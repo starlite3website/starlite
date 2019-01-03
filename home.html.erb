@@ -1,0 +1,55 @@
+<body>
+    <div id="control">
+      <div id="ad">
+          <h3> Discover the </h3>
+          <h4> future of </h4>
+          <h5> creation </h5> 
+            <a href="/shop"><button>Now</button></a>
+      </div>
+      <style>
+      body {
+          
+      }
+      #ad {
+          background-color: white;
+          position: absolute;
+          top: 450px;
+          margin-left: 40%;
+          margin-bottom: 30px;
+          border: 1px solid black;
+          padding: 30px;
+          padding-left: 50px;
+          padding-right: 50px;
+          width: 100px;
+          border-radius: 20px;
+      }
+      h5 {
+          margin-left: 20px;
+      }
+      h4 {
+          margin-left: 10px;
+      }
+      h3 {
+          margin-left: 0px;
+      }
+      #user {
+          position: fixed;
+          margin-left: 65%;
+      }
+      #control {
+        margin: 0px;
+        margin-top: 3px;
+        height: 904px;
+        width: 100%;
+        background-image: url(https://www.starnamer.net/img/bg_stars.jpg);
+      }
+      </style>
+      <div id="user">
+          <% if @created == true %>
+            <button><%= @user.username %></button>
+          <% else %>
+            <a href="/signup"><button id="signup">Signup/Login</button></a>
+          <% end %>
+      </div>
+    </div>
+</body>
