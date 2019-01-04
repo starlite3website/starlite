@@ -1,0 +1,46 @@
+<body>
+    <div id="signup">
+	    <%= form_for @user, url: dashboard_path, method: :post do |f| %>
+		    <%= f.text_field :username, placeholder: "username" %>
+		    <%= f.password_field :password, placeholder: "password" %>
+		    <div id="submit-divider">
+		        <%= f.submit "Create Account" %>
+		    </div>
+	    <% end %>
+    </div>
+    <style>
+	    #signup {
+	        background-color: white;
+	        margin-left: 40%;
+	        margin-right: 40%;
+	        margin-top: 100px;
+	        border-width: 1px;
+	        border-color: black;
+	    }
+        body {
+    	    background-color: white;
+        }
+        #user_username {
+    	    margin-bottom: 25px;
+        }
+        #user_password {
+    	    margin-bottom: 25px;
+        }
+        #submit-divider input {
+            border: 2px white;
+            font-size: 20px;
+            padding: 12px;
+            background-color: white;
+            border-radius: 5px;
+            color: black;
+            margin-right: 15px;
+            margin-left: 15px;
+        }
+        #submit-divider input:hover {
+            transition-duration: 1.5s;
+            background-color: orange;
+            color: white;
+            border-color: orange;
+        }
+    </style>
+</body>

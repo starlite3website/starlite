@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+    <body>
+    	<div>
+    	    <%= @product.each do |p| %>
+    	        <%= p.title %>
+    	    <% end %>
+    	</div>
+    </body>
+    <style>
+        div {
+        	background-color: pink;
+        	border-radius: 20px;
+        	display: flex;
+        	flex-wrap: wrap;
+        	justify-content: center;
+        	width: 20em;
+        	height: 20em;
+        	margin-top: 30px;
+        }
+    </style>
+</html>

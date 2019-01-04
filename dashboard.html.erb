@@ -1,0 +1,10 @@
+<body>
+	<p></p>
+	<div id="user">
+        <% if @created == true %>
+          <button><%= @user.u %></button>
+        <% else %>
+          <a href="/signup"><button>Signup/Login</button></a>
+        <% end %>
+    </div>
+</body>
