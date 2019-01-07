@@ -51,7 +51,7 @@
             float: right;
         }
     </style>
-<body onload="onload()">
+<body>
     <div id="control">
       <div id="ad">
           <h3> Discover the </h3>
@@ -101,7 +101,7 @@
           <button href="/cart" id="username"></button>
           <button href="/signup" id="signup">Signup/Login</button>
           <script>
-              function onload() {
+              document.onload = function() {
                 var username = document.getElementById("username");
                 var signup = document.getElementById("signup");
                 if (user.username === undefined) {
