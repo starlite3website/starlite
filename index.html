@@ -98,11 +98,19 @@
       }
       </style>
       <div id="user">
-          <% if @created == true %>
-            <button><%= @user.username %></button>
-          <% else %>
-            <a href="/signup"><button id="signup">Signup/Login</button></a>
-          <% end %>
+          <button href="/cart" id="username"></button>
+          <button href="/signup" id="signup">Signup/Login</button>
+          <script>
+              var username = document.getElementById("username");
+              var signup = document.getElementById("signup");
+              if (user.username === undefined) {
+                  username.style.display = none;
+                  signup.style.display = block;
+              } else {
+                  username.style.display = block;
+                  signup.style.display = none;
+              }
+          </script>
       </div>
     </div>
 </body>
