@@ -2,14 +2,25 @@
 <html>
     <body>
     	<div>
-    	    <%= @product.each do |p| %>
-    	        <%= p.title %>
-    	    <% end %>
+    	    <h5>
+                200 tokens(2 hours of premium game time)
+            </h5>
+            <bold>
+                $1.00
+            </bold>
+            <p>
+            </p>
+            <button>
+                Buy Now
+            </button>
     	</div>
     </body>
     <style>
+        body {
+            background-color: gray;
+        }
         div {
-        	background-color: pink;
+        	background-color: white;
         	border-radius: 20px;
         	display: flex;
         	flex-wrap: wrap;
