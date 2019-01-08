@@ -45,7 +45,7 @@
         img {
             margin-top: 30px;
         }
-        #username {
+        #signup {
             top: 90%;
             left: 90%;
         }
@@ -102,21 +102,6 @@
       }
       </style>
       <div id="user">
-          <button href="/cart" id="username"></button>
           <button href="/signup" id="signup">Signup/Login</button>
-          <script>
-                var username = document.getElementById("username");
-                var signup = document.getElementById("signup");
-                if (user.username === undefined) {
-                    username.style.visibility = hidden;
-                    signup.style.visibility = visible;
-                    alert(4);
-                } else {
-                    username.style.visibility = visible;
-                    signup.style.visibility = hidden;
-                    alert(3);
-                }
-          </script>
-      </div>
     </div>
 </body>
