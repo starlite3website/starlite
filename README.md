@@ -1,4 +1,3 @@
 # starlite
 Deployed by Github
-Future domain: starlite.online
-IN PROGRESS
+Veiwable at starlite3.tk
