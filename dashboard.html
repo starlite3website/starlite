@@ -59,11 +59,13 @@
   <div id="control>
     <h1 id="username"></h1>
     <script>
-    sessionStorage.username = "cs641311";
+      sessionStorage.username = "cs641311";
       var username = document.getElementById("username");
       var num = Math.floor(Math.random() * 10);
-      if (true) {
+      if (num > 5) {
         username.innerHTML = "Welcome Back, "+sessionStorage.username;
+      } else {
+        username.innerHTML = "Hello, "+sessionStorage.username;
       }
     </script>
   </div>                                      
