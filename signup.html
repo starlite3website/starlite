@@ -1,8 +1,9 @@
 <body>
     <div id="signup">
 	    <form>
-		    <input>
-		    </input>
+		    <input type="text" id="user_username">
+		    <input type="password" id="user_username">
+		    <input type="email" id="user_email">
 	            <button onclick="submitForm()">Create Account</button>
 	    </form>
 	  <script type="text/javascript">
@@ -12,14 +13,14 @@
 	  </script>
     </div>
     <style>
-	    #signup {
-	        background-color: white;
-	        margin-left: 40%;
-	        margin-right: 40%;
-	        margin-top: 100px;
-	        border-width: 1px;
+	#signup {
+          background-color: white;
+          margin-left: 40%;
+          margin-right: 40%;
+          margin-top: 100px;
+          border-width: 1px;
 	        border-color: black;
-	    }
+        }
         body {
     	    background-color: white;
         }
@@ -29,21 +30,8 @@
         #user_password {
     	    margin-bottom: 25px;
         }
-        #submit-divider input {
-            border: 2px white;
-            font-size: 20px;
-            padding: 12px;
-            background-color: white;
-            border-radius: 5px;
-            color: black;
-            margin-right: 15px;
-            margin-left: 15px;
-        }
-        #submit-divider input:hover {
-            transition-duration: 1.5s;
-            background-color: orange;
-            color: white;
-            border-color: orange;
-        }
+	#user_email {
+       	  margin-bottom: 25px;
+	}
     </style>
 </body>
