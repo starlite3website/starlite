@@ -525,4 +525,119 @@ function enemy(x, y, m, team) {
 startScreen();
 
   </script>
+  <style>
+  canvas {
+  outline: hidden;
+  border: 1px solid black;
+  z-index: 1;
+}
+
+#messages {
+  width: 100%;
+  height: 100px;
+  overflow: auto;
+}
+
+#message {
+  margin-left: 30px;
+}
+
+#chat_submit {
+  background-color: #000000;
+  color: white;
+  border: 1px #000000;
+}
+
+h4 {
+  color: white;
+  margin-bottom: -25px;
+  margin-left: 15px;
+}
+
+.message {
+  border: 1px solid black;
+  background-color: white;
+  color: black;
+  display: block;
+  font-family: Courier;
+}
+
+#chat {
+  padding: 20px;
+  border-top: 30px solid blue;
+  border-bottom: 5px solid blue;
+  border-left: 5px solid blue;
+  border-right: 5px solid blue;
+  border-radius: 10px;
+  margin-bottom: 5px;
+  margin-left: 5px;
+}
+
+.console {
+  animation: alert 8s;
+}
+
+#play {
+  margin-top: -290px;
+  margin-left: 120px;
+}
+
+#playText {
+  animation: blink 4s infinite;
+  font-size: 20px;
+  font-family: Courier;
+  z-index: 2;
+  position: relative;
+}
+
+@keyframes blink {
+  0% {
+    color: #000;
+  }
+  49% {
+    color: transparent;
+  }
+  50% {
+    color: #000;
+  }
+  99% {
+    color: transparent;
+  }
+  100% {
+    color: #000;
+  }
+}
+
+#consoleText {
+  color: white;
+}
+
+#alertConsole {
+  z-index: 1000;
+  margin-top: 220px;
+  padding: 20px;
+  border-radius: 20px;
+  position: relative;
+}
+
+h1 {
+  font-family: Courier;
+}
+
+@keyframes alert {
+  0% {
+    margin-top: 220px;
+  }
+  20% {
+    margin-top: 120px;
+  }
+  90% {
+    margin-top: 120px;
+  }
+  100% {
+    margin-top: 220px;
+  }
+}
+
+  </style>
 </html>
