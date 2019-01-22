@@ -122,10 +122,10 @@ function Tank() {
   }
   this.control = function() {
     this.draw();
-    $('#canvas').focus();
-    $('#canvas').bind('keydown', function(event) {
-      jquery_tank_support(event);
-    });
+    canvas.focus();
+    canvas.addEventListener("click", function(event) {
+	    user.tank.move(event);
+    }, false);
   }
   this.checker = function(n, isX) {
     output = true;
@@ -362,9 +362,7 @@ function mainMenu(mode) {
   if (mode == undefined) {
     mode = "s";
   }
-  $('#canvas').bind('onclick', function() {
-    keySupport(event);
-  })
+  canvas.addEventListener("click", clickSupport, false);
   draw.clearRect(0, 0, 500, 500);
   playText.style.visibility = "hidden";
   if (mode == "s") {
