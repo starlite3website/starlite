@@ -1,5 +1,5 @@
 <html>
-  <audio controls>
+  <audio autoplay loop>
   	<source src="https://starlite3.tk/729331547840392.mp3" type="audio/mp3">
   </audio>
   <div id="game" class="container">
@@ -16,13 +16,13 @@
       <input type="text" id="to" placeholder="Who to send to?">
       <button id="chat_submit">
 			  Send
-			</button>
+      </button>
     </div>
     <canvas width="500" height="500" id="canvas" tabindex='1'>
 	  	<strong>Canvas is not supported.</strong>
 			Try using a diffrent browser,
 			If that does not work, please restart your device or use a diffrent device.
-	  </canvas>
+   </canvas>
 
     <div id="play">
       <h5 id="playText">
@@ -276,7 +276,7 @@ function alert_end() {
 } // alert end
 
 function loading() {
-  if (true) {
+  if (sessionStorage.user === undefined) {
     user = {
       username: "starlite_developer",
       tank: new Tank(),
@@ -289,9 +289,7 @@ function loading() {
   draw.clearRect(0, 0, 500, 500);
   a("Starting Game...");
   playText.style.visibility = "hidden";
-  window.setTimeout(function() {
-	  mainMenu();
-  }, 2000);
+  setTimeout(mainMenu(), 2000);
   canvas.removeEventListener("click", loading);
 }
 
