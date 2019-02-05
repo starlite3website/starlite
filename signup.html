@@ -81,29 +81,7 @@
 	            <button onclick="check()">Create Account</button>
 	    </form>
 	  <script type="text/javascript">
-            var i, return_text, username = document.getElementById("user_username"), password = document.getElementById("user_password"), email = document.getElementById("user_email");
-            function check() {
-		    for (i = 0; i == sessionStorage.user.username.length; i++) {
-			    if (localStorage.user.username === username.value) {
-				    return_text = false;
-			    }  else {
-			            if (localStorage.user.username === username.value) {
-			               return_text = false;
-		                    }  else {
-			               return_text = true;
-			            }
-		            }
-		    }
-	            submitForm(return_text);
-	    }
-	    function submitForm(input) {
-	      if (input) {
-		      alert('3');
-	      }  else {
-		      alert('4');
-	      }
-	    }
-		   
+               
 	  </script>
     </div>
     <style>
