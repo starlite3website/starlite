@@ -123,7 +123,7 @@ function Tank() {
   this.control = function() {
     this.draw();
     canvas.focus();
-    canvas.addEventListener("click", function(event) {
+    canvas.addEventListener("keydown", function(event) {
 	    user.tank.move(event);
     }, false);
   }
@@ -135,7 +135,23 @@ function Tank() {
     y1 = this.y + n;
     y2 = this.y + 40 + n;
     for (var r = 1; r < Game.blockId; r++) {
-      alert(b[r].x);
+      for (var r = 0; r < Game.blockId; r++) {
+      if (isX) {
+        bx = b[r].x * 50;
+        if ((bx < x1 && bx + 50 > x1) || (bx < x2 && bx + 50 > x2)) {
+          return false;
+        } else {
+          return true;
+        }
+      } else {
+        by = b[r].y * 50;
+        if ((by < y1 && by + 50 > y1) || (by < y2 && by + 50 > y2)) {
+          return false;
+        } else {
+          return true;
+        }
+      }
+    }
     }
   }
   this.move = function(e) {
