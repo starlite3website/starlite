@@ -126,9 +126,15 @@ function Tank() {
     canvas.addEventListener("keydown", function(event) {
 	    user.tank.move(event);
     }, false);
+    canvas.addEventListener("keyup", function() {
+	    this.stop = true;
+    }, false);
   }
   this.checker = function(n, isX) {
     output = true;
+    if (this.stop = false) {
+	    return false;
+    }
     var x1, x2, y1, y2;
     x1 = this.x + n;
     x2 = this.x + 40 + n;
