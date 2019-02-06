@@ -112,7 +112,7 @@ function Tank() {
   this.control = function() {
     this.draw();
     canvas.addEventListener("keydown", function(event) {
-	    e.stopImmediatePropagation();
+	    event.stopImmediatePropagation();
 	    user.tank.move(event);
     }, false);
   }
