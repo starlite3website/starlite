@@ -161,6 +161,9 @@ function Tank() {
     if (e.which == 40) {
 	    this.y += 5;
     }
+    if (e.which == 32) {
+	    this.fire();
+    }
     level(1, "n", true);
     this.draw();
   }
