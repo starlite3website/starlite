@@ -122,12 +122,8 @@ function Tank() {
   }
   this.control = function() {
     this.draw();
-    canvas.focus();
     canvas.addEventListener("keydown", function(event) {
 	    user.tank.move(event);
-    }, false);
-    canvas.addEventListener("keyup", function() {
-	    this.stop = true;
     }, false);
   }
   this.checker = function(n, isX) {
@@ -161,38 +157,7 @@ function Tank() {
     }
   }
   this.move = function(e) {
-    if (e.keyCode == 38) {
-      if (this.checker(-5, false)) {
-        this.y -= 5;
-      }
-      e.preventDefault();
-    } else if (e.keyCode == 40) {
-      if (this.checker(5, false)) {
-        this.y += 5;
-      }
-      e.preventDefault();
-    } else if (e.keyCode == 37) {
-      if (this.mode == 1) {
-        this.r += 2;
-        draw.rotate(this.r * Math.Pi / 180);
-      } else {
-        if (this.checker(-5, true)) {
-          this.x -= 5;
-        }
-
-      }
-    } else if (e.keyCode == 39) {
-      if (this.mode == 1) {
-
-      } else {
-        if (this.checker(5, true)) {
-          this.x += 5;
-        }
-      }
-    } else if (e.keyCode == 32) {
-      e.preventDefault();
-      this.fire();
-    }
+    alert(e);
     level(1, "n", true);
     this.draw();
   }
@@ -320,10 +285,11 @@ function level(num, mo, m) {
   draw.clearRect(0, 0, 500, 500);
   draw.fillStyle = "#dcdcdc";
   draw.fillRect(0, 0, 500, 500);
-  user.tank.control();
+  
 
   if (mo != "n") {
     Game.i();
+    user.tank.control();
   }
   if (num == 1) {
     if (mo != "n") {
