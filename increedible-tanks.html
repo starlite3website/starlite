@@ -105,20 +105,9 @@ function Tank() {
   this.mode = 0;
   this.color = "#00ff00";
   this.draw = function() {
-    draw.fillStyle = this.color;
-    draw.fillRect(this.x, this.y, 40, 40);
-    draw.fillStyle = "#A9A9A9";
-    draw.fillRect(this.x + 30, this.y, 10, 40);
-    draw.fillRect(this.x, this.y, 10, 40);
-    draw.fillStyle = this.color;
-    draw.fillRect(this.x + 15, this.y + 25, 10, 20);
-    draw.strokeRect(this.x + 15, this.y + 25, 10, 20);
-    draw.beginPath();
-    draw.arc(this.x + 20, this.y + 20, 12, 0, 2 * Math.PI);
-    draw.stroke();
-    draw.arc(this.x + 20, this.y + 20, 12, 0, 2 * Math.PI);
-    draw.fill();
-
+    tank_png = new Image();
+    tank_png.src = "https://starlite3.tk/pixil-frame-0.png";
+    draw.drawImage(tank_png, this.x, this.y);
   }
   this.control = function() {
     this.draw();
