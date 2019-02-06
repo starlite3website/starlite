@@ -157,7 +157,18 @@ function Tank() {
     }
   }
   this.move = function(e) {
-    alert(e);
+    if (e.which == 37) {
+	    this.x -= 5;
+    }
+    if (e.which == 38) {
+	    this.y -= 5;
+    }
+    if (e.which == 39) {
+	    this.x += 5;
+    }
+    if (e.which == 40) {
+	    this.Y += 5;
+    }
     level(1, "n", true);
     this.draw();
   }
@@ -285,7 +296,7 @@ function level(num, mo, m) {
   draw.clearRect(0, 0, 500, 500);
   draw.fillStyle = "#dcdcdc";
   draw.fillRect(0, 0, 500, 500);
-  
+  user.tank.draw();
 
   if (mo != "n") {
     Game.i();
