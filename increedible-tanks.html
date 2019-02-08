@@ -210,17 +210,6 @@ function Block(health, x, y, isInvincible, isExplosive) {
   this.blockId = Game.blockId;
   this.x = x;
   this.y = y;
-  this.damage = function() {
-    this.info = this.checker();
-    if (this.info.isTouching) {
-      s[this.info.id].isOver = true;
-      this.s = s[this.info.id].damage / this.oh * 100;
-      alert(this.s);
-      this.health = this.health - s[this.info.id].damage;	
-    }
-    setTimeout(this.damage, 20);
-  }
-  this.damage();
 } // All Blocks
 
 var alertConsole = document.getElementById("alertConsole"); // console for game
