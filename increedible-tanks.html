@@ -177,6 +177,7 @@ function Tank() {
   }
 } // Tank Object
 function Game() {
+  this.aiId = 0;
   this.shotId = 0;
   this.blockId = 0;
   this.redraw = function() {
@@ -326,7 +327,7 @@ function level(num, mo, m) {
     weak(9, 3, m);
     // chest(200,1,4, m);
     wall(3, 4, m);
-
+    enemy(1, 1, m, "Eval");
     wall(6, 4, m);
     // chest(9,4, m);
   }
