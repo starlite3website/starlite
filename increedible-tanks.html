@@ -190,7 +190,7 @@ function Game() {
   this.control = function() {
     canvas.addEventListener("keyup", function(event) {
       if (event.which == 80) {
-        if (this.paused = false) {
+        if (this.paused == false) {
 	  this.paused = true;
 	  user.tank.inactive = true;
 	  else {
