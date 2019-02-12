@@ -151,6 +151,7 @@ function Tank() {
     }
     }
   }
+  this.inactive = false;
   this.move = function(e) {
     if (e.which == 37) {
 	    this.x -= 5;
