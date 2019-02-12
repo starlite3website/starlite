@@ -193,11 +193,11 @@ function Game() {
         if (this.paused == false) {
 	  this.paused = true;
 	  user.tank.inactive = true;
-	  else {
-	    this.paused = false;
-	    user.tank.inactive = false;
-	  }
-          alert(this.paused);
+	} else {
+	  this.paused = false;
+	  user.tank.inactive = false;
+	}
+        alert(this.paused);
       }
     }, false);
   }
