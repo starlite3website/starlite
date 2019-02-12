@@ -185,6 +185,20 @@ function Game() {
       s[r].redraw();
     }
   }
+  this.control = function() {
+    canvas.addEventListener("keyup", function(event) {
+      if (event.which == 80) {
+        if (this.paused = false) {
+	  this.paused = true;
+	  user.tank.inactive = true;
+	else {
+	  this.paused = false;
+	  user.tank.inactive = false'
+	}
+        alert(this.paused);
+      }
+    }, false);
+  }
   this.i = function() {
     this.interval = window.setInterval(function() {
       clearShot();
@@ -295,6 +309,7 @@ function level(num, mo, m) {
   user.tank.draw();
 
   if (mo != "n") {
+    Game.control();
     Game.i();
     user.tank.control();
   }
