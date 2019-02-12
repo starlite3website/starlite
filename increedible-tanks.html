@@ -177,6 +177,7 @@ function Tank() {
   }
 } // Tank Object
 function Game() {
+  this.paused = false;
   this.aiId = 0;
   this.shotId = 0;
   this.blockId = 0;
@@ -191,11 +192,11 @@ function Game() {
         if (this.paused = false) {
 	  this.paused = true;
 	  user.tank.inactive = true;
-	else {
-	  this.paused = false;
-	  user.tank.inactive = false'
-	}
-        alert(this.paused);
+	  else {
+	    this.paused = false;
+	    user.tank.inactive = false'
+	  }
+          alert(this.paused);
       }
     }, false);
   }
