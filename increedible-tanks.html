@@ -291,9 +291,12 @@ function loading() {
       username: "starlite_developer",
       tank: new Tank(),
       level: 1,
-      coins: 50,
-      gems: 0,
       team: "Increedible: " + "",
+      progress : {
+        level : 1,
+	gems : 0,
+	coins : 0,
+      }
     }
   }
   draw.clearRect(0, 0, 500, 500);
@@ -353,22 +356,14 @@ function level(num, mo, m) {
   }
 }
 
-function click_support(e) {
-  if (true) {
-    level(1, null, true);
-  }
-}
-
 function keySupport(e) {
-  if (e.which == 39) {
-    mode_counter += 1;
+  if (e.which == 76) {
+    mainMenu("level");
+  } else {
+    a("Key "+e.which+" does not have a trigger", "yellow");
   }
-  if (e.which == 37) {
-    mode_counter -= 1;
-  }
-  alert(mode_counter);
 }
-
+	  
 function mainMenu(mode) {
   window.clearInterval(interval2);
   if (mode == undefined) {
@@ -393,8 +388,8 @@ function mainMenu(mode) {
 
   } else if (mode == "shop") {
 
-  }
-  canvas.addEventListener("click", click_support);
+  } else if (mode == "level") {}
+  canvas.addEventListener("keyup", keySupport);
 } // main Menu
 
 
