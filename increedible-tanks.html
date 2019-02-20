@@ -153,23 +153,27 @@ function Tank() {
   }
   this.inactive = false;
   this.move = function(e) {
-    if (e.which == 37) {
-	    this.x -= 5;
-    }
-    if (e.which == 38) {
-	    this.y -= 5;
-    }
-    if (e.which == 39) {
-	    this.x += 5;
-    }
-    if (e.which == 40) {
-	    this.y += 5;
-    }
-    if (e.which == 32) {
-	    this.fire();
-    }
-    level(1, "n", true);
-    this.draw();
+		if (this.inactive == false) {
+      if (e.which == 37) {
+	      this.x -= 5;
+      }
+      if (e.which == 38) {
+	      this.y -= 5;
+      }
+      if (e.which == 39) {
+	      this.x += 5;
+      }
+      if (e.which == 40) {
+	      this.y += 5;
+      }
+      if (e.which == 32) {
+	      this.fire();
+      }
+      level(1, "n", true);
+      this.draw();
+	  } else {
+			a("Game is paused", "yellow");
+		}
   }
   this.fire = function() {
     Game.shotId = Game.shotId + 1;
@@ -358,44 +362,33 @@ function level(num, mo, m) {
 
 function keySupport(e) {
   if (e.which == 76) {
-    mainMenu("level");
+    levelSelect(user.progress.level);
   } else {
     a("Key "+e.which+" does not have a trigger", "yellow");
   }
 }
 	  
-function mainMenu(mode) {
+function mainMenu() {
   window.clearInterval(interval2);
-  if (mode == undefined) {
-    mode = "s";
-  }
   draw.clearRect(0, 0, 500, 500);
   playText.style.visibility = "hidden";
-  if (mode == "s") {
-    draw.fillStyle = "#556B2F";
-    draw.fillRect(50, 50, 400, 400);
-    draw.fillStyle = "#ffffff";
-    draw.fillRect(75, 95, 50, 50);
-    draw.font = "15px Courier";
-    draw.fillText(user.username, 150, 125);
-    draw.fillText("Level:" + user.level, 325, 125);
-    draw.fillText("Coins:" + user.coins, 75, 190);
-    draw.fillText("Gems:" + user.gems, 75, 210);
-    draw.fillText("Type:" + user.type, 75, 230);
-    draw.fillText("Team:" + user.team, 75, 250);
-    draw.fillText("Settings", 150, 270);
-  } else if (mode == "battle") {
-
-  } else if (mode == "shop") {
-
-  } else if (mode == "level") {
-    if (true) {
-      level( 1, null, true);
-    }
-  }
+  draw.fillStyle = "#556B2F";
+  draw.fillRect(50, 50, 400, 400);
+	draw.fillStyle = "#ffffff";
+  draw.fillRect(75, 95, 50, 50);
+	draw.font = "15px Courier";
+  draw.fillText(user.username, 150, 125);
+  draw.fillText("Level:" + user.level, 325, 125);
+  draw.fillText("Coins:" + user.coins, 75, 190);
+  draw.fillText("Gems:" + user.gems, 75, 210);
+	draw.fillText("Type:" + user.type, 75, 230);
+  draw.fillText("Team:" + user.team, 75, 250);
+  draw.fillText("Settings", 150, 270);
   canvas.addEventListener("keyup", keySupport);
 } // main Menu
-
+function levelSelect(l) {
+	level(l, null, true);
+}
 
 function wall(x, y, m) {
   if (m) {
