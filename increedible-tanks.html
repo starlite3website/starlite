@@ -243,73 +243,52 @@ var consoleText = document.getElementById("consoleText"); // text control for co
 var chatSubmit = document.getElementById("chat_submit");
 var draw = canvas.getContext("2d"); // getting the canvas to be able to draw
 
-function startScreen() {
-  chat_setup();
-
-  a("Loading Game...", "black");
-  draw.fillStyle = "#DCDCDC";
-  draw.fillStyle = "#000000";
-  draw.font = "20px Courier";
-  wall(0, 3);
-  wall(0, 4);
-  wall(0, 5);
-  wall(0, 6);
-  strong(1, 6);
-  weak(1, 4);
-  wall(2, 4);
-  strong(2, 5);
-  strong(2, 3);
-  draw.fillStyle = "#556B2F";
-  draw.fillRect(0, 0, 500, 150);
-  draw.fillRect(0, 350, 500, 150);
-  draw.fillStyle = "#ffffff";
-  draw.font = "50px Courier";
-  draw.fillText("Increedible", 100, 60);
-  draw.fillText("Tanks", 175, 120);
-  canvas.addEventListener("click", loading, false);
-} // startScreen
-
-function alert_startup() {
-  alertConsole.style.visibility = "hidden";
-} // alert Setup
-
-function a(m, c) {
-  alertConsole.classList.add("console");
-  alertConsole.style.backgroundColor = c;
-  alertConsole.style.border = "1px solid black";
-  consoleText.innerHTML = m;
-  alertConsole.style.visibility = "visible";
-  interval = window.setInterval(alert_end, 8000);
-} // alert control
-
-function alert_end() {
-  window.clearInterval(interval);
-  alertConsole.classList.remove("console");
-  alertConsole.style.visibility = "hidden";
-
-} // alert end
-
-function loading() {
-  if (sessionStorage.user === undefined) {
-    user = {
-      username: "starlite_developer",
-      tank: new Tank(),
-      level: 1,
-      team: "Increedible: " + "",
-      progress : {
-        level : 1,
-	gems : 0,
-	coins : 0,
+var Menu = {
+	startScreen : function() {
+    chat_setup();
+    a("Loading Game...", "black");
+    draw.fillStyle = "#DCDCDC";
+    draw.fillStyle = "#000000";
+    draw.font = "20px Courier";
+    wall(0, 3);
+    wall(0, 4);
+    wall(0, 5);
+    wall(0, 6);
+    strong(1, 6);
+    weak(1, 4);
+    wall(2, 4);
+    strong(2, 5);
+    strong(2, 3);
+    draw.fillStyle = "#556B2F";
+    draw.fillRect(0, 0, 500, 150);
+    draw.fillRect(0, 350, 500, 150);
+    draw.fillStyle = "#ffffff";
+    draw.font = "50px Courier";
+    draw.fillText("Increedible", 100, 60);
+    draw.fillText("Tanks", 175, 120);
+    canvas.addEventListener("click", loading, false);
+  }, // startScreen
+  loading : function() {
+    if (sessionStorage.user === undefined) {
+      user = {
+        username: "starlite_developer",
+        tank: new Tank(),
+        level: 1,
+        team: "Increedible: " + "",
+        progress : {
+          level : 1,
+	        gems : 0,
+  	      coins : 0,
+        }
       }
     }
+    draw.clearRect(0, 0, 500, 500);
+    a("Starting Game...");
+    playText.style.visibility = "hidden";
+    setTimeout(mainMenu(), 2000);
+    canvas.removeEventListener("click", loading);
   }
-  draw.clearRect(0, 0, 500, 500);
-  a("Starting Game...");
-  playText.style.visibility = "hidden";
-  setTimeout(mainMenu(), 2000);
-  canvas.removeEventListener("click", loading);
 }
-
 function level(num, mo, m) {
 
   draw.clearRect(0, 0, 500, 500);
@@ -389,6 +368,25 @@ function mainMenu() {
 function levelSelect(l) {
 	level(l, null, true);
 }
+function alert_startup() {
+  alertConsole.style.visibility = "hidden";
+} // alert Setup
+
+function a(m, c) {
+  alertConsole.classList.add("console");
+  alertConsole.style.backgroundColor = c;
+  alertConsole.style.border = "1px solid black";
+  consoleText.innerHTML = m;
+  alertConsole.style.visibility = "visible";
+  interval = window.setInterval(alert_end, 8000);
+} // alert control
+
+function alert_end() {
+  window.clearInterval(interval);
+  alertConsole.classList.remove("console");
+  alertConsole.style.visibility = "hidden";
+
+} // alert end
 
 function wall(x, y, m) {
   if (m) {
