@@ -43,7 +43,6 @@
 window.history = null;
 function Ai() {
   this.random = function() {
-
   }
   this.control = function(x, y, t, te) {
     this.x = x;
@@ -59,12 +58,8 @@ function Ai() {
     draw.fillRect(this.x + 5, this.y + 5, 40, 40);
   }
 }
-
 function Shot() {
   this.sensor = function() {
-
-
-
   }
   this.control = function(x, y, id) {
     this.x = x;
@@ -76,7 +71,6 @@ function Shot() {
   this.draw = function() {
     this.sensor();
     if (!this.inactive) {
-
       this.y += 2;
       draw.fillStyle = "#000000";
       draw.fillRect(this.x, this.y, 5, 5);
@@ -87,17 +81,14 @@ function Shot() {
     support(this.id);
   }
 }
-
 function support(id) {
   setTimeout(function() {
     s[id].draw();
   }, 25);
 }
-
 function clearShot() {
   level(1, "n", true);
 }
-
 function Tank() {
   this.r = 0;
   this.x = 50;
@@ -211,11 +202,9 @@ function Game() {
     }, 74);
   }
 }
-
 function jquery_tank_support(e) {
   user.tank.move(e);
 }
-
 function Block(health, x, y, isInvincible, isExplosive) {
   if (!isInvincible) {
     this.health = health;
@@ -232,7 +221,6 @@ function Block(health, x, y, isInvincible, isExplosive) {
   this.x = x;
   this.y = y;
 } // All Blocks
-
 var alertConsole = document.getElementById("alertConsole"); // console for game
 var chat = document.getElementById("chat");
 var messages = document.getElementById("messages");
@@ -242,60 +230,71 @@ var canvas = document.getElementById("canvas"); // getting the canvas element
 var consoleText = document.getElementById("consoleText"); // text control for console
 var chatSubmit = document.getElementById("chat_submit");
 var draw = canvas.getContext("2d"); // getting the canvas to be able to draw
-
-var Menu = {
-	startScreen : function() {
-    chat_setup();
-    a("Loading Game...", "black");
-    draw.fillStyle = "#DCDCDC";
-    draw.fillStyle = "#000000";
-    draw.font = "20px Courier";
-    wall(0, 3);
-    wall(0, 4);
-    wall(0, 5);
-    wall(0, 6);
-    strong(1, 6);
-    weak(1, 4);
-    wall(2, 4);
-    strong(2, 5);
-    strong(2, 3);
-    draw.fillStyle = "#556B2F";
-    draw.fillRect(0, 0, 500, 150);
-    draw.fillRect(0, 350, 500, 150);
-    draw.fillStyle = "#ffffff";
-    draw.font = "50px Courier";
-    draw.fillText("Increedible", 100, 60);
-    draw.fillText("Tanks", 175, 120);
-    canvas.addEventListener("click", loading, false);
-  }, // startScreen
-  loading : function() {
-    if (sessionStorage.user === undefined) {
-      user = {
-        username: "starlite_developer",
-        tank: new Tank(),
-        level: 1,
-        team: "Increedible: " + "",
-        progress : {
-          level : 1,
-	        gems : 0,
-  	      coins : 0,
-        }
+function startScreen() {
+  chat_setup();
+  a("Loading Game...", "black");
+  draw.fillStyle = "#DCDCDC";
+  draw.fillStyle = "#000000";
+  draw.font = "20px Courier";
+  wall(0, 3);
+  wall(0, 4);
+  wall(0, 5);
+  wall(0, 6);
+  strong(1, 6);
+  weak(1, 4);
+  wall(2, 4);
+  strong(2, 5);
+  strong(2, 3);
+  draw.fillStyle = "#556B2F";
+  draw.fillRect(0, 0, 500, 150);
+  draw.fillRect(0, 350, 500, 150);
+  draw.fillStyle = "#ffffff";
+  draw.font = "50px Courier";
+  draw.fillText("Increedible", 100, 60);
+  draw.fillText("Tanks", 175, 120);
+  canvas.addEventListener("click", loading, false);
+} // startScreen
+function alert_startup() {
+  alertConsole.style.visibility = "hidden";
+} // alert Setup
+function a(m, c) {
+  alertConsole.classList.add("console");
+  alertConsole.style.backgroundColor = c;
+  alertConsole.style.border = "1px solid black";
+  consoleText.innerHTML = m;
+  alertConsole.style.visibility = "visible";
+  interval = window.setInterval(alert_end, 8000);
+} // alert control
+function alert_end() {
+  window.clearInterval(interval);
+  alertConsole.classList.remove("console");
+  alertConsole.style.visibility = "hidden";
+} // alert end
+function loading() {
+  if (sessionStorage.user === undefined) {
+    user = {
+      username: "starlite_developer",
+      tank: new Tank(),
+      level: 1,
+      team: "Increedible: " + "",
+      progress : {
+        level : 1,
+	gems : 0,
+	coins : 0,
       }
     }
-    draw.clearRect(0, 0, 500, 500);
-    a("Starting Game...");
-    playText.style.visibility = "hidden";
-    setTimeout(mainMenu(), 2000);
-    canvas.removeEventListener("click", loading);
   }
+  draw.clearRect(0, 0, 500, 500);
+  a("Starting Game...");
+  playText.style.visibility = "hidden";
+  setTimeout(mainMenu(), 2000);
+  canvas.removeEventListener("click", loading);
 }
 function level(num, mo, m) {
-
   draw.clearRect(0, 0, 500, 500);
   draw.fillStyle = "#dcdcdc";
   draw.fillRect(0, 0, 500, 500);
   user.tank.draw();
-
   if (mo != "n") {
     Game.control();
     Game.i();
@@ -310,7 +309,6 @@ function level(num, mo, m) {
     strong(5, 0, m);
     // enemy(6,0, m);
     // bomb(7,0, m);
-
     weak(9, 0, m);
     weak(2, 1, m);
     weak(3, 1, m);
@@ -338,7 +336,6 @@ function level(num, mo, m) {
     // level two
   }
 }
-
 function keySupport(e) {
   if (e.which == 76) {
     levelSelect(user.progress.level);
@@ -368,32 +365,11 @@ function mainMenu() {
 function levelSelect(l) {
 	level(l, null, true);
 }
-function alert_startup() {
-  alertConsole.style.visibility = "hidden";
-} // alert Setup
-
-function a(m, c) {
-  alertConsole.classList.add("console");
-  alertConsole.style.backgroundColor = c;
-  alertConsole.style.border = "1px solid black";
-  consoleText.innerHTML = m;
-  alertConsole.style.visibility = "visible";
-  interval = window.setInterval(alert_end, 8000);
-} // alert control
-
-function alert_end() {
-  window.clearInterval(interval);
-  alertConsole.classList.remove("console");
-  alertConsole.style.visibility = "hidden";
-
-} // alert end
-
 function wall(x, y, m) {
   if (m) {
     Game.blockId++;
     b[Game.blockId] = new Block(0, x, y, true);
   }
-
   draw.strokeStyle = "#000000";
   draw.fillStyle = "#ADD8E6";
   draw.strokeRect(x * 50, y * 50, 50, 50);
@@ -420,13 +396,11 @@ function wall(x, y, m) {
   draw.lineTo(x * 50 + 50, y * 50 + 0);
   draw.stroke();
 } // creates a wall
-
 function strong(x, y, m) {
   if (m) {
     Game.blockId++;
     b[Game.blockId] = new Block(20, x, y, false, false);
   }
-
   draw.strokeStyle = "#000000";
   draw.fillStyle = "#D3D3D3";
   draw.strokeRect(x * 50, y * 50, 50, 50);
@@ -458,13 +432,11 @@ function spawn(x, y) {
   user.tank.y = y;
   user.tank.spawn = [x, y];
 }
-
 function weak(x, y, m) {
   if (m) {
     Game.blockId++;
     b[Game.blockId] = new Block(10, x, y, false, false);
   }
-
   draw.strokeStyle = "#000000";
   draw.fillStyle = "#ffffff";
   draw.strokeRect(x * 50, y * 50, 50, 50);
@@ -491,11 +463,9 @@ function weak(x, y, m) {
   draw.lineTo(x * 50 + 50, y * 50 + 0);
   draw.stroke();
 }
-
 function chat_setup() {
   chatSubmit.addEventListener("click", chat_submit);
 }
-
 function chat_submit() {
   if (message.value != "") {
     if (user.username != undefined) {
@@ -511,7 +481,6 @@ function chat_submit() {
     a("Enter Text to Submit", "red");
   }
 }
-
 function enemy(x, y, m, team) {
   if (m) {
     Game.aiId++;
@@ -520,7 +489,6 @@ function enemy(x, y, m, team) {
   }
 }
 startScreen();
-
   </script>
   <style>
   canvas {
@@ -528,29 +496,24 @@ startScreen();
   border: 1px solid black;
   z-index: 1;
 }
-
 #messages {
   width: 100%;
   height: 100px;
   overflow: auto;
 }
-
 #message {
   margin-left: 30px;
 }
-
 #chat_submit {
   background-color: #000000;
   color: white;
   border: 1px #000000;
 }
-
 h4 {
   color: white;
   margin-bottom: -25px;
   margin-left: 15px;
 }
-
 .message {
   border: 1px solid black;
   background-color: white;
@@ -558,7 +521,6 @@ h4 {
   display: block;
   font-family: Courier;
 }
-
 #chat {
   padding: 20px;
   border-top: 30px solid blue;
@@ -569,16 +531,13 @@ h4 {
   margin-bottom: 5px;
   margin-left: 5px;
 }
-
 .console {
   animation: alert 8s;
 }
-
 #play {
   margin-top: -290px;
   margin-left: 120px;
 }
-
 #playText {
   animation: blink 4s infinite;
   font-size: 20px;
@@ -586,7 +545,6 @@ h4 {
   z-index: 2;
   position: relative;
 }
-
 @keyframes blink {
   0% {
     color: #000;
@@ -604,11 +562,9 @@ h4 {
     color: #000;
   }
 }
-
 #consoleText {
   color: white;
 }
-
 #alertConsole {
   z-index: 1000;
   margin-top: 220px;
@@ -616,11 +572,9 @@ h4 {
   border-radius: 20px;
   position: relative;
 }
-
 h1 {
   font-family: Courier;
 }
-
 @keyframes alert {
   0% {
     margin-top: 220px;
@@ -635,6 +589,5 @@ h1 {
     margin-top: 220px;
   }
 }
-
   </style>
 </html>
