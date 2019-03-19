@@ -468,7 +468,8 @@ function chat_submit() {
   if (message.value != "") {
     if (user.username != undefined) {
       var newMessage = document.createElement("SPAN");
-      newMessage.innerHTML = user.username + ": " + message.value;
+      newMessage.innerHTML = user.username + ": " + message.value + " to: " + to.value;
+      sessionStorage.setItem("messages", [user.username, message.value, to.value].concat(sessionStorage.getItem("messages")));
       messages.appendChild(newMessage);
       newMessage.classList.add("message");
       a("Message Sent", "green");
