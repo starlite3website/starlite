@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
   <audio autoplay loop>
@@ -43,8 +42,9 @@
   s = [], ai = [],
   Game = new Game();
 function Ai() {
-  
-  
+  this.control = function() {
+    window.setInterval(this.draw, 10);
+  }
   this.draw = function() {
     draw.fillStyle="#000000";
     draw.fillRect(0,0,50,50);
@@ -79,7 +79,7 @@ function support(id) {
   }, 25);
 }
 function clearShot() {
-  level(1, "n", true);
+  level(1, "n", false);
 }
 function Tank() {
   this.r = 0;
@@ -152,7 +152,7 @@ function Tank() {
       if (e.which == 32) {
 	      this.fire();
       }
-      level(1, "n", true);
+      level(1, "n", false);
       this.draw();
 	  } else {
 			a("Game is paused", "yellow");
@@ -475,7 +475,11 @@ function createAi(x, y, m, t, team) {
   if (m) {
     Game.aiId++;
     ai[Game.aiId] = new Ai();
-    ai[Game.aiId].draw();
+    ai[Game.aiId].id = Game.aiId;
+    ai[Game.aiId].x = x;
+    ai[Game.aiId].y = y;
+    ai[Game.aiId].master = team;
+    ai[Game.aiId].type = t;
   }
 }
 startScreen();
