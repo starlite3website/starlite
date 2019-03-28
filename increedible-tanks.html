@@ -480,6 +480,7 @@ function createAi(x, y, m, t, team) {
     ai[Game.aiId].y = y;
     ai[Game.aiId].master = team;
     ai[Game.aiId].type = t;
+		ai[Game.aiId].control();
   }
 }
 startScreen();
