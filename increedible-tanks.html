@@ -38,17 +38,22 @@
 
   </div>
   <script>
-	  var interval, user, listener, interval2, b = [],
+var interval, user, listener, interval2, b = [],
   s = [], ai = [],
   Game = new Game();
 function Ai() {
   this.control = function() {
     window.setInterval(this.draw, 10);
+    window.setInterval(this.aim, 10);
   }
   this.draw = function() {
     draw.fillStyle="#000000";
     draw.fillRect(0,0,50,50);
+		this.data = this.aim();
   }
+	this.aim = function() {
+		return [0,0];
+	}
 }
 function Shot() {
   this.sensor = function() {
