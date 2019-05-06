@@ -44,16 +44,31 @@ var interval, user, listener, interval2, b = [],
 function Ai() {
   this.control = function() {
     window.setInterval(this.draw, 10);
-    window.setInterval(this.aim, 10);
+		window.setInterval(this.move, 10);
   }
   this.draw = function() {
     draw.fillStyle="#000000";
     draw.fillRect(0,0,50,50);
 		this.data = this.aim();
   }
+	this.move = function() {
+		this.moveCalc();
+	}
 	this.aim = function() {
 		return [0,0];
 	}
+	this.moveCalc = function() {
+		this.xdistance = Math.abs(this.x-user.tank.x);
+		this.ydistance = Math.abs(this.y-user.tank.y);
+		if (this.xdistance > this.ydistance) {
+			if (this.x-user.tank.x>0) {
+				
+			}
+		} else if (this.ydistance) {
+		} else {
+		}
+	}
+	
 }
 function Shot() {
   this.sensor = function() {
