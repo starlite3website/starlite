@@ -186,13 +186,14 @@ function Tank() {
   }
 } // Tank Object
 function checker(x, y) {
-	alert(Game.blockId);
-	for (var l = 0; l > Game.blockId; l++) {
+	var l = 0;
+	for (l = 0; l > Game.blockId; l++) {
+		alert(b[l]);
 		if (x > b[l].x && x < b[l].x + 50 && y > b[l].x && y < b[l].y + 50) {
 			return false;
 			alert(false);
 		}
-		alert(b[l]);
+		
 	}
 }
 function Game() {
