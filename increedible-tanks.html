@@ -43,16 +43,27 @@ var interval, user, listener, interval2, b = [],
   Game = new Game();
 function Ai() {
   this.control = function() {
+		this.x = 0;
+		this.y = 0;
     window.setInterval(this.draw, 10);
 		window.setInterval(this.move, 10);
   }
   this.draw = function() {
     draw.fillStyle="#000000";
-    draw.fillRect(0,0,50,50);
+    draw.fillRect(this.y,this.x,50,50);
 		this.data = this.aim();
   }
 	this.move = function() {
-		this.moveCalc();
+		this.instructions = this.moveCalc();
+		if (this.instructions.up == true) {
+			this.y -= 10;
+		} else if (this.instructions.down == true) {
+			this.y += 10;
+		} else if (this.instructions.left == true) {
+			this.x += 10;
+		} else {
+			this.x -= 10;
+		}
 	}
 	this.aim = function() {
 		return [0,0];
