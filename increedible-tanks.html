@@ -146,40 +146,10 @@ function Tank() {
     canvas.focus();
     this.draw();
     canvas.addEventListener("keydown", function(event) {
-	    event.preventDefault();
+	    event.preventDefault();	
 	    event.stopImmediatePropagation();
 	    user.tank.move(event);
     }, false);
-  }
-  this.checker = function(n, isX) {
-    output = true;
-    if (this.stop = false) {
-	    return false;
-    }
-    var x1, x2, y1, y2;
-    x1 = this.x + n;
-    x2 = this.x + 40 + n;
-    y1 = this.y + n;
-    y2 = this.y + 40 + n;
-    for (var r = 1; r < Game.blockId; r++) {
-      for (var r = 0; r < Game.blockId; r++) {
-      if (isX) {
-        bx = b[r].x * 50;
-        if ((bx < x1 && bx + 50 > x1) || (bx < x2 && bx + 50 > x2)) {
-          return false;
-        } else {
-          return true;
-        }
-      } else {
-        by = b[r].y * 50;
-        if ((by < y1 && by + 50 > y1) || (by < y2 && by + 50 > y2)) {
-          return false;
-        } else {
-          return true;
-        }
-      }
-    }
-    }
   }
   this.inactive = false;
   this.move = function(e) {
@@ -188,21 +158,23 @@ function Tank() {
 	      this.x -= 5;
       }
       if (e.which == 38) {
-	      this.y -= 5;
+	      if (checker(x,y) != false) {
+					this.y -= 5;
+				}
       }
       if (e.which == 39) {
 	      this.x += 5;
       }
       if (e.which == 40) {
-	      this.y += 5;
+       this.y += 5;
       }
       if (e.which == 32) {
 	      this.fire();
       }
       level(1, "n", false);
       this.draw();
-	  } else {
-			a("Game is paused", "yellow");
+		} else {
+		 a("Game is paused", "yellow");
 		}
   }
   this.fire = function() {
@@ -211,6 +183,13 @@ function Tank() {
     s[Game.shotId].control(this.x + 17, this.y + 45, Game.shotId);
   }
 } // Tank Object
+function checker(x, y) {
+	for (var l = 0; l > Game.blockId; l++) {
+		if (x > b[l].x && x < b[l].x + 50 && y > b[l].x && y < b[l].y + 50) {
+			return false;
+		}
+	}
+}
 function Game() {
   this.paused = false;
   this.aiId = 0;
