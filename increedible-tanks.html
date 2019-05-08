@@ -155,7 +155,9 @@ function Tank() {
   this.move = function(e) {
 		if (this.inactive == false) {
       if (e.which == 37) {
-	      this.x -= 5;
+	      if (checker(this.x - 5, this.y) != false) {
+					this.x -= 5;
+				}
       }
       if (e.which == 38) {
 	      if (checker(this.x,this.y-5) != false) {
@@ -168,7 +170,9 @@ function Tank() {
 				}
       }
       if (e.which == 40) {
-       this.y += 5;
+       if (checker(this.x, this.y + 5) != false) {
+				 this.y += 5;
+			 }
       }
       if (e.which == 32) {
 	      this.fire();
@@ -187,14 +191,13 @@ function Tank() {
 } // Tank Object
 function checker(x, y) {
 	var l = 0;
-	for (l = 0; l < Game.blockId; ) {
+	while (l < Game.blockId) {
 		l = l + 1;
-		alert(l)
-		if (x > b[l].x && x < b[l].x + 50 && y > b[l].x && y < b[l].y + 50) {
-			return false;
-			alert("Movement Denied");
+		if ((x+40>b[l].x*50 && x+40<b[l].x*50+50)||(x>b[l].x*50&&x<b[l].x*50+50)) {
+			if ((y>b[l].y*50&&y<b[l].y*50+50)||(y+40>b[l].y*50&&y+40<b[l].y*50+50)) {
+			  return false;
+			}
 		}
-		alert("TRUE");
 	}
 }
 function Game() {
