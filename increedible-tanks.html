@@ -190,6 +190,9 @@ function Tank() {
   }
 } // Tank Object
 function checker(x, y) {
+	if (x < 0 || y < 0 || x > 500 || y > 500) {
+		return false;
+	}
 	var l = 0;
 	while (l < Game.blockId) {
 		l = l + 1;
