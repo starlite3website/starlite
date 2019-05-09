@@ -42,9 +42,9 @@ var interval, user, listener, interval2, b = [],
   s = [], ai = [],
   Game = new Game();
 function Ai() {
+	this.x = 0;
+	this.y = 0;
   this.control = function() {
-		this.x = 0;
-		this.y = 0;
     window.setInterval(this.draw, 10);
 		window.setInterval(this.move, 10);
   }
@@ -55,7 +55,6 @@ function Ai() {
   }
 	this.move = function() {
 		this.instructions = this.moveCalc();
-    alert(this.instructions + " " + this.x + " " + this.y);
 		if (this.instructions.up == true) {
 			this.y -= 10;
 		} else if (this.instructions.down == true) {
