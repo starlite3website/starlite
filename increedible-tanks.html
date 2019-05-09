@@ -68,7 +68,7 @@ function Ai() {
 	this.aim = function() {
 		return [0,0];
 	}
-	this.moveCalc = function() {
+	moveCalc = function() {
 		this.xdistance = user.tank.x - this.x;
 		this.ydistance = user.tank.y - this.y;
 		if (Math.abs(this.ydistance) > Math.abs(this.xdistance)) {
@@ -84,7 +84,9 @@ function Ai() {
 				return { up : false, down : false, left : true, right : false };
 			}
 		} else {
-			var q = Math.rnd(2);
+			var min=1; 
+                        var max=2;  
+                        var q =Math.floor(Math.random() * (+max - +min)) + +min;
 			if (q==1) {
 				if (this.ydistance > 0) {
 					return { up : true, down : false, left : false, right : false };
