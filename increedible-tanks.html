@@ -55,6 +55,7 @@ function Ai() {
   }
 	this.move = function() {
 		this.instructions = this.moveCalc();
+    alert(this.instructions + " " + this.x + " " + this.y);
 		if (this.instructions.up == true) {
 			this.y -= 10;
 		} else if (this.instructions.down == true) {
