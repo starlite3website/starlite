@@ -46,7 +46,7 @@ function Ai() {
 	this.y = 0;
   this.control = function() {
     window.setInterval(this.draw, 10);
-		window.setInterval(this.move, 10);
+		window.setInterval(this.move, 500);
   }.bind(this);
   this.draw = function() {
     draw.fillStyle="#000000";
@@ -68,7 +68,7 @@ function Ai() {
 	this.aim = function() {
 		return [0,0];
 	}.bind(this);
-	moveCalc = function() {
+	this.moveCalc = function() {
 		this.xdistance = user.tank.x - this.x;
 		this.ydistance = user.tank.y - this.y;
 		if (Math.abs(this.ydistance) > Math.abs(this.xdistance)) {
