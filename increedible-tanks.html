@@ -47,12 +47,12 @@ function Ai() {
   this.control = function() {
     window.setInterval(this.draw, 10);
 		window.setInterval(this.move, 10);
-  }
+  }.bind(this);
   this.draw = function() {
     draw.fillStyle="#000000";
     draw.fillRect(this.y,this.x,50,50);
 
-  }
+  }.bind(this);
 	this.move = function() {
 		this.instructions = this.moveCalc();
 		if (this.instructions.up == true) {
@@ -64,10 +64,10 @@ function Ai() {
 		} else {
 			this.x -= 10;
 		}
-	}
+	}.bind(this);
 	this.aim = function() {
 		return [0,0];
-	}
+	}.bind(this);
 	moveCalc = function() {
 		this.xdistance = user.tank.x - this.x;
 		this.ydistance = user.tank.y - this.y;
@@ -97,7 +97,7 @@ function Ai() {
 			 	
 	    }  
 	  }
-	}
+	}.bind(this);
 }
 function Shot() {
   this.sensor = function() {
