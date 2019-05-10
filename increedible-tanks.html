@@ -56,13 +56,13 @@ function Ai() {
 	this.move = function() {
 		this.instructions = this.moveCalc();
 		if (this.instructions.up == true) {
-			this.y -= 10;
-		} else if (this.instructions.down == true) {
 			this.y += 10;
+		} else if (this.instructions.down == true) {
+			this.y -= 10;
 		} else if (this.instructions.left == true) {
-			this.x += 10;
-		} else {
 			this.x -= 10;
+		} else {
+			this.x += 10;
 		}
 	}.bind(this);
 	this.aim = function() {
