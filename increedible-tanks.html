@@ -48,7 +48,7 @@ function Ai() {
 	this.x = 0;
 	this.y = 0;
   this.control = function() {
-    window.setInterval(this.draw, 10);
+    window.setInterval(this.draw, 1);
 		window.setInterval(this.move, 500);
   }.bind(this);
   this.draw = function() {
