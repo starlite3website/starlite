@@ -54,10 +54,11 @@ function Ai() {
   this.draw = function() {
     ai_top = new Image();
     ai_top.src = "https://starlite3.tk/starlite-tank-top.png";
-	  draw.drawImage(ai_top, this.x, this.y);
+	 
 		ai_base = new Image();
 		ai_base.src = "https://starlite3.tk/starlite-tank-base.png";
 	  draw.drawImage(ai_base, this.x, this.y);
+	  draw.drawImage(ai_top, this.x, this.y);
   }.bind(this);
 	this.move = function() {
 		this.instructions = this.moveCalc();
