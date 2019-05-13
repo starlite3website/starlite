@@ -56,9 +56,9 @@ function Ai() {
 	this.move = function() {
 		this.instructions = this.moveCalc();
 		if (this.instructions.up == true) {
-			this.y += 10;
-		} else if (this.instructions.down == true) {
 			this.y -= 10;
+		} else if (this.instructions.down == true) {
+			this.y += 10;
 		} else if (this.instructions.left == true) {
 			this.x -= 10;
 		} else {
@@ -73,15 +73,15 @@ function Ai() {
 		this.ydistance = user.tank.y - this.y;
 		if (Math.abs(this.ydistance) > Math.abs(this.xdistance)) {
 			if (this.ydistance > 0) {
-				return { up : true, down : false, left : false, right : false };
+				return { up : false, down : false, left : true, right : false };
 			} else {
-				return { up : false, down : true, left : false, right : false };
+				return { up : false, down : false, left : false, right : true };
 			}
 		} else if (Math.abs(this.xdistance) > Math.abs(this.ydistance)) {
 			if (this.xdistance > 0) {
-			  return { up : false, down : false, left : false, right : true };
+			  return { up : true, down : false, left : false, right : false };
 		  } else {
-				return { up : false, down : false, left : true, right : false };
+				return { up : false, down : true, left : false, right : false };
 			}
 		} else {
 			var min=1; 
