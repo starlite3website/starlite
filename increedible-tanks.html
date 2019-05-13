@@ -52,8 +52,10 @@ function Ai() {
 		window.setInterval(this.move, 500);
   }.bind(this);
   this.draw = function() {
-    draw.fillStyle = "#000000";
-    draw.fillRect(this.x, this.y, 40, 40);
+    ai_top = new Image();
+    ai_top.src = "https://starlite3.tk/starlite-tank-top.png";
+		ai_base = new Image(0;
+		ai_base.src = "https://starlite3.tk/starlite-tank-base.png";
   }.bind(this);
 	this.move = function() {
 		this.instructions = this.moveCalc();
