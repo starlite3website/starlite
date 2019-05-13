@@ -386,9 +386,9 @@ function mainMenu() {
   draw.fillRect(75, 95, 50, 50);
 	draw.font = "15px Courier";
   draw.fillText(user.username, 150, 125);
-  draw.fillText("Level:" + user.level, 325, 125);
-  draw.fillText("Coins:" + user.coins, 75, 190);
-  draw.fillText("Gems:" + user.gems, 75, 210);
+  draw.fillText("Level:" + user.progress.level, 325, 125);
+  draw.fillText("Coins:" + user.progress.coins, 75, 190);
+  draw.fillText("Gems:" + user.progress.gems, 75, 210);
 	draw.fillText("Type:" + user.type, 75, 230);
   draw.fillText("Team:" + user.team, 75, 250);
   draw.fillText("Settings", 150, 270);
