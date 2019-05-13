@@ -94,7 +94,11 @@ function Ai() {
 					return { up : false, down : true, left : false, right : false };
 				}
 			} else {
-			 	
+			 if (this.xdistance > 0) {
+			  return { up : false, down : false, left : false, right : true };
+		  } else {
+				return { up : false, down : false, left : true, right : false };
+			}	
 	    }  
 	  }
 	}.bind(this);
