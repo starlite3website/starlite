@@ -49,23 +49,27 @@ function Ai() {
 		window.setInterval(this.move, 500);
   }.bind(this);
   this.draw = function() {
-    var ai_tank_base = new Image();
-    ai_tank_base.src = "https://starlite3.tk/starlite-tank-base.png";
-    var ai_tank_top = new Image();
-    ai_tank_top.src = "https://starlite3.tk/starlite-tank-top.png";
-    draw.drawImage(ai_tank_base, this.x, this.y);
-    draw.drawImage(ai_tank_top, this.x, this.y);
+    draw.fillStyle = "#000000";
+    draw.fillRect(this.x, this.y, 40, 40);
   }.bind(this);
 	this.move = function() {
 		this.instructions = this.moveCalc();
 		if (this.instructions.up == true) {
-			this.x -= 10;
+			if (checker(this.x - 5, this.y) != false) {
+				this.x -= 10;
+			}
 		} else if (this.instructions.down == true) {
-			this.x += 10;
+			if (checker(this.x,this.y-5) != false) {
+				this.x += 10;
+			}
 		} else if (this.instructions.left == true) {
-			this.y -= 10;
+			if (checker(this.x + 5, this.y) != false) {
+				this.y -= 10;
+			}
 		} else {
-			this.y += 10;
+  	  if (checker(this.x, this.y + 5) != false) {
+			  this.y += 10;
+		  }
 		}
 	}.bind(this);
 	this.aim = function() {
@@ -76,19 +80,19 @@ function Ai() {
 		this.ydistance = user.tank.y - this.y;
 		if (Math.abs(this.ydistance) > Math.abs(this.xdistance)) {
 			if (this.ydistance > 0) {
-				return { up : false, down : false, left : false, right : true };
+				return { up : false, down : true, left : false, right : false };
 			} else {
 				return { up : false, down : false, left : true, right : false };
 			}
 		} else if (Math.abs(this.xdistance) > Math.abs(this.ydistance)) {
 			if (this.xdistance > 0) {
-			  return { up : false, down : true, left : false, right : false };
+			  return { up : false, down : false, left : false, right : true };
 		  } else {
 				return { up : true, down : false, left : false, right : false };
 			}
 		} else {
-		return { up : false, down : false, left : false, right : false };	
-	    }  
+		  return { up : false };
+		}
 	}.bind(this);
 }
 function Shot() {
@@ -129,10 +133,10 @@ function Tank() {
   this.mode = 0;
   this.color = "#00ff00";
   this.draw = function() {
-    var tank_base_png = new Image();
+    tank_base_png = new Image();
     tank_base_png.src = "https://starlite3.tk/starlite-tank-base.png";
     draw.drawImage(tank_base_png, this.x, this.y);
-    var tank_top_png = new Image();
+    tank_top_png = new Image();
     tank_top_png.src = "https://starlite3.tk/starlite-tank-top.png";
     draw.drawImage(tank_top_png, this.x, this.y);
   }
