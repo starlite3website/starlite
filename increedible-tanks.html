@@ -88,18 +88,22 @@ function Ai() {
 		this.ydistance = user.tank.y - this.y;
 		if (Math.abs(this.ydistance) > Math.abs(this.xdistance)) {
 			if (this.ydistance > 0) {
-				return { up : false, down : true, left : false, right : false };
+				return { up : false, down : false, left : false, right : true };
 			} else {
 				return { up : false, down : false, left : true, right : false };
 			}
 		} else if (Math.abs(this.xdistance) > Math.abs(this.ydistance)) {
 			if (this.xdistance > 0) {
-			  return { up : false, down : false, left : false, right : true };
+			  return { up : false, down : true, left : false, right : false };
 		  } else {
 				return { up : true, down : false, left : false, right : false };
 			}
 		} else {
-		  return { up : false };
+		  if (this.ydistance < 0) {
+			  return { left : true };
+		  } else {
+			  return { right : true };
+		  }
 		}
 	}.bind(this);
 }
