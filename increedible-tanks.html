@@ -155,6 +155,12 @@ function support(id) {
 }
 function clearShot() {
   level(1, "n", false);
+  var l = 0;
+  while (l < ai.length - 1) {
+    l++;
+    a(l)
+    ai[l].draw();
+  }
 }
 function Tank() {
   this.r = 0;
