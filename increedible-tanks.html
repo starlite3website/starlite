@@ -211,6 +211,11 @@ function Tank() {
 	      this.fire();
       }
       level(1, "n", false);
+      var l = 0;
+  while (l < ai.length - 1) {
+    l++;
+    ai[l].draw();
+  }
       this.draw();
 		} else {
 		 a("Game is paused", "yellow");
