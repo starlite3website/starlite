@@ -2,9 +2,19 @@
   <head>
     <h1>404</h1>
     <p id="message"></p>
+    <a href="https://starlite3.tk">Home Page</a>
+    <a onclick = "window.history.back();">Last Page</a>
+    <style>
+      #message {
+        color: white;
+      }
+      a {
+       color: white;
+      }
+    </style>
     <script>
       var message = document.getElementById("message");
-      message.innerHTML = "Sorry, but we do not have this URL(web page) on our site: " + window.location + " If you want you can to to the last page: " + window.history.back + " or go home: https://starlite3.tk/";
+      message.innerHTML = "Sorry, but we do not have this URL(web page) on our site: " + window.location + " If you want you can to to the last page, or go home click below";
       
     </script>
   </head>
