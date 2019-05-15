@@ -64,7 +64,11 @@ function Ai() {
 	this.move = function() {
 		if (this.inactive != true) {
 		this.instructions = this.moveCalc();
-		if (this.instructions.up == true) {
+	        if (this.instructions.fire == true) {
+			Game.shotId = Game.shotId + 1;
+                        s[Game.shotId] = new Shot();
+                        s[Game.shotId].control(this.x + 17, this.y + 45, Game.shotId);
+		} else if (this.instructions.up == true) {
 			if (checker(this.x - 5, this.y) != false) {
 				this.x -= 10;
 			}
@@ -96,6 +100,9 @@ function Ai() {
 	this.moveCalc = function() {
 		this.xdistance = user.tank.x - this.x;
 		this.ydistance = user.tank.y - this.y;
+		if (150 > Math.sqrt(this.xdistance * this.xdistance + this.ydistance * this.ydistance)) {
+                  return { fire : true };
+		} else {
 		if (Math.abs(this.ydistance) > Math.abs(this.xdistance)) {
 			if (this.ydistance > 0) {
 				return { up : false, down : false, left : false, right : true };
@@ -115,6 +122,7 @@ function Ai() {
 			  return { right : true };
 		  }
 		}
+            }
 	}.bind(this);
 }
 function Shot() {
