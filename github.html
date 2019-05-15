@@ -1,0 +1,16 @@
+<html>
+  <body>
+    <script>
+      function StarLite() {
+        this.new = function( url, func) {
+          var master = new XMLHttpRequest();
+          master.onreadystatechange = function() {
+            if (master.readyState == 4 && master.status == 200) {
+              document.createElement("H1").innerHTML = master.responseText;
+            }
+          }
+        }
+      }
+    </script>
+  </body>
+</html>
