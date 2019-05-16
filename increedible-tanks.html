@@ -220,6 +220,12 @@ function Tank() {
       if (e.which == 32 || e.which == 83) {
 	      this.fire();
       }
+      if (e.which == 65) {
+	      this.rotation -= 5;
+      }
+      if (e.which == 68) {
+	      this.rotation += 5;
+      }
       level(1, "n", false);
       var l = 0;
   while (l < ai.length - 1) {
