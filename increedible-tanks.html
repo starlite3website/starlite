@@ -59,7 +59,11 @@ function Ai() {
 		ai_base = new Image();
 		ai_base.src = "https://starlite3.tk/starlite-tank-base.png";
 	  draw.drawImage(ai_base, this.x, this.y);
-	  draw.drawImage(ai_top, this.x, this.y);
+	  draw.translate(this.x+20,this.y+20);
+	  draw.rotate(this.rotation * Math.PI / 180);
+	  draw.drawImage(ai_top, -20, -20);
+	  draw.rotate(-(this.rotation * Math.PI / 180));
+	  draw.translate(-this.x-20, -this.y-20);
   }.bind(this);
 	this.move = function() {
 		if (this.inactive != true) {
@@ -97,9 +101,11 @@ function Ai() {
 		    }
 		}
 	}.bind(this);
+	this.rotation = 0;
 	this.moveCalc = function() {
 		this.xdistance = user.tank.x - this.x;
 		this.ydistance = user.tank.y - this.y;
+		this.rotation = Math.atan(this.ydistance / this.xdistance)*180/Math.PI + 90;
 		if (150 > Math.sqrt(this.xdistance * this.xdistance + this.ydistance * this.ydistance)) {
                   return { fire : true };
 		} else {
