@@ -222,8 +222,7 @@ function Tank() {
       }
       if (e.which == 65) {
 	      this.rotation -= 5;
-      }
-      if (e.which == 68) {
+      } else if (e.which == 68) {
 	      this.rotation += 5;
       }
       level(1, "n", false);
