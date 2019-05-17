@@ -105,7 +105,12 @@ function Ai() {
 	this.moveCalc = function() {
 		this.xdistance = user.tank.x - this.x;
 		this.ydistance = user.tank.y - this.y;
-		this.rotation = Math.atan(this.ydistance / this.xdistance)*180/Math.PI + 90;
+		this.rotation = Math.atan(this.ydistance / this.xdistance)*180/Math.PI;
+		if (this.xdistance > 0) {
+		  this.rotation -= 90;
+		} else {
+		  this.rotation += 90;
+		}
 		if (150 > Math.sqrt(this.xdistance * this.xdistance + this.ydistance * this.ydistance)) {
                   return { fire : true };
 		} else {
@@ -195,6 +200,7 @@ function Tank() {
     }, false);
   }
   this.inactive = false;
+	this.rotation = 0;
   this.move = function(e) {
 		if (this.inactive == false) {
       if (e.which == 37) {
