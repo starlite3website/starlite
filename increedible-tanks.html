@@ -202,7 +202,7 @@ function Tank() {
 	    event.preventDefault();
 	    event.stopImmeadiatePropagation();
 	    window.clearInterval(moveTank);
-  }
+  }, false);
   this.inactive = false;
 	this.rotation = 0;
   this.move = function(e) {
