@@ -198,6 +198,10 @@ function Tank() {
 	    event.stopImmediatePropagation();
 	    user.tank.move(event);
     }, false);
+    canvas.addEventListener("keyup", function() {
+	    event.preventDefault();
+	    event.stopImmeadiatePropagation();
+	    window.clearInterval(moveTank);
   }
   this.inactive = false;
 	this.rotation = 0;
@@ -205,22 +209,30 @@ function Tank() {
 		if (this.inactive == false) {
       if (e.which == 37) {
 	      if (checker(this.x - 5, this.y) != false) {
-					this.x -= 5;
+					var moveTank = window.setInterval(function() {
+						this.x -= 2;
+					}, 500
 				}
       }
       if (e.which == 38) {
 	      if (checker(this.x,this.y-5) != false) {
-					this.y -= 5;
+					var moveTank = window.setInterval(function() {
+						this.y -= 2;
+					}, 500
 				}
       }
       if (e.which == 39) {
 	      if (checker(this.x + 5, this.y) != false) {
-					this.x += 5;
+					var moveTank = window.setInterval(function() {
+						this.x += 2;
+					}, 500
 				}
       }
       if (e.which == 40) {
        if (checker(this.x, this.y + 5) != false) {
-				 this.y += 5;
+				 var moveTank = window.setInterval(function() {
+						this.y += 2;
+					}, 500
 			 }
       }
       if (e.which == 32 || e.which == 83) {
