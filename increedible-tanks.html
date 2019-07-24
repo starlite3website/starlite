@@ -198,7 +198,7 @@ function Tank() {
 	    event.stopImmediatePropagation();
 	    user.tank.move(event);
     }, false);
-    canvas.addEventListener("keyup", function() {
+    canvas.addEventListener("keyup", function(event) {
 	    event.preventDefault();
 	    event.stopImmeadiatePropagation();
 	    window.clearInterval(moveTank);
