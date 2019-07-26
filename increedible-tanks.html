@@ -152,7 +152,7 @@ function Shot() {
     this.sensor();
     if (!this.inactive) {
       this.y += this.ym;
-      thix.x += this.xm;    
+      this.x += this.xm;    
       draw.fillStyle = "#000000";
       draw.fillRect(this.x, this.y, 5, 5);
       this.support();
