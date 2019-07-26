@@ -142,6 +142,8 @@ function Shot() {
   this.control = function(x, y, id, xm, ym) {
     this.x = x;
     this.y = y;
+    this.ym = ym;
+	  this.xm = xm;
     this.id = id;
     this.inactive = false;
     this.draw();
@@ -149,8 +151,8 @@ function Shot() {
   this.draw = function() {
     this.sensor();
     if (!this.inactive) {
-      this.y += ym;
-      thix.x += xm;    
+      this.y += this.ym;
+      thix.x += this.xm;    
       draw.fillStyle = "#000000";
       draw.fillRect(this.x, this.y, 5, 5);
       this.support();
