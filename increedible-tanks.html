@@ -139,7 +139,7 @@ function Ai() {
 function Shot() {
   this.sensor = function() {
   }
-  this.control = function(x, y, id) {
+  this.control = function(x, y, id, xm, ym) {
     this.x = x;
     this.y = y;
     this.id = id;
@@ -149,7 +149,8 @@ function Shot() {
   this.draw = function() {
     this.sensor();
     if (!this.inactive) {
-      this.y += 2;
+      this.y += ym;
+      thix.x += xm;    
       draw.fillStyle = "#000000";
       draw.fillRect(this.x, this.y, 5, 5);
       this.support();
@@ -250,11 +251,14 @@ function Tank() {
   }
   this.fire = function() {
     this.yd = 1;
-    this.xd = Math.abs(((this.yd * this.rotation) - (90 * this.yd)) / this.angle);
-    alert(this.yd/this.xd);
+    if (this.rotation != 0) {
+    this.xd = Math.abs(((this.yd * this.rotation) - (90 * this.yd)) / this.rotation);
+    } else {
+      this.xd = 0;
+    }
     Game.shotId = Game.shotId + 1;
     s[Game.shotId] = new Shot();
-    s[Game.shotId].control(this.x + 17, this.y + 45, Game.shotId);
+    s[Game.shotId].control(this.x + 17, this.y + 45, Game.shotId, this.xd, this.yd);
   }
 } // Tank Object
 function checker(x, y) {
