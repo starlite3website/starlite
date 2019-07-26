@@ -251,7 +251,7 @@ function Tank() {
   this.fire = function() {
     this.yd = 1;
     this.xd = Math.abs(((this.yd * this.rotation) - (90 * this.yd)) / this.angle);
-    alert(y/x);
+    alert(this.yd/this.xd);
     Game.shotId = Game.shotId + 1;
     s[Game.shotId] = new Shot();
     s[Game.shotId].control(this.x + 17, this.y + 45, Game.shotId);
