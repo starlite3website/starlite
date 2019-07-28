@@ -252,16 +252,22 @@ function Tank() {
 		}
   }
   this.fire = function() {
+    if (this.rotation < 90 && this.rotation > 270) {
+        this.calc = this.rotation - 90;
+      } else {
+        this.calc = this.rotation + 90;
+    }
     this.yd = 1;
+    this.angle = this.calc % 90;
     if (this.rotation != 0) {
-    this.xd = Math.abs(((this.yd * this.rotation) - (90 * this.yd)) / this.rotation);
-	    if (this.rotation > 90 && this.rotation < 270) {
-        //this.yd = 0 - this.yd;
-      else {
+      this.xd = Math.abs(((this.yd * this.angle) - (90 * this.yd)) / this.angle);
+      if (this.calc > 90 && this.calc < 270) {
+        this.yd = 0 - this.yd;
+      } else {
         this.yd = Math.abs(this.yd);
       }
-      if (this.rotation > 180) {
-        //this.xd = 0 - this.xd;
+      if (this.calc > 180) {
+        this.xd = 0 - this.xd;
       } else {
         this.xd = Math.abs(this.xd);
       }
@@ -270,7 +276,7 @@ function Tank() {
     }
     Game.shotId = Game.shotId + 1;
     s[Game.shotId] = new Shot();
-    s[Game.shotId].control(this.x + 17, this.y + 45, Game.shotId, this.xd, this.yd);
+    s[Game.shotId].control(this.x+20, this.y+20, Game.shotId, this.xd, this.yd);
   }
 } // Tank Object
 function checker(x, y) {
