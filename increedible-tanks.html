@@ -236,9 +236,9 @@ function Tank() {
 	      this.fire();
       }
       if (e.which == 65) {
-	      this.rotation -= 5;
-      } else if (e.which == 68) {
 	      this.rotation += 5;
+      } else if (e.which == 68) {
+	      this.rotation -= 5;
       }
       level(1, "n", false);
       var l = 0;
@@ -252,21 +252,16 @@ function Tank() {
 		}
   }
   this.fire = function() {
-    if (this.rotation < 90 && this.rotation > 270) {
-        this.calc = this.rotation - 90;
-      } else {
-        this.calc = this.rotation + 90;
-    }
     this.yd = 1;
-    this.angle = this.calc % 90;
+    this.angle = this.rotation % 90;
     if (this.rotation != 0) {
       this.xd = Math.abs(((this.yd * this.angle) - (90 * this.yd)) / this.angle);
-      if (this.calc > 90 && this.calc < 270) {
+      if (this.rotation > 90 && this.rotation < 270) {
         this.yd = 0 - this.yd;
       } else {
         this.yd = Math.abs(this.yd);
       }
-      if (this.calc > 180) {
+      if (this.rotation < 180) {
         this.xd = 0 - this.xd;
       } else {
         this.xd = Math.abs(this.xd);
