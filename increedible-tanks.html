@@ -255,6 +255,16 @@ function Tank() {
     this.yd = 1;
     if (this.rotation != 0) {
     this.xd = Math.abs(((this.yd * this.rotation) - (90 * this.yd)) / this.rotation);
+	    if (this.rotation > 90 && this.rotation < 270) {
+        //this.yd = 0 - this.yd;
+      else {
+        this.yd = Math.abs(this.yd);
+      }
+      if (this.rotation > 180) {
+        //this.xd = 0 - this.xd;
+      } else {
+        this.xd = Math.abs(this.xd);
+      }
     } else {
       this.xd = 0;
     }
