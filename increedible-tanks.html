@@ -254,21 +254,20 @@ function Tank() {
   this.fire = function() {
     this.xd = 1;
     this.angle = this.rotation % 90;
-    if (this.rotation != 0) {
+    if (this.rotation == 0) {
+      
+    }
       this.yd = Math.abs(((this.xd * this.angle) - (90 * this.xd)) / this.angle);
-      if (this.rotation > 90 && this.rotation < 270) {
-        this.xd = Math.abs(this.xd);
-      } else {
-        this.xd = 0 - Math.abs(this.xd);
-      }    
-      if (this.rotation < 180) {
+      if (this.rotation < 90 || this.rotation > 270) {
         this.yd = Math.abs(this.yd);
       } else {
         this.yd = 0 - Math.abs(this.yd);
+      }    
+      if (this.rotation > 180) {
+        this.xd = Math.abs(this.xd);
+      } else {
+        this.xd = 0 - Math.abs(this.xd);
       }
-    } else {
-      this.xd = 0;
-    }
     Game.shotId = Game.shotId + 1;
     s[Game.shotId] = new Shot();
     s[Game.shotId].control(this.x+20, this.y+20, Game.shotId, this.xd, this.yd);
