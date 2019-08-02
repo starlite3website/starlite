@@ -270,7 +270,11 @@ function Tank() {
       }
     Game.shotId = Game.shotId + 1;
     s[Game.shotId] = new Shot();
+    if ((this.xd < 0 && this.yd < 0 ) || (this.xd > 0 && this.yd > 0)) {
+    s[Game.shotId].control(this.x+20, this.y+20, Game.shotId, this.yd, this.xd);
+    } else {
     s[Game.shotId].control(this.x+20, this.y+20, Game.shotId, this.xd, this.yd);
+    }
   }
 } // Tank Object
 function checker(x, y) {
