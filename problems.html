@@ -71,14 +71,13 @@
           <script>
           var message = document.getElementById("message");
           var submit = document.getElementById("Submit");
-          alert(message+" "+submit);
-          submit.onclick = function() {
+          submit.addEventListener("click", function() {
               if (localStorage.getItem(counter) == undefined) {
                 localStorage.setItem(counter, 1);
               } 
               localStorage.setItem(errorLog, [message.value, localStorage.getItem(errorLog)]);
               alert(localStorage.getItem(errorLog));
-            }
+            }, false);
           </script>
         </form>
       </div>
