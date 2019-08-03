@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="shortcut icon" href="http://cubeupload.com/im/cs641311/d85image.png" type="image/png">
+    <title>Starlite</title>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-132422058-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-132422058-1');
+    </script>
+  </head>
+    <header>
+        <img src="http://u.cubeupload.com/cs641311/87cimage.png" style="width: 140px; height: 120px; margin-bottom: -50px; margin-left: 7.1428071428%"/>
+        <strong>
+    	    <a href="/"><button>Home</button></a>
+    	    <a href="/shop"><button>Shop(Disabled)</button></a>
+            <a href="/problems"><button>Bugs</button></a>
+    	    <a href="/contact"><button>Contact</button></a>
+            <a href="/games"><button>Games</button></a>
+           </strong>
+    </header>
+    <style>
+        header {
+            position: sticky;
+            border-bottom: 1px solid black;
+            margin-left: 0px;
+            margin-right: 0px;
+        }
+        footer {
+            color: orange;
+            margin-bottom: 0px;
+            margin-left: 0px;
+            margin-right: 0px;
+            width: 100%;
+        }
+        button {
+            border: 2px white;
+            font-size: 20px;
+            padding: 12px;
+            background-color: white;
+            color: black;
+            margin-left: 7.1428071428%;
+            margin-bottom: 50px;
+        }
+        button:hover {
+            transition-duration: 1.5s;
+            background-color: orange;
+            color: white;
+            border-color: orange;
+        }
+        #signup {
+          margin-left: -20px;
+        }
+        body {
+            margin: 0px;
+        }
+        .cart {
+            color: white;
+            background-color: orange;
+            float: right;
+        }
+    </style>
+    <body>
+      <div id="Form">
+        <form>
+          <input type="text" id="message" />
+          <button onclick="submitForm()">Submit Error Form</button>
+          <script>
+          var message = document.getElementById("message");
+            function submitForm() {
+              if (localStorage.getItem(counter) == undefined) {
+                localStorage.setItem(counter, 1);
+              } 
+              localStorage.setItem(errorLog, [message.value, localStorage.getItem(errorLog)]);
+              
+            }
+          </script>
+        </form>
+      </div>
+    </body>
+    <style>
+        #FooterLink {
+          margin-top: 10%;
+        }
+        #Footer {
+          text-decoration: none;
+          font-size: 20px;
+          font-family: Courier;
+          margin-left: 20%;
+          color: Black;
+        }
+      </style>
+      <footer>
+    <div id="FooterLink">
+      <a href="/" id="Footer">
+        Home
+      </a>
+      <a href="/games" id="Footer">
+        Games
+      </a>
+      <a href="/problems" style="margin-right: 20%" id="Footer">
+        Game Bugs
+      </a>
+    </div>
+    <div>
+      <a href="https://seal.beyondsecurity.com/vulnerability-scanner-verification/starlite3.tk"><img src="https://seal.beyondsecurity.com/verification-images/starlite3.tk/vulnerability-scanner-2.gif" alt="Website Security Test" border="0"></a>
+    </div>
+  </footer>
+</html>
