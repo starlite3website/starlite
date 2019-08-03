@@ -41,6 +41,17 @@
 var interval, user, listener, interval2, b = [],
   s = [], ai = [],
   Game = new Game();
+	  function ai_check() {
+    var l = 0;
+	while (l < Game.shotId) {
+		l = l + 1;
+		if ((this.x+40>s[l].x+5 && this.x+40<s[l].x)||(this.x>s[l].x+5&&this.x<s[l].x)) {
+			if ((this.y>s[l].y+5&&this.y<s[l].y)||(this.y+45>s[l].y+5&&this.y+45<s[l].y)) {
+			  alert(5);
+			}
+		}
+	}
+  }
 function Ai() {
 	this.x = 0;
 	this.y = 0;
@@ -91,18 +102,7 @@ function Ai() {
 		}
 	}.bind(this);
 	this.check = function() {
-		if (s[l].x == NaN) {
-      user.tank.x = 0;
-    }
-	var l = 0;
-	while (l < Game.shotId) {
-		l = l + 1;
-		if ((this.x+40>s[l].x+5 && this.x+40<s[l].x)||(this.x>s[l].x+5&&this.x<s[l].x)) {
-			if ((this.y>s[l].y+5&&this.y<s[l].y)||(this.y+45>s[l].y+5&&this.y+45<s[l].y)) {
-			  alert(5);
-			}
-		}
-	}
+		ai_check();
 	}.bind(this);
 	this.rotation = 0;
 	this.moveCalc = function() {
