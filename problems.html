@@ -67,10 +67,12 @@
       <div id="Form">
         <form>
           <input type="text" id="message" />
-          <button onclick="submitForm();">Submit Error Form</button>
+          <button id="Submit">Submit Error Form</button>
           <script>
           var message = document.getElementById("message");
-            function submitForm() {
+          var submit = document.getElementById("Submit");
+          alert(message+" "+submit);
+          submit.onclick = function() {
               if (localStorage.getItem(counter) == undefined) {
                 localStorage.setItem(counter, 1);
               } 
