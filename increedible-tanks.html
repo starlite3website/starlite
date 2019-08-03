@@ -91,12 +91,18 @@ function Ai() {
 		}
 	}.bind(this);
 	this.check = function() {
-		if (false) {
-		    this.health -= 10;
-		    if (this.health <= 0) {
-			this.inactive = true;
-		    }
+		if (s[l].x == NaN) {
+      user.tank.x = 0;
+    }
+	var l = 0;
+	while (l < Game.shotId) {
+		l = l + 1;
+		if ((this.x+40>s[l].x+5 && this.x+40<s[l].x)||(this.x>s[l].x+5&&this.x<s[l].x)) {
+			if ((this.y>s[l].y+5&&this.y<s[l].y)||(this.y+45>s[l].y+5&&this.y+45<s[l].y)) {
+			  alert(5);
+			}
 		}
+	}
 	}.bind(this);
 	this.rotation = 0;
 	this.moveCalc = function() {
