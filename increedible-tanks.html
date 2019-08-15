@@ -220,26 +220,26 @@ function Tank() {
 	this.rotation = 0;
   this.move = function(e) {
 		if (this.inactive == false) {
-      if (e.which == 37) {
+      if (e.which == 65) {
 	      if (checker(this.x - 5, this.y) != false) {
 						this.x -= 2;
 
 				}
       }
-      if (e.which == 38) {
+      if (e.which == 87) {
 	      if (checker(this.x,this.y-5) != false) {
 
 						this.y -= 2;
 
 				}
       }
-      if (e.which == 39) {
+      if (e.which == 68) {
 	      if (checker(this.x + 5, this.y) != false) {
 						this.x += 2;
 
 				}
       }
-      if (e.which == 40) {
+      if (e.which == 83) {
        if (checker(this.x, this.y + 5) != false) {
 
 						this.y += 2;
@@ -249,13 +249,13 @@ function Tank() {
       if (e.which == 32 || e.which == 83) {
 	      this.fire();
       }
-      if (e.which == 65) {
+      if (e.which == 37) {
 	      if (this.rotation == 355) {
 		      this.rotation == 0;
 	      } else {
 		      this.rotation += 5;
 	      }
-      } else if (e.which == 68) {
+      } else if (e.which == 39) {
 	      if (this.rotation == 0) {
 		      this.rotation = 355;
 	      } else {
