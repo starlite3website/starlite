@@ -66,20 +66,24 @@
     </style>
   <body>
     <div id="control">
-      <!-- Ezoic - HomeTopSidebar - sidebar -->
       <div id="ad">
-          <img alt="" style="width:0px;height:0px" src="//rtb.adx1.com/pixels/pixel.js?id=570413&event=conversion&value=1"/>
-      </div>
-          
-      <div id="ad">
-          <h3> Discover the </h3>
-          <h4> future of </h4>
-          <h5> gaming </h5> 
-            <a href="/games"><button>Now</button></a>
-        <div id="user">
-          <button href="/signup" id="signup">Signup/Login</button>
-       </div>
-      </div>
+ <h3>Countdown to Increedible Tanks</h3>
+ <progress id="PROGRESS" max=50000000000></progress>
+ <p id="time"></p>
+ <script>
+   var now;
+   var countdown = new Date("Nov 28, 2019");
+   var recorder = document.getElementById("PROGRESS");
+   var timer = document.getElementById("time");
+   setInterval(getTime, 1);
+   function getTime() {
+     now = new Date();
+     time = countdown - now;
+     recorder.value = time;
+      timer.innerHTML = time;
+   }
+ </script>
+</div>
     </div>
       <style>
       #ad {
