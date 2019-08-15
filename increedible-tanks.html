@@ -52,6 +52,17 @@ var interval, user, listener, interval2, b = [],
 		}
 	}
   }
+function ai_check(x,y) {
+  var l = 1;
+  while (l < Game.shotId) {
+    l = l + 1;
+    if ((x+40>s[l].x && x+40<s[l].x+10)||(x>s[l].x&&x<s[l].x+10)) {
+     if ((y>s[l].y&&y<s[l].y+10)||(y+45>s[l].y&&y+45<s[l].y+10)) {
+   	 console.log(3);
+      }
+    }
+  }
+ }
 function Ai() {
 	this.x = 0;
 	this.y = 0;
@@ -102,7 +113,7 @@ function Ai() {
 		}
 	}.bind(this);
 	this.check = function() {
-		ai_check();
+		ai_check(this.x, this.y);
 	}.bind(this);
 	this.rotation = 0;
 	this.moveCalc = function() {
@@ -239,9 +250,17 @@ function Tank() {
 	      this.fire();
       }
       if (e.which == 65) {
-	      this.rotation += 5;
+	      if (this.rotation == 355) {
+		      this.rotation == 0;
+	      } else {
+		      this.rotation += 5;
+	      }
       } else if (e.which == 68) {
-	      this.rotation -= 5;
+	      if (this.rotation == 0) {
+		      this.rotation == 355;
+	      } else {
+		      this.rotation -= 5;
+	      }
       }
       level(1, "n", false);
       var l = 0;
@@ -256,28 +275,38 @@ function Tank() {
   }
   this.fire = function() {
     this.xd = 1;
-    this.angle = this.rotation % 90;
-    if (this.rotation == 0) {
-      
-    }
-      this.yd = Math.abs(((this.xd * this.angle) - (90 * this.xd)) / this.angle);
-      if (this.rotation < 90 || this.rotation > 270) {
-        this.yd = Math.abs(this.yd);
-      } else {
-        this.yd = 0 - Math.abs(this.yd);
-      }    
-      if (this.rotation > 180) {
-        this.xd = Math.abs(this.xd);
-      } else {
-        this.xd = 0 - Math.abs(this.xd);
-      }
-    Game.shotId = Game.shotId + 1;
-    s[Game.shotId] = new Shot();
-    if ((this.xd < 0 && this.yd < 0 ) || (this.xd > 0 && this.yd > 0)) {
-    s[Game.shotId].control(this.x+20, this.y+20, Game.shotId, this.yd, this.xd);
-    } else {
-    s[Game.shotId].control(this.x+20, this.y+20, Game.shotId, this.xd, this.yd);
-    }
+   this.angle = this.rotation % 90;
+   this.yd = Math.abs(((this.xd * this.angle) - (90 * this.xd)) / this.angle);
+   if (this.rotation < 90 || this.rotation > 270) {
+     this.yd = Math.abs(this.yd);
+   } else {
+     this.yd = 0 - Math.abs(this.yd);
+   }   
+   if (this.rotation > 180) {
+     this.xd = Math.abs(this.xd);
+   } else {
+     this.xd = 0 - Math.abs(this.xd);
+   }
+   if (this.rotation == 0) {
+     this.xd = 0;
+     this.yd = 1;
+   } else if (this.rotation == 90) {
+     this.xd = -1;
+     this.yd = 0;
+   } else if (this.rotation == 180) {
+     this.xd = 0;
+     this.yd = -1;
+   } else if (this.rotation == 270) {
+     this.xd = 1;
+     this.yd = 0;
+   }
+   Game.shotId = Game.shotId + 1;
+   s[Game.shotId] = new Shot();
+   if ((this.xd < 0 && this.yd < 0 ) || (this.xd > 0 && this.yd > 0)) {
+   s[Game.shotId].control(this.x+20, this.y+20, Game.shotId, this.yd, this.xd);
+   } else {
+   s[Game.shotId].control(this.x+20, this.y+20, Game.shotId, this.xd, this.yd);
+   }
   }
 } // Tank Object
 function checker(x, y) {
