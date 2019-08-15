@@ -210,9 +210,9 @@ function Tank() {
   this.control = function() {
     canvas.focus();
     this.draw();
-    canvas.addEventListener("keydown", function(event) {	    
+    canvas.addEventListener("keypress", function(event) {	    
 	    if (this.interval == undefined) {
-		window.setInterval(user.tank.move(event), 10);
+		this.interval = window.setInterval(user.tank.move(event), 10);
             }
     }, false);
     canvas.addEventListener("keyup", function(event) {
