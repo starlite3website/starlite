@@ -210,15 +210,20 @@ function Tank() {
   this.control = function() {
     canvas.focus();
     this.draw();
-    canvas.addEventListener("keydown", function(event) {
-	    event.preventDefault();	
-	    event.stopImmediatePropagation();
-	    user.tank.move(event);
+    canvas.addEventListener("keypress", function(event) {	    
+	    if (this.interval == undefined) {
+		window.setInterval(user.tank.move(event), 10);
+            }
     }, false);
-  }
+    canvas.addEventListener("keyup", function(event) {
+	    window.clearInterval(this.interval);
+    }
+ }
   this.inactive = false;
 	this.rotation = 0;
   this.move = function(e) {
+	  event.preventDefault();	
+	    event.stopImmediatePropagation();
 		if (this.inactive == false) {
       if (e.which == 65) {
 	      if (checker(this.x - 5, this.y) != false) {
@@ -246,7 +251,7 @@ function Tank() {
 
 			 }
       }
-      if (e.which == 32 || e.which == 83) {
+      if (e.which == 32) {
 	      this.fire();
       }
       if (e.which == 37) {
