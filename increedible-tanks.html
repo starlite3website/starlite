@@ -214,7 +214,7 @@ function Tank() {
       if (this.interval == undefined) {
  	   this.interval = window.setInterval(function() {
          user.tank.move(event);
-       }, 10);
+       }, 50);
      }
    }, false);
    canvas.addEventListener("keyup", function(event) {
@@ -229,23 +229,23 @@ function Tank() {
       e.stopImmediatePropagation();
     if (this.inactive == false) {
      if (e.code == "KeyD") {
-        if (checker(this.x + 5, this.y) != false) {
-            this.x += 5;
+        if (checker(this.x + 1, this.y) != false) {
+            this.x += 1;
         }
      }
      if (e.code == "KeyW") {
-        if (checker(this.x,this.y-5) != false) {
-            this.y -= 5;
+        if (checker(this.x,this.y-1) != false) {
+            this.y -= 1;
         }
      }
      if (e.code == "KeyA") {
-       if (checker(this.x - 5, this.y) != false) {
-            this.x -= 5;
+       if (checker(this.x - 1, this.y) != false) {
+            this.x -= 1;
         }
      }
      if (e.code == "KeyS") {
-      if (checker(this.x, this.y + 5) != false) {
-            this.y += 5;
+      if (checker(this.x, this.y + 1) != false) {
+            this.y += 1;
    	}
      }
      if (e.which == 32) {
