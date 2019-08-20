@@ -58,7 +58,7 @@ function ai_check(x,y) {
    l = l + 1;
    if ((x+40>s[l].x && x+40<s[l].x+10)||(x>s[l].x&&x<s[l].x+10)) {
     if ((y>s[l].y&&y<s[l].y+10)||(y+45>s[l].y&&y+45<s[l].y+10)) {
-      console.log(4)
+      alert("AI HIT");
      }
    }
  }
@@ -214,7 +214,7 @@ function Tank() {
       if (this.interval == undefined) {
  	   this.interval = window.setInterval(function() {
          user.tank.move(event);
-       }, 50);
+       }, 10);
      }
    }, false);
    canvas.addEventListener("keyup", function(event) {
@@ -320,7 +320,7 @@ function checker(x, y) {
     l = l + 1;
     if ((x+40>b[l].x*50 && x+40<b[l].x*50+50)||(x>b[l].x*50&&x<b[l].x*50+50)) {
       if ((y>b[l].y*50&&y<b[l].y*50+50)||(y+45>b[l].y*50&&y+45<b[l].y*50+50)) {
-   	 return true;
+   	 return false;
       }
     }
   }
