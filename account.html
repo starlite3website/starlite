@@ -1,38 +1,9 @@
 
 <div id="login">
-		<input type="text" id="usernameForm" />
-		<input type="password" id="passwordForm" />
+	<form action="https://starlite3.tk/dashboard" method="POST">
+		<input type="text" id="usernameForm" name="username"/>
+		<input type="password" id="passwordForm" name="passwrord"/>
 		<button id="submit">Submit</button>
 		<button id="newaccount">New Account</button>
+	</form>
 </div>
-<script>
-	localStorage.setItem("username", JSON.stringify([""]));
-localStorage.setItem("password", JSON.stringify([""]));
-var usernameInput = document.getElementById("usernameForm");
-var passwordInput = document.getElementById("passwordForm");
-var submit = document.getElementById("submit");
-var newaccount = document.getElementById("newaccount");
-submit.addEventListener("click", function() {
-if (isCorrect(usernameInput.value, passwordInput.value)) {
-  var post = new XMLHttpRequest();
-  post.open();
-  post.setRequestHeader('Content-Type','application/json');
-  post.send(JSON.stringify({ username : usernameInput.value, password : usernameInput.value }));
-}
-});
-newaccount.addEventListener("click", function() {
- if (!isCorrect(usernameInput.value, passwordInput.value)) {
-   localStorage.setItem("username", JSON.stringify(JSON.parse(localStorage.getItem("username")).concat([usernameInput.value])));
-   localStorage.setItem("password", JSON.stringify(JSON.parse(localStorage.getItem("password")).concat([passwordInput.value])));
- }
-});
-function isCorrect(username, password) {
- if (JSON.parse(localStorage.getItem("username"))[JSON.parse(localStorage.getItem("username")).indexOf(username)] == username) {
-   if (JSON.parse(localStorage.getItem("password"))[JSON.parse(localStorage.getItem("password")).indexOf(password)]) {
-     return true;
-   }
- }
- return false;
-}
-
-</script>
