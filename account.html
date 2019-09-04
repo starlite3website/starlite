@@ -1,9 +1,37 @@
+<div id="form">
+	<input type="text" id="usernameForm">
+	<input type="password" id="passwordForm">
+	<button id="submit">Submit</button>
+	<button id="newaccount">New Account</button>
+	<script>
+localStorage.setItem("username", JSON.stringify([""]));
+localStorage.setItem("password", JSON.stringify([""]));
+var usernameInput = document.getElementById("usernameForm");
+var passwordInput = document.getElementById("passwordForm");
+var submit = document.getElementById("submit");
+var newaccount = document.getElementById("newaccount");
+submit.addEventListener("click", function() {
+if (isCorrect(usernameInput.value, passwordInput.value)) {
+  sessionStorage.setItem("username", usernameInput.value);
+  sessionStorage.setItme("password", passwordInput.value);
+	alert(sessionStorage.username+" "+sessionStorage.password);
+}
+});
+newaccount.addEventListener("click", function() {
+ if (!isCorrect(usernameInput.value, passwordInput.value)) {
+   localStorage.setItem("username", JSON.stringify(JSON.parse(localStorage.getItem("username")).concat([usernameInput.value])));
+   localStorage.setItem("password", JSON.stringify(JSON.parse(localStorage.getItem("password")).concat([passwordInput.value])));
+   alert("New Account Created: "+usernameInput.value);
+ }
+});
+function isCorrect(username, password) {
+ if (JSON.parse(localStorage.getItem("username"))[JSON.parse(localStorage.getItem("username")).indexOf(username)] == username) {
+   if (JSON.parse(localStorage.getItem("password"))[JSON.parse(localStorage.getItem("password")).indexOf(password)]) {
+     return true;
+   }
+ }
+ return false;
+}
 
-<div id="login">
-	<form action="https://starlite3.tk/dashboard" method=post>
-		<input type="text" id="usernameForm" name="username"/>
-		<input type="password" id="passwordForm" name="passwrord"/>
-		<button id="submit" type="submit" >Submit</button>
-		<button id="newaccount">New Account</button>
-	</form>
+	</script>
 </div>
