@@ -21,17 +21,17 @@ if (isCorrect(usernameInput.value, passwordInput.value)) {
 });
 newaccount.addEventListener("click", function() {
  if (!isCorrect(usernameInput.value, passwordInput.value)) {
-   console.log(2)
    localStorage.setItem("username", JSON.stringify(JSON.parse(localStorage.getItem("username")).concat([usernameInput.value])));
    localStorage.setItem("password", JSON.stringify(JSON.parse(localStorage.getItem("password")).concat([passwordInput.value])));
-   console.log(localStorage.username);
-   console.log(localStorage.password)
+   alert(localStorage.username);
+   alert(localStorage.password)
  }
 });
 function isCorrect(username, password) {
  if (JSON.parse(localStorage.getItem("username"))[JSON.parse(localStorage.getItem("username")).indexOf(username)] == username) {
    if (JSON.parse(localStorage.getItem("password"))[JSON.parse(localStorage.getItem("password")).indexOf(password)]) {
      return true;
+	   alert(3);
    }
  }
  return false;
