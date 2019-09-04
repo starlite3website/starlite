@@ -13,8 +13,8 @@ var newaccount = document.getElementById("newaccount");
 submit.addEventListener("click", function() {
 if (isCorrect(usernameInput.value, passwordInput.value)) {
   sessionStorage.setItem("username", usernameInput.value);
-  sessionStorage.setItme("password", passwordInput.value);
-	alert(sessionStorage.username+" "+sessionStorage.password);
+  sessionStorage.setItem("password", passwordInput.value);
+  window.location.href = "https://starlite3.tk/dashboard";
 }
 });
 newaccount.addEventListener("click", function() {
