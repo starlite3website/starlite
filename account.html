@@ -5,8 +5,10 @@
 	<button id="submit">Submit</button>
 	<button id="newaccount">New Account</button>
 	<script>
-localStorage.setItem("username", JSON.stringify([""]));
-localStorage.setItem("password", JSON.stringify([""]));
+if (localStorage.username == undefined || localStorage.password == undefined) {
+	localStorage.setItem("username", JSON.stringify([""]));
+        localStorage.setItem("password", JSON.stringify([""]));
+}
 var usernameInput = document.getElementById("usernameForm");
 var passwordInput = document.getElementById("passwordForm");
 var submit = document.getElementById("submit");
