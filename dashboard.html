@@ -66,12 +66,11 @@
         }
     </style>
 <script>
-  alert(sessionStorage.username+" "+sessionStorage.password);
     document.onload = function() {
-        if (sessionStorage.username == undefined && sessionStorage.password == undefined) {
-            window.location.href = "https://starlite3.tk/account";
-        } else {
+        if (sessionStorage.username != undefined && sessionSTorage.password != undefined) {
             loadAccountProgress();
+        } else {
+            window.location.href = "https://starlite3.tk/account";
         }
     }
     function loadAccountProgress() {
