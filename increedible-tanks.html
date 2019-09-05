@@ -581,31 +581,9 @@ function weak(x, y, m) {
    Game.blockId++;
    b[Game.blockId] = new Block(10, x, y, false, false);
  }
- draw.strokeStyle = "#000000";
- draw.fillStyle = "#ffffff";
- draw.strokeRect(x * 50, y * 50, 50, 50);
- draw.fillRect(x * 50, y * 50, 50, 50);
- draw.beginPath();
- draw.moveTo(x * 50, y * 50);
- draw.lineTo(x * 50 + 10, y * 50 + 10);
- draw.lineTo(x * 50 + 40, y * 50 + 10);
- draw.lineTo(x * 50 + 50, y * 50 + 0);
- draw.stroke();
- draw.moveTo(x * 50, y * 50);
- draw.lineTo(x * 50 + 10, y * 50 + 10);
- draw.lineTo(x * 50 + 10, y * 50 + 40);
- draw.lineTo(x * 50, y * 50 + 50);
- draw.stroke();
- draw.moveTo(x * 50, y * 50 + 50);
- draw.lineTo(x * 50 + 10, y * 50 + 40);
- draw.lineTo(x * 50 + 40, y * 50 + 40);
- draw.lineTo(x * 50 + 50, y * 50 + 50);
- draw.stroke();
- draw.moveTo(x * 50 + 50, y * 50 + 50);
- draw.lineTo(x * 50 + 40, y * 50 + 40);
- draw.lineTo(x * 50 + 40, y * 50 + 10);
- draw.lineTo(x * 50 + 50, y * 50 + 0);
- draw.stroke();
+ var weak_image = new Image();
+ weak_image.src = "https://starlite3.tk/block-silver.png";
+ draw.drawImage(weak_image, x * 50, y*50);
 }
 function chat_setup() {
  chatSubmit.addEventListener("click", chat_submit);
