@@ -536,31 +536,9 @@ function wall(x, y, m) {
    Game.blockId++;
    b[Game.blockId] = new Block(0, x, y, true);
  }
- draw.strokeStyle = "#000000";
- draw.fillStyle = "#ADD8E6";
- draw.strokeRect(x * 50, y * 50, 50, 50);
- draw.fillRect(x * 50, y * 50, 50, 50);
- draw.beginPath();
- draw.moveTo(x * 50, y * 50);
- draw.lineTo(x * 50 + 10, y * 50 + 10);
- draw.lineTo(x * 50 + 40, y * 50 + 10);
- draw.lineTo(x * 50 + 50, y * 50 + 0);
- draw.stroke();
- draw.moveTo(x * 50, y * 50);
- draw.lineTo(x * 50 + 10, y * 50 + 10);
- draw.lineTo(x * 50 + 10, y * 50 + 40);
- draw.lineTo(x * 50, y * 50 + 50);
- draw.stroke();
- draw.moveTo(x * 50, y * 50 + 50);
- draw.lineTo(x * 50 + 10, y * 50 + 40);
- draw.lineTo(x * 50 + 40, y * 50 + 40);
- draw.lineTo(x * 50 + 50, y * 50 + 50);
- draw.stroke();
- draw.moveTo(x * 50 + 50, y * 50 + 50);
- draw.lineTo(x * 50 + 40, y * 50 + 40);
- draw.lineTo(x * 50 + 40, y * 50 + 10);
- draw.lineTo(x * 50 + 50, y * 50 + 0);
- draw.stroke();
+ var wall_image = new Image();
+ wall_image.src = "https://starlite3.tk/qwangle.png"
+ draw.drawImage(wall_image, x, y);
 } // creates a wall
 function strong(x, y, m) {
  if (m) {
