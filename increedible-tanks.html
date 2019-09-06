@@ -205,14 +205,6 @@ function Tank() {
     draw.rotate(-(this.rotation * Math.PI / 180));
     draw.translate(-this.x-20, -this.y-20);
  }
-   tank_top_png = new Image();
-   tank_top_png.src = "https://starlite3.tk/starlite-tank-top.png";
-   draw.translate(this.x+20,this.y+20);
-    draw.rotate(this.rotation * Math.PI / 180);
-    draw.drawImage(tank_top_png, -20, -20);
-    draw.rotate(-(this.rotation * Math.PI / 180));
-    draw.translate(-this.x-20, -this.y-20);
- }
  this.control = function() {
    canvas.focus();
    this.draw();
