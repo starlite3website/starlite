@@ -20,8 +20,17 @@
             <a href="/problems"><button>Bugs</button></a>
     	    <a href="/chat"><button>Chat</button></a>
             <a href="/games"><button>Games</button></a>
-        <a href="/account"><button>Sign up/Login</button></a>
+        <a id="account" ><button>Sign up/Login</button></a>
            </strong>
+      <script>
+        if (sessionStorage.username != undefined) {
+          document.getElementById("account").innerHTML = sessionStorage.username;
+          document.getElementById("account").setAttribute('href', "https://starlite3.tk/dashboard");
+        } else {
+          document.getElementById("account").innerHTML = "Signup/Login";
+          document.getElementById("account").setAttribute('href', "https://starlite3.tk/account");
+        }
+      </script>
     </header>
     <style>
         header {
