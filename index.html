@@ -25,10 +25,10 @@
       <script>
         if (sessionStorage.username != undefined) {
           document.getElementById("account").innerHTML = sessionStorage.username;
-          document.getElementById("account").setAttribute('href', "https://starlite3.tk/dashboard");
+          document.getElementById("account").href = "https://starlite3.tk/dashboard";
         } else {
           document.getElementById("account").innerHTML = "Signup/Login";
-          document.getElementById("account").setAttribute('href', "https://starlite3.tk/account");
+          document.getElementById("account").href =  "https://starlite3.tk/account";
           document.getElementById("account").style = "border: 2px white;
             font-size: 20px;
             padding: 12px;
