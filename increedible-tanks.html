@@ -45,11 +45,11 @@ function ai_check(x,y) {
  var l = 1;
  while (l < Game.shotId) {
    l = l + 1;
-   if ((x+40>s[l].x && x+40<s[l].x+10)||(x>s[l].x&&x<s[l].x+10)) {
-    if ((y>s[l].y&&y<s[l].y+10)||(y+45>s[l].y&&y+45<s[l].y+10)) {
+   if ((x+40>s[l].x && x+40<s[l].x+20)||(x>s[l].x&&x<s[l].x+20)) {
+    if ((y>s[l].y&&y<s[l].y+20)||(y+40>s[l].y&&y+40<s[l].y+20)) {
       return true;
      }
-   }
+   } 
  }
  return false;
 }
@@ -62,17 +62,17 @@ function Ai() {
     window.setInterval(this.check, 10);
  }.bind(this);
  this.draw = function() {
+   if (this.inactive != true) {
    ai_top = new Image();
    ai_top.src = "https://starlite3.tk/starlite-tank-top.png";
   
     ai_base = new Image();
-    ai_base.src = "https://starlite3.tk/starlite-tank-base.png";
-    draw.drawImage(ai_base, this.x, this.y);
-    draw.translate(this.x+20,this.y+20);
+    ai_base.src = "https://starlite3.tk/starlite-tank-b ó
     draw.rotate(this.rotation * Math.PI / 180);
     draw.drawImage(ai_top, -20, -20);
     draw.rotate(-(this.rotation * Math.PI / 180));
     draw.translate(-this.x-20, -this.y-20);
+   }
  }.bind(this);
   this.move = function() {
     if (this.inactive != true) {
@@ -103,7 +103,9 @@ function Ai() {
     }
   }.bind(this);
   this.check = function() {
-    this.inactive = ai_check(this.x, this.y);
+    if (ai_check(this.x, this.y)) {
+     this.inactive = true;
+    }
   }.bind(this);
   this.rotation = 0;
   this.moveCalc = function() {
