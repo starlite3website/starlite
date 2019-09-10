@@ -62,12 +62,12 @@ function Ai() {
     window.setInterval(this.check, 10);
  }.bind(this);
  this.draw = function() {
-   if (this.inactive != true) {
-   ai_top = new Image();
+   if (this.inactive != true) {ai_top = new Image();
    ai_top.src = "https://starlite3.tk/starlite-tank-top.png";
-  
     ai_base = new Image();
-    ai_base.src = "https://starlite3.tk/starlite-tank-b ó
+    ai_base.src = "https://starlite3.tk/starlite-tank-base.png";
+    draw.drawImage(ai_base, this.x, this.y);
+    draw.translate(this.x+20,this.y+20);
     draw.rotate(this.rotation * Math.PI / 180);
     draw.drawImage(ai_top, -20, -20);
     draw.rotate(-(this.rotation * Math.PI / 180));
@@ -104,7 +104,8 @@ function Ai() {
   }.bind(this);
   this.check = function() {
     if (ai_check(this.x, this.y)) {
-     this.inactive = true;
+      this.inactive = true;
+      console.log(this.inactive);
     }
   }.bind(this);
   this.rotation = 0;
@@ -252,7 +253,7 @@ function Tank() {
             this.leftright = false;
    	}
      }
-     if (e.which == 32) {
+     if (e.which == 70) {
         this.fire();
      }
      if (e.which == 37) {
