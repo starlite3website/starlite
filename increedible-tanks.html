@@ -621,12 +621,6 @@ function level(num, mo, m) {
    // level two
  }
 }
-function keySupport(e) {
- if (e.which == 76) {
-   levelSelect(user.progress.level);
- }
-}
-   
 function mainMenu() {
  window.clearInterval(interval2);
  draw.clearRect(0, 0, 500, 500);
@@ -643,7 +637,27 @@ function mainMenu() {
   draw.fillText("Type:" + user.type, 75, 230);
  draw.fillText("Team:" + user.team, 75, 250);
  draw.fillText("Settings", 150, 270);
- canvas.addEventListener("keyup", keySupport);
+ draw.fillRect(225,225,50,50);
+ document.addEventListener("click", function(e) {
+  if (e.pageX || e.pageY) { 
+    x = e.pageX;
+    y = e.pageY;
+  } else { 
+    x = e.clientX + document.body.scrollLeft + document.documentElement.scrollLeft; 
+    y = e.clientY + document.body.scrollTop + document.documentElement.scrollTop; 
+  } 
+  x -= canvas.offsetLeft;
+  y -= canvas.offsetTop;
+ if (x > 225) {
+   if (x < 275) {
+     if (y > 225) {
+       if (y < 275) {
+         levelSelect(1)
+       }
+     }
+   }
+ }
+});
 } // main Menu
 function levelSelect(l) {
   level(l, null, true);
