@@ -57,7 +57,7 @@ function Ai() {
   this.x = 0;
   this.y = 0;
  this.control = function() {
-   this.aiDraw e= window.setInterval(this.draw, 1);
+   this.aiDraw = window.setInterval(this.draw, 1);
     window.setInterval(this.move, 500);
     window.setInterval(this.check, 10);
  }.bind(this);
@@ -473,7 +473,7 @@ function level(num, mo, m) {
  draw.fillStyle = "#dcdcdc";
    var floor = new Image();
    floor.src = "https://starlite3.tk/floor.png";
- draw.drawImage(floor,0,0);
+   draw.drawImage(floor,0,0);
    draw.drawImage(floor,50,0);
    draw.drawImage(floor,100,0);
    draw.drawImage(floor,150,0);
