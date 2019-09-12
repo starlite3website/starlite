@@ -471,7 +471,17 @@ function loading() {
 function level(num, mo, m) {
  draw.clearRect(0, 0, 500, 500);
  draw.fillStyle = "#dcdcdc";
- draw.fillRect(0, 0, 500, 500);
+ while(l1<11) {
+  console.log(l1)
+  while(l2 < 11) {
+    var floor = new Image();
+    floor.src = "https://starlite3.tk/floor.png";
+    draw.drawImage(floor, l1*50, l2*50);
+    l2 += 1;
+  }
+  l2 = 0;
+  l1 +=1;
+}
  user.tank.draw();
  if (mo != "n") {
    Game.control();
