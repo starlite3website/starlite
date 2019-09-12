@@ -637,7 +637,7 @@ function mainMenu() {
   draw.fillText("Type:" + user.type, 75, 230);
  draw.fillText("Team:" + user.team, 75, 250);
  draw.fillText("Settings", 150, 270);
- draw.fillRect(225,225,50,50);
+ draw.fillRect(225,375,50,50);
  document.addEventListener("click", function(e) {
   if (e.pageX || e.pageY) { 
     x = e.pageX;
@@ -650,8 +650,8 @@ function mainMenu() {
   y -= canvas.offsetTop;
  if (x > 225) {
    if (x < 275) {
-     if (y > 225) {
-       if (y < 275) {
+     if (y > 375) {
+       if (y < 425) {
          levelSelect(1)
        }
      }
