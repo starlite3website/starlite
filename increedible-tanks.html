@@ -438,6 +438,7 @@ function alert_startup() {
 function a(m, c) {
  alertConsole.classList.add("console");
  alertConsole.style.backgroundColor = c;
+ alertConsole.style.opacity = .1;
  alertConsole.style.border = "1px solid black";
  consoleText.innerHTML = m;
  alertConsole.style.visibility = "visible";
@@ -812,8 +813,6 @@ h4 {
 #alertConsole {
  z-index: 1000;
  margin-top: 220px;
- padding: 20px;
- border-radius: 20px;
  position: relative;
 }
 h1 {
