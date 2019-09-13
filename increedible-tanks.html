@@ -666,8 +666,27 @@ function levelSelect(l) {
   draw.fillRect(100,100,50,50);
   draw.fillStyle = "#000000";
   draw.fon = "20px Courier";
-  draw.fillText("1", 75,75);
-   //level(l, null, true);
+  draw.fillText("1", 125,125);
+  document.addEventListener("click", function(e) {
+  if (e.pageX || e.pageY) { 
+    x = e.pageX;
+    y = e.pageY;
+  } else { 
+    x = e.clientX + document.body.scrollLeft + document.documentElement.scrollLeft; 
+    y = e.clientY + document.body.scrollTop + document.documentElement.scrollTop; 
+  } 
+  x -= canvas.offsetLeft;
+  y -= canvas.offsetTop;
+ if (x > 100) {
+   if (x < 150) {
+     if (y > 100) {
+       if (y < 150) {
+         level(1, null, true);
+       }
+     }
+   }
+ }
+});
 }
 function wall(x, y, m) {
  if (m) {
