@@ -438,7 +438,7 @@ function alert_startup() {
 function a(m, c) {
  alertConsole.classList.add("console");
  alertConsole.style.backgroundColor = c;
- alertConsole.style.opacity = .1;
+ alertConsole.style.opacity = .7;
  alertConsole.style.border = "1px solid black";
  consoleText.innerHTML = m;
  alertConsole.style.visibility = "visible";
@@ -667,7 +667,7 @@ function levelSelect(l) {
   draw.fillStyle = "#000000";
   draw.fon = "20px Courier";
   draw.fillText("1", 75,75);
-   level(l, null, true);
+   //level(l, null, true);
 }
 function wall(x, y, m) {
  if (m) {
