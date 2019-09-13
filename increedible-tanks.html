@@ -640,7 +640,8 @@ function mainMenu() {
   draw.fillText("Type:" + user.type, 75, 230);
  draw.fillText("Team:" + user.team, 75, 250);
  draw.fillText("Settings", 150, 270);
- draw.fillRect(225,375,50,50);
+ draw.fillRect(225,375,100,50);
+ draw.fillText("Play Levels", 225,375);
  document.addEventListener("click", function(e) {
   if (e.pageX || e.pageY) { 
     x = e.pageX;
