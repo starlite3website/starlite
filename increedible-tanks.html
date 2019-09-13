@@ -640,8 +640,9 @@ function mainMenu() {
   draw.fillText("Type:" + user.type, 75, 230);
  draw.fillText("Team:" + user.team, 75, 250);
  draw.fillText("Settings", 150, 270);
- draw.fillRect(225,375,100,50);
- draw.fillText("Play Levels", 225,375);
+draw.fillRect(190,350,120,50);
+  draw.fillStyle = "#000000";
+ draw.fillText("Play Levels", 200,380);
  document.addEventListener("click", function(e) {
   if (e.pageX || e.pageY) { 
     x = e.pageX;
@@ -652,10 +653,10 @@ function mainMenu() {
   } 
   x -= canvas.offsetLeft;
   y -= canvas.offsetTop;
- if (x > 225) {
-   if (x < 275) {
-     if (y > 375) {
-       if (y < 425) {
+ if (x > 190) {
+   if (x < 310) {
+     if (y > 350) {
+       if (y < 400) {
          levelSelect();
        }
      }
