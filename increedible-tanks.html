@@ -45,9 +45,13 @@ function ai_check(x,y) {
  var l = 1;
  while (l < Game.shotId) {
    l = l + 1;
-   if ((x+40>s[l].x && x+40<s[l].x+20)||(x>s[l].x&&x<s[l].x+20)) {
-    if ((y>s[l].y&&y<s[l].y+20)||(y+40>s[l].y&&y+40<s[l].y+20)) {
-      return true;
+   if (s[l].x > x || s[l].x + 5 > x) {
+     if (s[l].x < x + 40 || s[l].x + 5 < x + 40) {
+       if (s[l].y > x || s[l].y + 5 > x) {
+         if (s[l].y < x + 40 || s[l].y + 5 < x + 40) {
+           return true;
+         }
+       }
      }
    } 
  }
