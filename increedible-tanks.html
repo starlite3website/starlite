@@ -45,10 +45,10 @@ function ai_check(x,y) {
  var l = 1;
  while (l < Game.shotId) {
    l = l + 1;
-   if (s[l].x > x || s[l].x + 5 > x) {
-     if (s[l].x < x + 40 || s[l].x + 5 < x + 40) {
-       if (s[l].y > x || s[l].y + 5 > x) {
-         if (s[l].y < x + 40 || s[l].y + 5 < x + 40) {
+   if (s[l].x > x || s[l].x + 10 > x) {
+     if (s[l].x < x + 40 || s[l].x + 10 < x + 40) {
+       if (s[l].y > y || s[l].y + 10 > y) {        
+         if (s[l].y < y + 40 || s[l].y + 10 < y + 40) {
            return true;
          }
        }
@@ -109,7 +109,6 @@ function Ai() {
   this.check = function() {
     if (ai_check(this.x, this.y)) {
       this.inactive = true;
-      console.log(this.inactive);
     }
   }.bind(this);
   this.rotation = 0;
