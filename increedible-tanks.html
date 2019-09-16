@@ -367,41 +367,23 @@ function jquery_tank_support(e) {
  user.tank.move(e);
 }
 function Block(health, x, y, isInvincible, isExplosive) {
- if (!isInvincible) {
-   this.health = health;
-    this.oh = health;
- } else {
-   this.health = Infinity;
- }
- if (isExplosive) {
-   this.e = true;
- } else {
-   this.e = false;
- }
-  window.setInterval(this.check, 10);
-  this.check = function() {
-    if (this.checker == false) {
-      this.health -= 10;
-      if (this.health == 0) {
-        this.x = -500;
-        this.y = -500;
-      }
-    }
-  }.bind(this);
-  this.checker = function() {
-    while (l < Game.shotId) {
-      l = l + 1;
-      if ((this.x*50+50>s[l].x*50 && this.x*50+50<s[l].x*50+50)||(this.x*50>s[l].x*50&&this.x*50<s[l].x*50+50)) {
-   	 if ((this.y*50>s[l].y*50&&this.y*50<s[l].y*50+50)||(this.y*50+50>s[l].y*50&&this.y*50+50<s[l].y*50+50)) {
-   	   return false;
-   	 }
- 	 }
-    }
-  }.bind(this);
- this.blockId = Game.blockId;
+ this.blockId = blockHelper();
  this.x = x;
  this.y = y;
+ window.setInterval(function(id) {
+   if (ai_check(x*50,y*50)) {
+     block_support(id);
+   }
+ }, 50, [this.blockId]);
 } // All Blocks
+function blockHelper() {
+  return Game.blockId;
+}
+function block_support(id) {
+  console.log(id)
+  b[id].x = undefined;
+  b[id].y = undefined;
+}
 var alertConsole = document.getElementById("alertConsole"); // console for game
 var chat = document.getElementById("chat");
 var messages = document.getElementById("messages");
