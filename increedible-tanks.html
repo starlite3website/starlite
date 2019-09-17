@@ -152,8 +152,8 @@ function Shot() {
  this.control = function(x, y, id, xm, ym) {
    this.x = x;
    this.y = y;
-   this.ym = ym;
-    this.xm = xm;
+   this.ym = ym * 16;
+    this.xm = xm * 16;
    this.id = id;
    this.inactive = false;
    this.draw();
