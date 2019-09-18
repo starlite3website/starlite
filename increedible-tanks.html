@@ -247,6 +247,7 @@ function Tank() {
  this.control = function() {
    canvas.focus();
    this.draw();
+   this.interval = window.setInterval(this.check, 50);
    canvas.addEventListener("keydown", function(event) {     
       if (this.interval == undefined) {
  	   this.interval = window.setInterval(function() {
@@ -259,6 +260,9 @@ function Tank() {
      this.interval = undefined;
    }, false);
 }
+ this.check = function() {
+   this.inactive = ai_check(this.x, this.y);
+ }
  this.inactive = false;
   this.rotation = 0;
  this.move = function(e) {  
