@@ -82,9 +82,7 @@ function Ai() {
     if (this.inactive != true) {
     this.instructions = this.moveCalc();
           if (this.instructions.fire == true) {
-      Game.shotId = Game.shotId + 1;
-                       s[Game.shotId] = new Shot();
-                       s[Game.shotId].control(this.x + 17, this.y + 45, Game.shotId);
+      this.fire();  
     } else if (this.instructions.up == true) {
       if (checker(this.x - 5, this.y) != false) {
         this.x -= 10;
@@ -106,6 +104,41 @@ function Ai() {
       window.clearInterval(this.aiDraw);
     }
   }.bind(this);
+ this.fire = function() {
+    this.xd = 1;
+  this.angle = this.rotation % 90;
+  this.yd = Math.abs(((this.xd * this.angle) - (90 * this.xd)) / this.angle);
+  if (this.rotation < 90 || this.rotation > 270) {
+    this.yd = Math.abs(this.yd);
+  } else {
+    this.yd = 0 - Math.abs(this.yd);
+  }  
+  if (this.rotation > 180) {
+    this.xd = Math.abs(this.xd);
+  } else {
+    this.xd = 0 - Math.abs(this.xd);
+  }
+  if (this.rotation == 0) {
+    this.xd = 0;
+    this.yd = 1;
+  } else if (this.rotation == 90) {
+    this.xd = -1;
+    this.yd = 0;
+  } else if (this.rotation == 180) {
+    this.xd = 0;
+    this.yd = -1;
+  } else if (this.rotation == 270) {
+    this.xd = 1;
+    this.yd = 0;
+  }
+  Game.shotId = Game.shotId + 1;
+  s[Game.shotId] = new Shot();
+  if ((this.xd < 0 && this.yd < 0 ) || (this.xd > 0 && this.yd > 0)) {
+  s[Game.shotId].control(this.x+20, this.y+20, Game.shotId, this.yd, this.xd);
+  } else {
+  s[Game.shotId].control(this.x+20, this.y+20, Game.shotId, this.xd, this.yd);
+  }
+  }
   this.check = function() {
     if (ai_check(this.x, this.y)) {
       this.inactive = true;
@@ -150,8 +183,8 @@ function Shot() {
  this.sensor = function() {
  }
  this.control = function(x, y, id, xm, ym) {
-   this.x = x;
-   this.y = y;
+   this.x = x + xm * 16;
+   this.y = y + ym * 16;
    this.ym = ym * 16;
     this.xm = xm * 16;
    this.id = id;
