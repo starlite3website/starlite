@@ -244,10 +244,19 @@ function Tank() {
     draw.rotate(-(this.rotation * Math.PI / 180));
     draw.translate(-this.x-20, -this.y-20);
  }
+ this.check = function() {
+   console.clear()
+   if (ai_check(this.x, this.y)) {
+     this.inactive = true;
+     Game.endGame();
+   }
+ }
  this.control = function() {
    canvas.focus();
    this.draw();
-   this.interval = window.setInterval(this.check, 50);
+  this.checkloop = window.setInterval(function() {
+     user.tank.check();
+  }, 50);
    canvas.addEventListener("keydown", function(event) {     
       if (this.interval == undefined) {
  	   this.interval = window.setInterval(function() {
