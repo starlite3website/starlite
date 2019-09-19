@@ -133,8 +133,8 @@ function Ai() {
   }
   Game.shotId = Game.shotId + 1;
   s[Game.shotId] = new Shot();
-  if ((this.xd < 0 && this.yd < 0 ) || (this.xd > 0 && this.yd > 0)) {
-  s[Game.shotId].control(this.x+20, this.y+20, Game.shotId, this.yd, this.xd);
+  if (this.x < user.tank.x) {
+  s[Game.shotId].control(this.x+20, this.y+20, Game.shotId, Math.abs(this.xd), this.yd);
   } else {
   s[Game.shotId].control(this.x+20, this.y+20, Game.shotId, this.xd, this.yd);
   }
