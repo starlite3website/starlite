@@ -248,7 +248,7 @@ function Tank() {
    console.clear()
    if (ai_check(this.x, this.y)) {
      this.inactive = true;
-     Game.endGame();
+     
    }
  }
  this.control = function() {
@@ -269,9 +269,6 @@ function Tank() {
      this.interval = undefined;
    }, false);
 }
- this.check = function() {
-   this.inactive = ai_check(this.x, this.y);
- }
  this.inactive = false;
   this.rotation = 0;
  this.move = function(e) {  
