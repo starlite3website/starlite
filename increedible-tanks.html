@@ -615,7 +615,9 @@ function level(num, mo, m) {
    draw.drawImage(floor,350,450);
    draw.drawImage(floor,400,450);
    draw.drawImage(floor,450,450);
- user.tank.draw();
+ if (user.tank != undefined) {
+    user.tank.draw();
+  }
  if (mo != "n") {
    Game.control();
    Game.i();
