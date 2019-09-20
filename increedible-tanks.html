@@ -248,7 +248,13 @@ function Tank() {
    console.clear()
    if (ai_check(this.x, this.y)) {
      this.inactive = true;
-     
+     window.clearInterval(this.checkloop);
+     window.clearInterval(this.interval);
+     window.clearInterval(this.interval2)
+     this.checkloop = undefined;
+     this.interval = undefined;
+     this.interval2 = undefined;
+     Game.endGame();
    }
  }
  this.control = function() {
@@ -376,11 +382,19 @@ function checker(x, y) {
     }
   }
 }
+function gameHelper() { 
+  b = [];
+  ai = [];
+  user.tank = undefined;
+}
 function Game() {
  this.paused = false;
  this.aiId = 0;
  this.shotId = 0;
  this.blockId = 0;
+ this.endGame = function() {
+   gameHelper();
+ }
  this.redraw = function() {
    for (var r = 1; r == this.shotId; r++) {
      s[r].redraw();
