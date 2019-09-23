@@ -62,8 +62,8 @@ function Ai() {
   this.y = 0;
  this.control = function() {
    this.aiDraw = window.setInterval(this.draw, 1);
-    window.setInterval(this.move, 500);
-    window.setInterval(this.check, 10);
+   this.aiMove = window.setInterval(this.move, 500);
+   this.aiCheck = window.setInterval(this.check, 10);
  }.bind(this);
  this.draw = function() {
    if (this.inactive != true) {ai_top = new Image();
@@ -385,9 +385,17 @@ function checker(x, y) {
   }
 }
 function gameHelper() { 
+  var l = 1;
+  while (l<ai.length) {
+    window.clearInterval(ai[l].aiDraw);
+    window.clearInterval(ai[l].aiMove);
+    window.clearInterval(ai[l].aiCheck);
+    l++;
+  }
   b = [];
   ai = [];
   user.tank = undefined;
+  mainMenu();
 }
 function Game() {
  this.paused = false;
