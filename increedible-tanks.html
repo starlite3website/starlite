@@ -729,6 +729,7 @@ function levelSelect(l) {
   draw.fon = "20px Courier";
   draw.fillText("1", 125,125);
   document.addEventListener("click", function(e) {
+   user.tank = new Tank();
   if (e.pageX || e.pageY) { 
     x = e.pageX;
     y = e.pageY;
