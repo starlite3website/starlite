@@ -392,8 +392,14 @@ function gameHelper() {
     window.clearInterval(ai[l].aiCheck);
     l++;
   }
+  var l = 1;
+  while (l<b.length) {
+    window.clearInterval(b[l].interval);
+    l++;
+  }
   b = [];
   ai = [];
+  s = [];
   user.tank = undefined;
   mainMenu();
 }
@@ -437,7 +443,7 @@ function Block(health, x, y, isInvincible, isExplosive) {
  this.blockId = blockHelper();
  this.x = x;
  this.y = y;
- window.setInterval(function(id) {
+ this.interval = window.setInterval(function(id) {
    if (ai_check(x*50,y*50)) {
      block_support(id);
    }
