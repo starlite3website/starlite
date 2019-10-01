@@ -506,7 +506,7 @@ function loading() {
    if (sessionStorage.username == undefined) {
      window.location.href = "https://starlite3.tk/account"
    }
-   sessionStorage.user = {
+   user = {
      username : sessionStorage.username,
      level : 1,
      coins : 0,
@@ -681,9 +681,9 @@ function mainMenu() {
   draw.fillStyle = "#ffffff";
  draw.fillRect(75, 95, 50, 50);
   draw.font = "15px Courier";
- draw.fillText(sessionStorage.user.username, 150, 125);
- draw.fillText("Level:" + sessionStorage.user.level, 325, 125);
- draw.fillText("Coins:" + sessionStorage.user.coins, 75, 190);
+ draw.fillText(user.username, 150, 125);
+ draw.fillText("Level:" + user.level, 325, 125);
+ draw.fillText("Coins:" + user.coins, 75, 190);
 draw.fillRect(190,350,120,50);
   draw.fillStyle = "#000000";
  draw.fillText("Play Levels", 200,380);
