@@ -1,6 +1,6 @@
-<button id="destory">DESTROY</button>
-<button id="display" >DISPLAY</button>
+<button id="destroy">DESTROY</button>
+<button id="display">DISPLAY</button>
 <script>
   document.getElementById("destroy").addEventListener("click",function() { localStorage.username = [] });
-  document.getElementBYId("display").addEventListener("click",function() { alert(localStorage.username); });
+  document.getElementById("display").addEventListener("click",function() { alert(JSON.parse(localStorage.username)); });
 </script>
