@@ -22,8 +22,8 @@ if (isCorrect(usernameInput.value, passwordInput.value)) {
 }
 });
 newaccount.addEventListener("click", function() {
- if (JSON.parse(localStorage.getItem("username"))[JSON.parse(localStorage.getItem("username")).indexOf(username)] == username) {
-   if (JSON.parse(localStorage.getItem("password"))[JSON.parse(localStorage.getItem("password")).indexOf(password)] == password) {
+ if (JSON.parse(localStorage.getItem("username"))[JSON.parse(localStorage.getItem("username")).indexOf(usernameInput.value)] == usernameInput.value) {
+   if (JSON.parse(localStorage.getItem("password"))[JSON.parse(localStorage.getItem("password")).indexOf(passwordInput.value)] == passwordInput.value) {
        localStorage.setItem("username", JSON.stringify(JSON.parse(localStorage.getItem("username")).concat([usernameInput.value])));
        localStorage.setItem("password", JSON.stringify(JSON.parse(localStorage.getItem("password")).concat([passwordInput.value])));
        alert("New Account Created: "+usernameInput.value);
