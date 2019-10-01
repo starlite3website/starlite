@@ -502,17 +502,14 @@ function alert_end() {
  alertConsole.style.visibility = "hidden";
 } // alert end
 function loading() {
- if (sessionStorage.user === undefined) {
-   user = {
-     username: "starlite_developer",
-     tank: new Tank(),
-     level: 1,
-     team: "Increedible: " + "",
-     progress : {
-       level : 1,
-  gems : 0,
-  coins : 0,
-     }
+ if (sessionStorage.level == undefined) {
+   if (sessionStorage.username == undefined) {
+     window.location.href = "https://starlite3.tk/account"
+   }
+   sessionStorage.user = {
+     username : sessionStorage.username,
+     level : 1,
+     coins : 0,
    }
  }
  draw.clearRect(0, 0, 500, 500);
