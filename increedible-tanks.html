@@ -207,7 +207,9 @@ function Shot() {
 }
 function support(id) {
  setTimeout(function() {
-   s[id].draw();
+   if (user.tank != undefined) {
+    s[id].draw();
+   }
  }, 25);
 }
 function clearShot() {
