@@ -27,6 +27,7 @@ newaccount.addEventListener("click", function() {
        localStorage.setItem("username", JSON.stringify(JSON.parse(localStorage.getItem("username")).concat([usernameInput.value])));
        localStorage.setItem("password", JSON.stringify(JSON.parse(localStorage.getItem("password")).concat([passwordInput.value])));
        alert("New Account Created: "+usernameInput.value);
+   }
  }
 });
 function isCorrect(username, password) {
