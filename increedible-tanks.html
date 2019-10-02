@@ -507,6 +507,7 @@ function loading() {
      window.location.href = "https://starlite3.tk/account"
    }
    user = {
+     tank : new Tank(),
      username : sessionStorage.username,
      level : 1,
      coins : 0,
@@ -717,7 +718,6 @@ function levelSelect(l) {
   draw.fon = "20px Courier";
   draw.fillText("1", 125,125);
   document.addEventListener("click", function(e) {
-   user.tank = new Tank();
   if (e.pageX || e.pageY) { 
     x = e.pageX;
     y = e.pageY;
