@@ -443,7 +443,7 @@ function Block(health, x, y, isInvincible, isExplosive) {
  this.x = x;
  this.y = y;
  i.push(window.setInterval(function(id) {
-   if (ai_check(x*50,y*50)) {
+   if (ai_check(b[id].x*50,b[id].y*50)) {
      block_support(id);
    }
  }, 50, [this.blockId]));
