@@ -10,6 +10,6 @@
   document.getElementById("display").addEventListener("click",function() { alert(localStorage.username+" "+localStorage.password); });
   document.getElementById("plusone").addEventListener("click",function() { l++; });
   document.getElementById("minusone").addEventListener("click",function() { l--; });
-  document.getElementById("destroyone").addEventListener("click",function() { localStorage.setItem("username", JSON.stringify(JSON.parse(localStorage.username).splice(l+1,1))); localStorage.setItem("password", JSON.stringify(JSON.parse(localStorage.password).splice(l+1,1)));});
+  document.getElementById("destroyone").addEventListener("click",function() { JSON.parse(localStorage.username)[l] = undefined; JSON.parse(localStorage.password)[l] = undefined;});
   document.getElementById("displayone").addEventListener("click",function() { alert(JSON.parse(localStorage.username)[l]+" "+JSON.parse(localStorage.password)[l])})
 </script>
