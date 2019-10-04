@@ -7,8 +7,8 @@
 <button id="displayone">DISPLAYONE</button>
 <script>
   var l = 0;
-  localStorage.username = ['1','2','3','4'];
-  localStorage.password = ['1p','2p','3p','4p'];
+  localStorage.username = JSON.stringify(['1','2','3','4']);
+  localStorage.password = JSON.stringify(['1p','2p','3p','4p']);
   document.getElementById("destroy").addEventListener("click",function() { localStorage.setItem("username", JSON.stringify([])); localStorage.setItem("password", JSON.stringify([])); alert('Destroyed');});
   document.getElementById("display").addEventListener("click",function() { alert(localStorage.username+" "+localStorage.password); });
   document.getElementById("plusone").addEventListener("click",function() { l++; });
