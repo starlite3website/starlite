@@ -1,3 +1,4 @@
+
 <button id="destroy">DESTROY</button>
 <button id="display">DISPLAY</button>
 <button id="plusone">PLUSONE</button>
@@ -6,10 +7,12 @@
 <button id="displayone">DISPLAYONE</button>
 <script>
   var l = 0;
+  localStorage.username = ['1','2','3','4'];
+  localStorage.password = ['1p','2p','3p','4p'];
   document.getElementById("destroy").addEventListener("click",function() { localStorage.setItem("username", JSON.stringify([])); localStorage.setItem("password", JSON.stringify([])); alert('Destroyed');});
   document.getElementById("display").addEventListener("click",function() { alert(localStorage.username+" "+localStorage.password); });
   document.getElementById("plusone").addEventListener("click",function() { l++; });
   document.getElementById("minusone").addEventListener("click",function() { l--; });
-  document.getElementById("destroyone").addEventListener("click",function() { JSON.parse(localStorage.username)[l] = undefined; JSON.parse(localStorage.password)[l] = undefined;});
+  document.getElementById("destroyone").addEventListener("click",function() {localStorage.username.splice(l,1); localStorage.password.splice(l,1);});
   document.getElementById("displayone").addEventListener("click",function() { alert(JSON.parse(localStorage.username)[l]+" "+JSON.parse(localStorage.password)[l])})
 </script>
