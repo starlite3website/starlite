@@ -13,6 +13,6 @@
   document.getElementById("display").addEventListener("click",function() { alert(localStorage.username+" "+localStorage.password); });
   document.getElementById("plusone").addEventListener("click",function() { l++; });
   document.getElementById("minusone").addEventListener("click",function() { l--; });
-  document.getElementById("destroyone").addEventListener("click",function() {localStorage.username.splice(l,1); localStorage.password.splice(l,1);});
+  document.getElementById("destroyone").addEventListener("click",function() {var uh = localStorage.username; uh.splice(l,1); localStorage.setItem("username", uh); var ph = localStorage.username; ph.splice(l,1); localStorage.setItem("password", ph)});
   document.getElementById("displayone").addEventListener("click",function() { alert(JSON.parse(localStorage.username)[l]+" "+JSON.parse(localStorage.password)[l])})
 </script>
