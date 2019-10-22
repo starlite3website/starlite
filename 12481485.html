@@ -1,4 +1,20 @@
-
+<div id="c">
+  <script>
+    var div = document.getElementById("c"), data = [];
+    window.setInterval(function() {
+      var l = 0;
+      while (l<JSON.parse(localStorage.username).length) {
+        if (data[l]!=JSON.parse(localStorage.username)[l]) {
+          data[l] = JSON.parse(localStorage.username)[l];
+          var t = document.createElement("DIV");
+          t.innerHTML = "USERNAME: "+JSON.parse(localStorage.username)[l]+ " PASSWORD: "+JSON.parse(localStorage.password)[l];
+          c.appendChild(t);
+        }
+        l++;
+      }
+    }, 500)
+  </script>
+</div>
 <button id="destroy">DESTROY</button>
 <button id="display">DISPLAY</button>
 <button id="plusone">PLUSONE</button>
