@@ -6,7 +6,7 @@
 	<button id="submit">Submit</button>
 	<button id="newaccount">New Account</button>
 	<script>
-if (localStorage.username == undefined || localStorage.password == undefined) {
+if (localStorage.getItem("username") == undefined || localStorage.getItem("password") == undefined) {
 	localStorage.setItem("username", JSON.stringify([""]));
         localStorage.setItem("password", JSON.stringify([""]));
 }
