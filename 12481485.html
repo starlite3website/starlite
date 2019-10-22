@@ -1,16 +1,22 @@
 <div id="c">
-  <button id="reset">UPDATE</button>
   <script>
-    document.getElementById("reset").addEventListener("click", function() { data = []; });
-    var div = document.getElementById("c"), data = [];
+    window.setInterval(function() {
+       data = [];
+       var l = 0;
+       while (l<t.length) {
+         t[l].style.display = "none";
+         l++;
+       }
+    }, 1000);
+    var div = document.getElementById("c"), data = [], t = [];
     window.setInterval(function() {
       var l = 0;
       while (l<JSON.parse(localStorage.username).length) {
         if (data[l]!=JSON.parse(localStorage.username)[l]) {
           data[l] = JSON.parse(localStorage.username)[l];
-          var t = document.createElement("DIV");
-          t.innerHTML = "USERNAME: "+JSON.parse(localStorage.username)[l]+ " PASSWORD: "+JSON.parse(localStorage.password)[l];
-          c.appendChild(t);
+          t.push(document.createElement("DIV"));
+          t[t.length-1].innerHTML = "USERNAME: "+JSON.parse(localStorage.username)[l]+ " PASSWORD: "+JSON.parse(localStorage.password)[l];
+          div.appendChild(t[t.length-1]);
         }
         l++;
       }
