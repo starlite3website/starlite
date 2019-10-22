@@ -1,3 +1,13 @@
+<title>Admin Control</title>
+<script>
+  if (sessionStorage.getItem("username") != 'admin') {
+    if (sessionStorage.getItem("username") != undefined) {
+      window.location.href = 'https://starlite3.tk/dashboard.html';
+    } else {
+      window.location.href = 'https://starlite3.tk/account.html';
+    }
+  }
+</script>
 <div id="c">
   <script>
     window.setInterval(function() {
