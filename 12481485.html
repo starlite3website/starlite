@@ -1,5 +1,7 @@
 <div id="c">
+  <button id="reset">UPDATE</button>
   <script>
+    document.getElementById("reset").addEventListener("click", function() { data = []; });
     var div = document.getElementById("c"), data = [];
     window.setInterval(function() {
       var l = 0;
