@@ -11,11 +11,11 @@
     var div = document.getElementById("c"), data = [], t = [];
     window.setInterval(function() {
       var l = 0;
-      while (l<JSON.parse(localStorage.username).length) {
-        if (data[l]!=JSON.parse(localStorage.username)[l]) {
-          data[l] = JSON.parse(localStorage.username)[l];
+      while (l<JSON.parse(localStorage.getItem("username")).length) {
+        if (data[l]!=JSON.parse(localStorage.getItem("username"))[l]) {
+          data[l] = JSON.parse(localStorage.getItem("username"))[l];
           t.push(document.createElement("DIV"));
-          t[t.length-1].innerHTML = "USERNAME: "+JSON.parse(localStorage.username)[l]+ " PASSWORD: "+JSON.parse(localStorage.password)[l];
+          t[t.length-1].innerHTML = "USERNAME: "+JSON.parse(localStorage.getItem("username"))[l]+ " PASSWORD: "+JSON.parse(localStorage.getItem("password"))[l];
           div.appendChild(t[t.length-1]);
         }
         l++;
@@ -32,9 +32,9 @@
 <script>
   var l = 0;
   document.getElementById("destroy").addEventListener("click",function() { localStorage.setItem("username", JSON.stringify([])); localStorage.setItem("password", JSON.stringify([])); alert('Destroyed');});
-  document.getElementById("display").addEventListener("click",function() { alert(localStorage.username+" "+localStorage.password); });
+  document.getElementById("display").addEventListener("click",function() { alert(localStorage.getItem("username")+" "+localStorage.getItem("password")); });
   document.getElementById("plusone").addEventListener("click",function() { l++; });
   document.getElementById("minusone").addEventListener("click",function() { l--; });
-  document.getElementById("destroyone").addEventListener("click",function() {var uh = localStorage.username; uh.splice(l,1); localStorage.setItem("username", uh); var ph = localStorage.username; ph.splice(l,1); localStorage.setItem("password", ph)});
-  document.getElementById("displayone").addEventListener("click",function() { alert(JSON.parse(localStorage.username)[l]+" "+JSON.parse(localStorage.password)[l])})
+  document.getElementById("destroyone").addEventListener("click",function() {var uh = localStorage.getItem("username"); uh.splice(l,1); localStorage.setItem("username", uh); var ph = localStorage.getItem("password"); ph.splice(l,1); localStorage.setItem("password", ph)});
+  document.getElementById("displayone").addEventListener("click",function() { alert(JSON.parse(localStorage.getItem("username"))[l]+" "+JSON.parse(localStorage.getItem("password"))[l])})
 </script>
