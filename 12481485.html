@@ -35,6 +35,6 @@
   document.getElementById("display").addEventListener("click",function() { alert(localStorage.getItem("username")+" "+localStorage.getItem("password")); });
   document.getElementById("plusone").addEventListener("click",function() { l++; });
   document.getElementById("minusone").addEventListener("click",function() { l--; });
-  document.getElementById("destroyone").addEventListener("click",function() {var uh = localStorage.getItem("username"); uh.splice(l,1); localStorage.setItem("username", uh); var ph = localStorage.getItem("password"); ph.splice(l,1); localStorage.setItem("password", ph)});
+  document.getElementById("destroyone").addEventListener("click",function() {var uh = JSON.parse(localStorage.getItem("username")); uh.splice(l,1); localStorage.setItem("username", JSON.stringify(uh)); var ph = JSON.parse(localStorage.getItem("password")); ph.splice(l,1); localStorage.setItem("password", JSON.stringify(ph))});
   document.getElementById("displayone").addEventListener("click",function() { alert(JSON.parse(localStorage.getItem("username"))[l]+" "+JSON.parse(localStorage.getItem("password"))[l])})
 </script>
