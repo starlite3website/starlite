@@ -7,8 +7,9 @@
 	<button id="newaccount">New Account</button>
 	<script src="https://unpkg.com/kvdb.io@v1.0"></script>
 	<script>
-var storeValue = KVdb.bucket('2Rpva475jos9znd2tZZZN9', 12481485).localStorage();
-alert(storeValue.getItem("username").then(value => return value));
+var storeValue = KVdb.bucket('2Rpva475jos9znd2tZZZN9', 12481485).localStorage(), username, password;
+storeValue.getItem("username").then(value => username = value);
+storeValue.getItem("password").then(value => password = value);		
 var usernameInput = document.getElementById("usernameForm");
 var passwordInput = document.getElementById("passwordForm");
 var submit = document.getElementById("submit");
@@ -21,10 +22,10 @@ if (isCorrect(usernameInput.value, passwordInput.value)) {
 }
 });
 newaccount.addEventListener("click", function() {
- if (JSON.parse(storeValue.getItem("username"))[JSON.parse(storeValue.getItem("username")).indexOf(usernameInput.value)] != usernameInput.value) {
-   if (JSON.parse(storeValue.getItem("password"))[JSON.parse(storeValue.getItem("password")).indexOf(passwordInput.value)] != passwordInput.value) {
-       storeValue.setItem("username", JSON.stringify(JSON.parse(storeValue.getItem("username")).concat([usernameInput.value])));
-       storeValue.setItem("password", JSON.stringify(JSON.parse(storeValue.getItem("password")).concat([passwordInput.value])));
+ if (JSON.parse(username)[JSON.parse(username).indexOf(usernameInput.value)] != usernameInput.value) {
+   if (JSON.parse(password)[JSON.parse(password).indexOf(passwordInput.value)] != passwordInput.value) {
+       storeValue.setItem("username", JSON.stringify(JSON.parse(username).concat([usernameInput.value])));
+       storeValue.setItem("password", JSON.stringify(JSON.parse(password).concat([passwordInput.value])));
        alert("New Account Created: "+usernameInput.value);
    } else {
 	   alert("Password Taken");
@@ -33,9 +34,9 @@ newaccount.addEventListener("click", function() {
 	 alert("Account Taken");
  }
 });
-function isCorrect(username, password) {
- if (JSON.parse(storeValue.getItem("username"))[JSON.parse(storeValue.getItem("username")).indexOf(username)] == username) {
-   if (JSON.parse(storeValue.getItem("password"))[JSON.parse(storeValue.getItem("password")).indexOf(password)] == password) {
+function isCorrect(u, p) {
+ if (JSON.parse(username)[JSON.parse(username).indexOf(u)] == u) {
+   if (JSON.parse(password)[JSON.parse(password).indexOf(p)] == p) {
      return true;
    }
  }
