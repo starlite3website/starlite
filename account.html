@@ -35,6 +35,7 @@ newaccount.addEventListener("click", function() {
  }
 });
 function isCorrect(u, p) {
+	alert(username, u, password, p);
  if (JSON.parse(username)[JSON.parse(username).indexOf(u)] == u) {
    if (JSON.parse(password)[JSON.parse(password).indexOf(p)] == p) {
      return true;
