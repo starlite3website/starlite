@@ -10,6 +10,7 @@
 var storeValue = KVdb.bucket('2Rpva475jos9znd2tZZZN9', 12481485).localStorage();
 alert(storeValue.getItem("username"));
 if (storeValue.getItem("username") == null || stoveValue.getItem("password") == null) {
+	alert(storeValue.setItem);
 	storeValue.setItem("username", JSON.stringify([""]));
         storeValue.setItem("password", JSON.stringify([""]));
 }
