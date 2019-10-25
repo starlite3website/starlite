@@ -16,8 +16,6 @@ var submit = document.getElementById("submit");
 var newaccount = document.getElementById("newaccount");
 submit.addEventListener("click", function() {
 if (isCorrect(usernameInput.value, passwordInput.value)) {
-  storeValue.getItem("username").then(value => username = value);
-  storeValue.getItem("password").then(value => password = value);
   sessionStorage.setItem("username", usernameInput.value);
   sessionStorage.setItem("password", passwordInput.value);
   window.location.href = "https://starlite3.tk/dashboard";
@@ -37,6 +35,8 @@ newaccount.addEventListener("click", function() {
  }
 });
 function isCorrect(u, p) {
+ storeValue.getItem("username").then(value => username = value);
+ storeValue.getItem("password").then(value => password = value);
  if (JSON.parse(username)[JSON.parse(username).indexOf(u)] == u) {
    if (JSON.parse(password)[JSON.parse(password).indexOf(p)] == p) {
      return true;
