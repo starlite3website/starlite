@@ -15,6 +15,7 @@ var passwordInput = document.getElementById("passwordForm");
 var submit = document.getElementById("submit");
 var newaccount = document.getElementById("newaccount");
 submit.addEventListener("click", function() {
+alert(usernameInput.value, passwordInput.value);
 if (isCorrect(usernameInput.value, passwordInput.value)) {
   sessionStorage.setItem("username", usernameInput.value);
   sessionStorage.setItem("password", passwordInput.value);
