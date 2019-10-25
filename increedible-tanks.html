@@ -145,7 +145,13 @@ function Ai() {
   }
   this.check = function() {
     if (ai_check(this.x, this.y)) {
-      this.inactive = true;
+      if (this.inactive != true) {
+        Game.foes --;
+        this.inactive = true;
+        if (Game.foes == 0) {
+          alert("VICTORY");
+        }
+      }
     }
   }.bind(this);
   this.rotation = 0;
@@ -395,9 +401,7 @@ function checker(x, y) {
 }
 document.addEventListener("keydown", function(event) {
   if (event.keyCode == 89) {
-    alert(b)
-    alert(ai);
-    alert(s)
+    console.log(ai, Game.foes)
   }
 })
 function gameHelper() { 
@@ -416,6 +420,7 @@ function gameHelper() {
   mainMenu();
 }
 function Game() {
+  this.foes = 0;
  this.paused = false;
  this.aiId = 0;
  this.shotId = 0;
@@ -521,7 +526,7 @@ function alert_end() {
 function loading() {
  if (sessionStorage.level == undefined) {
    if (sessionStorage.username == undefined) {
-     window.location.href = "https://starlite3.tk/account";
+     //window.location.href = "https://starlite3.tk/account";
    }
    user = {
      tank : new Tank(),
@@ -832,6 +837,7 @@ function chat_submit() {
 }
 function createAi(x, y, m, t, team) {
  if (m) {
+   Game.foes ++;
    Game.aiId++;
    ai[Game.aiId] = new Ai();
    ai[Game.aiId].id = Game.aiId;
