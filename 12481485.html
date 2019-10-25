@@ -2,8 +2,6 @@
 <script src="https://unpkg.com/kvdb.io@v1.0"></script>
 <script>
   var storeValue = KVdb.bucket('2Rpva475jos9znd2tZZZN9', 12481485).localStorage(), username, password;
-  storeValue.getItem("username").then(value => username = value);
-  storeValue.getItem("password").then(value => password = value);
   if (sessionStorage.getItem("username") != 'admin') {
     if (sessionStorage.getItem("username") != undefined) {
       window.location.href = 'https://starlite3.tk/dashboard.html';
@@ -24,6 +22,8 @@
     }, 1000);
     var div = document.getElementById("c"), data = [], t = [];
     window.setInterval(function() {
+      storeValue.getItem("username").then(value => username = value);
+      storeValue.getItem("password").then(value => password = value);
       var l = 0;
       while (l<JSON.parse(username).length) {
         if (data[l]!=JSON.parse(username)[l]) {
