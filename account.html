@@ -8,8 +8,8 @@
 	<script src="https://unpkg.com/kvdb.io@v1.0"></script>
 	<script>
 var storeValue = KVdb.bucket('2Rpva475jos9znd2tZZZN9', 12481485).localStorage();
-alert(storeValue);
-if (storeValue.getItem("username") == undefined || stoveValue.getItem("password") == undefined) {
+alert(storeValue.getItem("username"));
+if (storeValue.getItem("username") == null || stoveValue.getItem("password") == null) {
 	storeValue.setItem("username", JSON.stringify([""]));
         storeValue.setItem("password", JSON.stringify([""]));
 }
