@@ -8,11 +8,6 @@
 	<script src="https://unpkg.com/kvdb.io@v1.0"></script>
 	<script>
 var storeValue = KVdb.bucket('2Rpva475jos9znd2tZZZN9', 12481485).localStorage();
-if (true) {
-	alert(storeValue.setItem);
-	storeValue.setItem("username", JSON.stringify([""]));
-        storeValue.setItem("password", JSON.stringify([""]));
-}
 var usernameInput = document.getElementById("usernameForm");
 var passwordInput = document.getElementById("passwordForm");
 var submit = document.getElementById("submit");
