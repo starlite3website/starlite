@@ -7,7 +7,7 @@
 	<button id="newaccount">New Account</button>
 	<script src="https://unpkg.com/kvdb.io@v1.0"></script>
 	<script>
-var storeValue = KVdb.bucket('2Rpva475jos9znd2tZZZN9').localStorage();
+var storeValue = KVdb.bucket('2Rpva475jos9znd2tZZZN9', 12481485).localStorage();
 console.log(storeValue);
 if (storeValue.getItem("username") == undefined || stoveValue.getItem("password") == undefined) {
 	storeValue.setItem("username", JSON.stringify([""]));
