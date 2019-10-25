@@ -5,10 +5,12 @@
 	<a href="https://starlite3.tk/termsofservice">Terms of Service:<a/> <input type="check" id="termsofservice" />
 	<button id="submit">Submit</button>
 	<button id="newaccount">New Account</button>
+	<script src=""></script>
 	<script>
-if (localStorage.getItem("username") == undefined || localStorage.getItem("password") == undefined) {
-	localStorage.setItem("username", JSON.stringify([""]));
-        localStorage.setItem("password", JSON.stringify([""]));
+var storeValue = KVdb.bucket(TgJg5WuxEzonUneEdiTzaL').localStorage();
+if (storeValue.getItem("username") == undefined || stoveValue.getItem("password") == undefined) {
+	storeValue.setItem("username", JSON.stringify([""]));
+        storeValue.setItem("password", JSON.stringify([""]));
 }
 var usernameInput = document.getElementById("usernameForm");
 var passwordInput = document.getElementById("passwordForm");
@@ -22,10 +24,10 @@ if (isCorrect(usernameInput.value, passwordInput.value)) {
 }
 });
 newaccount.addEventListener("click", function() {
- if (JSON.parse(localStorage.getItem("username"))[JSON.parse(localStorage.getItem("username")).indexOf(usernameInput.value)] != usernameInput.value) {
-   if (JSON.parse(localStorage.getItem("password"))[JSON.parse(localStorage.getItem("password")).indexOf(passwordInput.value)] != passwordInput.value) {
-       localStorage.setItem("username", JSON.stringify(JSON.parse(localStorage.getItem("username")).concat([usernameInput.value])));
-       localStorage.setItem("password", JSON.stringify(JSON.parse(localStorage.getItem("password")).concat([passwordInput.value])));
+ if (JSON.parse(storeValue.getItem("username"))[JSON.parse(storeValue.getItem("username")).indexOf(usernameInput.value)] != usernameInput.value) {
+   if (JSON.parse(storeValue.getItem("password"))[JSON.parse(storeValue.getItem("password")).indexOf(passwordInput.value)] != passwordInput.value) {
+       storeValue.setItem("username", JSON.stringify(JSON.parse(storeValue.getItem("username")).concat([usernameInput.value])));
+       storeValue.setItem("password", JSON.stringify(JSON.parse(storeValue.getItem("password")).concat([passwordInput.value])));
        alert("New Account Created: "+usernameInput.value);
    } else {
 	   alert("Password Taken");
@@ -35,8 +37,8 @@ newaccount.addEventListener("click", function() {
  }
 });
 function isCorrect(username, password) {
- if (JSON.parse(localStorage.getItem("username"))[JSON.parse(localStorage.getItem("username")).indexOf(username)] == username) {
-   if (JSON.parse(localStorage.getItem("password"))[JSON.parse(localStorage.getItem("password")).indexOf(password)] == password) {
+ if (JSON.parse(storeValue.getItem("username"))[JSON.parse(storeValue.getItem("username")).indexOf(username)] == username) {
+   if (JSON.parse(storeValue.getItem("password"))[JSON.parse(storeValue.getItem("password")).indexOf(password)] == password) {
      return true;
    }
  }
