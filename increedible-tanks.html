@@ -149,7 +149,7 @@ function Ai() {
         Game.foes --;
         this.inactive = true;
         if (Game.foes == 0) {
-          alert("VICTORY");
+          Game.endGame();
         }
       }
     }
