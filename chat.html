@@ -11,18 +11,30 @@
   <script>
     var storeValue = KVdb.bucket('2Rpva475jos9znd2tZZZN9',12481485).localStorage(), om, of, messages, t=[], message = document.getElementById("message"), from = document.getElementById("from");
     window.setInterval(function(){
-    storeValue.getItem("messages").then(value => messages = value);
-    var l = 0;
-    /*while (l<t.length) {
+      storeValue.getItem("messages").then(value => messages = value);
+      var l = 0;
+      while (l<t.length) {
         t.style.display = "none";
+        l++;
+      }
+    },100);
+    window.setInterval(function(){
+      if (messages.indexOf(sessionStorage.username)) {
+        var l = 0;
+        while (l<messages.length) {
+          if (messages[l] == sessionStorage.username) {
+            var y = document.createElement("SPAN");
+            y.innerHTML = from.value+": "+message.value;
+            document.getElementById("messages").appendChild(y);
+            t.push(y);
+          }
+          l++;
+        }
       }
     },50);
-    window.setInterval(function(){
-      
-    },50); */
     document.addEventListener("click",	function() {
       if (message.value != "" && from.value != "") {
-        var y = push(document.createElement("SPAN"));
+        var y = document.createElement("SPAN");
         y.innerHTML = from.value+": "+message.value;
         document.getElementById("messages").appendChild(y);
         t.push(y);
