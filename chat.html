@@ -13,12 +13,12 @@
     window.setInterval(function(){
       
     },50);
-    function sendMessage() {
+    document.addEventListener("click",	function() {
       if (message.value != "" && from.value != "") {
         var t = document.createElement("SPAN");
         t.innerHTML = from.value+": "+message.value;
         document.getElementById("messages").appendChild(t);
       }
-    }
+    });
   </script>
 </html>
