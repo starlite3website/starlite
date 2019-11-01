@@ -9,15 +9,18 @@
   </div>
   <script src="https://unpkg.com/kvdb.io@1.0.5/index.js" integrity="sha384-91zc4JidmYl6NUcicf1m8ABob6eO1HkULPeHYooqi1sptqZ9k5vaZqSNNkVlPsap" crossorigin="anonymous"></script>
   <script>
-    var storeValue = KVdb.bucket('2Rpva475jos9znd2tZZZN9',12481485).localStorage(), om, of, message = document.getElementById("message"), from = document.getElementById("from");
+    var storeValue = KVdb.bucket('2Rpva475jos9znd2tZZZN9',12481485).localStorage(), om, of, messages, t=[], message = document.getElementById("message"), from = document.getElementById("from");
     window.setInterval(function(){
-      
+      storeValue.getItem("messages").then(value => messages = value);
     },50);
     document.addEventListener("click",	function() {
       if (message.value != "" && from.value != "") {
-        var t = document.createElement("SPAN");
-        t.innerHTML = from.value+": "+message.value;
-        document.getElementById("messages").appendChild(t);
+        var y = push(document.createElement("SPAN"));
+        y.innerHTML = from.value+": "+message.value;
+        document.getElementById("messages").appendChild(y);
+        t.push(y);
+        alert(t);
+        alert(y);
       }
     });
   </script>
