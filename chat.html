@@ -32,12 +32,13 @@
         }
       }
     },50);
-    document.addEventListener("click",	function() {
+    document.getElementById("submit").addEventListener("click",	function() {
       if (message.value != "" && from.value != "") {
         var y = document.createElement("SPAN");
         y.innerHTML = from.value+": "+message.value;
         document.getElementById("messages").appendChild(y);
         t.push(y);
+        //storeValue.getItem("").then(value => messages = JSON.stringify(JSON.parse().concat({message.value})));
       }
     });
   </script>
