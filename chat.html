@@ -1,3 +1,4 @@
+
 <html>
   <title>Starlite | Chat</title>
   <div id="messages">
@@ -16,7 +17,7 @@
   <script src="https://unpkg.com/kvdb.io@1.0.5/index.js" integrity="sha384-91zc4JidmYl6NUcicf1m8ABob6eO1HkULPeHYooqi1sptqZ9k5vaZqSNNkVlPsap" crossorigin="anonymous"></script>
   <script>
     var d = [], e = [], storeValue = KVdb.bucket('2Rpva475jos9znd2tZZZN9', 12481485).localStorage();
-    if (storeValue.getIte("messages").then(value => messages = value) {
+    if (storeValue.getItem("messages").then(value => messages = value)) {
       storeValue.setItem("messages", JSON.stringify([]));
     }
     window.setInterval(update, 50);
