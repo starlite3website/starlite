@@ -1,6 +1,5 @@
-<title> Chat </title>
 <html>
-  NOTE: DO NOT USE UNLESS YOU ARE ME!!!!
+  <title>Starlite | Chat</title>
   <div id="messages">
   </div>
   <div id="send">
@@ -8,39 +7,38 @@
     <input type="text" placeholder="To" id="from"/>
     <button id="submit">SUBMIT</button>
   </div>
+  <style>
+    span {
+      display: block;
+    }
+  </style>
   <script src="https://unpkg.com/kvdb.io@1.0.5/index.js" integrity="sha384-91zc4JidmYl6NUcicf1m8ABob6eO1HkULPeHYooqi1sptqZ9k5vaZqSNNkVlPsap" crossorigin="anonymous"></script>
   <script>
-    var storeValue = KVdb.bucket('2Rpva475jos9znd2tZZZN9',12481485).localStorage(), om, of, messages, t=[], message = document.getElementById("message"), from = document.getElementById("from");
-    window.setInterval(function(){
+    var d = [], e = [], storeValue = KVdb.bucket('2Rpva475jos9znd2tZZZN9', 12481485).localStorage();
+    window.setInterval(update, 50);
+    function update() {
       storeValue.getItem("messages").then(value => messages = value);
       var l = 0;
-      while (l<t.length) {
-        t.style.display = "none";
+      while (l<e.length) {
+        e[l].style.display = "none";
         l++;
       }
-    },100);
-    window.setInterval(function(){
-      if (messages.indexOf(sessionStorage.username)) {
-        var l = 0;
-        while (l<messages.length) {
-          if (messages[l] == sessionStorage.username) {
-            var y = document.createElement("SPAN");
-            y.innerHTML = from.value+": "+message.value;
-            document.getElementById("messages").appendChild(y);
-            t.push(y);
-          }
-          l++;
-        }
+      d = [];
+      var l = 0;
+      while (l<JSON.parse(messages).length) {
+        var t = document.createElement("SPAN");
+        t.innerHTML = JSON.parse(messages)[l].user+": "+JSON.parse(messages)[l].message;
+        document.getElementById("messages").appendChild(t);
+        e.push(t);
+        d.push(t);
+        l++;
       }
-    },50);
-    document.getElementById("submit").addEventListener("click",	function() {
-      if (message.value != "" && from.value != "") {
-        var y = document.createElement("SPAN");
-        y.innerHTML = from.value+": "+message.value;
-        document.getElementById("messages").appendChild(y);
-        t.push(y);
-        //storeValue.getItem("").then(value => messages = JSON.stringify(JSON.parse().concat({message.value})));
+    }
+    document.getElementById("submit").addEventListener("click", send);
+    function send() {
+      if (document.getElementById("from").value!=""&&document.getElementById("message").value!="") {
+        storeValue.setItem("messages", JSON.stringify(JSON.parse(messages).concat({message:document.getElementById("message").value,user:document.getElementById("from").value})));
       }
-    });
+    }
   </script>
 </html>
