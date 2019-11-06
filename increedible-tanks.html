@@ -1,951 +1,983 @@
 <!DOCTYPE html>
 <html>
- <head>
-    <title>Starlite | Increedible Tanks</title>
-  </head>
- <div id="game" class="container">
-   <h1 id="gameName">
-     Increedible Tanks
-   </h1>
-  <h3>Game won't work on an Ipad or Iphone(sorry:<). I will edit that soon(:>). Game has these errors that will be fized before v1.0.0 comes out: Blocks do not disappear when you shoot them. Ai cannot shoot right(they literally can't shoot right, the direction). There are a few incomplete things like, when you shoot all the tanks, nothing happens. Updates come daily.
-  Last Update: October, 17, 2019</h3>
-   <h4 id="chatText">
-     Chat
-   </h4>
-   <div id="chat">
-     <div id="messages">
-     </div>
-     <input type="text" id="message" placeholder="Enter a Message" />
-     <input type="text" id="to" placeholder="Who to send to?">
-     <button id="chat_submit">
-   	 Send
-     </button>
-   </div>
-  
-   <canvas width="500" height="500" id="canvas" tabindex='1'>
-      <strong>Canvas is not supported.</strong>
-      Try using a diffrent browser,
-      If that does not work, please restart your device or use a diffrent device.
-  </canvas>
 
-   <div id="play">
-     <h5 id="playText">
-       Click Anywhere To Start
-     </h5>
-   </div>
+<head>
+  <title>Starlite | Increedible Tanks</title>
+</head>
+<div id="game" class="container">
+  <h1 id="gameName"> Increedible Tanks </h1>
+  <h3>Game won't work on an Ipad or Iphone(sorry:<). I will edit that soon(:>). Game has these errors that will be fized before v1.0.0 comes out: Blocks do not disappear when you shoot them. Ai cannot shoot right(they literally can't shoot right, the direction). There are a few incomplete things like, when you shoot all the tanks, nothing happens. Updates come daily. Last Update: October, 17, 2019</h3>
+  <h4 id="chatText"> Chat </h4>
+  <div id="chat">
+    <div id="messages">
+    </div>
+    <input type="text" id="message" placeholder="Enter a Message" />
+    <input type="text" id="to" placeholder="Who to send to?">
+    <button id="chat_submit"> Send </button>
+  </div>
+  <canvas width="500" height="500" id="canvas" tabindex='1'>
+    <strong>Canvas is not supported.</strong> Try using a diffrent browser, If that does not work, please restart your device or use a diffrent device. </canvas>
+  <div id="play">
+    <h5 id="playText"> Click Anywhere To Start </h5>
+  </div>
+  <div id="alertConsole">
+    <h5 id="consoleText">
+    </h5>
+  </div>
+</div>
+<script>
+  var interval, user, listener, interval2, b = [],
+    s = [],
+    ai = [],
+    l1 = 0,
+    l2 = 0,
+    i = [],
+    Game = new Game();
 
-   <div id="alertConsole">
-     <h5 id="consoleText">
-     </h5>
-   </div>
-
- </div>
- <script>
-var interval, user, listener, interval2, b = [],
- s = [], ai = [], l1 = 0, l2 = 0, i = [],
- Game = new Game();
-function ai_check(x,y) {
- var l = 1;
- while (l < Game.shotId) {
-   l = l + 1;
-   if (s[l].x > x || s[l].x + 10 > x) {
-     if (s[l].x < x + 40 || s[l].x + 10 < x + 40) {
-       if (s[l].y > y || s[l].y + 10 > y) {        
-         if (s[l].y < y + 40 || s[l].y + 10 < y + 40) {
-           s[l].inactive = true;
-           return true;
-         }
-       }
-     }
-   } 
- }
- return false;
-}
-function Ai() {
-  this.x = 0;
-  this.y = 0;
- this.control = function() {
-   i.push(window.setInterval(this.draw, 1));
-   i.push(window.setInterval(this.move, 500));
-   i.push(window.setInterval(this.check, 10));
- }.bind(this);
- this.draw = function() {
-   if (this.inactive != true) {ai_top = new Image();
-   ai_top.src = "https://starlite3.tk/starlite-tank-top.png";
-    ai_base = new Image();
-    ai_base.src = "https://starlite3.tk/starlite-tank-base.png";
-    draw.drawImage(ai_base, this.x, this.y);
-    draw.translate(this.x+20,this.y+20);
-    draw.rotate(this.rotation * Math.PI / 180);
-    draw.drawImage(ai_top, -20, -20);
-    draw.rotate(-(this.rotation * Math.PI / 180));
-    draw.translate(-this.x-20, -this.y-20);
-   }
- }.bind(this);
-  this.move = function() {
-    if (this.inactive != true) {
-    this.instructions = this.moveCalc();
-          if (this.instructions.fire == true) {
-      this.fire();  
-    } else if (this.instructions.up == true) {
-      if (checker(this.x - 5, this.y) != false) {
-        this.x -= 10;
-      }
-    } else if (this.instructions.down == true) {
-      if (checker(this.x,this.y-5) != false) {
-        this.x += 10;
-      }
-    } else if (this.instructions.left == true) {
-      if (checker(this.x + 5, this.y) != false) {
-        this.y -= 10;
-      }
-    } else {
-     if (checker(this.x, this.y + 5) != false) {
-   	 this.y += 10;
- 	 }
-    }
-    } else {
-      window.clearInterval(this.aiDraw);
-    }
-  }.bind(this);
- this.fire = function() {
-    this.xd = 1;
-  this.angle = this.rotation % 90;
-  this.yd = Math.abs(((this.xd * this.angle) - (90 * this.xd)) / this.angle);
-  if (this.rotation < 90 || this.rotation > 270) {
-    this.yd = Math.abs(this.yd);
-  } else {
-    this.yd = 0 - Math.abs(this.yd);
-  }  
-  if (this.rotation > 180) {
-    this.xd = Math.abs(this.xd);
-  } else {
-    this.xd = 0 - Math.abs(this.xd);
-  }
-  if (this.rotation == 0) {
-    this.xd = 0;
-    this.yd = 1;
-  } else if (this.rotation == 90) {
-    this.xd = -1;
-    this.yd = 0;
-  } else if (this.rotation == 180) {
-    this.xd = 0;
-    this.yd = -1;
-  } else if (this.rotation == 270) {
-    this.xd = 1;
-    this.yd = 0;
-  }
-  Game.shotId = Game.shotId + 1;
-  s[Game.shotId] = new Shot();
-  if (this.x < user.tank.x) {
-  s[Game.shotId].control(this.x+20, this.y+20, Game.shotId, Math.abs(this.xd), this.yd);
-  } else {
-  s[Game.shotId].control(this.x+20, this.y+20, Game.shotId, this.xd, this.yd);
-  }
-  }
-  this.check = function() {
-    if (ai_check(this.x, this.y)) {
-      if (this.inactive != true) {
-        Game.foes --;
-        this.inactive = true;
-        if (Game.foes == 0) {
-          Game.endGame();
+  function ai_check(x, y) {
+    var l = 1;
+    while (l < Game.shotId) {
+      l = l + 1;
+      if (s[l].x > x || s[l].x + 10 > x) {
+        if (s[l].x < x + 40 || s[l].x + 10 < x + 40) {
+          if (s[l].y > y || s[l].y + 10 > y) {
+            if (s[l].y < y + 40 || s[l].y + 10 < y + 40) {
+              s[l].inactive = true;
+              return true;
+            }
+          }
         }
       }
     }
-  }.bind(this);
-  this.rotation = 0;
-  this.moveCalc = function() {
-    this.xdistance = user.tank.x - this.x;
-    this.ydistance = user.tank.y - this.y;
-    this.rotation = Math.atan(this.ydistance / this.xdistance)*180/Math.PI;
-    if (this.xdistance > 0) {
- 	 this.rotation -= 90;
-    } else {
- 	 this.rotation += 90;
-    }
-    if (150 > Math.sqrt(this.xdistance * this.xdistance + this.ydistance * this.ydistance)) {
-                 return { fire : true };
-    } else {
-    if (Math.abs(this.ydistance) > Math.abs(this.xdistance)) {
-      if (this.ydistance > 0) {
-        return { up : false, down : false, left : false, right : true };
-      } else {
-        return { up : false, down : false, left : true, right : false };
-      }
-    } else if (Math.abs(this.xdistance) > Math.abs(this.ydistance)) {
-      if (this.xdistance > 0) {
-   	 return { up : false, down : true, left : false, right : false };
- 	 } else {
-        return { up : true, down : false, left : false, right : false };
-      }
-    } else {
- 	 if (this.ydistance < 0) {
-   	 return { left : true };
- 	 } else {
-   	 return { right : true };
- 	 }
-    }
-           }
-  }.bind(this);
-}
-function Shot() {
- this.sensor = function() {
- }
- this.control = function(x, y, id, xm, ym) {
-   this.x = x + xm * 16;
-   this.y = y + ym * 16;
-   this.ym = ym * 16;
-    this.xm = xm * 16;
-   this.id = id;
-   this.inactive = false;
-   this.draw();
- }
- this.draw = function() {
-   this.sensor();
-   if (!this.inactive) {
-     this.y += this.ym;
-     this.x += this.xm;   
-     draw.fillStyle = "#000000";
-     draw.fillRect(this.x, this.y, 5, 5);
-     this.support();
-   } else {
-    this.x = undefined;
-    this.y = undefined;
-   }
- }
- this.support = function() {
-   support(this.id);
- }
-}
-function support(id) {
- setTimeout(function() {
-   if (user.tank != undefined) {
-    s[id].draw();
-   }
- }, 25);
-}
-function clearShot() {
- if (user.tank != undefined) {
-   level(1,"n",false);
- }
- var l = 0;
- while (l < ai.length - 1) {
-   l++;
-   ai[l].draw();
- }
-}
-function Tank() {
- this.r = 0;
- this.x = 0;
- this.y = 0;
- this.mode = 0;
- this.color = "#00ff00";
- this.draw = function() {
-   tank_base_png = new Image();
-   tank_base_png.src = "https://starlite3.tk/starlite-tank-base.png";
-   if (this.leftright == true) { 
-     draw.translate(this.x+20, this.y+20)
-     draw.rotate(90*Math.PI/180); 
-     draw.drawImage(tank_base_png, -20, -20); 
-     draw.rotate(-90*Math.PI/180); 
-     draw.translate((-this.x-20), (-this.y-20));
-   } else {
-     draw.drawImage(tank_base_png, this.x, this.y); 
-   }
-   tank_top_png = new Image();
-   tank_top_png.src = "https://starlite3.tk/starlite-tank-top.png";
-   draw.translate(this.x+20,this.y+20);
-    draw.rotate(this.rotation * Math.PI / 180);
-    draw.drawImage(tank_top_png, -20, -20);
-    draw.rotate(-(this.rotation * Math.PI / 180));
-    draw.translate(-this.x-20, -this.y-20);
- }
- this.check = function() {
-   console.clear()
-   if (ai_check(this.x, this.y)) {
-     this.inactive = true;
-     window.clearInterval(this.checkloop);
-     window.clearInterval(this.interval);
-     window.clearInterval(this.interval2)
-     this.checkloop = undefined;
-     this.interval = undefined;
-     this.interval2 = undefined;
-     Game.endGame();
-   }
- }
- this.control = function() {
-   canvas.focus();
-   this.draw();
-  i.push(window.setInterval(function() {
-     user.tank.check();
-  }, 50));
-   canvas.addEventListener("keydown", function(event) {     
-      if (this.interval == undefined) {
- 	   this.interval = window.setInterval(function() {
-         user.tank.move(event);
-       }, 20);
-     }
-   }, false);
-   canvas.addEventListener("keyup", function(event) {
-      window.clearInterval(this.interval);
-     this.interval = undefined;
-   }, false);
-}
- this.inactive = false;
-  this.rotation = 0;
- this.move = function(e) {  
-    e.preventDefault(); 
-      e.stopImmediatePropagation();
-    if (this.inactive == false) {
-     if (e.code == "KeyD") {
-        if (checker(this.x + 5, this.y) != false) {
-            this.x += 5;
-            this.leftright = true;
-        }
-     }
-     if (e.code == "KeyW") {
-        if (checker(this.x,this.y-5) != false) {
-            this.y -= 5;
-            this.leftright = false;
-        }
-     }
-     if (e.code == "KeyA") {
-       if (checker(this.x - 5, this.y) != false) {
-            this.x -= 5;
-            this.leftright = true;
-        }
-     }
-     if (e.code == "KeyS") {
-      if (checker(this.x, this.y + 5) != false) {
-            this.y += 5;
-            this.leftright = false;
-   	}
-     }
-     if (e.which == 70) {
-        this.fire();
-     }
-     if (e.which == 37) {
-        if (this.rotation == 355) {
- 	     this.rotation = 0;
-        } else {
- 	     this.rotation += 5;
-        }
-     } else if (e.which == 39) {
-        if (this.rotation == 0) {
- 	     this.rotation = 355;
-        } else {
- 	     this.rotation -= 5;
-        }
-     }
-     level(1, "n", false);
-     var l = 0;
- while (l < ai.length - 1) {
-   l++;
-   ai[l].draw();
- }
-     this.draw();
-    } else {
- 	a("Game is paused", "yellow");
-    }
- }
- this.fire = function() {
-   this.xd = 1;
-  this.angle = this.rotation % 90;
-  this.yd = Math.abs(((this.xd * this.angle) - (90 * this.xd)) / this.angle);
-  if (this.rotation < 90 || this.rotation > 270) {
-    this.yd = Math.abs(this.yd);
-  } else {
-    this.yd = 0 - Math.abs(this.yd);
-  }  
-  if (this.rotation > 180) {
-    this.xd = Math.abs(this.xd);
-  } else {
-    this.xd = 0 - Math.abs(this.xd);
-  }
-  if (this.rotation == 0) {
-    this.xd = 0;
-    this.yd = 1;
-  } else if (this.rotation == 90) {
-    this.xd = -1;
-    this.yd = 0;
-  } else if (this.rotation == 180) {
-    this.xd = 0;
-    this.yd = -1;
-  } else if (this.rotation == 270) {
-    this.xd = 1;
-    this.yd = 0;
-  }
-  Game.shotId = Game.shotId + 1;
-  s[Game.shotId] = new Shot();
-  if ((this.xd < 0 && this.yd < 0 ) || (this.xd > 0 && this.yd > 0)) {
-  s[Game.shotId].control(this.x+20, this.y+20, Game.shotId, this.yd, this.xd);
-  } else {
-  s[Game.shotId].control(this.x+20, this.y+20, Game.shotId, this.xd, this.yd);
-  }
- }
-} // Tank Object
-function checker(x, y) {
-  if (x < 0 || y < 0 || x + 40 > 500 || y + 40 > 500) {
     return false;
   }
-  var l = 0;
-  while (l < Game.blockId) {
-    l = l + 1;
-    if ((x+40>b[l].x*50 && x+40<b[l].x*50+50)||(x>b[l].x*50&&x<b[l].x*50+50)) {
-      if ((y>b[l].y*50&&y<b[l].y*50+50)||(y+40>b[l].y*50&&y+40<b[l].y*50+50)) {
-   	 return false;
+
+  function Ai() {
+    this.x = 0;
+    this.y = 0;
+    this.control = function() {
+      i.push(window.setInterval(this.draw, 1));
+      i.push(window.setInterval(this.move, 500));
+      i.push(window.setInterval(this.check, 10));
+    }.bind(this);
+    this.draw = function() {
+      if (this.inactive != true) {
+        ai_top = new Image();
+        ai_top.src = "https://starlite3.tk/starlite-tank-top.png";
+        ai_base = new Image();
+        ai_base.src = "https://starlite3.tk/starlite-tank-base.png";
+        draw.drawImage(ai_base, this.x, this.y);
+        draw.translate(this.x + 20, this.y + 20);
+        draw.rotate(this.rotation * Math.PI / 180);
+        draw.drawImage(ai_top, -20, -20);
+        draw.rotate(-(this.rotation * Math.PI / 180));
+        draw.translate(-this.x - 20, -this.y - 20);
+      }
+    }.bind(this);
+    this.move = function() {
+      if (this.inactive != true) {
+        this.instructions = this.moveCalc();
+        if (this.instructions.fire == true) {
+          this.fire();
+        } else if (this.instructions.up == true) {
+          if (checker(this.x - 5, this.y) != false) {
+            this.x -= 10;
+          }
+        } else if (this.instructions.down == true) {
+          if (checker(this.x, this.y - 5) != false) {
+            this.x += 10;
+          }
+        } else if (this.instructions.left == true) {
+          if (checker(this.x + 5, this.y) != false) {
+            this.y -= 10;
+          }
+        } else {
+          if (checker(this.x, this.y + 5) != false) {
+            this.y += 10;
+          }
+        }
+      } else {
+        window.clearInterval(this.aiDraw);
+      }
+    }.bind(this);
+    this.fire = function() {
+      this.xd = 1;
+      this.angle = this.rotation % 90;
+      this.yd = Math.abs(((this.xd * this.angle) - (90 * this.xd)) / this.angle);
+      if (this.rotation < 90 || this.rotation > 270) {
+        this.yd = Math.abs(this.yd);
+      } else {
+        this.yd = 0 - Math.abs(this.yd);
+      }
+      if (this.rotation > 180) {
+        this.xd = Math.abs(this.xd);
+      } else {
+        this.xd = 0 - Math.abs(this.xd);
+      }
+      if (this.rotation == 0) {
+        this.xd = 0;
+        this.yd = 1;
+      } else if (this.rotation == 90) {
+        this.xd = -1;
+        this.yd = 0;
+      } else if (this.rotation == 180) {
+        this.xd = 0;
+        this.yd = -1;
+      } else if (this.rotation == 270) {
+        this.xd = 1;
+        this.yd = 0;
+      }
+      Game.shotId = Game.shotId + 1;
+      s[Game.shotId] = new Shot();
+      if (this.x < user.tank.x) {
+        s[Game.shotId].control(this.x + 20, this.y + 20, Game.shotId, Math.abs(this.xd), this.yd);
+      } else {
+        s[Game.shotId].control(this.x + 20, this.y + 20, Game.shotId, this.xd, this.yd);
+      }
+    }
+    this.check = function() {
+      if (ai_check(this.x, this.y)) {
+        if (this.inactive != true) {
+          Game.foes--;
+          this.inactive = true;
+          if (Game.foes == 0) {
+            Game.endGame();
+          }
+        }
+      }
+    }.bind(this);
+    this.rotation = 0;
+    this.moveCalc = function() {
+      this.xdistance = user.tank.x - this.x;
+      this.ydistance = user.tank.y - this.y;
+      this.rotation = Math.atan(this.ydistance / this.xdistance) * 180 / Math.PI;
+      if (this.xdistance > 0) {
+        this.rotation -= 90;
+      } else {
+        this.rotation += 90;
+      }
+      if (150 > Math.sqrt(this.xdistance * this.xdistance + this.ydistance * this.ydistance)) {
+        return { fire: true };
+      } else {
+        if (Math.abs(this.ydistance) > Math.abs(this.xdistance)) {
+          if (this.ydistance > 0) {
+            return { up: false, down: false, left: false, right: true };
+          } else {
+            return { up: false, down: false, left: true, right: false };
+          }
+        } else if (Math.abs(this.xdistance) > Math.abs(this.ydistance)) {
+          if (this.xdistance > 0) {
+            return { up: false, down: true, left: false, right: false };
+          } else {
+            return { up: true, down: false, left: false, right: false };
+          }
+        } else {
+          if (this.ydistance < 0) {
+            return { left: true };
+          } else {
+            return { right: true };
+          }
+        }
+      }
+    }.bind(this);
+  }
+
+  function Shot() {
+    this.sensor = function() {}
+    this.control = function(x, y, id, xm, ym) {
+      this.x = x + xm * 16;
+      this.y = y + ym * 16;
+      this.ym = ym * 16;
+      this.xm = xm * 16;
+      this.id = id;
+      this.inactive = false;
+      this.draw();
+    }
+    this.draw = function() {
+      this.sensor();
+      if (!this.inactive) {
+        this.y += this.ym;
+        this.x += this.xm;
+        draw.fillStyle = "#000000";
+        draw.fillRect(this.x, this.y, 5, 5);
+        this.support();
+      } else {
+        this.x = undefined;
+        this.y = undefined;
+      }
+    }
+    this.support = function() {
+      support(this.id);
+    }
+  }
+
+  function support(id) {
+    setTimeout(function() {
+      if (user.tank != undefined) {
+        s[id].draw();
+      }
+    }, 25);
+  }
+
+  function clearShot() {
+    if (user.tank != undefined) {
+      level(1, "n", false);
+    }
+    var l = 0;
+    while (l < ai.length - 1) {
+      l++;
+      ai[l].draw();
+    }
+  }
+
+  function Tank() {
+    this.r = 0;
+    this.x = 0;
+    this.y = 0;
+    this.mode = 0;
+    this.color = "#00ff00";
+    this.draw = function() {
+      tank_base_png = new Image();
+      tank_base_png.src = "https://starlite3.tk/starlite-tank-base.png";
+      if (this.leftright == true) {
+        draw.translate(this.x + 20, this.y + 20)
+        draw.rotate(90 * Math.PI / 180);
+        draw.drawImage(tank_base_png, -20, -20);
+        draw.rotate(-90 * Math.PI / 180);
+        draw.translate((-this.x - 20), (-this.y - 20));
+      } else {
+        draw.drawImage(tank_base_png, this.x, this.y);
+      }
+      tank_top_png = new Image();
+      tank_top_png.src = "https://starlite3.tk/starlite-tank-top.png";
+      draw.translate(this.x + 20, this.y + 20);
+      draw.rotate(this.rotation * Math.PI / 180);
+      draw.drawImage(tank_top_png, -20, -20);
+      draw.rotate(-(this.rotation * Math.PI / 180));
+      draw.translate(-this.x - 20, -this.y - 20);
+    }
+    this.check = function() {
+      console.clear()
+      if (ai_check(this.x, this.y)) {
+        this.inactive = true;
+        window.clearInterval(this.checkloop);
+        window.clearInterval(this.interval);
+        window.clearInterval(this.interval2)
+        this.checkloop = undefined;
+        this.interval = undefined;
+        this.interval2 = undefined;
+        Game.endGame();
+      }
+    }
+    this.control = function() {
+      canvas.focus();
+      this.draw();
+      i.push(window.setInterval(function() {
+        user.tank.check();
+      }, 50));
+      canvas.addEventListener("keydown", tank_listener1, false);
+      canvas.addEventListener("keyup", tank_listener2, false);
+    }
+    this.inactive = false;
+    this.rotation = 0;
+    this.move = function(e) {
+      e.preventDefault();
+      e.stopImmediatePropagation();
+      if (this.inactive == false) {
+        if (e.code == "KeyD") {
+          if (checker(this.x + 5, this.y) != false) {
+            this.x += 5;
+            this.leftright = true;
+          }
+        }
+        if (e.code == "KeyW") {
+          if (checker(this.x, this.y - 5) != false) {
+            this.y -= 5;
+            this.leftright = false;
+          }
+        }
+        if (e.code == "KeyA") {
+          if (checker(this.x - 5, this.y) != false) {
+            this.x -= 5;
+            this.leftright = true;
+          }
+        }
+        if (e.code == "KeyS") {
+          if (checker(this.x, this.y + 5) != false) {
+            this.y += 5;
+            this.leftright = false;
+          }
+        }
+        if (e.which == 70) {
+          this.fire();
+        }
+        if (e.which == 37) {
+          if (this.rotation == 355) {
+            this.rotation = 0;
+          } else {
+            this.rotation += 5;
+          }
+        } else if (e.which == 39) {
+          if (this.rotation == 0) {
+            this.rotation = 355;
+          } else {
+            this.rotation -= 5;
+          }
+        }
+        level(1, "n", false);
+        var l = 0;
+        while (l < ai.length - 1) {
+          l++;
+          ai[l].draw();
+        }
+        this.draw();
+      } else {
+        a("Game is paused", "yellow");
+      }
+    }
+    this.fire = function() {
+      this.xd = 1;
+      this.angle = this.rotation % 90;
+      this.yd = Math.abs(((this.xd * this.angle) - (90 * this.xd)) / this.angle);
+      if (this.rotation < 90 || this.rotation > 270) {
+        this.yd = Math.abs(this.yd);
+      } else {
+        this.yd = 0 - Math.abs(this.yd);
+      }
+      if (this.rotation > 180) {
+        this.xd = Math.abs(this.xd);
+      } else {
+        this.xd = 0 - Math.abs(this.xd);
+      }
+      if (this.rotation == 0) {
+        this.xd = 0;
+        this.yd = 1;
+      } else if (this.rotation == 90) {
+        this.xd = -1;
+        this.yd = 0;
+      } else if (this.rotation == 180) {
+        this.xd = 0;
+        this.yd = -1;
+      } else if (this.rotation == 270) {
+        this.xd = 1;
+        this.yd = 0;
+      }
+      Game.shotId = Game.shotId + 1;
+      s[Game.shotId] = new Shot();
+      if ((this.xd < 0 && this.yd < 0) || (this.xd > 0 && this.yd > 0)) {
+        s[Game.shotId].control(this.x + 20, this.y + 20, Game.shotId, this.yd, this.xd);
+      } else {
+        s[Game.shotId].control(this.x + 20, this.y + 20, Game.shotId, this.xd, this.yd);
+      }
+    }
+  } // Tank Object
+  function tank_listener1(event) {
+    if (user.tank.interval == undefined) {
+      user.tank.interval = window.setInterval(function() {
+        user.tank.move(event);
+      }, 20);
+    }
+  }
+function tank_listener2(event) {
+  window.clearInterval(user.tank.interval);
+  user.tank.interval = undefined;
+}
+  function checker(x, y) {
+    if (x < 0 || y < 0 || x + 40 > 500 || y + 40 > 500) {
+      return false;
+    }
+    var l = 0;
+    while (l < Game.blockId) {
+      l = l + 1;
+      if ((x + 40 > b[l].x * 50 && x + 40 < b[l].x * 50 + 50) || (x > b[l].x * 50 && x < b[l].x * 50 + 50)) {
+        if ((y > b[l].y * 50 && y < b[l].y * 50 + 50) || (y + 40 > b[l].y * 50 && y + 40 < b[l].y * 50 + 50)) {
+          return false;
+        }
       }
     }
   }
-}
-document.addEventListener("keydown", function(event) {
-  if (event.keyCode == 89) {
-    console.log(ai, Game.foes)
+  document.addEventListener("keydown", function(event) {
+    if (event.keyCode == 89) {
+      console.log(ai, Game.foes)
+    }
+  })
+
+  function gameHelper() {
+    var l = 0;
+    while (l < i.length) {
+      window.clearInterval(i[l]);
+      l++;
+    }
+    b = [];
+    ai = [];
+    s = [];
+    user.tank = undefined;
+    Game.blockId = 0;
+    Game.shotId = 0;
+    Game.aiId = 0;
+    mainMenu();
   }
-})
-function gameHelper() { 
-  var l = 0;
-  while (l<i.length) {
-    window.clearInterval(i[l]);
-    l++;
-  }
-  b = [];
-  ai = [];
-  s = [];
-  user.tank = undefined;
-  Game.blockId = 0;
-  Game.shotId = 0;
-  Game.aiId = 0;
-  mainMenu();
-}
-function Game() {
-  this.foes = 0;
- this.paused = false;
- this.aiId = 0;
- this.shotId = 0;
- this.blockId = 0;
- this.endGame = function() {
-   gameHelper();
- }
- this.redraw = function() {
-   for (var r = 1; r == this.shotId; r++) {
-     s[r].redraw();
-   }
- }
- this.control = function() {
-   canvas.addEventListener("keyup", function(event) {
-     if (event.which == 80) {
-       if (this.paused == false) {
-    this.paused = true;
-    user.tank.inactive = true;
-  } else {
+
+  function Game() {
+    this.foes = 0;
     this.paused = false;
-    user.tank.inactive = false;
+    this.aiId = 0;
+    this.shotId = 0;
+    this.blockId = 0;
+    this.endGame = function() {
+      gameHelper();
+    }
+    this.redraw = function() {
+      for (var r = 1; r == this.shotId; r++) {
+        s[r].redraw();
+      }
+    }
+    this.control = function() {
+      canvas.addEventListener("keyup", function(event) {
+        if (event.which == 80) {
+          if (this.paused == false) {
+            this.paused = true;
+            user.tank.inactive = true;
+          } else {
+            this.paused = false;
+            user.tank.inactive = false;
+          }
+          alert(this.paused);
+        }
+      }, false);
+    }
+    this.i = function() {
+      i.push(window.setInterval(function() {
+        clearShot();
+      }, 74));
+    }
   }
-       alert(this.paused);
-     }
-   }, false);
- }
- this.i = function() {
-   i.push(window.setInterval(function() {
-     clearShot();
-   }, 74));
- }
-}
-function jquery_tank_support(e) {
- user.tank.move(e);
-}
-function Block(health, x, y, isInvincible, isExplosive) {
- this.blockId = blockHelper();
- this.x = x;
- this.y = y;
- i.push(window.setInterval(function(id) {
-   if (ai_check(b[id].x*50,b[id].y*50)) {
-     block_support(id);
-   }
- }, 50, [this.blockId]));
-} // All Blocks
-function blockHelper() {
-  return Game.blockId;
-}
-function block_support(id) {
-  b[id].x = undefined;
-  b[id].y = undefined;
-}
-var alertConsole = document.getElementById("alertConsole"); // console for game
-var chat = document.getElementById("chat");
-var messages = document.getElementById("messages");
-var message = document.getElementById("message");
-var playText = document.getElementById("playText");
-var canvas = document.getElementById("canvas"); // getting the canvas element
-var consoleText = document.getElementById("consoleText"); // text control for console
-var chatSubmit = document.getElementById("chat_submit");
-var draw = canvas.getContext("2d"); // getting the canvas to be able to draw
-function startScreen() {
- chat_setup();
- a("Loading Game...", "black");
- draw.fillStyle = "#DCDCDC";
- draw.fillStyle = "#000000";
- draw.font = "20px Courier";
- wall(0, 3);
- wall(0, 4);
- wall(0, 5);
- wall(0, 6);
- strong(1, 6);
- weak(1, 4);
- wall(2, 4);
- strong(2, 5);
- strong(2, 3);
- draw.fillStyle = "#556B2F";
- draw.fillRect(0, 0, 500, 150);
- draw.fillRect(0, 350, 500, 150);
- draw.fillStyle = "#ffffff";
- draw.font = "50px Courier";
- draw.fillText("Increedible", 100, 60);
- draw.fillText("Tanks", 175, 120);
- canvas.addEventListener("click", loading, false);
-} // startScreen
-function alert_startup() {
- alertConsole.style.visibility = "hidden";
-} // alert Setup
-function a(m, c) {
- alertConsole.classList.add("console");
- alertConsole.style.backgroundColor = c;
- alertConsole.style.opacity = .7;
- alertConsole.style.border = "1px solid black";
- consoleText.innerHTML = m;
- alertConsole.style.visibility = "visible";
- i.push(window.setInterval(alert_end, 8000));
-} // alert control
-function alert_end() {
- window.clearInterval(interval);
- alertConsole.classList.remove("console");
- alertConsole.style.visibility = "hidden";
-} // alert end
-function loading() {
- if (sessionStorage.level == undefined) {
-   if (sessionStorage.username == undefined) {
-     window.location.href = "https://starlite3.tk/account";
-   }
-   user = {
-     tank : new Tank(),
-     username : sessionStorage.username,
-     level : 1,
-     coins : 0,
-   }
- }
- draw.clearRect(0, 0, 500, 500);
- a("Starting Game...");
- playText.style.visibility = "hidden";
- setTimeout(mainMenu(), 2000);
- canvas.removeEventListener("click", loading);
-}
-function level(num, mo, m) {
- draw.clearRect(0, 0, 500, 500);
- draw.fillStyle = "#dcdcdc";
-   var floor = new Image();
-   floor.src = "https://starlite3.tk/floor.png";
-   draw.drawImage(floor,0,0);
-   draw.drawImage(floor,50,0);
-   draw.drawImage(floor,100,0);
-   draw.drawImage(floor,150,0);
-   draw.drawImage(floor,200,0);
-   draw.drawImage(floor,250,0);
-   draw.drawImage(floor,300,0);
-   draw.drawImage(floor,350,0);
-   draw.drawImage(floor,400,0);
-   draw.drawImage(floor,450,0);
-   draw.drawImage(floor,0,50);
-   draw.drawImage(floor,50,50);
-   draw.drawImage(floor,100,50);
-   draw.drawImage(floor,150,50);
-   draw.drawImage(floor,200,50);
-   draw.drawImage(floor,250,50);
-   draw.drawImage(floor,300,50);
-   draw.drawImage(floor,350,50);
-   draw.drawImage(floor,400,50);
-   draw.drawImage(floor,450,50);
-   draw.drawImage(floor,0,100);
-   draw.drawImage(floor,50,100);
-   draw.drawImage(floor,100,100);
-   draw.drawImage(floor,150,100);
-   draw.drawImage(floor,200,100);
-   draw.drawImage(floor,250,100);
-   draw.drawImage(floor,300,100);
-   draw.drawImage(floor,350,100);
-   draw.drawImage(floor,400,100);
-   draw.drawImage(floor,450,100);
-   draw.drawImage(floor,0,150);
-   draw.drawImage(floor,50,150);
-   draw.drawImage(floor,100,150);
-   draw.drawImage(floor,150,150);
-   draw.drawImage(floor,200,150);
-   draw.drawImage(floor,250,150);
-   draw.drawImage(floor,300,150);
-   draw.drawImage(floor,350,150);
-   draw.drawImage(floor,400,150);
-   draw.drawImage(floor,450,150);
-   draw.drawImage(floor,0,200);
-   draw.drawImage(floor,50,200);
-   draw.drawImage(floor,100,200);
-   draw.drawImage(floor,150,200);
-   draw.drawImage(floor,200,200);
-   draw.drawImage(floor,250,200);
-   draw.drawImage(floor,300,200);
-   draw.drawImage(floor,350,200);
-   draw.drawImage(floor,400,200);
-   draw.drawImage(floor,450,200);
-   draw.drawImage(floor,0,250);
-   draw.drawImage(floor,50,250);
-   draw.drawImage(floor,100,250);
-   draw.drawImage(floor,150,250);
-   draw.drawImage(floor,200,250);
-   draw.drawImage(floor,250,250);
-   draw.drawImage(floor,300,250);
-   draw.drawImage(floor,350,250);
-   draw.drawImage(floor,400,250);
-   draw.drawImage(floor,450,250);
-   draw.drawImage(floor,0,300);
-   draw.drawImage(floor,50,300);
-   draw.drawImage(floor,100,300);
-   draw.drawImage(floor,150,300);
-   draw.drawImage(floor,200,300);
-   draw.drawImage(floor,250,300);
-   draw.drawImage(floor,300,300);
-   draw.drawImage(floor,350,300);
-   draw.drawImage(floor,400,300);
-   draw.drawImage(floor,450,300);
-   draw.drawImage(floor,0,350);
-   draw.drawImage(floor,50,350);
-   draw.drawImage(floor,100,350);
-   draw.drawImage(floor,150,350);
-   draw.drawImage(floor,200,350);
-   draw.drawImage(floor,250,350);
-   draw.drawImage(floor,300,350);
-   draw.drawImage(floor,350,350);
-   draw.drawImage(floor,400,350);
-   draw.drawImage(floor,450,350);
-   draw.drawImage(floor,0,400);
-   draw.drawImage(floor,50,400);
-   draw.drawImage(floor,100,400);
-   draw.drawImage(floor,150,400);
-   draw.drawImage(floor,200,400);
-   draw.drawImage(floor,250,400);
-   draw.drawImage(floor,300,400);
-   draw.drawImage(floor,350,400);
-   draw.drawImage(floor,400,400);
-   draw.drawImage(floor,450,400);
-   draw.drawImage(floor,0,450);
-   draw.drawImage(floor,50,450);
-   draw.drawImage(floor,100,450);
-   draw.drawImage(floor,150,450);
-   draw.drawImage(floor,200,450);
-   draw.drawImage(floor,250,450);
-   draw.drawImage(floor,300,450);
-   draw.drawImage(floor,350,450);
-   draw.drawImage(floor,400,450);
-   draw.drawImage(floor,450,450);
- if (user.tank != undefined) {
-    user.tank.draw();
+
+  function jquery_tank_support(e) {
+    user.tank.move(e);
   }
- if (mo != "n") {
-   Game.control();
-   Game.i();
-   user.tank.control();
- }
- if (num == 1) {
-   if (mo != "n") {
-     spawn(0, 0);
-   }
-   weak(2, 0, m);
-   weak(3, 0, m);
-   strong(5, 0, m);
-   createAi( 6*50, 0, m, 3, 3);
-   // bomb(7,0, m);
-   weak(9, 0, m);
-   weak(2, 1, m);
-   weak(3, 1, m);
-   strong(6, 1, m);
-   strong(8, 1, m);
-   weak(2, 2, m);
-   weak(3, 2, m);
-   wall(0, 3, m);
-   wall(1, 3, m);
-   wall(2, 3, m);
-   wall(3, 3, m);
-   wall(4, 3, m);
-   wall(5, 3, m);
-   wall(6, 3, m);
-   wall(7, 3, m);
-   wall(8, 3, m);
-   weak(9, 3, m);
-   // chest(200, 1, 4, m);
-   wall(3, 4, m);
-   wall(6, 4, m);
-    createAi(4*50,4*50,m,3,3);
-   // chest(9,4, m);
-   wall(3, 5, m);
-   strong(4, 5, m);
-    strong(5, 5, m);
-    wall(6, 5, m);
-    
- }
- if (num === 2) {
-   // level two
- }
-}
-function mainMenu() {
- user.tank = new Tank();
- window.clearInterval(interval2);
- draw.clearRect(0, 0, 500, 500);
- playText.style.visibility = "hidden";
- draw.fillStyle = "#556B2F";
- draw.fillRect(50, 50, 400, 400);
-  draw.fillStyle = "#ffffff";
- draw.fillRect(75, 95, 50, 50);
-  draw.font = "15px Courier";
- draw.fillText(user.username, 150, 125);
- draw.fillText("Level:" + user.level, 325, 125);
- draw.fillText("Coins:" + user.coins, 75, 190);
- draw.fillText("Controls: WASD movement, F fire", 75, 250);
-draw.fillRect(190,350,120,50);
-  draw.fillStyle = "#000000";
- draw.fillText("Play Levels", 200,380);
- document.addEventListener("click", function(e) {
-  if (e.pageX || e.pageY) { 
-    x = e.pageX;
-    y = e.pageY;
-  } else { 
-    x = e.clientX + document.body.scrollLeft + document.documentElement.scrollLeft; 
-    y = e.clientY + document.body.scrollTop + document.documentElement.scrollTop; 
-  } 
-  x -= canvas.offsetLeft;
-  y -= canvas.offsetTop;
- if (x > 190) {
-   if (x < 310) {
-     if (y > 350) {
-       if (y < 400) {
-         levelSelect();
-       }
-     }
-   }
- }
-});
-} // main Menu
-function levelSelect(l) {
-  draw.fillStyle = "#556B2f";
-  draw.fillRect(50, 50, 400, 400);
-  draw.fillStyle = "#ffffff";
-  draw.fillRect(100,100,50,50);
-  draw.fillStyle = "#000000";
-  draw.fon = "20px Courier";
-  draw.fillText("1", 125,125);
-  document.addEventListener("click", function(e) {
-  if (e.pageX || e.pageY) { 
-    x = e.pageX;
-    y = e.pageY;
-  } else { 
-    x = e.clientX + document.body.scrollLeft + document.documentElement.scrollLeft; 
-    y = e.clientY + document.body.scrollTop + document.documentElement.scrollTop; 
-  } 
-  x -= canvas.offsetLeft;
-  y -= canvas.offsetTop;
- if (x > 100) {
-   if (x < 150) {
-     if (y > 100) {
-       if (y < 150) {
-         level(1, null, true);
-       }
-     }
-   }
- }
-});
-}
-function wall(x, y, m) {
- if (m) {
-   Game.blockId++;
-   b[Game.blockId] = new Block(0, x, y, true);
- }
- var wall_image = new Image();
- wall_image.src = "https://starlite3.tk/block-blue.png"
- draw.drawImage(wall_image, x*50, y*50);
-} // creates a wall
-function strong(x, y, m) {
- if (m) {
-   Game.blockId++;
-   b[Game.blockId] = new Block(20, x, y, false, false);
- }
- draw.strokeStyle = "#000000";
- draw.fillStyle = "#D3D3D3";
- draw.strokeRect(x * 50, y * 50, 50, 50);
- draw.fillRect(x * 50, y * 50, 50, 50);
- draw.beginPath();
- draw.moveTo(x * 50, y * 50);
- draw.lineTo(x * 50 + 10, y * 50 + 10);
- draw.lineTo(x * 50 + 40, y * 50 + 10);
- draw.lineTo(x * 50 + 50, y * 50 + 0);
- draw.stroke();
- draw.moveTo(x * 50, y * 50);
- draw.lineTo(x * 50 + 10, y * 50 + 10);
- draw.lineTo(x * 50 + 10, y * 50 + 40);
- draw.lineTo(x * 50, y * 50 + 50);
- draw.stroke();
- draw.moveTo(x * 50, y * 50 + 50);
- draw.lineTo(x * 50 + 10, y * 50 + 40);
- draw.lineTo(x * 50 + 40, y * 50 + 40);
- draw.lineTo(x * 50 + 50, y * 50 + 50);
- draw.stroke();
- draw.moveTo(x * 50 + 50, y * 50 + 50);
- draw.lineTo(x * 50 + 40, y * 50 + 40);
- draw.lineTo(x * 50 + 40, y * 50 + 10);
- draw.lineTo(x * 50 + 50, y * 50 + 0);
- draw.stroke();
-} // creates a strong block
-function spawn(x, y) {
- user.tank.x = x;
- user.tank.y = y;
- user.tank.spawn = [x, y];
-}
-function weak(x, y, m) {
- if (m) {
-   Game.blockId++;
-   b[Game.blockId] = new Block(10, x, y, false, false);
- }
- var weak_image = new Image();
- weak_image.src = "https://starlite3.tk/block-silver.png";
- draw.drawImage(weak_image, x * 50, y*50);
-}
-function chat_setup() {
- chatSubmit.addEventListener("click", chat_submit);
-}
-function chat_submit() {
- if (message.value != "") {
-   if (user.username != undefined) {
-     var newMessage = document.createElement("SPAN");
-     newMessage.innerHTML = user.username + ": " + message.value + " to: " + to.value;
-     sessionStorage.setItem("messages", [user.username, message.value, to.value].concat(sessionStorage.getItem("messages")));
-     messages.appendChild(newMessage);
-     newMessage.classList.add("message");
-     a("Message Sent", "green");
-   } else {
-     a("Start Game First", "red");
-   }
- } else {
-   a("Enter Text to Submit", "red");
- }
-}
-function createAi(x, y, m, t, team) {
- if (m) {
-   Game.foes ++;
-   Game.aiId++;
-   ai[Game.aiId] = new Ai();
-   ai[Game.aiId].id = Game.aiId;
-   ai[Game.aiId].x = x;
-   ai[Game.aiId].y = y;
-   ai[Game.aiId].master = team;
-   ai[Game.aiId].type = t;
-    ai[Game.aiId].control();
- }
-}
-startScreen();
- </script>
- <style>
- canvas {
- outline: hidden;
- border: 1px solid black;
- z-index: 1;
-}
-#messages {
- width: 100%;
- height: 100px;
- overflow: auto;
-}
-#message {
- margin-left: 30px;
-}
-#chat_submit {
- background-color: #000000;
- color: white;
- border: 1px #000000;
-}
-h4 {
- color: white;
- margin-bottom: -25px;
- margin-left: 15px;
-}
-.message {
- border: 1px solid black;
- background-color: white;
- color: black;
- display: block;
- font-family: Courier;
-}
-#chat {
- padding: 20px;
- border-top: 30px solid blue;
- border-bottom: 5px solid blue;
- border-left: 5px solid blue;
- border-right: 5px solid blue;
- border-radius: 10px;
- margin-bottom: 5px;
- margin-left: 5px;
-}
-.console {
- animation: alert 8s;
-}
-#play {
- margin-top: -290px;
- margin-left: 120px;
-}
-#playText {
- animation: blink 4s infinite;
- font-size: 20px;
- font-family: Courier;
- z-index: 2;
- position: relative;
-}
-@keyframes blink {
- 0% {
-   color: #000;
- }
- 49% {
-   color: transparent;
- }
- 50% {
-   color: #000;
- }
- 99% {
-   color: transparent;
- }
- 100% {
-   color: #000;
- }
-}
-#consoleText {
- color: white;
-}
-#alertConsole {
- z-index: 1000;
- margin-top: 220px;
- position: relative;
-}
-h1 {
- font-family: Courier;
-}
-@keyframes alert {
- 0% {
-   margin-top: 220px;
- }
- 20% {
-   margin-top: 120px;
- }
- 90% {
-   margin-top: 120px;
- }
- 100% {
-   margin-top: 220px;
- }
-}
- </style>
+
+  function Block(health, x, y, isInvincible, isExplosive) {
+    this.blockId = blockHelper();
+    this.x = x;
+    this.y = y;
+    i.push(window.setInterval(function(id) {
+      if (ai_check(b[id].x * 50, b[id].y * 50)) {
+        block_support(id);
+      }
+    }, 50, [this.blockId]));
+  } // All Blocks
+  function blockHelper() {
+    return Game.blockId;
+  }
+
+  function block_support(id) {
+    b[id].x = undefined;
+    b[id].y = undefined;
+  }
+  var alertConsole = document.getElementById("alertConsole"); // console for game
+  var chat = document.getElementById("chat");
+  var messages = document.getElementById("messages");
+  var message = document.getElementById("message");
+  var playText = document.getElementById("playText");
+  var canvas = document.getElementById("canvas"); // getting the canvas element
+  var consoleText = document.getElementById("consoleText"); // text control for console
+  var chatSubmit = document.getElementById("chat_submit");
+  var draw = canvas.getContext("2d"); // getting the canvas to be able to draw
+  function startScreen() {
+    chat_setup();
+    a("Loading Game...", "black");
+    draw.fillStyle = "#DCDCDC";
+    draw.fillStyle = "#000000";
+    draw.font = "20px Courier";
+    wall(0, 3);
+    wall(0, 4);
+    wall(0, 5);
+    wall(0, 6);
+    strong(1, 6);
+    weak(1, 4);
+    wall(2, 4);
+    strong(2, 5);
+    strong(2, 3);
+    draw.fillStyle = "#556B2F";
+    draw.fillRect(0, 0, 500, 150);
+    draw.fillRect(0, 350, 500, 150);
+    draw.fillStyle = "#ffffff";
+    draw.font = "50px Courier";
+    draw.fillText("Increedible", 100, 60);
+    draw.fillText("Tanks", 175, 120);
+    canvas.addEventListener("click", loading, false);
+  } // startScreen
+  function alert_startup() {
+    alertConsole.style.visibility = "hidden";
+  } // alert Setup
+  function a(m, c) {
+    alertConsole.classList.add("console");
+    alertConsole.style.backgroundColor = c;
+    alertConsole.style.opacity = .7;
+    alertConsole.style.border = "1px solid black";
+    consoleText.innerHTML = m;
+    alertConsole.style.visibility = "visible";
+    i.push(window.setInterval(alert_end, 8000));
+  } // alert control
+  function alert_end() {
+    window.clearInterval(interval);
+    alertConsole.classList.remove("console");
+    alertConsole.style.visibility = "hidden";
+  } // alert end
+  function loading() {
+    if (sessionStorage.level == undefined) {
+      if (sessionStorage.username == undefined) {
+        window.location.href = "https://starlite3.tk/account";
+      }
+      user = {
+        tank: new Tank(),
+        username: sessionStorage.username,
+        level: 1,
+        coins: 0,
+      }
+    }
+    draw.clearRect(0, 0, 500, 500);
+    a("Starting Game...");
+    playText.style.visibility = "hidden";
+    setTimeout(mainMenu(), 2000);
+    canvas.removeEventListener("click", loading);
+  }
+
+  function level(num, mo, m) {
+    draw.clearRect(0, 0, 500, 500);
+    draw.fillStyle = "#dcdcdc";
+    var floor = new Image();
+    floor.src = "https://starlite3.tk/floor.png";
+    draw.drawImage(floor, 0, 0);
+    draw.drawImage(floor, 50, 0);
+    draw.drawImage(floor, 100, 0);
+    draw.drawImage(floor, 150, 0);
+    draw.drawImage(floor, 200, 0);
+    draw.drawImage(floor, 250, 0);
+    draw.drawImage(floor, 300, 0);
+    draw.drawImage(floor, 350, 0);
+    draw.drawImage(floor, 400, 0);
+    draw.drawImage(floor, 450, 0);
+    draw.drawImage(floor, 0, 50);
+    draw.drawImage(floor, 50, 50);
+    draw.drawImage(floor, 100, 50);
+    draw.drawImage(floor, 150, 50);
+    draw.drawImage(floor, 200, 50);
+    draw.drawImage(floor, 250, 50);
+    draw.drawImage(floor, 300, 50);
+    draw.drawImage(floor, 350, 50);
+    draw.drawImage(floor, 400, 50);
+    draw.drawImage(floor, 450, 50);
+    draw.drawImage(floor, 0, 100);
+    draw.drawImage(floor, 50, 100);
+    draw.drawImage(floor, 100, 100);
+    draw.drawImage(floor, 150, 100);
+    draw.drawImage(floor, 200, 100);
+    draw.drawImage(floor, 250, 100);
+    draw.drawImage(floor, 300, 100);
+    draw.drawImage(floor, 350, 100);
+    draw.drawImage(floor, 400, 100);
+    draw.drawImage(floor, 450, 100);
+    draw.drawImage(floor, 0, 150);
+    draw.drawImage(floor, 50, 150);
+    draw.drawImage(floor, 100, 150);
+    draw.drawImage(floor, 150, 150);
+    draw.drawImage(floor, 200, 150);
+    draw.drawImage(floor, 250, 150);
+    draw.drawImage(floor, 300, 150);
+    draw.drawImage(floor, 350, 150);
+    draw.drawImage(floor, 400, 150);
+    draw.drawImage(floor, 450, 150);
+    draw.drawImage(floor, 0, 200);
+    draw.drawImage(floor, 50, 200);
+    draw.drawImage(floor, 100, 200);
+    draw.drawImage(floor, 150, 200);
+    draw.drawImage(floor, 200, 200);
+    draw.drawImage(floor, 250, 200);
+    draw.drawImage(floor, 300, 200);
+    draw.drawImage(floor, 350, 200);
+    draw.drawImage(floor, 400, 200);
+    draw.drawImage(floor, 450, 200);
+    draw.drawImage(floor, 0, 250);
+    draw.drawImage(floor, 50, 250);
+    draw.drawImage(floor, 100, 250);
+    draw.drawImage(floor, 150, 250);
+    draw.drawImage(floor, 200, 250);
+    draw.drawImage(floor, 250, 250);
+    draw.drawImage(floor, 300, 250);
+    draw.drawImage(floor, 350, 250);
+    draw.drawImage(floor, 400, 250);
+    draw.drawImage(floor, 450, 250);
+    draw.drawImage(floor, 0, 300);
+    draw.drawImage(floor, 50, 300);
+    draw.drawImage(floor, 100, 300);
+    draw.drawImage(floor, 150, 300);
+    draw.drawImage(floor, 200, 300);
+    draw.drawImage(floor, 250, 300);
+    draw.drawImage(floor, 300, 300);
+    draw.drawImage(floor, 350, 300);
+    draw.drawImage(floor, 400, 300);
+    draw.drawImage(floor, 450, 300);
+    draw.drawImage(floor, 0, 350);
+    draw.drawImage(floor, 50, 350);
+    draw.drawImage(floor, 100, 350);
+    draw.drawImage(floor, 150, 350);
+    draw.drawImage(floor, 200, 350);
+    draw.drawImage(floor, 250, 350);
+    draw.drawImage(floor, 300, 350);
+    draw.drawImage(floor, 350, 350);
+    draw.drawImage(floor, 400, 350);
+    draw.drawImage(floor, 450, 350);
+    draw.drawImage(floor, 0, 400);
+    draw.drawImage(floor, 50, 400);
+    draw.drawImage(floor, 100, 400);
+    draw.drawImage(floor, 150, 400);
+    draw.drawImage(floor, 200, 400);
+    draw.drawImage(floor, 250, 400);
+    draw.drawImage(floor, 300, 400);
+    draw.drawImage(floor, 350, 400);
+    draw.drawImage(floor, 400, 400);
+    draw.drawImage(floor, 450, 400);
+    draw.drawImage(floor, 0, 450);
+    draw.drawImage(floor, 50, 450);
+    draw.drawImage(floor, 100, 450);
+    draw.drawImage(floor, 150, 450);
+    draw.drawImage(floor, 200, 450);
+    draw.drawImage(floor, 250, 450);
+    draw.drawImage(floor, 300, 450);
+    draw.drawImage(floor, 350, 450);
+    draw.drawImage(floor, 400, 450);
+    draw.drawImage(floor, 450, 450);
+    if (user.tank != undefined) {
+      user.tank.draw();
+    }
+    if (mo != "n") {
+      Game.control();
+      Game.i();
+      user.tank.control();
+    }
+    if (num == 1) {
+      if (mo != "n") {
+        spawn(0, 0);
+      }
+      weak(2, 0, m);
+      weak(3, 0, m);
+      strong(5, 0, m);
+      createAi(6 * 50, 0, m, 3, 3);
+      // bomb(7,0, m);
+      weak(9, 0, m);
+      weak(2, 1, m);
+      weak(3, 1, m);
+      strong(6, 1, m);
+      strong(8, 1, m);
+      weak(2, 2, m);
+      weak(3, 2, m);
+      wall(0, 3, m);
+      wall(1, 3, m);
+      wall(2, 3, m);
+      wall(3, 3, m);
+      wall(4, 3, m);
+      wall(5, 3, m);
+      wall(6, 3, m);
+      wall(7, 3, m);
+      wall(8, 3, m);
+      weak(9, 3, m);
+      // chest(200, 1, 4, m);
+      wall(3, 4, m);
+      wall(6, 4, m);
+      createAi(4 * 50, 4 * 50, m, 3, 3);
+      // chest(9,4, m);
+      wall(3, 5, m);
+      strong(4, 5, m);
+      strong(5, 5, m);
+      wall(6, 5, m);
+
+    }
+    if (num === 2) {
+      // level two
+    }
+  }
+
+  function mainMenu() {
+    user.tank = new Tank();
+    window.clearInterval(interval2);
+    draw.clearRect(0, 0, 500, 500);
+    playText.style.visibility = "hidden";
+    draw.fillStyle = "#556B2F";
+    draw.fillRect(50, 50, 400, 400);
+    draw.fillStyle = "#ffffff";
+    draw.fillRect(75, 95, 50, 50);
+    draw.font = "15px Courier";
+    draw.fillText(user.username, 150, 125);
+    draw.fillText("Level:" + user.level, 325, 125);
+    draw.fillText("Coins:" + user.coins, 75, 190);
+    draw.fillText("Controls: WASD movement, F fire", 75, 250);
+    draw.fillRect(190, 350, 120, 50);
+    draw.fillStyle = "#000000";
+    draw.fillText("Play Levels", 200, 380);
+    document.addEventListener("click", function(e) {
+      if (e.pageX || e.pageY) {
+        x = e.pageX;
+        y = e.pageY;
+      } else {
+        x = e.clientX + document.body.scrollLeft + document.documentElement.scrollLeft;
+        y = e.clientY + document.body.scrollTop + document.documentElement.scrollTop;
+      }
+      x -= canvas.offsetLeft;
+      y -= canvas.offsetTop;
+      if (x > 190) {
+        if (x < 310) {
+          if (y > 350) {
+            if (y < 400) {
+              levelSelect();
+            }
+          }
+        }
+      }
+    });
+  } // main Menu
+  function levelSelect(l) {
+    draw.fillStyle = "#556B2f";
+    draw.fillRect(50, 50, 400, 400);
+    draw.fillStyle = "#ffffff";
+    draw.fillRect(100, 100, 50, 50);
+    draw.fillStyle = "#000000";
+    draw.fon = "20px Courier";
+    draw.fillText("1", 125, 125);
+    document.addEventListener("click", function(e) {
+      if (e.pageX || e.pageY) {
+        x = e.pageX;
+        y = e.pageY;
+      } else {
+        x = e.clientX + document.body.scrollLeft + document.documentElement.scrollLeft;
+        y = e.clientY + document.body.scrollTop + document.documentElement.scrollTop;
+      }
+      x -= canvas.offsetLeft;
+      y -= canvas.offsetTop;
+      if (x > 100) {
+        if (x < 150) {
+          if (y > 100) {
+            if (y < 150) {
+              level(1, null, true);
+            }
+          }
+        }
+      }
+    });
+  }
+
+  function wall(x, y, m) {
+    if (m) {
+      Game.blockId++;
+      b[Game.blockId] = new Block(0, x, y, true);
+    }
+    var wall_image = new Image();
+    wall_image.src = "https://starlite3.tk/block-blue.png"
+    draw.drawImage(wall_image, x * 50, y * 50);
+  } // creates a wall
+  function strong(x, y, m) {
+    if (m) {
+      Game.blockId++;
+      b[Game.blockId] = new Block(20, x, y, false, false);
+    }
+    draw.strokeStyle = "#000000";
+    draw.fillStyle = "#D3D3D3";
+    draw.strokeRect(x * 50, y * 50, 50, 50);
+    draw.fillRect(x * 50, y * 50, 50, 50);
+    draw.beginPath();
+    draw.moveTo(x * 50, y * 50);
+    draw.lineTo(x * 50 + 10, y * 50 + 10);
+    draw.lineTo(x * 50 + 40, y * 50 + 10);
+    draw.lineTo(x * 50 + 50, y * 50 + 0);
+    draw.stroke();
+    draw.moveTo(x * 50, y * 50);
+    draw.lineTo(x * 50 + 10, y * 50 + 10);
+    draw.lineTo(x * 50 + 10, y * 50 + 40);
+    draw.lineTo(x * 50, y * 50 + 50);
+    draw.stroke();
+    draw.moveTo(x * 50, y * 50 + 50);
+    draw.lineTo(x * 50 + 10, y * 50 + 40);
+    draw.lineTo(x * 50 + 40, y * 50 + 40);
+    draw.lineTo(x * 50 + 50, y * 50 + 50);
+    draw.stroke();
+    draw.moveTo(x * 50 + 50, y * 50 + 50);
+    draw.lineTo(x * 50 + 40, y * 50 + 40);
+    draw.lineTo(x * 50 + 40, y * 50 + 10);
+    draw.lineTo(x * 50 + 50, y * 50 + 0);
+    draw.stroke();
+  } // creates a strong block
+  function spawn(x, y) {
+    user.tank.x = x;
+    user.tank.y = y;
+    user.tank.spawn = [x, y];
+  }
+
+  function weak(x, y, m) {
+    if (m) {
+      Game.blockId++;
+      b[Game.blockId] = new Block(10, x, y, false, false);
+    }
+    var weak_image = new Image();
+    weak_image.src = "https://starlite3.tk/block-silver.png";
+    draw.drawImage(weak_image, x * 50, y * 50);
+  }
+
+  function chat_setup() {
+    chatSubmit.addEventListener("click", chat_submit);
+  }
+
+  function chat_submit() {
+    if (message.value != "") {
+      if (user.username != undefined) {
+        var newMessage = document.createElement("SPAN");
+        newMessage.innerHTML = user.username + ": " + message.value + " to: " + to.value;
+        sessionStorage.setItem("messages", [user.username, message.value, to.value].concat(sessionStorage.getItem("messages")));
+        messages.appendChild(newMessage);
+        newMessage.classList.add("message");
+        a("Message Sent", "green");
+      } else {
+        a("Start Game First", "red");
+      }
+    } else {
+      a("Enter Text to Submit", "red");
+    }
+  }
+
+  function createAi(x, y, m, t, team) {
+    if (m) {
+      Game.foes++;
+      Game.aiId++;
+      ai[Game.aiId] = new Ai();
+      ai[Game.aiId].id = Game.aiId;
+      ai[Game.aiId].x = x;
+      ai[Game.aiId].y = y;
+      ai[Game.aiId].master = team;
+      ai[Game.aiId].type = t;
+      ai[Game.aiId].control();
+    }
+  }
+  startScreen();
+
+</script>
+<style>
+  canvas {
+    outline: hidden;
+    border: 1px solid black;
+    z-index: 1;
+  }
+
+  #messages {
+    width: 100%;
+    height: 100px;
+    overflow: auto;
+  }
+
+  #message {
+    margin-left: 30px;
+  }
+
+  #chat_submit {
+    background-color: #000000;
+    color: white;
+    border: 1px #000000;
+  }
+
+  h4 {
+    color: white;
+    margin-bottom: -25px;
+    margin-left: 15px;
+  }
+
+  .message {
+    border: 1px solid black;
+    background-color: white;
+    color: black;
+    display: block;
+    font-family: Courier;
+  }
+
+  #chat {
+    padding: 20px;
+    border-top: 30px solid blue;
+    border-bottom: 5px solid blue;
+    border-left: 5px solid blue;
+    border-right: 5px solid blue;
+    border-radius: 10px;
+    margin-bottom: 5px;
+    margin-left: 5px;
+  }
+
+  .console {
+    animation: alert 8s;
+  }
+
+  #play {
+    margin-top: -290px;
+    margin-left: 120px;
+  }
+
+  #playText {
+    animation: blink 4s infinite;
+    font-size: 20px;
+    font-family: Courier;
+    z-index: 2;
+    position: relative;
+  }
+
+  @keyframes blink {
+    0% {
+      color: #000;
+    }
+
+    49% {
+      color: transparent;
+    }
+
+    50% {
+      color: #000;
+    }
+
+    99% {
+      color: transparent;
+    }
+
+    100% {
+      color: #000;
+    }
+  }
+
+  #consoleText {
+    color: white;
+  }F
+
+  #alertConsole {
+    z-index: 1000;
+    margin-top: 220px;
+    position: relative;
+  }
+
+  h1 {
+    font-family: Courier;
+  }
+
+  @keyframes alert {
+    0% {
+      margin-top: 220px;
+    }
+
+    20% {
+      margin-top: 120px;
+    }
+
+    90% {
+      margin-top: 120px;
+    }
+
+    100% {
+      margin-top: 220px;
+    }
+  }
+
+</style>
 </html>
