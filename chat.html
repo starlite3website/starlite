@@ -30,11 +30,13 @@
       d = [];
       var l = 0;
       while (l<JSON.parse(messages).length) {
-        var t = document.createElement("SPAN");
-        t.innerHTML = JSON.parse(messages)[l].send+": "+JSON.parse(messages)[l].message+" to: "+JSON.parse(messages)[l].user;
-        document.getElementById("messages").appendChild(t);
-        e.push(t);
-        d.push(t);
+        if (JSON.parse(messages)[l].send == sessionStorage.username || JSON.parse(messages)[l].user == sessionStorage.username) {
+          var t = document.createElement("SPAN");
+          t.innerHTML = JSON.parse(messages)[l].send+": "+JSON.parse(messages)[l].message+" to: "+JSON.parse(messages)[l].user;
+          document.getElementById("messages").appendChild(t);
+          e.push(t);
+          d.push(t);
+        } 
         l++;
       }
     }
