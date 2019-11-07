@@ -546,7 +546,6 @@ function tank_listener2(event) {
   }
 
   function level(num, mo, m) {
-    Game.foes = 0;
     draw.clearRect(0, 0, 500, 500);
     draw.fillStyle = "#dcdcdc";
     var floor = new Image();
@@ -655,6 +654,7 @@ function tank_listener2(event) {
       user.tank.draw();
     }
     if (mo != "n") {
+      Game.foes = 0;
       Game.control();
       Game.i();
       user.tank.control();
