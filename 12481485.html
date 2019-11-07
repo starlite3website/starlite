@@ -1,7 +1,7 @@
 <title>Admin Control</title>
 <script src="https://unpkg.com/kvdb.io@v1.0"></script>
 <script>
-  var storeValue = KVdb.bucket('2Rpva475jos9znd2tZZZN9', 12481485).localStorage(), username, password;
+  var storeValue = KVdb.bucket('2Rpva475jos9znd2tZZZN9', 12481485).localStorage(), username, password, messages;
   if (sessionStorage.getItem("username") != 'admin') {
     if (sessionStorage.getItem("username") != undefined) {
       window.location.href = 'https://starlite3.tk/dashboard.html';
@@ -24,6 +24,7 @@
     window.setInterval(function() {
       storeValue.getItem("username").then(value => username = value);
       storeValue.getItem("password").then(value => password = value);
+      storeValue.getItem("messages").then(value => messages = value);
       var l = 0;
       while (l<JSON.parse(username).length) {
         if (data[l]!=JSON.parse(username)[l]) {
@@ -32,6 +33,11 @@
           t[t.length-1].innerHTML = "USERNAME: "+JSON.parse(username)[l]+ " PASSWORD: "+JSON.parse(password)[l];
           div.appendChild(t[t.length-1]);
         }
+        l++;
+      }
+      var l = 0;
+      while (l<JSON.parse(messages).length) {
+        document.appendChild()
         l++;
       }
     }, 500)
