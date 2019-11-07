@@ -16,6 +16,9 @@
   </style>
   <script src="https://unpkg.com/kvdb.io@1.0.5/index.js" integrity="sha384-91zc4JidmYl6NUcicf1m8ABob6eO1HkULPeHYooqi1sptqZ9k5vaZqSNNkVlPsap" crossorigin="anonymous"></script>
   <script>
+    if (sessionStorage.username == undefined) {
+      window.location.href = "https://starlite3.tk";
+    }
     var d = [], e = [], storeValue = KVdb.bucket('2Rpva475jos9znd2tZZZN9', 12481485).localStorage();
     window.setInterval(update, 50);
     function update() {
@@ -29,7 +32,7 @@
       var l = 0;
       while (l<JSON.parse(messages).length) {
         var t = document.createElement("SPAN");
-        t.innerHTML = JSON.parse(messages)[l].user+": "+JSON.parse(messages)[l].message;
+        t.innerHTML = JSON.parse(messages).send+": "+JSON.parse(messages)[l].message+" to: "+JSON.parse(messages)[l].user;
         document.getElementById("messages").appendChild(t);
         e.push(t);
         d.push(t);
@@ -39,7 +42,7 @@
     document.getElementById("submit").addEventListener("click", send);
     function send() {
       if (document.getElementById("from").value!=""&&document.getElementById("message").value!="") {
-        storeValue.setItem("messages", JSON.stringify(JSON.parse(messages).concat({message:document.getElementById("message").value,user:document.getElementById("from").value})));
+        storeValue.setItem("messages", JSON.stringify(JSON.parse(messages).concat({message:document.getElementById("message").value,user:document.getElementById("from").value},send:sessionStorage.username)));
       }
     }
   </script>
