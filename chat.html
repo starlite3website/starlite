@@ -3,7 +3,7 @@
   <div id="messages">
   </div>
   <div>
-    <input type="text" placeholder="Message" id="message"/>
+    <textarea placeholder="Message" id="message"></textarea>
     <input type="text" placeholder="To" id="from"/>
     <button id="submit">SUBMIT</button>
   </div>
@@ -11,6 +11,34 @@
     span {
       display: block;
       font-family: Courier;
+    }
+    textarea {
+      margin-bottom: 10px;
+      margin-top: 10px;
+      width: 200px;
+      height: 100px;
+      display: block;
+      background-color: white;
+      font-family: Courier;
+      border: 1px solid black;
+      padding: 10px;
+    }
+    input {
+      margin-bottom: 10px;
+      width: 200px;
+      display: block;
+      font-family: Courier;
+      background-color: white;
+      border: 1px solid back;
+      padding: 10px;
+    }
+    button {
+      font-family: Courier;
+      color: white;
+      background-color: orange;
+      border: 1px solid orange;
+      padding: 5px;
+      border-radius: 20px;
     }
   </style>
   <script src="https://unpkg.com/kvdb.io@1.0.5/index.js" integrity="sha384-91zc4JidmYl6NUcicf1m8ABob6eO1HkULPeHYooqi1sptqZ9k5vaZqSNNkVlPsap" crossorigin="anonymous"></script>
