@@ -71,7 +71,7 @@
     document.getElementById("submit").addEventListener("click", send);
     function send() {
       if (document.getElementById("from").value!=""&&document.getElementById("message").value!="") {
-            storeValue.setItem("messages", JSON.stringify(JSON.parse(messages).concat({message:document.getElementById("message").value,user:document.getElementById("from").value,send:sessionStorage.username,timestamps:new Date();})));
+            storeValue.setItem("messages", JSON.stringify(JSON.parse(messages).concat({message:document.getElementById("message").value,user:document.getElementById("from").value,send:sessionStorage.username,timestamps:new Date()})));
             document.getElementById("message").value = "";
             document.getElementById("from").value = "";
       }
