@@ -60,7 +60,7 @@
       while (l<JSON.parse(messages).length) {
         if (JSON.parse(messages)[l].send == sessionStorage.username || JSON.parse(messages)[l].user == sessionStorage.username) {
           var t = document.createElement("SPAN");
-          t.innerHTML = JSON.parse(messages)[l].send+": "+JSON.parse(messages)[l].message+" to: "+JSON.parse(messages)[l].user;
+          t.innerHTML = JSON.parse(messages)[l].send+": "+JSON.parse(messages)[l].message+" to: "+JSON.parse(messages)[l].user+" at: "+JSON.parse(messages)[l].timestamps;
           document.getElementById("messages").appendChild(t);
           e.push(t);
           d.push(t);
@@ -71,7 +71,7 @@
     document.getElementById("submit").addEventListener("click", send);
     function send() {
       if (document.getElementById("from").value!=""&&document.getElementById("message").value!="") {
-            storeValue.setItem("messages", JSON.stringify(JSON.parse(messages).concat({message:document.getElementById("message").value,user:document.getElementById("from").value,send:sessionStorage.username})));
+            storeValue.setItem("messages", JSON.stringify(JSON.parse(messages).concat({message:document.getElementById("message").value,user:document.getElementById("from").value,send:sessionStorage.username,timestamps:new Date();})));
             document.getElementById("message").value = "";
             document.getElementById("from").value = "";
       }
