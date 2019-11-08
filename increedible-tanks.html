@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -220,7 +221,7 @@
 
   function clearShot() {
     if (user.tank != undefined) {
-      level(1, "n", false);
+      level(Game.level, "n", false);
     }
     var l = 0;
     while (l < ai.length - 1) {
@@ -323,7 +324,7 @@
             this.rotation -= 5;
           }
         }
-        level(1, "n", false);
+        level(Game.level, "n", false);
         var l = 0;
         while (l < ai.length - 1) {
           l++;
@@ -694,10 +695,10 @@ function tank_listener2(event) {
       strong(4, 5, m);
       strong(5, 5, m);
       wall(6, 5, m);
-
     }
     if (num === 2) {
-      // level two
+      wall(0,9,m);
+      createAi(0*50,50*8,m,3,3);
     }
   }
 
@@ -744,9 +745,12 @@ function tank_listener2(event) {
     draw.fillRect(50, 50, 400, 400);
     draw.fillStyle = "#ffffff";
     draw.fillRect(100, 100, 50, 50);
+    draw.fillRect(200,100,50,50);
     draw.fillStyle = "#000000";
-    draw.fon = "20px Courier";
-    draw.fillText("1", 125, 125);
+    draw.font = "20px Courier";
+    draw.fillText("1", 120, 130);
+    
+    draw.fillText("2", 220,130);
     document.addEventListener("click", function(e) {
       if (e.pageX || e.pageY) {
         x = e.pageX;
@@ -761,7 +765,18 @@ function tank_listener2(event) {
         if (x < 150) {
           if (y > 100) {
             if (y < 150) {
+              Game.level = 1;
               level(1, null, true);
+            }
+          }
+        }
+      }
+      if (x>200) {
+        if (x<250) {
+          if (y>100) {
+            if (y<150) {
+              Game.level = 2;
+              level(2, null, true);
             }
           }
         }
@@ -980,6 +995,5 @@ function tank_listener2(event) {
       margin-top: 220px;
     }
   }
-
 </style>
 </html>
