@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -424,6 +425,7 @@ function tank_listener2(event) {
     this.shotId = 0;
     this.blockId = 0;
     this.endGame = function() {
+      document.removeEventListener("click", levelSelectSupport)
       canvas.removeEventListener("keydown", tank_listener1);
       canvas.removeEventListener("keyup", tank_listener2);
       gameHelper();
@@ -750,8 +752,10 @@ function tank_listener2(event) {
     draw.fillText("1", 120, 130);
     
     draw.fillText("2", 220,130);
-    document.addEventListener("click", function(e) {
-      if (e.pageX || e.pageY) {
+    document.addEventListener("click", levelSelectSupport);
+  }
+  function levelSelectSupport(e) {
+     if (e.pageX || e.pageY) {
         x = e.pageX;
         y = e.pageY;
       } else {
@@ -780,9 +784,7 @@ function tank_listener2(event) {
           }
         }
       }
-    });
   }
-
   function wall(x, y, m) {
     if (m) {
       Game.blockId++;
