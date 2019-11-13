@@ -235,6 +235,7 @@ Only 1 Error until Game is released<img src="https://starlite3.tk/game_error.png
   }
 
   function Tank() {
+    this.count = 0;
     this.health = 100;
     this.r = 0;
     this.x = 0;
@@ -317,7 +318,12 @@ Only 1 Error until Game is released<img src="https://starlite3.tk/game_error.png
           }
         }
         if (e.which == 70) {
-          this.fire();
+          if (this.count == 2) {
+            this.fire();
+            this.count = 0;
+          } else {
+            this.count++;
+          }
         }
         if (e.which == 37) {
           if (this.rotation == 355) {
