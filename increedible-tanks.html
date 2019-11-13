@@ -53,6 +53,7 @@ Only 1 Error until Game is released<img src="https://starlite3.tk/game_error.png
   }
 
   function Ai() {
+    this.health = 100;
     this.x = 0;
     this.y = 0;
     this.control = function() {
@@ -137,11 +138,14 @@ Only 1 Error until Game is released<img src="https://starlite3.tk/game_error.png
     }
     this.check = function() {
       if (ai_check(this.x, this.y)) {
-        if (this.inactive != true) {
-          Game.foes--;
-          this.inactive = true;
-          if (Game.foes == 0) {
-            Game.endGame();
+        if (this.inactive != true) {\
+          this.health -= 20;
+          if (this.health <= 0) {
+            Game.foes--;
+            this.inactive = true;
+            if (Game.foes == 0) {
+              Game.endGame();
+            }
           }
         }
       }
@@ -231,6 +235,7 @@ Only 1 Error until Game is released<img src="https://starlite3.tk/game_error.png
   }
 
   function Tank() {
+    this.health = 100;
     this.r = 0;
     this.x = 0;
     this.y = 0;
@@ -259,14 +264,17 @@ Only 1 Error until Game is released<img src="https://starlite3.tk/game_error.png
     this.check = function() {
       console.clear()
       if (ai_check(this.x, this.y)) {
-        this.inactive = true;
-        window.clearInterval(this.checkloop);
-        window.clearInterval(this.interval);
-        window.clearInterval(this.interval2)
-        this.checkloop = undefined;
-        this.interval = undefined;
-        this.interval2 = undefined;
-        Game.endGame();
+        this.health -= 20;
+        if (this.health <= 0) {
+          this.inactive = true;
+          window.clearInterval(this.checkloop);
+          window.clearInterval(this.interval);
+          window.clearInterval(this.interval2)
+          this.checkloop = undefined;
+          this.interval = undefined;
+          this.interval2 = undefined;
+          Game.endGame();
+        }
       }
     }
     this.control = function() {
