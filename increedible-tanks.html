@@ -1,4 +1,5 @@
 
+
 <!DOCTYPE html>
 <html>
 Only 1 Error until Game is released<img src="https://starlite3.tk/game_error.png" />
@@ -465,6 +466,43 @@ function tank_listener2(event) {
     this.blockId = blockHelper();
     this.x = x;
     this.y = y;
+    this.wall = function(x,y) {
+      var wall_image = new Image();
+      wall_image.src = "https://starlite3.tk/block-blue.png"
+      draw.drawImage(wall_image, x * 50, y * 50);
+    }
+    this.strong = function(x,y) {
+      draw.strokeStyle = "#000000";
+    draw.fillStyle = "#D3D3D3";
+    draw.strokeRect(x * 50, y * 50, 50, 50);
+    draw.fillRect(x * 50, y * 50, 50, 50);
+    draw.beginPath();
+    draw.moveTo(x * 50, y * 50);
+    draw.lineTo(x * 50 + 10, y * 50 + 10);
+    draw.lineTo(x * 50 + 40, y * 50 + 10);
+    draw.lineTo(x * 50 + 50, y * 50 + 0);
+    draw.stroke();
+    draw.moveTo(x * 50, y * 50);
+    draw.lineTo(x * 50 + 10, y * 50 + 10);
+    draw.lineTo(x * 50 + 10, y * 50 + 40);
+    draw.lineTo(x * 50, y * 50 + 50);
+    draw.stroke();
+    draw.moveTo(x * 50, y * 50 + 50);
+    draw.lineTo(x * 50 + 10, y * 50 + 40);
+    draw.lineTo(x * 50 + 40, y * 50 + 40);
+    draw.lineTo(x * 50 + 50, y * 50 + 50);
+    draw.stroke();
+    draw.moveTo(x * 50 + 50, y * 50 + 50);
+    draw.lineTo(x * 50 + 40, y * 50 + 40);
+    draw.lineTo(x * 50 + 40, y * 50 + 10);
+    draw.lineTo(x * 50 + 50, y * 50 + 0);
+    draw.stroke();
+    }
+    this.weak = function(x,y) {
+      var weak_image = new Image();
+      weak_image.src = "https://starlite3.tk/block-silver.png";
+      draw.drawImage(weak_image, x * 50, y * 50);
+    }
     i.push(window.setInterval(function(id) {
       if (ai_check(b[id].x * 50, b[id].y * 50)) {
         block_support(id);
@@ -532,7 +570,7 @@ function tank_listener2(event) {
   function loading() {
     if (sessionStorage.level == undefined) {
       if (sessionStorage.username == undefined) {
-        window.location.href = "https://starlite3.tk/account";
+        //window.location.href = "https://starlite3.tk/account";
       }
       user = {
         tank: new Tank(),
@@ -791,40 +829,30 @@ function tank_listener2(event) {
       Game.blockId++;
       b[Game.blockId] = new Block(0, x, y, true);
     }
-    var wall_image = new Image();
-    wall_image.src = "https://starlite3.tk/block-blue.png"
-    draw.drawImage(wall_image, x * 50, y * 50);
+    var l = 1;
+    while (l<b.length) {
+      if (b[l].x == x) {
+        if (b[l].y == y) {
+          b[l].wall(x,y);
+        }
+      }
+      l++;
+    }
   } // creates a wall
   function strong(x, y, m) {
     if (m) {
       Game.blockId++;
       b[Game.blockId] = new Block(20, x, y, false, false);
     }
-    draw.strokeStyle = "#000000";
-    draw.fillStyle = "#D3D3D3";
-    draw.strokeRect(x * 50, y * 50, 50, 50);
-    draw.fillRect(x * 50, y * 50, 50, 50);
-    draw.beginPath();
-    draw.moveTo(x * 50, y * 50);
-    draw.lineTo(x * 50 + 10, y * 50 + 10);
-    draw.lineTo(x * 50 + 40, y * 50 + 10);
-    draw.lineTo(x * 50 + 50, y * 50 + 0);
-    draw.stroke();
-    draw.moveTo(x * 50, y * 50);
-    draw.lineTo(x * 50 + 10, y * 50 + 10);
-    draw.lineTo(x * 50 + 10, y * 50 + 40);
-    draw.lineTo(x * 50, y * 50 + 50);
-    draw.stroke();
-    draw.moveTo(x * 50, y * 50 + 50);
-    draw.lineTo(x * 50 + 10, y * 50 + 40);
-    draw.lineTo(x * 50 + 40, y * 50 + 40);
-    draw.lineTo(x * 50 + 50, y * 50 + 50);
-    draw.stroke();
-    draw.moveTo(x * 50 + 50, y * 50 + 50);
-    draw.lineTo(x * 50 + 40, y * 50 + 40);
-    draw.lineTo(x * 50 + 40, y * 50 + 10);
-    draw.lineTo(x * 50 + 50, y * 50 + 0);
-    draw.stroke();
+    var l = 1;
+    while (l<b.length) {
+      if (b[l].x == x) {
+        if (b[l].y == y) {
+          b[l].strong(x,y);
+        }
+      }
+      l++;
+    }
   } // creates a strong block
   function spawn(x, y) {
     user.tank.x = x;
@@ -837,9 +865,15 @@ function tank_listener2(event) {
       Game.blockId++;
       b[Game.blockId] = new Block(10, x, y, false, false);
     }
-    var weak_image = new Image();
-    weak_image.src = "https://starlite3.tk/block-silver.png";
-    draw.drawImage(weak_image, x * 50, y * 50);
+    var l = 1;
+    while (l<b.length) {
+      if (b[l].x == x) {
+        if (b[l].y == y) {
+          b[l].weak(x,y);
+        }
+      }
+      l++;
+    }
   }
 
   function chat_setup() {
