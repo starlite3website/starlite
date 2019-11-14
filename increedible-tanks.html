@@ -482,8 +482,14 @@ function tank_listener2(event) {
       var wall_image = new Image();
       wall_image.src = "https://starlite3.tk/block-blue.png"
       draw.drawImage(wall_image, x * 50, y * 50);
+      if (this.health == undefined) {
+        this.health = Infinity;
+      }
     }
     this.strong = function(x,y) {
+      if (this.health == undefined) {
+        this.health = 30;
+      }
       draw.strokeStyle = "#000000";
     draw.fillStyle = "#D3D3D3";
     draw.strokeRect(x * 50, y * 50, 50, 50);
@@ -511,13 +517,19 @@ function tank_listener2(event) {
     draw.stroke();
     }
     this.weak = function(x,y) {
+      if (this.health == undefined) {
+        this.health = 10;
+      }
       var weak_image = new Image();
       weak_image.src = "https://starlite3.tk/block-silver.png";
       draw.drawImage(weak_image, x * 50, y * 50);
     }
     i.push(window.setInterval(function(id) {
       if (ai_check(b[id].x * 50, b[id].y * 50)) {
-        block_support(id);
+        b[id].health -= 10;
+        if (b[id].health <= 0) {
+          block_support(id);
+        }
       }
     }, 50, [this.blockId]));
   } // All Blocks
