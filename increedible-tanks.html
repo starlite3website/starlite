@@ -439,7 +439,8 @@ function tank_listener2(event) {
     this.shotId = 0;
     this.blockId = 0;
     this.endGame = function() {
-      document.removeEventListener("click", levelSelectSupport)
+      document.removeEventListener("click", levelSelectSupport);
+      window.clearInterval(user.tank.interval);
       canvas.removeEventListener("keydown", tank_listener1);
       canvas.removeEventListener("keyup", tank_listener2);
       gameHelper();
