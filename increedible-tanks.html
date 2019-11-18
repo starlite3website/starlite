@@ -25,6 +25,7 @@
     </h5>
   </div>
 </div>
+<script src="https://unpkg.com/kvdb.io@1.0.5/index.js" integrity="sha384-91zc4JidmYl6NUcicf1m8ABob6eO1HkULPeHYooqi1sptqZ9k5vaZqSNNkVlPsap" crossorigin="anonymous"></script>
 <script>
   var interval, user, listener, interval2, b = [],
     s = [],
@@ -33,7 +34,7 @@
     l2 = 0,
     i = [],
     Game = new Game();
-
+  var storeValue = KVdb.bucket('2Rpva475jos9znd2tZZZN9', 12481485).localStorage();
   function ai_check(x, y) {
     var l = 1;
     while (l < Game.shotId) {
