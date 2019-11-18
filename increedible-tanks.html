@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
   Reload if this happens:<img src="https://starlite3.tk/game_error.png" width="50" height="50"/>
@@ -141,9 +142,11 @@
         if (this.inactive != true) {
           this.health -= 20;
           if (this.health <= 0) {
+            Game.coins += 100;
             Game.foes--;
             this.inactive = true;
             if (Game.foes == 0) {
+              setTimeout(victory, 20);
               Game.endGame();
             }
           }
@@ -274,6 +277,7 @@
           this.checkloop = undefined;
           this.interval = undefined;
           this.interval2 = undefined;
+          setTimeout(defeat, 20);
           Game.endGame();
         }
       }
@@ -433,6 +437,7 @@ function tank_listener2(event) {
   }
 
   function Game() {
+    this.coins = 0;
     this.foes = 0;
     this.paused = false;
     this.aiId = 0;
@@ -720,6 +725,7 @@ function tank_listener2(event) {
       user.tank.draw();
     }
     if (mo != "n") {
+      Game.coins = 0;
       Game.foes = 0;
       Game.control();
       Game.i();
@@ -765,6 +771,28 @@ function tank_listener2(event) {
       wall(0,9,m);
       createAi(0*50,50*8,m,3,3);
     }
+  }
+  function defeat() {
+    draw.fillStyle="#556B2F";
+    draw.fillRect(50,50,400,400);
+    draw.font="60px Courier";
+    draw.fillStyle = "#ffffff";
+    draw.fillText("DEFEAT!",120,120);
+    draw.font = "20px Courier";
+    draw.fillText("No Stats Updated",140,250);
+    setTimeout(mainMenu, 3000);
+  }
+  function victory() {
+    draw.fillStyle="#556B2F";
+    draw.fillRect(50,50,400,400);
+    draw.font="60px Courier";
+    draw.fillStyle = "#ffffff";
+    draw.fillText("VICTORY!",120,120);
+    draw.font = "20px Courier";
+    draw.fillText("Coins Gained: "+Game.coins,140,200);
+    user.coins += Game.coins;
+    draw.fillText("Total Coins: "+user.coins,140,230);
+    setTimeout(mainMenu, 5000);
   }
 
   function mainMenu() {
