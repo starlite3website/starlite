@@ -828,14 +828,14 @@ function tank_listener2(event) {
     window.clearInterval(interval2);
     draw.clearRect(0, 0, 500, 500);
     playText.style.visibility = "hidden";
-    draw.fillStyle = "#556B2F";
+    draw.fillStyle = "#556B2F";.
     draw.fillRect(50, 50, 400, 400);
     draw.fillStyle = "#ffffff";
     draw.fillRect(75, 95, 50, 50);
     draw.font = "15px Courier";
     draw.fillText(user.username, 150, 125);
     draw.fillText("Level:" + user.level, 325, 125);
-    draw.fillText("Coins:" + user.coins, 75, 190);
+    draw.fillText("Coins:" + userData.coins, 75, 190);
     draw.fillText("Controls: WASD movement, F fire, and", 75, 250);
     draw.fillText("arrow keys barrel movement", 75, 270);
     draw.fillRect(190, 350, 120, 50);
