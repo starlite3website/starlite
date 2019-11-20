@@ -597,16 +597,30 @@ function tank_listener2(event) {
     alertConsole.classList.remove("console");
     alertConsole.style.visibility = "hidden";
   } // alert end
+  var gameData, userData;
+  sessionStorage.username = "admin";
+  storeValue.getItem("gameData").then(value => gameData = value);
   function loading() {
+    var l = 0;
+    while (l<JSON.parse(gameData).length) {
+      if (JSON.parse(gameData)[l].username==sessionStorage.username) {
+        userData = JSON.parse(gameData)[l];
+      }
+      l++;
+    }
+    if (userData == undefined) {
+      storeValue.setItem("gameData", JSON.stringify(JSON.parse(gameData).concat({username:sessionStorage.username,coins:0})));
+      userData = JSON.parse(gameData)[JSON.parse(gameData).length]
+    }
     if (sessionStorage.level == undefined) {
       if (sessionStorage.username == undefined) {
-        window.location.href = "https://starlite3.tk/account";
+        //window.location.href = "https://starlite3.tk/account";
       }
       user = {
         tank: new Tank(),
         username: sessionStorage.username,
         level: 1,
-        coins: 0,
+        coins: userData.coins,
       }
     }
     draw.clearRect(0, 0, 500, 500);
@@ -795,8 +809,17 @@ function tank_listener2(event) {
     draw.fillText("VICTORY!",120,120);
     draw.font = "20px Courier";
     draw.fillText("Coins Gained: "+Game.coins,140,200);
-    user.coins += Game.coins;
-    draw.fillText("Total Coins: "+user.coins,140,230);
+    userData.coins += Game.coins;
+    var l = 0;
+    while (l<JSON.parse(gameData).length) {
+      if (JSON.parse(gameData)[l].username==sessionStorage.username) {
+        var t = JSON.parse(gameData);
+        t[l].coins = userData.coins;
+        storeValue.setItem("gameData", JSON.stringify(t));
+      }
+      l++;
+    }
+    draw.fillText("Total Coins: "+userData.coins,140,230);
     setTimeout(mainMenu, 5000);
   }
 
