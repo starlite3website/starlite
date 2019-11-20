@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -840,6 +842,46 @@ function tank_listener2(event) {
       createAi(4*50,7*50,m,3,3);
       createAi(3*60,8*50,m,3,3);
     }
+    if (num === 3) {
+      if (mo != "n") {
+        user.tank.x = 5*50;
+        user.tank.y = 0;
+      }
+      wall(0,5,m);
+      weak(0,7,m);
+      weak(1,6,m);
+      weak(2,5,m);
+      strong(2,6,m);
+      wall(3,0,m);
+      weak(3,1,m);
+      weak(3,2,m);
+      weak(3,4,m);
+      strong(3,6,m);
+      weak(4,3,m);
+      strong(4,6,m);
+      wall(4,7,m);
+      wall(4,8,m);
+      wall(4,9,m);
+      weak(5,3,m);
+      strong(5,6,m);
+      wall(5,7,m);
+      wall(5,8,m);
+      wall(5,9,m);
+      wall(6,0,m);
+      weak(6,1,m);
+      weak(6,2,m);
+      weak(6,4,m);
+      strong(6,6,m);
+      weak(7,5,m);
+      strong(7,6,m);
+      weak(8,6,m);
+      wall(9,5,m);
+      weak(9,7,m);
+      createAi(0,6*50,m,3,3);
+      createAi(2*50,8*50,m,3,3);
+      createAi(7*70,8*50,m,3,3);
+      createAi(9*50,6*50,m,3,3);
+    }
   }
   function defeat() {
     draw.fillStyle="#556B2F";
@@ -942,11 +984,12 @@ function tank_listener2(event) {
     draw.fillStyle = "#ffffff";
     draw.fillRect(100, 100, 50, 50);
     draw.fillRect(200,100,50,50);
+    draw.fillRect(300,100,50,50);
     draw.fillStyle = "#000000";
     draw.font = "20px Courier";
     draw.fillText("1", 120, 130);
-    
     draw.fillText("2", 220,130);
+    draw.fillText("3", 320,130);
     document.addEventListener("click", levelSelectSupport);
   }
   function levelSelectSupport(e) {
@@ -975,6 +1018,16 @@ function tank_listener2(event) {
             if (y<150) {
               Game.level = 2;
               level(2, null, true);
+            }
+          }
+        }
+      }
+      if (x>300) {
+        if (x<350) {
+          if (y>100) {
+            if (y<150) {
+              Game.level = 3;
+              level(3, null, true);
             }
           }
         }
@@ -1158,7 +1211,7 @@ function tank_listener2(event) {
 
   #consoleText {
     color: white;
-  }F
+  }
 
   #alertConsole {
     z-index: 1000;
