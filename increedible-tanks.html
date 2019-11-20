@@ -1,20 +1,11 @@
 <!DOCTYPE html>
 <html>
-  Reload if this happens:<img src="https://starlite3.tk/game_error.png" width="50" height="50"/>
 <head>
   <title>Starlite | Increedible Tanks</title>
 </head>
 <div id="game" class="container">
   <h1 id="gameName"> Increedible Tanks </h1>
-  <h3>As of Nov 12, we only have 1 error left, but a few "small" bugs to fix.</h3>
-  <h4 id="chatText"> Chat </h4>
-  <div id="chat">
-    <div id="messages">
-    </div>
-    <input type="text" id="message" placeholder="Enter a Message" />
-    <input type="text" id="to" placeholder="Who to send to?">
-    <button id="chat_submit"> Send </button>
-  </div>
+  <h3>We are on to final beta-testing. Prepare for Increedible Tanks(Nov 20th 2019)!!</h3>
   <canvas width="500" height="500" id="canvas" tabindex='1'>
     <strong>Canvas is not supported.</strong> Try using a diffrent browser, If that does not work, please restart your device or use a diffrent device. </canvas>
   <div id="play">
@@ -548,16 +539,13 @@ function tank_listener2(event) {
     b[id].y = undefined;
   }
   var alertConsole = document.getElementById("alertConsole"); // console for game
-  var chat = document.getElementById("chat");
   var messages = document.getElementById("messages");
   var message = document.getElementById("message");
   var playText = document.getElementById("playText");
   var canvas = document.getElementById("canvas"); // getting the canvas element
   var consoleText = document.getElementById("consoleText"); // text control for console
-  var chatSubmit = document.getElementById("chat_submit");
   var draw = canvas.getContext("2d"); // getting the canvas to be able to draw
   function startScreen() {
-    chat_setup();
     a("Loading Game...", "black");
     draw.fillStyle = "#DCDCDC";
     draw.fillStyle = "#000000";
