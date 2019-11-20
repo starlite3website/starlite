@@ -775,8 +775,70 @@ function tank_listener2(event) {
       wall(6, 5, m);
     }
     if (num === 2) {
+      if (mo != "n") {
+        user.tank.x = 9*50;
+        user.tank.y = 1*50;
+      }
+      wall(0,0,m);
       wall(0,9,m);
-      createAi(0*50,50*8,m,3,3);
+      wall(1,0,m);
+      strong(1,1,m);
+      strong(1,2,m);
+      wall(1,3,m);
+      strong(1,4,m);
+      strong(1,5,m);
+      wall(1,6,m);
+      strong(1,7,m);
+      strong(1,8,m);
+      wall(1,9,m);
+      wall(2,0,m);
+      wall(2,3,m);
+      wall(2,6,m);
+      wall(2,9,m);
+      wall(3,0,m);
+      strong(3,1,m);
+      strong(3,2,m);
+      wall(3,3,m);
+      wall(3,6,m);
+      wall(3,9,m);
+      wall(4,0,m);
+      wall(4,3,m);
+      wall(4,6,m);
+      wall(4,9,m);
+      wall(5,0,m);
+      strong(5,1,m);
+      strong(5,2,m);
+      wall(5,3,m);
+      wall(5,6,m);
+      wall(5,9,m);
+      wall(6,0,m);
+      wall(6,3,m);
+      wall(6,6,m);
+      wall(6,9,m);
+      wall(7,0,m);
+      strong(7,1,m);
+      strong(7,2,m);
+      wall(7,3,m);
+      wall(7,6,m);
+      wall(7,9,m);
+      wall(8,0,m);
+      wall(8,3,m);
+      wall(8,6,m);
+      wall(8,9,m);
+      wall(9,0,m);
+      wall(9,3,m);
+      wall(9,4,m);
+      wall(9,5,m);
+      wall(9,6,m);
+      wall(9,7,m);
+      wall(9,8,m);
+      wall(9,9,m);
+      createAi(8*50,4*50,m,3,3);
+      createAi(7*50,5*50,m,3,3);
+      createAi(6*50,4*50,m,3,3);
+      createAi(5*50,8*50,m,3,3);
+      createAi(4*50,7*50,m,3,3);
+      createAi(3*60,8*50,m,3,3);
     }
   }
   function defeat() {
