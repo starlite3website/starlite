@@ -822,7 +822,31 @@ function tank_listener2(event) {
     draw.fillText("Total Coins: "+userData.coins,140,230);
     setTimeout(mainMenu, 5000);
   }
-
+  function shop() {    
+    draw.fillStyle="#556B2F";
+    draw.fillRect(50,50,400,400);
+    draw.fillStyle="#ffffff";
+    draw.font="60px Courier";
+    draw.fillText("Shop",170,120);
+    draw.font="20px Courier";
+    draw.fillText("Health Update:",70,200);
+    
+    draw.fillRect(300,180,120,60);
+    draw.fillText("New Updates Coming Late 2019",80,400);
+    draw.fillStyle="#000000";
+    draw.fillText("Buy Now",315,215);
+    draw.font="15px Courier";
+    draw.fillStyle="#ffffff";
+    draw.fillText("500 coins for +20 health",70,230);
+    draw.fillStyle="#ffffff";
+    draw.font="10px Courier";
+    draw.fillRect(60,60,90,30);
+    draw.fillStyle="#000000";
+    draw.fillText("Main Menu", 75, 75);
+    canvas.addEventListener("click", function(e) {
+      
+    })
+  }
   function mainMenu() {
     user.tank = new Tank();
     window.clearInterval(interval2);
