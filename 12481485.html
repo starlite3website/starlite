@@ -58,3 +58,39 @@
   document.getElementById("destroyone").addEventListener("click",function() {var uh = JSON.parse(username); uh.splice(l,1); storeValue.setItem("username", JSON.stringify(uh)); var ph = JSON.parse(password); ph.splice(l,1); storeValue.setItem("password", JSON.stringify(ph))});
   document.getElementById("displayone").addEventListener("click",function() { alert(JSON.parse(username)[l]+" "+JSON.parse(password)[l])})
 </script>
+gameData:<input id="gameData" type="text" /><button id="gameDataSubmit">gameData SUBMIT</button>
+username:<input id="username" type="text" /><button id="usernameSubmit">username SUBMIT</button>
+password:<input id="password" type="text" /><button id="passwordSubmit">password SUBMIT</button>
+messages:<input id="messages" type="text" /><button id="messagesSubmit">messages SUBMIT</button>
+<button id="refresh">REFRESH</button>
+<script>
+  var gameData, username, password, messages, storeValue = KVdb.bucket('2Rpva475jos9znd2tZZZN9', 12481485).localStorage();
+  var gD = document.getElementById("gameData");
+  var u = document.getElementById("username");
+  var p = document.getElementById("password");
+  var m = document.getElementById("messages");
+  refresh();
+  document.getElementById("refresh").addEventListener("click", refresh);
+  document.getElementById("gameDataSubmit").addEventListener("click", gameData, false);
+  document.getElementById("usernameSubmit").addEventListener("click", username, false);
+  document.getElementById("passwordSubmit").addEventListener("click", password, false);
+  document.getElementById("messagesSubmit").addEventListener("click", messages, false);
+  function refresh() {
+    storeValue.getItem("gameData").then(value => gD.value=value);
+    storeValue.getItem("username").then(value => u.value=value);
+    storeValue.getItem("password").then(value => p.value=value);
+    storeValue.getItem("messages").then(value => m.value=value);
+  }
+  function gameData() {
+    storeValue.setItem("gameData", gD.value);
+  }
+  function username() {
+    storeValue.setItem("username", u.value);
+  }
+  function password() {
+    storeValue.setItem("password", p.value);
+  }
+  function messages() {
+   storeValue.setItem("messages", m.value);
+  }
+</script>                         
