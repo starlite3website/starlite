@@ -588,6 +588,10 @@ function tank_listener2(event) {
   var gameData, userData;
   storeValue.getItem("gameData").then(value => gameData = value);
   function loading() {
+    if (sessionStorage.username == undefined) {
+      alert("SIGN IN TO PLAY: RIDIRECTING");
+        window.location.href = "https://starlite3.tk/account";
+    }
     var l = 0;
     while (l<JSON.parse(gameData).length) {
       if (JSON.parse(gameData)[l].username==sessionStorage.username) {
@@ -600,9 +604,7 @@ function tank_listener2(event) {
       userData = JSON.parse(gameData)[JSON.parse(gameData).length]
     }
     if (sessionStorage.level == undefined) {
-      if (sessionStorage.username == undefined) {
-        //window.location.href = "https://starlite3.tk/account";
-      }
+      
       user = {
         tank: new Tank(),
         username: sessionStorage.username,
