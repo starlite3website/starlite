@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -725,11 +723,6 @@ function tank_listener2(event) {
     draw.drawImage(floor, 350, 450);
     draw.drawImage(floor, 400, 450);
     draw.drawImage(floor, 450, 450);
-    draw.globalAlpha=.5;
-    draw.fillStyle="#ffffff";
-    draw.font="20px Courier";
-    draw.fillText("Your health: "+user.tank.health, 300,490);
-    draw.globalAlpha = 1;
     if (user.tank != undefined) {
       user.tank.draw();
     }
@@ -882,6 +875,11 @@ function tank_listener2(event) {
       createAi(7*70,8*50,m,3,3);
       createAi(9*50,6*50,m,3,3);
     }
+    draw.globalAlpha=.5;
+    draw.fillStyle="#ffffff";
+    draw.font="20px Courier";
+    draw.fillText("Your health: "+user.tank.health, 300,490);
+    draw.globalAlpha = 1;
   }
   function defeat() {
     draw.fillStyle="#556B2F";
