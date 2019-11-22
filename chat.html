@@ -6,12 +6,12 @@
   <script>
   window.setInterval(reload, 500);
   function reload() {
-    document.getElementById("e1").documentContent.location.reload();
-    document.getElementById("e2").documentContent.location.reload();
-    document.getElementById("e3").documentContent.location.reload();
-    document.getElementById("e4").documentContent.location.reload();
+    document.getElementById("e1").src = document.getElementById("e1").src;
+    document.getElementById("e2").src = document.getElementById("e2").src;
+    document.getElementById("e3").src = document.getElementById("e3").src;
+    document.getElementById("e4").src = document.getElementById("e4").src;
   }
-  </script>
+</script>
   <title>Starlite | Chat</title>
   <div id="messages">
   </div>
