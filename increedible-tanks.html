@@ -935,7 +935,6 @@ function tank_listener2(event) {
     draw.fillText("Shop",170,120);
     draw.font="20px Courier";
     draw.fillText("Health Update:",70,200);
-    
     draw.fillRect(300,180,120,60);
     draw.fillText("New Updates Coming Late 2019",80,400);
     draw.fillStyle="#000000";
@@ -948,9 +947,26 @@ function tank_listener2(event) {
     draw.fillRect(60,60,90,30);
     draw.fillStyle="#000000";
     draw.fillText("Main Menu", 75, 75);
-    canvas.addEventListener("click", function(e) {
-      alert("THIS AREA IS IN BETA, PLEASE RELOAD THE PAGE");
-    })
+    document.addEventListener("click", function(e) {
+      if (e.pageX || e.pageY) {
+        x = e.pageX;
+        y = e.pageY;
+      } else {
+        x = e.clientX + document.body.scrollLeft + document.documentElement.scrollLeft;
+        y = e.clientY + document.body.scrollTop + document.documentElement.scrollTop;
+      }
+      x -= canvas.offsetLeft;
+      y -= canvas.offsetTop;
+      if (x>60) {
+        if (x<140) {
+          if (y>60) {
+            if (y<90) {
+              mainMenu();
+            }
+          }
+        }
+      }
+    }
   }
   function mainMenu() {
     user.tank = new Tank();
