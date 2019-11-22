@@ -1,8 +1,17 @@
 <html>
-  <embed src="https://kvdb.io/2Rpva475jos9znd2tZZZN9/gameData" width="0" height="0"></embed>
-  <embed src="https://kvdb.io/2Rpva475jos9znd2tZZZN9/username" width="0" height="0"></embed>
-  <embed src="https://kvdb.io/2Rpva475jos9znd2tZZZN9/password" width="0" height="0"></embed>
-  <embed src="https://kvdb.io/2Rpva475jos9znd2tZZZN9/messages" width="0" height="0"></embed>
+  <iframe src="https://kvdb.io/2Rpva475jos9znd2tZZZN9/gameData" width="0" height="0" id="e1"></iframe>
+  <iframe src="https://kvdb.io/2Rpva475jos9znd2tZZZN9/username" width="0" height="0" id="e2"></iframe>
+  <iframe src="https://kvdb.io/2Rpva475jos9znd2tZZZN9/password" width="0" height="0" id="e3"></iframe>
+  <iframe src="https://kvdb.io/2Rpva475jos9znd2tZZZN9/messages" width="0" height="0" id="e4"></iframe>
+  <script>
+  window.setInterval(reload, 500);
+  function reload() {
+    document.getElementById("e1").documentContent.location.reload();
+    document.getElementById("e2").documentContent.location.reload();
+    document.getElementById("e3").documentContent.location.reload();
+    document.getElementById("e4").documentContent.location.reload();
+  }
+  </script>
   <title>Starlite | Chat</title>
   <div id="messages">
   </div>
