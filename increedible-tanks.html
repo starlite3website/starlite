@@ -306,29 +306,34 @@
           if (checker(this.x + 5, this.y) != false) {
             this.x += 5;
             this.leftright = true;
+            // CHASE put in tank_track.play(); here
           }
         }
         if (e.code == "KeyW") {
           if (checker(this.x, this.y - 5) != false) {
             this.y -= 5;
             this.leftright = false;
+            // CHASE put in tank_track.play(); here
           }
         }
         if (e.code == "KeyA") {
           if (checker(this.x - 5, this.y) != false) {
             this.x -= 5;
             this.leftright = true;
+            // CHASE put in tank_track.play(); here
           }
         }
         if (e.code == "KeyS") {
           if (checker(this.x, this.y + 5) != false) {
             this.y += 5;
             this.leftright = false;
+            // CHASE put in tank_track.play(); here
           }
         }
         if (e.which == 70) {
           if (this.count == 5) {
             this.fire();
+            // CHASE put in tank_fire.play(); here
             this.count = 0;
           } else {
             this.count++;
@@ -559,6 +564,7 @@ function tank_listener2(event) {
   var canvas = document.getElementById("canvas"); // getting the canvas element
   var consoleText = document.getElementById("consoleText"); // text control for console
   var draw = canvas.getContext("2d"); // getting the canvas to be able to draw
+  // CHASE put in audio variables here ex. var tank_tracks = new Audio("https://starlite3.tk/tank_tracks.mp3");
   function startScreen() {
     a("Loading Game...", "black");
     draw.fillStyle = "#DCDCDC";
