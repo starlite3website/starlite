@@ -956,6 +956,10 @@ function tank_listener2(event) {
       // this level was designed by Adam
     }
     if (num === 5) {
+      if (mo != "n") {
+        user.tank.x = 5*50;
+        user.tank.y = 9*50;
+      }
       wall(2,2,m);
       wall(2,3,m);
       wall(3,2,m);
@@ -1150,7 +1154,8 @@ function tank_listener2(event) {
           }
         }
       }
-      if (x>200) {
+      
+      if (x>200) {                  
         if (x<250) {
           if (y>100) {
             if (y<150) {
@@ -1184,7 +1189,8 @@ function tank_listener2(event) {
         if (x<250) {
           if (y>200) {
             if (y<250) {
-              level(4, null, true);
+              Game.level = 5;
+              level(5, null, true);
             }
           }
         }
