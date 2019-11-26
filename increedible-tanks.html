@@ -1004,6 +1004,52 @@ function tank_listener2(event) {
       strong(8,7,m);
       strong(8,8,m);
     }
+    if (num === 7) {
+      if (mo != "n") {
+        user.tank.x = 5*50;
+        user.tank.y = 6*50;
+      }
+      strong(0,1,m);
+      weak(1,0,m);
+      weak(1,1,m);
+      weak(1,2,m);
+      wall(1,6,m);
+      wall(1,7,m);
+      weak(2,0,m);
+      createAi(2*50,50,m,3,3);
+      weak(2,2,m);
+      wall(2,7,m);
+      weak(3,0,m);
+      weak(3,1,m);
+      weak(3,2,m);
+      wall(3,7,m);
+      strong(4,1,m);
+      wall(4,4,m);
+      wall(4,7,m);
+      strong(5,1,m);
+      wall(5,4,m);
+      wall(5,7,m);
+      weak(6,0,m);
+      weak(6,1,m);
+      weak(6,2,m);
+      wall(6,7,m);
+      weak(7,0,m);
+      createAi(7*50,50,m,3,3);
+      weak(7,2);
+      wall(7,7,m);
+      weak(8,0,m);
+      weak(8,1,m);
+      weak(8,2,m);
+      wall(8,6,m);
+      wall(8,7,m);
+      strong(9,1,m);
+    }
+    if (num === 8) {
+      
+    }
+    if (num === 9) {
+      
+    }
     draw.globalAlpha=.5;
     draw.fillStyle="#ffffff";
     draw.font="20px Courier";
