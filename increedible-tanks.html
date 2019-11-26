@@ -896,6 +896,9 @@ function tank_listener2(event) {
       createAi(7*70,8*50,m,3,3);
       createAi(9*50,6*50,m,3,3);
     }
+    if (num === 4) {
+      
+    }
     draw.globalAlpha=.5;
     draw.fillStyle="#ffffff";
     draw.font="20px Courier";
@@ -1032,11 +1035,17 @@ function tank_listener2(event) {
     draw.fillRect(100, 100, 50, 50);
     draw.fillRect(200,100,50,50);
     draw.fillRect(300,100,50,50);
+    draw.fillRect(100,200,50,50);
+    draw.fillRect(200,200,50,50);
+    draw.fillRect(300,200,50,50);
     draw.fillStyle = "#000000";
     draw.font = "20px Courier";
-    draw.fillText("1", 120, 130);
-    draw.fillText("2", 220,130);
-    draw.fillText("3", 320,130);
+    draw.fillText("1",120,130);
+    draw.fillText("2",220,130);
+    draw.fillText("3",320,130);
+    draw.fillText("4",120,230);
+    draw.fillText("5",220,230);
+    draw.fillText("6",320,230);
     document.addEventListener("click", levelSelectSupport);
   }
   function levelSelectSupport(e) {
