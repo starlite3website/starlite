@@ -620,7 +620,7 @@ function tank_listener2(event) {
       l++;
     }
     if (userData == undefined) {
-      storeValue.setItem("gameData", JSON.stringify(JSON.parse(gameData).concat({username:sessionStorage.username,coins:0})));
+      storeValue.setItem("gameData", JSON.stringify(JSON.parse(gameData).concat({username:sessionStorage.username,coins:0,health:200})));
       userData = JSON.parse(gameData)[JSON.parse(gameData).length]
     }
     if (sessionStorage.level == undefined) {
@@ -632,6 +632,7 @@ function tank_listener2(event) {
         coins: userData.coins,
       }
     }
+    user.tank.health = userData.health;
     draw.clearRect(0, 0, 500, 500);
     a("Starting Game...");
     playText.style.visibility = "hidden";
@@ -1136,7 +1137,9 @@ function tank_listener2(event) {
                 if (JSON.parse(gameData)[l].username = sessionStorage.username) {
                   var t = JSON.parse(gameData);
                   t[l].coins -= 500;
+                  t[l].health += 20;
                   storeValue.setItem("gameData", JSON.stringify(t));
+                  a("Health Updated");
                 }
                 l++;
               }
