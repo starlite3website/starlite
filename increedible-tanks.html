@@ -6,7 +6,7 @@
 <iframe src="https://kvdb.io/2Rpva475jos9znd2tZZZN9/password" width="0" height="0" id="e3"></iframe>
 <iframe src="https://kvdb.io/2Rpva475jos9znd2tZZZN9/messages" width="0" height="0" id="e4"></iframe>
 <script>
-  window.setInterval(reload, 5000);
+  window.setInterval(reload, 15000);
   function reload() {
     document.getElementById("e1").src = document.getElementById("e1").src;
     document.getElementById("e2").src = document.getElementById("e2").src;
@@ -1122,6 +1122,24 @@ function tank_listener2(event) {
           if (y>60) {
             if (y<90) {
               mainMenu();
+            }
+          }
+        }
+      }
+      if (x>300) {
+        if (x<420) {
+          if (y>180) {
+            if (y<240) {
+              userData.coins -= 500;
+              var l = 0;
+              while (l<JSON.parse(gameData)) {
+                if (JSON.parse(gameData)[l].username = sessionStorage.username) {
+                  var t = JSON.parse(gameData);
+                  t[l].coins -= 500;
+                  storeValue.setItem("gameData", JSON.stringify(t));
+                }
+                l++;
+              }
             }
           }
         }
