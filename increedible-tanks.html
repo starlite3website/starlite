@@ -1143,6 +1143,9 @@ function tank_listener2(event) {
     draw.fillRect(100,200,50,50);
     draw.fillRect(200,200,50,50);
     draw.fillRect(300,200,50,50);
+    draw.fillRect(100,300,50,50);
+    draw.fillRect(200,300,50,50);
+    draw.fillRect(300,300,50,50);
     draw.fillStyle = "#000000";
     draw.font = "20px Courier";
     draw.fillText("1",120,130);
@@ -1151,6 +1154,9 @@ function tank_listener2(event) {
     draw.fillText("4",120,230);
     draw.fillText("5",220,230);
     draw.fillText("6",320,230);
+    draw.fillText("7",120,330);
+    draw.fillText("8",220,330);
+    draw.fillText("9",320,330);
     document.addEventListener("click", levelSelectSupport);
   }
   function levelSelectSupport(e) {
@@ -1220,6 +1226,36 @@ function tank_listener2(event) {
           if (y<250) {
             Game.level = 6;
             level(6, null, true);
+          }
+        }
+      }
+    }
+    if (x>100) {
+      if (x<150) {
+        if (y>300) {
+          if (y<350) {
+            Game.level = 7;
+            level(7, null, true);
+          }
+        }
+      }
+    }
+    if (x>200) {
+      if (x<250) {
+        if (y>300) {
+          if (y<350) {
+            Game.level = 8;
+            level(8, null, true);
+          }
+        }
+      }
+    }
+    if (x>300) {
+      if (x<350) {
+        if (y>300) {
+          if (y<350) {
+            Game.level = 9;
+            level(9, null, true);
           }
         }
       }
