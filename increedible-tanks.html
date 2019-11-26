@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,7 +22,7 @@
   <h3>We are on to final beta-testing. Prepare for Increedible Tanks(Nov 20th 2019)!!</h3>
   <canvas width="500" height="500" id="canvas" tabindex='1'>
     <strong>Canvas is not supported.</strong> Try using a diffrent browser, If that does not work, please restart your device or use a diffrent device. </canvas>
-  <iframe src="https://starlite3.tk/chat" width="500" height="500"></iframe>
+
   <div id="play">
     <h5 id="playText"> Click Anywhere To Start </h5>
   </div>
@@ -917,7 +918,7 @@ function tank_listener2(event) {
       strong(3,0,m);
       strong(3,1,m);
       strong(3,2,m);
-      stong(3,4,m);
+      strong(3,4,m);
       strong(3,6,m);
       wall(3,8,m);
       strong(4,4,m);
@@ -1144,11 +1145,12 @@ function tank_listener2(event) {
           }
         }
       }
-      if (x>200) {
-        if (x<250) {
+      if (x>100) {
+        if (x<150) {
           if (y>200) {
             if (y<250) {
-              levelSelect(4, null, true);
+              Game.level = 4;
+              level(4, null, true);
             }
           }
         }
