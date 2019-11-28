@@ -1108,6 +1108,57 @@ function tank_listener2(event) {
       createAi(7*50,6*50,m,3,3);
       createAi(9,4,m);
     }
+    if (num === 10) {
+      if (mo != "n") {
+        user.tank.x = 9*50;
+        user.tank.y = 9*50;
+      }
+      //chest(0,0,m);
+      strong(1,0,m);
+      strong(2,0,m);
+      strong(9,0,m);
+      strong(0,1,m);
+      strong(1,1,m);
+      strong(0,2,m);
+      strong(2,2,m);
+      weak(0,3,m);
+      wall(1,3,m);
+      wall(8,3,m);
+      wall(2,3,m);
+      wall(3,3,m);
+      wall(4,3,m);
+      wall(5,3,m);
+      wall(6,3,m);
+      wall(7,3,m);
+      weak(9,3,m);
+      wall(0,5,m);
+      wall(1,5,m);
+      wall(8,5,m);
+      wall(2,5,m);
+      wall(3,5,m);
+      strong(4,5,m);
+      wall(5,5,m);
+      wall(6,5,m);
+      wall(7,5,m);
+      wall(9,5,m);
+      weak(0,8,m);
+      weak(1,8,m);
+      strong(8,8,m);
+      weak(2,8,m);
+      weak(3,8,m);
+      weak(4,8,m);
+      strong(5,8,m);
+      strong(6,8,m);
+      strong(7,8,m);
+      strong(9,8,m);
+      weak(5,8,m);
+      createAi(2*50,1*50,m,3,3);
+      createAi(1*50,2*50,m,3,3);
+      createAi(0*50,4*50,m,3,3);
+      createAi(9*50,4*50,m,3,3);
+      createAi(0*50,9*50,m,3,3);
+      createAi(4*50,9*50,m,3,3);
+    }
     draw.globalAlpha=.5;
     draw.fillStyle="#ffffff";
     draw.font="20px Courier";
@@ -1271,6 +1322,9 @@ function tank_listener2(event) {
     draw.fillRect(100,300,50,50);
     draw.fillRect(200,300,50,50);
     draw.fillRect(300,300,50,50);
+    draw.fillRect(100,400,50,50);
+    draw.fillRect(200,400,50,50);
+    draw.fillRect(300,400,50,50);
     draw.fillStyle = "#000000";
     draw.font = "20px Courier";
     draw.fillText("1",120,130);
@@ -1282,6 +1336,9 @@ function tank_listener2(event) {
     draw.fillText("7",120,330);
     draw.fillText("8",220,330);
     draw.fillText("9",320,330);
+    draw.fillText("10",120,430);
+    draw.fillText("11",230,430);
+    draw.fillText("12",330,430);
     document.addEventListener("click", levelSelectSupport);
   }
   function levelSelectSupport(e) {
@@ -1381,6 +1438,36 @@ function tank_listener2(event) {
           if (y<350) {
             Game.level = 9;
             level(9, null, true);
+          }
+        }
+      }
+    }
+    if (x>100) {
+      if (x<150) {
+        if (y>400) {
+          if (y<450) {
+            Game.level = 10;
+            level(10, null, true);
+          }
+        }
+      }
+    }
+    if (x>200) {
+      if (x<250) {
+        if (y>400) {
+          if (y<450) {
+            Game.level = 11;
+            level(11, null, true);
+          }
+        }
+      }
+    }
+    if (x>300) {
+      if (x<350) {
+        if (y>400) {
+          if (y<450) {
+            Game.level = 12;
+            level(12, null, true);
           }
         }
       }
