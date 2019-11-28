@@ -1091,8 +1091,22 @@ function tank_listener2(event) {
     }
     if (num === 9) {
       if (mo != "n") {
-        
+        user.tank.x = 5*50;
+        user.tank.y = 3*50;
       }
+      createAi(0,4*50,m,3,3);
+      createAi(2*50,50,m,3,3);
+      createAi(2*50,6*50,m,3,3);
+      strong(4,2,m);
+      strong(4,3,m);
+      strong(4,4,m);
+      createAi(5*50,0,m,3,3);
+      strong(5,2,m,3,3);
+      strong(5,4,m);
+      createAi(5*50,9*50,m,3,3);
+      createAi(7*50,50,m,3,3);
+      createAi(7*50,6*50,m,3,3);
+      createAi(9,4,m);
     }
     draw.globalAlpha=.5;
     draw.fillStyle="#ffffff";
