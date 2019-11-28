@@ -150,6 +150,8 @@
           if (this.health <= 0) {
             Game.coins += 100;
             Game.foes--;
+            this.x = undefined;
+            this.y = undefined;
             this.inactive = true;
             if (Game.foes == 0) {
               setTimeout(victory, 20);
