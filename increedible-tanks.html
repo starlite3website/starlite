@@ -1190,13 +1190,14 @@ function tank_listener2(event) {
             if (y<240) {
               userData.coins -= 500;
               var l = 0;
-              while (l<JSON.parse(gameData)) {
-                if (JSON.parse(gameData)[l].username = sessionStorage.username) {
+              while (l<JSON.parse(gameData).length) {
+                if (JSON.parse(gameData)[l].username == sessionStorage.username) {
                   var t = JSON.parse(gameData);
-                  t[l].coins -= 500;
                   t[l].health += 20;
+                  t[l].coins -= 500;
                   storeValue.setItem("gameData", JSON.stringify(t));
                   a("Health Updated");
+                  userData.health += 20;
                 }
                 l++;
               }
