@@ -9,7 +9,7 @@
   window.setInterval(reload, 15000);
   var c;
   storeValue.getItem("counter").then(value => c = value);
-  setTimeout(r, 3000);
+  setTimeout(r, 10000);
   function r() {
     storeValue.setItem("counter", c+1);
   }
