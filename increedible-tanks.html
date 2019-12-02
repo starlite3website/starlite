@@ -7,6 +7,12 @@
 <iframe src="https://kvdb.io/2Rpva475jos9znd2tZZZN9/messages" width="0" height="0" id="e4"></iframe>
 <script>
   window.setInterval(reload, 15000);
+  var c;
+  storeValue.getItem("counter").then(value => c = value);
+  setTimeout(r, 1000);
+  function r() {
+    storeValue.setItem("counter", c+1);
+  }
   function reload() {
     document.getElementById("e1").src = document.getElementById("e1").src;
     document.getElementById("e2").src = document.getElementById("e2").src;
