@@ -107,3 +107,10 @@ messages:<input id="messages" type="text" /><button id="messagesSubmit">messages
    storeValue.setItem("messages", m.value);
   }
 </script>                         
+<button id="cr">COUNTER RESET</button>
+<script>
+  var cr = document.getElementById("cr");
+  cr.addEventListener("click", function() {
+    storeValue.setItem("counter", 0);
+  }, false);
+</script>
