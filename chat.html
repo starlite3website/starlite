@@ -74,7 +74,7 @@
         if (JSON.parse(messages)[l].user != undefined) var q = JSON.parse(messages)[l].user.split(":");
         if (JSON.parse(messages)[l].send == sessionStorage.username || JSON.parse(messages)[l].user == sessionStorage.username || JSON.parse(messages)[l].user == "public" || q.indexOf(sessionStorage.username) != -1) {
           var t = document.createElement("SPAN");
-          t.innerHTML = JSON.parse(messages)[l].send+": "+JSON.parse(messages)[l].message+" to: "+JSON.parse(messages)[l].user+" at: "+JSON.parse(messages)[l].timestamps;
+          t.innerHTML = JSON.parse(messages)[l].send+": <bold>"+JSON.parse(messages)[l].message+"</bold> to: "+JSON.parse(messages)[l].user+" at: "+JSON.parse(messages)[l].timestamps;
           document.getElementById("messages").appendChild(t);
           e.push(t);
           d.push(t);
