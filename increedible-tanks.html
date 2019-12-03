@@ -10,14 +10,14 @@
 <script>
   window.setInterval(reload, 15000);
   var storeValue = KVdb.bucket('2Rpva475jos9znd2tZZZN9', 12481485).localStorage();
-  var c, views = document.getElementById("views"), users = document.getElementById("users");
+  var c;
   storeValue.getItem("counter").then(value => c = value);
   storeValue.getItem("gameData").then(value => w = value);
   setTimeout(r, 5000);
   function r() {
     storeValue.setItem("counter", JSON.parse(c)+1);
-    views.innerHTML = 'Views: <bold>'+JSON.stringify(JSON.parse(c)+1)+'</bold>';
-    users.innerHTML = 'Users: <bold>'+JSON.stringify(JSON.parse(w).length)+'<bold>';
+    document.getElementById("views").innerHTML = 'Views: <bold>'+JSON.stringify(JSON.parse(c)+1)+'</bold>';
+    document.getElementById("users").innerHTML = 'Users: <bold>'+JSON.stringify(JSON.parse(w).length)+'<bold>';
   }
   function reload() {
     document.getElementById("e1").src = document.getElementById("e1").src;
