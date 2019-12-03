@@ -10,7 +10,7 @@
 <script>
   window.setInterval(reload, 15000);
   var storeValue = KVdb.bucket('2Rpva475jos9znd2tZZZN9', 12481485).localStorage();
-  var c, views = document.getElementById("views"), users = document.getElementById("");
+  var c, views = document.getElementById("views"), users = document.getElementById("users");
   storeValue.getItem("counter").then(value => c = value);
   storeValue.getItem("gameData").then(value => w = value);
   setTimeout(r, 5000);
