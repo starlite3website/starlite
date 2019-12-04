@@ -415,6 +415,9 @@
   } // Tank Object
   function tank_listener1(event) {
     if (user.tank.interval == undefined) {
+      if (event.keyCode == 87 || event.keyCode == 83 || event.keyCode == 68 || event.keyCode == 65) {
+        tank_tracks.play();
+      }
       user.tank.interval = window.setInterval(function() {
         user.tank.move(event);
       }, 20);
@@ -422,6 +425,8 @@
   }
 function tank_listener2(event) {
   window.clearInterval(user.tank.interval);
+  tank_tracks.pause();
+  tank_tracks.load();
   user.tank.interval = undefined;
 }
   function checker(x, y) {
@@ -578,6 +583,8 @@ function tank_listener2(event) {
   var canvas = document.getElementById("canvas"); // getting the canvas element
   var consoleText = document.getElementById("consoleText"); // text control for console
   var draw = canvas.getContext("2d"); // getting the canvas to be able to draw
+  var tank_tracks = new Audio("https://starlite3.tk/tank-tracks.mp3");
+  tank_tracks.load();
   // CHASE put in audio variables here ex. var tank_tracks = new Audio("https://starlite3.tk/tank_tracks.mp3");
   function startScreen() {
     a("Loading Game...", "black");
