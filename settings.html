@@ -46,9 +46,14 @@
     }
     usernameSubmit.addEventListener("click", function() {
       if (oldUsername.value == sessionStorage.username) {
-       t = JSON.parse(username);
-       t[JSON.parse(username).indexOf(sessionStorage.username)] = newUsername.value;
-       storeValue.setItem("password", JSON.stringify(t));
+        t = JSON.parse(username);
+        t[JSON.parse(username).indexOf(sessionStorage.username)] = newUsername.value;
+        storeValue.setItem("username", JSON.stringify(t));
+        sessionStorage.username = newUsername.value;
+        usernameSuccess.innerHTML = "Username updated!";
+        setTimeout(function() {
+          usernameSuccess.innerHTML = "";
+        }, 5000);
       }
     }, false);
     passwordSubmit.addEventListener("click", function() {
@@ -56,6 +61,10 @@
         t = JSON.parse(password);
         t[JSON.parse(username).indexOf(sessionStorage.username)] = newPassword.value;
         storeValue.setItem("username", JSON.stringify(t));
+        passwordSuccess.innerHTML = "Password updated!";
+        setTimeout(function() {
+          passwordSuccess.innerHTLM = "";
+        }, 5000);
       }
     }, false);
   </script>
