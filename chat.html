@@ -57,7 +57,7 @@
   <script src="https://unpkg.com/kvdb.io@1.0.5/index.js" integrity="sha384-91zc4JidmYl6NUcicf1m8ABob6eO1HkULPeHYooqi1sptqZ9k5vaZqSNNkVlPsap" crossorigin="anonymous"></script>
   <script>
     if (sessionStorage.username == undefined) {
-      window.location.href = "https://starlite3.tk";
+      //window.location.href = "https://starlite3.tk";
     }
     var d = [], e = [], storeValue = KVdb.bucket('2Rpva475jos9znd2tZZZN9', 12481485).localStorage();
     window.setInterval(update, 50);
@@ -77,12 +77,13 @@
           if (sessionStorage.username == JSON.parse(messages)[l].send) {
             var q = document.createElement("BUTTON");
             q.setAttribute("id", l);
+            q.innerHTML = "DELETE";
             q.addEventListener("click", function() {
               t = JSON.parse(messages);
               t[q.id] = undefined;
               console.log(t);
             }, false);
-            t.innerHTML = q+" "+JSON.parse(messages)[l].send+": <b>"+JSON.parse(messages)[l].messages+"</b> to:"+JSON.parse(messages)[l].user+" at: "+JSON.parse(messages)[l].timestamps;
+            t.innerHTML = q.outerHTML+" "+JSON.parse(messages)[l].send+": <b>"+JSON.parse(messages)[l].message+"</b> to:"+JSON.parse(messages)[l].user+" at: "+JSON.parse(messages)[l].timestamps;
           } else {
             t.innerHTML = JSON.parse(messages)[l].send+": <b>"+JSON.parse(messages)[l].message+"</b> to: "+JSON.parse(messages)[l].user+" at: "+JSON.parse(messages)[l].timestamps;
           } 
