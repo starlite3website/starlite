@@ -1,0 +1,33 @@
+<!DOCTYPE html><html><head><link rel="shortcut icon"href="https://lh3.googleusercontent.com/V_QPwUhRc7nBw7TEV6CdV47ypKwUkZQhVdkzTxRhHjhl3ddDf1-Hdg0zqJFGmwfteItsOUgXOTLxqYDcibrscKzPreqLP-dxx6hKUh6ECcVJPBoxWIsbgKqWbNcYee2-VoTIo1o7e_caLpm0vn5IhV5TwcPIOGw9bldxs5DcQDGpbhHFH0sm3mH4AvPXAXujxeM23FF1xmvPxXGEHRtchHBopQ9hKEA4qDvrIjZsc-XdckvjpdNMFjEektA18ZaJXgY5N5LFr3emZ7rTiN7DZk7k2nGL0DFBvUGGt6x34jUyCKrTqINwxc8uqqaa5XXlVykfsxy5YemaahMHgfGbbDKm3LWFkpIX0-BgVkdBb2aPcse2-hNIEllUBHhT9FdgOjMqkpTZt3ZbYN408KvGk63PDOuZci7Oyp4Bva5PzfiWys1vb7c7IOZI7tEjgdzPrZsI1rixBhEImAQSutKTI4ihiod57z0Ls1jBpOjZ23d9D8kUpmQ2abmfzzpgRBDBPFCw4Upq8GJOVEf6qJqivn6ySLfow7ToSKeqM7ZkCj6MforTMtJm5P_SZwpNZhKpLrqjR_C3vM1dwDRJ0XbVXcIrq9MFbNFhaQ4On0pd2SlTZOpCt20zE0zNskoJJ1qecJAn-WP1KQKS3jL2-Xa6vTAZoowU2po=s300-no"type="image/png"><title>Starlite</title><script async src="https://www.googletagmanager.com/gtag/js?id=UA-132422058-1"></script><script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','UA-132422058-1');</script></head><header id="d1"><img src="https://lh3.googleusercontent.com/V_QPwUhRc7nBw7TEV6CdV47ypKwUkZQhVdkzTxRhHjhl3ddDf1-Hdg0zqJFGmwfteItsOUgXOTLxqYDcibrscKzPreqLP-dxx6hKUh6ECcVJPBoxWIsbgKqWbNcYee2-VoTIo1o7e_caLpm0vn5IhV5TwcPIOGw9bldxs5DcQDGpbhHFH0sm3mH4AvPXAXujxeM23FF1xmvPxXGEHRtchHBopQ9hKEA4qDvrIjZsc-XdckvjpdNMFjEektA18ZaJXgY5N5LFr3emZ7rTiN7DZk7k2nGL0DFBvUGGt6x34jUyCKrTqINwxc8uqqaa5XXlVykfsxy5YemaahMHgfGbbDKm3LWFkpIX0-BgVkdBb2aPcse2-hNIEllUBHhT9FdgOjMqkpTZt3ZbYN408KvGk63PDOuZci7Oyp4Bva5PzfiWys1vb7c7IOZI7tEjgdzPrZsI1rixBhEImAQSutKTI4ihiod57z0Ls1jBpOjZ23d9D8kUpmQ2abmfzzpgRBDBPFCw4Upq8GJOVEf6qJqivn6ySLfow7ToSKeqM7ZkCj6MforTMtJm5P_SZwpNZhKpLrqjR_C3vM1dwDRJ0XbVXcIrq9MFbNFhaQ4On0pd2SlTZOpCt20zE0zNskoJJ1qecJAn-WP1KQKS3jL2-Xa6vTAZoowU2po=s300-no"style="height:100px;width:100px;margin-bottom:-50px;margin-top:30px;margin-left:7.1428071428%;margin-right:3.0214030214%;"/><strong><a href="/home"style="font-family:Courier;text-decoration:none;color:black;margin-bottom:40px;">Starlite</a><a href="/news"><button>News</button></a><a href="/problems"><button>Bugs</button></a><a href="/chat"><button>Chat</button></a><a href="/games"><button>Games</button></a><a href="/account"><button>Sign up/Login</button></a><script>if(sessionStorage.username!=undefined){window.location.href="https://starlite3.tk/dashboard"}</script></strong></header><style>header{position:fixed;border-bottom:1px solid black;margin-left:0px;margin-right:0px;background-color:white;width:100%;z-index:100;}footer{color:orange;margin-bottom:0;margin-left:0;margin-right:0;width:100%}button{border:2px white;font-size:20px;padding:12px;background-color:white;color:black;margin-left:7.1428071428%;margin-bottom:50px;font-family:Courier}button:hover{transition-duration:1.5s;background-color:orange;color:white;border-color:orange}#signup{margin-left:-20px}body{margin:0}.cart{color:white;background-color:orange;float:right}</style>
+<body style="font-family: Courier;">
+  <div id="changeUsername">
+    Change username: <input id="username" type="text"/> Verify Old Username: <input id="oldusername" type="text"/>
+    <button id="usernameSubmit">SUBMIT</button>
+    <p id="successUsername"></p>
+  </div>
+  <div id="changePassword">
+    <input id="password" type="text"/> Verify Old Password: <input id="oldpassword" type="text"/>
+    <button id="passwordSubmit">SUBMIT</button>
+    <p id="successPassword"></p>
+  </div>
+  <script src="https://unpkg.com/kvdb.io@1.0.5/index.js" integrity="sha384-91zc4JidmYl6NUcicf1m8ABob6eO1HkULPeHYooqi1sptqZ9k5vaZqSNNkVlPsap" crossorigin="anonymous"></script>
+  <script>
+    if (sessionStorage.username == undefined) {
+      alert("PLEASE SIGN IN, REDIRECTING");
+      window.location.href = "https://starlite3.tk/account";
+    }
+    var storeValue = KVdb.bucket('2Rpva475jos9znd2tZZZN9', 12481485).localStorage();
+    var newUsername = document.getElementById("username");
+    var oldUsername = document.getElementById("oldusername");
+    var newPassword = document.getElementById("password");
+    var oldPassword = document.getElementById("oldpassword");
+    var usernameSubmit = document.getElementById("usernameSubmit");
+    var passwordSubmit = document.getElementById("passwordSubmit");
+    var usernameSuccess = document.getElementById("successUsername");
+    var passwordSuccess = document.getElementById("successPassword");
+    var username, password;
+    document.addEventListener("click", function() {
+      
+    }, false);
+  </script>
+</body>
