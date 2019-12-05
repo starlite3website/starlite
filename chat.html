@@ -78,7 +78,7 @@
             var q = document.createElement("BUTTON");
             q.setAttribute("id", l);
             q.setAttribute("onclick", 't=JSON.parse(messages);var index = this.id; if (index>-1) {t.splice(index,1)};storeValue.setItem("messages", JSON.stringify(t));')
-            q.innerHTML = "DELETE";
+            q.innerHTML = "CLICK 3x TO DELETE";
             t.innerHTML = q.outerHTML+" "+JSON.parse(messages)[l].send+": <b>"+JSON.parse(messages)[l].message+"</b> to:"+JSON.parse(messages)[l].user+" at: "+JSON.parse(messages)[l].timestamps;
           } else {
             t.innerHTML = JSON.parse(messages)[l].send+": <b>"+JSON.parse(messages)[l].message+"</b> to: "+JSON.parse(messages)[l].user+" at: "+JSON.parse(messages)[l].timestamps;
