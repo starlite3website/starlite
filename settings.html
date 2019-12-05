@@ -39,16 +39,24 @@
     var usernameSuccess = document.getElementById("successUsername");
     var passwordSuccess = document.getElementById("successPassword");
     var username, password;
-    window.setInterval( r, 5000);
+    window.setInterval(r, 5000);
     function r() {
       storeValue.getItem("username").then(value => username = value);
       storeValue.getItem("password").then(value => password = value);
     }
     usernameSubmit.addEventListener("click", function() {
-      
+      if (oldUsername.value == sessionStorage.username) {
+       t = JSON.parse(username);
+       t[JSON.parse(username).indexOf(sessionStorage.username)] = newUsername.value;
+       storeValue.setItem("password", JSON.stringify(t));
+      }
     }, false);
     passwordSubmit.addEventListener("click", function() {
-      
+      if (oldPassword.value == JSON.parse(password)[JSON.parse(username).indexOf(sessionStorage.username)]) {
+        t = JSON.parse(password);
+        t[JSON.parse(username).indexOf(sessionStorage.username)] = newPassword.value;
+        storeValue.setItem("username", JSON.stringify(t));
+      }
     }, false);
   </script>
 </body>
