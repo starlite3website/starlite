@@ -77,7 +77,7 @@
           if (sessionStorage.username == JSON.parse(messages)[l].send) {
             var q = document.createElement("BUTTON");
             q.setAttribute("id", l);
-            q.setAttribute("onclick", 't=JSON.parse(messages);var index = this.id; while (index>-1) {t.splice(index,1)};alert(t)')
+            q.setAttribute("onclick", 't=JSON.parse(messages);var index = this.id; if (index>-1) {t.splice(index,1)};this.innerHTML = "DELETING";storeValue.setItem("messages", JSON.stringify(t));')
             q.innerHTML = "DELETE";
             t.innerHTML = q.outerHTML+" "+JSON.parse(messages)[l].send+": <b>"+JSON.parse(messages)[l].message+"</b> to:"+JSON.parse(messages)[l].user+" at: "+JSON.parse(messages)[l].timestamps;
           } else {
