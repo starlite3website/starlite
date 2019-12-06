@@ -16,8 +16,8 @@
   setTimeout(r, 5000);
   function r() {
     storeValue.setItem("counter", JSON.parse(c)+1);
-    document.getElementById("views").innerHTML = 'Views: <bold>'+JSON.stringify(JSON.parse(c)+1)+'</bold>';
-    document.getElementById("users").innerHTML = 'Users: <bold>'+JSON.stringify(JSON.parse(w).length)+'<bold>';
+    document.getElementById("views").innerHTML = 'Views: <b>'+JSON.stringify(JSON.parse(c)+1)+'</b>';
+    document.getElementById("users").innerHTML = 'Users: <b>'+JSON.stringify(JSON.parse(w).length)+'</b>';
   }
   function reload() {
     document.getElementById("e1").src = document.getElementById("e1").src;
@@ -32,7 +32,7 @@
   <h1 id="gameName"> Increedible Tanks </h1>
   <h3 id="views"></h3>
   <h3 id="users"></h3>
-  <h2>Increedible Tanks needs audio, and some user suggestions. If you have audio that you think we can use in the game or have a rating, comment in the chat</h2>
+  <h2>Merry Christmas!</h2>
   <canvas width="500" height="500" id="canvas" tabindex='1'>
     <strong>Canvas is not supported.</strong> Try using a diffrent browser, If that does not work, please restart your device or use a diffrent device. </canvas>
   <iframe src="https://starlite3.tk/chat" width="500" height="500"></iframe>
