@@ -1301,11 +1301,13 @@ function tank_listener2(event) {
     draw.font = "20px Courier";
     draw.fillText("Coins Gained: "+Game.coins,140,200);
     userData.coins += Game.coins;
+    if (userData.level == Game.level) userData.level++;
     var l = 0;
     while (l<JSON.parse(gameData).length) {
       if (JSON.parse(gameData)[l].username==sessionStorage.username) {
         var t = JSON.parse(gameData);
         t[l].coins = userData.coins;
+        t[l].level = userData.level;
         storeValue.setItem("gameData", JSON.stringify(t));
       }
       l++;
@@ -1584,7 +1586,7 @@ function tank_listener2(event) {
     if (x>100) {
       if (x<150) {
         if (y>400) {
-          if (y<450) {
+          if (y<450 && userData.level > 9) {
             Game.level = 10;
             level(10, null, true);
           }
@@ -1594,7 +1596,7 @@ function tank_listener2(event) {
     if (x>200) {
       if (x<250) {
         if (y>400) {
-          if (y<450) {
+          if (y<450 && userData.level > 10) {
             Game.level = 11;
             level(11, null, true);
           }
@@ -1604,7 +1606,7 @@ function tank_listener2(event) {
     if (x>300) {
       if (x<350) {
         if (y>400) {
-          if (y<450) {
+          if (y<450 && userData.level > 11) {
             Game.level = 12;
             level(12, null, true);
           }
