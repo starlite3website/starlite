@@ -642,7 +642,7 @@ function tank_listener2(event) {
       l++;
     }
     if (userData == undefined) {
-      storeValue.setItem("gameData", JSON.stringify(JSON.parse(gameData).concat({username:sessionStorage.username,coins:0,health:200})));
+      storeValue.setItem("gameData", JSON.stringify(JSON.parse(gameData).concat({username:sessionStorage.username,coins:0,health:200,level:1})));
       userData = JSON.parse(gameData)[JSON.parse(gameData).length]
     }
     if (sessionStorage.level == undefined) {
@@ -650,7 +650,7 @@ function tank_listener2(event) {
       user = {
         tank: new Tank(),
         username: sessionStorage.username,
-        level: 1,
+        level: userData.level,
         coins: userData.coins,
       }
     }
