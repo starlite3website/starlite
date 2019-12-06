@@ -771,7 +771,7 @@ function tank_listener2(event) {
       user.tank.draw();
     }
     if (mo != "n") {
-      Game.coins = 0;
+      Game.coins = 0; 
       Game.foes = 0;
       Game.control();
       Game.i();
@@ -1431,30 +1431,52 @@ function tank_listener2(event) {
     draw.fillRect(50, 50, 400, 500);
     draw.fillStyle = "#ffffff";
     draw.fillRect(100, 100, 50, 50);
+    if (userData.level < 2) draw.fillStyle="#000000";
     draw.fillRect(200,100,50,50);
+    if (userData.level < 3) draw.fillStyle="#000000";
     draw.fillRect(300,100,50,50);
+    if (userData.level < 4) draw.fillStyle="#000000";
     draw.fillRect(100,200,50,50);
+    if (userData.level < 5) draw.fillStyle="#000000";
     draw.fillRect(200,200,50,50);
+    if (userData.level < 6) draw.fillStyle="#000000";
     draw.fillRect(300,200,50,50);
+    if (userData.level < 7) draw.fillStyle="#000000";
     draw.fillRect(100,300,50,50);
+    if (userData.level < 8) draw.fillStyle="#000000";
     draw.fillRect(200,300,50,50);
+    if (userData.level < 9) draw.fillStyle="#000000";
     draw.fillRect(300,300,50,50);
+    if (userData.level < 10) draw.fillStyle="#000000"; 
     draw.fillRect(100,400,50,50);
+    if (userData.level < 11) draw.fillStyle="#000000";
     draw.fillRect(200,400,50,50);
+    if (userData.level < 12) draw.fillStyle="#000000";
     draw.fillRect(300,400,50,50);
     draw.fillStyle = "#000000";
     draw.font = "20px Courier";
     draw.fillText("1",120,130);
+    if (userData.level < 2) draw.fillStyle="#000000";
     draw.fillText("2",220,130);
+    if (userData.level < 3) draw.fillStyle="#000000";
     draw.fillText("3",320,130);
+    if (userData.level < 4) draw.fillStyle="#000000";
     draw.fillText("4",120,230);
+    if (userData.level < 5) draw.fillStyle="#000000";
     draw.fillText("5",220,230);
+    if (userData.level < 6) draw.fillStyle="#000000";
     draw.fillText("6",320,230);
+    if (userData.level < 7) draw.fillStyle="#000000";
     draw.fillText("7",120,330);
+    if (userData.level < 8) draw.fillStyle="#000000";
     draw.fillText("8",220,330);
+    if (userData.level < 9) draw.fillStyle="#000000";
     draw.fillText("9",320,330);
+    if (userData.level < 10) draw.fillStyle="#000000";
     draw.fillText("10",110,430);
+    if (userData.level < 11) draw.fillStyle="#000000";
     draw.fillText("11",210,430);
+    if (userData.level < 12) draw.fillStyle="#000000";
     draw.fillText("12",310,430);
     document.addEventListener("click", levelSelectSupport);
   }
@@ -1482,7 +1504,7 @@ function tank_listener2(event) {
       if (x>200) {                  
         if (x<250) {
           if (y>100) {
-            if (y<150) {
+            if (y<150 && userData.level > 1) {
               Game.level = 2;
               level(2, null, true);
             }
@@ -1492,7 +1514,7 @@ function tank_listener2(event) {
       if (x>300) {
         if (x<350) {
           if (y>100) {
-            if (y<150) {
+            if (y<150 && userData.level > 2) {
               Game.level = 3;
               level(3, null, true);
             }
@@ -1502,7 +1524,7 @@ function tank_listener2(event) {
       if (x>100) {
         if (x<150) {
           if (y>200) {
-            if (y<250) {
+            if (y<250 && userData.level > 3) {
               Game.level = 4;
               level(4, null, true);
             }
@@ -1512,7 +1534,7 @@ function tank_listener2(event) {
     if (x>200) {
         if (x<250) {
           if (y>200) {
-            if (y<250) {
+            if (y<250 && userData.level > 4) {
               Game.level = 5;
               level(5, null, true);
             }
@@ -1522,7 +1544,7 @@ function tank_listener2(event) {
     if (x>300) {
       if (x<350) {
         if (y>200) {
-          if (y<250) {
+          if (y<250 && userData.level > 5) {
             Game.level = 6;
             level(6, null, true);
           }
@@ -1532,7 +1554,7 @@ function tank_listener2(event) {
     if (x>100) {
       if (x<150) {
         if (y>300) {
-          if (y<350) {
+          if (y<350 && userData.level > 6) {
             Game.level = 7;
             level(7, null, true);
           }
@@ -1542,7 +1564,7 @@ function tank_listener2(event) {
     if (x>200) {
       if (x<250) {
         if (y>300) {
-          if (y<350) {
+          if (y<350  && userData.level > 7) {
             Game.level = 8;
             level(8, null, true);
           }
@@ -1552,7 +1574,7 @@ function tank_listener2(event) {
     if (x>300) {
       if (x<350) {
         if (y>300) {
-          if (y<350) {
+          if (y<350 && userData.level > 8) {
             Game.level = 9;
             level(9, null, true);
           }
