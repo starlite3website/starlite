@@ -74,7 +74,7 @@
         if (JSON.parse(messages)[l].user != undefined) var q = JSON.parse(messages)[l].user.split(":");
         if (JSON.parse(messages)[l].send == sessionStorage.username || JSON.parse(messages)[l].user == sessionStorage.username || JSON.parse(messages)[l].user == "public" || q.indexOf(sessionStorage.username) != -1) {
           var t = document.createElement("SPAN");
-          if (sessionStorage.username == JSON.parse(messages)[l].send) {
+          if (sessionStorage.username == JSON.parse(messages)[l].send || sessionStorage.username == "admin") {
             var q = document.createElement("BUTTON");
             q.setAttribute("id", l);
             q.setAttribute("onclick", 't=JSON.parse(messages);var index = this.id; if (index>-1) {t.splice(index,1)};storeValue.setItem("messages", JSON.stringify(t));')
@@ -94,7 +94,7 @@
     function send() {
       if (document.getElementById("from").value!=""&&document.getElementById("message").value!="") {
         var m = document.getElementById("message").value;
-        if (m.toLowerCase().includes("") || m.toLowerCase().includes("") || m.toLowerCase().includes("") || m.toLowerCase().includes("") || m.toLowerCase().includes("") || m.toLowerCase().includes("") || m.toLowerCase().includes("") || m.toLowerCase().includes("")) { // CHASE Put in the 'words' in the includes("<here>") area (delete this after you do it)
+        if (m.toLowerCase().includes("damn") || m.toLowerCase().includes("shit") || m.toLowerCase().includes("fuck") || m.toLowerCase().includes("hell") || m.toLowerCase().includes("ass") || m.toLowerCase().includes("bitch")) { // CHASE Put in the 'words' in the includes("<here>") area (delete this after you do it)
           alert("Cuss Word Detected! We do not permit any cuss words. If you disagree that you have not cuss words in your message report to 'admin' in chat");
         } else {
          storeValue.setItem("messages", JSON.stringify(JSON.parse(messages).concat({message:document.getElementById("message").value,user:document.getElementById("from").value,send:sessionStorage.username,timestamps:new Date()})));
