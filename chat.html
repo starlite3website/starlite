@@ -94,7 +94,7 @@
     function send() {
       if (document.getElementById("from").value!=""&&document.getElementById("message").value!="") {
         var m = document.getElementById("message").value;
-        if (m.toLowerCase().includes("damn") || m.toLowerCase().includes("shit") || m.toLowerCase().includes("fuck") || m.toLowerCase().includes("hell") || m.toLowerCase().includes("ass") || m.toLowerCase().includes("bitch") || m.toLowerCase().includes("cunt")) { // CHASE Put in the 'words' in the includes("<here>") area (delete this after you do it)
+        if (m.replace(' ','').toLowerCase().includes("damn") || m.replace(' ','').toLowerCase().includes("shit") || m.replace(' ','').toLowerCase().includes("fuck") || m.replace(' ','').toLowerCase().includes("hell") || m.replace(' ','').toLowerCase().includes("ass") || m.replace(' ','').toLowerCase().includes("bitch") || m.replace(' ','').toLowerCase().includes("cunt")) { // CHASE Put in the 'words' in the includes("<here>") area (delete this after you do it)
           alert("Cuss Word Detected! We do not permit any cuss words. If you disagree that you have not cuss words in your message report to 'admin' in chat");
         } else {
          storeValue.setItem("messages", JSON.stringify(JSON.parse(messages).concat({message:document.getElementById("message").value,user:document.getElementById("from").value,send:sessionStorage.username,timestamps:new Date()})));
