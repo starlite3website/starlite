@@ -2,7 +2,7 @@
 <input id="message" />
 <button id="submit">Send</button>
 <script>
-  var socket = new WebSocket('wss://starlite3.tk/IncreedibleTanksServer');
+  var socket = new WebSocket('wss://echo.websocket.org/');
   socket.onopen = function() {
     document.getElementById("status").innerHTML="Connected";
   }
