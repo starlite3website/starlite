@@ -1,2 +1,4 @@
 const webSocket = new require('ws');
-webSocket.send('5');
+webSocket.onmessage = function() {
+  webSocket.send('Connection Opened')
+}
