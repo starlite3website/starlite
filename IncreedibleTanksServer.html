@@ -1,3 +1,4 @@
+<script>
 const ws = new require('ws');
 const wss = new ws.Server({noServer: true});
 const clients = new Set();
@@ -11,3 +12,4 @@ ws.onopen = function() {
 function t() {
   ws.send("hi");
 }
+</script>
