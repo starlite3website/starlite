@@ -1,6 +1,8 @@
 <script>
 const ws = new require('ws');
+  alert(ws);
 const wss = new ws.Server({noServer: true});
+  alert(wss);
 const clients = new Set();
 http.createServer((req, res) => {
   wss.handleUpgrade(req, req.socket, Buffer.alloc(0), onSocketConnect);
