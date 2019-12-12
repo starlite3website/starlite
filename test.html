@@ -2,17 +2,17 @@
 <input id="message" />
 <button id="submit">Send</button>
 <script>
-  var socket = new WebSocket('wss://starlite3.tk/IncreedibleTanksServer');
-  socket.onopen = function() {
+  var s = new WebSocket('wss://cs641311.pythonanywhere.com);
+  s.onopen = function() {
     document.getElementById("status").innerHTML="Connected";
   }
   document.getElementById("submit").addEventListener("click", function() {
-    socket.send(document.getElementById("message").value);
+    s.send(document.getElementById("message").value);
   });
-  socket.onmessage = function(e) {
+  s.onmessage = function(e) {
     alert(e.data);
   }
-  socket.onerrror = function(e) {
+  s.onerrror = function(e) {
     document.getElementById("status").innerHTML = "ERROR: "+e.target.CONNECTING
   }
 </script>
