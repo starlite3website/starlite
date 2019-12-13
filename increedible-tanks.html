@@ -70,7 +70,6 @@
     }
     return false;
   }
-
   function Ai() {
     this.health = 200;
     this.x = 0;
@@ -208,7 +207,6 @@
       }
     }.bind(this);
   }
-
   function Shot() {
     this.sensor = function() {}
     this.control = function(x, y, id, xm, ym) {
@@ -237,7 +235,6 @@
       support(this.id);
     }
   }
-
   function support(id) {
     setTimeout(function() {
       if (s[id]!=undefined) {
@@ -245,7 +242,6 @@
       }
     }, 25);
   }
-
   function clearShot() {
     if (user.tank != undefined) {
       level(Game.level, "n", false);
@@ -256,7 +252,6 @@
       ai[l].draw();
     }
   }
-
   function Tank() {
     this.count = 0;
     this.health = userData.health;
@@ -413,7 +408,7 @@
         s[Game.shotId].control(this.x + 20, this.y + 20, Game.shotId, this.xd, this.yd);
       }
     }
-  } // Tank Object
+  }
   function tank_listener1(event) {
     if (user.tank.interval == undefined) {
       if (event.keyCode == 87 || event.keyCode == 83 || event.keyCode == 68 || event.keyCode == 65) {
@@ -448,8 +443,7 @@ function tank_listener2(event) {
     if (event.keyCode == 89) {
       console.log(ai, Game.foes)
     }
-  })
-
+  });
   function gameHelper() {
     var l = 0;
     while (l < i.length) {
@@ -465,7 +459,6 @@ function tank_listener2(event) {
     Game.aiId = 0;
     mainMenu();
   }
-
   function Game() {
     this.coins = 0;
     this.foes = 0;
@@ -505,11 +498,9 @@ function tank_listener2(event) {
       }, 74));
     }
   }
-
   function jquery_tank_support(e) {
     user.tank.move(e);
   }
-
   function Block(health, x, y, isInvincible, isExplosive) {
     this.blockId = blockHelper();
     this.x = x;
@@ -568,11 +559,10 @@ function tank_listener2(event) {
         }
       }
     }, 50, [this.blockId]));
-  } // All Blocks
+  }
   function blockHelper() {
     return Game.blockId;
   }
-
   function block_support(id) {
     b[id].x = undefined;
     b[id].y = undefined;
@@ -586,7 +576,7 @@ function tank_listener2(event) {
   var draw = canvas.getContext("2d"); // getting the canvas to be able to draw
   var tank_tracks = new Audio("https://starlite3.tk/tank-tracks.mp3");
   tank_tracks.load();
-  // CHASE put in audio variables here ex. var tank_tracks = new Audio("https://starlite3.tk/tank_tracks.mp3");
+  tank_tracks.volume = 0.4;
   function startScreen() {
     a("Loading Game...", "black");
     draw.fillStyle = "#DCDCDC";
@@ -645,8 +635,7 @@ function tank_listener2(event) {
       storeValue.setItem("gameData", JSON.stringify(JSON.parse(gameData).concat({username:sessionStorage.username,coins:0,health:200,level:1})));
       userData = {username:sessionStorage.username,coins:0,health:200,level:1};
     }
-    if (sessionStorage.level == undefined) {
-      
+    if (sessionStorage.level == undefined) {   
       user = {
         tank: new Tank(),
         username: sessionStorage.username,
@@ -661,7 +650,6 @@ function tank_listener2(event) {
     setTimeout(mainMenu(), 2000);
     canvas.removeEventListener("click", loading);
   }
-
   function level(num, mo, m) {
     draw.clearRect(0, 0, 500, 500);
     draw.fillStyle = "#dcdcdc";
