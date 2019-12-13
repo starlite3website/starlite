@@ -252,6 +252,45 @@
       ai[l].draw();
     }
   }
+  function Host() {
+    this.webScoket = new WebSocket("starlite3.ml");
+    this.data = {
+      users : []
+      blocks : []
+    }
+    this.users = []
+    this.generatelevel = function() {
+      var l = 0;
+      while (l<this.users.length) {
+        this.users[l].x = Math.floor(Math.random(9)*10)*50;
+        this.users[l].y = Math.floor(Math.random(9)*10)*50;
+        this.data.users = this.users; 
+        l++;
+      }
+      //70% on map is blocks %10 weak %40 strong and %20 unbreakable
+      var l = 0;
+      this.data.blocks = []
+      while (l<20) {
+        this.data.blocks.push(['wall', Math.floor(Math.random(9)*10), Math.floor(Math.random(9)*10)]);
+        l++;
+      }
+      var l = 10;
+      while (l<10) {
+        this.data.blocks.push(['weak', Math.floor(Math.random(9)*10), Math.floor(Math.random(9)*10)]);
+        l++;
+      }
+      var l = 40;
+      while (l<40) {
+        this.data.blocks.push(['strong', Math.floor(Math.random(9)*10), Math.floor(Math.random(9)*10)]);
+        l++;
+      }
+      console.log(JSON.stringify(this.data));
+    }
+  }
+  function Get() {
+    this.recieve = function() {
+    }
+  }
   function Tank() {
     this.count = 0;
     this.health = userData.health;
