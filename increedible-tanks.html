@@ -252,10 +252,34 @@
       ai[l].draw();
     }
   }
+  function HOST_support(e) {
+    host.generatelevel(); //AARON Do not forget host variable
+    host.updateLoop = window.setInterval(HOST_support_two, 16)
+    host.webSocket.onmessage = function(e) {
+       host.data.shots.push(JSON.parse(e.data.shots));
+    }
+  }
+  function HOST_support_two() {
+    host.webSocket.send(JSON.stringify(host.data));
+  }
   function Host() {
     this.webScoket = new WebSocket("starlite3.ml");
-    this.data = {users:[],blocks:[],shots:[]}
+    this.data = {users:[],blocks:[],shots:[],port:-1}
     this.users = []
+    this.start = function() {
+      // menu while waiting for users 
+      webSocket.send('Requesting ID');
+      webSocket.onmessage = function(e) {
+        if (isNaN(JSON.parse(e.data))) {
+           // Alert HOST that USER connected
+           this.users.push({})
+        } else {
+           this.data.port = JSON.parse(e.data);
+           webSocket.send('Accepting Users');
+        }
+      }
+      canvas.addEventListener("click", HOST_support);
+    }
     this.generatelevel = function() {
       var l = 0;
       while (l<this.users.length) {
@@ -284,6 +308,7 @@
     }
   }
   function Get() {
+    this.web
     this.recieve = function() {
     }
   }
