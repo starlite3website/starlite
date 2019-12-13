@@ -254,10 +254,7 @@
   }
   function Host() {
     this.webScoket = new WebSocket("starlite3.ml");
-    this.data = {
-      users : []
-      blocks : []
-    }
+    this.data = {users:[],blocks:[],shots:[]}
     this.users = []
     this.generatelevel = function() {
       var l = 0;
@@ -267,7 +264,6 @@
         this.data.users = this.users; 
         l++;
       }
-      //70% on map is blocks %10 weak %40 strong and %20 unbreakable
       var l = 0;
       this.data.blocks = []
       while (l<20) {
