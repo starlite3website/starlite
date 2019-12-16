@@ -12,7 +12,7 @@
   s.onmessage = function(e) {
     alert(e.data);
   }
-  s.onerror = function(e) {
+  s.onclose = function(e) {
     document.getElementById("status").innerHTML = "ERROR: "+e.code
   }
 </script>
