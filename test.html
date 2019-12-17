@@ -2,7 +2,7 @@
 <input id="message" />
 <button id="submit">Send</button>
 <script>
-  var s = new WebSocket("wss://DarkmagentaRosybrownTrial--five-nine.repl.co:8000");
+  var s = new WebSocket("wss://DarkmagentaRosybrownTrial--five-nine.repl.co:8000", ["soap"]);
   s.onopen = function() {
     document.getElementById("status").innerHTML="Connected";
   }
