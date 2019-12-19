@@ -1,18 +1,19 @@
 <p id="status">Connecting...</p>
 <input id="message" />
 <button id="submit">Send</button>
+<div id="2"></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
 <script>
-  var s = new WebSocket("wss://StarliteServer.cs641311.repl.run:8000", ["soap", "wamp"]);
-  s.onopen = function() {
-    document.getElementById("status").innerHTML="Connected";
-  }
-  document.getElementById("submit").addEventListener("click", function() {
-    s.send(document.getElementById("message").value);
+  var status = document.getElementById("status");
+  var submit = document.getElementById("submit");
+  var m = document.getElementById("2");
+  let socket = io("https://StarliteServer.cs641311.repl.co:8000");
+  socket.on('data', function(data) {
+    let q = document.createElement("P")
+    q.innerHTML = data;
+    m.appendChild(q);
   });
-  s.onmessage = function(e) {
-    alert(e.data);
-  }
-  s.onclose = function(e) {
-    document.getElementById("status").innerHTML = "ERROR: "+e.code
-  }
+  submit.addEventListener("click", function() {
+    socket.emit('data', document.getElementById("message").value);
+  });
 </script>
