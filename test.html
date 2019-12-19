@@ -1,19 +1,29 @@
 <p id="status">Connecting...</p>
 <input id="message" />
-<button id="submit">Send</button>
-<div id="2"></div>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
-<script>
-  var status = document.getElementById("status");
-  var submit = document.getElementById("submit");
-  var m = document.getElementById("2");
-  let socket = io("https://StarliteServer.cs641311.repl.co:8000");
-  socket.on('data', function(data) {
-    let q = document.createElement("P")
-    q.innerHTML = data;
-    m.appendChild(q);
-  });
-  submit.addEventListener("click", function() {
-    socket.emit('data', document.getElementById("message").value);
-  });
-</script>
+<button id="submit">
+  Send
+</button>
+<div id="2">
+</div>
+<body>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
+  <script>
+    var status = document.getElementById("status");
+    var submit = document.getElementById("submit");
+var m = document.getElementById("2");
+let socket = io();
+socket.on('data', function(data) {
+  let q = document.createElement("P")
+  q.innerHTML = data;
+  m.appendChild(q);
+});
+socket.on('connection', function() {
+  status.innerHTML = "Connected";
+  status.style.color="green";
+})
+document.getElementById("submit").addEventListener("click", send)
+function send() {
+  socket.emit('data', document.getElementById("message").value);
+}
+  </script>
+</body>
