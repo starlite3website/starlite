@@ -1,5 +1,5 @@
 <h1>Starlite Multiplayer Attempt #1</h1>
-<input id="data" /><button onclick="send();">SEND</button>
+<input id="data" /><button id="submit">SEND</button>
 <div id="messages">
 </div>
 <iframe src="https://starliteserver.cs641311.repl.co" id="myframe">
@@ -7,7 +7,7 @@
 <script>
   var server = document.getElementById("myframe");
   var submit = document.getElementById("submit");
-  function send(e) {
+  submit.addEventListener("click", function(e) {
     alert(document.getElementById("data"))
     var event = new CustomEvent('babbit', {detail:document.getElementById("data").value})
     server.dispatchEvent(event);
