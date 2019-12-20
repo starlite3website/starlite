@@ -7,9 +7,11 @@
 <script>
   var server = document.getElementById("myframe");
   document.getElementById("submit").addEventListener("click", function() {
+    alert(document.getElementById("data"))
     server.postMessage(document.getElementById("data").value, "*");
   });
   window.addEventListener('message', function(e) {
+    alert(e);
     document.getElementById("messages").innerHTML = e.data;
   });
 </script>
