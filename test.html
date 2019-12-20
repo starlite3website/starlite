@@ -1,8 +1,7 @@
 <h1>Starlite Multiplayer Attempt #1</h1>
 <script>
   var server = window.open('https://starliteserver.cs641311.repl.run/');
-  server.onload = function() {
-    let html = '<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script><script>const ws = io();ws.send("data", "hi users") ws.on("data", function(data) {alert(data);})</script>'
+  server.onload = function() { 
     server.document.body.insertAdjacentHTML('afterbegin', html);
   }
 </script>
