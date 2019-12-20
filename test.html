@@ -2,8 +2,10 @@
 <input id="data" /><button id="submit">SEND</button>
 <div id="messages">
 </div>
+<iframe src="https://starliteserver.cs641311.repl.co">
+</frame>
 <script>
-  var server = window.open('https://StarliteServer.cs641311.repl.co/');
+  var server = document.getElementById("myframe");
   document.getElementById("submit").addEventListener("click", function() {
     server.postMessage(document.getElementById("data").value, "*");
   });
