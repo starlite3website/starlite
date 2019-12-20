@@ -6,7 +6,8 @@
 </frame>
 <script>
   var server = document.getElementById("myframe");
-  document.getElementById("submit").addEventListener("click", function() {
+  var submit = document.getElementById("submit");
+  submit.addEventListener("click", function(e) {
     alert(document.getElementById("data"))
     var event = new CustomEvent('babbit', {detail:document.getElementById("data").value})
     server.dispatchEvent(event);
