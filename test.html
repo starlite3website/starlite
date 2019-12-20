@@ -4,4 +4,10 @@
 </div>
 <script>
   var server = window.open('https://StarliteServer.cs641311.repl.co/');
+  document.getElementById("submit").addEventListener("click", function() {
+    server.postMessage(document.getElementById("message").value, "*");
+  }
+  window.addEventListener("message", function(e) {
+    document.getElementById("messages").innerHTML += "<div>"+e.data+"</div>"
+  });
 </script>
