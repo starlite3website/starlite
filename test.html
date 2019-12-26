@@ -10,4 +10,9 @@
   ws.on('message', funciton(data) {
         alert(data);
   });
+  ws.onclose = function(e) {
+    alert("CLOSED");
+    alert(e.reason);
+    alert(e.code);
+  }
 </script>
