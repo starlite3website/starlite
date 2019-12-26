@@ -1,15 +1,19 @@
+
 <h1>Starlite Multiplayer Attempt #1</h1>
 <input id="data" /><button id="submit">SEND</button>
 <div id="messages">
 </div>
-<script>
+<script src="/cdn-cgi/apps/head/uCSm8uZLv5JU1utsvWxxUpwUeXc.js"></script><script>
   var ws = new WebSocket('wss://starliteserver.cs641311.repl.co:8000');
   document.getElementById('submit').addEventListener('click', function() {
     ws.send(document.getElementById("data").value);
   });
-  ws.on('message', funciton(data) {
-        alert(data);
-  });
+  ws.onopen = function() {
+    alert(3)
+  }
+  ws.onmessage = function(data) {
+    console.log(data)
+  }
   ws.onclose = function(e) {
     alert("CLOSED");
     alert(e.reason);
