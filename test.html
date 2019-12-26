@@ -3,7 +3,7 @@
 <div id="messages">
 </div>
 <script>
-  var ws = new WebSocket('wss://starliteserver.cs641311.repl.co');
+  var ws = new WebSocket('wss://starliteserver.cs641311.repl.co:8000');
   document.getElementById('submit').addEventListener('click', function() {
     ws.send(document.getElementById("data").value);
   });
