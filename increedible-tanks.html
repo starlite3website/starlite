@@ -35,7 +35,7 @@
   <h2>Merry Christmas!</h2>
   <canvas width="500" height="500" id="canvas" tabindex='1'>
     <strong>Canvas is not supported.</strong> Try using a diffrent browser, If that does not work, please restart your device or use a diffrent device. </canvas>
-  <iframe src="https://starlite3.tk/chat" width="500" height="500"></iframe>
+  <iframe src="/chat" width="500" height="500"></iframe>
   <div id="play">
     <h5 id="playText"> Click Anywhere To Start </h5>
   </div>
@@ -82,9 +82,9 @@
     this.draw = function() {
       if (this.inactive != true) {
         ai_top = new Image();
-        ai_top.src = "https://starlite3.tk/starlite-tank-top.png";
+        ai_top.src = "/starlite-tank-top.png";
         ai_base = new Image();
-        ai_base.src = "https://starlite3.tk/starlite-tank-base.png";
+        ai_base.src = "/starlite-tank-base.png";
         draw.drawImage(ai_base, this.x, this.y);
         draw.translate(this.x + 20, this.y + 20);
         draw.rotate(this.rotation * Math.PI / 180);
@@ -327,7 +327,7 @@
     this.color = "#00ff00";
     this.draw = function() {
       tank_base_png = new Image();
-      tank_base_png.src = "https://starlite3.tk/starlite-tank-base.png";
+      tank_base_png.src = "/starlite-tank-base.png";
       if (this.leftright == true) {
         draw.translate(this.x + 20, this.y + 20)
         draw.rotate(90 * Math.PI / 180);
@@ -338,7 +338,7 @@
         draw.drawImage(tank_base_png, this.x, this.y);
       }
       tank_top_png = new Image();
-      tank_top_png.src = "https://starlite3.tk/starlite-tank-top.png";
+      tank_top_png.src = "/starlite-tank-top.png";
       draw.translate(this.x + 20, this.y + 20);
       draw.rotate(this.rotation * Math.PI / 180);
       draw.drawImage(tank_top_png, -20, -20);
@@ -572,7 +572,7 @@ function tank_listener2(event) {
     this.y = y;
     this.wall = function(x,y) {
       var wall_image = new Image();
-      wall_image.src = "https://starlite3.tk/block-blue.png"
+      wall_image.src = "/block-blue.png"
       draw.drawImage(wall_image, x * 50, y * 50);
       if (this.health == undefined) {
         this.health = Infinity;
@@ -613,7 +613,7 @@ function tank_listener2(event) {
         this.health = 10;
       }
       var weak_image = new Image();
-      weak_image.src = "https://starlite3.tk/block-silver.png";
+      weak_image.src = "/block-silver.png";
       draw.drawImage(weak_image, x * 50, y * 50);
     }
     i.push(window.setInterval(function(id) {
@@ -639,7 +639,7 @@ function tank_listener2(event) {
   var canvas = document.getElementById("canvas"); // getting the canvas element
   var consoleText = document.getElementById("consoleText"); // text control for console
   var draw = canvas.getContext("2d"); // getting the canvas to be able to draw
-  var tank_tracks = new Audio("https://starlite3.tk/tank-tracks.mp3");
+  var tank_tracks = new Audio("/tank-tracks.mp3");
   tank_tracks.load();
   tank_tracks.volume = 0.4;
   function startScreen() {
@@ -687,7 +687,7 @@ function tank_listener2(event) {
   function loading() {
     if (sessionStorage.username == undefined) {
       alert("SIGN IN TO PLAY: RIDIRECTING");
-        window.location.href = "https://starlite3.tk/account";
+        window.location.href = "/account";
     }
     var l = 0;
     while (l<JSON.parse(gameData).length) {
@@ -719,7 +719,7 @@ function tank_listener2(event) {
     draw.clearRect(0, 0, 500, 500);
     draw.fillStyle = "#dcdcdc";
     var floor = new Image();
-    floor.src = "https://starlite3.tk/floor.png";
+    floor.src = "/floor.png";
     draw.drawImage(floor, 0, 0);
     draw.drawImage(floor, 50, 0);
     draw.drawImage(floor, 100, 0);
