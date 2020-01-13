@@ -133,7 +133,7 @@
       } else {
         this.xd = 0 - Math.abs(this.xd);
       }
-      if (this.rotation == 0) {
+      /*if (this.rotation == 0) {
         this.xd = 0;
         this.yd = 1;
       } else if (this.rotation == 90) {
@@ -145,7 +145,7 @@
       } else if (this.rotation == 270) {
         this.xd = 1;
         this.yd = 0;
-      }
+      }*/
       Game.shotId = Game.shotId + 1;
       s[Game.shotId] = new Shot();
       if (this.x < user.tank.x) {
