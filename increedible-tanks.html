@@ -211,10 +211,9 @@
     this.sensor = function() {}
     this.control = function(x, y, id, xm, ym) {
       this.x = x + xm * 16;
-      this.y = y + ym * 16;
-      this.ym = ym * 16;
+      this.y = y + ym * 16;  
+      // removed for test
       this.xm = xm * 16;
-      alert(this.xm+" "+this.ym);
       this.id = id;
       this.inactive = false;
       this.draw();
