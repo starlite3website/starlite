@@ -212,8 +212,11 @@
     this.control = function(x, y, id, xm, ym) {
       this.x = x + xm * 16;
       this.y = y + ym * 16;  
-      // removed for test
+      this.ym = ym * 16;
       this.xm = xm * 16;
+      while (Math.abs(this.ym) > 20) {
+        this.ym /= 2;
+      }
       this.id = id;
       this.inactive = false;
       this.draw();
@@ -1328,9 +1331,9 @@ function tank_listener2(event) {
     draw.fillStyle="#ffffff";
     draw.font="20px Courier";
     if (num == 1) {
-      draw.fillText("Use WASD to move", 50, 410);
-      draw.fillText("F to fire", 50, 440);
-      draw.fillText("You can break all walls but blue", 50, 470);
+      draw.fillText("Use WASD to move", 50, 370);
+      draw.fillText("F to fire", 50, 400);
+      draw.fillText("You can break all walls but blue", 50, 430);
     }
     draw.font="20px Courier";
     draw.fillText("Your health: "+user.tank.health, 300,490);
