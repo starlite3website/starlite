@@ -561,7 +561,7 @@ function tank_listener2(event) {
         clearShot();
       }, 74));
     }
-  }
+  } 
   function jquery_tank_support(e) {
     user.tank.move(e);
   }
@@ -709,9 +709,9 @@ function tank_listener2(event) {
     }
     user.tank.health = userData.health;
     draw.clearRect(0, 0, 500, 500);
-    a("Starting Game...");
+    a("Loading...");
     playText.style.visibility = "hidden";
-    setTimeout(mainMenu(), 2000);
+    setTimeout(mainMenu(), 5000);
     canvas.removeEventListener("click", loading);
   }
   function level(num, mo, m) {
