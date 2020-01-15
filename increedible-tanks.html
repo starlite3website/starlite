@@ -215,8 +215,8 @@
       this.ym = ym * 16;
       this.xm = xm * 16;
       while (Math.abs(this.xm) > 18 || Math.abs(this.ym) > 18) {
-        this.xm /= 2;
-        this.ym /= 2;
+        this.xm /= 6;
+        this.ym /= 6;
       }
       this.id = id;
       this.inactive = false;
