@@ -215,6 +215,7 @@
       this.ym = ym * 16;
       this.xm = xm * 16;
       while (Math.abs(this.ym) > 20) {
+        this.xm /= 2;
         this.ym /= 2;
       }
       this.id = id;
@@ -440,7 +441,7 @@
       this.xd = 1;
       this.angle = this.rotation % 90;
       this.yd = Math.abs(((this.xd * this.angle) - (90 * this.xd)) / this.angle);
-      if (this.rotation < 90 || this.rotation > 270) {
+      if (this.rotation < 90 || (this.rotation < 270 && this.rotation > 180)) {
         this.yd = Math.abs(this.yd);
       } else {
         this.yd = 0 - Math.abs(this.yd);
