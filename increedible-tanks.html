@@ -214,10 +214,7 @@
       this.y = y + ym * 16;
       this.ym = ym * 16;
       this.xm = xm * 16;
-      while (Math.abs(this.xm) > 18 || Math.abs(this.ym) > 18) {
-        this.xm /= 6;
-        this.ym /= 6;
-      }
+      alert(this.xm+" "+this.ym);
       this.id = id;
       this.inactive = false;
       this.draw();
