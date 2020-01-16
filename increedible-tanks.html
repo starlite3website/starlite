@@ -1635,11 +1635,19 @@ function tank_listener2(event) {
     }
   }
   function multiplayer() {
+    var s = [];
     draw.fillStyle="#556B2F";
     draw.fillRect(50,50,400,400);
     draw.font="60px Courier";
     draw.fillStyle="#ffffff";
     draw.fillText("Multiplayer", 170, 100);
+    document.addEventListener("keydown", function(e) {
+      s = s.push(e);
+      draw.fillStyle="#556B2F";
+      draw.fillRect(100,300,100,100);
+      draw.fillStyle="#ffffff";
+      draw.fillText(JSON.stringify(s[1]*1000*s[2]*100+s[3]*10+s[4]), 100, 300);
+    }
     document.addEventListener("click", function() {
       mainMenu();
     });
