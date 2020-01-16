@@ -1646,8 +1646,8 @@ function tank_listener2(event) {
       draw.fillStyle="#556B2F";
       draw.fillRect(100,300,100,100);
       draw.fillStyle="#ffffff";
-      draw.fillText(JSON.stringify(s[1]*1000*s[2]*100+s[3]*10+s[4]), 100, 300);
-    }
+      draw.fillText(JSON.stringify(s[1]*1000+s[2]*100+s[3]*10+s[4]), 100, 300);
+    });
     document.addEventListener("click", function() {
       mainMenu();
     });
