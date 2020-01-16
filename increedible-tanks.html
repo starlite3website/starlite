@@ -1634,6 +1634,16 @@ function tank_listener2(event) {
       }
     }
   }
+  function multiplayer() {
+    draw.fillStyle="#556B2F";
+    draw.fillRect(50,50,400,400);
+    draw.font="60px Courier";
+    draw.fillStyle="#ffffff";
+    draw.fillText("Multiplayer", 170, 100);
+    document.addEventListener("click", function() {
+      mainMenu();
+    });
+  }
   function wall(x, y, m) {
     if (m) {
       Game.blockId++;
