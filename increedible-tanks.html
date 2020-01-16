@@ -1403,9 +1403,11 @@ function tank_listener2(event) {
     draw.fillText("arrow keys barrel movement", 75, 270);
     draw.fillRect(190, 350, 120, 50);
     draw.fillRect(70,350,100,50);
+    draw.fillRect(330, 350, 100, 50);
     draw.fillStyle = "#000000";
     draw.fillText("Play Levels", 200, 380);
     draw.fillText("Upgrades", 80, 380);
+    draw.fillText("Multiplayer", 340, 380);
     document.addEventListener("click", function(e) {
       if (e.pageX || e.pageY) {
         x = e.pageX;
@@ -1416,6 +1418,15 @@ function tank_listener2(event) {
       }
       x -= canvas.offsetLeft;
       y -= canvas.offsetTop;
+      if (x > 330) {
+        if (x < 430) {
+          if (y > 350) {
+            if (y < 400) {
+              multiplayer();
+            }
+          }
+        }
+      }
       if (x > 190) {
         if (x < 310) {
           if (y > 350) {
