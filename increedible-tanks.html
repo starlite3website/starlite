@@ -1635,7 +1635,7 @@ function tank_listener2(event) {
     }
   }
   function multiplayer() {
-    var s = [];
+    var s = [], d = [];
     draw.fillStyle="#556B2F";
     draw.fillRect(50,50,400,400);
     draw.font="60px Courier";
@@ -1648,7 +1648,17 @@ function tank_listener2(event) {
       draw.fillStyle="#556B2F";
       draw.fillRect(100,300,100,100);
       draw.fillStyle="#ffffff";
-      draw.fillText(JSON.stringify(s[1]*1000+s[2]*100+s[3]*10+s[4]), 100, 300);
+      var l;
+      while (l < 4) {
+        if (s[l] == undefined) {
+          d[l] = 0;
+        } else {
+          d[l] = s[l];
+        }
+        alert(s[l]+" "+d[l]);
+        l++;
+      }
+      draw.fillText(JSON.stringify(d[1]*1000+d[2]*100+d[3]*10+d[4]), 100, 300);
     });
     document.addEventListener("click", function() {
       mainMenu();
