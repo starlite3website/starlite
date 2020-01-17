@@ -1642,13 +1642,12 @@ function tank_listener2(event) {
     draw.fillStyle="#ffffff";
     draw.fillText("Multiplayer", 170, 100);
     document.addEventListener("keydown", function(e) {
-      if (48 < e.keyCode < 57) {
-        s = s.push(JSON.parse(e.key));
-        alert(s);
+      if (48 < e.keyCode && e.keyCode < 57) {
+        s.push(JSON.parse(e.key));
+        console.info(s);
+      } else if (e.keyCode == 8) {
+        s = [];
       }
-      draw.fillStyle="#556B2F";
-      draw.fillRect(100,300,100,100);
-      draw.fillStyle="#ffffff";
       var l = 0;
       while (l < 4) {
         if (s[l] == undefined) {
@@ -1656,10 +1655,13 @@ function tank_listener2(event) {
         } else {
           d[l] = s[l];
         }
-        alert(s[l]+" "+d[l]);
+        console.info(s+" "+d);
         l++;
       }
-      draw.fillText(JSON.stringify(d[1]*1000+d[2]*100+d[3]*10+d[4]), 100, 300);
+      draw.fillStyle="#556B2F";
+      draw.fillRect(150,250,200,60);
+      draw.fillStyle="#ffffff";
+      draw.fillText(d[0]*1000+d[1]*100+d[2]*10+d[3], 150, 300);
     });
     document.addEventListener("click", function() {
       mainMenu();
