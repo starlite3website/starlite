@@ -1644,11 +1644,12 @@ function tank_listener2(event) {
     document.addEventListener("keydown", function(e) {
       if (48 < e.keyCode < 57) {
         s = s.push(JSON.parse(e.key));
+        alert(s);
       }
       draw.fillStyle="#556B2F";
       draw.fillRect(100,300,100,100);
       draw.fillStyle="#ffffff";
-      var l;
+      var l = 0;
       while (l < 4) {
         if (s[l] == undefined) {
           d[l] = 0;
