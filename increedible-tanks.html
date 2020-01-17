@@ -32,7 +32,7 @@
   <h1 id="gameName"> Increedible Tanks </h1>
   <h3 id="views"></h3>
   <h3 id="users"></h3>
-  <h2>Merry Christmas!</h2>
+  <h2>Increedible Tanks Multiplayer is Coming Soon!</h2>
   <canvas width="500" height="500" id="canvas" tabindex='1'>
     <strong>Canvas is not supported.</strong> Try using a diffrent browser, If that does not work, please restart your device or use a diffrent device. </canvas>
   <iframe src="/chat" width="500" height="500"></iframe>
@@ -267,6 +267,9 @@
     }
   }
   function Get() {
+    this.control = function(id) {
+      //
+    }
   }
   function Tank() {
     this.count = 0;
@@ -1651,9 +1654,13 @@ function tank_listener2(event) {
     draw.fillText("Main Menu", 75, 75);
     draw.font="60px Courier";
     draw.fillStyle="#ffffff";
-    draw.fillText("Multiplayer", 60, 150);
+    draw.fillText("Multiplayer", 55, 150);
     draw.fillRect(150,300,100,50);
     draw.fillRect(260,300,100,50);
+    draw.font="20px Courier";
+    draw.fillStyle="#000000";
+    draw.fillText("Join Game", 150, 180);
+    draw.fillText("Host Game", 260, 180);
     document.addEventListener("keydown", multiplayer1);
     document.addEventListener("click", multiplayer2);
   }
@@ -1671,8 +1678,6 @@ function tank_listener2(event) {
         if (x<360) {
           if (y>300) {
             if (y<350) {
-              alert("This area is in progress");
-              alert(sessionStorage.servers);
               user.host = new Host();
               user.host.control(s[0]*100+s[1]*10+s[2]);
             }
@@ -1683,8 +1688,8 @@ function tank_listener2(event) {
         if (x<250) {
           if (y>300) {
             if (y<350) {
-              alert("This area is in progress");
-              alert(sessionStorage.servers);
+              user.get = new Get();
+              user.get.control(s[0]*100+s[1]*10+s[2]);
             }
           }
         }
