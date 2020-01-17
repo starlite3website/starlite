@@ -1645,7 +1645,7 @@ function tank_listener2(event) {
     draw.fillText("Main Menu", 75, 75);
     draw.font="60px Courier";
     draw.fillStyle="#ffffff";
-    draw.fillText("Multiplayer", 100, 150);
+    draw.fillText("Multiplayer", 70, 150);
     draw.fillRect(150,300,100,50);
     draw.fillRect(260,300,100,50);
     document.addEventListener("keydown", function(e) {
@@ -1666,9 +1666,9 @@ function tank_listener2(event) {
         l++;
       }
       draw.fillStyle="#556B2F";
-      draw.fillRect(200,250,200,60);
+      draw.fillRect(200,200,200,60);
       draw.fillStyle="#ffffff";
-      draw.fillText(d[0]*100+d[1]*10+d[2], 200, 300);
+      draw.fillText(d[0]*100+d[1]*10+d[2], 200, 250);
     });
     document.addEventListener("click", function() {
       if (x>150) {
