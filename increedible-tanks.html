@@ -1638,18 +1638,25 @@ function tank_listener2(event) {
     var s = [], d = [];
     draw.fillStyle="#556B2F";
     draw.fillRect(50,50,400,400);
+    draw.fillStyle="#ffffff";
+    draw.font="10px Courier";
+    draw.fillRect(60,60,90,30);
+    draw.fillStyle="#000000";
+    draw.fillText("Main Menu", 75, 75);
     draw.font="60px Courier";
     draw.fillStyle="#ffffff";
-    draw.fillText("Multiplayer", 170, 100);
+    draw.fillText("Multiplayer", 100, 150);
+    draw.fillRect(150,300,100,50);
+    draw.fillRect(260,300,100,50);
     document.addEventListener("keydown", function(e) {
-      if (48 < e.keyCode && e.keyCode < 57) {
+      if (48 <= e.keyCode && e.keyCode <= 57) {
         s.push(JSON.parse(e.key));
         console.info(s);
       } else if (e.keyCode == 8) {
         s = [];
       }
       var l = 0;
-      while (l < 4) {
+      while (l < 3) {
         if (s[l] == undefined) {
           d[l] = 0;
         } else {
@@ -1659,12 +1666,31 @@ function tank_listener2(event) {
         l++;
       }
       draw.fillStyle="#556B2F";
-      draw.fillRect(150,250,200,60);
+      draw.fillRect(200,250,200,60);
       draw.fillStyle="#ffffff";
-      draw.fillText(d[0]*1000+d[1]*100+d[2]*10+d[3], 150, 300);
+      draw.fillText(d[0]*100+d[1]*10+d[2], 200, 300);
     });
     document.addEventListener("click", function() {
-      mainMenu();
+      if (x>150) {
+        if (x<250) {
+          if (y>260) {
+            if (y<310) {
+              storeValue.getItem("servers", (data) => sessionStorage.servers = data);
+              while (sessionStorage.servers == undefined) {}
+              alert(sessionStorage.servers);
+            }
+          }
+        }
+      }
+      if (x>60) {
+        if (x<140) {
+          if (y>60) {
+            if (y<90) {
+              mainMenu();
+            }
+          }
+        }
+      }
     });
   }
   function wall(x, y, m) {
