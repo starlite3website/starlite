@@ -1682,20 +1682,24 @@ function tank_listener2(event) {
       y -= canvas.offsetTop;
       if (x>260) {
         if (x<360) {
-          if (y>260) {
-            if (y<310) {
+          if (y>300) {
+            if (y<350) {
+              alert("This area is in progress");
+              user.host = new Host();
+              user.host.control(s[0]*100+s[1]*10+s[2]);
             }
           }
         }
       }
       if (x>150) {
         if (x<250) {
-          if (y>260) {
-            if (y<310) {
+          if (y>300) {
+            if (y<350) {
               alert("This area is in progress");
               storeValue.getItem("servers", (data) => sessionStorage.servers = data);
-              while (sessionStorage.servers == undefined) {}
-              alert(sessionStorage.servers);
+              setTimeout(function() {
+                alert(sessionStorage.servers);
+              }, 3000);
             }
           }
         }
