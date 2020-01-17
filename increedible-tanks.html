@@ -1670,11 +1670,29 @@ function tank_listener2(event) {
       draw.fillStyle="#ffffff";
       draw.fillText(d[0]*100+d[1]*10+d[2], 200, 250);
     });
-    document.addEventListener("click", function() {
+    document.addEventListener("click", function(e) {
+      if (e.pageX || e.pageY) {
+        x = e.pageX;
+        y = e.pageY;
+      } else {
+        x = e.clientX + document.body.scrollLeft + document.documentElement.scrollLeft;
+        y = e.clientY + document.body.scrollTop + document.documentElement.scrollTop;
+      }
+      x -= canvas.offsetLeft;
+      y -= canvas.offsetTop;
+      if (x>260) {
+        if (x<360) {
+          if (y>260) {
+            if (y<310) {
+            }
+          }
+        }
+      }
       if (x>150) {
         if (x<250) {
           if (y>260) {
             if (y<310) {
+              alert("This area is in progress");
               storeValue.getItem("servers", (data) => sessionStorage.servers = data);
               while (sessionStorage.servers == undefined) {}
               alert(sessionStorage.servers);
