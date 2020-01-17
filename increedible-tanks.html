@@ -266,6 +266,8 @@
       }
     }
   }
+  function Get() {
+  }
   function Tank() {
     this.count = 0;
     this.health = userData.health;
@@ -1649,7 +1651,7 @@ function tank_listener2(event) {
     draw.fillText("Main Menu", 75, 75);
     draw.font="60px Courier";
     draw.fillStyle="#ffffff";
-    draw.fillText("Multiplayer", 70, 150);
+    draw.fillText("Multiplayer", 60, 150);
     draw.fillRect(150,300,100,50);
     draw.fillRect(260,300,100,50);
     document.addEventListener("keydown", multiplayer1);
