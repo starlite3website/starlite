@@ -1387,6 +1387,8 @@ function tank_listener2(event) {
     });
   }
   function mainMenu() {
+    document.removeEventListener("keydown", multiplayer1);
+    document.removeEventListener("click", multiplayer2);
     user.tank = new Tank();
     window.clearInterval(interval2);
     draw.clearRect(0, 0, 500, 500);
@@ -1649,29 +1651,10 @@ function tank_listener2(event) {
     draw.fillText("Multiplayer", 70, 150);
     draw.fillRect(150,300,100,50);
     draw.fillRect(260,300,100,50);
-    document.addEventListener("keydown", function(e) {
-      if (48 <= e.keyCode && e.keyCode <= 57) {
-        s.push(JSON.parse(e.key));
-        console.info(s);
-      } else if (e.keyCode == 8) {
-        s = [];
-      }
-      var l = 0;
-      while (l < 3) {
-        if (s[l] == undefined) {
-          d[l] = 0;
-        } else {
-          d[l] = s[l];
-        }
-        console.info(s+" "+d);
-        l++;
-      }
-      draw.fillStyle="#556B2F";
-      draw.fillRect(200,200,200,60);
-      draw.fillStyle="#ffffff";
-      draw.fillText(d[0]*100+d[1]*10+d[2], 200, 250);
-    });
-    document.addEventListener("click", function(e) {
+    document.addEventListener("keydown", multiplayer1);
+    document.addEventListener("click", multiplayer2);
+  }
+  function multiplayer2(e) {
       if (e.pageX || e.pageY) {
         x = e.pageX;
         y = e.pageY;
@@ -1712,8 +1695,29 @@ function tank_listener2(event) {
           }
         }
       }
-    });
-  }
+    }
+  function multiplayer1(e) {
+      if (48 <= e.keyCode && e.keyCode <= 57) {
+        s.push(JSON.parse(e.key));
+        console.info(s);
+      } else if (e.keyCode == 8) {
+        s = [];
+      }
+      var l = 0;
+      while (l < 3) {
+        if (s[l] == undefined) {
+          d[l] = 0;
+        } else {
+          d[l] = s[l];
+        }
+        console.info(s+" "+d);
+        l++;
+      }
+      draw.fillStyle="#556B2F";
+      draw.fillRect(200,200,200,60);
+      draw.fillStyle="#ffffff";
+      draw.fillText(d[0]*100+d[1]*10+d[2], 200, 250);
+    }
   function wall(x, y, m) {
     if (m) {
       Game.blockId++;
