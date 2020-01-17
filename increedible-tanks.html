@@ -1696,7 +1696,7 @@ function tank_listener2(event) {
           if (y>300) {
             if (y<350) {
               alert("This area is in progress");
-              storeValue.getItem("servers", (data) => sessionStorage.servers = data);
+              storeValue.getItem("servers", value => sessionStorage.servers = value);
               setTimeout(function() {
                 alert(sessionStorage.servers);
               }, 3000);
