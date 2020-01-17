@@ -10,7 +10,7 @@
 <script>
   window.setInterval(reload, 15000);
   var storeValue = KVdb.bucket('2Rpva475jos9znd2tZZZN9', 12481485).localStorage();
-  var c;
+  var c, s=[], d=[];
   storeValue.getItem("counter").then(value => c = value);
   storeValue.getItem("gameData").then(value => w = value);
   setTimeout(r, 5000);
@@ -1637,6 +1637,8 @@ function tank_listener2(event) {
     }
   }
   function multiplayer() {
+    s=[];
+    d=[];
     storeValue.getItem("servers").then(value => sessionStorage.servers = value);
     draw.fillStyle="#556B2F";
     draw.fillRect(50,50,400,400);
@@ -1696,7 +1698,6 @@ function tank_listener2(event) {
       }
     }
   function multiplayer1(e) {
-      var s = [], d = [];
       if (48 <= e.keyCode && e.keyCode <= 57) {
         s.push(JSON.parse(e.key));
         console.info(s);
