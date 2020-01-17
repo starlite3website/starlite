@@ -1635,6 +1635,7 @@ function tank_listener2(event) {
     }
   }
   function multiplayer() {
+    storeValue.getItem("servers").then(value => sessionStorage.servers = value);
     var s = [], d = [];
     draw.fillStyle="#556B2F";
     draw.fillRect(50,50,400,400);
@@ -1685,8 +1686,6 @@ function tank_listener2(event) {
           if (y>300) {
             if (y<350) {
               alert("This area is in progress");
-              storeValue.getItem("servers").then(value => sessionStorage.servers = value);
-              while (sessionStorage.servers == undefined) {}
               alert(sessionStorage.servers);
               user.host = new Host();
               user.host.control(s[0]*100+s[1]*10+s[2]);
@@ -1699,8 +1698,6 @@ function tank_listener2(event) {
           if (y>300) {
             if (y<350) {
               alert("This area is in progress");
-              storeValue.getItem("servers").then(value => sessionStorage.servers = value);
-              while (sessionStorage.servers == undefined) {}
               alert(sessionStorage.servers);
             }
           }
