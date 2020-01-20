@@ -1679,8 +1679,12 @@ function tank_listener2(event) {
         if (x<360) {
           if (y>300) {
             if (y<350) {
-              user.host = new Host();
-              user.host.control(s[0]*100+s[1]*10+s[2]);
+              if (sessionStorage.servers.includes(s[0]*100+s[1]*10+s[2])) {
+                a('Sorry, room is taken');
+              } else {
+                user.host = new Host();
+                user.host.control(s[0]*100+s[1]*10+s[2]);
+              }
             }
           }
         }
@@ -1689,8 +1693,12 @@ function tank_listener2(event) {
         if (x<250) {
           if (y>300) {
             if (y<350) {
-              user.get = new Get();
-              user.get.control(s[0]*100+s[1]*10+s[2]);
+              if (sessionStorage.servers.includes(s[0]*100+s[1]*10+s[2])) {
+                user.get = new Get();
+                user.get.control(s[0]*100+s[1]*10+s[2]);
+              } else {
+                a("Room not found! Return to Main Menu and back to reload.");
+              }
             }
           }
         }
