@@ -264,23 +264,23 @@
       this.socket.onopen = function() {
         a('Mutiplayer Server(room: '+id+') created Sucessfully');
       }
+      this.generateLevel();
     }
     this.users = [];
     this.generateLevel = function() {
-      this.level = {weak:[],strong:[],block:[],users:[], shits}, p = 1;
+      this.level = {weak:[],strong:[],block:[],users:[]}
+      let p = 0;
       while (p<10) {
-        p++;
-      }
-      p = 0;
-      while (p<10) {
-        this.level.weak.push([Math.floor(Math.random(9)*10),Math.floor(Math.random(9)*10)]);
+        this.level.weak.push(new Block(30, Math.floor(Math.random(9)*10)), Math.floor(Math.random(9)*10))));
         p++;
       }
       p = 0;
       while (s<10) {
-        this.level.strong.push([Math]);
+        this.level.strong.push(new Block(30, Math.floor(Math.random(9)*10)), Math.floor(Math.random(9)*10))));
         p++;
       }
+      p=0;
+      alert(this.level);
     }
     this.sendLevel = function() {
     }
