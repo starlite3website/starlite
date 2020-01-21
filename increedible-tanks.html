@@ -265,11 +265,21 @@
         a('Mutiplayer Server(room: '+id+') created Sucessfully');
       }
     }
+    this.users = [];
     this.generateLevel = function() {
-      var level = {weak:[],strong:[],block:[],users:[]}, s = 1;
+      this.level = {weak:[],strong:[],block:[],users:[], shits}, p = 1;
+      while (p<10) {
+        p++;
+      }
+      p = 0;
+      while (p<10) {
+        this.level.weak.push([Math.floor(Math.random(9)*10),Math.floor(Math.random(9)*10)]);
+        p++;
+      }
+      p = 0;
       while (s<10) {
-        level.weak.push()
-        s++;
+        this.level.strong.push([Math]);
+        p++;
       }
     }
     this.sendLevel = function() {
