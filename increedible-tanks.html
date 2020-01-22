@@ -273,7 +273,8 @@
       this.users.push(user.tank);
       this.gameControl();
     }
-    this.gameControl()
+    this.gameControl = function() {
+    }
     this.users = [];
     this.generateLevel = function() {
       this.level = {weak:[],strong:[],block:[],shots:[],users:this.level.s}
