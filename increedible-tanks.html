@@ -266,9 +266,7 @@
         //storeValue.setItem("servers", JSON.stringify(JSON.parse(sessionStorage.servers).concat([id])));
       }
       this.socket.onmesssage = function(e) {
-        if (e.data.includes("user ")) {
-          alert('User joined');
-        }
+        alert(e.data);
       }
       this.users.push(user.tank);
       this.gameControl();
