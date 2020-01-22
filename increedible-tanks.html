@@ -263,12 +263,20 @@
       this.socket = new WebSocket("wss://connect.websocket.in/v2/"+id+"?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6ImY1ZTIxMDM4ZDQzMjFmNWQ3YzQ1NzhiYTFhZGU4NDZhMGE0ODY2MGQxODg1YzJlZjMwZTc1NjBiNzQ0Y2EwYjZlYzc3NmE1Y2Q4MDE3ZTc4In0.eyJhdWQiOiI4IiwianRpIjoiZjVlMjEwMzhkNDMyMWY1ZDdjNDU3OGJhMWFkZTg0NmEwYTQ4NjYwZDE4ODVjMmVmMzBlNzU2MGI3NDRjYTBiNmVjNzc2YTVjZDgwMTdlNzgiLCJpYXQiOjE1NzkyMDAxNDksIm5iZiI6MTU3OTIwMDE0OSwiZXhwIjoxNjEwODIyNTQ5LCJzdWIiOiIzNTMiLCJzY29wZXMiOltdfQ.rBE0cUiXX4J6lD7Ybfa6W-uwXixsroXS8cJh-8IXFVAqK_JPJn3OIexWkwLGIVHDyxiHepXnE8iWTpfoSlDbevHGHyN4SzHcfBSsDFqrHxOibIHJMqWWuAUELZ8C8WCS50EDwnOZQVUac6G5GTkdt4OLdsbUy3akuasC2jIMtYdl00Q_u55Bw9GdLElEGJ3p7uRitxOiEe1SUDntLol4LxkQWr7pS4IqBiIwbhMahNun754Ix_3gqwkTn-B-Gm1laWe02H8RZfKoOD7-JcQHHNVjYdRtlAv1EGs3WcOdr8yus9oo24o3hDe06K3QvEEIkTVuULza-1JnwguBCIxlGd10WKIC0Zg9ikwGHBuv-8q9I3QEbapL54hv9GkSkj6-a0_xOarr1flaUF4gEiocrrjrFnKH24aO8bgFzbxtn7d9hHO7LEFmxYuomf-tlesDvXxxiVnCA_FOA9maT7oW6Fq2dxk9QUxPyZnE0nvamWZBcYYYlXbUSHw9dsW_yZWdirnO1J9O7h0288jVRyw8jGRKCRJC3SPsZIy2943vxdo5yYC089Bx_FlDxgaCfuwTASDYmFd14CZj1suV7qO1pZAbd3JQJUM7R3Ebpcx-IIDvzQmCrPNGOXo8T8L6dt_fY8iY84WaEg56Hs8L3ySbhnFY8Vvea4W648-VmX05KXE");
       this.socket.onopen = function() {
         a('Mutiplayer Server(room: '+id+') created Sucessfully');
+        //storeValue.setItem("servers", JSON.stringify(JSON.parse(sessionStorage.servers).concat([id])));
       }
-      this.generateLevel();
+      this.socket.onmesssage = function(e) {
+        if (e.data.includes("user ")) {
+          alert('User joined');
+        }
+      }
+      this.users.push(user.tank);
+      this.gameControl();
     }
+    this.gameControl()
     this.users = [];
     this.generateLevel = function() {
-      this.level = {weak:[],strong:[],block:[],users:[]}
+      this.level = {weak:[],strong:[],block:[],shots:[],users:this.level.s}
       let p = 0;
       while (p<10) {
         this.level.weak.push(new Block(30, Math.floor(Math.random(9)*10), Math.floor(Math.random(9)*10)));
@@ -283,6 +291,7 @@
       alert(this.level);
     }
     this.sendLevel = function() {
+      this.socket.send("level "+this.level);
     }
   }
   function Get() {
@@ -290,6 +299,7 @@
       this.socket = new WebSocket("wss://connect.websocket.in/v2/"+id+"?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6ImY1ZTIxMDM4ZDQzMjFmNWQ3YzQ1NzhiYTFhZGU4NDZhMGE0ODY2MGQxODg1YzJlZjMwZTc1NjBiNzQ0Y2EwYjZlYzc3NmE1Y2Q4MDE3ZTc4In0.eyJhdWQiOiI4IiwianRpIjoiZjVlMjEwMzhkNDMyMWY1ZDdjNDU3OGJhMWFkZTg0NmEwYTQ4NjYwZDE4ODVjMmVmMzBlNzU2MGI3NDRjYTBiNmVjNzc2YTVjZDgwMTdlNzgiLCJpYXQiOjE1NzkyMDAxNDksIm5iZiI6MTU3OTIwMDE0OSwiZXhwIjoxNjEwODIyNTQ5LCJzdWIiOiIzNTMiLCJzY29wZXMiOltdfQ.rBE0cUiXX4J6lD7Ybfa6W-uwXixsroXS8cJh-8IXFVAqK_JPJn3OIexWkwLGIVHDyxiHepXnE8iWTpfoSlDbevHGHyN4SzHcfBSsDFqrHxOibIHJMqWWuAUELZ8C8WCS50EDwnOZQVUac6G5GTkdt4OLdsbUy3akuasC2jIMtYdl00Q_u55Bw9GdLElEGJ3p7uRitxOiEe1SUDntLol4LxkQWr7pS4IqBiIwbhMahNun754Ix_3gqwkTn-B-Gm1laWe02H8RZfKoOD7-JcQHHNVjYdRtlAv1EGs3WcOdr8yus9oo24o3hDe06K3QvEEIkTVuULza-1JnwguBCIxlGd10WKIC0Zg9ikwGHBuv-8q9I3QEbapL54hv9GkSkj6-a0_xOarr1flaUF4gEiocrrjrFnKH24aO8bgFzbxtn7d9hHO7LEFmxYuomf-tlesDvXxxiVnCA_FOA9maT7oW6Fq2dxk9QUxPyZnE0nvamWZBcYYYlXbUSHw9dsW_yZWdirnO1J9O7h0288jVRyw8jGRKCRJC3SPsZIy2943vxdo5yYC089Bx_FlDxgaCfuwTASDYmFd14CZj1suV7qO1pZAbd3JQJUM7R3Ebpcx-IIDvzQmCrPNGOXo8T8L6dt_fY8iY84WaEg56Hs8L3ySbhnFY8Vvea4W648-VmX05KXE");
       this.socket.onopen = function() {
         a("Successful Joined Room!");
+        this.socket.send("user "+JSON.stringify(user.tank));
       }
     }
   }
@@ -1715,12 +1725,12 @@ function tank_listener2(event) {
         if (x<250) {
           if (y>300) {
             if (y<350) {
-              if (sessionStorage.servers.includes(s[0]*100+s[1]*10+s[2])) {
+              //if (sessionStorage.servers.includes(s[0]*100+s[1]*10+s[2])) {
                 user.get = new Get();
                 user.get.control(s[0]*100+s[1]*10+s[2]);
-              } else {
-                a("Room not found! Return to Main Menu and back to reload.");
-              }
+              //} else {
+              //  a("Room not found! Return to Main Menu and back to reload.");
+              //}
             }
           }
         }
