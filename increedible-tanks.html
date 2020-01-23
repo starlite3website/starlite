@@ -291,7 +291,7 @@
     }
     this.sendLevel = function() {
       this.socket.send("level "+this.level);
-    }
+    }.bind(this);
   }
   function Get() {
     this.control = function(id) {
@@ -299,7 +299,7 @@
       this.socket.onopen = function() {
         a("Successful Joined Room!");
         this.socket.send("user ");
-      }
+      }.bind(this);
     }
   }
   function Tank() {
