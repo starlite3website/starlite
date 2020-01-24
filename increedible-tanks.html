@@ -269,6 +269,7 @@
         let d = e.data;
         if (d.includes("user ")) {
           let y = d.split("user ");
+          this.users.push(y[1]);
           a(y[1]+" has joined the game");
         }
         if (d.includes("update ")) {
@@ -284,18 +285,34 @@
     }
     this.users = [];
     this.generateLevel = function() {
-      this.level = {weak:[],strong:[],block:[],shots:[],users:this.level.s}
+      this.level = {weak:[],strong:[],block:[],shots:[],users:this.users}
       let p = 0;
       while (p<10) {
-        this.level.weak.push(new Block(30, Math.floor(Math.random(9)*10), Math.floor(Math.random(9)*10)));
+        let s = new Block(30, Math.floor(Math.random(9)*10), Math.floor(Math.random(9)*10));
+        s.strong();
+        b.push(s);
+        this.level.weak.push(s);
+        s.weak();
         p++;
       }
       p = 0;
-      while (s<10) {
-        this.level.strong.push(new Block(30, Math.floor(Math.random(9)*10), Math.floor(Math.random(9)*10)));
+      while (p<10) {
+        let s = new Block(30, Math.floor(Math.random(9)*10), Math.floor(Math.random(9)*10));
+        s.strong();
+        b.push(s);
+        this.level.strong.push(s);
+        s.strong();
         p++;
       }
       p=0;
+      while (p<10) {
+        let s = new Block(30, Math.floor(Math.random(9)*10), Math.floor(Math.random(9)*10));
+        s.strong();
+        b.push(s);
+        this.level.strong.push(s);
+        s.wall();
+        p++;
+      }
       alert(this.level);
     }
     this.sendLevel = function() {
