@@ -295,6 +295,32 @@
         this.level.strong[p].strong(this.level.strong[p].x, this.level.strong[p].y);
         p++;
       }
+      while (p<this.level.wall.length) {
+        this.level.wall[p].wall(this.level.wall[p].x, this.level.wall[p].y);
+        p++;
+      }
+      /*p = 0;
+      while (p<this.level.users.length) {
+        tank_base_png = new Image();
+        tank_base_png.src = "/starlite-tank-base.png";
+        if (this.level.users[p].leftright == true) {
+          draw.translate(this.x + 20, this.y + 20)
+          draw.rotate(90 * Math.PI / 180);
+          draw.drawImage(tank_base_png, -20, -20);
+          draw.rotate(-90 * Math.PI / 180);
+          draw.translate((-this.x - 20), (-this.y - 20));
+        } else {
+          draw.drawImage(tank_base_png, this.x, this.y);
+        }
+        tank_top_png = new Image();
+        tank_top_png.src = "/starlite-tank-top.png";
+        draw.translate(this.x + 20, this.y + 20);
+        draw.rotate(this.rotation * Math.PI / 180);
+        draw.drawImage(tank_top_png, -20, -20);
+        draw.rotate(-(this.rotation * Math.PI / 180));
+        draw.translate(-this.x - 20, -this.y - 20);
+        p++;
+      }*/
     }.bind(this);
     this.users = [];
     this.generateLevel = function() {
@@ -319,7 +345,7 @@
       while (p<10) {
         let s = new Block(30, Math.floor(Math.random(9)*10), Math.floor(Math.random(9)*10));
         b.push(s);
-        this.level.strong.push(s);
+        this.level.wall.push(s);
         s.wall();
         p++;
       }
