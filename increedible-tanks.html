@@ -282,6 +282,14 @@
     }
     this.gameControl = function() {
       this.generateLevel();
+      window.setInterval(this.draw, 100);
+    }
+    this.draw = function() {
+      let p = 0;
+      while (p<this.level.weak.length) {
+        this.level.weak[p].weak(this.level.weak[p].x, this.level.weak[p].y);
+        p++;
+      }
     }
     this.users = [];
     this.generateLevel = function() {
@@ -289,7 +297,6 @@
       let p = 0;
       while (p<10) {
         let s = new Block(30, Math.floor(Math.random(9)*10), Math.floor(Math.random(9)*10));
-        s.strong();
         b.push(s);
         this.level.weak.push(s);
         s.weak();
@@ -298,7 +305,6 @@
       p = 0;
       while (p<10) {
         let s = new Block(30, Math.floor(Math.random(9)*10), Math.floor(Math.random(9)*10));
-        s.strong();
         b.push(s);
         this.level.strong.push(s);
         s.strong();
@@ -307,13 +313,11 @@
       p=0;
       while (p<10) {
         let s = new Block(30, Math.floor(Math.random(9)*10), Math.floor(Math.random(9)*10));
-        s.strong();
         b.push(s);
         this.level.strong.push(s);
         s.wall();
         p++;
       }
-      alert(this.level);
     }
     this.sendLevel = function() {
       this.socket.send("level "+this.level);
