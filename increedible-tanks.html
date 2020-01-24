@@ -269,7 +269,11 @@
         let d = e.data;
         if (d.includes("user ")) {
           let y = d.split("user ");
-          a(y[1]+" has joined the game);
+          a(y[1]+" has joined the game");
+        }
+        if (d.includes("update ")) {
+            let y = d.split("update ");
+            // recieve user x, y, shots and health??
         }
       }
       this.users.push(user.tank);
