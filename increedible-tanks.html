@@ -15,7 +15,7 @@
   storeValue.getItem("gameData").then(value => w = value);
   setTimeout(r, 5000);
   function r() {
-    storeValue.setItem("counter", JSON.parse(c)+1);
+    storeValue.setItem("counter", JFSON.parse(c)+1);
     document.getElementById("views").innerHTML = 'Views: <b>'+JSON.stringify(JSON.parse(c)+1)+'</b>';
     document.getElementById("users").innerHTML = 'Users: <b>'+JSON.stringify(JSON.parse(w).length)+'</b>';
   }
@@ -290,7 +290,12 @@
         this.level.weak[p].weak(this.level.weak[p].x, this.level.weak[p].y);
         p++;
       }
-    }
+      p = 0;
+      while (p<this.level.strong.length) {
+        this.level.strong[p].strong(this.level.strong[p].x, this.level.strong[p].y);
+        p++;
+      }
+    }.bind(this);
     this.users = [];
     this.generateLevel = function() {
       this.level = {weak:[],strong:[],block:[],shots:[],users:this.users}
