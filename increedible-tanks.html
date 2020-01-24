@@ -260,6 +260,8 @@
   }
   function Host() {
     this.control = function(id) {
+      document.removeEventListener("keydown", multiplayer1);
+      document.removeEventListener("click", multiplayer2);
       this.socket = new WebSocket("wss://connect.websocket.in/v2/"+id+"?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6ImY1ZTIxMDM4ZDQzMjFmNWQ3YzQ1NzhiYTFhZGU4NDZhMGE0ODY2MGQxODg1YzJlZjMwZTc1NjBiNzQ0Y2EwYjZlYzc3NmE1Y2Q4MDE3ZTc4In0.eyJhdWQiOiI4IiwianRpIjoiZjVlMjEwMzhkNDMyMWY1ZDdjNDU3OGJhMWFkZTg0NmEwYTQ4NjYwZDE4ODVjMmVmMzBlNzU2MGI3NDRjYTBiNmVjNzc2YTVjZDgwMTdlNzgiLCJpYXQiOjE1NzkyMDAxNDksIm5iZiI6MTU3OTIwMDE0OSwiZXhwIjoxNjEwODIyNTQ5LCJzdWIiOiIzNTMiLCJzY29wZXMiOltdfQ.rBE0cUiXX4J6lD7Ybfa6W-uwXixsroXS8cJh-8IXFVAqK_JPJn3OIexWkwLGIVHDyxiHepXnE8iWTpfoSlDbevHGHyN4SzHcfBSsDFqrHxOibIHJMqWWuAUELZ8C8WCS50EDwnOZQVUac6G5GTkdt4OLdsbUy3akuasC2jIMtYdl00Q_u55Bw9GdLElEGJ3p7uRitxOiEe1SUDntLol4LxkQWr7pS4IqBiIwbhMahNun754Ix_3gqwkTn-B-Gm1laWe02H8RZfKoOD7-JcQHHNVjYdRtlAv1EGs3WcOdr8yus9oo24o3hDe06K3QvEEIkTVuULza-1JnwguBCIxlGd10WKIC0Zg9ikwGHBuv-8q9I3QEbapL54hv9GkSkj6-a0_xOarr1flaUF4gEiocrrjrFnKH24aO8bgFzbxtn7d9hHO7LEFmxYuomf-tlesDvXxxiVnCA_FOA9maT7oW6Fq2dxk9QUxPyZnE0nvamWZBcYYYlXbUSHw9dsW_yZWdirnO1J9O7h0288jVRyw8jGRKCRJC3SPsZIy2943vxdo5yYC089Bx_FlDxgaCfuwTASDYmFd14CZj1suV7qO1pZAbd3JQJUM7R3Ebpcx-IIDvzQmCrPNGOXo8T8L6dt_fY8iY84WaEg56Hs8L3ySbhnFY8Vvea4W648-VmX05KXE");
       this.socket.onopen = function() {
         a('Mutiplayer Server(room: '+id+') created Sucessfully');
