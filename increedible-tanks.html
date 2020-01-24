@@ -324,7 +324,7 @@
     }.bind(this);
     this.users = [];
     this.generateLevel = function() {
-      this.level = {weak:[],strong:[],block:[],shots:[],users:this.users}
+      this.level = {weak:[],strong:[],wall:[],shots:[],users:this.users}
       let p = 0;
       while (p<10) {
         let s = new Block(30, Math.floor(Math.random(9)*10), Math.floor(Math.random(9)*10));
