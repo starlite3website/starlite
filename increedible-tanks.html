@@ -347,7 +347,8 @@
       }.bind(this);
       this.socket.onmessage = function(e) {
         let d = e.data;
-        if (d.includes('level ')) {
+        alert(e.data);
+        if (d.includes("level ")) {
           let y = d.split('level ');
           this.level = JSON.parse(y[1]);
           alert(this.level);
