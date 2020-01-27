@@ -355,7 +355,7 @@
           this.draw();
         }
       }
-    }
+    }.bind(this);
     this.draw = function() {
       let p = 0;
       while (p<this.level.weak.length) {
