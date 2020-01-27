@@ -271,8 +271,8 @@
         let d = e.data;
         if (d.includes("user ")) {
           let y = d.split("user ");
-          this.users.push(y[1]);
-          a(y[1]+" has joined the game");
+          this.users.push(JSON.parse(y[1]));
+          a(JSON.parse(y[1]).id+" has joined the game");
         }
         if (d.includes("update ")) {
             let y = d.split("update ");
@@ -302,28 +302,7 @@
         this.level.wall[p].wall(this.level.wall[p].x, this.level.wall[p].y);
         p++;
       }
-      /*p = 0;
-      while (p<this.level.users.length) {
-        tank_base_png = new Image();
-        tank_base_png.src = "/starlite-tank-base.png";
-        if (this.level.users[p].leftright == true) {
-          draw.translate(this.x + 20, this.y + 20)
-          draw.rotate(90 * Math.PI / 180);
-          draw.drawImage(tank_base_png, -20, -20);
-          draw.rotate(-90 * Math.PI / 180);
-          draw.translate((-this.x - 20), (-this.y - 20));
-        } else {
-          draw.drawImage(tank_base_png, this.x, this.y);
-        }
-        tank_top_png = new Image();
-        tank_top_png.src = "/starlite-tank-top.png";
-        draw.translate(this.x + 20, this.y + 20);
-        draw.rotate(this.rotation * Math.PI / 180);
-        draw.drawImage(tank_top_png, -20, -20);
-        draw.rotate(-(this.rotation * Math.PI / 180));
-        draw.translate(-this.x - 20, -this.y - 20);
-        p++;
-      }*/
+      this.sendLevel();
     }.bind(this);
     this.users = [];
     this.generateLevel = function() {
@@ -363,9 +342,36 @@
       this.socket = new WebSocket("wss://connect.websocket.in/v2/"+id+"?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6ImY1ZTIxMDM4ZDQzMjFmNWQ3YzQ1NzhiYTFhZGU4NDZhMGE0ODY2MGQxODg1YzJlZjMwZTc1NjBiNzQ0Y2EwYjZlYzc3NmE1Y2Q4MDE3ZTc4In0.eyJhdWQiOiI4IiwianRpIjoiZjVlMjEwMzhkNDMyMWY1ZDdjNDU3OGJhMWFkZTg0NmEwYTQ4NjYwZDE4ODVjMmVmMzBlNzU2MGI3NDRjYTBiNmVjNzc2YTVjZDgwMTdlNzgiLCJpYXQiOjE1NzkyMDAxNDksIm5iZiI6MTU3OTIwMDE0OSwiZXhwIjoxNjEwODIyNTQ5LCJzdWIiOiIzNTMiLCJzY29wZXMiOltdfQ.rBE0cUiXX4J6lD7Ybfa6W-uwXixsroXS8cJh-8IXFVAqK_JPJn3OIexWkwLGIVHDyxiHepXnE8iWTpfoSlDbevHGHyN4SzHcfBSsDFqrHxOibIHJMqWWuAUELZ8C8WCS50EDwnOZQVUac6G5GTkdt4OLdsbUy3akuasC2jIMtYdl00Q_u55Bw9GdLElEGJ3p7uRitxOiEe1SUDntLol4LxkQWr7pS4IqBiIwbhMahNun754Ix_3gqwkTn-B-Gm1laWe02H8RZfKoOD7-JcQHHNVjYdRtlAv1EGs3WcOdr8yus9oo24o3hDe06K3QvEEIkTVuULza-1JnwguBCIxlGd10WKIC0Zg9ikwGHBuv-8q9I3QEbapL54hv9GkSkj6-a0_xOarr1flaUF4gEiocrrjrFnKH24aO8bgFzbxtn7d9hHO7LEFmxYuomf-tlesDvXxxiVnCA_FOA9maT7oW6Fq2dxk9QUxPyZnE0nvamWZBcYYYlXbUSHw9dsW_yZWdirnO1J9O7h0288jVRyw8jGRKCRJC3SPsZIy2943vxdo5yYC089Bx_FlDxgaCfuwTASDYmFd14CZj1suV7qO1pZAbd3JQJUM7R3Ebpcx-IIDvzQmCrPNGOXo8T8L6dt_fY8iY84WaEg56Hs8L3ySbhnFY8Vvea4W648-VmX05KXE");
       this.socket.onopen = function() {
         a("Successful Joined Room!");
-        this.socket.send("user "+sessionStorage.username);
+        user.tank.id = sessionStorage.username;
+        this.socket.send("user "+user.tank);
       }.bind(this);
+      this.socket.onmessage = function(e) {
+        let d = e.data;
+        if (d.includes('level ')) {
+          let y = d.split('level ');
+          this.level = JSON.parse(y[1]);
+          this.draw();
+        }
+      }
     }
+    this.draw = function() {
+      let p = 0;
+      while (p<this.level.weak.length) {
+        this.level.weak[p].weak(this.level.weak[p].x, this.level.weak[p].y);
+        p++;
+      }
+      p = 0;
+      while (p<this.level.strong.length) {
+        this.level.strong[p].strong(this.level.strong[p].x, this.level.strong[p].y);
+        p++;
+      }
+      p = 0;
+      while (p<this.level.wall.length) {
+        this.level.wall[p].wall(this.level.wall[p].x, this.level.wall[p].y);
+        p++;
+      }
+      this.sendLevel();
+    }.bind(this);
   }
   function Tank() {
     this.count = 0;
