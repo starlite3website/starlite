@@ -276,7 +276,7 @@
         }
         if (d.includes("update ")) {
             let y = d.split("update ");
-            // recieve user x, y, shots and health??
+            a(y);
         }
       }
       this.users.push(user.tank);
@@ -448,6 +448,7 @@
         a("Successful Joined Room!");
         user.tank.id = sessionStorage.username;
         this.socket.send("user "+user.tank);
+        user.tank.control();
       }.bind(this);
       this.socket.onmessage = function(e) {
         let d = e.data;
@@ -594,7 +595,7 @@
         this.level.wall[p].wall(this.level.wall[p].x, this.level.wall[p].y);
         p++;
       }
-      this.sendLevel();
+      this.socket.send("update "+JSON.stringify({x:user.tank.x, y:user.tank.y, s:s}));
     }.bind(this);
   }
   function Tank() {
