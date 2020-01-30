@@ -276,7 +276,7 @@
         }
         if (d.includes("update ")) {
             let y = d.split("update ");
-            a(y);
+            draw.fillRect(JSON.parse(y[1]).x, JSON.parse(y[1]).y, 50, 50);
         }
       }
       this.users.push(user.tank);
