@@ -435,6 +435,7 @@
         s.wall();
         p++;
       }
+      this.level.users = this.users;
     }
     this.sendLevel = function() {
       this.socket.send("level "+JSON.stringify(this.level));
@@ -528,6 +529,11 @@
           p = 0;
           while (p<user.get.level.wall.length) {
             user.get.level.wall[p].wall = o.wall;
+            p++;
+          }
+          p = 0;
+          while (p<user.get.level.users.length) {
+            draw.fillRect(user.get.level.users[p].x, user.get.level.users[p].y, 50, 50);
             p++;
           }
           user.get.draw();
