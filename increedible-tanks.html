@@ -532,13 +532,14 @@
             p++;
           }
           p = 0;
+          alert(user.get.level.users);
           while (p<user.get.level.users.length) {
             draw.fillStyle="#ffffff";
             draw.fillRect(user.get.level.users[p].x, user.get.level.users[p].y, 50, 50);
             p++;
           }
           user.get.draw();
-          b = user.get.level;
+          b = user.get.level.weak.concat(user.get.level.strong.concat(user.get.level.wall));
         }
       }
     }.bind(this);
