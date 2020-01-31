@@ -277,9 +277,10 @@
         if (d.includes("update ")) {
             let y = d.split("update ");
             draw.fillRect(JSON.parse(y[1]).x, JSON.parse(y[1]).y, 50, 50);
+          this.users[this.users.indexOf(JSON.parse(y[1]).id)].x = x;
+          this.users[this.users.indexOf(JSON.parse(y[1]).id)].y = y;
         }
       }
-      this.users.push(user.tank);
       this.gameControl();
     }
     this.gameControl = function() {
@@ -663,7 +664,7 @@
         this.level.wall[p].wall(this.level.wall[p].x, this.level.wall[p].y);
         p++;
       }
-      this.socket.send("update "+JSON.stringify({x:user.tank.x, y:user.tank.y, s:s}));
+      this.socket.send("update "+JSON.stringify({x:user.tank.x, y:user.tank.y, s:s, id:sessionStorage.username}));
     }.bind(this);
   }
   function Tank() {
