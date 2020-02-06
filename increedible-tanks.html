@@ -830,6 +830,7 @@
     }
   }
   function tank_listener1(event) {
+    a(user.tank.keys);
     if (user.tank.interval == undefined) {
       if (event.keyCode == 87 || event.keyCode == 83 || event.keyCode == 68 || event.keyCode == 65) {
         tank_tracks.play();
@@ -842,7 +843,6 @@
 function tank_listener2(event) {
   window.clearInterval(user.tank.interval);
   user.tank.keys[event.keyCode] = false;
-  a(user.tank.keys);
   tank_tracks.pause();
   tank_tracks.load();
   user.tank.interval = undefined;
