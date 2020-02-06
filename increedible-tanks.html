@@ -4,7 +4,7 @@
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-132422058-1"></script>
 <iframe src="https://kvdb.io/2Rpva475jos9znd2tZZZN9/gameData" width="0" height="0" id="e1"></iframe>
 <iframe src="https://kvdb.io/2Rpva475jos9znd2tZZZN9/username" width="0" height="0" id="e2"></iframe>
-<iframe src="https://kvdb.io/2Rpva475jos9znd2tZZZN9/apassword" width="0" height="0" id="e3"></iframe>
+<iframe src="https://kvdb.io/2Rpva475jos9znd2tZZZN9/apassword" width="0" height="f0" id="e3"></iframe>
 <iframe src="https://kvdb.io/2Rpva475jos9znd2tZZZN9/messages" width="0" height="0" id="e4"></iframe>
 <script src="https://unpkg.com/kvdb.io@1.0.5/index.js" integrity="sha384-91zc4JidmYl6NUcicf1m8ABob6eO1HkULPeHYooqi1sptqZ9k5vaZqSNNkVlPsap" crossorigin="anonymous"></script>
 <script>
@@ -15,7 +15,7 @@
   storeValue.getItem("gameData").then(value => w = value);
   setTimeout(r, 5000);
   function r() {
-    storeValue.setItem("counter", JFSON.parse(c)+1);
+    storeValue.setItem("counter", JSON.parse(c)+1);
     document.getElementById("views").innerHTML = 'Views: <b>'+JSON.stringify(JSON.parse(c)+1)+'</b>';
     document.getElementById("users").innerHTML = 'Users: <b>'+JSON.stringify(JSON.parse(w).length)+'</b>';
   }
@@ -724,39 +724,42 @@
     }
     this.inactive = false;
     this.rotation = 0;
+    this.keys = [];
     this.move = function(e) {
+      e = e || event;
+      this.keys[e.keyCode] = true;
       e.preventDefault();
       e.stopImmediatePropagation();
       if (this.inactive == false) {
-        if (e.code == "KeyD") {
+        if (this.keys[e.keyCode]) {
           if (checker(this.x + 5, this.y) != false) {
             this.x += 5;
             this.leftright = true;
             // CHASE put in tank_track.play(); here
           }
         }
-        if (e.code == "KeyW") {
+        if (this.keys[e.keyCode]) {
           if (checker(this.x, this.y - 5) != false) {
             this.y -= 5;
             this.leftright = false;
             // CHASE put in tank_track.play(); here
           }
         }
-        if (e.code == "KeyA") {
+        if (this.keys[e.keyCode]) {
           if (checker(this.x - 5, this.y) != false) {
             this.x -= 5;
             this.leftright = true;
             // CHASE put in tank_track.play(); here
           }
         }
-        if (e.code == "KeyS") {
+        if (this.keys[e.keyCode]) {
           if (checker(this.x, this.y + 5) != false) {
             this.y += 5;
             this.leftright = false;
             // CHASE put in tank_track.play(); here
           }
         }
-        if (e.which == 70) {
+        if (this.keys[e.keyCode]) {
           if (this.count == 5) {
             this.fire();
             // CHASE put in tank_fire.play(); here
@@ -765,13 +768,14 @@
             this.count++;
           }
         }
-        if (e.which == 37) {
+        if (this.keys[e.keyCode]) {
           if (this.rotation == 355) {
             this.rotation = 0;
           } else {
             this.rotation += 5;
           }
-        } else if (e.which == 39) {
+        }
+        if (this.keys[e.keyCode]) {
           if (this.rotation == 0) {
             this.rotation = 355;
           } else {
