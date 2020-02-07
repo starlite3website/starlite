@@ -730,35 +730,35 @@
       e.preventDefault();
       e.stopImmediatePropagation();
       if (this.inactive == false) {
-        if (this.keys[e.keyCode]) {
+        if (this.keys[68]) {
           if (checker(this.x + 5, this.y) != false) {
             this.x += 5;
             this.leftright = true;
             // CHASE put in tank_track.play(); here
           }
         }
-        if (this.keys[e.keyCode]) {
+        if (this.keys[87]) {
           if (checker(this.x, this.y - 5) != false) {
             this.y -= 5;
             this.leftright = false;
             // CHASE put in tank_track.play(); here
           }
         }
-        if (this.keys[e.keyCode]) {
+        if (this.keys[65]) {
           if (checker(this.x - 5, this.y) != false) {
             this.x -= 5;
             this.leftright = true;
             // CHASE put in tank_track.play(); here
           }
         }
-        if (this.keys[e.keyCode]) {
+        if (this.keys[83]) {
           if (checker(this.x, this.y + 5) != false) {
             this.y += 5;
             this.leftright = false;
             // CHASE put in tank_track.play(); here
           }
         }
-        if (this.keys[e.keyCode]) {
+        if (this.keys[70]) {
           if (this.count == 5) {
             this.fire();
             // CHASE put in tank_fire.play(); here
@@ -767,14 +767,14 @@
             this.count++;
           }
         }
-        if (this.keys[e.keyCode]) {
+        if (this.keys[39]) {
           if (this.rotation == 355) {
             this.rotation = 0;
           } else {
             this.rotation += 5;
           }
         }
-        if (this.keys[e.keyCode]) {
+        if (this.keys[37]) {
           if (this.rotation == 0) {
             this.rotation = 355;
           } else {
