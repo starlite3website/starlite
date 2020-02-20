@@ -830,7 +830,7 @@
   }
   function tank_listener1(event) {
     a(event.keyCode);
-    this.keys[event.keyCode] = true;
+    user.tank.keys[event.keyCode] = true;
     if (user.tank.interval == undefined) {
       if (event.keyCode == 87 || event.keyCode == 83 || event.keyCode == 68 || event.keyCode == 65) {
         tank_tracks.play();
