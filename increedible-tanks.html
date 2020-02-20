@@ -1921,6 +1921,7 @@ function tank_listener2(event) {
         if (x < 150) {
           if (y > 100) {
             if (y < 150) {
+              document.removeEventListener("click", levelSelectSupport);
               Game.level = 1;
               level(1, null, true);
             }
@@ -1932,6 +1933,7 @@ function tank_listener2(event) {
         if (x<250) {
           if (y>100) {
             if (y<150 && userData.level > 1) {
+              document.removeEventListener("click", levelSelectSupport);
               Game.level = 2;
               level(2, null, true);
             }
@@ -1942,6 +1944,7 @@ function tank_listener2(event) {
         if (x<350) {
           if (y>100) {
             if (y<150 && userData.level > 2) {
+              document.removeEventListener("click", levelSelectSupport);
               Game.level = 3;
               level(3, null, true);
             }
@@ -1952,6 +1955,7 @@ function tank_listener2(event) {
         if (x<150) {
           if (y>200) {
             if (y<250 && userData.level > 3) {
+              document.removeEventListener("click", levelSelectSupport);
               Game.level = 4;
               level(4, null, true);
             }
@@ -1962,6 +1966,7 @@ function tank_listener2(event) {
         if (x<250) {
           if (y>200) {
             if (y<250 && userData.level > 4) {
+              document.removeEventListener("click", levelSelectSupport);
               Game.level = 5;
               level(5, null, true);
             }
@@ -1972,6 +1977,7 @@ function tank_listener2(event) {
       if (x<350) {
         if (y>200) {
           if (y<250 && userData.level > 5) {
+            document.removeEventListener("click", levelSelectSupport);
             Game.level = 6;
             level(6, null, true);
           }
@@ -1982,6 +1988,7 @@ function tank_listener2(event) {
       if (x<150) {
         if (y>300) {
           if (y<350 && userData.level > 6) {
+            document.removeEventListener("click", levelSelectSupport);
             Game.level = 7;
             level(7, null, true);
           }
@@ -1992,6 +1999,7 @@ function tank_listener2(event) {
       if (x<250) {
         if (y>300) {
           if (y<350  && userData.level > 7) {
+            document.removeEventListener("click", levelSelectSupport);
             Game.level = 8;
             level(8, null, true);
           }
@@ -2002,6 +2010,7 @@ function tank_listener2(event) {
       if (x<350) {
         if (y>300) {
           if (y<350 && userData.level > 8) {
+            document.removeEventListener("click", levelSelectSupport);
             Game.level = 9;
             level(9, null, true);
           }
@@ -2012,6 +2021,7 @@ function tank_listener2(event) {
       if (x<150) {
         if (y>400) {
           if (y<450 && userData.level > 9) {
+            document.removeEventListener("click", levelSelectSupport);
             Game.level = 10;
             level(10, null, true);
           }
@@ -2022,6 +2032,7 @@ function tank_listener2(event) {
       if (x<250) {
         if (y>400) {
           if (y<450 && userData.level > 10) {
+            document.removeEventListener("click", levelSelectSupport);
             Game.level = 11;
             level(11, null, true);
           }
@@ -2032,6 +2043,7 @@ function tank_listener2(event) {
       if (x<350) {
         if (y>400) {
           if (y<450 && userData.level > 11) {
+            document.removeEventListener("click", levelSelectSupport);
             Game.level = 12;
             level(12, null, true);
           }
