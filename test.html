@@ -1,22 +1,7 @@
-
-<h1>Starlite Multiplayer Attempt #1</h1>
-<input id="data" /><button id="submit">SEND</button>
-<div id="messages">
-</div>
-<script src="/cdn-cgi/apps/head/uCSm8uZLv5JU1utsvWxxUpwUeXc.js"></script><script>
-  var ws = new WebSocket('wss://starliteserver.cs641311.repl.co:8000');
-  document.getElementById('submit').addEventListener('click', function() {
-    ws.send(document.getElementById("data").value);
-  });
-  ws.onopen = function() {
-    alert(3)
-  }
-  ws.onmessage = function(data) {
-    console.log(data)
-  }
-  ws.onclose = function(e) {
-    alert("CLOSED");
-    alert(e.reason);
-    alert(e.code);
-  }
+<script src="https://unpkg.com/kvdb.io@1.0.5/index.js" integrity="sha384-91zc4JidmYl6NUcicf1m8ABob6eO1HkULPeHYooqi1sptqZ9k5vaZqSNNkVlPsap" crossorigin="anonymous"></script>
+<script>
+  var storeValue = KVdb.bucket(''2Rpva475jos9znd2tZZZN9',12481485');
+  storeValue.setItem('username', '[]');
+  storeValue.setItem('password', '[]');
+  storeValue.setItem('servers', '[]');
 </script>
