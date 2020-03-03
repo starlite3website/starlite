@@ -123,11 +123,10 @@
     this.fire = function() {
       this.xd = 1;
       this.angle = this.rotation % 90;
-      if (this.rotation < 90 || (this.rotation < 270 && this.rotation > 180)) {
-        this.yd = Math.abs(((this.xd * this.angle+90) - (90 * this.xd)) / this.angle+90);
+      this.yd = Math.abs(((this.xd * this.angle) - (90 * this.xd)) / this.angle);
+      if (this.rotation < 90 || this.rotation > 270) {
         this.yd = Math.abs(this.yd);
       } else {
-        this.yd = Math.abs(((this.xd * this.angle) - (90 * this.xd)) / this.angle);
         this.yd = 0 - Math.abs(this.yd);
       }
       if (this.rotation > 180) {
@@ -150,8 +149,8 @@
       }
       Game.shotId = Game.shotId + 1;
       s[Game.shotId] = new Shot();
-      if (this.x < user.tank.x) {
-        s[Game.shotId].control(this.x + 20, this.y + 20, Game.shotId, Math.abs(this.xd), this.yd);
+      if ((this.xd < 0 && this.yd < 0) || (this.xd > 0 && this.yd > 0)) {
+        s[Game.shotId].control(this.x + 20, this.y + 20, Game.shotId, this.yd, this.xd);
       } else {
         s[Game.shotId].control(this.x + 20, this.y + 20, Game.shotId, this.xd, this.yd);
       }
@@ -829,7 +828,6 @@
     }
   }
   function tank_listener1(event) {
-    a(event.keyCode);
     user.tank.keys[event.keyCode] = true;
     if (user.tank.interval == undefined) {
       if (event.keyCode == 87 || event.keyCode == 83 || event.keyCode == 68 || event.keyCode == 65) {
