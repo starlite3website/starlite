@@ -857,15 +857,19 @@
     }
   }
   function tank_listener1(event) {
-    user.tank.keys[event.keyCode] = true;
-    if (user.tank.interval == undefined) {
-      if (event.keyCode == 87 || event.keyCode == 83 || event.keyCode == 68 || event.keyCode == 65) {
+    if (event.keyCode == 87 || event.keyCode == 83 || event.keyCode == 68 || event.keyCode == 65) {
         tank_tracks.play();
-      }
+    }
+    if (user.tank.keys[e.keyCode] != true) {
       user.tank.interval = window.setInterval(function() {
         user.tank.move(event);
-      }, 20);
+      }, 200);
+    } else {
+      user.tank.interval = window.setInterval(function() {
+        user.tank.move(event);
+      }, 500);
     }
+    user.tank.keys[event.keyCode] = true;
   }
 function tank_listener2(event) {
   window.clearInterval(user.tank.interval);
