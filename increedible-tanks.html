@@ -893,7 +893,7 @@
           count++;
         }
       }
-      if (count > 1) {
+      if (count > 0) {
         user.tank.intervals[event.keyCode] = window.setInterval(function() {
           user.tank.move(event);
         }, 50);
