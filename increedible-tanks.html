@@ -887,9 +887,21 @@
     }
     a(user.tank.keys+' '+user.tank.intervals);
     if (user.tank.keys[event.keyCode] != true) {
-      user.tank.intervals[event.keyCode] = window.setInterval(function() {
-        user.tank.move(event);
-      }, 50);
+      var count = 0;
+      for(var i = 0; i < user.tank.keys.length; ++i){
+        if(user.tank.keys[i]) {
+          count++;
+        }
+      }
+      if (count > 1) {
+        user.tank.intervals[event.keyCode] = window.setInterval(function() {
+          user.tank.move(event);
+        }, 25);
+      } else {
+        user.tank.intervals[event.keyCode] = window.setInterval(function() {
+          user.tank.move(event);
+        }, 50);
+      }
     }
     user.tank.keys[event.keyCode] = true;
   }
