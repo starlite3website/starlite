@@ -896,11 +896,11 @@
       if (count > 1) {
         user.tank.intervals[event.keyCode] = window.setInterval(function() {
           user.tank.move(event);
-        }, 25);
+        }, 50);
       } else {
         user.tank.intervals[event.keyCode] = window.setInterval(function() {
           user.tank.move(event);
-        }, 50);
+        }, 25);
       }
     }
     user.tank.keys[event.keyCode] = true;
