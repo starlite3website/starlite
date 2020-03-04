@@ -1096,7 +1096,7 @@ function tank_listener2(event) {
   function loading() {
     if (sessionStorage.username == undefined || JSON.parse(gameData) == null) {
       if (JSON.parse(gameData) == null) {
-        alert('Starlite uses a free database, which mean that about 2/24 hours a day we are down. You can choose to play as Guest, but nothing will be saved...");
+        alert('Starlite uses a free database, which mean that about 2/24 hours a day we are down. You can choose to play as Guest, but nothing will be saved...');
       }
       var t = confirm("Do you want to play as Guest?");
       if (t) {
