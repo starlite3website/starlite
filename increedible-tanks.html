@@ -1094,10 +1094,19 @@ function tank_listener2(event) {
   var gameData, userData;
   storeValue.getItem("gameData").then(value => gameData = value);
   function loading() {
-    if (sessionStorage.username == undefined) {
-      alert("SIGN IN TO PLAY: RIDIRECTING");
-        window.location.href = "/account";
+    if (sessionStorage.username == undefined || JSON.parse(gameData) == null) {
+      if (JSON.parse(gameData) == null) {
+        alert('Starlite uses a free database, which mean that about 2/24 hours a day we are down. You can choose to play as Guest, but nothing will be saved...");
+      }
+      var t = confirm("Do you want to play as Guest?");
+      if (t) {
+        gameData = JSON.stringify([{username:"Guest", health:200, coins:0}]);
+        sessionStorage.username = "Guest";
+      } else {
+        startScreen();
+      }
     }
+    
     var l = 0;
     while (l<JSON.parse(gameData).length) {
       if (JSON.parse(gameData)[l].username==sessionStorage.username) {
