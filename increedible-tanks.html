@@ -889,7 +889,7 @@
     if (user.tank.keys[event.keyCode] != true) {
       user.tank.intervals[event.keyCode] = window.setInterval(function() {
         user.tank.move(event);
-      }, 200);
+      }, 50);
     }
     user.tank.keys[event.keyCode] = true;
   }
