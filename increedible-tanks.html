@@ -175,60 +175,7 @@
     }.bind(this);
     this.rotation = 0;
     this.moveCalc = function() {
-      this.xd = (this.x-20)-(user.tank.x-20);
-      this.yd = (this.y+20)-(user.tank.y+20);
-      if (this.xd == 0) {
-        if (this.yd > 0) {
-          this.deg = 0;
-        } else {
-          this.deg = 180;
-        }
-      }
-      if (this.yd == 0) {
-        if (this.xd > 0) {
-          this.deg = 90;
-        } else {
-          this.deg = 270;
-        }
-      }
-      this.odeg = (Math.abs(this.yd)*90)/(Math.abs(this.xd)+1);
-      this.deg = this.odeg;
-      if (this.xd < 0) {
-        this.deg = 360 - this.odeg;
-      }
-      if (this.yd < 0) {
-        if (this.deg > 270) {
-          this.deg -= 2(90-this.odeg);
-        } else {
-          this.deg += 2(90-this.odeg);
-        }
-      }
-      this.rotation=this.deg;
-      console.log(this.deg, this.odeg);
-      if (300 > Math.sqrt(this.xdistance * this.xdistance + this.ydistance * this.ydistance)) {
-        return { fire: true };
-      } else {
-        if (Math.abs(this.ydistance) > Math.abs(this.xdistance)) {
-          if (this.ydistance > 0) {
-            return { up: false, down: false, left: false, right: true };
-          } else {
-            return { up: false, down: false, left: true, right: false };
-          }
-        } else if (Math.abs(this.xdistance) > Math.abs(this.ydistance)) {
-          if (this.xdistance > 0) {
-            return { up: false, down: true, left: false, right: false };
-          } else {
-            return { up: true, down: false, left: false, right: false };
-          }
-        } else {
-          if (this.ydistance < 0) {
-            return { left: true };
-          } else {
-            return { right: true };
-          }
-        }
-      }
-      /*this.xdistance = user.tank.x - this.x;
+      this.xdistance = user.tank.x - this.x;
       this.ydistance = user.tank.y - this.y;
       this.rotation = Math.atan(this.ydistance / this.xdistance) * 180 / Math.PI;
       if (this.xdistance > 0) {
@@ -236,6 +183,11 @@
       } else {
         this.rotation += 90;
       }
+      if (this.ydistance > 0) {
+        this.rotation += 90;
+      } else {
+        this.rotation -= 90;
+      }
       if (300 > Math.sqrt(this.xdistance * this.xdistance + this.ydistance * this.ydistance)) {
         return { fire: true };
       } else {
@@ -258,7 +210,7 @@
             return { right: true };
           }
         }
-      }*/
+      }
     }.bind(this);
   }
   function Shot() {
