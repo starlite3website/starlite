@@ -126,12 +126,18 @@
       this.yd = Math.abs(((this.xd * this.angle) - (90 * this.xd)) / this.angle);
       if (this.rotation < 90 || this.rotation > 270) {
         if (this.rotation < 90) {
-          this,yd = Math.abs(this.yd);
+          this.yd = Math.abs(this.yd);
         } else {
           this.yd = Math.abs(this.yd);
         }
       } else {
         this.yd = 0 - Math.abs(this.yd);
+      }
+      if (this.xd > 0) {
+        this.yd = this.xd;
+        this.xd = this.yd;
+        this.xd = -this.xd;
+        this.yd = -this.yd;
       }
       if (this.rotation > 180) {
         this.xd = Math.abs(this.xd);
