@@ -182,10 +182,11 @@
       this.xdistance = user.tank.x - this.x;
       this.ydistance = user.tank.y - this.y;
       this.rotation = Math.atan(this.ydistance / this.xdistance) * 180 / Math.PI;
+      this.odeg = (90*Math.abs(this.yd))/(this.xdistance+1);
       if (this.xdistance > 0) {
         this.rotation -= 90;
       } else {
-        this.rotation += 90;
+        this.rotation += 2(90-this.odeg);
       }
       if (300 > Math.sqrt(this.xdistance * this.xdistance + this.ydistance * this.ydistance)) {
         return { fire: true };
