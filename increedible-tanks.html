@@ -136,6 +136,8 @@
       }
       if (this.ydistance > 0 && this.xdistance) {
         this.xd = Math.abs(this.xd);
+        this.yd = this.xd;
+        this.xd = this.yd;
       }
       if (this.rotation == 0) {
         this.xd = 0;
