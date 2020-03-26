@@ -1841,8 +1841,10 @@ function tank_listener2(event) {
     draw.fillText(user.username, 150, 125);
     draw.fillText("Level:" + userData.level, 325, 125);
     draw.fillText("Coins:" + userData.coins, 75, 190);
+    draw.font = "bold 15px Courier";
     draw.fillText("Controls: WASD movement, F fire, and", 75, 250);
     draw.fillText("arrow keys barrel movement", 75, 270);
+    draw.font = "15px Courier";
     draw.fillRect(190, 350, 120, 50);
     draw.fillRect(70,350,100,50);
     draw.fillRect(330, 350, 100, 50);
