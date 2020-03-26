@@ -184,7 +184,7 @@
         this.rotation += 90;
       }
       if (this.ydistance < 0) {
-        this.rotation -= 90;
+        //this.rotation -= 90; Commented for testing purposes
       }
       if (300 > Math.sqrt(this.xdistance * this.xdistance + this.ydistance * this.ydistance)) {
         return { fire: true };
