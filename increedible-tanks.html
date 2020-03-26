@@ -134,6 +134,9 @@
       } else {
         this.xd = 0 - Math.abs(this.xd);
       }
+      if (this.ydistance > 0 && this.xdistance) {
+        this.xd = Math.abs(this.xd);
+      }
       if (this.rotation == 0) {
         this.xd = 0;
         this.yd = 1;
@@ -179,11 +182,7 @@
       this.ydistance = user.tank.y - this.y;
       this.rotation = Math.atan(this.ydistance / this.xdistance) * 180 / Math.PI;
       if (this.xdistance > 0) {
-        if (this.ydistance > 0) {
-          //nothing for now...
-        } else {
-          this.rotation -= 90;
-        }
+        this.rotation -= 90;
       } else {
         this.rotation += 90;
       }
