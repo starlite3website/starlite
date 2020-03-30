@@ -13,7 +13,7 @@
   var c, s=[], d=[];
   storeValue.getItem("counter").then(value => c = value);
   storeValue.getItem("gameData").then(value => w = value);
-  setTimeout(r, 5000);
+  setTimeout(r, 30000);
   function r() {
     storeValue.setItem("counter", JSON.parse(c)+1);
     document.getElementById("views").innerHTML = 'Views: <b>'+JSON.stringify(JSON.parse(c)+1)+'</b>';
