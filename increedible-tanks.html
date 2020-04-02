@@ -8,7 +8,7 @@
 <iframe src="https://kvdb.io/2Rpva475jos9znd2tZZZN9/messages" width="0" height="0" id="e4"></iframe>
 <script src="https://unpkg.com/kvdb.io@1.0.5/index.js" integrity="sha384-91zc4JidmYl6NUcicf1m8ABob6eO1HkULPeHYooqi1sptqZ9k5vaZqSNNkVlPsap" crossorigin="anonymous"></script>
 <script>
-  window.setInterval(reload, 15000);
+  window.setInterval(reload, 100000);
   var storeValue = KVdb.bucket('2Rpva475jos9znd2tZZZN9', 12481485).localStorage();
   var c, s=[], d=[];
   storeValue.getItem("counter").then(value => c = value);
@@ -46,14 +46,7 @@
   <a href="http://onvictinitor.com/afu.php?zoneid=3033122"><b>Support Starlite(ad)</b></a>
 </div>
 <script>
-  var interval, user, listener, interval2, b = [],
-    s = [],
-    ai = [],
-    l1 = 0,
-    l2 = 0,
-    i = [],
-    Game = new Game();
-  var storeValue = KVdb.bucket('2Rpva475jos9znd2tZZZN9', 12481485).localStorage();
+  var interval, user, listener, interval2, b = [], s = [], ai = [], l1 = 0, l2 = 0, i = [], Game = new Game(), ai_top = new Image(), ai_top.src = "/starlite-tank-top.png", ai_base = new Image(), ai_base.src = "/starlite-tank-base.png", tank_base_png = new Image(), tank_base_png.src = "/starlite-tank-base.png", tank_top_png = new Image(), tank_top_png.src = "/starlite-tank-top.png", storeValue = KVdb.bucket('2Rpva475jos9znd2tZZZN9', 12481485).localStorage(),
   function ai_check(x, y) {
     var l = 1;
     while (l < Game.shotId) {
@@ -82,10 +75,6 @@
     }.bind(this);
     this.draw = function() {
       if (this.inactive != true) {
-        ai_top = new Image();
-        ai_top.src = "/starlite-tank-top.png";
-        ai_base = new Image();
-        ai_base.src = "/starlite-tank-base.png";
         draw.drawImage(ai_base, this.x, this.y);
         draw.translate(this.x + 20, this.y + 20);
         draw.rotate(this.rotation * Math.PI / 180);
@@ -681,8 +670,6 @@
     this.mode = 0;
     this.color = "#00ff00";
     this.draw = function() {
-      tank_base_png = new Image();
-      tank_base_png.src = "/starlite-tank-base.png";
       if (this.leftright == true) {
         draw.translate(this.x + 20, this.y + 20)
         draw.rotate(90 * Math.PI / 180);
@@ -692,8 +679,7 @@
       } else {
         draw.drawImage(tank_base_png, this.x, this.y);
       }
-      tank_top_png = new Image();
-      tank_top_png.src = "/starlite-tank-top.png";
+      
       draw.translate(this.x + 20, this.y + 20);
       draw.rotate(this.rotation * Math.PI / 180);
       draw.drawImage(tank_top_png, -20, -20);
@@ -701,7 +687,6 @@
       draw.translate(-this.x - 20, -this.y - 20);
     }
     this.check = function() {
-      console.clear()
       if (ai_check(this.x, this.y)) {
         this.health -= 20;
         if (this.health <= 0) {
@@ -1829,8 +1814,8 @@ function tank_listener2(event) {
     playText.style.visibility = "hidden";
     draw.fillStyle = "#556B2F";
     draw.fillRect(50, 50, 400, 400);
-    draw.fillStyle = "#ffffff";
-    draw.fillRect(75, 95, 50, 50);
+    draw.drawImage(tank_base_png, 75, 95, 50, 50);
+    draw.drawImage(tank_top_png, 75, 95, 50, 50);
     draw.font = "15px Courier";
     draw.fillText(user.username, 150, 125);
     draw.fillText("Level:" + userData.level, 325, 125);
