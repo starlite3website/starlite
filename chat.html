@@ -17,6 +17,48 @@
   }
 </script>
   
+<div id="animate">
+</div>
+<style>
+    #animate {
+      position: absolute;
+      left: 40%;
+      top: 40%;
+      margin-top: 50px;
+      margin-left:0px;
+      width: 30px;
+      height: 30px;
+      border: 1px solid orange;
+      background-color: orange;
+      border-radius: 15px;
+      animation: animation 5s infinite;
+    }
+    @keyframes animation {
+      0% {
+        margin-top: 50px;
+        margin-left:0px;
+      }
+      25% {
+        margin-left: 50px;
+        margin-top: 0px;
+        background-color: white;
+      }
+      50% {
+        margin-left: 100px;
+        margin-top: 50px;
+        background-color: orange;
+      }
+      75% {
+        margin-left: 50px;
+        margin-top: 100px;
+        background-color: white;
+      }
+      100% {
+        margin-top: 50px;
+        margin-left: 0px;
+      }
+    }
+</style>
   <div id="messages">
   </div>
   <div>
@@ -64,7 +106,9 @@
       window.location.href = "/";
     }
     var d = [], e = [], storeValue = KVdb.bucket('2Rpva475jos9znd2tZZZN9', 12481485).localStorage();
-    window.setInterval(update, 50);
+    window.setTimeout(function() {
+      window.setInterval(update, 50);
+    }, 5000);
     function update() {
       storeValue.getItem("messages").then(value => messages = value);
       var l = 0;
