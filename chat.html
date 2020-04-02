@@ -16,10 +16,26 @@
     document.getElementById("e4").src = document.getElementById("e4").src;
   }
 </script>
-  
+<div id='wall'></div>
+<script>
+  window.setTimeout(function() {
+    document.getElementById('wall').style.display = 'hidden';
+    document.getElementById('animate').style.display = 'hidden';
+  }, 5000);
+</script>
 <div id="animate">
 </div>
 <style>
+    #wall {
+      position: fixed;
+      background-color: white;
+      opacity: 0.8;
+      width: 100%;
+      height: 100%;
+      top: 0px;
+      left: 0px;
+      z-index: 1000;
+    }
     #animate {
       position: absolute;
       left: 40%;
