@@ -1817,8 +1817,8 @@ function tank_listener2(event) {
     playText.style.visibility = "hidden";
     draw.fillStyle = "#556B2F";
     draw.fillRect(50, 50, 400, 400);
-    draw.drawImage(tank_base_png, 75, 95, 50, 50);
-    draw.drawImage(tank_top_png, 75, 95, 50, 50);
+    draw.drawImage(tank_base_png, 75, 95);
+    draw.drawImage(tank_top_png, 75, 95);
     draw.font = "15px Courier";
     draw.fillText(user.username, 150, 125);
     draw.fillText("Level:" + userData.level, 325, 125);
@@ -1826,6 +1826,7 @@ function tank_listener2(event) {
     draw.font = "bold 15px Courier";
     draw.fillText("Controls: WASD movement, F fire, and", 75, 250);
     draw.fillText("arrow keys barrel movement", 75, 270);
+    draw.fillStyle="#ffffff";
     draw.font = "15px Courier";
     draw.fillRect(190, 350, 120, 50);
     draw.fillRect(70,350,100,50);
