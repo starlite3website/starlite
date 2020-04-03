@@ -121,12 +121,15 @@
     if (sessionStorage.username == undefined) {
       window.location.href = "/";
     }
-    var d = [], e = [], storeValue = KVdb.bucket('2Rpva475jos9znd2tZZZN9', 12481485).localStorage();
+    var d = [], e = [], storeValue = KVdb.bucket('2Rpva475jos9znd2tZZZN9', 12481485).localStorage(), socket = new WebSocket('wss://connect.websocket.in/v3/1?apiKey=c37MW77TpY8GDiA4yfQPegQUtlFUJkK5d2i1Nrkuk87aCjfwtsxTxHPgKdLn');;
     window.setTimeout(function() {
       window.setInterval(update, 50);
+      socket.onmessage = function(e) {
+        update(JSON.parse(e.data));
+      }
     }, 5000);
-    function update() {
-      storeValue.getItem("messages").then(value => messages = value);
+    function update(messages) {
+      storeValue.getItem("messages").then(value => messages = messages.concat(value));
       var l = 0;
       while (l<e.length) {
         e[l].style.display = "none";
@@ -161,6 +164,7 @@
         if (m.replace(/\s/g,'').toLowerCase().includes("damn") || m.replace(/\s/g,'').toLowerCase().includes("shit") || m.replace(/\s/g,'').toLowerCase().includes("fuck") || m.replace(/\s/g,'').toLowerCase().includes("ass") || m.replace(/\s/g,'').toLowerCase().includes("bitch") || m.replace(/\s/g,'').toLowerCase().includes("cunt")) { // CHASE Put in the 'words' in the includes("<here>") area (delete this after you do it)
           alert("Cuss Word Detected! We do not permit any cuss words. If you disagree that you have not cuss words in your message report to 'admin' in chat");
         } else {
+         socket.send(JSON.stringify({message:document.getElementById("message").value,user:document.getElementById("from").value,send:sessionStorage.username,timestamps:new Date()}));
          storeValue.setItem("messages", JSON.stringify(JSON.parse(messages).concat({message:document.getElementById("message").value,user:document.getElementById("from").value,send:sessionStorage.username,timestamps:new Date()})));
         }
         document.getElementById("message").value = "";
