@@ -196,7 +196,6 @@
         this.xd = 1;
         this.yd = 0;
       }
-      a(this.xd+' '+this.yd);
       Game.shotId = Game.shotId + 1;
       s[Game.shotId] = new Shot();
       if ((this.xd < 0 && this.yd < 0) || (this.xd > 0 && this.yd > 0)) {
@@ -593,7 +592,6 @@
           }
           user.get.draw();
           b = user.get.level.weak.concat(user.get.level.strong.concat(user.get.level.wall));
-          a(user.get.level);
         }
       }
     }.bind(this);
