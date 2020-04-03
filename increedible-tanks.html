@@ -320,7 +320,7 @@
         let d = e.data;
         if (d.includes("user ")) {
           let y = d.split("user ");
-          this.users.push(JSON.parse(y[1]));
+          this.users.push({x:JSON.parse(y[1]).x,y:JSON.parse(y[1]).y,rotation:JSON.parse(y[1]).rotation,id:JSON.parse(y[1]).id});
           a(JSON.parse(y[1]).id+" has joined the game");
         }
         if (d.includes("update ")) {
