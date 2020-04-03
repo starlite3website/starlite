@@ -19,8 +19,8 @@
 <div id='wall'></div>
 <script>
   window.setTimeout(function() {
-    document.getElementById('wall').style.display = 'hidden';
-    document.getElementById('animate').style.display = 'hidden';
+    document.getElementById('wall').style.visibility = 'hidden';
+    document.getElementById('animate').style.visibility = 'hidden';
   }, 5000);
 </script>
 <div id="animate">
@@ -34,7 +34,7 @@
       height: 100%;
       top: 0px;
       left: 0px;
-      z-index: 1000;
+      z-index: 100;
     }
     #animate {
       position: absolute;
@@ -48,6 +48,7 @@
       background-color: orange;
       border-radius: 15px;
       animation: animation 5s infinite;
+      z-index:101;
     }
     @keyframes animation {
       0% {
