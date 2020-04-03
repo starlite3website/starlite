@@ -583,12 +583,14 @@
           }
           p = 0;
           while (p<user.get.level.users.length) {
-            draw.drawImage(tank_base_png, user.get.level.users[p].x, user.gel.level.users[p].y);
-            draw.translate(this.x + 20, this.y + 20);
-            draw.rotate(user.get.level.users[p].rotation * Math.PI / 180);
-            draw.drawImage(tank_top_png, user.get.level.users[p].x, user.get.level.users[p].y);
-            draw.rotate(-(user.get.level.users[p].rotation * Math.PI / 180));
-            draw.translate(-this.x - 20, -this.y - 20);
+            draw.fillStyle = "#ffffff";
+            draw.fillRect(user.get.level.users[p].x,user.get.level.users[p].y,50,50);
+            //draw.drawImage(tank_base_png, user.get.level.users[p].x, user.gel.level.users[p].y);
+            //draw.translate(this.x + 20, this.y + 20);
+            //draw.rotate(user.get.level.users[p].rotation * Math.PI / 180);
+            //draw.drawImage(tank_top_png, user.get.level.users[p].x, user.get.level.users[p].y);
+            //draw.rotate(-(user.get.level.users[p].rotation * Math.PI / 180));
+            //draw.translate(-this.x - 20, -this.y - 20);
             p++;
           }
           user.get.draw();
