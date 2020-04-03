@@ -7,6 +7,101 @@
 <iframe src="https://kvdb.io/2Rpva475jos9znd2tZZZN9/apassword" width="0" height="0" id="e3"></iframe>
 <iframe src="https://kvdb.io/2Rpva475jos9znd2tZZZN9/messages" width="0" height="0" id="e4"></iframe>
 <script src="https://unpkg.com/kvdb.io@1.0.5/index.js" integrity="sha384-91zc4JidmYl6NUcicf1m8ABob6eO1HkULPeHYooqi1sptqZ9k5vaZqSNNkVlPsap" crossorigin="anonymous"></script>
+</head>
+<div id='wall'></div>
+<div id="animate">
+</div>
+<style>
+    #wall {
+      position: fixed;
+      background-color: white;
+      width: 100%;
+      height: 100%;
+      top: 0px;
+      left: 0px;
+      z-index: 100;
+    }
+    #animate {
+      position: absolute;
+      left: 45%;
+      top: 40%;
+      margin-top: 50px;
+      margin-left:0px;
+      width: 30px;
+      height: 30px;
+      border: 1px solid orange;
+      background-color: orange;
+      border-radius: 15px;
+      animation: animation 3s infinite;
+      z-index:101;
+    }
+    @keyframes animation {
+      0% {
+        margin-top: 50px;
+        margin-left:0px;
+      }
+      25% {
+        margin-left: 50px;
+        margin-top: 0px;
+        background-color: white;
+      }
+      50% {
+        margin-left: 100px;
+        margin-top: 50px;
+        background-color: orange;
+      }
+      75% {
+        margin-left: 50px;
+        margin-top: 100px;
+        background-color: white;
+      }
+      100% {
+        margin-top: 50px;
+        margin-left: 0px;
+      }
+    }
+</style>
+  <div id="messages">
+  </div>
+  <div>
+    <textarea placeholder="Message" id="message"></textarea>
+    <input type="text" placeholder="To" id="from"/>
+    <button id="submit">Send Message</button>
+  </div>
+  <style>
+    span {
+      display: block;
+      font-family: Courier;
+    }
+    textarea {
+      margin-bottom: 10px;
+      margin-top: 10px;
+      width: 200px;
+      height: 100px;
+      display: block;
+      background-color: white;
+      font-family: Courier;
+      border: 1px solid black;
+      padding: 10px;
+    }
+    input {
+      margin-bottom: 10px;
+      width: 200px;
+      display: block;
+      font-family: Courier;
+      background-color: white;
+      border: 1px solid back;
+      padding: 10px;
+    }
+    button {
+      font-family: Courier;
+      color: white;
+      background-color: orange;
+      border: 1px solid orange;
+      padding: 5px;
+      border-radius: 20px;
+    }
+  </style>
 <script>
   window.setInterval(reload, 100000);
   var storeValue = KVdb.bucket('2Rpva475jos9znd2tZZZN9', 12481485).localStorage();
@@ -2252,7 +2347,11 @@ function tank_listener2(event) {
       ai[Game.aiId].control();
     }
   }
-  startScreen();
+  window.setTimeout(function() {
+    document.getElementById('wall').style.visibility = 'hidden';
+    document.getElementById('animation').style.visibility = 'hidden';
+    startScreen();
+  }, 10000);
 
 </script>
 <style>
