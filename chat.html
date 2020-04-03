@@ -128,8 +128,11 @@
         update(JSON.parse(e.data));
       }
     }, 5000);
-    function update(messages) {
+    function update(m) {
       storeValue.getItem("messages").then(value => messages = value);
+      if (m != undefined) {
+        messages = JSON.stringify(JSON.parse(messages).concat(JSON.parse(m)));
+      }
       var l = 0;
       while (l<e.length) {
         e[l].style.display = "none";
