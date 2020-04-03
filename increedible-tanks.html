@@ -324,8 +324,8 @@
           a(JSON.parse(y[1]).id+" has joined the game");
         }
         if (d.includes("update ")) {
-            let y = d.split("update ");
-            draw.fillRect(JSON.parse(y[1]).x, JSON.parse(y[1]).y, 50, 50);
+          let y = d.split("update ");
+          draw.fillRect(JSON.parse(y[1]).x, JSON.parse(y[1]).y, 50, 50);
           this.users[this.users.indexOf(JSON.parse(y[1]).id)].x = x;
           this.users[this.users.indexOf(JSON.parse(y[1]).id)].y = y;
         }
@@ -337,7 +337,7 @@
       window.setInterval(this.draw, 100);
     }
     this.draw = function() {
-      draw.clearRect(0, 0, 500, 500);
+    draw.clearRect(0, 0, 500, 500);
     draw.fillStyle = "#dcdcdc";
     var floor = new Image();
     floor.src = "/floor.png";
@@ -583,8 +583,12 @@
           }
           p = 0;
           while (p<user.get.level.users.length) {
-            draw.fillStyle="#ffffff";
-            draw.fillRect(user.get.level.users[p].x, user.get.level.users[p].y, 50, 50);
+            draw.drawImage(tank_base_png, user.get.level.users[p].x, user.gel.level.users[p].y);
+            draw.translate(this.x + 20, this.y + 20);
+            draw.rotate(user.get.level.users[p].rotation * Math.PI / 180);
+            draw.drawImage(tank_top_png, user.get.level.users[p].x, user.get.level.users[p].y);
+            draw.rotate(-(user.get.level.users[p].rotation * Math.PI / 180));
+            draw.translate(-this.x - 20, -this.y - 20);
             p++;
           }
           user.get.draw();
