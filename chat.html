@@ -129,7 +129,7 @@
       }
     }, 5000);
     function update(messages) {
-      storeValue.getItem("messages").then(value => messages = messages.concat(value));
+      storeValue.getItem("messages").then(value => messages = value);
       var l = 0;
       while (l<e.length) {
         e[l].style.display = "none";
