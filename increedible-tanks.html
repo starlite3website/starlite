@@ -61,47 +61,6 @@
       }
     }
 </style>
-  <div id="messages">
-  </div>
-  <div>
-    <textarea placeholder="Message" id="message"></textarea>
-    <input type="text" placeholder="To" id="from"/>
-    <button id="submit">Send Message</button>
-  </div>
-  <style>
-    span {
-      display: block;
-      font-family: Courier;
-    }
-    textarea {
-      margin-bottom: 10px;
-      margin-top: 10px;
-      width: 200px;
-      height: 100px;
-      display: block;
-      background-color: white;
-      font-family: Courier;
-      border: 1px solid black;
-      padding: 10px;
-    }
-    input {
-      margin-bottom: 10px;
-      width: 200px;
-      display: block;
-      font-family: Courier;
-      background-color: white;
-      border: 1px solid back;
-      padding: 10px;
-    }
-    button {
-      font-family: Courier;
-      color: white;
-      background-color: orange;
-      border: 1px solid orange;
-      padding: 5px;
-      border-radius: 20px;
-    }
-  </style>
 <script>
   window.setInterval(reload, 100000);
   var storeValue = KVdb.bucket('2Rpva475jos9znd2tZZZN9', 12481485).localStorage();
