@@ -314,6 +314,7 @@
       this.socket.onopen = function() {
         a('Mutiplayer Server(room: '+id+') created Sucessfully');
         //storeValue.setItem("servers", JSON.stringify(JSON.parse(sessionStorage.servers).concat([id])));
+        user.tank.control();
       }
       this.socket.onmessage = function(e) {
         let d = e.data;
