@@ -99,11 +99,12 @@
   </div>
 </div>
 <script>
-  var interval, user, listener, interval2, b = [], s = [], ai = [], l1 = 0, l2 = 0, i = [], Game = new Game(), ai_top = new Image(),  ai_base = new Image(), tank_base_png = new Image(), tank_top_png = new Image(),  storeValue = KVdb.bucket('2Rpva475jos9znd2tZZZN9', 12481485).localStorage();
+  var interval, user, listener, interval2, b = [], s = [], ai = [], l1 = 0, l2 = 0, i = [], Game = new Game(), ai_top = new Image(),  ai_base = new Image(), tank_base_png = new Image(), tank_top_png = new Image(),  start_screen = new Image(), storeValue = KVdb.bucket('2Rpva475jos9znd2tZZZN9', 12481485).localStorage();
   ai_base.src = "/starlite-tank-base.png";
   tank_top_png.src = "/starlite-tank-top.png";
   tank_base_png.src = "/starlite-tank-base.png";
   ai_top.src = "/starlite-tank-top.png";
+  start_screen.src = "/starlite-increedible-tanks-start-screen.png";
   function ai_check(x, y) {
     var l = 1;
     while (l < Game.shotId) {
@@ -1127,9 +1128,7 @@ function tank_listener2(event) {
   tank_tracks.volume = 0.4;
   function startScreen() {
     a("Loading Game...", "black");
-    draw.fillStyle = "#DCDCDC";
-    draw.fillStyle = "#000000";
-    draw.font = "20px Courier";
+    draw.drawImage(start_screen, 0, 0);
     wall(0, 3);
     wall(0, 4);
     wall(0, 5);
@@ -1139,13 +1138,6 @@ function tank_listener2(event) {
     wall(2, 4);
     strong(2, 5);
     strong(2, 3);
-    draw.fillStyle = "#556B2F";
-    draw.fillRect(0, 0, 500, 150);
-    draw.fillRect(0, 350, 500, 150);
-    draw.fillStyle = "#ffffff";
-    draw.font = "50px Courier";
-    draw.fillText("Increedible", 100, 60);
-    draw.fillText("Tanks", 175, 120);
     canvas.addEventListener("click", loading, false);
   } // startScreen
   function alert_startup() {
