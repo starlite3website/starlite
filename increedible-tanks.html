@@ -99,12 +99,13 @@
   </div>
 </div>
 <script>
-  var interval, user, listener, interval2, b = [], s = [], ai = [], l1 = 0, l2 = 0, i = [], Game = new Game(), ai_top = new Image(),  ai_base = new Image(), tank_base_png = new Image(), tank_top_png = new Image(),  start_screen = new Image(), storeValue = KVdb.bucket('2Rpva475jos9znd2tZZZN9', 12481485).localStorage();
+  var interval, user, listener, interval2, b = [], s = [], ai = [], l1 = 0, l2 = 0, i = [], Game = new Game(), ai_top = new Image(),  ai_base = new Image(), tank_base_png = new Image(), tank_top_png = new Image(),  start_screen = new Image(), main_menu = new Image(), storeValue = KVdb.bucket('2Rpva475jos9znd2tZZZN9', 12481485).localStorage();
   ai_base.src = "/starlite-tank-base.png";
   tank_top_png.src = "/starlite-tank-top.png";
   tank_base_png.src = "/starlite-tank-base.png";
   ai_top.src = "/starlite-tank-top.png";
   start_screen.src = "/starlite-increedible-tanks-start-screen.png";
+  main_menu.src = "/starlite-increedible-tanks-main-menu.png";
   function ai_check(x, y) {
     var l = 1;
     while (l < Game.shotId) {
@@ -1928,8 +1929,7 @@ function tank_listener2(event) {
     window.clearInterval(interval2);
     draw.clearRect(0, 0, 500, 500);
     playText.style.visibility = "hidden";
-    draw.fillStyle = "#556B2F";
-    draw.fillRect(50, 50, 400, 400);
+    draw.drawImage(main_menu, 0, 0);
     draw.drawImage(tank_base_png, 75, 95);
     draw.drawImage(tank_top_png, 75, 95);
     draw.fillStyle="#ffffff";
