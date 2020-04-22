@@ -794,23 +794,25 @@
     this.r = 0;
     this.x = 0;
     this.y = 0;
-    this.u = 1;
+    this.u = true;
     this.mode = 0;
     this.color = "#00ff00";
-    this.draw = function() {
+    thids.draw = function() {
       if (this.leftright == true) {
         draw.translate(this.x + 20, this.y + 20)
         draw.rotate(90 * Math.PI / 180);
-        draw.drawImage(tank_base_png, -20, -20);
+        if (this.u) {
+            draw.drawImage(tank_base_png, -20, -20);
+        } else {
+            draw.drawImage(tank_base2, -20, -20);
+        }
         draw.rotate(-90 * Math.PI / 180);
         draw.translate((-this.x - 20), (-this.y - 20));
       } else {
-        if (this.u == 1) {
+        if (this.u) {
             draw.drawImage(tank_base_png, this.x, this.y);
-            this.u = 0;
         } else {
             draw.drawImage(tank_base2, this.x, this.y);
-            this.u = 1;
         }
       }
       draw.translate(this.x + 20, this.y + 20);
@@ -863,6 +865,7 @@
           if (checker(this.x, this.y - 5) != false) {
             this.y -= 5;
             this.leftright = false;
+            this.u = !this.u;
             // CHASE put in tank_track.play(); here
           }
         }
@@ -877,6 +880,7 @@
           if (checker(this.x, this.y + 5) != false) {
             this.y += 5;
             this.leftright = false;
+            this.u = !this.u;
             // CHASE put in tank_track.play(); here
           }
         }
