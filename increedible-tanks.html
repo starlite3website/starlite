@@ -865,7 +865,11 @@
           if (checker(this.x, this.y - 5) != false) {
             this.y -= 5;
             this.leftright = false;
-            this.u = !this.u;
+            if (this.u) {
+                this.u = false;
+            } else {
+                this.u = true;
+            }
             // CHASE put in tank_track.play(); here
           }
         }
@@ -880,7 +884,11 @@
           if (checker(this.x, this.y + 5) != false) {
             this.y += 5;
             this.leftright = false;
-            this.u = !this.u;
+            if (this.u) {
+                this.u = false;
+            } else {
+                this.u = true;
+            }
             // CHASE put in tank_track.play(); here
           }
         }
