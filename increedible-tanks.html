@@ -954,7 +954,7 @@
           count++;
         }
       }
-      if (count > 0) {
+      if (count < 0) {
         user.tank.intervals[event.keyCode] = window.setInterval(function() {
           user.tank.move(event);
         }, 50);
@@ -1930,12 +1930,12 @@ function tank_listener2(event) {
     draw.clearRect(0, 0, 500, 500);
     playText.style.visibility = "hidden";
     draw.drawImage(main_menu, 0, 0);
-    draw.drawImage(tank_base_png, 75, 95);
-    draw.drawImage(tank_top_png, 75, 95);
+    draw.drawImage(tank_base_png, 75, 120);
+    draw.drawImage(tank_top_png, 75, 120);
     draw.fillStyle="#ffffff";
     draw.font = "15px Courier";
-    draw.fillText(user.username, 150, 125);
-    draw.fillText("Level:" + userData.level, 325, 125);
+    draw.fillText(user.username, 150, 150);
+    draw.fillText("Level:" + userData.level, 325, 150);
     draw.fillText("Coins:" + userData.coins, 75, 190);
     draw.font = "bold 15px Courier";
     draw.fillText("Controls: WASD movement, F fire, and", 75, 250);
