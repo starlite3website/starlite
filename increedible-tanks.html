@@ -801,19 +801,19 @@
       if (this.leftright == true) {
         draw.translate(this.x + 20, this.y + 20)
         draw.rotate(90 * Math.PI / 180);
-        if (this.u) {
+        /*if (this.u) {
             draw.drawImage(tank_base_png, -20, -20);
         } else {
             draw.drawImage(tank_base2, -20, -20);
-        }
+        }*/
         draw.rotate(-90 * Math.PI / 180);
         draw.translate((-this.x - 20), (-this.y - 20));
       } else {
-        if (this.u) {
+        /*if (this.u) {
             draw.drawImage(tank_base_png, this.x, this.y);
         } else {
             draw.drawImage(tank_base2, this.x, this.y);
-        }
+        }*/
       }
       draw.translate(this.x + 20, this.y + 20);
       draw.rotate(this.rotation * Math.PI / 180);
