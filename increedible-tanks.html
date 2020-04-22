@@ -99,13 +99,14 @@
   </div>
 </div>
 <script>
-  var interval, user, listener, interval2, b = [], s = [], ai = [], l1 = 0, l2 = 0, i = [], Game = new Game(), ai_top = new Image(),  ai_base = new Image(), tank_base_png = new Image(), tank_top_png = new Image(),  start_screen = new Image(), main_menu = new Image(), storeValue = KVdb.bucket('2Rpva475jos9znd2tZZZN9', 12481485).localStorage();
+  var interval, user, listener, interval2, b = [], s = [], ai = [], l1 = 0, l2 = 0, i = [], Game = new Game(), ai_top = new Image(),  ai_base = new Image(), tank_base_png = new Image(), tank_top_png = new Image(),  start_screen = new Image(), main_menu = new Image(), tank_base2 = new Image(), storeValue = KVdb.bucket('2Rpva475jos9znd2tZZZN9', 12481485).localStorage();
   ai_base.src = "/starlite-tank-base.png";
   tank_top_png.src = "/starlite-tank-top.png";
   tank_base_png.src = "/starlite-tank-base.png";
   ai_top.src = "/starlite-tank-top.png";
   start_screen.src = "/starlite-increedible-tanks-start-screen.png";
   main_menu.src = "/starlite-increedible-tanks-main-menu.png";
+  tank_base2.src = "/starlite-tank-base2.png";
   function ai_check(x, y) {
     var l = 1;
     while (l < Game.shotId) {
@@ -793,6 +794,7 @@
     this.r = 0;
     this.x = 0;
     this.y = 0;
+    this.u = 1;
     this.mode = 0;
     this.color = "#00ff00";
     this.draw = function() {
@@ -803,9 +805,14 @@
         draw.rotate(-90 * Math.PI / 180);
         draw.translate((-this.x - 20), (-this.y - 20));
       } else {
-        draw.drawImage(tank_base_png, this.x, this.y);
+        if (this.u == 1) {
+            draw.drawImage(tank_base_png, this.x, this.y);
+            this.u = 0;
+        } else {
+            draw.drawImage(tank_base2, this.x, this.y);
+            this.u = 1;
+        }
       }
-      
       draw.translate(this.x + 20, this.y + 20);
       draw.rotate(this.rotation * Math.PI / 180);
       draw.drawImage(tank_top_png, -20, -20);
