@@ -996,14 +996,18 @@
         }
       }
       a(count);
-      if (count >= 0) {
+      if (count == 0) {
         user.tank.intervals[event.keyCode] = window.setInterval(function() {
           user.tank.move(event);
         }, 25);
-      } else {
+      } else if (count == 1) {
         user.tank.intervals[event.keyCode] = window.setInterval(function() {
           user.tank.move(event);
-        }, 200);
+        }, 50);
+      } else if (count == 2) {
+        user.tank.intervals[event.keyCode] = window.setInterval(function() {
+            user.tank.move(event);
+        }, 75);
       }
     }
     user.tank.keys[event.keyCode] = true;
