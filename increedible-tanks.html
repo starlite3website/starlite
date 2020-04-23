@@ -172,8 +172,17 @@
     this.fire = function() {
        var xd = (this.x + 20) - (user.tank.x + 20);
        var yd = (this.y + 20) - (user.tank.y + 20);
+       if (xd < 0 && yd < 0) {
+           var neg = true;
+       } else {
+           var neg = false;
+       }
        yd = yd/xd;
        xd = 1;
+       if (neg) {
+           xd = 0-1;
+           yd = 0-yd;
+       }
        Game.shotId = Game.shotId + 1;
        s[Game.shotId] = new Shot();
        s[Game.shotId].control(this.x + 20, this.y + 20, Game.shotId, xd, yd);
