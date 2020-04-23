@@ -995,14 +995,15 @@
           count++;
         }
       }
-      if (count > 1) {
+      a(count);
+      if (count >= 0) {
         user.tank.intervals[event.keyCode] = window.setInterval(function() {
           user.tank.move(event);
         }, 25);
       } else {
         user.tank.intervals[event.keyCode] = window.setInterval(function() {
           user.tank.move(event);
-        }, 2000);
+        }, 200);
       }
     }
     user.tank.keys[event.keyCode] = true;
