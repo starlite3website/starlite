@@ -170,7 +170,14 @@
       }
     }.bind(this);
     this.fire = function() {
-      this.xd = 1;
+       var xd = (this.x + 20) - (user.tank.x + 20);
+       var yd = (this.y + 20) - (user.tank.y + 20);
+       yd = yd/xd;
+       xd = 1;
+       Game.shotId = Game.shotId + 1;
+       s[Game.shotId] = new Shot();
+       s[Game.shotId].control(this.x + 20, this.y + 20, Game.shotId, xd, yd);
+      /*this.xd = 1;
       this.angle = this.rotation % 90;
       this.yd = Math.abs(((this.xd * this.angle) - (90 * this.xd)) / this.angle);
       if (this.rotation < 90 || this.rotation > 270) {
@@ -205,7 +212,7 @@
         s[Game.shotId].control(this.x + 20, this.y + 20, Game.shotId, this.yd, this.xd);
       } else {
         s[Game.shotId].control(this.x + 20, this.y + 20, Game.shotId, this.xd, this.yd);
-      }
+      }*/
     }
     this.check = function() {
       if (ai_check(this.x, this.y)) {
