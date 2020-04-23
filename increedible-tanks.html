@@ -142,7 +142,7 @@
         draw.rotate(-(this.rotation * Math.PI / 180));
         draw.translate(-this.x - 20, -this.y - 20);
       }
-    }.bind(this);
+    }.bind(this); 
     this.move = function() {
       if (this.inactive != true) {
         this.instructions = this.moveCalc();
@@ -245,6 +245,9 @@
     this.moveCalc = function() {
       this.xdistance = user.tank.x - this.x;
       this.ydistance = user.tank.y - this.y;
+      if (this.xdistance == 0) {
+          this.xdistance = 1;
+      }
       this.rotation = Math.atan(this.ydistance / this.xdistance) * 180 / Math.PI;
       if (this.xdistance > 0) {
         this.rotation -= 90;
