@@ -259,25 +259,25 @@
         this.rotation += 90;
       }
       if (300 > Math.sqrt(this.xdistance * this.xdistance + this.ydistance * this.ydistance)) {
-        return { fire: true };
+        var fire = true
       }
       if (Math.abs(this.ydistance) > Math.abs(this.xdistance)) {
         if (this.ydistance > 0) {
-          return { up: false, down: false, left: false, right: true };
+          return { up: false, down: false, left: false, right: true, fire: fire};
         } else {
-          return { up: false, down: false, left: true, right: false };
+          return { up: false, down: false, left: true, right: false, fire: fire };
         }
       } else if (Math.abs(this.xdistance) > Math.abs(this.ydistance)) {
         if (this.xdistance > 0) {
-          return { up: false, down: true, left: false, right: false };
+          return { up: false, down: true, left: false, right: false, fire: fire };
         } else {
-          return { up: true, down: false, left: false, right: false };
+          return { up: true, down: false, left: false, right: false, fire: fire };
         }
       } else {
         if (this.ydistance < 0) {
-          return { left: true };
+          return { left: true, fire: fire };
         } else {
-          return { right: true };
+          return { right: true, fire: fire };
         }
       }
     }.bind(this);
