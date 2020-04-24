@@ -99,7 +99,7 @@
   </div>
 </div>
 <script>
-  var interval, user, listener, interval2, b = [], s = [], ai = [], l1 = 0, l2 = 0, i = [], Game = new Game(), ai_top = new Image(),  ai_base = new Image(), tank_base_png = new Image(), tank_top_png = new Image(),  start_screen = new Image(), main_menu = new Image(), tank_base2 = new Image(), storeValue = KVdb.bucket('2Rpva475jos9znd2tZZZN9', 12481485).localStorage();
+  var interval, user, listener, interval2, b = [], s = [], ai = [], l1 = 0, l2 = 0, i = [], Game = new Game(), ai_top = new Image(),  ai_base = new Image(), tank_base_png = new Image(), tank_top_png = new Image(),  start_screen = new Image(), main_menu = new Image(), tank_base2 = new Image(), coins = new Image(), storeValue = KVdb.bucket('2Rpva475jos9znd2tZZZN9', 12481485).localStorage();
   ai_base.src = "/starlite-tank-base.png";
   tank_top_png.src = "/starlite-tank-top.png";
   tank_base_png.src = "/starlite-tank-base.png";
@@ -107,6 +107,7 @@
   start_screen.src = "/starlite-increedible-tanks-start-screen.png";
   main_menu.src = "/starlite-increedible-tanks-main-menu.png";
   tank_base2.src = "/starlite-tank-base2.png";
+  coins.src = "/starlite-coin.png";
   function ai_check(x, y) {
     var l = 1;
     while (l < Game.shotId) {
@@ -1980,8 +1981,9 @@ function tank_listener2(event) {
     draw.fillStyle="#ffffff";
     draw.font = "15px Courier";
     draw.fillText(user.username, 150, 150);
-    draw.fillText("Level:" + userData.level, 325, 150);
-    draw.fillText("Coins:" + userData.coins, 75, 190);
+    draw.fillText("Level:" + userData.level, 75, 190);
+    draw.drawImage(coins, 310, 150);
+    draw.fillText(userData.coins, 325, 150);
     draw.font = "bold 15px Courier";
     draw.fillText("Controls: WASD movement, F fire, and", 75, 250);
     draw.fillText("arrow keys barrel movement", 75, 270);
