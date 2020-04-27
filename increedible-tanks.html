@@ -1935,7 +1935,8 @@ function tank_listener2(event) {
     if (Game.level == 12) {
       level(1, null, true);
     } else {
-      level(Game.level+1, null, true);
+      Game.level++;
+      level(Game.level, null, true);
     }
   }
   function shop() {    
