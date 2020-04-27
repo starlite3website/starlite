@@ -1932,7 +1932,11 @@ function tank_listener2(event) {
   function victoryHelper() {
     user.tank = new Tank();
     document.removeEventListener("keydown", victoryHelper);
-    level(Game.level, null, true);
+    if (Game.level == 12) {
+      level(1, null, true);
+    } else {
+      level(Game.level+1, null, true);
+    }
   }
   function shop() {    
     draw.fillStyle="#556B2F";
