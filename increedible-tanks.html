@@ -1875,6 +1875,7 @@ function tank_listener2(event) {
     draw.fillText("Your x:"+user.tank.x+", y:" + user.tank.y, 275, 470);
     draw.globalAlpha = 1;
   }
+  var defeatSupport = false;
   function defeat() {
     draw.fillStyle="#556B2F";
     draw.fillRect(50,50,400,400);
@@ -1883,7 +1884,19 @@ function tank_listener2(event) {
     draw.fillText("DEFEAT!",120,120);
     draw.font = "20px Courier";
     draw.fillText("No Stats Updated",140,250);
-    setTimeout(mainMenu, 3000);
+    document.addEventListener("keydown", defeatHelper);
+    setTimeout(function() {
+        if (!defeatSupport) {
+          mainMenu();
+        } else {
+          defeatSupport = false;
+        }
+    }, 3000);
+  }
+  function defeatHelper() {
+    user.tank = new Tank();
+    document.removeEventListener("keydown", defeatHelper);
+    level(Game.level, null, true);
   }
   function victory() {
     draw.fillStyle="#556B2F";
