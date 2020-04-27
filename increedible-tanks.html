@@ -1898,6 +1898,7 @@ function tank_listener2(event) {
   }
   function defeatHelper(event) {
     if (event.keyCode == 13) {
+      defeatSupport = true;
       user.tank = new Tank();
       window.clearInterval(interval2);
       document.removeEventListener("keydown", defeatHelper);
@@ -1941,6 +1942,7 @@ function tank_listener2(event) {
   }
   function victoryHelper(event) {
     if (event.keyCode == 13) {
+      victorySupport = true;
       user.tank = new Tank();
       window.clearInterval(interval2);
       document.removeEventListener("keydown", victoryHelper);
