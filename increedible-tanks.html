@@ -1004,11 +1004,11 @@
       } else if (count == 1) {
         user.tank.intervals[event.keyCode] = window.setInterval(function() {
           user.tank.move(event);
-        }, 50);
+        }, 60);
       } else if (count == 2) {
         user.tank.intervals[event.keyCode] = window.setInterval(function() {
             user.tank.move(event);
-        }, 75);
+        }, 60);
       }
     }
     user.tank.keys[event.keyCode] = true;
