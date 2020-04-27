@@ -1885,21 +1885,24 @@ function tank_listener2(event) {
     draw.fillText("No Stats Updated",140,250);
     document.addEventListener("keydown", defeatHelper);
     setTimeout(function() {
-        if (!defeatSupport) {
-          mainMenu();
-        } else {
-          window.setTimeout(function() {
-            defeatSupport = false;
-          }, 20);
-        }
+      document.removeEventListener("keydown", defeatHelper);
+      if (!defeatSupport) {
+        mainMenu();
+      } else {
+        window.setTimeout(function() {
+          defeatSupport = false;
+        }, 20);
+      }
     }, 3000);
     Game.endGame();
   }
-  function defeatHelper() {
-    user.tank = new Tank();
-    window.clearInterval(interval2);
-    document.removeEventListener("keydown", defeatHelper);
-    level(Game.level, null, true);
+  function defeatHelper(event) {
+    if (event.keyCode) {
+      user.tank = new Tank();
+      window.clearInterval(interval2);
+      document.removeEventListener("keydown", defeatHelper);
+      level(Game.level, null, true);
+    }
   }
   var victorySupport = false;
   function victory() {
@@ -1925,6 +1928,7 @@ function tank_listener2(event) {
     draw.fillText("Total Coins: "+userData.coins,140,230);
     document.addEventListener("keydown", victoryHelper);
     setTimeout(function() {
+      document.removeEventListener("keydown", victoryHelper);
       if (!victorySupport) {
         mainMenu();
       } else {
@@ -1935,15 +1939,17 @@ function tank_listener2(event) {
     }, 5000);
     Game.endGame();
   }
-  function victoryHelper() {
-    user.tank = new Tank();
-    window.clearInterval(interval2);
-    document.removeEventListener("keydown", victoryHelper);
-    if (Game.level == 12) {
-      level(1, null, true);
-    } else {
-      Game.level++;
-      level(Game.level, null, true);
+  function victoryHelper(e) {
+    if (e.keyCode == 13) {
+      user.tank = new Tank();
+      window.clearInterval(interval2);
+      document.removeEventListener("keydown", victoryHelper);
+      if (Game.level == 12) {
+        level(1, null, true);
+      } else {
+        Game.level++;
+        level(Game.level, null, true);
+      }
     }
   }
   function shop() {    
