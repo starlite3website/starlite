@@ -1897,7 +1897,7 @@ function tank_listener2(event) {
     Game.endGame();
   }
   function defeatHelper(event) {
-    if (event.keyCode) {
+    if (event.keyCode == 13) {
       user.tank = new Tank();
       window.clearInterval(interval2);
       document.removeEventListener("keydown", defeatHelper);
@@ -1939,8 +1939,8 @@ function tank_listener2(event) {
     }, 5000);
     Game.endGame();
   }
-  function victoryHelper(e) {
-    if (e.keyCode == 13) {
+  function victoryHelper(event) {
+    if (event.keyCode == 13) {
       user.tank = new Tank();
       window.clearInterval(interval2);
       document.removeEventListener("keydown", victoryHelper);
