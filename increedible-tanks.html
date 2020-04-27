@@ -1888,7 +1888,9 @@ function tank_listener2(event) {
         if (!defeatSupport) {
           mainMenu();
         } else {
-          defeatSupport = false;
+          window.setTimeout(function() {
+            defeatSupport = false;
+          }, 20);
         }
     }, 3000);
     Game.endGame();
@@ -1926,7 +1928,9 @@ function tank_listener2(event) {
       if (!victorySupport) {
         mainMenu();
       } else {
-        victorySupport = false;
+        window.setTimeout(function() {
+          victorySupport = false;
+        }, 20);
       }
     }, 5000);
     Game.endGame();
