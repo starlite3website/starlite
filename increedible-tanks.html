@@ -1898,6 +1898,7 @@ function tank_listener2(event) {
     document.removeEventListener("keydown", defeatHelper);
     level(Game.level, null, true);
   }
+  var victorySupport = false;
   function victory() {
     draw.fillStyle="#556B2F";
     draw.fillRect(50,50,400,400);
@@ -1919,7 +1920,19 @@ function tank_listener2(event) {
       l++;
     }
     draw.fillText("Total Coins: "+userData.coins,140,230);
-    setTimeout(mainMenu, 5000);
+    document.addEventListener("keydown", victoryHelper);
+    setTimeout(function() {
+      if (!victorySupport) {
+        mainMenu();
+      } else {
+        victorySupport = false;
+      }
+    }, 5000);
+  }
+  function victoryHelper() {
+    user.tank = new Tank();
+    document.removeEventListener("keydown", victoryHelper);
+    level(Game.level, null, true);
   }
   function shop() {    
     draw.fillStyle="#556B2F";
