@@ -159,7 +159,7 @@
     setTimeout(function(){messages=o[3][0][1];},2000);
     var d = [], e = [], socket = new WebSocket('wss://connect.websocket.in/v3/1?apiKey=c37MW77TpY8GDiA4yfQPegQUtlFUJkK5d2i1Nrkuk87aCjfwtsxTxHPgKdLn');;
     window.setTimeout(function() {
-      window.setInterval(updateChat, 50);
+      window.setInterval(updateChat, 3000);
       socket.onmessage = function(e) {
         updateChat(JSON.parse(e.data));
       }
