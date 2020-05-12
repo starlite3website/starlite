@@ -3,19 +3,6 @@
     <link rel="shortcut icon"href="/starlite-logo.png"type="image/png">
     <title>Starlite | Chat</title>
   </head>
-  <iframe src="https://kvdb.io/2Rpva475jos9znd2tZZZN9/gameData" width="0" height="0" id="e1"></iframe>
-  <iframe src="https://kvdb.io/2Rpva475jos9znd2tZZZN9/username" width="0" height="0" id="e2"></iframe>
-  <iframe src="https://kvdb.io/2Rpva475jos9znd2tZZZN9/password" width="0" height="0" id="e3"></iframe>
-  <iframe src="https://kvdb.io/2Rpva475jos9znd2tZZZN9/messages" width="0" height="0" id="e4"></iframe>
-  <script>
-  window.setInterval(reload,15000);
-  function reload() {
-    document.getElementById("e1").src = document.getElementById("e1").src;
-    document.getElementById("e2").src = document.getElementById("e2").src;
-    document.getElementById("e3").src = document.getElementById("e3").src;
-    document.getElementById("e4").src = document.getElementById("e4").src;
-  }
-</script>
 <div id='wall'></div>
 <script>
   window.setTimeout(function() {
@@ -116,20 +103,69 @@
       border-radius: 20px;
     }
   </style>
-  <script src="https://unpkg.com/kvdb.io@1.0.5/index.js" integrity="sha384-91zc4JidmYl6NUcicf1m8ABob6eO1HkULPeHYooqi1sptqZ9k5vaZqSNNkVlPsap" crossorigin="anonymous"></script>
-  <script>
+  <iframe src="" id="database" width="500" height="500"></iframe>
+<script>
+  var embed = document.getElementById("database");
+  var s = [];
+    function update(range, value) {
+      embed.src="https://script.google.com/a/macros/gilbertschools.net/s/AKfycbwp4cBG-osQbiGUbuhq8nBrDyLUryqlP1IhZfxr6HqjWt67NbPb/exec?type=2&range="+range+"&value="+value;
+    }
+    function get(one, two) {
+      getUrlJSON("https://spreadsheets.google.com/feeds/list/1bCZMrjfLvQbQ8C6LIqQMNjJ-Hofn9l5BbeRogBGjBjU/1/public/basic?alt=json");
+      setTimeout(function() {console.log(s[one][0][two]);}, 1000);
+    }
+    function getUrlJSON(url) {
+      getJSON(url, after); 
+    }
+    function after(err, data) {
+      if (err !== null) {
+        console.log('Something went wrong: ' + err);
+      } else {
+      var l = 0;
+        while (l<data.feed.entry.length) {
+          if (data.feed.entry[l].content.$t != "") {
+            s.push(data.feed.entry[l].content.$t.split(", ")); 
+          }
+            l++;
+          }
+          l = 0;
+          while (l<s.length) {
+            var q = 0;
+              while (q<s[l].length) {
+                 s[l][q] = s[l][q].split(": ");
+                q++;
+              }
+            l++;
+          }
+        }
+      } 
+      var getJSON = function(url, callback) {
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', url, true);
+        xhr.responseType = 'json';
+        xhr.onload = function() {
+          var status = xhr.status;
+          if (status === 200) {
+            callback(null, xhr.response);
+          } else {
+            callback(status, xhr.response);
+          }
+        };
+      xhr.send();
+    };
     if (sessionStorage.username == undefined) {
       window.location.href = "/";
     }
-    var d = [], e = [], storeValue = KVdb.bucket('2Rpva475jos9znd2tZZZN9', 12481485).localStorage(), socket = new WebSocket('wss://connect.websocket.in/v3/1?apiKey=c37MW77TpY8GDiA4yfQPegQUtlFUJkK5d2i1Nrkuk87aCjfwtsxTxHPgKdLn');;
+    var d = [], e = [], socket = new WebSocket('wss://connect.websocket.in/v3/1?apiKey=c37MW77TpY8GDiA4yfQPegQUtlFUJkK5d2i1Nrkuk87aCjfwtsxTxHPgKdLn');;
     window.setTimeout(function() {
-      window.setInterval(update, 50);
+      window.setInterval(updateChat, 50);
       socket.onmessage = function(e) {
-        update(JSON.parse(e.data));
+        updateChat(JSON.parse(e.data));
       }
     }, 5000);
-    function update(m) {
-      storeValue.getItem("messages").then(value => messages = value);
+    function updateChat(m) {
+      get(3,1);
+      setTimeout(function(){messages=o[3][0][1];},2000);
       if (m != undefined) {
         messages = JSON.stringify(JSON.parse(messages).concat(JSON.parse(m)));
       }
@@ -147,7 +183,7 @@
           if (sessionStorage.username == JSON.parse(messages)[l].send || sessionStorage.username == "admin") {
             var q = document.createElement("BUTTON");
             q.setAttribute("id", l);
-            q.setAttribute("onclick", 't=JSON.parse(messages);var index = this.id; if (index>-1) {t.splice(index,1)};storeValue.setItem("messages", JSON.stringify(t));')
+            q.setAttribute("onclick", 't=JSON.parse(messages);var index = this.id; if (index>-1) {t.splice(index,1)};update("B5", JSON.stringify(t));')
             q.innerHTML = "CLICK 3x TO DELETE";
             t.innerHTML = q.outerHTML+" "+JSON.parse(messages)[l].send+": <b>"+JSON.parse(messages)[l].message+"</b> to:"+JSON.parse(messages)[l].user+" at: "+JSON.parse(messages)[l].timestamps;
           } else {
@@ -168,7 +204,7 @@
           alert("Cuss Word Detected! We do not permit any cuss words. If you disagree that you have not cuss words in your message report to 'admin' in chat");
         } else {
          socket.send(JSON.stringify({message:document.getElementById("message").value,user:document.getElementById("from").value,send:sessionStorage.username,timestamps:new Date()}));
-         storeValue.setItem("messages", JSON.stringify(JSON.parse(messages).concat({message:document.getElementById("message").value,user:document.getElementById("from").value,send:sessionStorage.username,timestamps:new Date()})));
+         update("B5", JSON.stringify(JSON.parse(messages).concat({message:document.getElementById("message").value,user:document.getElementById("from").value,send:sessionStorage.username,timestamps:new Date()})));
         }
         document.getElementById("message").value = "";
         document.getElementById("from").value = "";
