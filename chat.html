@@ -204,6 +204,7 @@
         } else {
          socket.send(JSON.stringify({message:document.getElementById("message").value,user:document.getElementById("from").value,send:sessionStorage.username,timestamps:new Date()}));
          update("B5", JSON.stringify(JSON.parse(messages).concat({message:document.getElementById("message").value,user:document.getElementById("from").value,send:sessionStorage.username,timestamps:new Date()})));
+         messages = JSON.stringify(JSON.parse(messages).concat({message:document.getElementById("message").value,user:document.getElementById("from").value,send:sessionStorage.username,timestamps:new Date()}));
         }
         document.getElementById("message").value = "";
         document.getElementById("from").value = "";
