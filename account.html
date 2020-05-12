@@ -2,17 +2,55 @@
   <title>Starlite | Accounts</title>
   <link rel="shortcut icon"href="/starlite-logo.png"type="image/png">
 </head>
-<iframe src="https://kvdb.io/2Rpva475jos9znd2tZZZN9/gameData" width="0" height="0" id="e1"></iframe>
-<iframe src="https://kvdb.io/2Rpva475jos9znd2tZZZN9/username" width="0" height="0" id="e2"></iframe>
-<iframe src="https://kvdb.io/2Rpva475jos9znd2tZZZN9/password" width="0" height="0" id="e3"></iframe>
-<iframe src="https://kvdb.io/2Rpva475jos9znd2tZZZN9/messages" width="0" height="0" id="e4"></iframe>
+<iframe src="" id="database" width="500" height="500"></iframe>
 <script>
-  window.setInterval(reload, 100000);
-  function reload() {
-    document.getElementById("e1").src = document.getElementById("e1").src;
-    document.getElementById("e2").src = document.getElementById("e2").src;
-    document.getElementById("e3").src = document.getElementById("e3").src;
-    document.getElementById("e4").src = document.getElementById("e4").src;
+  var embed = document.getElementById("database");
+  var s = [];
+  function update(range, value) {
+    embed.src="https://script.google.com/a/macros/gilbertschools.net/s/AKfycbwp4cBG-osQbiGUbuhq8nBrDyLUryqlP1IhZfxr6HqjWt67NbPb/exec?type=2&range="+range+"&value="+value;
   }
+  function get(one, two) {
+    getUrlJSON("https://spreadsheets.google.com/feeds/list/1bCZMrjfLvQbQ8C6LIqQMNjJ-Hofn9l5BbeRogBGjBjU/1/public/basic?alt=json");
+    setTimeout(function() {console.log(s[one][0][two]);}, 1000);
+  }
+  function getUrlJSON(url) {
+    getJSON(url, after); 
+  }
+  function after(err, data) {
+    if (err !== null) {
+      console.log('Something went wrong: ' + err);
+    } else {
+    var l = 0;
+      while (l<data.feed.entry.length) {
+        if (data.feed.entry[l].content.$t != "") {
+          s.push(data.feed.entry[l].content.$t.split(", ")); 
+        }
+          l++;
+        }
+        l = 0;
+        while (l<s.length) {
+          var q = 0;
+            while (q<s[l].length) {
+              s[l][q] = s[l][q].split(": ");
+              q++;
+            }
+          l++;
+        }
+      }
+    }
+    var getJSON = function(url, callback) {
+      var xhr = new XMLHttpRequest();
+      xhr.open('GET', url, true);
+      xhr.responseType = 'json';
+      xhr.onload = function() {
+        var status = xhr.status;
+        if (status === 200) {
+          callback(null, xhr.response);
+        } else {
+          callback(status, xhr.response);
+        }
+      };
+    xhr.send();
+  };
 </script>
-<div id="form"><img src="/starlite-logo.png"/><h2>Sign up/Login</h2><b>Username:</b><input type="text"id="usernameForm"/><b>Password:</b><input type="password"id="passwordForm"/><a href="/termsofservice">Terms of Service:<a/><input type="checkbox"id="termsofservice"/><button id="submit">Submit</button><button id="newaccount">New Account</button><script src="https://unpkg.com/kvdb.io@1.0.5/index.js" integrity="sha384-91zc4JidmYl6NUcicf1m8ABob6eO1HkULPeHYooqi1sptqZ9k5vaZqSNNkVlPsap" crossorigin="anonymous"></script><script>var storeValue=KVdb.bucket('2Rpva475jos9znd2tZZZN9',12481485).localStorage(),username,password;storeValue.getItem("username").then(value=>username=value);storeValue.getItem("password").then(value=>password=value);var usernameInput=document.getElementById("usernameForm");var passwordInput=document.getElementById("passwordForm");var submit=document.getElementById("submit");var newaccount=document.getElementById("newaccount");submit.addEventListener("click",function(){if(isCorrect(usernameInput.value,passwordInput.value)){sessionStorage.setItem("username",usernameInput.value);sessionStorage.setItem("password",passwordInput.value);window.location.href="/dashboard"}});newaccount.addEventListener("click",function(){storeValue.getItem("username").then(value=>username=value);storeValue.getItem("password").then(value=>password=value);var usernameInput=document.getElementById("usernameForm");if(JSON.parse(username)[JSON.parse(username).indexOf(usernameInput.value)]!=usernameInput.value){if(JSON.parse(password)[JSON.parse(password).indexOf(passwordInput.value)]!=passwordInput.value){storeValue.setItem("username",JSON.stringify(JSON.parse(username).concat([usernameInput.value])));storeValue.setItem("password",JSON.stringify(JSON.parse(password).concat([passwordInput.value])));alert("New Account Created: "+usernameInput.value)}else{alert("Password Taken")}}else{alert("Account Taken")}});function isCorrect(u,p){storeValue.getItem("username").then(value=>username=value);storeValue.getItem("password").then(value=>password=value);if(JSON.parse(username)[JSON.parse(username).indexOf(u)]==u){if(JSON.parse(password)[JSON.parse(password).indexOf(p)]==p){return!0}}return!1}</script><style>img{width:50px;height:50px;margin-left:50%;}html{font-family:Courier;}#form{display:block;padding:5px;margin-left:30%;margin-right:30%;margin-top:20%;border:1px solid black;font-family:Courier;}h2,input{display:block;margin-bottom:10px;font-family:Courier;}button{display:block;border:2px white;font-size:20px;padding:12px;background-color:white;color:black;font-family:Courier}button:hover{transition-duration:1.5s;background-color:orange;color:white;border-color:orange}img{margin-left:40%;}h2,input,a,button,b{margin-left:30%;}</style></div>
+<div id="form"><img src="/starlite-logo.png"/><h2>Sign up/Login</h2><b>Username:</b><input type="text"id="usernameForm"/><b>Password:</b><input type="password"id="passwordForm"/><a href="/termsofservice">Terms of Service:<a/><input type="checkbox"id="termsofservice"/><button id="submit">Submit</button><button id="newaccount">New Account</button><script src="https://unpkg.com/kvdb.io@1.0.5/index.js" integrity="sha384-91zc4JidmYl6NUcicf1m8ABob6eO1HkULPeHYooqi1sptqZ9k5vaZqSNNkVlPsap" crossorigin="anonymous"></script><script>var username,password;get(0,1);setTimeout(function(){username=o[0][0][1];},2000);get(1,1);setTimeout(function(){password=o[1][0][1]},2000);var usernameInput=document.getElementById("usernameForm");var passwordInput=document.getElementById("passwordForm");var submit=document.getElementById("submit");var newaccount=document.getElementById("newaccount");submit.addEventListener("click",function(){if(isCorrect(usernameInput.value,passwordInput.value)){sessionStorage.setItem("username",usernameInput.value);sessionStorage.setItem("password",passwordInput.value);window.location.href="/dashboard"}});newaccount.addEventListener("click",function(){get(0,1);setTimeout(function(){username=o[0][0][1];},2000);get(1,1);setTimeout(function(){password=o[1][0][1];});var usernameInput=document.getElementById("usernameForm");if(JSON.parse(username)[JSON.parse(username).indexOf(usernameInput.value)]!=usernameInput.value){if(JSON.parse(password)[JSON.parse(password).indexOf(passwordInput.value)]!=passwordInput.value){update("B2",JSON.stringify(JSON.parse(username).concat([usernameInput.value])));update("B3",JSON.stringify(JSON.parse(password).concat([passwordInput.value])));alert("New Account Created: "+usernameInput.value)}else{alert("Password Taken")}}else{alert("Account Taken")}});function isCorrect(u,p){get(0,1);setTimeout(function(){username=o[0][0][1];},2000);get(1,1);setTimeout(function(){password=o[1][0][1]},2000);if(JSON.parse(username)[JSON.parse(username).indexOf(u)]==u){if(JSON.parse(password)[JSON.parse(password).indexOf(p)]==p){return!0}}return!1}</script><style>img{width:50px;height:50px;margin-left:50%;}html{font-family:Courier;}#form{display:block;padding:5px;margin-left:30%;margin-right:30%;margin-top:20%;border:1px solid black;font-family:Courier;}h2,input{display:block;margin-bottom:10px;font-family:Courier;}button{display:block;border:2px white;font-size:20px;padding:12px;background-color:white;color:black;font-family:Courier}button:hover{transition-duration:1.5s;background-color:orange;color:white;border-color:orange}img{margin-left:40%;}h2,input,a,button,b{margin-left:30%;}</style></div>
