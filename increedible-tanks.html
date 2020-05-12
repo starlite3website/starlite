@@ -1236,7 +1236,7 @@ function tank_listener2(event) {
   } // alert end
   var gameData, userData;
   get(2,1);
-  gameData=o[2][0][1];
+  setTimeout(function(){gameData=o[2][0][1];},2000);
   function loading() {
     if (sessionStorage.username == undefined || JSON.parse(gameData) == null) {
       if (JSON.parse(gameData) == null) {
@@ -2317,7 +2317,7 @@ function tank_listener2(event) {
     s=[];
     d=[];
     get(5,1);
-    sessionStorage.servers = JSON.parse(o[5][0][1]);
+    setTimeout(function(){sessionStorage.servers = JSON.parse(o[5][0][1]);},2000);
     draw.fillStyle="#556B2F";
     draw.fillRect(50,50,400,400);
     draw.fillStyle="#ffffff";
