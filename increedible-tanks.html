@@ -2,11 +2,6 @@
 <html>
 <head>
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-132422058-1"></script>
-<iframe src="https://kvdb.io/2Rpva475jos9znd2tZZZN9/gameData" width="0" height="0" id="e1"></iframe>
-<iframe src="https://kvdb.io/2Rpva475jos9znd2tZZZN9/username" width="0" height="0" id="e2"></iframe>
-<iframe src="https://kvdb.io/2Rpva475jos9znd2tZZZN9/apassword" width="0" height="0" id="e3"></iframe>
-<iframe src="https://kvdb.io/2Rpva475jos9znd2tZZZN9/messages" width="0" height="0" id="e4"></iframe>
-<script src="https://unpkg.com/kvdb.io@1.0.5/index.js" integrity="sha384-91zc4JidmYl6NUcicf1m8ABob6eO1HkULPeHYooqi1sptqZ9k5vaZqSNNkVlPsap" crossorigin="anonymous"></script>
 </head>
 <div id='wall'></div>
 <div id="animate">
@@ -61,25 +56,6 @@
       }
     }
 </style>
-<script>
-  window.setInterval(reload, 100000);
-  var storeValue = KVdb.bucket('2Rpva475jos9znd2tZZZN9', 12481485).localStorage();
-  var c, s=[], d=[];
-  storeValue.getItem("counter").then(value => c = value);
-  storeValue.getItem("gameData").then(value => w = value);
-  setTimeout(r, 30000);
-  function r() {
-    storeValue.setItem("counter", JSON.parse(c)+1);
-    document.getElementById("views").innerHTML = 'Views: <b>'+JSON.stringify(JSON.parse(c)+1)+'</b>';
-    document.getElementById("users").innerHTML = 'Users: <b>'+JSON.stringify(JSON.parse(w).length)+'</b>';
-  }
-  function reload() {
-    document.getElementById("e1").src = document.getElementById("e1").src;
-    document.getElementById("e2").src = document.getElementById("e2").src;
-    document.getElementById("e3").src = document.getElementById("e3").src;
-    document.getElementById("e4").src = document.getElementById("e4").src;
-  }
-</script>
   <title>Starlite | Increedible Tanks</title>
 </head>
 <div id="game" class="container">
@@ -98,8 +74,56 @@
     </h5>
   </div>
 </div>
+<iframe src="" id="database" width="500" height="500"></iframe>
 <script>
-  var interval, user, listener, interval2, b = [], s = [], ai = [], l1 = 0, l2 = 0, i = [], Game = new Game(), ai_top = new Image(),  ai_base = new Image(), tank_base_png = new Image(), tank_top_png = new Image(),  start_screen = new Image(), main_menu = new Image(), tank_base2 = new Image(), coins = new Image(), storeValue = KVdb.bucket('2Rpva475jos9znd2tZZZN9', 12481485).localStorage();
+  var embed = document.getElementById("database");
+  var o = [];
+  function update(range, value) {
+    embed.src="https://script.google.com/a/macros/gilbertschools.net/s/AKfycbwp4cBG-osQbiGUbuhq8nBrDyLUryqlP1IhZfxr6HqjWt67NbPb/exec?type=2&range="+range+"&value="+value;
+  }
+  function get(one, two) {
+    getUrlJSON("https://spreadsheets.google.com/feeds/list/1bCZMrjfLvQbQ8C6LIqQMNjJ-Hofn9l5BbeRogBGjBjU/1/public/basic?alt=json");
+  }
+  function getUrlJSON(url) {
+    getJSON(url, after); 
+  }
+  function after(err, data) {
+    if (err !== null) {
+      console.log('Something went wrong: ' + err);
+    } else {
+    var l = 0;
+      while (l<data.feed.entry.length) {
+        if (data.feed.entry[l].content.$t != "") {
+          o.push(data.feed.entry[l].content.$t.split(", ")); 
+        }
+          l++;
+        }
+        l = 0;
+        while (l<o.length) {
+          var q = 0;
+            while (q<o[l].length) {
+              o[l][q] = o[l][q].split(": ");
+              q++;
+            }
+          l++;
+        }
+      }
+    }
+    var getJSON = function(url, callback) {
+      var xhr = new XMLHttpRequest();
+      xhr.open('GET', url, true);
+      xhr.responseType = 'json';
+      xhr.onload = function() {
+        var status = xhr.status;
+        if (status === 200) {
+          callback(null, xhr.response);
+        } else {
+          callback(status, xhr.response);
+        }
+      };
+    xhr.send();
+  };
+  var interval, user, listener, interval2, b = [], s = [], ai = [], l1 = 0, l2 = 0, i = [], Game = new Game(), ai_top = new Image(),  ai_base = new Image(), tank_base_png = new Image(), tank_top_png = new Image(),  start_screen = new Image(), main_menu = new Image(), tank_base2 = new Image(), coins = new Image();
   ai_base.src = "/starlite-tank-base.png";
   tank_top_png.src = "/starlite-tank-top.png";
   tank_base_png.src = "/starlite-tank-base.png";
@@ -1205,7 +1229,8 @@ function tank_listener2(event) {
     alertConsole.style.visibility = "hidden";
   } // alert end
   var gameData, userData;
-  storeValue.getItem("gameData").then(value => gameData = value);
+  get(2,1);
+  gameData=o[2][0][1];
   function loading() {
     if (sessionStorage.username == undefined || JSON.parse(gameData) == null) {
       if (JSON.parse(gameData) == null) {
@@ -1228,7 +1253,7 @@ function tank_listener2(event) {
       l++;
     }
     if (userData == undefined) {
-      storeValue.setItem("gameData", JSON.stringify(JSON.parse(gameData).concat({username:sessionStorage.username,coins:0,health:200,level:1})));
+      update("B4", JSON.stringify(JSON.parse(gameData).concat({username:sessionStorage.username,coins:0,health:200,level:1})));
       userData = {username:sessionStorage.username,coins:0,health:200,level:1};
     }
     if (sessionStorage.level == undefined) {   
@@ -1922,7 +1947,7 @@ function tank_listener2(event) {
         var t = JSON.parse(gameData);
         t[l].coins = userData.coins;
         t[l].level = userData.level;
-        storeValue.setItem("gameData", JSON.stringify(t));
+        update("B4", JSON.stringify(t));
       }
       l++;
     }
@@ -2004,7 +2029,7 @@ function tank_listener2(event) {
                   var t = JSON.parse(gameData);
                   t[l].health += 20;
                   t[l].coins -= 500;
-                  storeValue.setItem("gameData", JSON.stringify(t));
+                  update("B4", JSON.stringify(t));
                   a("Health Updated");
                   userData.health += 20;
                 }
@@ -2285,7 +2310,8 @@ function tank_listener2(event) {
   function multiplayer() {
     s=[];
     d=[];
-    storeValue.getItem("servers").then(value => sessionStorage.servers = value);
+    get(5,1);
+    sessionStorage.servers = JSON.parse(o[5][0][1]);
     draw.fillStyle="#556B2F";
     draw.fillRect(50,50,400,400);
     draw.fillStyle="#ffffff";
@@ -2302,7 +2328,7 @@ function tank_listener2(event) {
     draw.fillStyle="#000000";
     draw.fillText("Join Game", 150, 330);
     draw.fillText("Host Game", 260, 330);
-    draw.font="60px COurier";
+    draw.font="60px Courier";
     document.addEventListener("keydown", multiplayer1);
     document.addEventListener("click", multiplayer2);
   }
