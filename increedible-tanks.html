@@ -327,9 +327,11 @@
       this.y = y + ym * 16;  
       this.ym = ym * 16;
       this.xm = xm * 16;
+        console.log(this.y, this.x);
       while (Math.abs(this.y) > 20) {
         this.x /= 2;
         this.y /= 2;
+          console.log(this.y, this.x);
       }
       this.id = id;
       this.inactive = false;
