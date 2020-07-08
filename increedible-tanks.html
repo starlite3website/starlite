@@ -1034,14 +1034,14 @@
             window.clearInterval(user.tank.intervals[i]);
             user.tank.intervals[i] = window.setInterval(function() {
                 user.tank.move(event);
-            }, 20);
+            }, 40);
             console.log(user.tank.intervals[i]);
             console.log(i);
           }
         }
         user.tank.intervals[event.keyCode] = window.setInterval(function() {
           user.tank.move(event);
-        }, 20);
+        }, 40);
       }
     }
     user.tank.keys[event.keyCode] = true;
