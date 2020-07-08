@@ -327,9 +327,9 @@
       this.y = y + ym * 16;  
       this.ym = ym * 16;
       this.xm = xm * 16;
-      while (Math.abs(this.ym) > 20) {
-        this.xm /= 2;
-        this.ym /= 2;
+      while (Math.abs(this.y) > 20) {
+        this.x /= 2;
+        this.y /= 2;
       }
       this.id = id;
       this.inactive = false;
@@ -1022,26 +1022,22 @@
         }
       }
       if (count == 0) {
-          console.log("0");
         user.tank.intervals[event.keyCode] = window.setInterval(function() {
           user.tank.move(event);
         }, 25);
       } else if (count == 1) {
-          console.log("1");
         for(var i = 0; i < user.tank.keys.length; ++i){
           if(user.tank.keys[i]) {
             console.log(3);
             window.clearInterval(user.tank.intervals[i]);
             user.tank.intervals[i] = window.setInterval(function() {
                 user.tank.move(event);
-            }, 40);
-            console.log(user.tank.intervals[i]);
-            console.log(i);
+            }, 50);
           }
         }
         user.tank.intervals[event.keyCode] = window.setInterval(function() {
           user.tank.move(event);
-        }, 40);
+        }, 50);
       }
     }
     user.tank.keys[event.keyCode] = true;
