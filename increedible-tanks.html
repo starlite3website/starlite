@@ -325,14 +325,13 @@
     this.control = function(x, y, id, xm, ym) {
       this.x = x + xm * 16;
       this.y = y + ym * 16;  
-      this.ym = ym * 16;
-      this.xm = xm * 16;
-        console.log(this.y, this.x);
-      while (Math.abs(this.y) > 20) {
-        this.x /= 2;
-        this.y /= 2;
-          console.log(this.y, this.x);
+      console.log(this.xm, this.ym);
+      if (this.xm > 0) {
       }
+      if (this.ym > 0 {
+      }
+        this.ym = ym * 16;
+        this.xm = xm * 16;
       this.id = id;
       this.inactive = false;
       this.draw();
