@@ -1028,11 +1028,11 @@
       } else if (count == 1) {
         user.tank.intervals[event.keyCode] = window.setInterval(function() {
           user.tank.move(event);
-        }, 60);
+        }, 80);
       } else if (count == 2) {
         user.tank.intervals[event.keyCode] = window.setInterval(function() {
             user.tank.move(event);
-        }, 60);
+        }, 80);
       }
     }
     user.tank.keys[event.keyCode] = true;
@@ -1377,8 +1377,7 @@ function tank_listener2(event) {
     draw.drawImage(floor, 400, 450);
     draw.drawImage(floor, 450, 450);
     // draw shots
-    var l = 0;
-      console.log(s);
+    var l = 1;
     while (l < Game.shotId) {
       s[l].draw();
       l++;
