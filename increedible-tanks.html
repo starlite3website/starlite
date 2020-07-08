@@ -343,22 +343,11 @@
         this.x += this.xm;
         draw.fillStyle = "#000000";
         draw.fillRect(this.x, this.y, 5, 5);
-        this.support();
       } else {
         this.x = undefined;
         this.y = undefined;
       }
     }
-    this.support = function() {
-      support(this.id);
-    }
-  }
-  function support(id) {
-    setTimeout(function() {
-      if (s[id]!=undefined) {
-        s[id].draw();
-      }
-    }, 10);
   }
   function clearShot() {
     if (user.tank != undefined) {
@@ -1034,7 +1023,6 @@
           count++;
         }
       }
-      a(count);
       if (count == 0) {
         user.tank.intervals[event.keyCode] = window.setInterval(function() {
           user.tank.move(event);
@@ -1390,7 +1378,13 @@ function tank_listener2(event) {
     draw.drawImage(floor, 350, 450);
     draw.drawImage(floor, 400, 450);
     draw.drawImage(floor, 450, 450);
-    // draw shots here
+    // draw shots
+    var l = 0;
+    while (l < s.length) {
+      s[l].draw();
+      l++;
+    }
+    // draw tank
     if (user.tank != undefined) {
       user.tank.draw();
     }
