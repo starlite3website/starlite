@@ -1028,11 +1028,11 @@
       } else if (count == 1) {
         user.tank.intervals[event.keyCode] = window.setInterval(function() {
           user.tank.move(event);
-        }, 80);
+        }, 100);
       } else if (count == 2) {
         user.tank.intervals[event.keyCode] = window.setInterval(function() {
             user.tank.move(event);
-        }, 80);
+        }, 40);
       }
     }
     user.tank.keys[event.keyCode] = true;
