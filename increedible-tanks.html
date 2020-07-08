@@ -1022,23 +1022,21 @@
         }
       }
       if (count == 0) {
-        console.log("count == 0");
         user.tank.intervals[event.keyCode] = window.setInterval(function() {
           user.tank.move(event);
         }, 25);
       } else if (count == 1) {
-        console.log("count == 1");
         for(var i = 0; i < user.tank.keys.length; ++i){
           if(user.tank.keys[i]) {
-            window.clearInterval(user.tank.intervals[user.tank.keys[i]]);
-            user.tank.intervals[user.tank.keys[i]] = window.setInterval(function() {
+            window.clearInterval(user.tank.intervals[user.tank.keys[i].length]);
+            user.tank.intervals[user.tank.keys[i].length] = window.setInterval(function() {
                 user.tank.move(event);
-            }, 20);
+            }, 80);
           }
         }
         user.tank.intervals[event.keyCode] = window.setInterval(function() {
           user.tank.move(event);
-        }, 20);
+        }, 80);
       }
     }
     user.tank.keys[event.keyCode] = true;
