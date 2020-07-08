@@ -1022,17 +1022,20 @@
         }
       }
       if (count == 0) {
+          console.log("count == 0");
         user.tank.intervals[event.keyCode] = window.setInterval(function() {
           user.tank.move(event);
         }, 25);
       } else if (count == 1) {
+          console.log("count == 1");
         user.tank.intervals[event.keyCode] = window.setInterval(function() {
           user.tank.move(event);
-        }, 100);
+        }, 40);
       } else if (count == 2) {
+        console.log("count == 2");
         user.tank.intervals[event.keyCode] = window.setInterval(function() {
             user.tank.move(event);
-        }, 40);
+        }, 100);
       }
     }
     user.tank.keys[event.keyCode] = true;
