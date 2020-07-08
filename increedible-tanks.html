@@ -358,7 +358,7 @@
       if (s[id]!=undefined) {
         s[id].draw();
       }
-    }, 25);
+    }, 10);
   }
   function clearShot() {
     if (user.tank != undefined) {
@@ -1390,6 +1390,7 @@ function tank_listener2(event) {
     draw.drawImage(floor, 350, 450);
     draw.drawImage(floor, 400, 450);
     draw.drawImage(floor, 450, 450);
+    // draw shots here
     if (user.tank != undefined) {
       user.tank.draw();
     }
