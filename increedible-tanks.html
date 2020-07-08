@@ -1380,7 +1380,7 @@ function tank_listener2(event) {
     draw.drawImage(floor, 450, 450);
     // draw shots
     var l = 0;
-    while (l < s.length) {
+    while (l < Game.shotId) {
       s[l].draw();
       l++;
     }
