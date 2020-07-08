@@ -324,14 +324,16 @@
   function Shot() {
     this.control = function(x, y, id, xm, ym) {
       this.x = x + xm * 16;
-      this.y = y + ym * 16;    
-      if (this.xm > 0) {
-      }
-      if (this.ym > 0) {
-      }
+      this.y = y + ym * 16;
       this.ym = ym * 16;
-      this.xm = xm * 16;
-        console.log(this.xm, this.ym);
+      this.xm = xm * 16;    
+      if (this.xm > 80) {
+        this.ym /= 2;
+      }
+      if (this.ym > 80) {
+        this.xm /= 2;
+      }
+      console.log(this.xm, this.ym);
       this.id = id;
       this.inactive = false;
       this.draw();
