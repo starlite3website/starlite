@@ -322,7 +322,6 @@
     }.bind(this);
   }
   function Shot() {
-    this.sensor = function() {}
     this.control = function(x, y, id, xm, ym) {
       this.x = x + xm * 16;
       this.y = y + ym * 16;  
@@ -337,7 +336,6 @@
       this.draw();
     }
     this.draw = function() {
-      this.sensor();
       if (!this.inactive) {
         this.y += this.ym;
         this.x += this.xm;
@@ -1380,6 +1378,7 @@ function tank_listener2(event) {
     draw.drawImage(floor, 450, 450);
     // draw shots
     var l = 0;
+      console.log(s);
     while (l < Game.shotId) {
       s[l].draw();
       l++;
