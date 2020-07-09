@@ -323,25 +323,17 @@
   }
   function Shot() {
     this.control = function(x, y, id, xm, ym) {
+      this.x = x + xm * 16;
+      this.y = y + ym * 16;
       this.ym = ym * 2;
-      this.xm = xm * 2;
-      if (20/this.xm * this.ym > 20) {
-        this.y = 20/this.xm * this.ym;
-        this.x = x + 20;
+      this.xm = xm * 2;    
+      while (this.xm > 80) {
+        this.xm /= 2;
       }
-      if (-20/this.xm * this.ym < -20) {
-        this.y = -20/this.xm * this.ym;
-        this.x = x - 20;
+      while (this.ym > 80) {
+        this.ym /= 2;
       }
-      if (20/this.ym * this.xm > 20) {
-        this.x = 20/this.ym * this.xm;
-        this.y = y + 20;
-      } 
-      if (-20/this.ym * this.xm < -20) {
-        this.x = -20/this.ym * this.xm;
-        this.y = y - 20;
-      }
-      console.log(this.xm, this.ym, this.y, this.x);
+      console.log(this.xm, this.ym);
       this.id = id;
       this.inactive = false;
       this.draw();
