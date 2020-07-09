@@ -327,10 +327,17 @@
       this.xm = xm * 2;
       if (this.xm > 20) {
         this.y = 20/this.xm * this.ym;
-        this.x = 20;
-      } else {
+        this.x = x + 20;
+      } elsif (this.xm < -20) {
+        this.y = -20/this.xm * this.ym;
+        this.x = x - 20;
+      }
+      if (this.ym > 20) {
         this.x = 20/this.ym * this.xm;
-        this.y = 20;
+        this.y =  y + 20;
+      } elsif (this.ym < -20) {
+        this.x = -20/this.ym * this.xm;
+        this.y = y - 20;
       }
       console.log(this.xm, this.ym, this.y, this.x);
       this.id = id;
