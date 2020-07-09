@@ -325,20 +325,13 @@
     this.control = function(x, y, id, xm, ym) {
       this.ym = ym * 2;
       this.xm = xm * 2;
-      while (this.xm > 80) {
-        this.xm /= 2;
-      }
-      while (this.ym > 80) {
-        this.ym /= 2;
-      }
-      if (xm < 0) {
-        this.ym = this.xm/this.ym * -20;
-        this.x = x + this.xm;
+      if (this.xm > 20) {
+        this.y = 20/this.xm * this.ym;
+        this.x = 20;
       } else {
-        this.ym = this.xm/this.ym * 20;
-        this.x = x + this.xm;
+        this.x = 20/this.ym * this.xm;
+        this.y = 20;
       }
-      this.y = y + this.ym;
       console.log(this.xm, this.ym, this.y, this.x);
       this.id = id;
       this.inactive = false;
