@@ -323,10 +323,10 @@
   }
   function Shot() {
     this.control = function(x, y, id, xm, ym) {
-      this.x = x + xm * 30;
-      this.y = y + ym * 30;
-      this.ym = ym * 16;
-      this.xm = xm * 16;    
+      this.x = x + xm * 16;
+      this.y = y + ym * 16;
+      this.ym = ym * 2;
+      this.xm = xm * 2;    
       while (this.xm > 80) {
         this.xm /= 2;
       }
@@ -966,13 +966,6 @@
             this.rotation -= 5;
           }
         }
-        level(Game.level, "n", false);
-        var l = 0;
-        while (l < ai.length - 1) {
-          l++;
-          ai[l].draw();
-        }
-        this.draw();
       } else {
         a("Game is paused", "yellow");
       }
@@ -1122,7 +1115,7 @@ function tank_listener2(event) {
     this.i = function() {
       i.push(window.setInterval(function() {
         clearShot();
-      }, 20));
+      }, 1));
     }
   } 
   function jquery_tank_support(e) {
@@ -1392,6 +1385,12 @@ function tank_listener2(event) {
     // draw tank
     if (user.tank != undefined) {
       user.tank.draw();
+    }
+    // draw ai
+    var l = 0;
+    while (l < ai.length - 1) {
+      l++;
+      ai[l].draw();
     }
     if (mo != "n") {
       Game.coins = 0; 
