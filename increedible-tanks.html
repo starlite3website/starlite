@@ -326,7 +326,25 @@
       this.x = x + xm * 16;
       this.y = y + ym * 16;
       this.ym = ym * 2;
-      this.xm = xm * 2;    
+      this.xm = xm * 2;  
+      if (this.x > 0) {
+        while (this.x < 26) {
+          this.x++;
+        }
+      } else {
+        while (this.x > -26) {
+          this.x--;
+        }
+      }
+      if (this.y > 0) {
+        while (this.y < 26) {
+          this.y++;
+        }
+      } else {
+        while (this.y > -26) {
+          this.y--;
+        }
+      }
       while (this.xm > 80) {
         this.xm /= 2;
       }
