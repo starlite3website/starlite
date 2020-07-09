@@ -332,13 +332,13 @@
         this.ym /= 2;
       }
       if (xm < 0) {
-        ym = xm/ym * -20;
-        this.x = x;
+        this.ym = this.xm/this.ym * -20;
+        this.x = x + this.xm;
       } else {
-        ym = xm/ym * 20;
-        this.x = x;
+        this.ym = this.xm/this.ym * 20;
+        this.x = x + this.xm;
       }
-      this.y = y;
+      this.y = y + this.ym;
       console.log(this.xm, this.ym, this.y, this.x);
       this.id = id;
       this.inactive = false;
