@@ -323,15 +323,14 @@
   }
   function Shot() {
     this.control = function(x, y, id, xm, ym) {
-      this.xm = xm;
-      this.ym = ym;
+      this.xm = 1 * 16;
+      this.ym = ym/xm * 16;
       this.y = y;
       this.x = x;
       while ((this.x < x + 35 && this.x > x - 35) && (this.y < y + 35 && this.y > y - 35)) {
         this.x = this.x + this.xm;
         this.y = this.y + this.ym;
       }
-      console.log(this.xm, this.ym, this.x, this.y);
       this.id = id;
       this.inactive = false;
       this.draw();
@@ -1028,12 +1027,12 @@
             window.clearInterval(user.tank.intervals[i]);
             user.tank.intervals[i] = window.setInterval(function() {
                 user.tank.move(event, 2);
-            }, 25);
+            }, 35);
           }
         }
         user.tank.intervals[event.keyCode] = window.setInterval(function() {
           user.tank.move(event, 2);
-        }, 25);
+        }, 35);
       }
     }
     user.tank.keys[event.keyCode] = true;
