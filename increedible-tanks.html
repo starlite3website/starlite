@@ -327,7 +327,7 @@
       this.ym = ym;
       this.y = y;
       this.x = x;
-      while ((this.x > x + 20 || this.x < x - 20) && (this.y > y + 20 || this.y < y - 20)) {
+      while ((this.x < x + 20 && this.x > x - 20) && (this.y < y + 20 && this.y > y - 20)) {
         this.x = this.x + this.xm;
         this.y = this.y + this.ym;
       }
