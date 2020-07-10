@@ -323,8 +323,16 @@
   }
   function Shot() {
     this.control = function(x, y, id, xm, ym) {
-      this.xm = 1 * 16;
-      this.ym = ym/xm * 16;
+      if (xm > 0) {
+        this.xm = 1 * 16;
+      } else {
+        this.xm = -1 * 16;
+      }
+      if (ym > 0) {
+        this.ym = ym/xm * 16;
+      } else {
+        this.ym = -(ym/xm * 16);
+      }
       this.y = y;
       this.x = x;
       while ((this.x < x + 35 && this.x > x - 35) && (this.y < y + 35 && this.y > y - 35)) {
