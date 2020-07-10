@@ -328,10 +328,16 @@
       } else {
         this.xm = -1 * 16;
       }
+      if (xm == 0) {
+        this.xm = 0;
+      }
       if (ym > 0) {
-        this.ym = ym/xm * 16;
+        this.ym = Math.abs(ym/xm * 16);
       } else {
         this.ym = -(ym/xm * 16);
+      }
+      if (ym == 0) {
+        this.ym == 0;
       }
       this.y = y;
       this.x = x;
@@ -1035,12 +1041,12 @@
             window.clearInterval(user.tank.intervals[i]);
             user.tank.intervals[i] = window.setInterval(function() {
                 user.tank.move(event, 2);
-            }, 35);
+            }, 30);
           }
         }
         user.tank.intervals[event.keyCode] = window.setInterval(function() {
           user.tank.move(event, 2);
-        }, 35);
+        }, 30);
       }
     }
     user.tank.keys[event.keyCode] = true;
