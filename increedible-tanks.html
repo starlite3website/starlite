@@ -332,10 +332,10 @@
         this.xm = 0;
       }
       if (ym > 0) {
-        console.log("greater than 0");
+        console.log("greater than 0", ym);
         this.ym = Math.abs(ym/xm * 8);
       } else {
-        console.log("less than 0");
+        console.log("less than 0", ym);
         this.ym = -(ym/xm * 8);
       }
       if (ym == 0) {
@@ -1043,12 +1043,12 @@
             window.clearInterval(user.tank.intervals[i]);
             user.tank.intervals[i] = window.setInterval(function() {
                 user.tank.move(event, 2);
-            }, 10);
+            }, 20);
           }
         }
         user.tank.intervals[event.keyCode] = window.setInterval(function() {
           user.tank.move(event, 2);
-        }, 10);
+        }, 20);
       }
     }
     user.tank.keys[event.keyCode] = true;
