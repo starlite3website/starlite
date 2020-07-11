@@ -332,10 +332,10 @@
         this.xm = 0;
       }
       if (ym > 0 || (xm > 0 && ym < 0)) {
-        console.log("greater than 0", ym);
+        console.log("greater than 0", ym, xm);
         this.ym = Math.abs(ym/xm * 8);
       } else {
-        console.log("less than 0", ym);
+        console.log("less than 0", ym, xm);
         this.ym = -(ym/xm * 8);
       }
       if (ym == 0) {
