@@ -331,7 +331,7 @@
       if (xm == 0) {
         this.xm = 0;
       }
-      if (ym > 0) {
+      if (ym > 0 || (xm > 0 && ym < 0)) {
         console.log("greater than 0", ym);
         this.ym = Math.abs(ym/xm * 8);
       } else {
