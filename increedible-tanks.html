@@ -325,9 +325,15 @@
     this.control = function(x, y, id, xm, ym) {
       this.xm = xm;
       this.ym = ym;
-      while (this.ym > 16) {
-        this.ym = this.ym/2;
-        this.xm = this.xm/2;
+      while (this.xm * this.xm + this.ym * this.ym > 1.40 || this.xm * this.xm + this.ym * this.ym < 1.10) {
+        if (this.xm * this.xm + this.ym * this.ym > 1.25) {
+          this.xm /= 1.01;
+          this.ym /= 1.01;
+        }
+        if (this.xm * this.xm + this.ym * this.ym < 1.25) {
+          this.xm *= 1.01;
+          this.ym *= 1.01;
+        }
       }
       this.y = y;
       this.x = x;
