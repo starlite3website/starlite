@@ -323,23 +323,11 @@
   }
   function Shot() {
     this.control = function(x, y, id, xm, ym) {
-      if (xm > 0) {
-        this.xm = 1 * 8;
-      } else {
-        this.xm = -1 * 8;
-      }
-      if (xm == 0) {
-        this.xm = 0;
-      }
-      if (ym > 0 || (xm < 0 || ym < 0)) {
-        console.log("greater than 0", ym, xm);
-        this.ym = Math.abs(ym/xm * 8);
-      } else {
-        console.log("less than 0", ym, xm);
-        this.ym = -(ym/xm * 8);
-      }
-      if (ym == 0) {
-        this.ym == 0;
+      this.xm = xm;
+      this.ym = ym;
+      while (this.ym > 16) {
+        this.ym = this.ym/2;
+        this.xm = this.xm/2;
       }
       this.y = y;
       this.x = x;
