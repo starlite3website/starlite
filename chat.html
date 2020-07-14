@@ -187,9 +187,9 @@
             q.setAttribute("id", l);
             q.setAttribute("onclick", 't=JSON.parse(messages);var index = this.id; if (index>-1) {t.splice(index,1)};update("B5", JSON.stringify(t));')
             q.innerHTML = "CLICK 3x TO DELETE";
-            t.innerHTML = q.outerHTML+" "+JSON.parse(messages)[l].send+": <b>"+JSON.parse(messages)[l].message+"</b> to:"+JSON.parse(messages)[l].user+" at: "+JSON.parse(messages)[l].timestamps;
+            t.innerHTML = q.outerHTML+" "+JSON.parse(messages)[l].send+": <b>"+decodeURIComponent(JSON.parse(messages)[l].message)+"</b> to:"+decodeURIComponent(JSON.parse(messages)[l].user)+" at: "+JSON.parse(messages)[l].timestamps;
           } else {
-            t.innerHTML = JSON.parse(messages)[l].send+": <b>"+JSON.parse(messages)[l].message+"</b> to: "+JSON.parse(messages)[l].user+" at: "+JSON.parse(messages)[l].timestamps;
+            t.innerHTML = JSON.parse(messages)[l].send+": <b>"+decodeURIComponent(JSON.parse(messages)[l].message)+"</b> to: "+decodeURIComponent(JSON.parse(messages)[l].user)+" at: "+JSON.parse(messages)[l].timestamps;
           } 
           document.getElementById("messages").appendChild(t);
           e.push(t);
@@ -205,8 +205,8 @@
         if (m.replace(/\s/g,'').toLowerCase().includes("damn") || m.replace(/\s/g,'').toLowerCase().includes("shit") || m.replace(/\s/g,'').toLowerCase().includes("fuck") || m.replace(/\s/g,'').toLowerCase().includes("ass") || m.replace(/\s/g,'').toLowerCase().includes("bitch") || m.replace(/\s/g,'').toLowerCase().includes("cunt")) { // CHASE Put in the 'words' in the includes("<here>") area (delete this after you do it)
           alert("Cuss Word Detected! We do not permit any cuss words. If you disagree that you have not cuss words in your message report to 'admin' in chat");
         } else {
-         socket.send(JSON.stringify({message:document.getElementById("message").value,user:document.getElementById("from").value,send:sessionStorage.username,timestamps:new Date()}));
-         update("B5", JSON.stringify(JSON.parse(messages).concat({message:document.getElementById("message").value,user:document.getElementById("from").value,send:sessionStorage.username,timestamps:new Date()})));
+         socket.send(JSON.stringify({message:encodeURIComponent(document.getElementById("message").value),user:encodeURIComponent(document.getElementById("from").value),send:sessionStorage.username,timestamps:new Date()}));
+         update("B5", JSON.stringify(JSON.parse(messages).concat({message:encodeURIComponent(document.getElementById("message").value),user:encodeURIComponent(document.getElementById("from").value),send:sessionStorage.username,timestamps:new Date()})));
         }
         document.getElementById("message").value = "";
         document.getElementById("from").value = "";
