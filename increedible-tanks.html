@@ -170,7 +170,7 @@
     this.control = function() {
       i.push(window.setInterval(this.draw, 1));
       i.push(window.setInterval(this.move, 500));
-      i.push(window.setInterval(this.check, 10));
+      //i.push(window.setInterval(this.check, 10)); // shot and ai check if hit interval
     }.bind(this);
     this.draw = function() {
       if (this.inactive != true) {
@@ -1147,7 +1147,7 @@ function tank_listener2(event) {
     }
     this.strong = function(x,y) {
       if (this.health == undefined) {
-        this.health = 30;
+        this.health = 60;
       }
       draw.strokeStyle = "#000000";
     draw.fillStyle = "#D3D3D3";
@@ -1177,7 +1177,7 @@ function tank_listener2(event) {
     }
     this.weak = function(x,y) {
       if (this.health == undefined) {
-        this.health = 10;
+        this.health = 20;
       }
       var weak_image = new Image();
       weak_image.src = "/block-silver.png";
@@ -1403,6 +1403,12 @@ function tank_listener2(event) {
     while (l < ai.length - 1) {
       l++;
       ai[l].draw();
+    }
+    // check stuff
+    var l = 0;
+    while (l < ai.length - 1) {
+      l++;
+      ai[l].check();
     }
     if (mo != "n") {
       Game.coins = 0; 
