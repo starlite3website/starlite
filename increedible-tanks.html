@@ -170,7 +170,7 @@
     this.control = function() {
       i.push(window.setInterval(this.draw, 1));
       i.push(window.setInterval(this.move, 500));
-      i.push(window.setInterval(this.check, 10)); // shot and ai check if hit interval
+      //i.push(window.setInterval(this.check, 10)); // shot and ai check if hit interval
     }.bind(this);
     this.draw = function() {
       if (this.inactive != true) {
@@ -1403,6 +1403,11 @@ function tank_listener2(event) {
     while (l < ai.length - 1) {
       l++;
       ai[l].draw();
+    }
+    var l = 0;
+    while (l < ai.length - 1) {
+        l++;
+        ai[l].check();
     }
     if (mo != "n") {
       Game.coins = 0; 
