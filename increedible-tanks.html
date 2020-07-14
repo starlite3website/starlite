@@ -956,7 +956,7 @@
           }
         }
         if (this.keys[32]) {
-          if (this.count == 5) {
+          if (this.count == 10) {
             this.fire();
             // CHASE put in tank_fire.play(); here
             this.count = 0;
@@ -968,14 +968,14 @@
           if (this.rotation == 355) {
             this.rotation = 0;
           } else {
-            this.rotation += 5;
+            this.rotation += speed;
           }
         }
         if (this.keys[37]) {
           if (this.rotation == 0) {
             this.rotation = 355;
           } else {
-            this.rotation -= 5;
+            this.rotation -= speed;
           }
         }
       } else {
