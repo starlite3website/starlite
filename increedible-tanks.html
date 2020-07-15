@@ -354,7 +354,9 @@
         var l = 0;
         while (l < ai.length - 1) {
           l++;
-          ai[l].check();
+          if (user.tank.inactive != true) {
+            ai[l].check();
+          }
         }
         draw.fillStyle = "#000000";
         draw.fillRect(this.x, this.y, 5, 5);
