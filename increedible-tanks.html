@@ -973,7 +973,7 @@
           }
         }
         if (this.keys[39]) {
-          if (this.count2 == 10) {
+          if (this.count2 == 2) {
             if (this.rotation == 355) {
               this.rotation = 0;
             } else {
@@ -985,10 +985,15 @@
           }
         }
         if (this.keys[37]) {
-          if (this.rotation == 0) {
-            this.rotation = 355;
+          if (this.count2 == 2) {
+            if (this.rotation == 0) {
+              this.rotation = 355;
+            } else {
+              this.rotation -= 5;
+            }
+            this.count2 = 0;
           } else {
-            this.rotation -= 5;
+            this.count2++;
           }
         }
       } else {
@@ -1052,12 +1057,12 @@
             window.clearInterval(user.tank.intervals[i]);
             user.tank.intervals[i] = window.setInterval(function() {
                 user.tank.move(event, 2);
-            }, 20);
+            }, 15);
           }
         }
         user.tank.intervals[event.keyCode] = window.setInterval(function() {
           user.tank.move(event, 2);
-        }, 20);
+        }, 15);
       }
     }
     user.tank.keys[event.keyCode] = true;
