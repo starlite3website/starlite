@@ -325,12 +325,12 @@
     this.control = function(x, y, id, xm, ym) {
       this.xm = xm;
       this.ym = ym;
-      while (this.xm * this.xm + this.ym * this.ym > 1.4 || this.xm * this.xm + this.ym * this.ym < 1.1) {
-        if (this.xm * this.xm + this.ym * this.ym > 1.25) {
+      while (this.xm * this.xm + this.ym * this.ym > 1.2 || this.xm * this.xm + this.ym * this.ym < 1) {
+        if (this.xm * this.xm + this.ym * this.ym > 1.1) {
           this.xm /= 1.01;
           this.ym /= 1.01;
         }
-        if (this.xm * this.xm + this.ym * this.ym < 1.25) {
+        if (this.xm * this.xm + this.ym * this.ym < 1.1) {
           this.xm *= 1.01;
           this.ym *= 1.01;
         }
