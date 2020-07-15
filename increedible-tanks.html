@@ -351,6 +351,11 @@
       if (!this.inactive) {
         this.y += this.ym;
         this.x += this.xm;
+        var l = 0;
+        while (l < ai.length - 1) {
+          l++;
+          ai[l].check();
+        }
         draw.fillStyle = "#000000";
         draw.fillRect(this.x, this.y, 5, 5);
       } else {
@@ -850,6 +855,7 @@
   function Tank() {
     this.intervals = [];
     this.count = 0;
+    this.count2 = 0;
     this.health = userData.health;
     this.r = 0;
     this.x = 0;
@@ -956,7 +962,7 @@
           }
         }
         if (this.keys[32]) {
-          if (this.count == 5) {
+          if (this.count == 10) {
             this.fire();
             // CHASE put in tank_fire.play(); here
             this.count = 0;
@@ -965,10 +971,15 @@
           }
         }
         if (this.keys[39]) {
-          if (this.rotation == 355) {
-            this.rotation = 0;
+          if (this.count2 == 10) {
+            if (this.rotation == 355) {
+              this.rotation = 0;
+            } else {
+              this.rotation += 5;
+            }
+            this.count2 = 0;
           } else {
-            this.rotation += 5;
+            this.count2++;
           }
         }
         if (this.keys[37]) {
@@ -1401,13 +1412,8 @@ function tank_listener2(event) {
     // draw ai
     var l = 0;
     while (l < ai.length - 1) {
-      l++;
-      ai[l].draw();
-    }
-    var l = 0;
-    while (l < ai.length - 1) {
         l++;
-        ai[l].check();
+        ai[l].draw();
     }
     if (mo != "n") {
       Game.coins = 0; 
