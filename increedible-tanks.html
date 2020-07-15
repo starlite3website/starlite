@@ -343,6 +343,7 @@
         this.x = this.x + this.xm;
         this.y = this.y + this.ym;
       }
+      console.log(this.x, this.y, this.xm, this.ym);
       this.id = id;
       this.inactive = false;
       this.draw();
@@ -1050,19 +1051,19 @@
       if (count == 0) {
         user.tank.intervals[event.keyCode] = window.setInterval(function() {
           user.tank.move(event, 5);
-        }, 15);
+        }, 20);
       } else if (count == 1) {
         for(var i = 0; i < user.tank.keys.length; ++i){
           if(user.tank.keys[i]) {
             window.clearInterval(user.tank.intervals[i]);
             user.tank.intervals[i] = window.setInterval(function() {
                 user.tank.move(event, 2);
-            }, 15);
+            }, 20);
           }
         }
         user.tank.intervals[event.keyCode] = window.setInterval(function() {
           user.tank.move(event, 2);
-        }, 15);
+        }, 20);
       }
     }
     user.tank.keys[event.keyCode] = true;
