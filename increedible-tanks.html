@@ -1058,12 +1058,12 @@
             window.clearInterval(user.tank.intervals[i]);
             user.tank.intervals[i] = window.setInterval(function() {
                 user.tank.move(event, 2);
-            }, 17);
+            }, 13);
           }
         }
         user.tank.intervals[event.keyCode] = window.setInterval(function() {
           user.tank.move(event, 2);
-        }, 17);
+        }, 13);
       }
     }
     user.tank.keys[event.keyCode] = true;
