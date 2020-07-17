@@ -1064,7 +1064,9 @@
           }
         }
         user.tank.intervals[event.keyCode] = window.setInterval(function() {
-          user.tank.move(event, 2);
+          if (user.tank != undefined) {
+            user.tank.move(event, 2);
+          }
         }, 13);
       }
     }
