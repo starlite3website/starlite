@@ -355,7 +355,7 @@
         var l = 0;
         while (l < ai.length - 1) {
           l++;
-          if (user.tank.inactive != true) {
+          if (user.tank != undefined) {
             ai[l].check();
           }
         }
@@ -1942,7 +1942,7 @@ function tank_listener2(event) {
       draw.fillText("F to fire", 50, 400);
       draw.fillText("You can break all walls but blue", 50, 430);
     }
-    if (user.tank.inactive != true) {
+    if (user.tank != undefined) {
       draw.fillText("Your health: "+user.tank.health, 300,490);
       draw.fillText("Your x:"+user.tank.x+", y:" + user.tank.y, 275, 470);
       draw.globalAlpha = 1;
