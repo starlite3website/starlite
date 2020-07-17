@@ -368,7 +368,7 @@
     }
   }
   function clearShot() {
-    if (user.tank.health != undefined) {
+    if (user.tank != undefined) {
       level(Game.level, "n", false);
     }
     var l = 0;
@@ -1115,12 +1115,12 @@ function tank_listener2(event) {
       canvas.removeEventListener("keydown", tank_listener1);
       canvas.removeEventListener("keyup", tank_listener2);
       var l = 0;
-      while(l<user.tank.intervals.length) {
-        if(user.tank.intervals[l] != false) {
+      /*while(l<user.tank.intervals.length) {
+        if (user.tank.intervals[l] != false) {
           window.clearInterval(user.tank.intervals[l]);
         }
         l++;
-      }
+      }*/
       gameHelper();
     }
     this.redraw = function() {
@@ -1938,9 +1938,11 @@ function tank_listener2(event) {
       draw.fillText("F to fire", 50, 400);
       draw.fillText("You can break all walls but blue", 50, 430);
     }
-    draw.fillText("Your health: "+user.tank.health, 300,490);
-    draw.fillText("Your x:"+user.tank.x+", y:" + user.tank.y, 275, 470);
-    draw.globalAlpha = 1;
+    if (user.tank.inactive != true) {
+      draw.fillText("Your health: "+user.tank.health, 300,490);
+      draw.fillText("Your x:"+user.tank.x+", y:" + user.tank.y, 275, 470);
+      draw.globalAlpha = 1;
+    }
   }
   var defeatSupport = false;
   function defeat() {
