@@ -1057,7 +1057,7 @@
           if(user.tank.keys[i]) {
             window.clearInterval(user.tank.intervals[i]);
             user.tank.intervals[i] = window.setInterval(function() {
-              if (user.tank.move != undefined) {
+              if (user.tank != undefined) {
                 user.tank.move(event, 2);
               }
             }, 13);
