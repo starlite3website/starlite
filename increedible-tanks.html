@@ -1,11 +1,13 @@
+
 <!DOCTYPE html>
 <html>
-  <head>
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-132422058-1"></script>
-  </head>
-  <div id='wall'></div>
-  <div id="animate"></div>
-  <style>
+<head>
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-132422058-1"></script>
+</head>
+<div id='wall'></div>
+<div id="animate">
+</div>
+<style>
     /*@font-face {
       font-family: pixel;
       font-size: 20px;
@@ -62,39 +64,38 @@
         margin-left: 0px;
       }
     }
-  </style>
-  <script>
-    window.setTimeout(function() {
-      document.getElementById('wall').style.visibility = 'hidden';
-      document.getElementById('animate').style.visibility = 'hidden';
-    }, 7000);
-  </script>
+</style>
+<script>
+  window.setTimeout(function() {
+    document.getElementById('wall').style.visibility = 'hidden';
+    document.getElementById('animate').style.visibility = 'hidden';
+  }, 7000);
+</script>
   <title>Starlite | Increedible Tanks</title>
-  </head>
-  <div id="game" class="container">
-    <h1 id="gameName"> Increedible Tanks </h1>
-    <h3 id="views"></h3>
-    <h3 id="users"></h3>
-    <h2>Increedible Tanks v1.1.1-9: The Graphics Update!(in progress)<br>Increedble Tanks v1.2.1-9: The Mechanism Update!(Starting September)</h2>
-    <canvas width="500" height="500" id="canvas" tabindex='1'>
-      <strong>Canvas is not supported.</strong> Try using a diffrent browser, If that does not work, please restart your device or use a diffrent device.
-    </canvas>
-    <iframe src="/chat" width="500" height="500"></iframe>
-    <div id="play">
-      <h5 id="playText"> Click Anywhere To Start </h5>
-    </div>
-    <div id="alertConsole">
-      <h5 id="consoleText"></h5>
-    </div>
+</head>
+<div id="game" class="container">
+  <h1 id="gameName"> Increedible Tanks </h1>
+  <h3 id="views"></h3>
+  <h3 id="users"></h3>
+  <h2>Increedible Tanks v1.1.1-9: The Graphics Update!(in progress)<br>Increedble Tanks v1.2.1-9: The Mechanism Update!(Starting September)</h2>
+  <canvas width="500" height="500" id="canvas" tabindex='1'>
+    <strong>Canvas is not supported.</strong> Try using a diffrent browser, If that does not work, please restart your device or use a diffrent device. </canvas>
+  <iframe src="/chat" width="500" height="500"></iframe>
+  <div id="play">
+    <h5 id="playText"> Click Anywhere To Start </h5>
   </div>
-  <iframe src="" id="database" visibility="hidden" display="hidden" width="0" height="0"></iframe>
-  <script>
+  <div id="alertConsole">
+    <h5 id="consoleText">
+    </h5>
+  </div>
+</div>
+<iframe src="" id="database" visibility="hidden" display="hidden" width="0" height="0"></iframe>
+<script>
   var embed = document.getElementById("database");
   var o = [];
   function update(range, value) {
     embed.src="https://script.google.com/macros/s/AKfycbx2j30BqJJTK0igYO2QDtbVvBSwS7JK4BjZ5qeSUdNtONWVApBn/exec?type=2&range="+range+"&value="+value;
   }
-    
   function get(one, two) {
     getUrlJSON("https://spreadsheets.google.com/feeds/list/14CpLkPBcEv44RQwlRohjwgQ7GyVbYciaC7mgKNguuSY/1/public/basic?alt=json");
   }
@@ -137,7 +138,6 @@
       };
     xhr.send();
   };
-  // define all variables
   var interval, user, listener, interval2, b = [], s = [], ai = [], l1 = 0, l2 = 0, i = [], Game = new Game(), ai_top = new Image(),  ai_base = new Image(), tank_base_png = new Image(), tank_top_png = new Image(),  start_screen = new Image(), main_menu = new Image(), tank_base2 = new Image(), coins = new Image();
   ai_base.src = "/starlite-tank-base.png";
   tank_top_png.src = "/starlite-tank-top.png";
@@ -147,7 +147,6 @@
   main_menu.src = "/starlite-increedible-tanks-main-menu.png";
   tank_base2.src = "/starlite-tank-base2.png";
   coins.src = "/starlite-coin.png";
-      
   function ai_check(x, y) {
     var l = 1;
     while (l < Game.shotId) {
@@ -169,14 +168,12 @@
     this.health = 200;
     this.x = 0;
     this.y = 0;
-    this.rotation = 0;
-  }
-    Ai.prototype.control = function() {
+    this.control = function() {
       i.push(window.setInterval(this.draw, 1));
       i.push(window.setInterval(this.move, 500));
       //i.push(window.setInterval(this.check, 10)); // shot and ai check if hit interval
-    }
-    Ai.prototype.draw = function() {
+    }.bind(this);
+    this.draw = function() {
       if (this.inactive != true) {
         draw.drawImage(ai_base, this.x, this.y);
         draw.translate(this.x + 20, this.y + 20);
@@ -185,8 +182,8 @@
         draw.rotate(-(this.rotation * Math.PI / 180));
         draw.translate(-this.x - 20, -this.y - 20);
       }
-    }
-    Ai.prototype.move = function() {
+    }.bind(this); 
+    this.move = function() {
       if (this.inactive != true) {
         this.instructions = this.moveCalc();
         if (this.instructions.up == true) {
@@ -212,8 +209,8 @@
       } else {
         window.clearInterval(this.aiDraw);
       }
-    }
-    Ai.prototype.fire = function() {
+    }.bind(this);
+    this.fire = function() {
        var xd = (this.x + 20) - (user.tank.x + 20);
        var yd = (this.y + 20) - (user.tank.y + 20);
        if (xd < 0) {
@@ -270,7 +267,7 @@
         s[Game.shotId].control(this.x + 20, this.y + 20, Game.shotId, this.xd, this.yd);
       }*/
     }
-    Ai.prototype.check = function() {
+    this.check = function() {
       if (ai_check(this.x, this.y)) {
         if (this.inactive != true) {
           this.health -= 20;
@@ -287,8 +284,9 @@
           }
         }
       }
-    }
-    Ai.prototype.moveCalc = function() {
+    }.bind(this);
+    this.rotation = 0;
+    this.moveCalc = function() {
       this.xdistance = user.tank.x - this.x;
       this.ydistance = user.tank.y - this.y;
       if (this.xdistance == 0) {
@@ -322,7 +320,8 @@
           return { right: true, fire: fire };
         }
       }
-    }
+    }.bind(this);
+  }
   function Shot() {
     this.control = function(x, y, id, xm, ym) {
       this.xm = xm;
@@ -1043,7 +1042,7 @@
     }
   function tank_listener1(event) {
     if (event.keyCode == 87 || event.keyCode == 83 || event.keyCode == 68 || event.keyCode == 65) {
-        //tank_tracks.play();
+        tank_tracks.play();
     }
     if (user.tank.keys[event.keyCode] != true) {
       var count = 0;
