@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -187,6 +185,7 @@
     }
     Ai.prototype.move = function() {
       if (this.inactive != true) {
+        console.log(this, this.prototype, this.prototype.moveCalc);
         this.instructions = this.moveCalc();
         if (this.instructions.up == true) {
           if (checker(this.x - 5, this.y) != false) {
