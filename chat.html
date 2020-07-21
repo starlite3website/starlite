@@ -184,8 +184,12 @@
           var t = document.createElement("SPAN");
           if (sessionStorage.username == JSON.parse(messages)[l].send || sessionStorage.username == "admin") {
             var q = document.createElement("BUTTON");
+            var w = document.createElement("BUTTON");
+            w.setAttribute("id", l);
             q.setAttribute("id", l);
-            q.setAttribute("onclick", 't=JSON.parse(messages);var index = this.id; if (index>-1) {t.splice(index,1)};update("B5", JSON.stringify(t));')
+            w.setAttribute("onclick", "t=JSON.parse(messages);var index = this.id; decodeURICompenent(t[index]).select(); document.execCommand('copy');");
+            q.setAttribute("onclick", 't=JSON.parse(messages);var index = this.id; if (index>-1) {t.splice(index,1)};update("B5", JSON.stringify(t));');
+            w.innerHTML = "Copy";
             q.innerHTML = "CLICK 3x TO DELETE";
             t.innerHTML = q.outerHTML+" "+JSON.parse(messages)[l].send+": <b>"+decodeURIComponent(JSON.parse(messages)[l].message)+"</b> to:"+decodeURIComponent(JSON.parse(messages)[l].user)+" at: "+JSON.parse(messages)[l].timestamps;
           } else {
