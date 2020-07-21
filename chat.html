@@ -191,7 +191,7 @@
             q.setAttribute("onclick", 't=JSON.parse(messages);var index = this.id; if (index>-1) {t.splice(index,1)};update("B5", JSON.stringify(t));');
             w.innerHTML = "Copy";
             q.innerHTML = "CLICK 3x TO DELETE";
-            t.innerHTML = q.outerHTML+" "+JSON.parse(messages)[l].send+": <b>"+decodeURIComponent(JSON.parse(messages)[l].message)+"</b> to:"+decodeURIComponent(JSON.parse(messages)[l].user)+" at: "+JSON.parse(messages)[l].timestamps;
+            t.innerHTML = q.outerHTML+" "+w.outerHTML+" "+JSON.parse(messages)[l].send+": <b>"+decodeURIComponent(JSON.parse(messages)[l].message)+"</b> to:"+decodeURIComponent(JSON.parse(messages)[l].user)+" at: "+JSON.parse(messages)[l].timestamps;
           } else {
             t.innerHTML = JSON.parse(messages)[l].send+": <b>"+decodeURIComponent(JSON.parse(messages)[l].message)+"</b> to: "+decodeURIComponent(JSON.parse(messages)[l].user)+" at: "+JSON.parse(messages)[l].timestamps;
           } 
