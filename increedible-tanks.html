@@ -168,12 +168,12 @@
     this.x = 0;
     this.y = 0;
   }
-    Ai.control = function() {
+    Ai.prototype.control = function() {
       i.push(window.setInterval(this.draw, 1));
       i.push(window.setInterval(this.move, 500));
       //i.push(window.setInterval(this.check, 10)); // shot and ai check if hit interval
     };
-    Ai.draw = function() {
+    Ai.prototype.draw = function() {
       if (this.inactive != true) {
         draw.drawImage(ai_base, this.x, this.y);
         draw.translate(this.x + 20, this.y + 20);
@@ -183,9 +183,8 @@
         draw.translate(-this.x - 20, -this.y - 20);
       }
     };
-    Ai.move = function() {
+    Ai.prototype.move = function() {
       if (this.inactive != true) {
-        console.log(this, this.prototype);
         this.instructions = this.moveCalc();
         if (this.instructions.up == true) {
           if (checker(this.x - 5, this.y) != false) {
@@ -211,7 +210,7 @@
         window.clearInterval(this.aiDraw);
       }
     };
-    Ai.fire = function() {
+    Ai.prototype.fire = function() {
        var xd = (this.x + 20) - (user.tank.x + 20);
        var yd = (this.y + 20) - (user.tank.y + 20);
        if (xd < 0) {
@@ -268,7 +267,7 @@
         s[Game.shotId].control(this.x + 20, this.y + 20, Game.shotId, this.xd, this.yd);
       }*/
     };
-    Ai.check = function() {
+    Ai.prototype.check = function() {
       if (ai_check(this.x, this.y)) {
         if (this.inactive != true) {
           this.health -= 20;
@@ -286,7 +285,7 @@
         }
       }
     };
-    Ai.moveCalc = function() {
+    Ai.prototype.moveCalc = function() {
       this.xdistance = user.tank.x - this.x;
       this.ydistance = user.tank.y - this.y;
       if (this.xdistance == 0) {
@@ -323,7 +322,7 @@
     };
   function Shot() {
   }
-    Shot.control = function(x, y, id, xm, ym) {
+    Shot.prototype.control = function(x, y, id, xm, ym) {
       this.xm = xm;
       this.ym = ym;
       while (this.xm * this.xm + this.ym * this.ym > 1.2 || this.xm * this.xm + this.ym * this.ym < 1) {
@@ -350,7 +349,7 @@
       this.draw();
     };
     
-    Shot.draw = function() {
+    Shot.prototype.draw = function() {
       if (!this.inactive) {
         this.y += this.ym;
         this.x += this.xm;
