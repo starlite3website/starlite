@@ -163,12 +163,12 @@
     }
     return false;
   }
-  function Ai() {
-    this.health = 200;
-    this.x = 0;
-    this.y = 0;
+  var Ai = {
+    this.health = 200,
+    this.x = 0,
+    this.y = 0,
   }
-    Ai.__proto__.control = function() {
+    Ai.control = function() {
       i.push(window.setInterval(this.draw, 1));
       i.push(window.setInterval(this.move, 500));
       //i.push(window.setInterval(this.check, 10)); // shot and ai check if hit interval
