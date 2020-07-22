@@ -183,7 +183,7 @@
         draw.translate(-this.x - 20, -this.y - 20);
       }
     }.bind(Ai);
-    Ai..move = function() {
+    Ai.move = function() {
       if (this.inactive != true) {
         console.log(this, this.prototype);
         this.instructions = this.moveCalc();
