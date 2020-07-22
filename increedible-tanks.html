@@ -322,7 +322,7 @@
     }.bind(Ai);
   function Shot() {
   }
-    Shot.prototype.control = function(x, y, id, xm, ym) {
+    Shot.control = function(x, y, id, xm, ym) {
       this.xm = xm;
       this.ym = ym;
       while (this.xm * this.xm + this.ym * this.ym > 1.2 || this.xm * this.xm + this.ym * this.ym < 1) {
@@ -347,9 +347,9 @@
       this.id = id;
       this.inactive = false;
       this.draw();
-    };
+    }.bind(Shot);
     
-    Shot.prototype.draw = function() {
+    Shot.draw = function() {
       if (!this.inactive) {
         this.y += this.ym;
         this.x += this.xm;
@@ -366,7 +366,7 @@
         this.x = undefined;
         this.y = undefined;
       }
-    };
+    }.bind(Shot);
     
   function clearShot() {
     if (user.tank != undefined) {
@@ -872,7 +872,7 @@
     this.keys = [];
   }
     
-    Tank.prototype.draw = function() {
+    Tank.draw = function() {
       if (this.leftright == true) {
         draw.translate(this.x + 20, this.y + 20)
         draw.rotate(90 * Math.PI / 180);
@@ -895,8 +895,9 @@
       draw.drawImage(tank_top_png, -20, -20);
       draw.rotate(-(this.rotation * Math.PI / 180));
       draw.translate(-this.x - 20, -this.y - 20);
-    }
-    Tank.prototype.check = function() {
+    }.bind(Tank);
+    
+    Tank.check = function() {
       if (ai_check(this.x, this.y)) {
         this.health -= 20;
         if (this.health <= 0) {
@@ -911,8 +912,9 @@
           Game.endGame();
         }
       }
-    }
-    Tank.prototype.control = function() {
+    }.bind(Tank);
+    
+    Tank.control = function() {
       canvas.focus();
       this.draw();
       i.push(window.setInterval(function() {
@@ -920,9 +922,9 @@
       }, 50));
       canvas.addEventListener("keydown", tank_listener1, false);
       canvas.addEventListener("keyup", tank_listener2, false);
-    }
+    }.bind(Tank);
     
-    Tank.prototype.move = function(e, speed) {
+    Tank.move = function(e, speed) {
       e = e || event;
       e.preventDefault();
       e.stopImmediatePropagation();
@@ -1004,8 +1006,9 @@
       } else {
         a("Game is paused", "yellow");
       }
-    }
-    Tank.prototype.fire = function() {
+    }.bind(this);
+    
+    Tank.fire = function() {
       this.xd = 1;
       this.angle = this.rotation % 90;
       this.yd = Math.abs(((this.xd * this.angle) - (90 * this.xd)) / this.angle);
@@ -1039,7 +1042,7 @@
       } else {
         s[Game.shotId].control(this.x + 20, this.y + 20, Game.shotId, this.xd, this.yd);
       }
-    }
+    }.bind(Tank);
   function tank_listener1(event) {
     if (event.keyCode == 87 || event.keyCode == 83 || event.keyCode == 68 || event.keyCode == 65) {
         tank_tracks.play();
