@@ -168,12 +168,12 @@
     this.x = 0;
     this.y = 0;
   }
-    Ai.prototype.control = function() {
+    Ai.control = function() {
       i.push(window.setInterval(this.draw, 1));
       i.push(window.setInterval(this.move, 500));
       //i.push(window.setInterval(this.check, 10)); // shot and ai check if hit interval
-    };
-    Ai.prototype.draw = function() {
+    }.bind(Ai);
+    Ai.draw = function() {
       if (this.inactive != true) {
         draw.drawImage(ai_base, this.x, this.y);
         draw.translate(this.x + 20, this.y + 20);
@@ -182,8 +182,8 @@
         draw.rotate(-(this.rotation * Math.PI / 180));
         draw.translate(-this.x - 20, -this.y - 20);
       }
-    };
-    Ai.prototype.move = function() {
+    }.bind(Ai);
+    Ai.move = function() {
       if (this.inactive != true) {
         this.instructions = this.moveCalc();
         if (this.instructions.up == true) {
@@ -209,8 +209,8 @@
       } else {
         window.clearInterval(this.aiDraw);
       }
-    };
-    Ai.prototype.fire = function() {
+    }.bind(Ai);
+    Ai.fire = function() {
        var xd = (this.x + 20) - (user.tank.x + 20);
        var yd = (this.y + 20) - (user.tank.y + 20);
        if (xd < 0) {
@@ -266,8 +266,8 @@
       } else {
         s[Game.shotId].control(this.x + 20, this.y + 20, Game.shotId, this.xd, this.yd);
       }*/
-    };
-    Ai.prototype.check = function() {
+    }.bind(Ai);
+    Ai.check = function() {
       if (ai_check(this.x, this.y)) {
         if (this.inactive != true) {
           this.health -= 20;
@@ -284,8 +284,8 @@
           }
         }
       }
-    };
-    Ai.prototype.moveCalc = function() {
+    }.bind(Ai);
+    Ai.moveCalc = function() {
       this.xdistance = user.tank.x - this.x;
       this.ydistance = user.tank.y - this.y;
       if (this.xdistance == 0) {
@@ -319,7 +319,7 @@
           return { right: true, fire: fire };
         }
       }
-    };
+    }.bind(Ai);
   function Shot() {
   }
     Shot.prototype.control = function(x, y, id, xm, ym) {
