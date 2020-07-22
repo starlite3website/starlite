@@ -343,7 +343,6 @@
         this.x = this.x + this.xm;
         this.y = this.y + this.ym;
       }
-      console.log(this.x, this.y, this.xm, this.ym);
       this.id = id;
       this.inactive = false;
       this.draw();
@@ -353,6 +352,7 @@
       if (!this.inactive) {
         this.y += this.ym;
         this.x += this.xm;
+        console.info(this.x, this.y);
         var l = 0;
         while (l < ai.length - 1) {
           l++;
