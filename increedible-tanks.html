@@ -858,7 +858,7 @@
   }
   function Tank() {
     this.intervals = [];
-    this.helper = [] = new Array();
+    this.helper = [];
     this.count = 0;
     this.count2 = 0;
     this.health = userData.health;
@@ -870,7 +870,7 @@
     this.color = "#00ff00";
     this.inactive = false;
     this.rotation = 0;
-  }
+  }.bind(Tank);
     
     Tank.draw = function() {
       if (this.leftright == true) {
