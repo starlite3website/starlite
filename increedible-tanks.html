@@ -229,7 +229,7 @@
            yd = 0-yd;
        }
        Game.shotId = Game.shotId + 1;
-       s[Game.shotId] = new Shot();
+       s[Game.shotId] = new Object(Shot);
        s[Game.shotId].control(this.x + 20, this.y + 20, Game.shotId, xd, yd);
       /*this.xd = 1;
       this.angle = this.rotation % 90;
@@ -322,7 +322,8 @@
       }
     };
   function Shot() {
-    this.control = function(x, y, id, xm, ym) {
+  }
+    Shot.control = function(x, y, id, xm, ym) {
       this.xm = xm;
       this.ym = ym;
       while (this.xm * this.xm + this.ym * this.ym > 1.2 || this.xm * this.xm + this.ym * this.ym < 1) {
@@ -347,8 +348,9 @@
       this.id = id;
       this.inactive = false;
       this.draw();
-    }
-    this.draw = function() {
+    };
+    
+    Shot.draw = function() {
       if (!this.inactive) {
         this.y += this.ym;
         this.x += this.xm;
@@ -365,8 +367,8 @@
         this.x = undefined;
         this.y = undefined;
       }
-    }
-  }
+    };
+    
   function clearShot() {
     if (user.tank != undefined) {
       level(Game.level, "n", false);
@@ -1032,7 +1034,7 @@
         this.yd = 0;
       }
       Game.shotId = Game.shotId + 1;
-      s[Game.shotId] = new Shot();
+      s[Game.shotId] = new Object(Shot);
       if ((this.xd < 0 && this.yd < 0) || (this.xd > 0 && this.yd > 0)) {
         s[Game.shotId].control(this.x + 20, this.y + 20, Game.shotId, this.yd, this.xd);
       } else {
@@ -1294,7 +1296,7 @@ function tank_listener2(event) {
     }
     if (sessionStorage.level == undefined) {   
       user = {
-        tank: new Tank(),
+        tank: new Object(Tank),
         username: sessionStorage.username,
         level: userData.level,
         coins: userData.coins,
@@ -2528,7 +2530,7 @@ function tank_listener2(event) {
     if (m) {
       Game.foes++;
       Game.aiId++;
-      ai[Game.aiId] = new Ai();
+      ai[Game.aiId] = new Object(Ai);
       ai[Game.aiId].id = Game.aiId;
       ai[Game.aiId].x = x;
       ai[Game.aiId].y = y;
