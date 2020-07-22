@@ -335,8 +335,9 @@
           this.ym *= 1.01;
         }
       }
-      this.xm = this.xm * 3;
-      this.ym = this.ym * 3;
+      this.xm = this.xm * 10;
+      this.ym = this.ym * 10;
+      console.log(this.xm, this.ym);
       this.y = y;
       this.x = x;
       while ((this.x < x + 40 && this.x > x - 40) && (this.y < y + 40 && this.y > y - 40)) {
@@ -352,7 +353,6 @@
       if (!this.inactive) {
         this.y += this.ym;
         this.x += this.xm;
-        console.info(this.x, this.y);
         var l = 0;
         while (l < ai.length - 1) {
           l++;
