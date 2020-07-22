@@ -391,35 +391,35 @@
       e.preventDefault();
       e.stopImmediatePropagation();
       if (this.inactive == false) {
-        if (this.keys[68]) {
+        if (this.key[68]) {
           if (checker(this.x + 5, this.y) != false) {
             this.x += 5;
             this.leftright = true;
             // CHASE put in tank_track.play(); here
           }
         }
-        if (this.keys[87]) {
+        if (this.key[87]) {
           if (checker(this.x, this.y - 5) != false) {
             this.y -= 5;
             this.leftright = false;
             // CHASE put in tank_track.play(); here
           }
         }
-        if (this.keys[65]) {
+        if (this.key[65]) {
           if (checker(this.x - 5, this.y) != false) {
             this.x -= 5;
             this.leftright = true;
             // CHASE put in tank_track.play(); here
           }
         }
-        if (this.keys[83]) {
+        if (this.key[83]) {
           if (checker(this.x, this.y + 5) != false) {
             this.y += 5;
             this.leftright = false;
             // CHASE put in tank_track.play(); here
           }
         }
-        if (this.keys[70]) {
+        if (this.key[70]) {
           if (this.count == 5) {
             this.fire();
             // CHASE put in tank_fire.play(); here
@@ -428,14 +428,14 @@
             this.count++;
           }
         }
-        if (this.keys[39]) {
+        if (this.key[39]) {
           if (this.rotation == 355) {
             this.rotation = 0;
           } else {
             this.rotation += 5;
           }
         }
-        if (this.keys[37]) {
+        if (this.key[37]) {
           if (this.rotation == 0) {
             this.rotation = 355;
           } else {
@@ -869,7 +869,7 @@
     this.color = "#00ff00";
     this.inactive = false;
     this.rotation = 0;
-    this.keys = [];
+    this.key = [];
   }
     
     Tank.draw = function() {
@@ -932,14 +932,14 @@
         speed = 5;
       }
       if (this.inactive == false) {
-        if (this.keys[68]) {
+        if (this.key[68]) {
           if (checker(this.x + speed, this.y) != false) {
             this.x += speed;
             this.leftright = true;
             // CHASE put in tank_track.play(); here
           }
         }
-        if (this.keys[87]) {
+        if (this.key[87]) {
           if (checker(this.x, this.y - speed) != false) {
             this.y -= speed;
             this.leftright = false;
@@ -951,14 +951,14 @@
             // CHASE put in tank_track.play(); here
           }
         }
-        if (this.keys[65]) {
+        if (this.key[65]) {
           if (checker(this.x - speed, this.y) != false) {
             this.x -= speed;
             this.leftright = true;
             // CHASE put in tank_track.play(); here
           }
         }
-        if (this.keys[83]) {
+        if (this.key[83]) {
           if (checker(this.x, this.y + speed) != false) {
             this.y += speed;
             this.leftright = false;
@@ -970,7 +970,7 @@
             // CHASE put in tank_track.play(); here
           }
         }
-        if (this.keys[32]) {
+        if (this.key[32]) {
           if (this.count == 10) {
             this.fire();
             // CHASE put in tank_fire.play(); here
@@ -979,7 +979,7 @@
             this.count++;
           }
         }
-        if (this.keys[39]) {
+        if (this.key[39]) {
           if (this.count2 == 2) {
             if (this.rotation == 355) {
               this.rotation = 0;
@@ -991,7 +991,7 @@
             this.count2++;
           }
         }
-        if (this.keys[37]) {
+        if (this.key[37]) {
           if (this.count2 == 2) {
             if (this.rotation == 0) {
               this.rotation = 355;
@@ -1006,7 +1006,7 @@
       } else {
         a("Game is paused", "yellow");
       }
-    }.bind(this);
+    }.bind(Tank);
     
     Tank.fire = function() {
       this.xd = 1;
@@ -1047,10 +1047,10 @@
     if (event.keyCode == 87 || event.keyCode == 83 || event.keyCode == 68 || event.keyCode == 65) {
         tank_tracks.play();
     }
-    if (user.tank.keys[event.keyCode] != true) {
+    if (user.tank.key[event.keyCode] != true) {
       var count = 0;
-      for(var i = 0; i < user.tank.keys.length; ++i){
-        if(user.tank.keys[i]) {
+      for(var i = 0; i < user.tank.key.length; ++i){
+        if(user.tank.key[i]) {
           count++;
         }
       }
@@ -1059,8 +1059,8 @@
           user.tank.move(event, 5);
         }, 15);
       } else if (count == 1) {
-        for(var i = 0; i < user.tank.keys.length; ++i){
-          if(user.tank.keys[i]) {
+        for(var i = 0; i < user.tank.key.length; ++i){
+          if(user.tank.key[i]) {
             window.clearInterval(user.tank.intervals[i]);
             user.tank.intervals[i] = window.setInterval(function() {
               if (user.tank != undefined) {
@@ -1076,11 +1076,11 @@
         }, 13);
       }
     }
-    user.tank.keys[event.keyCode] = true;
+    user.tank.key[event.keyCode] = true;
   }
 function tank_listener2(event) {
   window.clearInterval(user.tank.intervals[event.keyCode]);
-  user.tank.keys[event.keyCode] = false;
+  user.tank.key[event.keyCode] = false;
   tank_tracks.pause();
   tank_tracks.load();
   user.tank.intervals[event.keyCode] = false;
