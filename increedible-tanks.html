@@ -1979,7 +1979,7 @@ function tank_listener2(event) {
   function defeatHelper(event) {
     if (event.keyCode == 13) {
       defeatSupport = true;
-      user.tank = new Tank();
+      user.tank = new Object(Tank);
       window.clearInterval(interval2);
       document.removeEventListener("keydown", defeatHelper);
       level(Game.level, null, true);
@@ -2023,7 +2023,7 @@ function tank_listener2(event) {
   function victoryHelper(event) {
     if (event.keyCode == 13) {
       victorySupport = true;
-      user.tank = new Tank();
+      user.tank = new Object(Tank);
       window.clearInterval(interval2);
       document.removeEventListener("keydown", victoryHelper);
       if (Game.level == 12) {
@@ -2099,7 +2099,7 @@ function tank_listener2(event) {
   function mainMenu() {
     document.removeEventListener("keydown", multiplayer1);
     document.removeEventListener("click", multiplayer2);
-    user.tank = new Tank();
+    user.tank = new Object(Tank);
     window.clearInterval(interval2);
     draw.clearRect(0, 0, 500, 500);
     playText.style.visibility = "hidden";
