@@ -335,14 +335,13 @@
           this.ym *= 1.01;
         }
       }
-      this.xm = this.xm * 30;
-      this.ym = this.ym * 30;
-      console.log(this.xm, this.ym);
+      this.xm = this.xm * 15;
+      this.ym = this.ym * 15;
       this.y = y;
       this.x = x;
       while ((this.x < x + 40 && this.x > x - 40) && (this.y < y + 40 && this.y > y - 40)) {
-        this.x = this.x + this.xm;
-        this.y = this.y + this.ym;
+        this.x = this.x + xm;
+        this.y = this.y + ym;
       }
       this.id = id;
       this.inactive = false;
@@ -357,6 +356,7 @@
         while (l < ai.length - 1) {
           l++;
           if (user.tank != undefined) {
+            console.log("SHOT CHECKED");
             ai[l].check();
           }
         }
