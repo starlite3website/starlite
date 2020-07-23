@@ -171,7 +171,7 @@
     Ai.control = function() {
       i.push(window.setInterval(this.draw, 1));
       i.push(window.setInterval(this.move, 500));
-      //i.push(window.setInterval(this.check, 10)); // shot and ai check if hit interval
+      i.push(window.setInterval(this.check, 10)); // shot and ai check if hit interval
     }.bind(Ai);
     Ai.draw = function() {
       if (this.inactive != true) {
@@ -335,8 +335,8 @@
           this.ym *= 1.01;
         }
       }
-      this.xm = this.xm * 50;
-      this.ym = this.ym * 50;
+      this.xm = this.xm * 30;
+      this.ym = this.ym * 30;
       console.log(this.xm, this.ym);
       this.y = y;
       this.x = x;
