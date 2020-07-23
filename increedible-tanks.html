@@ -1432,6 +1432,11 @@ function tank_listener2(event) {
         l++;
         ai[l].draw();
     }
+    var l = 0;
+    while (l < ai.length - 1) {
+        l++;
+        ai[l].check();
+    }
     if (mo != "n") {
       Game.coins = 0; 
       Game.foes = 0;
