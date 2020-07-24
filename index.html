@@ -68,7 +68,6 @@
       }
       #d2 {
         background-color:white;
-        text-align:center;
         padding:5%;
         padding-left:5%;
         padding-right:5%;
@@ -80,9 +79,6 @@
       }
       h4 {
         margin-left:10px;
-      }
-      h1 {
-        margin-left:10%;
       }
       p {
         font-size:20px;
@@ -111,19 +107,19 @@
   </header>
   <body>
     <div id="main" style="background-image: url(/hompage.png);">
-      <div id="d2" style="position:absolute; top:30%; left:10%; right:10%; bottom: 5%;">
-        <h1>Increedible Tanks Now Ready to Play!</h1>
+      <div id="d2" style="position:absolute; top:30%; left:25%; right:25%; bottom: 5%;">
+        <h1 style="margin-left:10%;">Increedible Tanks Now Ready to Play!</h1>
         <script>
           var q = document.createElement("BUTTON");
           q.innerHTML = "Play Now!";
-          q.style.marginLeft = "30%";
+          q.style.marginLeft = "20%";
           q.addEventListener('click', function() {window.location.href='/increedible-tanks'});
           document.getElementById("d2").appendChild(q);
-          </script>
+        </script>
       </div>
-      <div id="d2" style="position:absolute; top:60%; left:10%; right:10%; bottom: 5%;">
-        <h1>Site Update Currently In Progress</h1>
-        <p>Currently the site is under style updates</p>
+      <div id="d2" style="position:absolute; top:60%; left:25%; right:25%; bottom: 5%;">
+        <h1 style="margin-left:10%;">Site Update Currently In Progress</h1>
+        <p style="margin-left:20%;">Currently the site is under style updates</p>
       </div>
     </div>
     <div style="background-color:white; color:black; margin: auto;justify-content:center;">
