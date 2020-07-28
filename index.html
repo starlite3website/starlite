@@ -1,29 +1,31 @@
 <!DOCTYPE html>
 <html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="description" content="in progress">
+    <meta name="keywords" content="Starlite, Increedible Tanks, Games, Cool Games, Fun Games, HTML5 Games, Javascript Games, Starlite's Increedible Tanks">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="index, follow">
+    <link rel="shortcut icon" href="/starlite-logo.png" type="image/png">
+    <title>Starlite</title>
+  </head>
   <header id="d1">
-    <head>
-      <meta charset="UTF-8">
-      <meta name="description" content="in progress">
-      <meta name="keywords" content="Starlite, Increedible Tanks, Games, Cool Games, Fun Games, HTML5 Games, Javascript Games, Starlite's Increedible Tanks">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <meta name="robots" content="index, follow">
-      <link rel="shortcut icon" href="/starlite-logo.png" type="image/png">
-      <title>Starlite</title>
-    </head>
     <img src="/starlite-logo.png" style="height:100px;width:100px;margin-bottom:-50px;margin-top:30px;margin-left:7.1428071428%;margin-right:3.0214030214%;"/>
-    <strong>
-      <a href="/home"style="font-family:Courier;text-decoration:none;color:black;margin-bottom:40px;">Starlite</a>
-      <a href="/news"><button>News</button></a>
-      <a href="/problems"><button>Bugs</button></a>
-      <a href="/chat"><button>Chat</button></a>
-      <a href="/games"><button>Games</button></a>
-      <a href="/account"><button>Sign up/Login</button></a>
-      <script>
-        if(sessionStorage.username!=undefined) {
-          window.location.href="/dashboard";
-        }
-      </script>
-    </strong>
+    <nav>
+      <strong>
+        <a href="/home"style="font-family:Courier;text-decoration:none;color:black;margin-bottom:40px;">Starlite</a>
+        <a href="/news"><button>News</button></a>
+        <a href="/problems"><button>Bugs</button></a>
+        <a href="/chat"><button>Chat</button></a>
+        <a href="/games"><button>Games</button></a>
+        <a href="/account"><button>Sign up/Login</button></a>
+        <script>
+          if(sessionStorage.username!=undefined) {
+            window.location.href="/dashboard";
+          }
+        </script>
+      </strong>
+    </nav>
     <style>
       * {
         font-family:Courier;
