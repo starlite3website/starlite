@@ -47,21 +47,21 @@
       }
       button:hover {
         transition-duration:1.5s;
-        background-color:orange;
+        background-color:orangered;
         color:white;
-        border-color:orange;
+        border-color:orangered;
       }
     </style>
     <style>
       body {
         margin:0;
       }
-      .cart{
+      .cart {
         color:white;
         background-color:orange;
         float:right;
       }
-      #main{
+      #main {
         margin:0;
         height:904px;
         width:100%;
@@ -139,7 +139,7 @@
       <script>
         var t = false;
         document.getElementById("dark").addEventListener("click", function() {
-          if (t==false) {
+          if (!t) {
             document.getElementById("d1").style.backgroundColor="black";
             document.getElementById("d2").style.backgroundColor="black";
             document.getElementById("d3").style.backgroundColor="black";
