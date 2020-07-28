@@ -68,7 +68,12 @@
       get(0,1);
       setTimeout(function(){username=o[0][0][1];},2000);
       get(1,1);
-      setTimeout(function(){password=o[1][0][1]},2000);var usernameInput=document.getElementById("usernameForm");var passwordInput=document.getElementById("passwordForm");var submit=document.getElementById("submit");var newaccount=document.getElementById("newaccount");submit.addEventListener("click",function(){if(isCorrect(usernameInput.value,passwordInput.value)){sessionStorage.setItem("username",usernameInput.value);sessionStorage.setItem("password",passwordInput.value);window.location.href="/dashboard"}});newaccount.addEventListener("click",function(){var usernameInput=document.getElementById("usernameForm");if(JSON.parse(username)[JSON.parse(username).indexOf(usernameInput.value)]!=usernameInput.value){if(JSON.parse(password)[JSON.parse(password).indexOf(passwordInput.value)]!=passwordInput.value){update("B2",JSON.stringify(JSON.parse(username).concat([usernameInput.value])));username=JSON.stringify(JSON.parse(username).concat([usernameInput.value]));setTimeout(function(){update("B3",JSON.stringify(JSON.parse(password).concat([passwordInput.value])));password=JSON.stringify(JSON.parse(password).concat([passwordInput.value]));},2000);alert("New Account Created: "+usernameInput.value)}else{alert("Password Taken")}}else{alert("Account Taken")}});function isCorrect(u,p){if(JSON.parse(username)[JSON.parse(username).indexOf(u)]==u){if(JSON.parse(password)[JSON.parse(password).indexOf(p)]==p){return!0}}return!1}</script>
+      setTimeout(function(){password=o[1][0][1]},2000);
+      var usernameInput=document.getElementById("usernameForm");
+      var passwordInput=document.getElementById("passwordForm");
+      var submit=document.getElementById("submit");
+      var newaccount=document.getElementById("newaccount");
+      submit.addEventListener("click",function(){if(isCorrect(usernameInput.value,passwordInput.value)){sessionStorage.setItem("username",usernameInput.value);sessionStorage.setItem("password",passwordInput.value);window.location.href="/dashboard"}});newaccount.addEventListener("click",function(){var usernameInput=document.getElementById("usernameForm");if(JSON.parse(username)[JSON.parse(username).indexOf(usernameInput.value)]!=usernameInput.value){if(JSON.parse(password)[JSON.parse(password).indexOf(passwordInput.value)]!=passwordInput.value){update("B2",JSON.stringify(JSON.parse(username).concat([usernameInput.value])));username=JSON.stringify(JSON.parse(username).concat([usernameInput.value]));setTimeout(function(){update("B3",JSON.stringify(JSON.parse(password).concat([passwordInput.value])));password=JSON.stringify(JSON.parse(password).concat([passwordInput.value]));},2000);alert("New Account Created: "+usernameInput.value)}else{alert("Password Taken")}}else{alert("Account Taken")}});function isCorrect(u,p){if(JSON.parse(username)[JSON.parse(username).indexOf(u)]==u){if(JSON.parse(password)[JSON.parse(password).indexOf(p)]==p){return!0}}return!1}</script>
     <style>
       img{
         width:100px;
@@ -78,10 +83,13 @@
       html{
         font-family:Courier;
       }
+      body {
+        background-color: orangered;
+      }
       #form{
         text-align: center;
         display:block;
-        padding:30px;
+        padding:30px; 
         margin-left:30%;
         margin-right:30%;
         margin-top:20%;
