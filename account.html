@@ -55,15 +55,21 @@
 <div id="form">
   <img src="/starlite-logo.png"/>
   <h2>Sign up/Login</h2>
-  <b>Username:</b>
-  <input type="text"id="usernameForm"/>
-  <b>Password:</b>
-  <input type="password"id="passwordForm"/>
-  <a href="/termsofservice">Terms of Service:<a/>
+  <b>
+    Username:
+    <input type="text"id="usernameForm"/>
+  </b>
+  <b>
+    Password:
+    <input type="password"id="passwordForm"/>
+  </b>
+  <b>
+    <a href="/termsofservice">Terms of Service:</a>
     <input type="checkbox"id="termsofservice"/>
-    <button id="submit">Submit</button>
-    <button id="newaccount">New Account</button>
-    <script>
+  </b>
+  <button id="submit">Submit</button>
+  <button id="newaccount">New Account</button>
+  <script>
       var username,password;
       get(0,1);
       setTimeout(function(){username=o[0][0][1];},2000);
@@ -74,7 +80,7 @@
       var submit=document.getElementById("submit");
       var newaccount=document.getElementById("newaccount");
       submit.addEventListener("click",function(){if(isCorrect(usernameInput.value,passwordInput.value)){sessionStorage.setItem("username",usernameInput.value);sessionStorage.setItem("password",passwordInput.value);window.location.href="/dashboard"}});newaccount.addEventListener("click",function(){var usernameInput=document.getElementById("usernameForm");if(JSON.parse(username)[JSON.parse(username).indexOf(usernameInput.value)]!=usernameInput.value){if(JSON.parse(password)[JSON.parse(password).indexOf(passwordInput.value)]!=passwordInput.value){update("B2",JSON.stringify(JSON.parse(username).concat([usernameInput.value])));username=JSON.stringify(JSON.parse(username).concat([usernameInput.value]));setTimeout(function(){update("B3",JSON.stringify(JSON.parse(password).concat([passwordInput.value])));password=JSON.stringify(JSON.parse(password).concat([passwordInput.value]));},2000);alert("New Account Created: "+usernameInput.value)}else{alert("Password Taken")}}else{alert("Account Taken")}});function isCorrect(u,p){if(JSON.parse(username)[JSON.parse(username).indexOf(u)]==u){if(JSON.parse(password)[JSON.parse(password).indexOf(p)]==p){return!0}}return!1}</script>
-    <style>
+  <style>
       img{
         width:100px;
         height:100px;
@@ -127,4 +133,4 @@
       }
     </style>
   </div>
-<html>
+</html>
