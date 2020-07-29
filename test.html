@@ -1,0 +1,16 @@
+<script>
+function Construct() {
+  alert(this);
+  this.a = function() {
+    this.b();
+  }
+  this.b = function() {
+    console.log("Success");
+  }
+}
+let tester = new Construct();
+let tester2 = new Object(Construct);
+alert(tester, tester2, tester.__proto__.constructor, tester2.__proto__.constructor);
+tester.a();
+tester2.a();
+</script>
