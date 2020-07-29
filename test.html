@@ -10,7 +10,10 @@ function Construct() {
 }
 let tester = new Construct();
 let tester2 = new Object(Construct);
-alert(tester, tester2, tester.__proto__.constructor, tester2.__proto__.constructor);
+alert(tester);
+alert(tester2);
+alert(tester.__proto__.constructor);
+alert(tester2.__proto__.constructor);
 tester.a();
 tester2.a();
 </script>
