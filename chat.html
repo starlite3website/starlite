@@ -188,7 +188,11 @@
             var w = document.createElement("BUTTON");
             w.setAttribute("id", l);
             q.setAttribute("id", l);
-            w.setAttribute("onclick", "t=JSON.parse(messages);var index = this.id; document.getElementById('span'+this.id).focus(); document.getElementById('span'+this.id).select(); document.execCommand('copy');");
+            w.addEventListener('click', function() {
+              document.getElementById('span'+this.id).focus(); 
+              document.getElementById('span'+this.id).select(); 
+              document.execCommand('copy');
+            }.bind(w););
             q.setAttribute("onclick", 't=JSON.parse(messages);var index = this.id; if (index>-1) {t.splice(index,1)};update("B5", JSON.stringify(t));');
             w.innerHTML = "Copy";
             q.innerHTML = "Delete";
