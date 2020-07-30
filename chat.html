@@ -187,10 +187,11 @@
             var w = document.createElement("BUTTON");
             w.setAttribute("id", l);
             q.setAttribute("id", l);
-            w.setAttribute("onclick", "t=JSON.parse(messages);var index = this.id; t[index].select(); document.execCommand('copy');");
+            w.setAttribute("onclick", "t=JSON.parse(messages);var index = this.id; t[index].select(); document.execCommand('copy'); alert("");");
             q.setAttribute("onclick", 't=JSON.parse(messages);var index = this.id; if (index>-1) {t.splice(index,1)};update("B5", JSON.stringify(t));');
             w.innerHTML = "Copy";
-            q.innerHTML = "CLICK 3x TO DELETE";
+            q.innerHTML = "Delete";
+            alert(JSON.parse(messages)[l].message);
             t.innerHTML = q.outerHTML+" "+w.outerHTML+" "+JSON.parse(messages)[l].send+": <b>"+decodeURIComponent(JSON.parse(messages)[l].message)+"</b> to:"+decodeURIComponent(JSON.parse(messages)[l].user)+" at: "+JSON.parse(messages)[l].timestamps;
           } else {
             t.innerHTML = JSON.parse(messages)[l].send+": <b>"+decodeURIComponent(JSON.parse(messages)[l].message)+"</b> to: "+decodeURIComponent(JSON.parse(messages)[l].user)+" at: "+JSON.parse(messages)[l].timestamps;
