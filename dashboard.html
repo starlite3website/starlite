@@ -56,6 +56,22 @@
         margin:0;
       }
     </style>
+    <style>
+      #main {
+        background-color: orangered;
+        width: 100%;
+        height: 100px;
+      }
+      #content {
+        text-align:center;
+        background-color:white;
+        padding:5%;
+        padding-left:5%;
+        padding-right:5%;
+        width:50%;
+        height:15%;
+      }
+    </style>
   </header>
   <script>
     if(sessionStorage.username!=undefined||sessionStorage.password!=undefined){
@@ -68,17 +84,18 @@
     }
   </script>
   <body>
-    <div style="width:40%;height:40%;border: 1px solid white;border-radius:50px;background-color:orange;color:white;margin:10px;">
-      <h1 style="margin-left:5%">Increedible Tanks Status</h1>
-      <h2 style="margin-left:5%;">THIS AREA IS IN PROGRESS</h2>
+    <div id="main">
+      <div id="content" style="width:40%;height:40%;border: 1px solid white;border-radius:50px;background-color:orange;color:white;margin:10px;">
+        <h1 style="margin-left:5%">Increedible Tanks Status</h1>
+        <h2 style="margin-left:5%;">Verion: <b>1.1.1.</b> Next Update: <b id="counter">Now</b> \n Increedible Tanks is a 2d Tank shooter. The point of the game is to defeat enemy tanks to win gold for upgrades. Play <a href="/increedible-tanks">here</a> Bugs: Bullets are broken...:(</h2>
+      </div>
     </div>
   </body>
   <footer id="d3">
     <div id="FooterLink" id="d4">
       <a href="/"id="Footer">Home</a>
       <a href="/games" id="Footer">Games</a>
-      <a href="/problems" id="Footer">Game Bugs</a>
-      <a href="/problems"                                                     
+      <a href="/problems" id="Footer">Game Bugs</a>                                                  
     </div>
     <div>
       <a href="https://seal.beyondsecurity.com/vulnerability-scanner-verification/starlite3.tk"><img src="https://seal.beyondsecurity.com/verification-images/starlite3.tk/vulnerability-scanner-2.gif"alt="Website Security Test"border="0"></a>
