@@ -182,16 +182,16 @@
         if (JSON.parse(messages)[l].user != undefined) var q = JSON.parse(messages)[l].user.split(":");
         if (JSON.parse(messages)[l].send == sessionStorage.username || JSON.parse(messages)[l].user == sessionStorage.username || JSON.parse(messages)[l].user == "public" || q.indexOf(sessionStorage.username) != -1 || sessionStorage.username == "admin") {
           var t = document.createElement("SPAN");
+          t.setAttribute("id", "span"+l);
           if (sessionStorage.username == JSON.parse(messages)[l].send || sessionStorage.username == "admin") {
             var q = document.createElement("BUTTON");
             var w = document.createElement("BUTTON");
             w.setAttribute("id", l);
             q.setAttribute("id", l);
-            w.setAttribute("onclick", "t=JSON.parse(messages);var index = this.id; t[index].select(); document.execCommand('copy'); alert("");");
+            w.setAttribute("onclick", "t=JSON.parse(messages);var index = this.id; document.getElementById('span'+this.id).focus(); document.getElementById('span'+this.id).select(); document.execCommand('copy');");
             q.setAttribute("onclick", 't=JSON.parse(messages);var index = this.id; if (index>-1) {t.splice(index,1)};update("B5", JSON.stringify(t));');
             w.innerHTML = "Copy";
             q.innerHTML = "Delete";
-            alert(JSON.parse(messages)[l].message);
             t.innerHTML = q.outerHTML+" "+w.outerHTML+" "+JSON.parse(messages)[l].send+": <b>"+decodeURIComponent(JSON.parse(messages)[l].message)+"</b> to:"+decodeURIComponent(JSON.parse(messages)[l].user)+" at: "+JSON.parse(messages)[l].timestamps;
           } else {
             t.innerHTML = JSON.parse(messages)[l].send+": <b>"+decodeURIComponent(JSON.parse(messages)[l].message)+"</b> to: "+decodeURIComponent(JSON.parse(messages)[l].user)+" at: "+JSON.parse(messages)[l].timestamps;
