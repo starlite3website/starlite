@@ -17,8 +17,16 @@
       <a href="/problems"><button>Bugs</button></a>
       <a href="/chat"><button>Chat</button></a>
       <a href="/games"><button>Games</button></a>
-      <a href="/account"><button>Sign up/Login</button></a>
+      <a href="/settings"><button><p id=userAccount></p></button></a>
       <script>
+        if (sessionStorage.username!=undefined||sessionStorage.password!=undefined) {
+          loadAccountProgress();
+        } else {
+          window.location.href="https://starlite3.tk/account";
+        }
+        function loadAccountProgress () {
+          document.getElementById("userAccount").innerHTML=sessionStorage.username;
+        }
         if(sessionStorage.username==undefined) {
           window.location.href="/";
         }
