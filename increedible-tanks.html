@@ -1310,31 +1310,26 @@ function tank_listener2(event) {
     setTimeout(mainMenu(), 5000);
     canvas.removeEventListener("click", loading);
   }
-  function levelReader(array) {
-    alert(array);
+  function levelReader(array, m) {
     var l = 0, q = 0;
     while (l < array.length) {
       while (q < array[l].length) {
         var p = array[l].split(""); // Block key: # = invincible, 1 = weak, 2 = strong, @ = player, A = ai
         if (p[q] == "#") {
-          wall(q, l);
-          alert('wall');
+          wall(q, l, m);
         }
         if (p[q] == "1") {
-          weak(q, l);
-          alert('weak');
+          weak(q, l, m);
         }
         if (p[q] == "2") {
-          strong(q, l);
-          alert('strong');
+          strong(q, l, m);
         }
         if (p[q] == "@") {
           user.tank.x = q*50;
           user.tank.y = l*50;
         }
         if (p[q] == "A") {
-          createAi(q*50, l*50, 0, 0);
-          alert('ai');
+          createAi(q*50, l*50,m, 3, 3);
         }
         q++;
       }
@@ -1478,7 +1473,7 @@ function tank_listener2(event) {
       if (mo != "n") {
         spawn(0, 0);
       }
-      levelReader(['  11 2A  1','  11  2 2','  11      ','#########1','   #A #   ','   #22#   ']);
+      levelReader(['  11 2A  1','  11  2 2','  11      ','#########1','   #A #   ','   #22#   '], m);
     }
     if (num === 2) {
       if (mo != "n") {
