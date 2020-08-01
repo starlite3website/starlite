@@ -1311,18 +1311,22 @@ function tank_listener2(event) {
     canvas.removeEventListener("click", loading);
   }
   function levelReader(array) {
+    alert(array);
     var l = 0, q = 0;
     while (l < array.length) {
       while (q < array[l].length) {
         var p = array[l].split(""); // Block key: # = invincible, 1 = weak, 2 = strong, @ = player, A = ai
         if (p[q] == "#") {
           wall(q, l);
+          alert('wall');
         }
         if (p[q] == "1") {
           weak(q, l);
+          alert('weak');
         }
         if (p[q] == "2") {
           strong(q, l);
+          alert('strong');
         }
         if (p[q] == "@") {
           user.tank.x = q*50;
@@ -1330,6 +1334,7 @@ function tank_listener2(event) {
         }
         if (p[q] == "A") {
           createAi(q*50, l*50, 0, 0);
+          alert('ai');
         }
         q++;
       }
