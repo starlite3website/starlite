@@ -146,6 +146,9 @@
   main_menu.src = "/starlite-increedible-tanks-main-menu.png";
   tank_base2.src = "/starlite-tank-base2.png";
   coins.src = "/starlite-coin.png";
+  window.setInterval(function() {
+    alert(s);
+  }, 10000);
   function ai_check(x, y) {
     var l = 1;
     while (l < Game.shotId) {
@@ -154,8 +157,8 @@
         if (s[l].x < x + 40 || s[l].x + 10 < x + 40) {
           if (s[l].y > y || s[l].y + 10 > y) {
             if (s[l].y < y + 40 || s[l].y + 10 < y + 40) {
-              alert("Shot Inactive");
               s[l].inactive = true;
+              delete s[l];
               return true;
             }
           }
