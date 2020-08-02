@@ -146,9 +146,6 @@
   main_menu.src = "/starlite-increedible-tanks-main-menu.png";
   tank_base2.src = "/starlite-tank-base2.png";
   coins.src = "/starlite-coin.png";
-  window.setInterval(function() {
-    alert(s);
-  }, 10000);
   function ai_check(x, y) {
     var l = 1;
     while (l < Game.shotId) {
@@ -339,8 +336,8 @@
           this.ym *= 1.01;
         }
       }
-      this.xm = this.xm * 15;
-      this.ym = this.ym * 15;
+      this.xm = this.xm * 30;
+      this.ym = this.ym * 30;
       this.y = y;
       this.x = x;
       while ((this.x < x + 40 && this.x > x - 40) && (this.y < y + 40 && this.y > y - 40)) {
@@ -974,7 +971,7 @@
           }
         }
         if (this.helper[32]) {
-          if (this.count == 10) {
+          if (this.count == 20) {
             this.fire();
             // CHASE put in tank_fire.play(); here
             this.count = 0;
