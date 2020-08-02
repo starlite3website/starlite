@@ -1312,10 +1312,10 @@ function tank_listener2(event) {
   }
   function levelReader(array, m) {
     var l = 0, q = 0;
+    alert(array.length);
     while (l < array.length) {
       while (q < array[l].split("").length) {
         var p = array[l].split(""); // Block key: # = invincible, 1 = weak, 2 = strong, @ = player, A = ai
-        alert(p);
         if (p[q] == "#") {
           wall(q, l, m);
         }
