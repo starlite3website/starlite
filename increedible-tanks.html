@@ -335,8 +335,8 @@
           this.ym *= 1.01;
         }
       }
-      this.xm = this.xm * 30;
-      this.ym = this.ym * 30;
+      this.xm = this.xm * 15;
+      this.ym = this.ym * 15;
       this.y = y;
       this.x = x;
       while ((this.x < x + 40 && this.x > x - 40) && (this.y < y + 40 && this.y > y - 40)) {
@@ -1439,6 +1439,7 @@ function tank_listener2(event) {
     draw.drawImage(floor, 400, 450);
     draw.drawImage(floor, 450, 450);
     // draw shots
+    user.tank.check();
     var l = 1;
     while (l < Game.shotId) {
       s[l].draw();
