@@ -1311,10 +1311,10 @@ function tank_listener2(event) {
     canvas.removeEventListener("click", loading);
   }
   function levelReader(array, m) {
-    var l = 0, q = 0;
+    var r = 0, q = 0;
     alert(array.length); 
     alert(array[0].split("").length);
-    while (l < array.length-1) {
+    while (r < array.length-1) {
       while (q < array[l].split("").length-1) {
         var p = array[l].split(""); // Block key: # = invincible, 1 = weak, 2 = strong, @ = player, A = ai
         if (p[q] == "#") {
@@ -1335,7 +1335,7 @@ function tank_listener2(event) {
         }
         q++;
       }
-      l++;
+      r++;
     }
     alert("done");
   }
