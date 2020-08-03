@@ -1197,7 +1197,7 @@ function tank_listener2(event) {
           block_support(id);
         }
       }
-    }, 50, [this.blockId]));
+    }, 10, [this.blockId]));
   }
   function blockHelper() {
     return Game.blockId;
@@ -1436,7 +1436,7 @@ function tank_listener2(event) {
     }
     var l = 0;
     while (l<s.length) {
-      s[l].check();
+      b[l].check();
       s[l].draw();
       l++;
     }
