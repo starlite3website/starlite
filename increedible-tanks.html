@@ -1049,9 +1049,9 @@
     if (user.tank.helper[event.keyCode] != true) {
       user.tank.intervals[event.keyCode] = window.setInterval(function() {
         if (user.tank.helper.indexOf(true)>1) {
-          user.tank.move(event, 4);
+          user.tank.move(event, 2);
         } else {
-          user.tank.move(event, 10);
+          user.tank.move(event, 5);
         }
       }, 15);
     }
