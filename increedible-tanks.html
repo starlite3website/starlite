@@ -1049,7 +1049,7 @@
     if (user.tank.helper[event.keyCode] != true) {
       user.tank.intervals[event.keyCode] = window.setInterval(function() {
         if (user.tank.helper.indexOf(true)>1) {
-          user.tank.move(event, 2);
+          user.tank.move(event, 1);
         } else {
           user.tank.move(event, 5);
         }
