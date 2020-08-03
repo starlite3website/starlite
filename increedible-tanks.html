@@ -1047,33 +1047,13 @@
         tank_tracks.play();
     }
     if (user.tank.helper[event.keyCode] != true) {
-      var count = 0;
-      for(var i = 0; i < user.tank.helper.length; ++i){
-        if(user.tank.helper[i]) {
-          count++;
-        }
-      }
-      if (count == 0) {
-        user.tank.intervals[event.keyCode] = window.setInterval(function() {
+      user.tank.intervals[event.keyCode] = window.setInterval(function() {
+        if (user.tank.helper.indexOf(true)>1) {
+          user.tank.move(event, 2);
+        } else {
           user.tank.move(event, 5);
-        }, 15);
-      } else if (count == 1) {
-        for(var i = 0; i < user.tank.helper.length; ++i){
-          if(user.tank.helper[i]) {
-            window.clearInterval(user.tank.intervals[i]);
-            user.tank.intervals[i] = window.setInterval(function() {
-              if (user.tank != undefined) {
-                user.tank.move(event, 2);
-              }
-            }, 13);
-          }
         }
-        user.tank.intervals[event.keyCode] = window.setInterval(function() {
-          if (user.tank != undefined) {
-            user.tank.move(event, 2);
-          }
-        }, 13);
-      }
+      }, 15);
     }
     user.tank.helper[event.keyCode] = true;
   }
