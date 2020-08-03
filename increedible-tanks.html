@@ -1431,14 +1431,20 @@ function tank_listener2(event) {
     }
     // draw ai
     var l = 0;
-    while (l < ai.length - 1) {
+    while (l < ai.length) {
         l++;
         ai[l].draw();
     }
     var l = 0;
-    while (l < ai.length - 1) {
+    while (l < ai.length) {
         l++;
         ai[l].check();
+    }
+    var l = 0;
+    while (l<s.length) {
+      s[l].check();
+      s[l].draw();
+      l++;
     }
     if (mo != "n") {
       Game.coins = 0; 
