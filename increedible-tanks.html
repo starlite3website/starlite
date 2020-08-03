@@ -1044,14 +1044,14 @@
     }.bind(Tank);
   function tank_listener1(event) {
     if (event.keyCode == 87 || event.keyCode == 83 || event.keyCode == 68 || event.keyCode == 65) {
-        tank_tracks.play();
+        //tank_tracks.play(); paused for testings
     }
     if (user.tank.helper[event.keyCode] != true) {
       user.tank.intervals[event.keyCode] = window.setInterval(function() {
         if (user.tank.helper.indexOf(true)>1) {
-          user.tank.move(event, 2);
+          user.tank.move(event, 4);
         } else {
-          user.tank.move(event, 5);
+          user.tank.move(event, 10);
         }
       }, 15);
     }
