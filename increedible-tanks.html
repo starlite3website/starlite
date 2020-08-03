@@ -1418,13 +1418,7 @@ function tank_listener2(event) {
     draw.drawImage(floor, 350, 450);
     draw.drawImage(floor, 400, 450);
     draw.drawImage(floor, 450, 450);
-    // draw shots
     user.tank.check();
-    var l = 1;
-    while (l < Game.shotId) {
-      s[l].draw();
-      l++;
-    }
     // draw tank
     if (user.tank != undefined) {
       user.tank.draw();
