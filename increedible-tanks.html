@@ -1106,12 +1106,12 @@ function tank_listener2(event) {
       canvas.removeEventListener("keydown", tank_listener1);
       canvas.removeEventListener("keyup", tank_listener2);
       var l = 0;
-      /*while(l<user.tank.intervals.length) {
-        if (user.tank.intervals[l] != false) {
+      while(l<user.tank.intervals.length) {
+        if (user.tank.intervals[l]) {
           window.clearInterval(user.tank.intervals[l]);
         }
         l++;
-      }*/
+      }
       gameHelper();
     }
     this.redraw = function() {
@@ -1430,11 +1430,12 @@ function tank_listener2(event) {
     while (l < ai.length-1) {
         l++;
         ai[l].draw();
+      ai[l].check();
     }
-    var l = 0;
-    while (l < ai.length-1) {
-        l++;
-        ai[l].check();
+    var l = 1;
+    while (l<s.length) {
+      s[l].draw();
+      s++;
     }
     var l = 1;
     while (l<b.length) {
