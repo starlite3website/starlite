@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html>
-<head>
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-132422058-1"></script>
-</head>
-<div id='wall'></div>
-<div id="animate">
-</div>
-<style>
+  <head>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-132422058-1"></script>
+  </head>
+  <div id='wall'></div>
+  <div id="animate">
+  </div>
+  <style>
     /*@font-face {
       font-family: pixel;
       font-size: 20px;
@@ -63,33 +63,33 @@
         margin-left: 0px;
       }
     }
-</style>
-<script>
-  window.setTimeout(function() {
-    document.getElementById('wall').style.visibility = 'hidden';
-    document.getElementById('animate').style.visibility = 'hidden';
-  }, 7000);
-</script>
+  </style>
+  <script>
+    window.setTimeout(function() {
+      document.getElementById('wall').style.visibility = 'hidden';
+      document.getElementById('animate').style.visibility = 'hidden';
+    }, 7000);
+  </script>
   <title>Starlite | Increedible Tanks</title>
-</head>
-<div id="game" class="container">
-  <h1 id="gameName"> Increedible Tanks </h1>
-  <h3 id="views"></h3>
-  <h3 id="users"></h3>
-  <h2>Increedible Tanks v1.1.1-9: The Graphics Update!(in progress)<br>Increedble Tanks v1.2.1-9: The Mechanism Update!(Starting September)</h2>
-  <canvas width="500" height="500" id="canvas" tabindex='1'>
-    <strong>Canvas is not supported.</strong> Try using a diffrent browser, If that does not work, please restart your device or use a diffrent device. </canvas>
-  <iframe src="/chat" width="500" height="500"></iframe>
-  <div id="play">
-    <h5 id="playText"> Click Anywhere To Start </h5>
+  </head>
+  <div id="game" class="container">
+    <h1 id="gameName"> Increedible Tanks </h1>
+    <h3 id="views"></h3>
+    <h3 id="users"></h3>
+    <h2>Increedible Tanks v1.1.1-9: The Graphics Update!(in progress)<br>Increedble Tanks v1.2.1-9: The Mechanism Update!(Starting September)</h2>
+    <canvas width="500" height="500" id="canvas" tabindex='1'>
+      <strong>Canvas is not supported.</strong> Try using a diffrent browser, If that does not work, please restart your device or use a diffrent device. </canvas>
+    <iframe src="/chat" width="500" height="500"></iframe>
+    <div id="play">
+      <h5 id="playText"> Click Anywhere To Start </h5>
+    </div>
+    <div id="alertConsole">
+      <h5 id="consoleText">
+      </h5>
+    </div>
   </div>
-  <div id="alertConsole">
-    <h5 id="consoleText">
-    </h5>
-  </div>
-</div>
-<iframe src="" id="database" visibility="hidden" display="hidden" width="0" height="0"></iframe>
-<script>
+  <iframe src="" id="database" visibility="hidden" display="hidden" width="0" height="0"></iframe>
+  <script>
   var embed = document.getElementById("database");
   var o = [];
   function update(range, value) {
@@ -2529,8 +2529,8 @@ function tank_listener2(event) {
     startScreen();
   }, 7000);
 
-</script>
-<style>
+  </script>
+  <style>
   canvas {
     outline: hidden;
     border: 1px solid black;
@@ -2648,6 +2648,5 @@ function tank_listener2(event) {
       margin-top: 220px;
     }
   }
-  
-</style>
+  </style>
 </html>
