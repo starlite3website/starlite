@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -105,7 +107,8 @@
   function after(err, data) {
     if (err !== null) {
       console.log('Something went wrong: ' + err);
-      var l = 0;
+    } else {
+    var l = 0;
       while (l<data.feed.entry.length) {
         if (data.feed.entry[l].content.$t != "") {
           o.push(data.feed.entry[l].content.$t.split(", ")); 
@@ -149,7 +152,7 @@
   function ai_check(x, y) {
     var l = 2;
     while (l < Game.shotId) {
-      if (s[l]==undefined) {return false;}
+      if (s[l] == undefined) return false;
       if (s[l].x > x || s[l].x + 10 > x) {
         if (s[l].x < x + 40 || s[l].x + 10 < x + 40) {
           if (s[l].y > y || s[l].y + 10 > y) {
@@ -229,8 +232,8 @@
            yd = 0-yd;
        }
        Game.shotId = Game.shotId + 1;
-       s.push(new Object(Shot));
-       s[s.length].control(this.x + 20, this.y + 20, Game.shotId, xd, yd);
+       s[Game.shotId] = new Object(Shot);
+       s[Game.shotId].control(this.x + 20, this.y + 20, Game.shotId, xd, yd);
       /*this.xd = 1;
       this.angle = this.rotation % 90;
       this.yd = Math.abs(((this.xd * this.angle) - (90 * this.xd)) / this.angle);
@@ -1239,7 +1242,7 @@ function tank_listener2(event) {
   } // alert end
   var gameData, userData;
   get(2,1);
-  setTimeout(function(){gameData=o[2][0][1];},5000);
+  setTimeout(function(){gameData=o[2][0][1];},2000);
   function loading() {
     if (sessionStorage.username == undefined || JSON.parse(gameData) == null) {
       if (JSON.parse(gameData) == null) {
@@ -2625,7 +2628,6 @@ function tank_listener2(event) {
     0% {
       margin-top: 220px;
     }
-
     20% {
       margin-top: 120px;
     }
