@@ -128,7 +128,6 @@
       var xhr = new XMLHttpRequest();
       xhr.open('GET', url, true);
       xhr.responseType = 'json';
-      xhr.onload = function() {
         var status = xhr.status;
         if (status === 200) {
           callback(null, xhr.response);
@@ -357,8 +356,8 @@
         draw.fillStyle = "#000000";
         draw.fillRect(this.x, this.y, 5, 5);
       } else {
-        this.x = undefined;
-        this.y = undefined;
+        this.x = -5000;
+        this.y = -5000;
       }
     }.bind(Shot);
     
