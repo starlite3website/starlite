@@ -351,7 +351,7 @@
     
     Shot.draw = function() {
       if (!this.inactive) {
-        alert(this.xm, this.ym, this.x, this.y);
+        alert(this.xm+":"+this.ym+":"+this.x+":"+this.y);
         this.y += this.ym;
         this.x += this.xm;
         draw.fillStyle = "#000000";
