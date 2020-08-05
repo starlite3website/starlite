@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -128,6 +129,7 @@
       var xhr = new XMLHttpRequest();
       xhr.open('GET', url, true);
       xhr.responseType = 'json';
+      xhr.onload = function() {
         var status = xhr.status;
         if (status === 200) {
           callback(null, xhr.response);
@@ -350,7 +352,6 @@
     
     Shot.draw = function() {
       if (!this.inactive) {
-        alert(this.xm+":"+this.ym+":"+this.x+":"+this.y);
         this.y += this.ym;
         this.x += this.xm;
         draw.fillStyle = "#000000";
