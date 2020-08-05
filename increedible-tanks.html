@@ -230,8 +230,8 @@
            yd = 0-yd;
        }
        Game.shotId = Game.shotId + 1;
-       s[Game.shotId] = new Object(Shot);
-       s[Game.shotId].control(this.x + 20, this.y + 20, Game.shotId, xd, yd);
+       s.push(new Object(Shot));
+       s[s.length].control(this.x + 20, this.y + 20, Game.shotId, xd, yd);
       /*this.xd = 1;
       this.angle = this.rotation % 90;
       this.yd = Math.abs(((this.xd * this.angle) - (90 * this.xd)) / this.angle);
