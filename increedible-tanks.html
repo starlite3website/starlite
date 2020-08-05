@@ -148,9 +148,9 @@
   tank_base2.src = "/starlite-tank-base2.png";
   coins.src = "/starlite-coin.png";
   function ai_check(x, y) {
+    alert(s);
     var l = 1;
     while (l < Game.shotId) {
-      if (s[l] == undefined) alert("error found");
       if (s[l].x > x || s[l].x + 10 > x) {
         if (s[l].x < x + 40 || s[l].x + 10 < x + 40) {
           if (s[l].y > y || s[l].y + 10 > y) {
