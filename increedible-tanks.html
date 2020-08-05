@@ -105,8 +105,7 @@
   function after(err, data) {
     if (err !== null) {
       console.log('Something went wrong: ' + err);
-    } else {
-    var l = 0;
+      var l = 0;
       while (l<data.feed.entry.length) {
         if (data.feed.entry[l].content.$t != "") {
           o.push(data.feed.entry[l].content.$t.split(", ")); 
@@ -150,7 +149,7 @@
   function ai_check(x, y) {
     var l = 2;
     while (l < Game.shotId) {
-      if (s[l]==undefined) {console.log("Error on:"+l);return false;}
+      if (s[l]==undefined) {return false;}
       if (s[l].x > x || s[l].x + 10 > x) {
         if (s[l].x < x + 40 || s[l].x + 10 < x + 40) {
           if (s[l].y > y || s[l].y + 10 > y) {
