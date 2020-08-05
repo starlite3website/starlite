@@ -352,6 +352,7 @@
     
     Shot.draw = function() {
       if (!this.inactive) {
+        if (typeof this.x != Number) alert('error');
         this.y += this.ym;
         this.x += this.xm;
         draw.fillStyle = "#000000";
