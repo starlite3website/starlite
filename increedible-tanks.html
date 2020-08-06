@@ -166,10 +166,10 @@
     return false;
   }
   function Ai() {
-    this.health = 200;
-    this.x = 0;
-    this.y = 0;
   }
+    Ai.health = 200;
+    Ai.x = 0;
+    Ai.y = 0;
     Ai.control = function() {
       i.push(window.setInterval(this.draw, 1));
       i.push(window.setInterval(this.move, 500));
