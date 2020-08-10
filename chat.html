@@ -91,7 +91,7 @@
     * {
       font-family: Courier;
     }
-    span {
+    div {
       display: block;
       font-family: Courier;
     }
@@ -202,14 +202,13 @@
       while (l<JSON.parse(messages).length) {
         if (JSON.parse(messages)[l].user != undefined) var q = JSON.parse(messages)[l].user.split(":");
         if (JSON.parse(messages)[l].send == sessionStorage.username || JSON.parse(messages)[l].user == sessionStorage.username || JSON.parse(messages)[l].user == "public" || q.indexOf(sessionStorage.username) != -1 || sessionStorage.username == "admin") {
-          var t = document.createElement("SPAN");
-          t.setAttribute("id", "span"+l);
+          var t = document.createElement("DIV");
           if (sessionStorage.username == JSON.parse(messages)[l].send || sessionStorage.username == "admin") {
             var q = document.createElement("BUTTON");
             q.setAttribute("id", l);
             q.setAttribute("onclick", 't=JSON.parse(messages);var index = this.id; if (index>-1) {t.splice(index,1)};update("B5", JSON.stringify(t));');
             q.innerHTML = "Delete";
-            t.innerHTML = q.outerHTML+" "+JSON.parse(messages)[l].send+": <b>"+decodeURIComponent(JSON.parse(messages)[l].message)+"</b> to:"+decodeURIComponent(JSON.parse(messages)[l].user)+" at: "+JSON.parse(messages)[l].timestamps;
+            t.innerHTML = q.outerHTML+" "+JSON.parse(messages)[l].send+": <div><b>"+decodeURIComponent(JSON.parse(messages)[l].message)+"</b></div>to:"+decodeURIComponent(JSON.parse(messages)[l].user)+" at: "+JSON.parse(messages)[l].timestamps;
           } else {
             t.innerHTML = JSON.parse(messages)[l].send+": <b>"+decodeURIComponent(JSON.parse(messages)[l].message)+"</b> to: "+decodeURIComponent(JSON.parse(messages)[l].user)+" at: "+JSON.parse(messages)[l].timestamps;
           } 
