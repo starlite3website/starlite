@@ -68,20 +68,6 @@
     <textarea placeholder="Message" id="message"></textarea>
     <input type="text" placeholder="To" id="from"/>
     <button id="submit">Send Message</button>
-    <h3> Messages Hard to See? Update for that coming <b id="timer" style="color:orangered;"></b></h3>
-    <script>
-      var then = new Date("August 10, 2020"), now, hours, mins, secs, days, timer = document.getElementById("timer");
-      window.setInterval(countdown, 1000);
-      function countdown() {
-        now = new Date();
-        let distance = then - now;
-        days = Math.floor(distance / (1000 * 60 * 60 * 24));
-        hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        mins = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-        secs = Math.floor((distance % (1000 * 60)) / 1000);
-        timer.innerHTML = days+"d "+hours+"h "+mins+"m "+secs+"s ";
-      }
-    </script>
     <h3> How To Use </h3>
     <p><b>Send Message:</b> Type message in MESSAGE box, and a username in TO box.</p>
     <p><b>Send to Everyone:</b> Type public in the TO box.</p>
@@ -208,7 +194,7 @@
             q.setAttribute("id", l);
             q.setAttribute("onclick", 't=JSON.parse(messages);var index = this.id; if (index>-1) {t.splice(index,1)};update("B5", JSON.stringify(t));');
             q.innerHTML = "Delete";
-            t.innerHTML = q.outerHTML+" "+JSON.parse(messages)[l].send+": <div><b>"+decodeURIComponent(JSON.parse(messages)[l].message)+"</b></div>to:"+decodeURIComponent(JSON.parse(messages)[l].user)+" at: "+JSON.parse(messages)[l].timestamps;
+            t.innerHTML = q.outerHTML+" "+JSON.parse(messages)[l].send+": <div><b style='margin-left: 10%;'>"+decodeURIComponent(JSON.parse(messages)[l].message)+"</b></div>to:"+decodeURIComponent(JSON.parse(messages)[l].user)+" at: "+JSON.parse(messages)[l].timestamps;
           } else {
             t.innerHTML = JSON.parse(messages)[l].send+": <b>"+decodeURIComponent(JSON.parse(messages)[l].message)+"</b> to: "+decodeURIComponent(JSON.parse(messages)[l].user)+" at: "+JSON.parse(messages)[l].timestamps;
           } 
