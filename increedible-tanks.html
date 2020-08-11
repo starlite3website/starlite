@@ -592,26 +592,26 @@
       this.level = {weak:[],strong:[],wall:[],shots:[],users:this.users}
       let p = 0;
       while (p<10) {
-        let s = new Block(30, Math.floor(Math.random(9)*10), Math.floor(Math.random(9)*10));
-        b.push(s);
-        this.level.weak.push(s);
-        s.weak();
+        let q = new Block(30, Math.floor(Math.random(9)*10), Math.floor(Math.random(9)*10));
+        q.push(s);
+        this.level.weak.push(q);
+        q.weak();
         p++;
       }
       p = 0;
       while (p<10) {
-        let s = new Block(30, Math.floor(Math.random(9)*10), Math.floor(Math.random(9)*10));
-        b.push(s);
-        this.level.strong.push(s);
-        s.strong();
+        let q = new Block(30, Math.floor(Math.random(9)*10), Math.floor(Math.random(9)*10));
+        b.push(q);
+        this.level.strong.push(q);
+        q.strong();
         p++;
       }
       p=0;
       while (p<10) {
-        let s = new Block(30, Math.floor(Math.random(9)*10), Math.floor(Math.random(9)*10));
-        b.push(s);
-        this.level.wall.push(s);
-        s.wall();
+        let q = new Block(30, Math.floor(Math.random(9)*10), Math.floor(Math.random(9)*10));
+        b.push(q);
+        this.level.wall.push(q);
+        q.wall();
         p++;
       }
       this.level.users = this.users;
@@ -1423,7 +1423,7 @@ function tank_listener2(event) {
     var l = 1;
     while (l<s.length) {
       s[l].draw();
-      s++;
+      l++;
     }
     var l = 1;
     while (l<b.length) {
