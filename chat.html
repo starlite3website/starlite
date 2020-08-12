@@ -8,7 +8,7 @@
   window.setTimeout(function() {
     document.getElementById('wall').style.visibility = 'hidden';
     document.getElementById('animate').style.visibility = 'hidden';
-  }, 7000);
+  }, 3000);
 </script>
 <div id="animate">
 </div>
@@ -24,41 +24,41 @@
     }
     #animate {
       position: absolute;
-      left: 45%;
-      top: 40%;
-      margin-top: 50px;
-      margin-left:0px;
+      left: 50%;
+      top: 50%;
       width: 30px;
       height: 30px;
-      border: 1px solid orange;
-      background-color: orange;
+      margin-top:-15px;
+      margin-left:-15px;
+      border: 1px solid orangered;
+      background-color: orangered;
       border-radius: 15px;
       animation: animation 3s infinite;
       z-index:101;
     }
     @keyframes animation {
       0% {
-        margin-top: 50px;
-        margin-left:0px;
+        margin-left: -15px;
+        margin-top: -65px;
       }
       25% {
-        margin-left: 50px;
-        margin-top: 0px;
+        margin-left: 35px;
+        margin-top: -15px;
         background-color: white;
       }
       50% {
-        margin-left: 100px;
-        margin-top: 50px;
-        background-color: orange;
+        margin-left: -15px;
+        margin-top: 35px;
+        background-color: orangered;
       }
       75% {
-        margin-left: 50px;
-        margin-top: 100px;
+        margin-left: -65px;
+        margin-top: -15px;
         background-color: white;
       }
       100% {
-        margin-top: 50px;
-        margin-left: 0px;
+        margin-left: -15px;
+        margin-top: -65px;
       }
     }
 </style>
@@ -166,11 +166,11 @@
     setTimeout(function(){messages=o[3][0][1];},2000);
     var d = [], e = [], interval, socket = new WebSocket('wss://connect.websocket.in/v3/1?apiKey=c37MW77TpY8GDiA4yfQPegQUtlFUJkK5d2i1Nrkuk87aCjfwtsxTxHPgKdLn');;
     window.setTimeout(function() {
-      interval = window.setInterval(updateChat, 3000);
+      interval = window.setInterval(updateChat, 1000);
       socket.onmessage = function(e) {
         updateChat(JSON.parse(e.data));
       }
-    }, 5000);
+    }, 2000);
     function updateChat(m) {
       o = [];
       get(3,1);
