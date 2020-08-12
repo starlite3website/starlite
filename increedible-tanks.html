@@ -9,14 +9,6 @@
     </div>
   </div>
   <style>
-    /*@font-face {
-      font-family: pixel;
-      font-size: 20px;
-      src: url(PixelFJVerdana12pt.ttf);
-    }*/
-    * {
-      font-family: pixel;
-    }
     #wall {
       position: fixed;
       background-color: white;
@@ -37,7 +29,7 @@
       border: 1px solid orangered;
       background-color: orangered;
       border-radius: 15px;
-      animation: animation 3s infinite;
+      animation: animation 2s infinite;
       z-index:101;
     }
     @keyframes animation {
@@ -70,7 +62,7 @@
     window.setTimeout(function() {
       document.getElementById('wall').style.visibility = 'hidden';
       document.getElementById('animate').style.visibility = 'hidden';
-    }, 7000);
+    }, 3000);
   </script>
   <title>Starlite | Increedible Tanks</title>
   </head>
@@ -2515,8 +2507,7 @@ function tank_listener2(event) {
     document.getElementById('wall').style.visibility = 'hidden';
     document.getElementById('animate').style.visibility = 'hidden';
     startScreen();
-  }, 7000);
-
+  }, 3000);
   </script>
   <style>
   canvas {
