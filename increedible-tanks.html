@@ -149,8 +149,7 @@
   coins.src = "/starlite-coin.png";
   function ai_check(x, y) {
     var l = 2;
-    while (l < Game.shotId) {
-      if (s[l] == undefined) return false;
+    while (l < s.length-1) {
       if (s[l].x > x || s[l].x + 10 > x) {
         if (s[l].x < x + 40 || s[l].x + 10 < x + 40) {
           if (s[l].y > y || s[l].y + 10 > y) {
@@ -229,9 +228,8 @@
            xd = 0-1;
            yd = 0-yd;
        }
-       Game.shotId = Game.shotId + 1;
        s.push(new Object(Shot));
-       s[s.length-1].control(this.x + 20, this.y + 20, Game.shotId, xd, yd);
+       s[s.length-1].control(this.x + 20, this.y + 20, s.length-1, xd, yd);
       /*this.xd = 1;
       this.angle = this.rotation % 90;
       this.yd = Math.abs(((this.xd * this.angle) - (90 * this.xd)) / this.angle);
@@ -1024,12 +1022,11 @@
         this.xd = 1;
         this.yd = 0;
       }
-      Game.shotId = Game.shotId + 1;
-      s[Game.shotId] = new Object(Shot);
+      s.push(new Object(Shot));
       if ((this.xd < 0 && this.yd < 0) || (this.xd > 0 && this.yd > 0)) {
-        s[Game.shotId].control(this.x + 20, this.y + 20, Game.shotId, this.yd, this.xd);
+        s[s.length-1].control(this.x + 20, this.y + 20, s.length, this.yd, this.xd);
       } else {
-        s[Game.shotId].control(this.x + 20, this.y + 20, Game.shotId, this.xd, this.yd);
+        s[s.length-1].control(this.x + 20, this.y + 20, s.length, this.xd, this.yd);
       }
     }.bind(Tank);
   function tank_listener1(event) {
@@ -1079,7 +1076,6 @@ function tank_listener2(event) {
     s = [];
     user.tank = undefined;
     Game.blockId = 0;
-    Game.shotId = 0;
     Game.aiId = 0;
   }
   function Game() {
@@ -1087,7 +1083,6 @@ function tank_listener2(event) {
     this.foes = 0;
     this.paused = false;
     this.aiId = 0;
-    this.shotId = 0;
     this.blockId = 0;
     this.endGame = function() {
       alert("removing event Listener");
@@ -1104,7 +1099,7 @@ function tank_listener2(event) {
       gameHelper();
     }
     this.redraw = function() {
-      for (var r = 1; r == this.shotId; r++) {
+      for (var r = 1; r == s.length-1; r++) {
         s[r].redraw();
       }
     }
