@@ -2431,8 +2431,8 @@ function tank_listener2(event) {
     }
   function wall(x, y, m) {
     if (m) {
-      Game.blockId++;
       b[Game.blockId] = new Block(0, x, y, true);
+      Game.blockId++;
     }
     var l = 1;
     while (l<b.length) {
