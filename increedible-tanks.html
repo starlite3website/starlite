@@ -2445,9 +2445,9 @@ function tank_listener2(event) {
     }
   } // creates a wall
   function strong(x, y, m) {
-    if (m) {
-      Game.blockId++;
+    if (m) {      
       b[Game.blockId] = new Block(20, x, y, false, false);
+      Game.blockId++;
     }
     var l = 1;
     while (l<b.length) {
@@ -2467,8 +2467,8 @@ function tank_listener2(event) {
 
   function weak(x, y, m) {
     if (m) {
-      Game.blockId++;
       b[Game.blockId] = new Block(10, x, y, false, false);
+      Game.blockId++;
     }
     var l = 1;
     while (l<b.length) {
