@@ -1420,12 +1420,13 @@ function tank_listener2(event) {
       l++;
       ai[l].draw();
     }*/
-    var l = 1;
+    var l = 0;
     while (l<s.length-1) {
+      if (s[l] == undefined) console.log("error");
       s[l].draw();
       l++;
     }
-    var l = 1;
+    var l = 0;
     while (l<b.length) {
       if (ai_check(b[l].x * 50, b[l].y * 50)) {
         b[l].health -= 10;
