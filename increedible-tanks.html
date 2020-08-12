@@ -1059,7 +1059,7 @@ function tank_listener2(event) {
       return false;
     }
     var l = 0;
-    while (l < Game.blockId) {
+    while (l < b.length-1) {
       l = l + 1;
       if ((x + 40 > b[l].x * 50 && x + 40 < b[l].x * 50 + 50) || (x > b[l].x * 50 && x < b[l].x * 50 + 50)) {
         if ((y > b[l].y * 50 && y < b[l].y * 50 + 50) || (y + 40 > b[l].y * 50 && y + 40 < b[l].y * 50 + 50)) {
