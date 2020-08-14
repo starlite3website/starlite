@@ -1074,8 +1074,6 @@ function tank_listener2(event) {
     ai = [];
     s = [];
     user.tank = undefined;
-    Game.blockId = 0;
-    Game.aiId = 0;
   }
   function Game() {
     this.coins = 0;
@@ -1185,7 +1183,7 @@ function tank_listener2(event) {
     }, 50, [this.blockId]));
   }
   function blockHelper() {
-    return Game.blockId;
+    return b.length-1;
   }
   function block_support(id) {
     b[id].x = undefined;
@@ -2425,11 +2423,10 @@ function tank_listener2(event) {
     }
   function wall(x, y, m) {
     if (m) {
-      b[Game.blockId] = new Block(0, x, y, true);
-      Game.blockId++;
+      b.push(new Block(0, x, y, true));
     }
-    var l = 1;
-    while (l<b.length) {
+    var l = 0;
+    while (l<b.length-1) {
       if (b[l].x == x) {
         if (b[l].y == y) {
           b[l].wall(x,y);
@@ -2440,11 +2437,10 @@ function tank_listener2(event) {
   } // creates a wall
   function strong(x, y, m) {
     if (m) {      
-      b[Game.blockId] = new Block(20, x, y, false, false);
-      Game.blockId++;
+      b.push(new Block(20, x, y, false, false));
     }
-    var l = 1;
-    while (l<b.length) {
+    var l = 0;
+    while (l<b.length-1) {
       if (b[l].x == x) {
         if (b[l].y == y) {
           b[l].strong(x,y);
@@ -2458,14 +2454,12 @@ function tank_listener2(event) {
     user.tank.y = y;
     user.tank.spawn = [x, y];
   }
-
   function weak(x, y, m) {
     if (m) {
-      b[Game.blockId] = new Block(10, x, y, false, false);
-      Game.blockId++;
+      b.push(new Block(10, x, y, false, false));
     }
     var l = 1;
-    while (l<b.length) {
+    while (l<b.length-1) {
       if (b[l].x == x) {
         if (b[l].y == y) {
           b[l].weak(x,y);
@@ -2498,15 +2492,13 @@ function tank_listener2(event) {
 
   function createAi(x, y, m, t, team) {
     if (m) {
-      Game.foes++;
-      Game.aiId++;
-      ai[Game.aiId] = new Object(Ai);
-      ai[Game.aiId].id = Game.aiId;
-      ai[Game.aiId].x = x;
-      ai[Game.aiId].y = y;
-      ai[Game.aiId].master = team;
-      ai[Game.aiId].type = t;
-      ai[Game.aiId].control();
+      ai.push(new Object(Ai));
+      ai[ai.length-1].id = ai.length;
+      ai[ai.length-1].x = x;
+      ai[ai.length-1].y = y;
+      ai[ai.length-1].master = team;
+      ai[ai.length-1].type = t;
+      ai[ai.length-1].control();
     }
   }
   window.setTimeout(function() {
