@@ -322,7 +322,6 @@
   function Shot() {
   }
     Shot.control = function(x, y, id, xm, ym) {
-      console.log(id);
       this.xm = xm;
       this.ym = ym;
       while (this.xm * this.xm + this.ym * this.ym > 1.2 || this.xm * this.xm + this.ym * this.ym < 1) {
@@ -343,9 +342,10 @@
         this.x = this.x + xm;
         this.y = this.y + ym;
       }
+      i.push(window.setInterval(function(id) {s[id].update();}, 100, [id]);
       this.id = id;
       this.inactive = false;
-      this.draw();
+      this.draw();      
     }.bind(Shot);
     
     Shot.draw = function() {
