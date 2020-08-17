@@ -1435,6 +1435,12 @@ function tank_listener2(event) {
       user.tank.draw();
       user.tank.check();
     }
+    draw.globalAlpha = .5;
+    draw.fillStyle="#ffffff";
+    draw.fillRect(user.tank.x, user.tank.y + 60, sessionStorage.username.length * 15, 20);
+    draw.font = "20px Courier";
+    draw.fillText(sessionStorage.username, user.tank.x + 5, user.tank.y + 65);
+    draw.globalAlpha = 1;
     // draw ai
     var l = 0;
     while (l < ai.length-1) {
