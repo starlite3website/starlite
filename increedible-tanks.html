@@ -349,15 +349,18 @@
     
     Shot.draw = function() {
       if (!this.inactive) {
-        this.y += this.ym;
-        this.x += this.xm;
         draw.fillStyle = "#000000";
         draw.fillRect(this.x, this.y, 5, 5);
-      } else {
-        this.x = -5000;
-        this.y = -5000;
       }
     }.bind(Shot);
+    Shot.update = function() {
+      if (this.inactive) {
+        // do noting if shot inactive
+      } else {
+        this.x += this.xm;
+        this.y += this.ym;
+      }
+    }
     
   function clearShot() {
     if (user.tank != undefined) {
@@ -1023,9 +1026,9 @@
       }
       s.push(new Object(Shot));
       if ((this.xd < 0 && this.yd < 0) || (this.xd > 0 && this.yd > 0)) {
-        s[s.length-1].control(this.x + 20, this.y + 20, s.length, this.yd, this.xd);
+        s[s.length-1].control(this.x + 20, this.y + 20, s.length-1, this.yd, this.xd);
       } else {
-        s[s.length-1].control(this.x + 20, this.y + 20, s.length, this.xd, this.yd);
+        s[s.length-1].control(this.x + 20, this.y + 20, s.length-1, this.xd, this.yd);
       }
     }.bind(Tank);
   function tank_listener1(event) {
