@@ -1416,6 +1416,7 @@ function tank_listener2(event) {
     }
     var l = 0;
     while (l<s.length-1) {
+      s[l].update();
       s[l].draw();
       l++;
     }
@@ -1430,12 +1431,6 @@ function tank_listener2(event) {
       l++;
     }
     if (mo != "n") {
-      i.push(window.setInterval(function() {
-        while (l<s.length-1) {
-          s[l].update();
-          l++;
-        }
-      }, 100));
       Game.coins = 0; 
       Game.foes = 0;
       Game.control();
