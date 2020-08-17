@@ -1,1 +1,17 @@
-https://www.ancestry.com/family-tree/pt/RSVP.aspx?dat=MTEyNTU5MzYyOzswNGQ5MzE4NS0wMDA2LTAwMDAtMDAwMC0wMDAwMDAwMDAwMDA7MjAyMDA4MDkxNTIwNDQ7MzI3NzU=&mac=v8UFx8YNzaQObajTWEadrg==
+<html>
+  <script>
+    var socket = new WebSocket("ws://server.cs641311.repl.co:9898");
+    var in = document.getElementById("in");
+    var sub = document.getElementById("sub");
+    var out = document.getElementById("out");
+    sub.addEventListener('click', function() {
+      socket.send(in.value);
+    });
+    socket.onmessage = function(e) {
+      out.innerHTML = e.data;
+    }
+  </script>
+  <input id="in" />
+  <button id="sub"></button>
+  <div id="out"></div>
+</html>
