@@ -1407,11 +1407,11 @@ function tank_listener2(event) {
     draw.drawImage(floor, 300, 450);
     draw.drawImage(floor, 350, 450);
     draw.drawImage(floor, 400, 450);
-    draw.drawImage(floor, 450, 450);
-    user.tank.check();
+    draw.drawImage(floor, 450, 450);    
     // draw tank
     if (user.tank != undefined) {
       user.tank.draw();
+      user.tank.check();
     }
     // draw ai
     var l = 0;
