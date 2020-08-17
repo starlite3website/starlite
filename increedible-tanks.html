@@ -358,7 +358,10 @@
     Shot.update = function() {
       if (this.counter == 10) {
         if (this.inactive) {
-          // do noting if shot inactive
+          this.x = -500;
+          this.y = -500;
+          this.xm = 0;
+          this.ym = 0;
         } else {
           this.x += this.xm;
           this.y += this.ym;
@@ -1059,7 +1062,6 @@ function tank_listener2(event) {
   tank_tracks.pause();
   tank_tracks.load();
   user.tank.intervals[event.keyCode] = false;
-}
   function checker(x, y) {
     if (x < 0 || y < 0 || x + 40 > 500 || y + 40 > 500) {
       return false;
