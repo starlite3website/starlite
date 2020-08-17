@@ -1173,14 +1173,14 @@ function tank_listener2(event) {
       weak_image.src = "/block-silver.png";
       draw.drawImage(weak_image, x * 50, y * 50);
     }
-    i.push(window.setInterval(function(id) {
+    /*i.push(window.setInterval(function(id) {
       if (ai_check(b[id].x * 50, b[id].y * 50)) {
         b[id].health -= 10;
         if (b[id].health <= 0) {
           block_support(id);
         }
       }
-    }, 50, [this.blockId]));
+    }, 50, [this.blockId]));*/
   }
   function block_support(id) {
     b[id].x = undefined;
@@ -1406,6 +1406,7 @@ function tank_listener2(event) {
     // draw ai
     var l = 0;
     while (l < ai.length-1) {
+      ai[l].check();
       ai[l].draw();
       l++;
     }
