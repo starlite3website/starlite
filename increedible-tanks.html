@@ -1288,15 +1288,12 @@ function tank_listener2(event) {
         var p = array[l].split(""); // Block key: # = invincible, 1 = weak, 2 = strong, @ = player, A = ai
         if (p[q] == "#") {
           wall(q, l, m);
-          console.log(q,l);
         }
         if (p[q] == "1") {
           weak(q, l, m);
-          console.log(q,l);
         }
         if (p[q] == "2") {
           strong(q, l, m);
-          console.log(q,l);
         }
         if (p[q] == "@") {
           user.tank.x = q*50;
@@ -2434,19 +2431,24 @@ function tank_listener2(event) {
       draw.fillStyle="#ffffff";
       draw.fillText(d[0]*100+d[1]*10+d[2], 200, 250);
     }
+    var dumbo = false;
   function wall(x, y, m) {
     if (m) {
       b.push(new Block(0, x, y, true));
     }
     var l = 0;
     while (l<b.length-1) {
+      if (!dumbo) {
+        console.log(b[l].x, b[l].y);
+      }
       if (b[l].x == x) {
         if (b[l].y == y) {
           b[l].wall(x,y);
         }
       }
       l++;
-    }
+    dumbo = true;
+    
   } // creates a wall
   function strong(x, y, m) {
     if (m) {      
