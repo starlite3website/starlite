@@ -1427,6 +1427,7 @@ function tank_listener2(event) {
     }
     if (mo != "n") {
       i.push(window.setInterval(function() {
+        console.log('running');
         while (l<s.length-1) {
           s[l].draw();
           l++;
