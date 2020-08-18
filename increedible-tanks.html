@@ -375,7 +375,7 @@
     }.bind(Shot);
     
     Shot.update = function() {
-      if (this.counter == 30) {
+      if (this.counter == 20) {
         this.x += this.xm;
         this.y += this.ym;
         this.counter = 0;
@@ -396,7 +396,7 @@
       this.socket = new WebSocket("wss://connect.websocket.in/v3/"+id+"?apiKey=Li11jOrgHnvR3uXYwoiMrssO3HyOdT5Kme8a0ftuAtVfsJzASYcXf6Amdafo");
       this.socket.onopen = function() {
         a('Mutiplayer Server(room: '+id+') created Sucessfully');
-        //storeValue.setItem("servers", JSON.stringify(JSON.parse(sessionStorage.servers).concat([id])));
+        // store value servers
         user.tank.move = function(e) {
       e = e || event;
       e.preventDefault();
@@ -850,12 +850,10 @@
     draw.drawImage(floor, 400, 450);
     draw.drawImage(floor, 450, 450);
       user.tank.draw();
-      draw.globalAlpha = .5;
       draw.fillStyle="#ffffff";
       draw.fillRect(user.tank.x, user.tank.y + 60, sessionStorage.username.length * 15, 20);
       draw.font = "20px Courier";
       draw.fillText(sessionStorage.username, user.tank.x + 5, user.tank.y + 65);
-      draw.globalAlpha = 1;
       while (p<this.level.weak.length) {
         this.level.weak[p].weak(this.level.weak[p].x, this.level.weak[p].y);
         p++;
@@ -1433,10 +1431,8 @@ function tank_listener2(event) {
       user.tank.draw();
       user.tank.check();
     }
-    draw.globalAlpha = .5;
     draw.fillStyle="#ffffff";
     draw.fillRect(user.tank.x-sessionStorage.username.length/4*15, user.tank.y + 50, sessionStorage.username.length * 15, 20);
-    draw.globalAlpha = 1.0;
     draw.font = "20px Courier";
     draw.fillStyle = "#FFDF00";
     draw.fillText(sessionStorage.username, user.tank.x-sessionStorage.username.length/4*15+5, user.tank.y + 65);
