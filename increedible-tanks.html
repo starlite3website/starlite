@@ -167,7 +167,8 @@
         if (s[l].x < x + 40 || s[l].x + 10 < x + 40) {
           if (s[l].y > y || s[l].y + 10 > y) {
             if (s[l].y < y + 40 || s[l].y + 10 < y + 40) {
-              s[l].inactive = true;
+              delete s[l]; // remove object from javascript memory for #lesslag
+              s.splice(l, 1); // remove extra undefined from array(leftover from *delete s[l];*)
               return true;
             }
           }
@@ -365,28 +366,18 @@
       }
       this.counter = 0;
       this.id = id;
-      this.inactive = false;
       this.draw();      
     }.bind(Shot);
     
     Shot.draw = function() {
-      if (!this.inactive) {
-        draw.fillStyle = "#000000";
-        draw.fillRect(this.x, this.y, 5, 5);
-      }
+      draw.fillStyle = "#000000";
+      draw.fillRect(this.x, this.y, 5, 5);
     }.bind(Shot);
     
     Shot.update = function() {
-      if (this.counter == 10) {
-        if (this.inactive) {
-          this.x = -500;
-          this.y = -500;
-          this.xm = 0;
-          this.ym = 0;
-        } else {
-          this.x += this.xm;
-          this.y += this.ym;
-        }
+      if (this.counter == 30) {
+        this.x += this.xm;
+        this.y += this.ym;
         this.counter = 0;
       } else {
         this.counter++;
