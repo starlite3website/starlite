@@ -183,6 +183,7 @@
     Ai.x = 0;
     Ai.y = 0;
     Ai.counter = 0;
+    Ai.inactive = false;
     Ai.control = function() {
       i.push(window.setInterval(this.draw, 1));
       i.push(window.setInterval(this.move, 500));
@@ -1095,12 +1096,12 @@ function tank_listener2(event) {
     }
     var l = 0;
     while (l < b.length-1) {
-      l = l + 1;
       if ((x + 40 > b[l].x * 50 && x + 40 < b[l].x * 50 + 50) || (x > b[l].x * 50 && x < b[l].x * 50 + 50)) {
         if ((y > b[l].y * 50 && y < b[l].y * 50 + 50) || (y + 40 > b[l].y * 50 && y + 40 < b[l].y * 50 + 50)) {
           return false;
         }
       }
+      l++;
     }
   }
   function gameHelper() {
