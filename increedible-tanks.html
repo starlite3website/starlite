@@ -182,6 +182,7 @@
     Ai.health = 200;
     Ai.x = 0;
     Ai.y = 0;
+    Ai.counter = 0;
     Ai.control = function() {
       i.push(window.setInterval(this.draw, 1));
       i.push(window.setInterval(this.move, 500));
@@ -218,7 +219,12 @@
           }
         }
         if (this.instructions.fire == true) {
-          this.fire();
+          if (this.counter == 50) {
+            this.fire();
+            this.counter = 0;
+          } else {
+            this.counter++;
+          }
         }
       } else {
         window.clearInterval(this.aiDraw);
@@ -990,7 +996,7 @@
           }
         }
         if (this.helper[32]) {
-          if (this.count == 20) {
+          if (this.count == 50) {
             this.fire();
             // CHASE put in tank_fire.play(); here
             this.count = 0;
