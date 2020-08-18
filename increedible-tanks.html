@@ -187,12 +187,13 @@
     Ai.health = 200;
     Ai.x = 0;
     Ai.y = 0;
-    Ai.counter = 0;
+    Ai.Scounter = 0;
+    Ai.Mcounter = 0;
     Ai.inactive = false;
     Ai.control = function() {
-      i.push(window.setInterval(this.draw, 1));
-      i.push(window.setInterval(this.move, 500));
-      i.push(window.setInterval(this.check, 10)); // shot and ai check if hit interval
+      //i.push(window.setInterval(this.draw, 1));
+      //i.push(window.setInterval(this.move, 500));
+      //i.push(window.setInterval(this.check, 10)); // shot and ai check if hit interval
     }.bind(Ai);
     Ai.draw = function() {
       if (this.inactive != true) {
@@ -205,35 +206,40 @@
       }
     }.bind(Ai);
     Ai.move = function() {
-      if (this.inactive != true) {
-        this.instructions = this.moveCalc();
-        if (this.instructions.up == true) {
-          if (checker(this.x - 5, this.y) != false) {
-            this.x -= 10;
+      if (this.Mcounter==50) {
+        if (this.inactive != true) {
+          this.instructions = this.moveCalc();
+          if (this.instructions.up == true) {
+            if (checker(this.x - 5, this.y) != false) {
+              this.x -= 10;
+            }
+          } else if (this.instructions.down == true) {
+            if (checker(this.x, this.y - 5) != false) {
+              this.x += 10;
+            }
+          } else if (this.instructions.left == true) {
+            if (checker(this.x + 5, this.y) != false) {
+              this.y -= 10;
+            }
+          } else {
+            if (checker(this.x, this.y + 5) != false) {
+              this.y += 10;
+            }
           }
-        } else if (this.instructions.down == true) {
-          if (checker(this.x, this.y - 5) != false) {
-            this.x += 10;
-          }
-        } else if (this.instructions.left == true) {
-          if (checker(this.x + 5, this.y) != false) {
-            this.y -= 10;
+          if (this.instructions.fire == true) {
+            if (this.Scounter == 50) {
+              this.fire();
+              this.Scounter = 0;
+            } else {
+              this.Scounter++;
+            }
           }
         } else {
-          if (checker(this.x, this.y + 5) != false) {
-            this.y += 10;
-          }
+          window.clearInterval(this.aiDraw);
         }
-        if (this.instructions.fire == true) {
-          if (this.counter == 50) {
-            this.fire();
-            this.counter = 0;
-          } else {
-            this.counter++;
-          }
-        }
+        this.Mcounter = 0;
       } else {
-        window.clearInterval(this.aiDraw);
+        this.Mcounter++;
       }
     }.bind(Ai);
     Ai.fire = function() {
@@ -1445,6 +1451,7 @@ function tank_listener2(event) {
     while (l < ai.length-1) {
       ai[l].check();
       ai[l].draw();
+      ai[l].move();
       l++;
     }
     var l = 0;
