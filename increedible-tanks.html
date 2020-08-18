@@ -2458,16 +2458,13 @@ function tank_listener2(event) {
       draw.fillStyle="#ffffff";
       draw.fillText(d[0]*100+d[1]*10+d[2], 200, 250);
     }
-    var dumbo = false;
+    
   function wall(x, y, m) {
     if (m) {
       b.push(new Block(0, x, y, true));
     }
     var l = 0;
-    while (l<b.length-1) {
-      if (!dumbo) {
-        console.log(b[l].x, b[l].y);
-      }
+    while(l<b.length-1) {
       if (b[l].x == x) {
         if (b[l].y == y) {
           b[l].wall(x,y);
@@ -2475,7 +2472,6 @@ function tank_listener2(event) {
       }
       l++;
     }
-    dumbo = true;
   } // creates a wall
   function strong(x, y, m) {
     if (m) {      
