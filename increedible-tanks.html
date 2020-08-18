@@ -2478,6 +2478,7 @@ function tank_listener2(event) {
       }
       l++;
     }
+    if (!this.true) {console.log(l);this.true = true;}
   } // creates a wall
   function strong(x, y, m) {
     if (m) {      
@@ -2502,7 +2503,7 @@ function tank_listener2(event) {
     if (m) {
       b.push(new Block(10, x, y, false, false));
     }
-    var l = 1;
+    var l = 0;
     while (l<b.length-1) {
       if (b[l].x == x) {
         if (b[l].y == y) {
