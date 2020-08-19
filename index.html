@@ -19,6 +19,16 @@
       <a href="/games"><button>Games</button></a>
       <a href="/account"><button>Sign up/Login</button></a>
       <script>
+        var xhr = new XMLHttpRequest();
+        xhr.onload = function() {
+          if (this.status < 400 && this.status >= 300) {
+            alert('this redirects to ' + this.getResponseHeader("Location"));
+          } else {
+            alert('doesn\'t redirect ');
+          }
+        }
+        xhr.open('HEAD', '/my/location', true);
+        xhr.send();
         if(sessionStorage.username!=undefined) {
           window.location.href="/dashboard";
         }
