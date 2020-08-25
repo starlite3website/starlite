@@ -888,8 +888,8 @@
       if (this.leftright == true) {
         draw.translate(this.x + 20, this.y + 20)
         draw.rotate(90 * Math.PI / 180);
-        if (this.u) {
-            draw.drawImage(tank_base_png, -20, -20);
+        if (this.u => 10) {
+          draw.drawImage(tank_base_png, -20, -20);
         } else {
             draw.drawImage(tank_base2, -20, -20);
         }
@@ -959,6 +959,11 @@
           if (checker(this.x + this.speed, this.y) != false) {
             this.x += this.speed;
             this.leftright = true;
+            if (this.u == 20) {
+                this.u = 0;
+            } else {
+                this.u++;
+            }
             // CHASE put in tank_track.play(); here
           }
         }
@@ -966,10 +971,10 @@
           if (checker(this.x, this.y - this.speed) != false) {
             this.y -= this.speed;
             this.leftright = false;
-            if (this.u) {
-                this.u = false;
+            if (this.u == 20) {
+                this.u = 0;
             } else {
-                this.u = true;
+                this.u++;
             }
             // CHASE put in tank_track.play(); here
           }
@@ -978,6 +983,11 @@
           if (checker(this.x - this.speed, this.y) != false) {
             this.x -= this.speed;
             this.leftright = true;
+            if (this.u == 20) {
+                this.u = 0;
+            } else {
+                this.u++;
+            }
             // CHASE put in tank_track.play(); here
           }
         }
@@ -985,10 +995,10 @@
           if (checker(this.x, this.y + this.speed) != false) {
             this.y += this.speed;
             this.leftright = false;
-            if (this.u) {
-                this.u = false;
+            if (this.u == 20) {
+                this.u = 0;
             } else {
-                this.u = true;
+                this.u++;
             }
             // CHASE put in tank_track.play(); here
           }
