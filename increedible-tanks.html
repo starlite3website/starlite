@@ -385,7 +385,7 @@
     }.bind(Shot);
     
     Shot.update = function() {
-      if (this.counter == 15) {
+      if (this.counter == 5) {
         this.x += this.xm;
         this.y += this.ym;
         this.counter = 0;
@@ -994,7 +994,7 @@
           }
         }
         if (this.helper[32]) {
-          if (this.count == 50) {
+          if (this.count == 30) {
             this.fire();
             // CHASE put in tank_fire.play(); here
             this.count = 0;
