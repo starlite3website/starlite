@@ -466,8 +466,8 @@
         //level(Game.level, "n", false);
         var l = 0;
         while (l < ai.length - 1) {
-          l++;
           ai[l].draw();
+          l++;
         }
         this.draw();
       } else {
@@ -927,7 +927,7 @@
     }.bind(Tank);
     
     Tank.control = function() {
-      Tank.speed = 5;
+      Tank.speed = 2;
       Tank.intervals = [];
       Tank.helper = [];
       Tank.count = 0;
