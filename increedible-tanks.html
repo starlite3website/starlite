@@ -385,7 +385,7 @@
     }.bind(Shot);
     
     Shot.update = function() {
-      if (this.counter == 20) {
+      if (this.counter == 15) {
         this.x += this.xm;
         this.y += this.ym;
         this.counter = 0;
@@ -927,6 +927,7 @@
     }.bind(Tank);
     
     Tank.control = function() {
+      Tank.speed = 5;
       Tank.intervals = [];
       Tank.helper = [];
       Tank.count = 0;
@@ -942,31 +943,28 @@
       Tank.rotation = 0;
       canvas.focus();
       this.draw();
-      i.push(window.setInterval(function() {
+      /*i.push(window.setInterval(function() {
         user.tank.check();
-      }, 50));
+      }, 50);*/ // type::interval reason::"paused for testing"
       canvas.addEventListener("keydown", tank_listener1, false);
       canvas.addEventListener("keyup", tank_listener2, false);
     }.bind(Tank);
     
-    Tank.move = function(e, speed) {
+    Tank.move = function(e) {
       e = e || event;
       e.preventDefault();
       e.stopImmediatePropagation();
-      if (speed == undefined) {
-        speed = 5;
-      }
       if (this.inactive == false) {
         if (this.helper[68]) {
-          if (checker(this.x + speed, this.y) != false) {
-            this.x += speed;
+          if (checker(this.x + this.speed, this.y) != false) {
+            this.x += this.speed;
             this.leftright = true;
             // CHASE put in tank_track.play(); here
           }
         }
         if (this.helper[87]) {
-          if (checker(this.x, this.y - speed) != false) {
-            this.y -= speed;
+          if (checker(this.x, this.y - this.speed) != false) {
+            this.y -= this.speed;
             this.leftright = false;
             if (this.u) {
                 this.u = false;
@@ -977,15 +975,15 @@
           }
         }
         if (this.helper[65]) {
-          if (checker(this.x - speed, this.y) != false) {
-            this.x -= speed;
+          if (checker(this.x - this.speed, this.y) != false) {
+            this.x -= this.speed;
             this.leftright = true;
             // CHASE put in tank_track.play(); here
           }
         }
         if (this.helper[83]) {
-          if (checker(this.x, this.y + speed) != false) {
-            this.y += speed;
+          if (checker(this.x, this.y + this.speed) != false) {
+            this.y += this.speed;
             this.leftright = false;
             if (this.u) {
                 this.u = false;
@@ -1073,11 +1071,7 @@
     }
     if (user.tank.helper[event.keyCode] != true) {
       user.tank.intervals[event.keyCode] = window.setInterval(function() {
-        if (user.tank.helper.indexOf(true)>1) {
-          user.tank.move(event, 1);
-        } else {
-          user.tank.move(event, 5);
-        }
+        user.tank.move(event, this.speed);
       }, 15);
     }
     user.tank.helper[event.keyCode] = true;
