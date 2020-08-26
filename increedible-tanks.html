@@ -5,15 +5,10 @@
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-132422058-1"></script>
   </head>
   <div id='wall'>
-    <h1 id="auth-text">Authencating...</h1>
     <div id="animate">
     </div>
   </div>
   <style>
-    #auth-text {
-      margin-top: -200px;
-      z-index: 101;
-    }
     #wall {
       justify-content: center;
       position: fixed;
@@ -184,13 +179,14 @@
   }
   function Ai() {
   }
-    Ai.health = 200;
-    Ai.x = 0;
-    Ai.y = 0;
-    Ai.Scounter = 0;
-    Ai.Mcounter = 0;
-    Ai.inactive = false;
+    
     Ai.control = function() {
+      Ai.health = 200;
+      Ai.x = 0;
+      Ai.y = 0;
+      Ai.Scounter = 0;
+      Ai.Mcounter = 0;
+      Ai.inactive = false;
       //i.push(window.setInterval(this.draw, 1));
       //i.push(window.setInterval(this.move, 500));
       //i.push(window.setInterval(this.check, 10)); // shot and ai check if hit interval
@@ -206,7 +202,7 @@
       }
     }.bind(Ai);
     Ai.move = function() {
-      if (this.Mcounter==50) {
+      if (this.Mcounter==10) {
         if (this.inactive != true) {
           this.instructions = this.moveCalc();
           if (this.instructions.up == true) {
@@ -227,7 +223,7 @@
             }
           }
           if (this.instructions.fire == true) {
-            if (this.Scounter == 50) {
+            if (this.Scounter == 10) {
               this.fire();
               this.Scounter = 0;
             } else {
