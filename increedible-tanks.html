@@ -888,7 +888,7 @@
       if (this.leftright == true) {
         draw.translate(this.x + 20, this.y + 20)
         draw.rotate(90 * Math.PI / 180);
-        if (this.u > 10) {
+        if (this.u > 40) {
           draw.drawImage(tank_base_png, -20, -20);
         } else {
             draw.drawImage(tank_base2, -20, -20);
@@ -896,7 +896,7 @@
         draw.rotate(-90 * Math.PI / 180);
         draw.translate((-this.x - 20), (-this.y - 20));
       } else {
-        if (this.u) {
+        if (this.u > 40) {
             draw.drawImage(tank_base_png, this.x, this.y);
         } else {
             draw.drawImage(tank_base2, this.x, this.y);
@@ -959,7 +959,7 @@
           if (checker(this.x + this.speed, this.y) != false) {
             this.x += this.speed;
             this.leftright = true;
-            if (this.u == 20) {
+            if (this.u == 80) {
                 this.u = 0;
             } else {
                 this.u++;
@@ -971,7 +971,7 @@
           if (checker(this.x, this.y - this.speed) != false) {
             this.y -= this.speed;
             this.leftright = false;
-            if (this.u == 20) {
+            if (this.u == 80) {
                 this.u = 0;
             } else {
                 this.u++;
