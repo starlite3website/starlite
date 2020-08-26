@@ -193,25 +193,56 @@
         draw.translate(-this.x - 20, -this.y - 20);
       }
     }.bind(Ai);
-    Ai.move = function() {
+    Ai.move = function(updateOrNot) {
+      updateOrNot = updateOrNot || true;
       if (this.Mcounter==10) {
         if (this.inactive != true) {
-          this.instructions = this.moveCalc();
+          if (updateOrNot) {
+            this.instructions = this.moveCalc();
+          }
           if (this.instructions.up == true) {
             if (checker(this.x - 5, this.y) != false) {
               this.x -= 5;
+            } else {
+              if (this.y < user.tank.y) {
+                this.instructions.right = true;
+              } else {
+                this.instructions.left = true;
+              }
+              this.move(false);
             }
           } else if (this.instructions.down == true) {
             if (checker(this.x + 5, this.y) != false) {
               this.x += 5;
+            } else {
+              if (this.y < user.tank.y) {
+                this.instructions.right = true;
+              } else {
+                this.instructions.left = true;
+              }
+              this.move(false);
             }
           } else if (this.instructions.left == true) {
             if (checker(this.x, this.y - 5) != false) {
               this.y -= 5;
+            } else {
+              if (this.x < user.tank.x) {
+                this.instructions.down = true;
+              } else {
+                this.instructions.up = true;
+              }
+              this.move(false);
             }
           } else {
             if (checker(this.x, this.y + 5) != false) {
               this.y += 5;
+            } else {
+              if (this.x < user.tank.x) {
+                this.instructions.down = true;
+              } else {
+                this.instructions.up = true;
+              }
+              this.move(false);
             }
           }
           if (this.instructions.fire == true) {
