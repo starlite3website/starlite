@@ -179,6 +179,7 @@
       Ai.Scounter = 0;
       Ai.Mcounter = 0;
       Ai.inactive = false;
+      Ai.Ucounter = 0;
       //i.push(window.setInterval(this.draw, 1));
       //i.push(window.setInterval(this.move, 500));
       //i.push(window.setInterval(this.check, 10)); // shot and ai check if hit interval
@@ -193,11 +194,17 @@
         draw.translate(-this.x - 20, -this.y - 20);
       }
     }.bind(Ai);
-    Ai.move = function(updateOrNot) {
-      updateOrNot = updateOrNot || true;
+    Ai.move = function() {
+      if (this.Ucounter == 2) {
+        this.Ucounter = 0;
+        this.uon = true;
+      } else {
+        this.Ucounter++;
+        this.uon = this.uon || true;
+      }
       if (this.Mcounter==10) {
         if (this.inactive != true) {
-          if (updateOrNot) {
+          if (this.uon) {
             this.instructions = this.moveCalc();
           }
           if (this.instructions.up == true) {
@@ -209,7 +216,7 @@
               } else {
                 this.instructions.left = true;
               }
-              this.move(false);
+              this.uon = false;
             }
           } else if (this.instructions.down == true) {
             if (checker(this.x + 5, this.y) != false) {
@@ -220,7 +227,7 @@
               } else {
                 this.instructions.left = true;
               }
-              this.move(false);
+              this.uon = false;
             }
           } else if (this.instructions.left == true) {
             if (checker(this.x, this.y - 5) != false) {
@@ -231,7 +238,7 @@
               } else {
                 this.instructions.up = true;
               }
-              this.move(false);
+              this.uon = false;
             }
           } else {
             if (checker(this.x, this.y + 5) != false) {
@@ -242,7 +249,7 @@
               } else {
                 this.instructions.up = true;
               }
-              this.move(false);
+              this.uon = false;
             }
           }
           if (this.instructions.fire == true) {
