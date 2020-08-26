@@ -1326,6 +1326,7 @@ function tank_listener2(event) {
           user.tank.y = l*50;
         }
         if (p[q] == "A") {
+          console.log("Ai:","x: "+q,"y: "+l);
           createAi(q*50, l*50,m, 3, 3);
         }
       }
@@ -2536,7 +2537,8 @@ function tank_listener2(event) {
 
   function createAi(x, y, m, t, team) {
     if (m) {
-      ai.push(new Object(Ai));
+      Game.foes++; // add Eval Tank to Game to detect victory when all destroyed!
+      ai.push(new Object(Ai)); // add Eval Tank to array
       ai[ai.length-1].id = ai.length;
       ai[ai.length-1].x = x;
       ai[ai.length-1].y = y;
