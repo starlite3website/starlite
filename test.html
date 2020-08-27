@@ -1,354 +1,159 @@
 
-
 <!doctype html>
-<html lang="en">
+<html>
 <head>
-	<meta charset="UTF-8">
-	<title>Moo Moo</title>
-	<link rel='shortcut icon' type="image/png" href="../.././img/favicon.png?v=1"/>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0">
-	<meta name="mobile-web-app-capable" content="yes">
-	<meta name="description" content="MooMoo.io is a brand new Survival IO Game. Build and Survive with your friends">
-	<meta name="keywords" content="game,games,gaming,online,io,multiplayer,moomoo,village,farm">
-	<meta http-equiv="cache-control" content="no-cache">
-	<meta http-equiv="expires" content="0">
-	<meta http-equiv="pragma" content="no-cache">
-	<link rel="stylesheet" href="css/main.css" />
-	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-	<link href="https://fonts.googleapis.com/css?family=Hammersmith+One" rel="stylesheet">
-	<script>
-		(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-			(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-				m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-		})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-		ga('create', 'UA-69264675-3', 'auto');
-		ga('send', 'pageview');
-	</script>
+    <link rel="stylesheet" href="//cdn.familyzone.com/assets/bootstrap/3.1.1/bootstrap.min.css">
+    <link rel="stylesheet" href="//cdn.familyzone.com/assets/bootstrap/3.1.1/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="//cdn.familyzone.com/assets/font-awesome/4.7.0/font-awesome.min.css">
+    <link rel="icon" href="/static/images/fz_favicon.ico" type="image/x-icon"/>
 
-	<script data-cfasync="false" type="text/javascript">
-		if (typeof admob == "undefined") {
-			var freestar = freestar || {};
-			freestar.hitTime = Date.now();
-			freestar.queue = freestar.queue || [];
-			freestar.config = freestar.config || {};
-			freestar.debug = window.location.search.indexOf('fsdebug') === -1 ? false : true;
-			freestar.config.enabled_slots = [
-				"moomooio_300x250_1",
-				"moomooio_728x90_home"
-			];
-			!function(a,b){var c=b.getElementsByTagName("script")[0],d=b.createElement("script"),e="https://a.pub.network/moomoo-io";e+=freestar.debug?"/qa/pubfig.min.js":"/pubfig.min.js",d.async=!0,d.src=e,c.parentNode.insertBefore(d,c)}(window,document);
-		}
-	</script>
-
-	<!-- <script>
-		window.twttr = (function(d, s, id) {
-			var js, fjs = d.getElementsByTagName(s)[0],
-					t = window.twttr || {};
-			if (d.getElementById(id)) return t;
-			js = d.createElement(s);
-			js.id = id;
-			js.src = "https://platform.twitter.com/widgets.js";
-			fjs.parentNode.insertBefore(js, fjs);
-			t._e = [];
-			t.ready = function(f) {
-				t._e.push(f);
-			};
-			return t;
-		}(document, "script", "twitter-wjs"));
-	</script> -->
-
-	<!-- SERVER LIST -->
-	<script src="/serverData.js"></script>
-
-	<!-- CPMSTAR -->
-	<script>
-		(function(zonefile) {
-		var y=window.location.href.split('#')[0].split('').reduce(function(a,b){return(a<<5)-a+b.charCodeAt(0)>>>1},0);y=(10+((y*7)%26)).toString(36)+y.toString(36);
-		var drutObj = window[y] = window[y] || {};
-		function failCpmstarAPI() { var failFn = function(o) { o && typeof(o) === "object" && o.fail && o.fail(); }; drutObj && Array.isArray(drutObj.cmd) && drutObj.cmd.forEach(failFn) && (drutObj.cmd.length = 0);  window.cpmstarAPI = window["_"+zonefile] = failFn; }
-		var rnd = Math.round(Math.random()*999999);
-		var s = document.createElement('script'); s.type = 'text/javascript'; s.async = true; s.onerror=failCpmstarAPI;
-		var proto = document.location.protocol;
-		var host = ( proto == "https:" || proto == "file:")?"https://server":"//cdn";
-		if(window.location.hash=="#cpmstarDev") host = "//dev.server";
-		if(window.location.hash=="#cpmstarStaging") host = "//staging.server";
-		s.src = host + ".cpmstar.com/cached/zonefiles/" + zonefile + ".js?rnd="+rnd;
-		var s2=document.getElementsByTagName('script')[0];
-		s2.parentNode.insertBefore(s, s2);
-		window.cpmstarAPI = function(o) { (drutObj.cmd = drutObj.cmd || []).push(o); }
-		}('392_50844_gameapi'));
-	</script>
+    <script src="//cdn.familyzone.com/assets/jquery/jquery-1.11.0.min.js"></script>
+    <script src="//cdn.familyzone.com/assets/jquery/jquery-migrate-1.2.1.min.js"></script>
+    <script src="//cdn.familyzone.com/assets/bootstrap/3.1.1/bootstrap.min.js"></script>
 </head>
 <body>
 
-<!-- SCRIPTS -->
-<!-- <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script> -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.0.4/howler.core.min.js"></script>
-<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<!-- <script async src="http://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script> -->
-<script src="https://apis.google.com/js/platform.js"></script>
+<style>
+    .container {
+        margin-left: auto;
+        margin-right: auto;
+        max-width: 700px;
+        margin-top: 50px;
+    }
+</style>
 
-<!-- PLAYWIRE -->
-<!-- <div id="my-content" style="display: none;"></div> -->
+<div class="container">
+    <div class="header" style="clear: both;">
+        <h2 style="transform: translate(0%,50%);float:left;">Content Blocked</h2>
+        
+            <img class="logo pull-right" src="data:image/jpeg;base64,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">
+        
+    </div>
+    <div class="content" style="clear: both;">
+        <HR>
+        <div>
+            
+                Access to yohoho.io has been blocked by your Administrator [
+                URL Block | Students].
+            
+        </div>
+        <div class="customMessage" style="margin-top: 20px;">
+            
+            
+        </div>
+        <br>
+        <div>
 
-<!-- ADS -->
-<div id="pre-content-container" style="display: none">
+            <table class="table table-bordered">
+                <tr>
+                    <td><b>Website </b></td>
+                    <td>yohoho.io</td>
+                </tr>
+
+                <tr>
+                    <td><b>Path </b></td>
+                    <td>img/close.svg</td>
+                </tr>
+
+                <tr>
+                    <td><b>Rule Type </b></td>
+                    <td> Standard
+                        Filtering </td>
+                </tr>
+
+                
+
+                
+                    <tr>
+                        <td><b>Policy Name</b></td>
+                        <td>URL Block | Students</td>
+                    </tr>
+                
+
+                
+
+                <tr>
+                    <td><b>Your IP </b></td>
+                    <td></td>
+                </tr>
+
+                
+                    <tr>
+                        <td><b>Username </b></td>
+                        <td>mg42457 - <a href="http://autologout.linewize.net">Logout</a></td>
+                    </tr>
+                
+            </table>
+        </div>
+    </div>
+    <div id="downvote_info footer" style="clear: both;">
+        <hr>
+        If you believe this website has been incorrectly blocked, you can submit it <a id="downvote"
+                                                                                       href="#">here</a>
+        for verification to your administrator.
+    </div>
+
+    <div style="clear: both;">
+        <hr>
+        <form id="bypass_form" action="#">
+            Enter your bypass code to unblock this link: <input type="text" id="bypass_code" />
+            <input id="bypass_submit" type="submit" value="submit" /> <span id="bypass_result"></span>
+        </form>
+    </div>
 
 </div>
+<script type="text/javascript">
+    $("#downvote").click(function () {
+        var data = {
+            "deviceid": "PHYS-SMIC-US-0000-0189",
+            "user": "mg42457",
+            "rule": "URL Block | Students",
+            "tagname": "None",
+            "url": "yohoho.io"
+        };
+        $.post("/downvote", data, function () {
+            $("#downvote_info").html("The information is submitted and will be verified by your administrator");
+        });
+    });
+    $("#bypass_form").submit(function (event) {
 
-<!-- CONFIRM CLOSE PAGE -->
-<script>
-	window.onbeforeunload = function(e) {
-		return 'Are you sure?';
-	};
+        $("#bypass_submit").prop("disabled", true);
+        $("#bypass_result").removeAttr("style");
+        $("#bypass_result").html("");
+
+        var bypass_code = $("#bypass_code").val();
+
+        var data = {
+            'deviceid': 'PHYS-SMIC-US-0000-0189',
+            'username': 'mg42457',
+            'bypass_code': bypass_code,
+            'ip': '',
+            'mac': '',
+            'cid': 'bWc0MjQ1NzE1OTg1NjM1MzMwOTQ='
+        };
+
+        $.post("/bypass_active", data, function (response, status) {
+            var result = response['result'];
+            if (result == 'success') {
+                $("#bypass_result").html('<i class="fa fa-circle-o-notch fa-spin" aria-hidden="true"></i>');
+                var countDown = 10;
+                setTimeout(function() {
+                    $("#bypass_submit").prop("disabled", false);
+                    $("#bypass_result").css("color", "blue");
+                    $("#bypass_result").html("succeeded");
+                    window.location = "//yohoho.io/img/close.svg";
+                }, 1000*countDown);
+            } else {
+               $("#bypass_result").css("color", "red");
+               $("#bypass_result").html("failed");
+               $("#bypass_submit").prop("disabled", false);
+            }
+        });
+        event.preventDefault();
+    });
+    jQuery('#bypass_code').keyup(function() {
+		$(this).val($(this).val().toUpperCase());
+	});
 </script>
-
-<!-- ERROR NOTIFICATION -->
-<div id="errorNotification" class="menuCard" style="display: none">
-	<div>It looks like MooMoo ran in to a problem. Please try <a target="_blank" href="https://www.computerhope.com/issues/ch001411.htm">disabling all of your browser extensions</a> and reloading the page.</div>
-	<div style="text-align: center"><a onclick="errorNotification.style.display = 'none'" style="cursor:pointer">Hide</a></div>
-</div>
-
-<!-- SHUTDOWN NOTICE -->
-<div id="shutdownDisplay" hidden></div>
-
-<!-- MAIN MENU -->
-<div id="mainMenu">
-	<div id="menuContainer">
-
-		<!-- GAME NAME -->
-		<div id="gameName">MOOMOO.io</div>
-
-		<!-- LOADING TEXT -->
-		<div id="loadingText">Loading...</div>
-
-		<!-- MENU CARDS -->
-		<div id="menuCardHolder" style="display:none;">
-			<div class="menuCard" id="adCard">
-				<!-- <ins class="adsbygoogle"
-                     style="display:inline-block;width:300px;height:250px"
-                     data-ad-client="ca-pub-4505182558467475"
-                     data-ad-slot="4965955347"></ins>
-                <script>
-                    (adsbygoogle = window.adsbygoogle || []).push({});
-                </script> -->
-				<div align="center" id="moomooio_300x250_1">
-					<script data-cfasync="false" type="text/javascript">
-						freestar.queue.push(function () { googletag.display('moomooio_300x250_1'); });
-					</script>
-				</div>
-			</div>
-			<div style="display:inline-block;">
-				<div class="menuCard" id="setupCard">
-					<input type="text" id="nameInput" placeholder="Enter Name" maxlength="15"></input>
-					<div id="enterGame" class="menuButton"><span>Enter Game</span></div>
-					<div id="mobileDownloadButtonContainer">
-						<a class="downloadBadge" href="https://itunes.apple.com/us/app/moomoo-io-mobile/id1236581367?ls=1&mt=8" target="_blank"><img src="./img/badges/ios.svg"></a></img>
-						<a class="downloadBadge" href="https://play.google.com/store/apps/details?id=com.yendis.moomoo_mobile" target="_blank"><img src="./img/badges/android.png"></img></a>
-					</div>
-				</div>
-				<div id="promoImgHolder" class="menuCard" style="display:block;margin-top:16px;padding-bottom:12px;" id="setupCard">
-					<img id="promoImg" src='./img/promotion/banner_3.png' style="width:300px;cursor:pointer"></img>
-				</div>
-			</div>
-			<div id="rightCardHolder">
-				<div class="menuCard" id="guideCard">
-					<div class="menuHeader">Servers</div>
-					<select id="serverBrowser"></select>
-					<div id="altServer"></div>
-					<div class="menuHeader" style="margin-top:10px">Select Color</div>
-					<div id="skinColorHolder"></div>
-					<div class="menuHeader" style="margin-top:10px">How To Play</div>
-					<div class="menuText">Collect resources around the map to build a village.
-						Your Windmills generate gold over time. But make sure to protect them from other players.</div>
-					<div class="menuHeader">Controls</div>
-					<div id="desktopInstructions" class="menuText">
-						Movement: W, A, S, D<br/>
-						Look: Mouse<br/>
-						Gather/Attack: Mouse or Space<br/>
-						Auto Attack: E<br/>
-						Select Item: 1-9 or Click<br/>
-						Quick Select Food: Q<br/>
-						Lock Rotation: X<br/>
-						Ping Minimap: R<br/>
-						Add Map Marker: C<br/>
-						Chat: Enter Key<br/>
-						Close Windows: ESC
-					</div>
-					<div id="mobileInstructions" class="menuText">
-						Movement: Drag on left side of screen<br/>
-						Gather/Attack: Drag on right side of screen<br/>
-						Select Item: Touch item at bottom<br/>
-						Ping Minimap: Touch map<br/>
-					</div>
-					<div class="menuHeader">Settings</div>
-					<div class="settingRadio"><input id="nativeResolution" type="checkbox" /> Use Native Resolution</div>
-					<div class="settingRadio"><input id="showPing" type="checkbox" /> Show Ping</div>
-					<div id="smallLinks">
-						<div class="menuHeader">Links</div>
-						<div class="menuText">
-							<a href="./docs/versions.txt" target="_blank" class="menuLink">v1.6.9</a> |
-							<a href="https://discordapp.com/invite/0yK1A2IFj6h3fz8U" target="_blank" class="menuLink">Discord</a> |
-							<a href="./docs/terms.txt" target="_blank" class="menuLink">Terms</a> |
-							<a href="./docs/privacy.txt" target="_blank" class="menuLink">Privacy</a> |
-							<a href="http://iogames.space" target="_blank" class="menuLink">More Games</a>
-						</div>
-					</div>
-					<div class="menuText">
-						Created by <a href="https://yendis.ch/" target="_blank" class="menuLink">Yendis</a>
-					</div>
-				</div>
-				<!-- <div id="downloadButtonContainer" class="menuCard">
-                    <a class="downloadBadge" href="https://itunes.apple.com/us/app/moomoo-io-mobile/id1236581367?ls=1&mt=8" target="_blank"><img src="./img/badges/ios.svg"></a></img>
-                    <a class="downloadBadge" href="https://play.google.com/store/apps/details?id=com.yendis.moomoo_mobile" target="_blank"><img src="./img/badges/android.png"></img></a>
-                </div> -->
-			</div>
-		</div>
-
-		<!-- NEW AD -->
-		<div class="menuCard" style="width:728px;display:inline-block;margin-top:10px;padding:10px;">
-			<div align="center" id="moomooio_728x90_home">
-				<script data-cfasync="false" type="text/javascript">
-					freestar.queue.push(function () { googletag.display('moomooio_728x90_home'); });
-				</script>
-			</div>
-		</div>
-
-	</div>
-
-	<!-- SETTINGS -->
-	<div id="settingsButton" class="ytLink">
-		<i class="material-icons" style="font-size:30px;vertical-align:middle">&#xE8B8;</i>
-		<span>Settings</span>
-	</div>
-
-	<!-- PARTY INTO -->
-	<div id="partyButton" class="inParty"><span></span>
-		<i class="material-icons" style="font-size:30px;vertical-align:middle">&#xE8D3;</i>
-	</div>
-
-	<!-- JOIN PARTY -->
-	<div id="joinPartyButton" class="ytLink"><span>Join Party</span>
-		<i class="material-icons" style="font-size:30px;vertical-align:middle">&#xE0DA;</i>
-	</div>
-
-	<!-- PING -->
-	<div id="pingDisplay" hidden>Not connected</div>
-
-	<!-- YOUTUBER OF THE DAY -->
-	<div id="youtuberOf">
-		Featured Mootuber:
-		<div class="spanLink" id="featuredYoutube">
-		</div>
-	</div>
-
-	<!-- LINKS CONTAINERS -->
-	<div id="linksContainer2">
-		<a href="./docs/versions.txt" target="_blank" class="menuLink">v1.6.9</a> |
-		<a href="https://discordapp.com/invite/0yK1A2IFj6h3fz8U" target="_blank" class="menuLink">Discord</a> |
-		<a href="./docs/terms.txt" target="_blank" class="menuLink">Terms</a> |
-		<a href="./docs/privacy.txt" target="_blank" class="menuLink">Privacy</a>
-	</div>
-
-</div>
-
-<!-- DEATH TEXT -->
-<div id="diedText">YOU DIED</div>
-
-<!-- GAME UI -->
-<div id="gameUI" style="display: none;">
-	<div id="chatHolder" style="display:none;">
-		<input id="chatBox" type="text" placeholder="Enter Message" maxlength="30"></input>
-	</div>
-	<div id="upgradeHolder"></div>
-	<div id="upgradeCounter"></div>
-	<div id="ageText"></div>
-	<div id="ageBarContainer">
-		<div id="ageBar">
-			<div id="ageBarBody"></div>
-		</div>
-	</div>
-	<div id="topInfoHolder">
-		<div id="leaderboard">
-			Leaderboard
-			<div id="leaderboardData"></div>
-		</div>
-		<div></div>
-		<div id="killCounter" class="resourceDisplay"></div>
-	</div>
-	<div id="itemInfoHolder" class="uiElement">
-	</div>
-	<div id="resDisplay">
-		<div id="foodDisplay" class="resourceDisplay"></div>
-		<div id="woodDisplay" class="resourceDisplay"></div>
-		<div id="stoneDisplay" class="resourceDisplay"></div>
-		<div id="scoreDisplay" class="resourceDisplay"></div>
-	</div>
-	<div id="actionBar"></div>
-	<div id="noticationDisplay" style="display:none"></div>
-	<div id="allianceButton" class="uiElement gameButton">
-		<i class="material-icons" style="font-size:40px;vertical-align:middle">&#xE8D3;</i>
-	</div>
-	<div id="storeButton" class="uiElement gameButton">
-		<i class="material-icons" style="font-size:40px;vertical-align:middle">&#xE8D1;</i>
-	</div>
-	<div id="chatButton" class="uiElement gameButton">
-		<i class="material-icons" style="font-size:40px;vertical-align:middle">&#xE8AF;</i>
-	</div>
-	<canvas id="mapDisplay">
-	</canvas>
-	<div id="storeMenu">
-		<div style="padding-bottom:15px">
-			<div class="storeTab" style="margin-right:10px" onclick="changeStoreIndex(0)">Hats</div>
-			<div class="storeTab" onclick="changeStoreIndex(1)">Accessories</div>
-		</div>
-		<div id="storeHolder">
-		</div>
-	</div>
-	<div id="allianceMenu">
-		<div id="allianceHolder"></div>
-		<div id="allianceManager"></div>
-	</div>
-</div>
-
-<!-- GAME CANVAS -->
-<canvas id="gameCanvas"></canvas>
-
-<!-- GDPR STUFF -->
-<div id='consentBlock'>
-	<div id="consentShake">
-		<div id="consentWindow">
-			<span style="font-size:35px !important">Welcome to MooMoo.io</span>
-			<div style='color:rgba(0,0,0,0.6)'>
-				This site uses cookies to personalize your experience. To use this site
-				you must agree and read the <a target="_blank" href="./docs/terms.txt">Terms & Conditions.</a>
-				Learn more about cookies <a href="https://cookiesandyou.com/">here.</a>
-			</div>
-			<div>
-				<div class='termsBtn' onclick="checkTerms(0)" style="background-color:#dd4a42">Decline</div>
-				<div class='termsBtn' onclick="checkTerms(1)" style="background-color:#a6dd42">Accept</div>
-			</div>
-		</div>
-	</div>
-</div>
-
-<!-- LOAD SCRIPTS -->
-<div id='cdm-zone-end'></div>
-
-<!-- INIT SCRIPT -->
-<script>
-	var loadedScript = false;
-
-	setTimeout(function() {
-		if (!loadedScript) {
-			alert("Bundle could not load. Could be an issue with the party key.");
-			window.location.href = "/";
-		}
-	}, 45000);
-</script>
-
-<script src="bundle.js"></script>
-<script src="https://www.google.com/recaptcha/api.js?onload=captchaCallback&render=6LevKusUAAAAAAFknhlV8sPtXAk5Z5dGP5T2FYIZ"></script>
 </body>
 </html>
