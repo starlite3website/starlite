@@ -179,7 +179,7 @@
       Ai.Scounter = 0;
       Ai.Mcounter = 0;
       Ai.inactive = false;
-      Ai.Ucounter = 0;
+      Ai.update = true;
       //i.push(window.setInterval(this.draw, 1));
       //i.push(window.setInterval(this.move, 500));
       //i.push(window.setInterval(this.check, 10)); // shot and ai check if hit interval
@@ -229,9 +229,9 @@
               this.y -= 5;
             } else {
               if (this.x <= user.tank.x) {
-                this.instructions.down = true;
-              } else {
                 this.instructions.up = true;
+              } else {
+                this.instructions.down = true;
               }
               this.update = false;
             }
@@ -240,9 +240,9 @@
               this.y += 5;
             } else {
               if (this.x <= user.tank.x) {
-                this.instructions.down = true;
-              } else {
                 this.instructions.up = true;
+              } else {
+                this.instructions.down = true;
               }
               this.update = false;
             }
