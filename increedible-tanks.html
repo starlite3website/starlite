@@ -391,6 +391,17 @@
       this.ym = this.ym * 20;
       this.y = y;
       this.x = x;
+      while ((this.x < x + 40 && this.x > x - 40) && (this.y < y + 40 && this.y > y - 40)) {	
+        this.x = this.x + xm;	
+        this.y = this.y + ym;	
+      }	
+      this.counter = 0;	
+      this.id = id;
+      this.draw();      	
+    }.bind(Shot);	
+
+    Shot.draw = function() {	
+      draw.fillStyle = "#000000";
       this.id = id;
       draw.fillRect(this.x, this.y, 5, 5);
     }.bind(Shot);
