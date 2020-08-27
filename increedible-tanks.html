@@ -195,61 +195,36 @@
       }
     }.bind(Ai);
     Ai.move = function() {
-      if (this.Ucounter == 2) {
-        this.Ucounter = 0;
-        this.uon = true;
-      } else {
-        this.Ucounter++;
-        this.uon = this.uon || true;
-      }
       if (this.Mcounter==10) {
         if (this.inactive != true) {
-          if (this.uon) {
-            this.instructions = this.moveCalc();
-          }
+          this.instructions = this.moveCalc();
           if (this.instructions.up == true) {
             if (checker(this.x - 5, this.y) != false) {
               this.x -= 5;
             } else {
-              if (this.y < user.tank.y) {
-                this.instructions.right = true;
-              } else {
-                this.instructions.left = true;
-              }
-              this.uon = false;
+              var r = Math.ceil(Math.random()/.25);
+              this.instructions = { up: r == 1, down: r == 2, left: r == 3, right: r == 4};
             }
           } else if (this.instructions.down == true) {
             if (checker(this.x + 5, this.y) != false) {
               this.x += 5;
             } else {
-              if (this.y < user.tank.y) {
-                this.instructions.right = true;
-              } else {
-                this.instructions.left = true;
-              }
-              this.uon = false;
+              var r = Math.ceil(Math.random()/.25);
+              this.instructions = { up: r == 1, down: r == 2, left: r == 3, right: r == 4};
             }
           } else if (this.instructions.left == true) {
             if (checker(this.x, this.y - 5) != false) {
               this.y -= 5;
             } else {
-              if (this.x < user.tank.x) {
-                this.instructions.down = true;
-              } else {
-                this.instructions.up = true;
-              }
-              this.uon = false;
+              var r = Math.ceil(Math.random()/.25);
+              this.instructions = { up: r == 1, down: r == 2, left: r == 3, right: r == 4};
             }
           } else {
             if (checker(this.x, this.y + 5) != false) {
               this.y += 5;
             } else {
-              if (this.x < user.tank.x) {
-                this.instructions.down = true;
-              } else {
-                this.instructions.up = true;
-              }
-              this.uon = false;
+              var r = Math.ceil(Math.random()/.25);
+              this.instructions = { up: r == 1, down: r == 2, left: r == 3, right: r == 4};
             }
           }
           if (this.instructions.fire == true) {
