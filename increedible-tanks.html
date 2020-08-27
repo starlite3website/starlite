@@ -235,7 +235,7 @@
               }
               this.update = false;
             }
-          } else {
+          } else if (this.instructions.right == true) {
             if (checker(this.x, this.y + 5) != false) {
               this.y += 5;
             } else {
