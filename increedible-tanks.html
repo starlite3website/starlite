@@ -206,32 +206,44 @@
             if (checker(this.x - 5, this.y) != false) {
               this.x -= 5;
             } else {
-              var r = Math.ceil(Math.random()/.25);
-              this.instructions = { up: r == 1, down: r == 2, left: r == 3, right: r == 4};
+              if (this.y <= user.tank.y) {
+                this.instructions.right = true;
+              } else {
+                this.instructions.left = true;
+              }
               this.update = false;
             }
           } else if (this.instructions.down == true) {
             if (checker(this.x + 5, this.y) != false) {
               this.x += 5;
             } else {
-              var r = Math.ceil(Math.random()/.25);
-              this.instructions = { up: r == 1, down: r == 2, left: r == 3, right: r == 4};
+              if (this.y <= user.tank.y) {
+                this.instructions.right = true;
+              } else {
+                this.instructions.left = true;
+              }
               this.update = false;
             }
           } else if (this.instructions.left == true) {
             if (checker(this.x, this.y - 5) != false) {
               this.y -= 5;
             } else {
-              var r = Math.ceil(Math.random()/.25);
-              this.instructions = { up: r == 1, down: r == 2, left: r == 3, right: r == 4};
+              if (this.x <= user.tank.x) {
+                this.instructions.down = true;
+              } else {
+                this.instructions.up = true;
+              }
               this.update = false;
             }
           } else {
             if (checker(this.x, this.y + 5) != false) {
               this.y += 5;
             } else {
-              var r = Math.ceil(Math.random()/.25);
-              this.instructions = { up: r == 1, down: r == 2, left: r == 3, right: r == 4};
+              if (this.x <= user.tank.x) {
+                this.instructions.down = true;
+              } else {
+                this.instructions.up = true;
+              }
               this.update = false;
             }
           }
