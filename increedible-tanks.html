@@ -391,17 +391,7 @@
       this.ym = this.ym * 20;
       this.y = y;
       this.x = x;
-      while ((this.x < x + 40 && this.x > x - 40) && (this.y < y + 40 && this.y > y - 40)) {
-        this.x = this.x + xm;
-        this.y = this.y + ym;
-      }
-      this.counter = 0;
       this.id = id;
-      this.draw();      
-    }.bind(Shot);
-    
-    Shot.draw = function() {
-      draw.fillStyle = "#000000";
       draw.fillRect(this.x, this.y, 5, 5);
     }.bind(Shot);
     
@@ -2502,7 +2492,6 @@ function tank_listener2(event) {
       }
       l++;
     }
-    if (!this.true) {console.log(l);this.true = true;}
   } // creates a wall
   function strong(x, y, m) {
     if (m) {      
@@ -2563,9 +2552,7 @@ function tank_listener2(event) {
     if (m) {
       Game.foes++; // add Eval Tank to Game to detect victory when all destroyed!
       ai.push(new Object(Ai)); // add Eval Tank to array
-      console.log(ai);
-      console.log(Game.foes);
-      ai[ai.length-1].id = ai.length;
+      ai[ai.length-1].id = ai.length-1;
       ai[ai.length-1].x = x;
       ai[ai.length-1].y = y;
       ai[ai.length-1].master = team;
