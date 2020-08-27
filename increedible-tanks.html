@@ -207,9 +207,9 @@
               this.x -= 5;
             } else {
               if (this.y <= user.tank.y) {
-                this.instructions.right = true;
-              } else {
                 this.instructions.left = true;
+              } else {
+                this.instructions.right = true;
               }
               this.update = false;
             }
@@ -218,9 +218,9 @@
               this.x += 5;
             } else {
               if (this.y <= user.tank.y) {
-                this.instructions.right = true;
-              } else {
                 this.instructions.left = true;
+              } else {
+                this.instructions.right = true;
               }
               this.update = false;
             }
@@ -229,9 +229,9 @@
               this.y -= 5;
             } else {
               if (this.x <= user.tank.x) {
-                this.instructions.up = true;
-              } else {
                 this.instructions.down = true;
+              } else {
+                this.instructions.up = true;
               }
               this.update = false;
             }
@@ -240,9 +240,9 @@
               this.y += 5;
             } else {
               if (this.x <= user.tank.x) {
-                this.instructions.up = true;
-              } else {
                 this.instructions.down = true;
+              } else {
+                this.instructions.up = true;
               }
               this.update = false;
             }
