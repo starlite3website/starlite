@@ -387,8 +387,8 @@
           this.ym *= 1.01;
         }
       }
-      this.xm = this.xm * 20;
-      this.ym = this.ym * 20;
+      this.xm = this.xm * 10;
+      this.ym = this.ym * 10;
       this.y = y;
       this.x = x;
       while ((this.x < x + 40 && this.x > x - 40) && (this.y < y + 40 && this.y > y - 40)) {	
@@ -406,7 +406,7 @@
     }.bind(Shot);
     
     Shot.update = function() {
-      if (this.counter == 5) {
+      if (this.counter == 1) {
         this.x += this.xm;
         this.y += this.ym;
         this.counter = 0;
