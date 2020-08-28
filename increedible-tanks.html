@@ -206,8 +206,8 @@
             if (checker(this.x - 5, this.y) != false) {
               this.x -= 5;
             } else {
-              console.log("UP");
               if (this.y <= user.tank.y) {
+                console.log("
                 this.instructions.right = true;
               } else {
                 this.instructions.left = true;
@@ -218,10 +218,11 @@
             if (checker(this.x + 5, this.y) != false) {
               this.x += 5;
             } else {
-              console.log("DOWN");
               if (this.y <= user.tank.y) {
+                console.log('right');
                 this.instructions.right = true;
               } else {
+                console.log('left');
                 this.instructions.left = true;
               }
               this.update = false;
@@ -230,7 +231,6 @@
             if (checker(this.x, this.y - 5) != false) {
               this.y -= 5;
             } else {
-              console.log("LEFT");
               if (this.x <= user.tank.x) {
                 this.instructions.down = true;
               } else {
@@ -242,7 +242,6 @@
             if (checker(this.x, this.y + 5) != false) {
               this.y += 5;
             } else {
-              console.log("RIGHT");
               if (this.x <= user.tank.x) {
                 this.instructions.down = true;
               } else {
