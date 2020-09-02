@@ -150,10 +150,6 @@
   function ai_check(x, y) {
     var l = 0;
     while (l < s.length) {
-      if (s[l].x < 0 || s[l].x > 500 || s[l].y < 0 || s[l].y > 500) {
-        delete s[l];
-        s.splice(l, 1);
-      }
       if (s[l].x > x || s[l].x + 10 > x) {
         if (s[l].x < x + 40 || s[l].x + 10 < x + 40) {
           if (s[l].y > y || s[l].y + 10 > y) {
@@ -166,6 +162,10 @@
         }
       }
       l++;
+      if (s[l].x < 0 || s[l].x > 500 || s[l].y < 0 || s[l].y > 500) {
+        delete s[l];
+        s.splice(l, 1);
+      }
     }
     return false;
   }
