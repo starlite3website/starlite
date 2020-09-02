@@ -161,11 +161,11 @@
           }
         }
       }
-      l++;
       if (s[l].x < 0 || s[l].x > 500 || s[l].y < 0 || s[l].y > 500) {
         delete s[l];
         s.splice(l, 1);
       }
+      l++;
     }
     return false;
   }
