@@ -903,6 +903,7 @@
     }.bind(this);
   }
   class Tank {
+    
     static draw() {
       if (this.leftright == true) {
         draw.translate(this.x + 20, this.y + 20)
@@ -927,6 +928,7 @@
       draw.rotate(-(this.rotation * Math.PI / 180));
       draw.translate(-this.x - 20, -this.y - 20);
     }
+    
     static check() {
       if (ai_check(this.x, this.y)) {
         this.health -= 20;
@@ -943,7 +945,8 @@
         }
       }
     }
-    static control() {
+    
+    constructor() {
       Tank.speed = 2;
       Tank.intervals = [];
       Tank.helper = [];
@@ -966,6 +969,7 @@
       canvas.addEventListener("keydown", tank_listener1, false);
       canvas.addEventListener("keyup", tank_listener2, false);
     }
+    
     static move(e) {
       e = e || event;
       e.preventDefault();
@@ -1056,6 +1060,7 @@
         a("Game is paused", "yellow");
       }
     }
+    
     static fire() {
       this.xd = 1;
       this.angle = this.rotation % 90;
@@ -1091,6 +1096,7 @@
       }
     }
   }
+    
   function tank_listener1(event) {
     if (event.keyCode == 87 || event.keyCode == 83 || event.keyCode == 68 || event.keyCode == 65) {
         //tank_tracks.play(); paused for testings
@@ -1495,7 +1501,6 @@ function tank_listener2(event) {
       Game.foes = 0;
       Game.control();
       Game.i();
-      user.tank.control();
     }
     if (num == 1) {
       if (mo != "n") {
