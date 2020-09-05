@@ -946,7 +946,7 @@
       }
     }
     
-    constructor() {
+    static initialize() {
       Tank.speed = 2;
       Tank.intervals = [];
       Tank.helper = [];
@@ -1501,6 +1501,7 @@ function tank_listener2(event) {
       Game.foes = 0;
       Game.control();
       Game.i();
+      user.tank.initialize();
     }
     if (num == 1) {
       if (mo != "n") {
