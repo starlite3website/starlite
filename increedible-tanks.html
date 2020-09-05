@@ -902,7 +902,7 @@
       this.socket.send("update "+JSON.stringify({x:user.tank.x, y:user.tank.y, s:s, id:sessionStorage.username}));
     }.bind(this);
   }
-  class Tank() {
+  class Tank {
     draw() {
       if (this.leftright == true) {
         draw.translate(this.x + 20, this.y + 20)
