@@ -902,10 +902,8 @@
       this.socket.send("update "+JSON.stringify({x:user.tank.x, y:user.tank.y, s:s, id:sessionStorage.username}));
     }.bind(this);
   }
-  function Tank() {
-  }
-    
-    Tank.draw = function() {
+  class Tank() {
+    draw() {
       if (this.leftright == true) {
         draw.translate(this.x + 20, this.y + 20)
         draw.rotate(90 * Math.PI / 180);
@@ -928,9 +926,8 @@
       draw.drawImage(tank_top_png, -20, -20);
       draw.rotate(-(this.rotation * Math.PI / 180));
       draw.translate(-this.x - 20, -this.y - 20);
-    }.bind(Tank);
-    
-    Tank.check = function() {
+    }
+    check() {
       if (ai_check(this.x, this.y)) {
         this.health -= 20;
         if (this.health <= 0) {
@@ -945,9 +942,8 @@
           Game.endGame();
         }
       }
-    }.bind(Tank);
-    
-    Tank.control = function() {
+    }
+    control() {
       Tank.speed = 2;
       Tank.intervals = [];
       Tank.helper = [];
@@ -969,9 +965,8 @@
       }, 50);*/ // type::interval reason::"paused for testing"
       canvas.addEventListener("keydown", tank_listener1, false);
       canvas.addEventListener("keyup", tank_listener2, false);
-    }.bind(Tank);
-    
-    Tank.move = function(e) {
+    }
+    move(e) {
       e = e || event;
       e.preventDefault();
       e.stopImmediatePropagation();
@@ -993,9 +988,9 @@
             this.y -= this.speed;
             this.leftright = false;
             if (this.u == 80) {
-                this.u = 0;
+              this.u = 0;
             } else {
-                this.u++;
+              this.u++;
             }
             // CHASE put in tank_track.play(); here
           }
@@ -1060,9 +1055,8 @@
       } else {
         a("Game is paused", "yellow");
       }
-    }.bind(Tank);
-    
-    Tank.fire = function() {
+    }
+    fire() {
       this.xd = 1;
       this.angle = this.rotation % 90;
       this.yd = Math.abs(((this.xd * this.angle) - (90 * this.xd)) / this.angle);
@@ -1095,7 +1089,8 @@
       } else {
         s[s.length-1].control(this.x + 20, this.y + 20, s.length-1, this.xd, this.yd);
       }
-    }.bind(Tank);
+    }
+  }
   function tank_listener1(event) {
     if (event.keyCode == 87 || event.keyCode == 83 || event.keyCode == 68 || event.keyCode == 65) {
         //tank_tracks.play(); paused for testings
