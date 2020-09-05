@@ -975,86 +975,88 @@
       e.preventDefault();
       e.stopImmediatePropagation();
       if (this.inactive == false) {
-        if (e.keyCode == 68) {
-          if (checker(this.x + this.speed, this.y) != false) {
-            this.x += this.speed;
-            this.leftright = true;
-            if (this.u == 80) {
+        switch (e.keyCode) 
+          case 68:
+            if (checker(this.x + this.speed, this.y) != false) {
+              this.x += this.speed;
+              this.leftright = true;
+              if (this.u == 80) {
                 this.u = 0;
-            } else {
+              } else {
                 this.u++;
+              }
+              // CHASE put in tank_track.play(); here
             }
-            // CHASE put in tank_track.play(); here
-          }
-        }
-        if (e.keyCode == 87) {
-          if (checker(this.x, this.y - this.speed) != false) {
-            this.y -= this.speed;
-            this.leftright = false;
-            if (this.u == 80) {
-              this.u = 0;
-            } else {
-              this.u++;
-            }
-            // CHASE put in tank_track.play(); here
-          }
-        }
-        if (e.keyCode == 65) {
-          if (checker(this.x - this.speed, this.y) != false) {
-            this.x -= this.speed;
-            this.leftright = true;
-            if (this.u == 20) {
+          break;
+          case 87:
+            if (checker(this.x, this.y - this.speed) != false) {
+              this.y -= this.speed;
+              this.leftright = false;
+              if (this.u == 80) {
                 this.u = 0;
-            } else {
+              } else {
                 this.u++;
+              }
+              // CHASE put in tank_track.play(); here
             }
-            // CHASE put in tank_track.play(); here
-          }
-        }
-        if (e.keyCode == 83) {
-          if (checker(this.x, this.y + this.speed) != false) {
-            this.y += this.speed;
-            this.leftright = false;
-            if (this.u == 20) {
+          break;
+          case 65:
+            if (checker(this.x - this.speed, this.y) != false) {
+              this.x -= this.speed;
+              this.leftright = true;
+              if (this.u == 20) {
                 this.u = 0;
-            } else {
+              } else {
                 this.u++;
+              }
+              // CHASE put in tank_track.play(); here
             }
-            // CHASE put in tank_track.play(); here
-          }
-        }
-        if (e.keyCode == 32) {
-          if (this.count == 30) {
-            this.fire();
-            // CHASE put in tank_fire.play(); here
-            this.count = 0;
-          } else {
-            this.count++;
-          }
-        }
-        if (e.keyCode == 39) {
-          if (this.count2 == 2) {
-            if (this.rotation == 355) {
-              this.rotation = 0;
+          break;
+          case 83:
+            if (checker(this.x, this.y + this.speed) != false) {
+              this.y += this.speed;
+              this.leftright = false;
+              if (this.u == 20) {
+                this.u = 0;
+              } else {
+                this.u++;
+              }
+              // CHASE put in tank_track.play(); here
+            }
+          break;
+          case 32:
+            if (this.count == 30) {
+              this.fire();
+              // CHASE put in tank_fire.play(); here
+              this.count = 0;
             } else {
-              this.rotation += 5;
+              this.count++;
             }
-            this.count2 = 0;
-          } else {
-            this.count2++;
-          }
-        }
-        if (e.keyCode == 37) {
-          if (this.count2 == 2) {
-            if (this.rotation == 0) {
-              this.rotation = 355;
+          break;
+          case 39:
+            if (this.count2 == 2) {
+              if (this.rotation == 355) {
+                this.rotation = 0;
+              } else {
+                this.rotation += 5;
+              }
+              this.count2 = 0;
             } else {
-              this.rotation -= 5;
+              this.count2++;
             }
-            this.count2 = 0;
-          } else {
-            this.count2++;
-          }
+          break;
+          case 37:
+            if (this.count2 == 2) {
+              if (this.rotation == 0) {
+                this.rotation = 355;
+              } else {
+                this.rotation -= 5;
+              }
+              this.count2 = 0;
+            } else {
+              this.count2++;
+            }
+          break;
         }
       } else {
         a("Game is paused", "yellow");
