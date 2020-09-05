@@ -903,7 +903,7 @@
     }.bind(this);
   }
   class Tank {
-    draw() {
+    static draw() {
       if (this.leftright == true) {
         draw.translate(this.x + 20, this.y + 20)
         draw.rotate(90 * Math.PI / 180);
@@ -927,7 +927,7 @@
       draw.rotate(-(this.rotation * Math.PI / 180));
       draw.translate(-this.x - 20, -this.y - 20);
     }
-    check() {
+    static check() {
       if (ai_check(this.x, this.y)) {
         this.health -= 20;
         if (this.health <= 0) {
@@ -943,7 +943,7 @@
         }
       }
     }
-    control() {
+    static control() {
       Tank.speed = 2;
       Tank.intervals = [];
       Tank.helper = [];
@@ -966,7 +966,7 @@
       canvas.addEventListener("keydown", tank_listener1, false);
       canvas.addEventListener("keyup", tank_listener2, false);
     }
-    move(e) {
+    static move(e) {
       e = e || event;
       e.preventDefault();
       e.stopImmediatePropagation();
@@ -1056,7 +1056,7 @@
         a("Game is paused", "yellow");
       }
     }
-    fire() {
+    static fire() {
       this.xd = 1;
       this.angle = this.rotation % 90;
       this.yd = Math.abs(((this.xd * this.angle) - (90 * this.xd)) / this.angle);
