@@ -1315,7 +1315,7 @@ function tank_listener2(event) {
     }
     if (sessionStorage.level == undefined) {   
       user = {
-        tank: new Object(Tank),
+        tank: new Tank(),
         username: sessionStorage.username,
         level: userData.level,
         coins: userData.coins,
