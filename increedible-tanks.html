@@ -190,10 +190,9 @@
     
   }
     
-  function Ai() {
-  }
+  class Ai {
     
-    Ai.control = function() {
+    static control() {
       Ai.health = 200;
       Ai.x = 0;
       Ai.y = 0;
@@ -204,8 +203,8 @@
       //i.push(window.setInterval(this.draw, 1));
       //i.push(window.setInterval(this.move, 500));
       //i.push(window.setInterval(this.check, 10)); // shot and ai check if hit interval
-    }.bind(Ai);
-    Ai.draw = function() {
+    }
+    static draw() {
       if (this.inactive != true) {
         draw.drawImage(ai_base, this.x, this.y);
         draw.translate(this.x + 20, this.y + 20);
@@ -214,8 +213,8 @@
         draw.rotate(-(this.rotation * Math.PI / 180));
         draw.translate(-this.x - 20, -this.y - 20);
       }
-    }.bind(Ai);
-    Ai.move = function() {
+    }
+    static move() {
       if (this.Mcounter==10) {
         if (this.inactive != true) {
           if (this.update) {
@@ -283,8 +282,8 @@
       } else {
         this.Mcounter++;
       }
-    }.bind(Ai);
-    Ai.fire = function() {
+    }
+    static fire() {
        var xd = (this.x + 20) - (user.tank.x + 20);
        var yd = (this.y + 20) - (user.tank.y + 20);
        if (xd < 0) {
@@ -339,8 +338,8 @@
       } else {
         s[Game.shotId].control(this.x + 20, this.y + 20, Game.shotId, this.xd, this.yd);
       }*/
-    }.bind(Ai);
-    Ai.check = function() {
+    }
+    static check() {
       if (ai_check(this.x, this.y)) {
         if (this.inactive != true) {
           this.health -= 20;
@@ -357,8 +356,8 @@
           }
         }
       }
-    }.bind(Ai);
-    Ai.moveCalc = function() {
+    }
+    static moveCalc() {
       this.xdistance = user.tank.x - this.x;
       this.ydistance = user.tank.y - this.y;
       if (this.xdistance == 0) {
@@ -392,7 +391,7 @@
           return { right: true, fire: fire };
         }
       }
-    }.bind(Ai);
+    }
   }
   class Shot {
     
