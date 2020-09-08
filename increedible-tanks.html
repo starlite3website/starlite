@@ -169,6 +169,27 @@
     }
     return false;
   }
+  class Hitbox {
+    
+    constructor(owner, x, y, width, height) {
+      this.owner = owner;
+      this.width = width;
+      this.x = x;
+      this.y = y;
+    }
+    
+    static detect() {
+      for (var l = 0; l < s[l].length; l++) {
+        if ((this.x < s[l].x && this.x + this.width > s[l].x) && (this.y < s[l].y && this.y + this.height > s[l].y)) {
+          delete s[l];
+          s.splice(l, 1);
+          this.owner.health -= s[l].damage;
+        }
+      }
+    }
+    
+  }
+    
   function Ai() {
   }
     
@@ -397,7 +418,7 @@
       this.counter = 0;	
       this.id = id;
       this.draw();      	
-    }.bind(Shot);	
+    }
 
     Shot.draw = function() {	
       draw.fillStyle = "#000000";
