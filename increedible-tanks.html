@@ -301,7 +301,8 @@
            xd = 0-1;
            yd = 0-yd;
        }
-       s.push(new Shot(this.x + 20, this.y + 20, s.length-1, xd, yd));
+       s.push(new Shot());
+       s[s.length-1].initialize(this.x + 20, this.y + 20, s.length-1, xd, yd));
       /*this.xd = 1;
       this.angle = this.rotation % 90;
       this.yd = Math.abs(((this.xd * this.angle) - (90 * this.xd)) / this.angle);
@@ -394,7 +395,7 @@
     }.bind(Ai);
   class Shot {
     
-    constructor(x, y, id, xm, ym) {
+    static initialize(x, y, id, xm, ym) {
       this.xm = xm;
       this.ym = ym;
       while (this.xm * this.xm + this.ym * this.ym > 1.2 || this.xm * this.xm + this.ym * this.ym < 1) {
@@ -1112,10 +1113,11 @@
         this.xd = 1;
         this.yd = 0;
       }
+      s.push(new Shot());
       if ((this.xd < 0 && this.yd < 0) || (this.xd > 0 && this.yd > 0)) {
-        s.push(new Shot(this.x + 20, this.y + 20, s.length-1, this.yd, this.xd));
+        s[s.length-1].initialize(this.x + 20, this.y + 20, s.length-1, this.yd, this.xd);
       } else {
-        s.push(new Shot(this.x + 20, this.y + 20, s.length-1, this.xd, this.yd));
+        s[s.length-1].initialize(this.x + 20, this.y + 20, s.length-1, this.xd, this.yd);
       }
     }
   }
