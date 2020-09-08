@@ -280,8 +280,7 @@
            xd = 0-1;
            yd = 0-yd;
        }
-       s.push(new Object(Shot));
-       s[s.length-1].control(this.x + 20, this.y + 20, s.length-1, xd, yd);
+       s.push(new Shot(this.x + 20, this.y + 20, s.length-1, xd, yd));
       /*this.xd = 1;
       this.angle = this.rotation % 90;
       this.yd = Math.abs(((this.xd * this.angle) - (90 * this.xd)) / this.angle);
@@ -372,9 +371,9 @@
         }
       }
     }.bind(Ai);
-  function Shot() {
-  }
-    Shot.control = function(x, y, id, xm, ym) {
+  class Shot {
+    
+    constructor(x, y, id, xm, ym) {
       this.xm = xm;
       this.ym = ym;
       while (this.xm * this.xm + this.ym * this.ym > 1.2 || this.xm * this.xm + this.ym * this.ym < 1) {
@@ -403,9 +402,9 @@
     Shot.draw = function() {	
       draw.fillStyle = "#000000";
       draw.fillRect(this.x, this.y, 5, 5);
-    }.bind(Shot);
+    }
     
-    Shot.update = function() {
+    static update() {
       if (this.counter == 1) {
         this.x += this.xm;
         this.y += this.ym;
@@ -415,11 +414,14 @@
       }
     }
     
+  }
+  
   function clearShot() {
     if (user.tank != undefined) {
       level(Game.level, "n", false);
     }
   }
+    
   function Host() {
     this.control = function(id) {
       document.removeEventListener("keydown", multiplayer1);
@@ -1090,11 +1092,10 @@
         this.xd = 1;
         this.yd = 0;
       }
-      s.push(new Object(Shot));
       if ((this.xd < 0 && this.yd < 0) || (this.xd > 0 && this.yd > 0)) {
-        s[s.length-1].control(this.x + 20, this.y + 20, s.length-1, this.yd, this.xd);
+        s.push(new Shot(this.x + 20, this.y + 20, s.length-1, this.yd, this.xd));
       } else {
-        s[s.length-1].control(this.x + 20, this.y + 20, s.length-1, this.xd, this.yd);
+        s.push(new Shot(this.x + 20, this.y + 20, s.length-1, this.xd, this.yd));
       }
     }
   }
