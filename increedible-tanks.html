@@ -395,7 +395,7 @@
   }
   class Shot {
     
-    static initialize(x, y, id, xm, ym) {
+    /*static initialize(x, y, id, xm, ym) {
       this.xm = xm;
       this.ym = ym;
       while (this.xm * this.xm + this.ym * this.ym > 1.2 || this.xm * this.xm + this.ym * this.ym < 1) {
@@ -418,8 +418,9 @@
       }	
       this.counter = 0;	
       this.id = id;     	
+    }*/
+    static initialize() {
     }
-
     static draw() {	
       draw.fillStyle = "#000000";
       draw.fillRect(this.x, this.y, 5, 5);
