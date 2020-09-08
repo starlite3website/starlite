@@ -178,7 +178,7 @@
       this.y = y;
     }
     
-    static detect() {
+    detect() {
       for (var l = 0; l < s[l].length; l++) {
         if ((this.x < s[l].x && this.x + this.width > s[l].x) && (this.y < s[l].y && this.y + this.height > s[l].y)) {
           delete s[l];
@@ -192,7 +192,7 @@
     
   class Ai {
     
-    static control() {
+    control() {
       Ai.health = 200;
       Ai.x = 0;
       Ai.y = 0;
@@ -204,7 +204,7 @@
       //i.push(window.setInterval(this.move, 500));
       //i.push(window.setInterval(this.check, 10)); // shot and ai check if hit interval
     }
-    static draw() {
+    draw() {
       if (this.inactive != true) {
         draw.drawImage(ai_base, this.x, this.y);
         draw.translate(this.x + 20, this.y + 20);
@@ -214,7 +214,7 @@
         draw.translate(-this.x - 20, -this.y - 20);
       }
     }
-    static move() {
+    move() {
       if (this.Mcounter==10) {
         if (this.inactive != true) {
           if (this.update) {
@@ -283,7 +283,7 @@
         this.Mcounter++;
       }
     }
-    static fire() {
+    fire() {
        var xd = (this.x + 20) - (user.tank.x + 20);
        var yd = (this.y + 20) - (user.tank.y + 20);
        if (xd < 0) {
@@ -300,8 +300,7 @@
            xd = 0-1;
            yd = 0-yd;
        }
-       s.push(new Shot());
-       s[s.length-1].initialize(this.x + 20, this.y + 20, s.length-1, xd, yd);
+       s.push(new Shot(this.x + 20, this.y + 20, s.length-1, xd, yd));
       /*this.xd = 1;
       this.angle = this.rotation % 90;
       this.yd = Math.abs(((this.xd * this.angle) - (90 * this.xd)) / this.angle);
@@ -339,7 +338,7 @@
         s[Game.shotId].control(this.x + 20, this.y + 20, Game.shotId, this.xd, this.yd);
       }*/
     }
-    static check() {
+    check() {
       if (ai_check(this.x, this.y)) {
         if (this.inactive != true) {
           this.health -= 20;
@@ -357,7 +356,7 @@
         }
       }
     }
-    static moveCalc() {
+    moveCalc() {
       this.xdistance = user.tank.x - this.x;
       this.ydistance = user.tank.y - this.y;
       if (this.xdistance == 0) {
@@ -395,7 +394,7 @@
   }
   class Shot {
     
-    static initialize(x, y, id, xm, ym) {
+    constructor(x, y, id, xm, ym) {
       this.xm = xm;
       this.ym = ym;
       while (this.xm * this.xm + this.ym * this.ym > 1.2 || this.xm * this.xm + this.ym * this.ym < 1) {
@@ -420,12 +419,12 @@
       this.id = id;     	
     }
 
-    static draw() {	
+    draw() {	
       draw.fillStyle = "#000000";
       draw.fillRect(this.x, this.y, 5, 5);
     }
     
-    static update() {
+    update() {
       if (this.counter == 1) {
         this.x += this.xm;
         this.y += this.ym;
@@ -927,7 +926,7 @@
   }
   class Tank {
     
-    static draw() {
+    draw() {
       if (this.leftright == true) {
         draw.translate(this.x + 20, this.y + 20)
         draw.rotate(90 * Math.PI / 180);
@@ -952,7 +951,7 @@
       draw.translate(-this.x - 20, -this.y - 20);
     }
     
-    static check() {
+    check() {
       if (ai_check(this.x, this.y)) {
         this.health -= 20;
         if (this.health <= 0) {
@@ -969,7 +968,7 @@
       }
     }
     
-    static initialize() {
+    initialize() {
       Tank.speed = 2;
       Tank.intervals = [];
       Tank.helper = [];
@@ -993,7 +992,7 @@
       canvas.addEventListener("keyup", tank_listener2, false);
     }
     
-    static move(e) {
+    move(e) {
       e = e || event;
       e.preventDefault();
       e.stopImmediatePropagation();
@@ -1086,7 +1085,7 @@
       }
     }
     
-    static fire() {
+    fire() {
       this.xd = 1;
       this.angle = this.rotation % 90;
       this.yd = Math.abs(((this.xd * this.angle) - (90 * this.xd)) / this.angle);
@@ -1113,11 +1112,10 @@
         this.xd = 1;
         this.yd = 0;
       }
-      s.push(new Shot());
       if ((this.xd < 0 && this.yd < 0) || (this.xd > 0 && this.yd > 0)) {
-        s[s.length-1].initialize(this.x + 20, this.y + 20, s.length-1, this.yd, this.xd);
+        s.push(new Shot(this.x + 20, this.y + 20, s.length-1, this.yd, this.xd));
       } else {
-        s[s.length-1].initialize(this.x + 20, this.y + 20, s.length-1, this.xd, this.yd);
+        s.push(new Shot(this.x + 20, this.y + 20, s.length-1, this.xd, this.yd));
       }
     }
   }
