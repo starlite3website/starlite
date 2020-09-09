@@ -932,7 +932,7 @@
   }
   class Tank {
     
-    static draw() {
+    draw() {
       if (this.leftright == true) {
         draw.translate(this.x + 20, this.y + 20)
         draw.rotate(90 * Math.PI / 180);
@@ -957,7 +957,7 @@
       draw.translate(-this.x - 20, -this.y - 20);
     }
     
-    static check() {
+    check() {
       if (ai_check(this.x, this.y)) {
         this.health -= 20;
         if (this.health <= 0) {
@@ -974,7 +974,7 @@
       }
     }
     
-    static initialize() {
+    initialize() {
       Tank.speed = 2;
       Tank.intervals = [];
       Tank.helper = [];
@@ -998,7 +998,7 @@
       canvas.addEventListener("keyup", tank_listener2, false);
     }
     
-    static move(e) {
+    move(e) {
       e = e || event;
       e.preventDefault();
       e.stopImmediatePropagation();
@@ -1091,7 +1091,7 @@
       }
     }
     
-    static fire() {
+    fire() {
       this.xd = 1;
       this.angle = this.rotation % 90;
       this.yd = Math.abs(((this.xd * this.angle) - (90 * this.xd)) / this.angle);
