@@ -2162,7 +2162,7 @@ function tank_listener2(event) {
   function mainMenu() {
     document.removeEventListener("keydown", multiplayer1);
     document.removeEventListener("click", multiplayer2);
-    user.tank = new Object(Tank);
+    user.tank = new Tank();
     window.clearInterval(interval2);
     draw.clearRect(0, 0, 500, 500);
     playText.style.visibility = "hidden";
@@ -2184,9 +2184,9 @@ function tank_listener2(event) {
     draw.fillRect(70,350,100,50);
     draw.fillRect(330, 350, 100, 50);
     draw.fillStyle = "#000000";
-    draw.fillText("Play Levels", 195, 380);
-    draw.fillText("Upgrades", 75, 380);
-    draw.fillText("########", 340, 380);
+    draw.fillText("Play Levels", 195, 390);
+    draw.fillText("Upgrades", 75, 390);
+    draw.fillText("#####", 340, 390);
     document.addEventListener("click", function(e) {
       if (e.pageX || e.pageY) {
         x = e.pageX;
