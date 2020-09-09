@@ -89,6 +89,12 @@
       </h5>
     </div>
   </div>
+  <style>
+    @font-face {
+      font-family: 'starfont';
+      src: url(http://starlite3.ml/00TT[1].TTF);
+    }
+  </style>
   <iframe src="" id="database" visibility="hidden" display="hidden" width="0" height="0"></iframe>
   <script>
   var embed = document.getElementById("database");
@@ -905,7 +911,7 @@
       user.tank.draw();
       draw.fillStyle="#ffffff";
       draw.fillRect(user.tank.x, user.tank.y + 60, sessionStorage.username.length * 15, 20);
-      draw.font = "20px Courier";
+      draw.font = "20px starfont";
       draw.fillText(sessionStorage.username, user.tank.x + 5, user.tank.y + 65);
       while (p<this.level.weak.length) {
         this.level.weak[p].weak(this.level.weak[p].x, this.level.weak[p].y);
@@ -1492,7 +1498,7 @@ function tank_listener2(event) {
     }
     draw.fillStyle="#ffffff";
     draw.fillRect(user.tank.x-sessionStorage.username.length/4*15, user.tank.y + 50, sessionStorage.username.length * 15, 20);
-    draw.font = "20px Courier";
+    draw.font = "20px starfont";
     draw.fillStyle = "#FFDF00";
     draw.fillText(sessionStorage.username, user.tank.x-sessionStorage.username.length/4*15+5, user.tank.y + 65);
     // draw ai
@@ -1999,7 +2005,7 @@ function tank_listener2(event) {
     draw.fillText(Game.coins, 20, 15);
     draw.globalAlpha=.5;
     draw.fillStyle="#ffffff";
-    draw.font="20px Courier";
+    draw.font="20px starfont";
     if (num == 1) {
       draw.fillText("Use WASD to move", 50, 370);
       draw.fillText("F to fire", 50, 400);
@@ -2015,10 +2021,10 @@ function tank_listener2(event) {
   function defeat() {
     draw.fillStyle="#556B2F";
     draw.fillRect(50,50,400,400);
-    draw.font="60px Courier";
+    draw.font="60px starfont";
     draw.fillStyle = "#ffffff";
     draw.fillText("DEFEAT!",120,120);
-    draw.font = "20px Courier";
+    draw.font = "20px starfont";
     draw.fillText("No Stats Updated",140,250);
     document.addEventListener("keydown", defeatHelper);
     setTimeout(function() {
@@ -2046,10 +2052,10 @@ function tank_listener2(event) {
   function victory() {
     draw.fillStyle="#556B2F";
     draw.fillRect(50,50,400,400);
-    draw.font="60px Courier";
+    draw.font="60px starfont";
     draw.fillStyle = "#ffffff";
     draw.fillText("VICTORY!",120,120);
-    draw.font = "20px Courier";
+    draw.font = "20px starfont";
     draw.fillText("Coins Gained: "+Game.coins,140,200);
     userData.coins += Game.coins;
     if (userData.level == Game.level) userData.level++;
@@ -2095,19 +2101,19 @@ function tank_listener2(event) {
     draw.fillStyle="#556B2F";
     draw.fillRect(50,50,400,400);
     draw.fillStyle="#ffffff";
-    draw.font="60px Courier";
+    draw.font="60px starfont";
     draw.fillText("Shop",170,120);
-    draw.font="20px Courier";
+    draw.font="20px starfont";
     draw.fillText("Health Update:",70,200);
     draw.fillRect(300,180,120,60);
     draw.fillText("New Updates Coming Late 2019",80,400);
     draw.fillStyle="#000000";
     draw.fillText("Buy Now",315,215);
-    draw.font="15px Courier";
+    draw.font="15px starfont";
     draw.fillStyle="#ffffff";
     draw.fillText("500 coins for +20 health",70,230);
     draw.fillStyle="#ffffff";
-    draw.font="10px Courier";
+    draw.font="10px starfont";
     draw.fillRect(60,60,90,30);
     draw.fillStyle="#000000";
     draw.fillText("Main Menu", 75, 75);
@@ -2164,16 +2170,16 @@ function tank_listener2(event) {
     draw.drawImage(tank_base_png, 75, 120);
     draw.drawImage(tank_top_png, 75, 120);
     draw.fillStyle="#ffffff";
-    draw.font = "15px Courier";
+    draw.font = "15px starfont";
     draw.fillText(user.username, 150, 150);
     draw.fillText("Level:" + userData.level, 75, 190);
     draw.drawImage(coins, 310, 140);
     draw.fillText(userData.coins, 325, 150);
-    draw.font = "bold 15px Courier";
+    draw.font = "bold 15px starfont";
     draw.fillText("Controls: WASD movement, F fire, and", 75, 250);
     draw.fillText("arrow keys barrel movement", 75, 270);
     draw.fillStyle="#ffffff";
-    draw.font = "15px Courier";
+    draw.font = "15px starfont";
     draw.fillRect(190, 350, 120, 50);
     draw.fillRect(70,350,100,50);
     draw.fillRect(330, 350, 100, 50);
@@ -2249,7 +2255,7 @@ function tank_listener2(event) {
     if (userData.level < 12) draw.fillStyle="#000000";
     draw.fillRect(300,400,50,50);
     draw.fillStyle = "#000000";
-    draw.font = "20px Courier";
+    draw.font = "20px starfont";
     draw.fillText("1",120,130);
     if (userData.level < 2) draw.fillStyle="#A9A9A9";
     draw.fillText("2",220,130);
@@ -2427,20 +2433,20 @@ function tank_listener2(event) {
     draw.fillStyle="#556B2F";
     draw.fillRect(50,50,400,400);
     draw.fillStyle="#ffffff";
-    draw.font="10px Courier";
+    draw.font="10px starfont";
     draw.fillRect(60,60,90,30);
     draw.fillStyle="#000000";
     draw.fillText("Main Menu", 75, 75);
-    draw.font="60px Courier";
+    draw.font="60px starfont";
     draw.fillStyle="#ffffff";
     draw.fillText("Multiplayer", 55, 150);
     draw.fillRect(150,300,100,50);
     draw.fillRect(260,300,100,50);
-    draw.font="20px Courier";
+    draw.font="20px starfont";
     draw.fillStyle="#000000";
     draw.fillText("Join Game", 150, 330);
     draw.fillText("Host Game", 260, 330);
-    draw.font="60px Courier";
+    draw.font="60px starfont";
     document.addEventListener("keydown", multiplayer1);
     document.addEventListener("click", multiplayer2);
   }
