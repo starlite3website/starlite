@@ -2177,16 +2177,16 @@ function tank_listener2(event) {
     draw.fillText(userData.coins, 325, 150);
     draw.font = "bold 15px starfont";
     draw.fillText("Controls: WASD movement, F fire, and", 75, 250);
-    draw.fillText("arrow keys barrel movement", 75, 270);
+    draw.fillText("arrow keys barrel movement", 75, 280);
     draw.fillStyle="#ffffff";
     draw.font = "15px starfont";
     draw.fillRect(190, 350, 120, 50);
     draw.fillRect(70,350,100,50);
     draw.fillRect(330, 350, 100, 50);
     draw.fillStyle = "#000000";
-    draw.fillText("Play Levels", 200, 380);
-    draw.fillText("Upgrades", 80, 380);
-    draw.fillText("Multiplayer", 340, 380);
+    draw.fillText("Play Levels", 195, 380);
+    draw.fillText("Upgrades", 75, 380);
+    draw.fillText("########", 340, 380);
     document.addEventListener("click", function(e) {
       if (e.pageX || e.pageY) {
         x = e.pageX;
