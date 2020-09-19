@@ -1157,7 +1157,8 @@
     
   function tank_listener1(event) {
     if (event.keyCode == 87 || event.keyCode == 83 || event.keyCode == 68 || event.keyCode == 65) {
-        movementNoise.play();
+      movementNoise.currentTime = 1;
+      movementNoise.play();
     }
     if (user.tank.helper[event.keyCode] != true) {
       user.tank.intervals[event.keyCode] = window.setInterval(function() {
