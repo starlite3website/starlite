@@ -1170,7 +1170,7 @@
   }
   function tank_listener2(event) {
     if (event.keyCode == 87 || event.keyCode == 83 || event.keyCode == 68 || event.keyCode == 65) {
-      if (user.tank.helper[87] == false && user.tank.helper[83] == false && user.tank.helper[68] == false && user.tank.helper[65] == false) {
+      if ((user.tank.helper[87] != true && user.tank.helper[83] != true) && (user.tank.helper[68] != true && user.tank.helper[65] != true)) {
         movementNoise.stop();
       } 
     }
@@ -1332,8 +1332,6 @@
     draw.font = "20px starfont";
     draw.color = "#ffffff";
     draw.fillText("", 0, 0);
-    // begin music
-    battleMusic.play();
     a("Loading Game...", "black");
     draw.drawImage(start_screen, 0, 0);
     wall(0, 3);
@@ -1368,6 +1366,7 @@
   get(2,1);
   setTimeout(function(){gameData=o[2][0][1];},2000);
   function loading() {
+    battleMusic.play();
     if (sessionStorage.username == undefined || JSON.parse(gameData) == null) {
       if (JSON.parse(gameData) == null) {
         alert('Starlite uses a free database, which mean that about 2/24 hours a day we are down. You can choose to play as Guest, but nothing will be saved...');
@@ -2324,6 +2323,7 @@
     document.addEventListener("click", levelSelectSupport);
   }
   function levelSelectSupport(e) {
+     battleMusic.stop();
      if (e.pageX || e.pageY) {
         x = e.pageX;
         y = e.pageY;
