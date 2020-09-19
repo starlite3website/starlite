@@ -975,20 +975,20 @@
     }
     
     initialize() {
-      Tank.speed = 2;
-      Tank.intervals = [];
-      Tank.helper = [];
-      Tank.count = 0;
-      Tank.count2 = 0;
-      Tank.health = userData.health;
-      Tank.r = 0;
-      Tank.x = 0;
-      Tank.y = 0;
-      Tank.u = true;
-      Tank.mode = 0;
-      Tank.color = "#00ff00";
-      Tank.inactive = false;
-      Tank.rotation = 0;
+      this.speed = 2;
+      this.intervals = [];
+      this.helper = [];
+      this.count = 0;
+      this.count2 = 0;
+      this.health = userData.health;
+      this.r = 0;
+      this.x = 0;
+      this.y = 0;
+      this.u = true;
+      this.mode = 0;
+      this.color = "#00ff00";
+      this.inactive = false;
+      this.rotation = 0;
       canvas.focus();
       this.draw();
       /*i.push(window.setInterval(function() {
