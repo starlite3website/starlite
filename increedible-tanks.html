@@ -1169,7 +1169,7 @@
   }
   function tank_listener2(event) {
     if (event.keyCode == 87 || event.keyCode == 83 || event.keyCode == 68 || event.keyCode == 65) {
-      if (user.tank.helper[87] == false || user.tank.helper[83] == false || user.tank.helper[68] == false || user.tank.helper[65] == false) {
+      if (user.tank.helper[87] == false && user.tank.helper[83] == false && user.tank.helper[68] == false && user.tank.helper[65] == false) {
         movementNoise.stop();
       } 
     }
