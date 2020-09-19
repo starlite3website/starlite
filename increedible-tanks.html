@@ -1327,7 +1327,10 @@
   tank_tracks.load();
   tank_tracks.volume = 0.4;
   function startScreen() {
+    // initialize font
     draw.font = "20px starfont";
+    draw.color = "#ffffff";
+    draw.fillText("", 0, 0);
     a("Loading Game...", "black");
     draw.drawImage(start_screen, 0, 0);
     wall(0, 3);
