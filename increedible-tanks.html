@@ -155,8 +155,8 @@
   coins.src = "/starlite-coin.png";
   
   // initialize music and sounds  
+  
   /*
-  var battleMusic = new sound("http://starlite3.ml/starlite-increedible-tanks-battle-music.mp3");
   var villageMusic = new sound("");
   var menuMusic = new sound("");
   var damageNoise = new sound("");
@@ -164,6 +164,7 @@
   var shotNoise = new sound("");
   */
     
+  var battleMusic = new sound("http://starlite3.ml/starlite-increedible-tanks-battle-music.mp3");
   var movementNoise = new sound("http://starlite3.ml/starlite-increedible-tanks-tank-movement.mp3");
     
   // function constructor for making sounds
@@ -1331,6 +1332,8 @@
     draw.font = "20px starfont";
     draw.color = "#ffffff";
     draw.fillText("", 0, 0);
+    // begin music
+    battleMusic.play();
     a("Loading Game...", "black");
     draw.drawImage(start_screen, 0, 0);
     wall(0, 3);
