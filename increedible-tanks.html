@@ -241,6 +241,10 @@
         draw.drawImage(ai_top, -20, -20);
         draw.rotate(-(this.rotation * Math.PI / 180));
         draw.translate(-this.x - 20, -this.y - 20);
+        draw.fillStyle="#000000";
+        draw.fillRect(this.x, this.y + 50, 40, 5);
+        draw.fillStyle="#FF0000";
+        draw.fillRect(this.x+2, this.y+51, 36*this.health/200, 3); 
       }
     }
     move() {
@@ -977,10 +981,11 @@
       draw.drawImage(tank_top_png, -20, -20);
       draw.rotate(-(this.rotation * Math.PI / 180));
       draw.translate(-this.x - 20, -this.y - 20);
+      // Health Bar!
       draw.fillStyle="#000000";
       draw.fillRect(this.x, this.y + 50, 40, 5);
       draw.fillStyle="#90EE90";
-      draw.fillRect(this.x+2, this.y+51, 36*this.health/200, 3);
+      draw.fillRect(this.x+2, this.y+51, 36*this.health/userData.health, 3); 
     }
     
     check() {
