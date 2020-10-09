@@ -45,7 +45,6 @@
       }
       header {
         position:fixed;
-        border-bottom:1px solid black;
         margin-left:0px;
         margin-right:0px;
         background-color:white;
@@ -137,7 +136,12 @@
       <h2 style="margin-top: 50px;">Why Choose Starlite?</h2>
       <p style="margin-left: 20%; margin-right: 20%;">Starlite's goal is to create a dedicated gaming website for everyone, free of cost. Although we are just starting we have already created a live chat and our first game, <a href="/increedible-tanks" style="text-decoration: none; color: orange;"><bold>Increedible Tanks!</bold></a> Starlite has features that beat other gaming websites, unlike website that host other people's games we create our own unique one of a kind games. Create an account now and start gaming!</p>
       <a href="/account">
-        <button style="margin-left: 0px;">Create Account</button>
+        <button style="color: orangered;" id="create_account_button">Create Account</button>
+        <style>
+          #create_account_button:hover {
+            color: white;
+          }
+        </style>
       </a>
     </div>
   </body>
