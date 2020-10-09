@@ -257,9 +257,9 @@
               this.x -= 5;
             } else {
               if (this.y <= user.tank.y) {
-                this.instructions = {left:true, right:false, up:false, down:false};
+                this.instructions = {left:false, right:true, up:false, down:false};
               } else {
-                this.instructions = {right:true, left:false, up:false, down:false};
+                this.instructions = {right:false, left:true, up:false, down:false};
               }
               this.update = false;
             }
@@ -268,9 +268,9 @@
               this.x += 5;
             } else {
               if (this.y <= user.tank.y) {
-                this.instructions = {left:true, right:false, up:false, down:false};
+                this.instructions = {left:false, right:true, up:false, down:false};
               } else {
-                this.instructions = {right:true, left:false, up:false, down:false};
+                this.instructions = {right:false, left:true, up:false, down:false};
               }
               this.update = false;
             }
