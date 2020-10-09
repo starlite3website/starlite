@@ -1185,6 +1185,19 @@
     if (x < 0 || y < 0 || x + 40 > 500 || y + 40 > 500) {
       return false;
     }
+    // if touching Eval Tank then return " i cant move"
+    var l = 0;
+    while (l < ai.length) {
+      if ((x + 40 > ai[l].x && x + 40 < ai[l].x + 40) || (x > ai[l].x && x < ai[l].x + 40)) {
+        if ((y + 40 > ai[l].y && y + 40 < ai[l].y + 40) || (y > ai[l].y && y < ai[l].y + 40)) {
+          return false;
+        }
+      }
+      l++;
+    }
+    // if touching user tank then return "i cant move"
+    
+    // if touching walls then return "i cant move"
     var l = 0;
     while (l < b.length) {
       if ((x + 40 > b[l].x * 50 && x + 40 < b[l].x * 50 + 50) || (x > b[l].x * 50 && x < b[l].x * 50 + 50)) {
