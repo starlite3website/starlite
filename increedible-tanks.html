@@ -144,7 +144,7 @@
       };
     xhr.send();
   };
-  var interval, user, listener, interval2, b = [], s = [], ai = [], l1 = 0, l2 = 0, i = [], Game = new Game(), ai_top = new Image(),  ai_base = new Image(), tank_base_png = new Image(), tank_top_png = new Image(),  start_screen = new Image(), main_menu = new Image(), tank_base2 = new Image(), coins = new Image();
+  var interval, user, listener, interval2, b = [], s = [], ai = [], l1 = 0, l2 = 0, i = [], Game = new Game(), red_bullet = new Image(), ai_top = new Image(),  ai_base = new Image(), tank_base_png = new Image(), tank_top_png = new Image(),  start_screen = new Image(), main_menu = new Image(), tank_base2 = new Image(), coins = new Image();
   ai_base.src = "/starlite-tank-base.png";
   tank_top_png.src = "/starlite-tank-top.png";
   tank_base_png.src = "/starlite-tank-base.png";
@@ -152,10 +152,9 @@
   start_screen.src = "/starlite-increedible-tanks-start-screen.png";
   main_menu.src = "/starlite-increedible-tanks-main-menu.png";
   tank_base2.src = "/starlite-tank-base2.png";
+  red_bullet.src = "/red-bullet.png";
   coins.src = "/starlite-coin.png";
-  
   // initialize music and sounds  
-  
   /*
   var villageMusic = new sound("");
   var menuMusic = new sound("");
@@ -450,8 +449,8 @@
     }
 
     draw() {	
-      draw.fillStyle = "#000000";
-      draw.fillRect(this.x, this.y, 5, 5);
+      // draw the bullet
+      draw.drawImage(red_bullet, this.x, this.y);
     }
     
     update() {
