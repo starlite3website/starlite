@@ -257,9 +257,9 @@
               this.x -= 5;
             } else {
               if (this.y <= user.tank.y) {
-                this.instructions.left = true;
+                this.instructions = {left:true, right:false, up:false, down:false};
               } else {
-                this.instructions.right = true;
+                this.instructions = {right:true, left:false, up:false, down:false};
               }
               this.update = false;
             }
@@ -268,9 +268,9 @@
               this.x += 5;
             } else {
               if (this.y <= user.tank.y) {
-                this.instructions.left = true;
+                this.instructions = {left:true, right:false, up:false, down:false};
               } else {
-                this.instructions.right = true;
+                this.instructions = {right:true, left:false, up:false, down:false};
               }
               this.update = false;
             }
@@ -279,9 +279,9 @@
               this.y -= 5;
             } else {
               if (this.x <= user.tank.x) {
-                this.instructions.down = true;
+                this.instructions = {down:true, up:false, left:false, right:false};
               } else {
-                this.instructions.up = true;
+                this.instructions = {up:true, down:false, left:false, right:false};
               }
               this.update = false;
             }
@@ -290,9 +290,9 @@
               this.y += 5;
             } else {
               if (this.x <= user.tank.x) {
-                this.instructions.down = true;
+                this.instructions = {down:true, up:false, right:false, left:false};
               } else {
-                this.instructions.up = true;
+                this.instructions = {up:true, down:false, right:false, left:false};
               }
               this.update = false;
             }
