@@ -2632,7 +2632,7 @@
   function createAi(x, y, m, t, team) {
     if (m) {
       Game.foes++; // add Eval Tank to Game to detect victory when all destroyed!
-      ai.push(new Ai())); // add Eval Tank to array
+      ai.push(new Ai()); // add Eval Tank to array
       ai[ai.length-1].id = ai.length-1;
       ai[ai.length-1].x = x;
       ai[ai.length-1].y = y;
