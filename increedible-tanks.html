@@ -226,8 +226,7 @@
     
   }
     
-  class Ai {
-    
+  class Ai { 
     static control() {
       this.health = 200;
       this.x = 0;
@@ -2083,7 +2082,7 @@
   function defeatHelper(event) {
     if (event.keyCode == 13) {
       defeatSupport = true;
-      user.tank = new Object(Tank);
+      user.tank = new Tank();
       window.clearInterval(interval2);
       document.removeEventListener("keydown", defeatHelper);
       level(Game.level, null, true);
@@ -2127,7 +2126,7 @@
   function victoryHelper(event) {
     if (event.keyCode == 13) {
       victorySupport = true;
-      user.tank = new Object(Tank);
+      user.tank = new Tank();
       window.clearInterval(interval2);
       document.removeEventListener("keydown", victoryHelper);
       if (Game.level == 12) {
@@ -2633,7 +2632,7 @@
   function createAi(x, y, m, t, team) {
     if (m) {
       Game.foes++; // add Eval Tank to Game to detect victory when all destroyed!
-      ai.push(new Object(Ai)); // add Eval Tank to array
+      ai.push(new Ai())); // add Eval Tank to array
       ai[ai.length-1].id = ai.length-1;
       ai[ai.length-1].x = x;
       ai[ai.length-1].y = y;
