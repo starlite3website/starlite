@@ -229,8 +229,6 @@
   class Ai { 
     control() {
       this.health = 200;
-      this.x = 0;
-      this.y = 0;
       this.Scounter = 0;
       this.Mcounter = 0;
       this.inactive = false;
@@ -1423,7 +1421,6 @@
           user.tank.y = l*50;
         }
         if (p[q] == "A") {
-          console.log(q, l);
           createAi(q*50, l*50,m, 3, 3);
         }
       }
