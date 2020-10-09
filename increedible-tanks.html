@@ -233,9 +233,6 @@
       this.Mcounter = 0;
       this.inactive = false;
       this.update = true;
-      //i.push(window.setInterval(this.draw, 1));
-      //i.push(window.setInterval(this.move, 500));
-      //i.push(window.setInterval(this.check, 10)); // shot and ai check if hit interval
     }
     draw() {
       if (this.inactive != true) {
@@ -259,6 +256,7 @@
             if (checker(this.x - 5, this.y) != false) {
               this.x -= 5;
             } else {
+              console.log(1);
               if (this.y <= user.tank.y) {
                 this.instructions.right = true;
               } else {
@@ -270,6 +268,7 @@
             if (checker(this.x + 5, this.y) != false) {
               this.x += 5;
             } else {
+              console.log(2);
               if (this.y <= user.tank.y) {
                 this.instructions.right = true;
               } else {
@@ -281,6 +280,7 @@
             if (checker(this.x, this.y - 5) != false) {
               this.y -= 5;
             } else {
+              console.log(3);
               if (this.x <= user.tank.x) {
                 this.instructions.down = true;
               } else {
@@ -292,6 +292,7 @@
             if (checker(this.x, this.y + 5) != false) {
               this.y += 5;
             } else {
+              console.log(4);
               if (this.x <= user.tank.x) {
                 this.instructions.down = true;
               } else {
