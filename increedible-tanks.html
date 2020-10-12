@@ -1188,8 +1188,8 @@
     // if touching Eval Tank then return " i cant move"
     var l = 0;
     while (l < ai.length) {
-      if ((x + 40 >= ai[l].x && x + 40 <= ai[l].x + 40) || (x >= ai[l].x && x <= ai[l].x + 40)) {
-        if ((y + 40 >= ai[l].y && y + 40 <= ai[l].y + 40) || (y >= ai[l].y && y <= ai[l].y + 40)) {
+      if ((x + 40 > ai[l].x && x + 40 < ai[l].x + 40) || (x > ai[l].x && x < ai[l].x + 40)) {
+        if ((y + 40 > ai[l].y && y + 40 < ai[l].y + 40) || (y > ai[l].y && y < ai[l].y + 40)) {
           if ((x == ai[l].x-5 || x == ai[l].x+5) || (y == ai[l].y-5 || y == ai[l].y+5)) {
           } else {
             return false;
