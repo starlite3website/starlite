@@ -144,7 +144,7 @@
       };
     xhr.send();
   };
-  var interval, user, listener, interval2, b = [], s = [], ai = [], l1 = 0, l2 = 0, i = [], Game = new Game(), red_bullet = new Image(), ai_top = new Image(),  ai_base = new Image(), tank_base_png = new Image(), tank_top_png = new Image(),  start_screen = new Image(), main_menu = new Image(), tank_base2 = new Image(), coins = new Image();
+  var interval, user, listener, interval2, b = [], s = [], ai = [], l1 = 0, l2 = 0, i = [], Game = new Game(), button = new Image(), gameplay1 = new Image(), red_bullet = new Image(), ai_top = new Image(),  ai_base = new Image(), tank_base_png = new Image(), tank_top_png = new Image(),  start_screen = new Image(), main_menu = new Image(), tank_base2 = new Image(), coins = new Image();
   ai_base.src = "/starlite-tank-base.png";
   tank_top_png.src = "/starlite-tank-top.png";
   tank_base_png.src = "/starlite-tank-base.png";
@@ -154,6 +154,8 @@
   tank_base2.src = "/starlite-tank-base2.png";
   red_bullet.src = "/red-bullet.png";
   coins.src = "/starlite-coin.png";
+  button.src = "/button.png";
+  gameplay1.src = "/gameplay1.png";
   // initialize music and sounds  
   /*
   var villageMusic = new sound("");
@@ -1393,22 +1395,13 @@
   tank_tracks.load();
   tank_tracks.volume = 0.4;
   function startScreen() {
-    // initialize font
-    draw.font = "20px starfont";
-    draw.color = "#ffffff";
-    draw.fillText("", 0, 0);
-    a("Loading Game...", "black");
-    draw.drawImage(start_screen, 0, 0);
-    wall(0, 3);
-    wall(0, 4);
-    wall(0, 5);
-    wall(0, 6);
-    strong(1, 6);
-    weak(1, 4);
-    wall(2, 4);
-    strong(2, 5);
-    strong(2, 3);
-    canvas.addEventListener("click", loading, false);
+    draw.drawImage(gameplay1, 0, 0);
+    draw.drawImage(button, 100, 300);
+    draw.font="30px starfont";
+    draw.fillText("Increedible", 50, 20);
+    draw.fillText("Tanks", 250, 60);
+    draw.fillStyle="#000000";
+    draw.fillText("Play", 200, 320);
   } // startScreen
   function alert_startup() {
     alertConsole.style.visibility = "hidden";
