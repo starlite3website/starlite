@@ -259,6 +259,11 @@
     move() {
       if (this.Mcounter==10) {
         if (this.inactive != true) {
+          var xdistance = user.tank.x-this.x;
+          var ydistance = user.tank.y-this.y;
+          if (xdistance < 300 || ydistance < 300) {
+            this.instructions.fire = true;
+          }
           if (this.update) {
             this.instructions = this.moveCalc();
           } else {
