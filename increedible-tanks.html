@@ -232,9 +232,19 @@
       this.Mcounter = 0;
       this.inactive = false;
       this.update = true;
+      this.leftright=false;
     }
     draw() {
       if (this.inactive != true) {
+        if (this.leftright == true) {
+          draw.translate(this.x + 20, this.y + 20)
+          draw.rotate(90 * Math.PI / 180);
+          draw.drawImage(tank_base_png, this.x, this.y);
+          draw.rotate(-90 * Math.PI / 180);
+          draw.translate((-this.x - 20), (-this.y - 20));
+        } else {
+          draw.drawImage(tank_base_png, this.x, this.y);
+        }
         draw.drawImage(ai_base, this.x, this.y);
         draw.translate(this.x + 20, this.y + 20);
         draw.rotate(this.rotation * Math.PI / 180);
@@ -258,6 +268,7 @@
           if (this.instructions.up == true) {
             if (checker(this.x - 5, this.y) != false) {
               this.x -= 5;
+              this.leftright=true;
             } else {
               if (this.y <= user.tank.y) {
                 this.instructions = {left:false, right:true, up:false, down:false};
@@ -269,6 +280,7 @@
           } else if (this.instructions.down == true) {
             if (checker(this.x + 5, this.y) != false) {
               this.x += 5;
+              this.leftright=true;
             } else {
               if (this.y <= user.tank.y) {
                 this.instructions = {left:false, right:true, up:false, down:false};
@@ -280,6 +292,7 @@
           } else if (this.instructions.left == true) {
             if (checker(this.x, this.y - 5) != false) {
               this.y -= 5;
+              this.leftright=false;
             } else {
               if (this.x <= user.tank.x) {
                 this.instructions = {down:true, up:false, left:false, right:false};
@@ -291,6 +304,7 @@
           } else if (this.instructions.right == true) {
             if (checker(this.x, this.y + 5) != false) {
               this.y += 5;
+              this.leftright=false;
             } else {
               if (this.x <= user.tank.x) {
                 this.instructions = {down:true, up:false, right:false, left:false};
