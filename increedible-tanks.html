@@ -1189,7 +1189,6 @@
     if ((x + 40 >= user.tank.x && x + 40 <= user.tank.x + 40) || (x >= user.tank.x && x <= user.tank.x + 40)) {
       if ((y + 40 >= user.tank.y && y + 40 <= user.tank.y + 40) || (y >= user.tank.y && y <= user.tank.y + 40)) {
         if ((user.tank.x-user.tank.speed == x || user.tank.x+user.tank.speed == x || user.tank.x == x) && (user.tank.y+user.tank.speed == y || user.tank.y-user.tank.speed == y || user.tank.y == y)) {
-          console.log("id: tank");
         } else {
           return false;
         }
@@ -1201,7 +1200,6 @@
       if ((x + 40 >= ai[l].x && x + 40 <= ai[l].x + 40) || (x >= ai[l].x && x <= ai[l].x + 40)) {
         if ((y + 40 >= ai[l].y && y + 40 <= ai[l].y + 40) || (y >= ai[l].y && y <= ai[l].y + 40)) {
           if ((x == ai[l].x-5 || x == ai[l].x+5 || ai[l].x == x) && (y == ai[l].y-5 || y == ai[l].y+5 || ai[l].y == y)) {
-            console.log("id: ai");
           } else {
             return false;
           }
