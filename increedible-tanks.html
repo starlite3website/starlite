@@ -1188,7 +1188,7 @@
     // if touching user tank then return "i cant move"
     if ((x + 40 >= user.tank.x && x + 40 <= user.tank.x + 40) || (x >= user.tank.x && x <= user.tank.x + 40)) {
       if ((y + 40 >= user.tank.y && y + 40 <= user.tank.y + 40) || (y >= user.tank.y && y <= user.tank.y + 40)) {
-        if ((user.tank.x-user.tank.speed == x || user.tank.x+user.tank.speed == x) && (user.tank.y+user.tank.speed == y || user.tank.y-user.tank.speed == y)) {
+        if ((user.tank.x-user.tank.speed == x || user.tank.x+user.tank.speed == x || user.tank.x == x) && (user.tank.y+user.tank.speed == y || user.tank.y-user.tank.speed == y || user.tank.y == y)) {
         } else {
           return false;
         }
