@@ -259,15 +259,16 @@
     move() {
       if (this.Mcounter==10) {
         if (this.inactive != true) {
-          var xdistance = user.tank.x-this.x;
-          var ydistance = user.tank.y-this.y;
-          if (xdistance < 300 || ydistance < 300) {
-            this.instructions.fire = true;
-          }
           if (this.update) {
             this.instructions = this.moveCalc();
           } else {
             this.update = true;
+          }
+          var xdistance = user.tank.x-this.x;
+          var ydistance = user.tank.y-this.y;
+          if (xdistance < 300 || ydistance < 300) {
+            if (!this.instructions) this.instructions = {};
+            this.instructions.fire = true;
           }
           if (this.instructions.up == true) {
             if (checker(this.x - 5, this.y) != false) {
