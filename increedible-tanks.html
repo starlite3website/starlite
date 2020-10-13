@@ -417,6 +417,9 @@
       if (300 > Math.sqrt(this.xdistance * this.xdistance + this.ydistance * this.ydistance)) {
         var fire = true;
       }
+      if (this.xdistance < 300 || this.ydistance < 300) {
+        var fire = true;
+      }
       if (Math.abs(this.ydistance) > Math.abs(this.xdistance)) {
         if (this.ydistance > 0) {
           return { up: false, down: false, left: false, right: true, fire: fire};
