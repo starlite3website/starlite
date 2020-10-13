@@ -1397,11 +1397,12 @@
   function startScreen() {
     draw.drawImage(gameplay1, 0, 0);
     draw.drawImage(button, 100, 300);
+    draw.font="60px starfont";
+    draw.fillText("Increedible", 80, 860);
+    draw.fillText("Tanks", 250, 120);
     draw.font="30px starfont";
-    draw.fillText("Increedible", 50, 20);
-    draw.fillText("Tanks", 250, 60);
     draw.fillStyle="#000000";
-    draw.fillText("Play", 200, 320);
+    draw.fillText("Play", 220, 370);
   } // startScreen
   function alert_startup() {
     alertConsole.style.visibility = "hidden";
