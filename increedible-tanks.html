@@ -82,8 +82,8 @@
       <strong>Canvas is not supported.</strong> Try using a diffrent browser, If that does not work, please restart your device or use a diffrent device. </canvas>
     <iframe src="/chat" width="500" height="500"></iframe>
     <div id="play">
-      <h5 id="playText"> Click Anywhere To Start </h5>
-    </div>
+      <h5 id="playText DEACTIVE"></h5>
+    </div> 
     <div id="alertConsole">
       <h5 id="consoleText">
       </h5>
@@ -1391,6 +1391,8 @@
   var consoleText = document.getElementById("consoleText"); // text control for console
   var draw = canvas.getContext("2d"); // getting the canvas to be able to draw
   draw.font = "15px starfont";
+  draw.fillText("abcdefghijklmnopqrstuvwxyz", 0, 0); // init font
+  draw.clearRect(0,0,500,500);
   var tank_tracks = new Audio("/tank-tracks.mp3");
   tank_tracks.load();
   tank_tracks.volume = 0.4;
@@ -1399,12 +1401,27 @@
     draw.drawImage(button, 100, 300);
     draw.font="40px starfont";
     draw.fillStyle="#ffffff";
-    draw.fillText("Increedible", 80, 60);
-    draw.fillText("Tanks", 150, 120);
+    draw.fillText("Increedible", 100, 60);
+    draw.fillText("Tanks", 170, 120);
     draw.font="30px starfont";
     draw.fillStyle="#000000";
     draw.fillText("Play", 200, 370);
+    document.addEventListener('click', startScreenListener);
   } // startScreen
+  function startScreenListener(e) {
+    if (e.pageX || e.pageY) {
+      x = e.pageX;
+      y = e.pageY;
+    } else {
+      x = e.clientX + document.body.scrollLeft + document.documentElement.scrollLeft;
+      y = e.clientY + document.body.scrollTop + document.documentElement.scrollTop;
+    }
+    x -= canvas.offsetLeft;
+    y -= canvas.offsetTop;
+    if (x > 100 && x < 400 && y > 300 && y < 400) {
+      mainMenu();
+    }
+  }
   function alert_startup() {
     alertConsole.style.visibility = "hidden";
   } // alert Setup
@@ -2261,6 +2278,7 @@
     });
   }
   function mainMenu() {
+    document.removeEventListener("click", startScreenListener);
     document.removeEventListener("keydown", multiplayer1);
     document.removeEventListener("click", multiplayer2);
     user.tank = new Tank();
