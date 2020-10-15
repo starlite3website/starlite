@@ -97,7 +97,7 @@
   </style>
   <iframe src="" id="database" visibility="hidden" display="hidden" width="0" height="0"></iframe>
   <script>
-  var embed = document.getElementById("database");
+  /*var embed = document.getElementById("database");
   var o = [];
   function update(range, value) {
     embed.src="https://script.google.com/macros/s/AKfycbx2j30BqJJTK0igYO2QDtbVvBSwS7JK4BjZ5qeSUdNtONWVApBn/exec?type=2&range="+range+"&value="+value;
@@ -143,7 +143,24 @@
         }
       };
     xhr.send();
-  };
+  };*/
+  var embed = document.getElementById("database");
+  function get(username) {
+    var xhr = new XMLHttpRequest();
+    var url = 'https://starlitedatabase.cs641311.repl.co/?task=get&username='+username;
+    xhr.open('GET', url, true);
+    xhr.responseType='json';
+    xhr.onload=function() {
+      if (xhr.status===200) {
+        return xhr.response[0];
+      } else {
+        console.error('DatabaseError: Starlite Database returned a unknown status request.');
+      }
+    }
+  }
+  function update(username, key, value) {
+    embed.src="https://starlitedatabase.cs641311.repl.co/?task=update&username="+username+"&key="+key+"&value="+value;
+  }
   var interval, user, listener, interval2, b = [], s = [], ai = [], l1 = 0, l2 = 0, i = [], Game = new Game(), button = new Image(), gameplay1 = new Image(), red_bullet = new Image(), ai_top = new Image(),  ai_base = new Image(), tank_base_png = new Image(), tank_top_png = new Image(),  start_screen = new Image(), main_menu = new Image(), tank_base2 = new Image(), coins = new Image();
   ai_base.src = "/starlite-tank-base.png";
   tank_top_png.src = "/starlite-tank-top.png";
