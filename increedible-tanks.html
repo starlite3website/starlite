@@ -1459,7 +1459,6 @@
   var userData;
   function loading() {
     battleMusic.play();
-    
     if (sessionStorage.username == undefined) {
       var t = confirm("Do you want to play as Guest?");
       if (t) {
@@ -1482,7 +1481,6 @@
     user.tank.health = userData.health;
     draw.clearRect(0, 0, 500, 500);
     a("Loading...");
-    playText.style.visibility = "hidden";
     setTimeout(mainMenu(), 5000);
     canvas.removeEventListener("click", loading);
   }
