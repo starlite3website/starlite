@@ -152,7 +152,7 @@
     xhr.responseType='json';
     xhr.onload=function() {
       if (xhr.status===200) {
-        return xhr.response[0];
+        userData = JSON.parse(xhr.response[0]);
       } else {
         console.error('DatabaseError: Starlite Database returned a unknown status request.');
       }
