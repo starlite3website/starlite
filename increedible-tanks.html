@@ -1436,7 +1436,7 @@
     x -= canvas.offsetLeft;
     y -= canvas.offsetTop;
     if (x > 100 && x < 400 && y > 300 && y < 400) {
-      mainMenu();
+      loading();
     }
   }
   function alert_startup() {
@@ -1456,34 +1456,20 @@
     alertConsole.classList.remove("console");
     alertConsole.style.visibility = "hidden";
   } // alert end
-  var gameData, userData;
-  get(2,1);
-  setTimeout(function(){gameData=o[2][0][1];},2000);
+  var userData;
   function loading() {
     battleMusic.play();
-    if (sessionStorage.username == undefined || JSON.parse(gameData) == null) {
-      if (JSON.parse(gameData) == null) {
-        alert('Starlite uses a free database, which mean that about 2/24 hours a day we are down. You can choose to play as Guest, but nothing will be saved...');
-      }
+    
+    if (sessionStorage.username == undefined) {
       var t = confirm("Do you want to play as Guest?");
       if (t) {
-        gameData = JSON.stringify([{username:"Guest", health:200, coins:0, level:1}]);
+        userData = JSON.stringify([{username:"Guest", health:200, coins:0, level:1}]);
         sessionStorage.username = "Guest";
       } else {
         startScreen();
       }
-    }
-    
-    var l = 0;
-    while (l<JSON.parse(gameData).length) {
-      if (JSON.parse(gameData)[l].username==sessionStorage.username) {
-        userData = JSON.parse(gameData)[l];
-      }
-      l++;
-    }
-    if (userData == undefined) {
-      update("B4", JSON.stringify(JSON.parse(gameData).concat({username:sessionStorage.username,coins:0,health:200,level:1})));
-      userData = {username:sessionStorage.username,coins:0,health:200,level:1};
+    } else {
+      userData = get(sessionStorage.username);
     }
     if (sessionStorage.level == undefined) {   
       user = {
@@ -2194,16 +2180,7 @@
     draw.fillText("Coins Gained: "+Game.coins,140,200);
     userData.coins += Game.coins;
     if (userData.level == Game.level) userData.level++;
-    var l = 0;
-    while (l<JSON.parse(gameData).length) {
-      if (JSON.parse(gameData)[l].username==sessionStorage.username) {
-        var t = JSON.parse(gameData);
-        t[l].coins = userData.coins;
-        t[l].level = userData.level;
-        update("B4", JSON.stringify(t));
-      }
-      l++;
-    }
+    update(sessionStorage.username, 'playerdata', JSON.stringify(userData));
     draw.fillText("Total Coins: "+userData.coins,140,230);
     document.addEventListener("keydown", victoryHelper);
     setTimeout(function() {
@@ -2282,9 +2259,9 @@
                   var t = JSON.parse(gameData);
                   t[l].health += 20;
                   t[l].coins -= 500;
-                  update("B4", JSON.stringify(t));
+                  //update("B4", JSON.stringify(t));
                   a("Health Updated");
-                  userData.health += 20;
+                  //userData.health += 20;
                 }
                 l++;
               }
