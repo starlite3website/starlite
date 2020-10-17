@@ -1473,8 +1473,7 @@
       }
     } else {
       userData = get(sessionStorage.username);
-    }
-    user.tank.health = userData.health;
+    } 
     draw.clearRect(0, 0, 500, 500);
     canvas.removeEventListener("click", loading);
     setTimeout(function() {
@@ -1484,6 +1483,7 @@
         level: userData.level,
         coins: userData.coins,
       }
+      user.tank.health = userData.health;
       mainMenu();
     }, 2000);
   }
