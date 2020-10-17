@@ -155,7 +155,7 @@
   function get(username) {
     var channel = pusher.subscribe('database-return');
     channel.bind('get', function(response) {
-      data = response.data[0];
+      data = JSON.parse(response.data[0].playerdata);
       pusher.unsubscribe('database-return');
     });
     database.src='https://starlitedatabase.cs641311.repl.co/?task=get&username='+username;
@@ -1418,6 +1418,17 @@
   tank_tracks.load();
   tank_tracks.volume = 0.4;
   function startScreen() {
+    if (sessionStorage.username == undefined) {
+      var t = confirm("Do you want to play as Guest?");
+      if (t) {
+        userData = {username:"Guest", health:200, coins:0, level:1};
+        sessionStorage.username = "Guest";
+      } else {
+        startScreen();
+      }
+    } else {
+      userData = get(sessionStorage.username);
+    }
     draw.drawImage(gameplay1, 0, 0);
     draw.drawImage(button, 100, 300);
     draw.font="40px starfont";
@@ -1463,17 +1474,6 @@
   var userData;
   function loading() {
     battleMusic.play();
-    if (sessionStorage.username == undefined) {
-      var t = confirm("Do you want to play as Guest?");
-      if (t) {
-        userData = {username:"Guest", health:200, coins:0, level:1};
-        sessionStorage.username = "Guest";
-      } else {
-        startScreen();
-      }
-    } else {
-      userData = get(sessionStorage.username);
-    }
     if (sessionStorage.level == undefined) {   
       user = {
         tank: new Tank(),
@@ -1484,7 +1484,6 @@
     }
     user.tank.health = userData.health;
     draw.clearRect(0, 0, 500, 500);
-    //a("Loading...");
     canvas.removeEventListener("click", loading);
     mainMenu();
   }
