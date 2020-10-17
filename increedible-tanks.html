@@ -96,9 +96,15 @@
     }
   </style>
   <iframe src="" id="database" visibility="hidden" display="hidden" width="0" height="0"></iframe>
+  <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
   <script>
   var embed = document.getElementById("database");
-  var o = [];
+  var pusher = new Pusher('127a8a2ca4a3676b2df9', {
+    cluster: 'us2',
+    authEndpoint: 'https://DimgreyZigzagProjector--five-nine.repl.co/pusher/auth',
+  });
+  
+  /*var o = [];
   function update(range, value) {
     embed.src="https://script.google.com/macros/s/AKfycbx2j30BqJJTK0igYO2QDtbVvBSwS7JK4BjZ5qeSUdNtONWVApBn/exec?type=2&range="+range+"&value="+value;
   }
@@ -143,24 +149,22 @@
         }
       };
     xhr.send();
-  };
-  /*var embed = document.getElementById("database");
+  };*/
+  var database = document.getElementById("database");
+  var data;
   function get(username) {
-    var xhr = new XMLHttpRequest();
-    var url = 'https://starlitedatabase.cs641311.repl.co/?task=get&username='+username;
-    xhr.open('GET', url, true);
-    xhr.responseType='json';
-    xhr.onload=function() {
-      if (xhr.status===200) {
-        userData = JSON.parse(xhr.response[0]);
-      } else {
-        console.error('DatabaseError: Starlite Database returned a unknown status request.');
-      }
-    }
+    var channel = pusher.subscribe('database-return');
+    channel.bind('get', function(response) {
+      data = response.data;
+      pusher.unsubscribe('database-return');
+    });
+    database.src='https://starlitedatabase.cs641311.repl.co/?task=get&username='+username;
+    return data;
+    console.log(data); // TESTING
   }
   function update(username, key, value) {
-    embed.src="https://starlitedatabase.cs641311.repl.co/?task=update&username="+username+"&key="+key+"&value="+value;
-  }*/
+    database.src="https://starlitedatabase.cs641311.repl.co/?task=update&username="+username+"&key="+key+"&value="+value;
+  }
   var interval, user, listener, interval2, b = [], s = [], ai = [], l1 = 0, l2 = 0, i = [], Game = new Game(), button = new Image(), gameplay1 = new Image(), red_bullet = new Image(), ai_top = new Image(),  ai_base = new Image(), tank_base_png = new Image(), tank_top_png = new Image(),  start_screen = new Image(), main_menu = new Image(), tank_base2 = new Image(), coins = new Image();
   ai_base.src = "/starlite-tank-base.png";
   tank_top_png.src = "/starlite-tank-top.png";
@@ -1417,8 +1421,8 @@
     draw.drawImage(gameplay1, 0, 0);
     draw.drawImage(button, 100, 300);
     draw.font="40px starfont";
-    draw.fillStyle="#ffffff";
-    draw.fillText("Increedible", 100, 60);
+    draw.fillStyle="#FFD700";
+    draw.fillText("Increedible", 110, 60);
     draw.fillText("Tanks", 170, 120);
     draw.font="30px starfont";
     draw.fillStyle="#000000";
@@ -1468,9 +1472,8 @@
         startScreen();
       }
     } else {
-      //userData = get(sessionStorage.username);
+      userData = get(sessionStorage.username);
     }
-    userData = JSON.stringify({username:'',health:200, coins:0, level:1});
     if (sessionStorage.level == undefined) {   
       user = {
         tank: new Tank(),
@@ -1481,9 +1484,9 @@
     }
     user.tank.health = userData.health;
     draw.clearRect(0, 0, 500, 500);
-    a("Loading...");
-    setTimeout(mainMenu(), 5000);
+    //a("Loading...");
     canvas.removeEventListener("click", loading);
+    mainMenu();
   }
   function levelReader(array, m) {
     for (l = 0; l < array.length; l++) {
