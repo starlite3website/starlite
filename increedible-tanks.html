@@ -1418,17 +1418,6 @@
   tank_tracks.load();
   tank_tracks.volume = 0.4;
   function startScreen() {
-    if (sessionStorage.username == undefined) {
-      var t = confirm("Do you want to play as Guest?");
-      if (t) {
-        userData = {username:"Guest", health:200, coins:0, level:1};
-        sessionStorage.username = "Guest";
-      } else {
-        startScreen();
-      }
-    } else {
-      userData = get(sessionStorage.username);
-    }
     draw.drawImage(gameplay1, 0, 0);
     draw.drawImage(button, 100, 300);
     draw.font="40px starfont";
@@ -1474,18 +1463,29 @@
   var userData;
   function loading() {
     battleMusic.play();
-    if (sessionStorage.level == undefined) {   
+    if (sessionStorage.username == undefined) {
+      var t = confirm("Do you want to play as Guest?");
+      if (t) {
+        userData = {username:"Guest", health:200, coins:0, level:1};
+        sessionStorage.username = "Guest";
+      } else {
+        startScreen();
+      }
+    } else {
+      userData = get(sessionStorage.username);
+    }
+    user.tank.health = userData.health;
+    draw.clearRect(0, 0, 500, 500);
+    canvas.removeEventListener("click", loading);
+    setTimeout(function() {
       user = {
         tank: new Tank(),
         username: sessionStorage.username,
         level: userData.level,
         coins: userData.coins,
       }
-    }
-    user.tank.health = userData.health;
-    draw.clearRect(0, 0, 500, 500);
-    canvas.removeEventListener("click", loading);
-    mainMenu();
+      mainMenu();
+    }, 2000);
   }
   function levelReader(array, m) {
     for (l = 0; l < array.length; l++) {
