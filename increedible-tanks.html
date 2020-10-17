@@ -155,12 +155,10 @@
   function get(username) {
     var channel = pusher.subscribe('database-return');
     channel.bind('get', function(response) {
-      data = JSON.parse(response.data[0].playerdata);
+      userData = JSON.parse(response.data[0].playerdata);
       pusher.unsubscribe('database-return');
     });
     database.src='https://starlitedatabase.cs641311.repl.co/?task=get&username='+username;
-    return data;
-    console.log(data); // TESTING
   }
   function update(username, key, value) {
     database.src="https://starlitedatabase.cs641311.repl.co/?task=update&username="+username+"&key="+key+"&value="+value;
