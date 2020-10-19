@@ -2176,7 +2176,9 @@
     draw.fillText("Coins Gained: "+Game.coins,140,200);
     userData.coins += Game.coins;
     if (userData.level == Game.level) userData.level++;
-    update(user.username, 'playerdata', JSON.stringify(userData));
+    var t = new Object();
+    t["increedible-tanks"] = userData;
+    update(user.username, 'playerdata', JSON.stringify(t));
     draw.fillText("Total Coins: "+userData.coins,140,230);
     document.addEventListener("keydown", victoryHelper);
     setTimeout(function() {
