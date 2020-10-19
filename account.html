@@ -4,53 +4,22 @@
 </head>
 <iframe src="" id="database" visibility="hidden" display="hidden" width="0" height="0"></iframe>
 <script>
-  var embed = document.getElementById("database");
-  var o = [];
-  function update(range, value) {
-    embed.src="https://script.google.com/macros/s/AKfycbx2j30BqJJTK0igYO2QDtbVvBSwS7JK4BjZ5qeSUdNtONWVApBn/exec?type=2&range="+range+"&value="+value;
+  var database = document.getElementById("database");
+  var data;
+  function get(username) {
+    var channel = pusher.subscribe('database-return');
+    channel.bind('get', function(response) {
+      data = response;
+      pusher.unsubscribe('database-return');
+    });
+    database.src='https://starlitedatabase.cs641311.repl.co/?task=get&username='+username;
   }
-  function get(one, two) {
-    getUrlJSON("https://spreadsheets.google.com/feeds/list/14CpLkPBcEv44RQwlRohjwgQ7GyVbYciaC7mgKNguuSY/1/public/basic?alt=json");
+  function update(username, key, value) {
+    database.src="https://starlitedatabase.cs641311.repl.co/?task=update&username="+username+"&key="+key+"&value="+value;
   }
-  function getUrlJSON(url) {
-    getJSON(url, after); 
+  function newAccount(username, password) {
+    database.src="https://starlitedatabase.cs641311.repl.co/?task=new&username="+username+"&password="+password;
   }
-  function after(err, data) {
-    if (err !== null) {
-      console.log('Something went wrong: ' + err);
-    } else {
-    var l = 0;
-      while (l<data.feed.entry.length) {
-        if (data.feed.entry[l].content.$t != "") {
-          o.push(data.feed.entry[l].content.$t.split(", ")); 
-        }
-          l++;
-        }
-        l = 0;
-        while (l<o.length) {
-          var q = 0;
-            while (q<o[l].length) {
-              o[l][q] = o[l][q].split(": ");
-              q++;
-            }
-          l++;
-        }
-      }
-    }
-    var getJSON = function(url, callback) {
-      var xhr = new XMLHttpRequest();
-      xhr.open('GET', url, true);
-      xhr.responseType = 'json';
-      xhr.onload = function() {
-        var status = xhr.status;
-        if (status === 200) {
-          callback(null, xhr.response);
-        } else {
-          callback(status, xhr.response);
-        }
-      };
-    xhr.send();
-  };
 </script>
 <div id="form">
   <img src="/starlite-logo.png"/>
@@ -69,17 +38,35 @@
   </div>
   <button id="submit">Submit</button>
   <button id="newaccount">New Account</button>
-  <script>
-      var username,password;
-      get(0,1);
-      setTimeout(function(){username=o[0][0][1];},2000);
-      get(1,1);
-      setTimeout(function(){password=o[1][0][1]},2000);
+  <script> 
+    var submit=document.getElementById("submit");
+    var newaccount=document.getElementById("newaccount");
+    submit.addEventListener("click", function() {
       var usernameInput=document.getElementById("usernameForm");
       var passwordInput=document.getElementById("passwordForm");
-      var submit=document.getElementById("submit");
-      var newaccount=document.getElementById("newaccount");
-      submit.addEventListener("click",function(){if(isCorrect(usernameInput.value,passwordInput.value)){sessionStorage.setItem("username",usernameInput.value);sessionStorage.setItem("password",passwordInput.value);window.location.href="/dashboard"}});newaccount.addEventListener("click",function(){var usernameInput=document.getElementById("usernameForm");if(JSON.parse(username)[JSON.parse(username).indexOf(usernameInput.value)]!=usernameInput.value){if(JSON.parse(password)[JSON.parse(password).indexOf(passwordInput.value)]!=passwordInput.value){update("B2",JSON.stringify(JSON.parse(username).concat([usernameInput.value])));username=JSON.stringify(JSON.parse(username).concat([usernameInput.value]));setTimeout(function(){update("B3",JSON.stringify(JSON.parse(password).concat([passwordInput.value])));password=JSON.stringify(JSON.parse(password).concat([passwordInput.value]));},2000);alert("New Account Created: "+usernameInput.value)}else{alert("Password Taken")}}else{alert("Account Taken")}});function isCorrect(u,p){if(JSON.parse(username)[JSON.parse(username).indexOf(u)]==u){if(JSON.parse(password)[JSON.parse(password).indexOf(p)]==p){return!0}}return!1}</script>
+      get(usernameInput.value);
+      setTimeout(function() {
+        if (data[0].password == passwordInput.value) {
+          sessionStorage.setItem("username",usernameInput.value);
+          window.location.href="/dashboard";
+        }
+      }, 2000);  
+    });
+    newaccount.addEventListener("click",function(){
+      var usernameInput=document.getElementById("usernameForm");
+      var passwordInput=document.getElementById("passwordForm");
+      get(usernameInput.value);
+      setTimeout(function() {
+        if (data[0] == []) {
+          alert("Account Taken :(");
+        } else {
+          newAccount(usernameInput.value, passwordInput.value);
+          sessionStorage.username = usernameInput.value;
+          window.location.href = "/dashboard";
+        }
+      }, 2000);
+    });
+  </script>
   <style>
       img{
         width:100px;
@@ -105,13 +92,11 @@
         margin-right:35%;
         margin-top:5%;
         border:1px solid black;
-        font-family:Courier;
         background-color: white;
       }
       h1,input{
         display:block;
         margin-bottom:10px;
-        font-family:Courier;
       }
       button{
         display:block;
@@ -120,7 +105,6 @@
         padding:12px;
         background-color:white;
         color:black;
-        font-family:Courier;
       }
       button:hover{
         transition-duration:1.5s;
