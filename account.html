@@ -5,6 +5,10 @@
 <iframe src="" id="database" visibility="hidden" display="hidden" width="0" height="0"></iframe>
 <script>
   var database = document.getElementById("database");
+  var pusher = new Pusher('127a8a2ca4a3676b2df9', {
+    cluster: 'us2',
+    authEndpoint: 'https://DimgreyZigzagProjector--five-nine.repl.co/pusher/auth',
+  });
   var data;
   function get(username) {
     var channel = pusher.subscribe('database-return');
