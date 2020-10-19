@@ -1460,6 +1460,7 @@
   } // alert end
   var userData;
   function loading() {
+    canvas.removeEventListener("click", startScreenListener);
     if (sessionStorage.username == undefined) {
       var t = confirm("Do you want to play as Guest?");
       if (t) {
@@ -1472,15 +1473,12 @@
       get(sessionStorage.username);
     } 
     draw.clearRect(0, 0, 500, 500);
-    canvas.removeEventListener("click", loading);
     setTimeout(function() {
       user = {
-        tank: new Tank(),
         username: sessionStorage.username,
         level: userData.level,
         coins: userData.coins,
       }
-      user.tank.health = userData.health;
       mainMenu();
     }, 2000);
   }
