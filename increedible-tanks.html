@@ -1469,7 +1469,7 @@
         startScreen();
       }
     } else {
-      userData = get(sessionStorage.username);
+      get(sessionStorage.username);
     } 
     draw.clearRect(0, 0, 500, 500);
     canvas.removeEventListener("click", loading);
