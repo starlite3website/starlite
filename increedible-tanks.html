@@ -778,7 +778,7 @@
       this.socket = new WebSocket("wss://connect.websocket.in/v3/"+id+"?apiKey=Li11jOrgHnvR3uXYwoiMrssO3HyOdT5Kme8a0ftuAtVfsJzASYcXf6Amdafo");
       this.socket.onopen = function() {
         a("Successful Joined Room!");
-        user.tank.id = sessionStorage.username;
+        user.tank.id = user.username;
         this.socket.send("user "+user.tank);
         user.tank.move = function(e) {
           e.preventDefault();
@@ -980,9 +980,9 @@
     draw.drawImage(floor, 450, 450);
       user.tank.draw();
       draw.fillStyle="#ffffff";
-      draw.fillRect(user.tank.x, user.tank.y + 60, sessionStorage.username.length * 15, 20);
+      draw.fillRect(user.tank.x, user.tank.y + 60, user.username.length * 15, 20);
       draw.font = "20px starfont";
-      draw.fillText(sessionStorage.username, user.tank.x + 5, user.tank.y + 65);
+      draw.fillText(user.username, user.tank.x + 5, user.tank.y + 65);
       while (p<this.level.weak.length) {
         this.level.weak[p].weak(this.level.weak[p].x, this.level.weak[p].y);
         p++;
@@ -997,7 +997,7 @@
         this.level.wall[p].wall(this.level.wall[p].x, this.level.wall[p].y);
         p++;
       }
-      this.socket.send("update "+JSON.stringify({x:user.tank.x, y:user.tank.y, s:s, id:sessionStorage.username}));
+      this.socket.send("update "+JSON.stringify({x:user.tank.x, y:user.tank.y, s:s, id:user.username}));
     }.bind(this);
   }
   class Tank {
@@ -1465,20 +1465,20 @@
       var t = confirm("Do you want to play as Guest?");
       if (t) {
         userData = {username:"Guest", health:200, coins:0, level:1};
-        sessionStorage.username = "Guest";
+        user = {};
+        user.username = "Guest";
       } else {
         startScreen();
       }
     } else {
+      user = {};
+      user.username = sessionStorage.username;
       get(sessionStorage.username);
     } 
     draw.clearRect(0, 0, 500, 500);
     setTimeout(function() {
-      user = {
-        username: sessionStorage.username,
-        level: userData.level,
-        coins: userData.coins,
-      }
+      user.level = userData.level;
+      user.coins = userData.coins;
       mainMenu();
     }, 2000);
   }
@@ -1624,7 +1624,7 @@
     }
     draw.font = "20px starfont";
     draw.fillStyle = "#FFDF00";
-    draw.fillText(sessionStorage.username, user.tank.x-sessionStorage.username.length/4*15+5, user.tank.y + 65);
+    draw.fillText(user.username, user.tank.x-user.username.length/4*15+5, user.tank.y + 65);
     // draw ai
     var l = 0;
     while (l < ai.length) {
@@ -2176,7 +2176,7 @@
     draw.fillText("Coins Gained: "+Game.coins,140,200);
     userData.coins += Game.coins;
     if (userData.level == Game.level) userData.level++;
-    update(sessionStorage.username, 'playerdata', JSON.stringify(userData));
+    update(user.username, 'playerdata', JSON.stringify(userData));
     draw.fillText("Total Coins: "+userData.coins,140,230);
     document.addEventListener("keydown", victoryHelper);
     setTimeout(function() {
@@ -2251,7 +2251,7 @@
               userData.coins -= 500;
               var l = 0;
               while (l<JSON.parse(gameData).length) {
-                if (JSON.parse(gameData)[l].username == sessionStorage.username) {
+                if (JSON.parse(gameData)[l].username == user.username) {
                   var t = JSON.parse(gameData);
                   t[l].health += 20;
                   t[l].coins -= 500;
