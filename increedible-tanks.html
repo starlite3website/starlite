@@ -1220,8 +1220,6 @@
     }
     window.clearInterval(user.tank.intervals[event.keyCode]);
     user.tank.helper[event.keyCode] = false;
-    tank_tracks.pause();
-    tank_tracks.load();
     user.tank.intervals[event.keyCode] = false;
   }
   function checker(x, y) {
@@ -1412,9 +1410,6 @@
   draw.font = "15px starfont";
   draw.fillText("abcdefghijklmnopqrstuvwxyz", 0, 0); // init font
   draw.clearRect(0,0,500,500);
-  var tank_tracks = new Audio("/tank-tracks.mp3");
-  tank_tracks.load();
-  tank_tracks.volume = 0.4;
   function startScreen() {
     draw.drawImage(gameplay1, 0, 0);
     draw.drawImage(button, 100, 300);
