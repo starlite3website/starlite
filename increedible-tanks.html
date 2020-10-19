@@ -1425,7 +1425,7 @@
     draw.font="30px starfont";
     draw.fillStyle="#000000";
     draw.fillText("Play", 200, 370);
-    document.addEventListener('click', startScreenListener);
+    canvas.addEventListener('click', startScreenListener);
   } // startScreen
   function startScreenListener(e) {
     if (e.pageX || e.pageY) {
