@@ -155,7 +155,7 @@
   function get(username) {
     var channel = pusher.subscribe('database-return');
     channel.bind('get', function(response) {
-      userData = JSON.parse(response.data[0].playerdata);
+      userData = JSON.parse(response.data[0].playerdata)["increedible-tanks"];
       pusher.unsubscribe('database-return');
     });
     database.src='https://starlitedatabase.cs641311.repl.co/?task=get&username='+username;
@@ -1460,7 +1460,6 @@
   } // alert end
   var userData;
   function loading() {
-    battleMusic.play();
     if (sessionStorage.username == undefined) {
       var t = confirm("Do you want to play as Guest?");
       if (t) {
