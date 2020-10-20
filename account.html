@@ -52,7 +52,7 @@
       var passwordInput=document.getElementById("passwordForm");
       get(usernameInput.value);
       setTimeout(function() {
-        if (data[0].password == passwordInput.value) {
+        if (data.password == passwordInput.value) {
           sessionStorage.setItem("username",usernameInput.value);
           window.location.href="/dashboard";
         }
@@ -63,7 +63,7 @@
       var passwordInput=document.getElementById("passwordForm");
       get(usernameInput.value);
       setTimeout(function() {
-        if (data[0] == []) {
+        if (data == []) {
           alert("Account Taken :(");
         } else {
           newAccount(usernameInput.value, passwordInput.value);
