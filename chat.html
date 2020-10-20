@@ -120,7 +120,7 @@
     cluster: 'us2',
     authEndpoint: 'https://DimgreyZigzagProjector--five-nine.repl.co/pusher/auth',
   });
-  function get(item) {
+  function list(item) {
     var channel = pusher.subscribe('database-return');
     channel.bind('get', function(response) {
       messages = JSON.parse(response.data[0].messages);
@@ -131,7 +131,7 @@
   function update(username, key, value) {
     database.src="https://starlitedatabase.cs641311.repl.co/?task=update&username="+username+"&key="+key+"&value="+value;
   }
-  get('messages');
+  list('messages');
   var d = [], e = [], interval, socket = new WebSocket('wss://connect.websocket.in/v3/1?apiKey=c37MW77TpY8GDiA4yfQPegQUtlFUJkK5d2i1Nrkuk87aCjfwtsxTxHPgKdLn');;
   window.setTimeout(function() {
     interval = window.setInterval(updateChat, 1000);
