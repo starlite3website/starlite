@@ -179,7 +179,7 @@
       } else {
         socket.send(JSON.stringify({message:document.getElementById("message").value,user:document.getElementById("from").value,send:sessionStorage.username,timestamps:new Date()}));
         update(sessionStorage.username, 'messages', JSON.stringify(messages.concat({message:document.getElementById("message").value,user:document.getElementById("from").value,send:sessionStorage.username,timestamps:new Date()})));
-        updateChat({message:document.getElementById("message").value,user:document.getElementById('from').value,send:sessionStorage.username,timestamps:new Data()});       
+        updateChat({message:document.getElementById("message").value,user:document.getElementById('from').value,send:sessionStorage.username,timestamps:new Date()});       
       }
       document.getElementById("message").value = "";
       document.getElementById("from").value = "";
