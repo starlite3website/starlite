@@ -1202,8 +1202,6 @@
     
   function tank_listener1(event) {
     if (event.keyCode == 87 || event.keyCode == 83 || event.keyCode == 68 || event.keyCode == 65) {
-      movementNoise.currentTime = 1;
-      movementNoise.play();
     }
     if (user.tank.helper[event.keyCode] != true) {
       user.tank.intervals[event.keyCode] = window.setInterval(function() {
@@ -1414,7 +1412,7 @@
     draw.drawImage(gameplay1, 0, 0);
     draw.drawImage(button, 100, 300);
     draw.font="40px starfont";
-    draw.fillStyle="#FF6600";
+    draw.fillStyle="#000000";
     draw.fillText("Increedible", 110, 60);
     draw.fillText("Tanks", 170, 120);
     draw.font="30px starfont";
