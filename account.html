@@ -14,7 +14,7 @@
   function get(username) {
     var channel = pusher.subscribe('database-return');
     channel.bind('get', function(response) {
-      data = response;
+      data = response.data[0];
       pusher.unsubscribe('database-return');
     });
     database.src='https://starlitedatabase.cs641311.repl.co/?task=get&username='+username;
