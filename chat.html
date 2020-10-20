@@ -154,7 +154,7 @@
       if (messages[l].send == sessionStorage.username || messages[l].user == sessionStorage.username || messages[l].user == "public" || sessionStorage.username == "admin") {
         var t = document.createElement("DIV");
         t.style = "margin-left:5%;margin-right:44%;margin-bottom:1%;margin-top:1%;padding:1%;border:1px solid black;word-wrap:break-word;width:50%;";
-        if (sessionStorage.username == JSON.parse(messages)[l].send || sessionStorage.username == "admin") {
+        if (sessionStorage.username == messages[l].send || sessionStorage.username == "admin") {
           var q = document.createElement("BUTTON");
           q.setAttribute("id", l);
           q.setAttribute("onclick", 't=messages;var index = this.id; if (index>-1) {t.splice(index,1)}; update(sessionStorage.username, "messages", t);');
