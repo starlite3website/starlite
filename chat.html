@@ -123,7 +123,7 @@
   function get(username) {
     var channel = pusher.subscribe('database-return');
     channel.bind('get', function(response) {
-      messages = JSON.parse(response.data[0].playerdata)["increedible-tanks"];
+      messages = JSON.parse(response.data[0].playerdata)["messages"];
       pusher.unsubscribe('database-return');
     });
     database.src='https://starlitedatabase.cs641311.repl.co/?task=get&username='+username;
