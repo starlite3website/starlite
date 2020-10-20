@@ -151,11 +151,11 @@
         if (sessionStorage.username == JSON.parse(messages)[l].send || sessionStorage.username == "admin") {
           var q = document.createElement("BUTTON");
           q.setAttribute("id", l);
-          q.setAttribute("onclick", 't=JSON.parse(messages);var index = this.id; if (index>-1) {t.splice(index,1)};update("B5", JSON.stringify(t));');
+          q.setAttribute("onclick", 't=messages;var index = this.id; if (index>-1) {t.splice(index,1)}; update(sessionStorage.username, "messages", t);');
           q.innerHTML = "Delete";
-          t.innerHTML = q.outerHTML+" "+messages[l].send+": <div><b>"+messages[l].message)+"</b></div>to:"+messages[l].user+" at: "+messages[l].timestamps;
+          t.innerHTML = q.outerHTML+" "+messages[l].send+": <div><b>"+messages[l].message+"</b></div>to:"+messages[l].user+" at: "+messages[l].timestamps;
         } else {
-          t.innerHTML = JSON.parse(messages)[l].send+": <b>"+decodeURIComponent(JSON.parse(messages)[l].message)+"</b> to: "+decodeURIComponent(JSON.parse(messages)[l].user)+" at: "+JSON.parse(messages)[l].timestamps;
+          t.innerHTML = messages[l].send+": <b>"+messages[l].message+"</b> to: "+messages[l].user+" at: "+messages[l].timestamps;
         } 
         document.getElementById("messages").appendChild(t);
         e.push(t);
@@ -171,8 +171,9 @@
       if (m.replace(/\s/g,'').toLowerCase().includes("damn") || m.replace(/\s/g,'').toLowerCase().includes("shit") || m.replace(/\s/g,'').toLowerCase().includes("fuck") || m.replace(/\s/g,'').toLowerCase().includes("ass") || m.replace(/\s/g,'').toLowerCase().includes("bitch") || m.replace(/\s/g,'').toLowerCase().includes("cunt")) { // CHASE Put in the 'words' in the includes("<here>") area (delete this after you do it)
         alert("Cuss Word Detected! We do not permit any cuss words. If you disagree that you have not cuss words in your message report to 'admin' in chat");
       } else {
-       socket.send(JSON.stringify({message:encodeURIComponent(document.getElementById("message").value),user:encodeURIComponent(document.getElementById("from").value),send:sessionStorage.username,timestamps:new Date()}));
-       update("B5", JSON.stringify(JSON.parse(messages).concat({message:encodeURIComponent(document.getElementById("message").value),user:encodeURIComponent(document.getElementById("from").value),send:sessionStorage.username,timestamps:new Date()})));
+        socket.send(JSON.stringify({message:document.getElementById("message").value,user:document.getElementById("from").value,send:sessionStorage.username,timestamps:new Date()}));
+        update(sessionStorage.username, 'messages', JSON.stringify(messages.concat({message:document.getElementById("message").value,user:document.getElementById("from").value,send:sessionStorage.username,timestamps:new Date()})));
+        updateChat({message:document.getElementById("message").value,user:document.getElementById('from').value,send:sessionStorage.username,timestamps:new Data()});       
       }
       document.getElementById("message").value = "";
       document.getElementById("from").value = "";
