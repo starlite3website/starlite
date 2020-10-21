@@ -145,7 +145,7 @@
   window.setTimeout(function() {
     interval = window.setInterval(updateChat, 1000);
     chat.bind('client-message', function(data) {
-      updateChat(JSON.parse(data.data));
+      updateChat(data.data);
     });
   }, 2000);
   function updateChat(m) {
