@@ -132,7 +132,15 @@
   function update(username, key, value) {
     database.src="https://starlitedatabase.cs641311.repl.co/?task=update&username="+username+"&key="+key+"&value="+value;
   }
+  function get(username) {
+    var channel = pusher.subscribe('database-return');
+    channel.bind('get', function(response) {
+      userMessages = JSON.parse(response.data[0].messages);
+      pusher.unsubscribe('database-return');
+    });
+  }
   list('messages');
+  get(sessionStorage.username);
   var d = [], e = [], interval;
   window.setTimeout(function() {
     interval = window.setInterval(updateChat, 1000);
@@ -179,7 +187,7 @@
         alert("Cuss Word Detected! We do not permit any cuss words. If you disagree that you have not cuss words in your message report to 'admin' in chat");
       } else {
         chat.trigger('client-message', JSON.stringify({data:{message:document.getElementById("message").value,user:document.getElementById("from").value,send:sessionStorage.username,timestamps:new Date()}}));
-        update(sessionStorage.username, 'messages', JSON.stringify(messages.concat({message:document.getElementById("message").value,user:document.getElementById("from").value,send:sessionStorage.username,timestamps:new Date()})));
+        update(sessionStorage.username, 'messages', JSON.stringify(userMessages.concat({message:document.getElementById("message").value,user:document.getElementById("from").value,send:sessionStorage.username,timestamps:new Date()})));
         updateChat({message:document.getElementById("message").value,user:document.getElementById('from').value,send:sessionStorage.username,timestamps:new Date()});       
       }
       document.getElementById("message").value = "";
