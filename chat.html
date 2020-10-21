@@ -120,6 +120,7 @@
     cluster: 'us2',
     authEndpoint: 'https://DimgreyZigzagProjector--five-nine.repl.co/pusher/auth',
   });
+  var chat = pusher.subscribe('private-chat');
   function list(item) {
     var channel = pusher.subscribe('database-return');
     channel.bind('get', function(response) {
@@ -132,12 +133,12 @@
     database.src="https://starlitedatabase.cs641311.repl.co/?task=update&username="+username+"&key="+key+"&value="+value;
   }
   list('messages');
-  var d = [], e = [], interval, socket = new WebSocket('wss://connect.websocket.in/v3/1?apiKey=c37MW77TpY8GDiA4yfQPegQUtlFUJkK5d2i1Nrkuk87aCjfwtsxTxHPgKdLn');;
+  var d = [], e = [], interval;
   window.setTimeout(function() {
     interval = window.setInterval(updateChat, 1000);
-    socket.onmessage = function(e) {
-      updateChat(JSON.parse(e.data));
-    }
+    chat.bind('client-message', function(data) {
+      updateChat(JSON.parse(data.data));
+    });
   }, 2000);
   function updateChat(m) {
     if (m != undefined) {
@@ -177,7 +178,7 @@
       if (m.replace(/\s/g,'').toLowerCase().includes("damn") || m.replace(/\s/g,'').toLowerCase().includes("shit") || m.replace(/\s/g,'').toLowerCase().includes("fuck") || m.replace(/\s/g,'').toLowerCase().includes("ass") || m.replace(/\s/g,'').toLowerCase().includes("bitch") || m.replace(/\s/g,'').toLowerCase().includes("cunt")) { // CHASE Put in the 'words' in the includes("<here>") area (delete this after you do it)
         alert("Cuss Word Detected! We do not permit any cuss words. If you disagree that you have not cuss words in your message report to 'admin' in chat");
       } else {
-        socket.send(JSON.stringify({message:document.getElementById("message").value,user:document.getElementById("from").value,send:sessionStorage.username,timestamps:new Date()}));
+        chat.trigger('client-message', {data:JSON.stringify({message:document.getElementById("message").value,user:document.getElementById("from").value,send:sessionStorage.username,timestamps:new Date()})});
         update(sessionStorage.username, 'messages', JSON.stringify(messages.concat({message:document.getElementById("message").value,user:document.getElementById("from").value,send:sessionStorage.username,timestamps:new Date()})));
         updateChat({message:document.getElementById("message").value,user:document.getElementById('from').value,send:sessionStorage.username,timestamps:new Date()});       
       }
