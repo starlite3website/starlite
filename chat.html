@@ -141,9 +141,9 @@
     database.src="https://starlitedatabase.cs641311.repl.co/?task=get&username="+username;
   }
   list('messages');
-  get(sessionStorage.username);
   var d = [], e = [], interval;
   window.setTimeout(function() {
+    get(sessionStorage.username);
     interval = window.setInterval(updateChat, 1000);
     chat.bind('client-message', function(data) {
       updateChat(data.data);
