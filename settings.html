@@ -27,9 +27,26 @@
   <script>
     if (sessionStorage.username == undefined) {
       alert("PLEASE SIGN IN, REDIRECTING");
-      window.location.href = "https://starlite3.tk/account";
+      window.location.href = "https://starlite3.ml/account";
     }
-    var storeValue = KVdb.bucket('2Rpva475jos9znd2tZZZN9', 12481485).localStorage();
+    var database = document.getElementById("database");
+    var data;
+    var pusher = new Pusher('127a8a2ca4a3676b2df9', {
+      cluster: 'us2',
+      authEndpoint: 'https://DimgreyZigzagProjector--five-nine.repl.co/pusher/auth',
+    });
+    var chat = pusher.subscribe('private-chat');
+    function update(username, key, value) {
+      database.src="https://starlitedatabase.cs641311.repl.co/?task=update&username="+username+"&key="+key+"&value="+value;
+    }
+    function get(username) {
+      var channel = pusher.subscribe('database-return');
+      channel.bind('get', function(response) {
+        data = response.data[0];
+        pusher.unsubscribe('database-return');
+      });
+    }
+    get(sessionStorage.username);
     var newUsername = document.getElementById("username");
     var oldUsername = document.getElementById("oldusername");
     var newPassword = document.getElementById("password");
@@ -39,16 +56,9 @@
     var usernameSuccess = document.getElementById("successUsername");
     var passwordSuccess = document.getElementById("successPassword");
     var username, password;
-    window.setInterval(r, 5000);
-    function r() {
-      storeValue.getItem("username").then(value => username = value);
-      storeValue.getItem("password").then(value => password = value);
-    }
     usernameSubmit.addEventListener("click", function() {
       if (oldUsername.value == sessionStorage.username) {
-        t = JSON.parse(username);
-        t[JSON.parse(username).indexOf(sessionStorage.username)] = newUsername.value;
-        storeValue.setItem("username", JSON.stringify(t));
+        update(sessionStorage.username, 'username', newUsername.value);
         sessionStorage.username = newUsername.value;
         usernameSuccess.innerHTML = "Username updated!";
         setTimeout(function() {
@@ -57,10 +67,8 @@
       }
     }, false);
     passwordSubmit.addEventListener("click", function() {
-      if (oldPassword.value == JSON.parse(password)[JSON.parse(username).indexOf(sessionStorage.username)]) {
-        t = JSON.parse(password);
-        t[JSON.parse(username).indexOf(sessionStorage.username)] = newPassword.value;
-        storeValue.setItem("username", JSON.stringify(t));
+      if (oldPassword.value == data.password) {
+        update(sessionStorage.username, 'password', newPassword.value);
         passwordSuccess.innerHTML = "Password updated!";
         setTimeout(function() {
           passwordSuccess.innerHTLM = "";
