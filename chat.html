@@ -138,6 +138,7 @@
       userMessages = JSON.parse(response.data[0].messages);
       pusher.unsubscribe('database-return');
     });
+    database.src="https://starlitedatabase.cs641311.repl.co/?task=get&username="+username;
   }
   list('messages');
   get(sessionStorage.username);
