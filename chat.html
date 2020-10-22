@@ -124,13 +124,7 @@
   function list(item) {
     var channel = pusher.subscribe('database-return');
     channel.bind('get', function(response) {
-      var l = 0;
-      var sl = [];
-      while (l<response.data.length) {
-        sl.concat(response.data[l]);
-        l++;
-      }
-      messages = sl;
+      messages = response.data;
       pusher.unsubscribe('database-return');
     });
     database.src='https://starlitedatabase.cs641311.repl.co/?task=list&item='+item;
