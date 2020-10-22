@@ -167,7 +167,7 @@
         if (sessionStorage.username == messages[l].send || sessionStorage.username == "admin") {
           var q = document.createElement("BUTTON");
           q.setAttribute("id", l);
-          q.setAttribute("onclick", 't=userMessages;var index = this.id; if (index>-1) {t.splice(index,1)}; update(sessionStorage.username, "messages", JSON.stringify(t)); get(sessionStorage.username);');
+          q.setAttribute("onclick", 't=userMessages;var index = this.id; if (index>-1) {t.splice(index,1)}; update(messages[this.id].send, "messages", JSON.stringify(t)); get(sessionStorage.username);');
           q.innerHTML = "Delete";
           t.innerHTML = q.outerHTML+" "+messages[l].send+": <div><b>"+messages[l].message+"</b></div>to:"+messages[l].user+" at: "+messages[l].timestamps;
         } else {
