@@ -168,14 +168,14 @@
         var data;
         if (sessionStorage.username == messages[l].send || sessionStorage.username == "admin") {
           var q = document.createElement("BUTTON");
-          data = l
-          q.setAttribute("onclick", 'get(messages[this.id].send); setTimeout(function(){t=userMessages;var index = this.id; if (index>-1) {t.splice(index,1)}; update(messages[this.id].send, "messages", JSON.stringify(t));}, 2000);');
+          t.data = l;
+          q.setAttribute("onclick", 'get(messages[this.data].send); setTimeout(function(){t=userMessages;var index = this.data; if (index>-1) {t.splice(index,1)}; update(messages[this.data].send, "messages", JSON.stringify(t));}, 2000);');
           q.innerHTML = "Delete";
           t.innerHTML = q.outerHTML+" "+messages[l].send+": <div><b>"+messages[l].message+"</b></div>to:"+messages[l].user+" at: "+messages[l].timestamps;
         } else {
           t.innerHTML = messages[l].send+": <b>"+messages[l].message+"</b> to: "+messages[l].user+" at: "+messages[l].timestamps;
         } 
-        e.push({element:t, data: data});
+        e.push(t);
         d.push(t);
         document.getElementById("messages").appendChild(t);
         
