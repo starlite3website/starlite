@@ -165,18 +165,20 @@
       if (messages[l].send == sessionStorage.username || messages[l].user == sessionStorage.username || messages[l].user == "public" || sessionStorage.username == "admin") {
         var t = document.createElement("DIV");
         t.style = "margin-left:5%;margin-right:44%;margin-bottom:1%;margin-top:1%;padding:1%;border:1px solid black;word-wrap:break-word;width:50%;";
+        var data;
         if (sessionStorage.username == messages[l].send || sessionStorage.username == "admin") {
           var q = document.createElement("BUTTON");
-          q.setAttribute("id", l);
+          data = l
           q.setAttribute("onclick", 'get(messages[this.id].send); setTimeout(function(){t=userMessages;var index = this.id; if (index>-1) {t.splice(index,1)}; update(messages[this.id].send, "messages", JSON.stringify(t));}, 2000);');
           q.innerHTML = "Delete";
           t.innerHTML = q.outerHTML+" "+messages[l].send+": <div><b>"+messages[l].message+"</b></div>to:"+messages[l].user+" at: "+messages[l].timestamps;
         } else {
           t.innerHTML = messages[l].send+": <b>"+messages[l].message+"</b> to: "+messages[l].user+" at: "+messages[l].timestamps;
         } 
-        document.getElementById("messages").appendChild(t);
-        e.push(t);
+        e.push({element:t, data: data});
         d.push(t);
+        document.getElementById("messages").appendChild(t);
+        
       } 
       l++;
     }
