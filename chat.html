@@ -116,7 +116,7 @@
   <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
   <script>
   var database = document.getElementById("database");
-  var database2 = document.getElementById("database");
+  var database2 = document.getElementById("database2");
   var messages, userMessages;
   var pusher = new Pusher('127a8a2ca4a3676b2df9', {
     cluster: 'us2',
@@ -168,8 +168,8 @@
         var data;
         if (sessionStorage.username == messages[l].send || sessionStorage.username == "admin") {
           var q = document.createElement("BUTTON");
-          t.data = l;
-          q.setAttribute("onclick", 'get(messages[this.data].send); setTimeout(function(){t=userMessages;var index = this.data; if (index>-1) {t.splice(index,1)}; update(messages[this.data].send, "messages", JSON.stringify(t));}, 2000);');
+          t.id = l;
+          q.setAttribute("onclick", 'get(messages[this.parentElement.data].send); setTimeout(function(){t=userMessages;var index = this.data; if (index>-1) {t.splice(index,1)}; update(messages[this.parentElement.data].send, "messages", JSON.stringify(t));}, 2000);');
           q.innerHTML = "Delete";
           t.innerHTML = q.outerHTML+" "+messages[l].send+": <div><b>"+messages[l].message+"</b></div>to:"+messages[l].user+" at: "+messages[l].timestamps;
         } else {
