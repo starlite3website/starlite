@@ -196,10 +196,11 @@
         setTimeout(function() {
           update(sessionStorage.username, 'messages', JSON.stringify(userMessages.concat({message:document.getElementById("message").value,user:document.getElementById("from").value,send:sessionStorage.username,timestamps:new Date()})));
           updateChat({message:document.getElementById("message").value,user:document.getElementById('from').value,send:sessionStorage.username,timestamps:new Date()});       
+          document.getElementById("message").value = "";
+          document.getElementById("from").value = "";
         }, 2000);
       }
-      document.getElementById("message").value = "";
-      document.getElementById("from").value = "";
+      
     }
   }
   </script>
