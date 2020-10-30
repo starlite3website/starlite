@@ -192,8 +192,11 @@
         alert("Cuss Word Detected! We do not permit any cuss words. If you disagree that you have not cuss words in your message report to 'admin' in chat");
       } else {
         chat.trigger('client-message', {data:{message:document.getElementById("message").value,user:document.getElementById("from").value,send:sessionStorage.username,timestamps:new Date()}});
-        update(sessionStorage.username, 'messages', JSON.stringify(userMessages.concat({message:document.getElementById("message").value,user:document.getElementById("from").value,send:sessionStorage.username,timestamps:new Date()})));
-        updateChat({message:document.getElementById("message").value,user:document.getElementById('from').value,send:sessionStorage.username,timestamps:new Date()});       
+        get(sessionStorage.username);
+        setTimeout(function() {
+          update(sessionStorage.username, 'messages', JSON.stringify(userMessages.concat({message:document.getElementById("message").value,user:document.getElementById("from").value,send:sessionStorage.username,timestamps:new Date()})));
+          updateChat({message:document.getElementById("message").value,user:document.getElementById('from').value,send:sessionStorage.username,timestamps:new Date()});       
+        }, 2000);
       }
       document.getElementById("message").value = "";
       document.getElementById("from").value = "";
