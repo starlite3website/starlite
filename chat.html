@@ -163,7 +163,7 @@
       while (l<messages.length) {
         var m = 0;
         while (m<oldMessages.length) {
-          if (oldMessages.timestamps == messages.timestamps && oldMessages.message == messages.message && oldMessages.send = messages.send && oldMessage.to == oldMessages.to) {
+          if ((oldMessages.timestamps == messages.timestamps && oldMessages.message == messages.message) && (oldMessages.send = messages.send && oldMessage.to == oldMessages.to)) {
             messages = messages.splice(l, 1);
           }
           m++;
