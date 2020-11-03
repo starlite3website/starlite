@@ -156,38 +156,35 @@
     if (m != undefined) {
       messages = messages.concat(m);
     }
-    var messagesHolder = messages;
-    if (oldMessages == messages) {
-      return null;
-    } else {
-      var l = 0;
-      while (l<messages.length) {
-        var m = 0;
-        while (m<oldMessages.length) {
-          if ((oldMessages.timestamps == messages.timestamps && oldMessages.message == messages.message) && (oldMessages.send = messages.send && oldMessage.to == oldMessages.to)) {
-            messages = messages.splice(l, 1);
-            console.log(messagesHolder, messages);
-          }
-          m++;
+    var newMessages = [];
+    var l = 0;
+    while (l<messages.length) {
+      var m = 0;
+      while (m<oldMessages.length) {
+        if (oldMessages[m].timestamps != messages[l].timestamps) {
+          newMessages.push(messages[l]);
         }
-        l++;
       }
+      l++;
+    }
+    if (newMessages.length<1) {
+      return null;
     }
     d = [];
     var l = 0;
-    while (l<messages.length) {
-      if (messages[l].send == sessionStorage.username || messages[l].user == sessionStorage.username || messages[l].user == "public" || sessionStorage.username == "admin") {
+    while (l<newMessages.length) {
+      if (newMessages[l].send == sessionStorage.username || newMessages[l].user == sessionStorage.username || newMessages[l].user == "public" || sessionStorage.username == "admin") {
         var t = document.createElement("DIV");
         t.style = "margin-left:5%;margin-right:44%;margin-bottom:1%;margin-top:1%;padding:1%;border:1px solid black;word-wrap:break-word;width:50%;";
         var data;
-        if (sessionStorage.username == messages[l].send || sessionStorage.username == "admin") {
+        if (sessionStorage.username == newMessages[l].send || sessionStorage.username == "admin") {
           var q = document.createElement("BUTTON");
           t.id = l;
           q.setAttribute("onclick", 'get(messages[JSON.parse(this.parentElement.id)].send); setTimeout(function(){t=userMessages; for(var l=0;l<t.length;l++){if(t[l].message==messages[JSON.parse(this.parentElement.id)].message){t.splice(l, 0);}} update(messages[JSON.parse(this.parentElement.id)].send, "messages", JSON.stringify(t));}.bind(this), 2000);');
           q.innerHTML = "Delete";
-          t.innerHTML = q.outerHTML+" "+messages[l].send+": <div><b>"+messages[l].message+"</b></div>to:"+messages[l].user+" at: "+messages[l].timestamps;
+          t.innerHTML = q.outerHTML+" "+newMessages[l].send+": <div><b>"+newMessages[l].message+"</b></div>to:"+newMessages[l].user+" at: "+newMessages[l].timestamps;
         } else {
-          t.innerHTML = messages[l].send+": <b>"+messages[l].message+"</b> to: "+messages[l].user+" at: "+messages[l].timestamps;
+          t.innerHTML = newMessages[l].send+": <b>"+newMessages[l].message+"</b> to: "+newMessages[l].user+" at: "+newMessages[l].timestamps;
         } 
         e.push(t);
         d.push(t);
@@ -197,7 +194,6 @@
       l++;
     }
     oldMessages = messages;
-    messages = messagesHolder;
   }
   document.getElementById("submit").addEventListener("click", send);
   function send() {
