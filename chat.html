@@ -156,6 +156,7 @@
     if (m != undefined) {
       messages = messages.concat(m);
     }
+    var messagesHolder = messages;
     if (oldMessages == messages) {
       return null;
     } else {
@@ -195,6 +196,7 @@
       l++;
     }
     oldMessages = messages;
+    messages = messagesHolder;
   }
   document.getElementById("submit").addEventListener("click", send);
   function send() {
