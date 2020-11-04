@@ -167,9 +167,10 @@
         while (m<oldMessages.length) {
           if (oldMessages[m].timestamps == messages[l].timestamps) {
             messageHolder.push(l);
+          } else {
+            messageHolder.push("blank");
           }
         }
-        
         l++;
       }
     }
@@ -180,12 +181,12 @@
       while (l<messages.length) {
         var m = 0;
         while (m<messageHolder.length) {
-         if (messageHolder[m] != l) {
-           newMessages.push(messages[l]);
-         }
-         m++;
-       }
-       l++;
+          if (messageHolder[m] != l) {
+            newMessages.push(messages[l]);
+          }
+          m++;
+        }
+        l++;
       }
     }
     console.log(newMessages);
