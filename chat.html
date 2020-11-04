@@ -162,6 +162,13 @@
     } else {
       newMessages = messages.filter(function(array_value) {
         var l = 0;
+        if (oldMessages.length == 0) {
+          var l = 0;
+          while (l<messages.length) {
+            oldMessages.push({true_value:"__blank__",timestamps:Math.random(922));
+            l++;
+          }
+        }
         while (l<oldMessages.length) {
           if (oldMessages[l].timestamps != array_value.timestamps) {
             return array_value;
@@ -169,6 +176,7 @@
           l++;
         }
       });
+      
       console.log(newMessages);
     }
     d = [];
