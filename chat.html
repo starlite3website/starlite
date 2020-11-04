@@ -165,7 +165,9 @@
       newMessages = [];
       newMessages = messages.filter(function(array_value) {
         var l = 0;
+        console.log(oldMessages.length);
         if (oldMessages.length == 0) {
+          console.log("lol");
           var l = 0;
           while (l<messages.length) {
             oldMessages.push({true_value:"__blank__",timestamps:Math.random(922)});
@@ -175,7 +177,6 @@
         var t;
         while (l<oldMessages.length) {
           if (new Date(oldMessages[l].timestamps) != new Date(array_value.timestamps)) {
-            console.log(new Date(oldMessages[l].timestamps), oldMessages, l);
             t = {bool:true,data:array_value};
           } else {
             t = {bool:false};
