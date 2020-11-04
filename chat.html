@@ -3,16 +3,16 @@
     <link rel="shortcut icon"href="/starlite-logo.png"type="image/png">
     <title>Starlite | Chat</title>
   </head>
-<div id='wall'></div>
-<script>
-  window.setTimeout(function() {
-    document.getElementById('wall').style.visibility = 'hidden';
-    document.getElementById('animate').style.visibility = 'hidden';
-  }, 3000);
-</script>
-<div id="animate">
-</div>
-<style>
+  <div id='wall'></div>
+  <script>
+    window.setTimeout(function() {
+      document.getElementById('wall').style.visibility = 'hidden';
+      document.getElementById('animate').style.visibility = 'hidden';
+    }, 3000);
+ </script>
+  <div id="animate">
+  </div>
+  <style>
     #wall {
       position: fixed;
       background-color: white;
@@ -61,7 +61,7 @@
         margin-top: -65px;
       }
     }
-</style>
+  </style>
   <div id="messages">
   </div>
   <div>
@@ -156,20 +156,35 @@
     if (m != undefined) {
       messages = messages.concat(m);
     }
-    var newMessages = [];
-    var l = 0;
-    while (l<messages.length) {
-      var m = 0;
-      while (m<oldMessages.length) {
-        if (oldMessages[m].timestamps != messages[l].timestamps) {
-          newMessages.push(messages[l]);
+    var messageHolder = [];
+    if (messages == oldMessages) {
+      return NaN;
+    } else {
+      var l = 0;
+      while (l<messages.length) {
+        var m = 0;
+        while (m<oldMessages.length) {
+          if (oldMessages[m].timestamps == messages[l].timestamps) {
+            messageHolder.push(l);
+          }
         }
+        
+        l++;
       }
-      l++;
     }
-    console.log(newMessages);
-    if (newMessages.length<1) {
-      return null;
+    var newMessages = [];
+    if (messageHolder.length != messages.length) {
+      var l = 0;
+      while (l<messages.length) {
+        var m = 0;
+        while (m<messageHolder.length) {
+         if (messageHolder[m] != l) {
+           newMessages.push(messages[l]);
+         }
+         m++;
+       }
+       l++;
+      }
     }
     d = [];
     var l = 0;
