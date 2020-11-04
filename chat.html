@@ -115,7 +115,6 @@
   <iframe src="" id="database2" visibility="hidden" display="hidden" width="0" height="0"></iframe>
   <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
   <script>
-    Pusher.logToConsole = true;
   var database = document.getElementById("database");
   var database2 = document.getElementById("database2");
   var messages = [], userMessages;
@@ -144,7 +143,9 @@
     });
     database.src="https://starlitedatabase.cs641311.repl.co/?task=get&username="+username;
   }
-  list('messages');
+  window.setTimeout(function() {
+    list('messages');
+  }, 2000);
   var d = [], e = [], interval;
   window.setTimeout(function() {
     get(sessionStorage.username);
@@ -171,12 +172,18 @@
             l++;
           }
         }
+        var t;
         while (l<oldMessages.length) {
           if (oldMessages[l].timestamps != array_value.timestamps) {
             console.log(oldMessages[l].timestamps, array_value.timestamps);
-            return array_value;
+            t = {bool:true,data:array_value};
+          } else {
+            t = {bool:false};
           }
           l++;
+        }
+        if (t.bool) {
+          return t.data
         }
       });
     }
