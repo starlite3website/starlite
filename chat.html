@@ -126,6 +126,7 @@
   function list(item) {
     var channel = pusher.subscribe('database-return');
     channel.bind('list', function(response) {
+      console.log(response.data);
       messages = response.data;
       pusher.unsubscribe('database-return');
     });
@@ -177,7 +178,6 @@
           l++;
         }
       });
-      console.log(newMessages);
     }
     d = [];
     var l = 0;
