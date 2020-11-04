@@ -173,6 +173,7 @@
         }
         while (l<oldMessages.length) {
           if (oldMessages[l].timestamps != array_value.timestamps) {
+            console.log(oldMessages, newMessages);
             return array_value;
           }
           l++;
