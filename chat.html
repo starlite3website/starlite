@@ -151,7 +151,7 @@
       updateChat(data.data);
     });
   }, 7000);
-  var oldMessages = [];
+  var oldMessages = [], newMessages = [];
   function updateChat(m) {
     if (m != undefined) {
       messages = messages.concat(m);
@@ -160,6 +160,7 @@
     if (messages == oldMessages) {
       return null;
     } else {
+      newMessages = [];
       newMessages = messages.filter(function(array_value) {
         var l = 0;
         if (oldMessages.length == 0) {
@@ -176,7 +177,6 @@
           l++;
         }
       });
-      
       console.log(newMessages);
     }
     d = [];
