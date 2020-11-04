@@ -171,7 +171,7 @@
         var t;
         while (l<oldMessages.length) {
           if (new Date(oldMessages[l].timestamps) != new Date(array_value.timestamps)) {
-            console.log(this, this.oldMessages);
+            console.log(new Date(oldMessages[l].timestamps, new Date(array_value.timestamps));
             t = {bool:true,data:array_value};
           } else {
             t = {bool:false};
