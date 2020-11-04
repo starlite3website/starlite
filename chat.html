@@ -110,7 +110,6 @@
       border-radius: 20px;
     }
   </style>
-  <h1>Adam and Chase email me at 3foes@mail.com</h1>
   <iframe src="" id="database" visibility="hidden" display="hidden" width="0" height="0"></iframe>
   <iframe src="" id="database2" visibility="hidden" display="hidden" width="0" height="0"></iframe>
   <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
@@ -128,6 +127,7 @@
     channel.bind('list', function(response) {
       console.log(response.data);
       messages = response.data;
+      console.log('list');
       pusher.unsubscribe('database-return');
     });
     database2.src='https://starlitedatabase.cs641311.repl.co/?task=list&item='+item;
@@ -139,6 +139,7 @@
     var channel = pusher.subscribe('database-return');
     channel.bind('get', function(response) {
       userMessages = JSON.parse(response.data[0].messages);
+      console.log('get');
       pusher.unsubscribe('database-return');
     });
     database.src="https://starlitedatabase.cs641311.repl.co/?task=get&username="+username;
@@ -195,7 +196,7 @@
         if (sessionStorage.username == newMessages[l].send || sessionStorage.username == "admin") {
           var q = document.createElement("BUTTON");
           t.id = l;
-          q.setAttribute("onclick", 'get(messages[JSON.parse(this.parentElement.id)].send); setTimeout(function(){t=userMessages; for(var l=0;l<t.length;l++){if(t[l].message==messages[JSON.parse(this.parentElement.id)].message){t.splice(l, 1);}} update(messages[JSON.parse(this.parentElement.id)].send, "messages", JSON.stringify(t));}.bind(this), 2000);');
+          q.setAttribute("onclick", 'get(messages[JSON.parse(this.parentElement.id)].send); setTimeout(function(){t=userMessages; for(var l=0;l<t.length;l++){if(t[l].message==messages[JSON.parse(this.parentElement.id)].message){t.splice(l, 1);}} update(messages[JSON.parse(this.parentElement.id)].send, "messages", JSON.stringify(t)); list("messages");}.bind(this), 2000);');
           q.innerHTML = "Delete";
           t.innerHTML = q.outerHTML+" "+newMessages[l].send+": <div><b>"+newMessages[l].message+"</b></div>to:"+newMessages[l].user+" at: "+newMessages[l].timestamps;
         } else {
