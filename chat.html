@@ -158,45 +158,11 @@
     }
     var messageHolder = [];
     if (messages == oldMessages) {
-      console.log(messages, oldMessages, messages==oldMessages);
-      return NaN;
+      return null;
     } else {
-      var l = 0;
-      while (l<messages.length) {
-        var m = 0;
-        while (m<oldMessages.length) {
-          if (oldMessages[m].timestamps == messages[l].timestamps) {
-            messageHolder.push(l);
-          } else {
-            messageHolder.push("blank");
-          }
-        }
-        l++;
-      }
+      console.log((messages.filter(oldMessages));
+      newMessages = messages.filter(oldMessages));
     }
-    if (oldMessages == []) {
-      var l = 0;
-      while (l<messages.length) {
-        messageHolder.push(l);
-        l++;
-      }
-    }
-    console.log(messageHolder);
-    var newMessages = [];
-    if (messageHolder.length != messages.length) {
-      var l = 0;
-      while (l<messages.length) {
-        var m = 0;
-        while (m<messageHolder.length) {
-          if (messageHolder[m] != l) {
-            newMessages.push(messages[l]);
-          }
-          m++;
-        }
-        l++;
-      }
-    }
-    console.log(newMessages);
     d = [];
     var l = 0;
     while (l<newMessages.length) {
