@@ -8,7 +8,7 @@
     window.setTimeout(function() {
       document.getElementById('wall').style.visibility = 'hidden';
       document.getElementById('animate').style.visibility = 'hidden';
-    }, 3000);
+    }, 7000);
  </script>
   <div id="animate">
   </div>
@@ -160,8 +160,16 @@
     if (messages == oldMessages) {
       return null;
     } else {
-      console.log(messages.filter(oldMessages));
-      newMessages = messages.filter(oldMessages);
+      newMessages = messages.filter(function(array_value) {
+        var l = 0;
+        while (l<oldMessages.length) {
+          if (oldMessages[l].timestamps == array_value.timestamps) {
+            return array_value;
+          }
+          l++;
+        }
+      });
+      console.log(newMessages);
     }
     d = [];
     var l = 0;
