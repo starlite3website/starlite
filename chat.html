@@ -163,7 +163,7 @@
       newMessages = messages.filter(function(array_value) {
         var l = 0;
         while (l<oldMessages.length) {
-          if (oldMessages[l].timestamps == array_value.timestamps) {
+          if (oldMessages[l].timestamps != array_value.timestamps) {
             return array_value;
           }
           l++;
