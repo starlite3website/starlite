@@ -212,7 +212,7 @@
       l++;
     }
     oldMessages = messages;
-  }
+  }.bind(window);
   document.getElementById("submit").addEventListener("click", send);
   function send() {
     if (document.getElementById("from").value!=""&&document.getElementById("message").value!="") {
