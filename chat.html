@@ -150,7 +150,7 @@
     chat.bind('client-message', function(data) {
       updateChat(data.data);
     });
-  }, 2000);
+  }, 4000);
   var oldMessages = [];
   function updateChat(m) {
     if (m != undefined) {
@@ -172,6 +172,7 @@
         l++;
       }
     }
+    console.log(messageHolder);
     var newMessages = [];
     if (messageHolder.length != messages.length) {
       var l = 0;
@@ -186,6 +187,7 @@
        l++;
       }
     }
+    console.log(newMessages);
     d = [];
     var l = 0;
     while (l<newMessages.length) {
