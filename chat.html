@@ -177,6 +177,7 @@
         var t;
         while (l<oldMessages.length) {
           if (new Date(oldMessages[l].timestamps) != new Date(array_value.timestamps)) {
+            console.log(this, this.oldMessages);
             t = {bool:true,data:array_value};
           } else {
             t = {bool:false};
@@ -212,7 +213,7 @@
       l++;
     }
     oldMessages = messages;
-  }.bind(window);
+  }
   document.getElementById("submit").addEventListener("click", send);
   function send() {
     if (document.getElementById("from").value!=""&&document.getElementById("message").value!="") {
