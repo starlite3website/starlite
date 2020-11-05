@@ -195,7 +195,7 @@
         if (sessionStorage.username == newMessages[l].send || sessionStorage.username == "admin") {
           var q = document.createElement("BUTTON");
           t.id = l;
-          q.setAttribute("onclick", 'this.remove(); get(messages[JSON.parse(this.parentElement.id)].send); setTimeout(function(){t=userMessages; for(var l=0;l<t.length;l++){if(t[l].message==messages[JSON.parse(this.parentElement.id)].message){t.splice(l, 1);}} update(messages[JSON.parse(this.parentElement.id)].send, "messages", JSON.stringify(t));}.bind(this), 2000);');
+          q.setAttribute("onclick", 'get(messages[JSON.parse(this.parentElement.id)].send); setTimeout(function(){t=userMessages; for(var l=0;l<t.length;l++){if(t[l].message==messages[JSON.parse(this.parentElement.id)].message){t.splice(l, 1);}} update(messages[JSON.parse(this.parentElement.id)].send, "messages", JSON.stringify(t));}.bind(this), 2000); this.remove();');
           q.innerHTML = "Delete";
           t.innerHTML = q.outerHTML+" "+newMessages[l].send+": <div><b>"+newMessages[l].message+"</b></div>to:"+newMessages[l].user+" at: "+newMessages[l].timestamps;
         } else {
