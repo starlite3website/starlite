@@ -2587,8 +2587,8 @@
     }
   } // creates a strong block
   function spawn(x, y) {
-    user.tank.x = x;
-    user.tank.y = y;
+    user.tank.x = x*50;
+    user.tank.y = y*50;
     user.tank.spawn = [x, y];
   }
   function weak(x, y, m) {
