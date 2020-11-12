@@ -2265,7 +2265,7 @@
     });
     
   } // main Menu
-  function levelSelect(l) {
+  function levelSelect() {
     draw.fillStyle = "#556B2f";
     draw.fillRect(50, 50, 400, 500);
     draw.fillStyle = "#ffffff";
@@ -2294,29 +2294,29 @@
     draw.fillRect(317, 94+44*6, 44, 44);
     draw.fillStyle = "#000000";
     draw.font = "20px starfont";
-    draw.fillText("1",120,140);
+    draw.fillText("1", 139, 94);
     if (userData.level < 2) draw.fillStyle="#A9A9A9";
-    draw.fillText("2",220,140);
+    draw.fillText("2", 228, 94);
     if (userData.level < 3) draw.fillStyle="#A9A9A9";
-    draw.fillText("3",320,140);
+    draw.fillText("3", 317, 94);
     if (userData.level < 4) draw.fillStyle="#A9A9A9";
-    draw.fillText("4",120,240);
+    draw.fillText("4", 139, 94+44*2);
     if (userData.level < 5) draw.fillStyle="#A9A9A9";
-    draw.fillText("5",220,240);
+    draw.fillText("5", 228, 94+44*2);
     if (userData.level < 6) draw.fillStyle="#A9A9A9";
-    draw.fillText("6",320,240);
+    draw.fillText("6", 317, 94+44*2);
     if (userData.level < 7) draw.fillStyle="#A9A9A9";
-    draw.fillText("7",120,340);
+    draw.fillText("7", 139, 94+44*4);
     if (userData.level < 8) draw.fillStyle="#A9A9A9";
-    draw.fillText("8",220,340);
+    draw.fillText("8", 228, 94+44*4);
     if (userData.level < 9) draw.fillStyle="#A9A9A9";
-    draw.fillText("9",320,340);
+    draw.fillText("9", 317, 94+44*4);
     if (userData.level < 10) draw.fillStyle="#A9A9A9";
-    draw.fillText("10",110,440);
+    draw.fillText("10", 139, 94+44*6);
     if (userData.level < 11) draw.fillStyle="#A9A9A9";
-    draw.fillText("11",210,440);
+    draw.fillText("11", 228, 94+44*6);
     if (userData.level < 12) draw.fillStyle="#A9A9A9";
-    draw.fillText("12",310,440);
+    draw.fillText("12", 317, 94+44*6);
     document.addEventListener("click", levelSelectSupport);
   }
   function levelSelectSupport(e) {
