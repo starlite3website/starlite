@@ -2330,10 +2330,10 @@
       }
       x -= canvas.offsetLeft;
       y -= canvas.offsetTop;
-      if (x > 100) {
-        if (x < 150) {
-          if (y > 100) {
-            if (y < 150) {
+      if (x > 139) {
+        if (x < 139+44) {
+          if (y > 94) {
+            if (y < 94+44) {
               document.removeEventListener("click", levelSelectSupport);
               Game.level = 1;
               level(1, null, true);
@@ -2342,10 +2342,10 @@
         }
       }
       
-      if (x>200) {                  
-        if (x<250) {
-          if (y>100) {
-            if (y<150 && userData.level > 1) {
+      if (x>228) {                  
+        if (x<228+44) {
+          if (y>94) {
+            if (y<94+44 && userData.level > 1) {
               document.removeEventListener("click", levelSelectSupport);
               Game.level = 2;
               level(2, null, true);
@@ -2353,10 +2353,10 @@
           }
         }
       }
-      if (x>300) {
-        if (x<350) {
-          if (y>100) {
-            if (y<150 && userData.level > 2) {
+      if (x>317) {
+        if (x<317+44) {
+          if (y>94) {
+            if (y<94+44 && userData.level > 2) {
               document.removeEventListener("click", levelSelectSupport);
               Game.level = 3;
               level(3, null, true);
