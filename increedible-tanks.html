@@ -969,7 +969,7 @@
   class Tank {
     draw() {
       if (this.leftright == true) {
-        draw.translate(this.x + 20, this.y + 20)
+        draw.translate(this.x + 20 - user.tank.x + 230, this.y + 20 - user.tank.y + 230);
         draw.rotate(90 * Math.PI / 180);
         if (this.u > 40) {
           draw.drawImage(tank_base_png, -20, -20);
@@ -985,16 +985,16 @@
             draw.drawImage(tank_base2, this.x, this.y);
         }
       }
-      draw.translate(this.x + 20, this.y + 20);
+      draw.translate(this.x + 20 - user.tank.x + 230, this.y + 20 - user.tank.y + 230);
       draw.rotate(this.rotation * Math.PI / 180);
       draw.drawImage(tank_top_png, -20, -20);
       draw.rotate(-(this.rotation * Math.PI / 180));
-      draw.translate(-this.x - 20, -this.y - 20);
+      draw.translate(-this.x - 20 - user.tank.x + 230, -this.y - 20 - user.tank.y + 230);
       // Health Bar!
       draw.fillStyle="#000000";
-      draw.fillRect(this.x, this.y + 50, 40, 5);
+      draw.fillRect(this.x - user.tank.x + 230, this.y + 50 - user.tank.y + 230, 40, 5);
       draw.fillStyle="#90EE90";
-      draw.fillRect(this.x+2, this.y+51, 36*this.health/userData.health, 3); 
+      draw.fillRect(this.x+2 - user.tank.x + 230, this.y+51 - user.tank.y + 230, 36*this.health/userData.health, 3); 
     }
     
     check() {
@@ -1446,16 +1446,16 @@
       for (q = 0;q < array[l].split("").length; q++) {
         var p = array[l].split(""); // Block key: # = invincible, 1 = weak, 2 = strong, @ = player, A = ai
         if (p[q] == "#") {
-          wall(q, l, m);
+          wall(q-(user.tank.x+230)/10, l-(user.tank.y+230)/10, m);
         }
         if (p[q] == "1") {
-          weak(q, l, m);
+          weak(q-(user.tank.x+230)/10, l-(user.tank.y+230)/10, m);
         }
         if (p[q] == "2") {
-          strong(q, l, m);
+          strong(q-(user.tank.x+230)/10, l-(user.tank.y+230)/10, m);
         }
         if (p[q] == "A") {
-          createAi(q*50, l*50,m, 3, 3);
+          createAi(q*50-user.tank.x+230, l*50-user.tank.y+230, m, 3, 3);
         }
       }
     }
@@ -1466,7 +1466,7 @@
     var floor = new Image();
     floor.src = "/floor.png";
     var pattern = draw.createPattern(floor, "repeat");
-    draw.rect(0, 0, 500, 500);
+    draw.rect(0-user.tank.x+230, 0-user.tank.y+230, 500, 500);
     draw.fillStyle=pattern;
     draw.fill();
     if (mo != "n") {
