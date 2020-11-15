@@ -1927,14 +1927,8 @@
     draw.fillText(Game.coins, 20, 20);
     draw.globalAlpha=.5;
     draw.font="20px starfont";
-    if (num == 1) {
-      draw.fillText("Use WASD to move", 50, 360);
-      draw.fillText("F to fire", 50, 390);
-      draw.fillText("You can break all walls but blue", 50, 420);
-    }
-    if (user.tank != undefined) {
-      draw.fillText("Your health: "+user.tank.health, 275,490);
-      draw.fillText("Your x:"+user.tank.x+", y:" + user.tank.y, 275, 460);
+    if (num == 1 && mo != "n") {
+      alert("IMPORTANT: Controls. WASD to move. Left and Right arrow keys for barrel(gun) movement. Space to fire.");
     }
     draw.globalAlpha = 1;
   }
@@ -1946,7 +1940,7 @@
     draw.fillStyle = "#ffffff";
     draw.fillText("DEFEAT!",120,120);
     draw.font = "20px starfont";
-    draw.fillText("No Stats Updated",140,250);
+    draw.fillText("No Stats Updated", 140, 250);
     document.addEventListener("keydown", defeatHelper);
     setTimeout(function() {
       document.removeEventListener("keydown", defeatHelper);
