@@ -1260,6 +1260,7 @@
       // still in progress
     }
     this.endGame = function() {
+      draw.setTransform(1, 0, 0, 1, 0, 0);
       movementNoise.stop();
       document.removeEventListener("click", levelSelectSupport);
       canvas.removeEventListener("keydown", tank_listener1);
