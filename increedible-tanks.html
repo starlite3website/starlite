@@ -341,7 +341,7 @@
             }
           }
           if (this.instructions.fire == true) {
-            if (this.Scounter == 10) {
+            if (this.Scounter == 20) {
               this.fire();
               this.Scounter = 0;
             } else {
@@ -1421,7 +1421,7 @@
   var userData;
   function loading() {
     canvas.removeEventListener("click", startScreenListener);
-    if (sessionStorage.username == undefined) {
+    if (t == undefined) {
       var t = confirm("Do you want to play as Guest?");
       if (t) {
         userData = {username:"Guest", health:200, coins:0, level:1};
@@ -1488,7 +1488,7 @@
     }
     draw.font = "20px starfont";
     draw.fillStyle = "#FFDF00";
-    draw.fillText(user.username, user.tank.x-user.username.length/4*15+5, user.tank.y + 65);
+    draw.fillText(user.username, user.tank.x-user.username.length/4*15+5, user.tank.y - 25);
     // draw ai
     var l = 0;
     while (l < ai.length) {
