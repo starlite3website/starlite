@@ -977,7 +977,7 @@
             draw.drawImage(tank_base2, -20, -20);
         }
         draw.rotate(-90 * Math.PI / 180);
-        draw.translate((-this.x - 20), (-this.y - 20));
+        draw.translate((-this.x - 20 - user.tank.x + 230), (-this.y - 20 - user.tank.y + 230));
       } else {
         if (this.u > 40) {
             draw.drawImage(tank_base_png, this.x, this.y);
