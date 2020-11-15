@@ -258,23 +258,23 @@
     draw() {
       if (this.inactive != true) {
         if (this.leftright) {
-          draw.translate(this.x + 20, this.y + 20)
+          draw.translate(this.x + 20 - user.tank.x + 230, this.y + 20 - user.tank.y + 230)
           draw.rotate(90 * Math.PI / 180);
           draw.drawImage(tank_base_png, -20, -20);
           draw.rotate(-90 * Math.PI / 180);
-          draw.translate((-this.x - 20), (-this.y - 20));
+          draw.translate((-this.x - 20 - user.tank.x + 230), (-this.y - 20 - user.tank.y + 230));
         } else {
-          draw.drawImage(tank_base_png, this.x, this.y);
+          draw.drawImage(tank_base_png, this.x - user.tank.x + 230, this.y - user.tank.y + 230);
         }
-        draw.translate(this.x + 20, this.y + 20);
+        draw.translate(this.x + 20 - user.tank.x + 230, this.y + 20 - user.tank.y + 230);
         draw.rotate(this.rotation * Math.PI / 180);
         draw.drawImage(ai_top, -20, -20);
         draw.rotate(-(this.rotation * Math.PI / 180));
-        draw.translate(-this.x - 20, -this.y - 20);
+        draw.translate(-this.x - 20 - user.tank.x + 230, -this.y - 20 - user.tank.y + 230);
         draw.fillStyle="#000000";
-        draw.fillRect(this.x, this.y + 50, 40, 5);
+        draw.fillRect(this.x - user.tank.x + 230, this.y + 50 - user.tank.y + 230, 40, 5);
         draw.fillStyle="#FF0000";
-        draw.fillRect(this.x+2, this.y+51, 36*this.health/200, 3); 
+        draw.fillRect(this.x+2 - user.tank.x + 230, this.y+51 - user.tank.y + 230, 36*this.health/200, 3); 
       }
     }
     move() {
@@ -463,7 +463,7 @@
 
     draw() {	
       // draw the bullet
-      draw.drawImage(red_bullet, this.x, this.y);
+      draw.drawImage(red_bullet, this.x - user.tank.x + 230, this.y - user.tank.y + 230);
     }
     
     update() {
