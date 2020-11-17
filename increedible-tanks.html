@@ -1187,7 +1187,7 @@
     user.tank.intervals[event.keyCode] = false;
   }
   function checker(x, y) {
-    if (x < Game.borders[1] || y < Game.borders[3] || x + 40 > Game.borders[2] || y + 40 > Game.borders[4]) {
+    if (x < Game.borders[0] || y < Game.borders[2] || x + 40 > Game.borders[1] || y + 40 > Game.borders[3]) {
       return false;
     }
     // if touching user tank then return "i cant move"
