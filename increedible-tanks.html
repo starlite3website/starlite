@@ -1187,7 +1187,7 @@
     user.tank.intervals[event.keyCode] = false;
   }
   function checker(x, y) {
-    if (x < 0 || y < 0 || x + 40 > 500 || y + 40 > 500) {
+    if (x < Game.borders[1] || y < Game.borders[3] || x + 40 > Game.borders[2] || y + 40 > Game.borders[4]) {
       return false;
     }
     // if touching user tank then return "i cant move"
@@ -1442,9 +1442,10 @@
       mainMenu();
     }, 2000);
   }
-  function levelReader(array, m) {
-    for (l = 0; l < array.length; l++) {
-      for (q = 0;q < array[l].split("").length; q++) {
+  function levelReader(array, m, x, y, borders) {
+    Game.borders = borders;
+    for (l = x; l < array.length; l++) {
+      for (q = y;q < array[l].split("").length; q++) {
         var p = array[l].split(""); // Block key: # = invincible, 1 = weak, 2 = strong, @ = player, A = ai
         if (p[q] == "#") {
           wall(q, l, m);
@@ -1512,13 +1513,13 @@
       if (mo != "n") {
         spawn(0, 0);
       }
-      levelReader(['  11 2A  1','  11  2 2','  11      ','#########1','   # A#   ','   #22#   '], m);
+      levelReader(['  11 2A  1','  11  2 2','  11      ','#########1','   # A#   ','   #22#   '], m, 0, 0, [0, 500, 0, 500]);
     }
     if (num === 2) {
       if (mo != "n") {
         spawn(5, 0);
       }
-      levelReader([' A # @# A ', ' 2 #  # 2 ','   #11#   ', '#11#11#11#', '# ##11## #', '#  #22#  #', '## #22# ##', '#  #22#  #', '# ## A## #', '#  2     #'], m);
+      levelReader([' A # @# A ', ' 2 #  # 2 ','   #11#   ', '#11#11#11#', '# ##11## #', '#  #22#  #', '## #22# ##', '#  #22#  #', '# ## A## #', '#  2     #'], m, 0, 0, [0, 500, 0, 500]);
     }
     if (num === 3) {
       if (mo != "n") {
