@@ -2136,7 +2136,7 @@
   } // main Menu
   function levelSelect() {
     draw.fillStyle = "#556B2f";
-    draw.fillRect(50, 50, 400, 500);
+    draw.fillRect(50, 50, 400, 400);
     draw.fillStyle = "#ffffff";
     draw.fillRect(139, 94, 44, 44);
     if (userData.level < 2) draw.fillStyle="#000000";
@@ -2187,60 +2187,6 @@
     if (userData.level < 12) draw.fillStyle="#A9A9A9";
     draw.fillText("12", 317+15, 94+44*6+30);
     document.addEventListener("click", levelSelectSupport);
-  }
-  function levelSelect2() {
-    draw.fillStyle = "#556B2f";
-    draw.fillRect(50, 50, 400, 500);
-    draw.fillStyle = "#ffffff";
-    draw.fillRect(139, 94, 44, 44);
-    if (userData.level < 2) draw.fillStyle="#000000";
-    draw.fillRect(228, 94, 44, 44);
-    if (userData.level < 3) draw.fillStyle="#000000";
-    draw.fillRect(317, 94, 44, 44);
-    if (userData.level < 4) draw.fillStyle="#000000";
-    draw.fillRect(139, 94+44*2, 44, 44);
-    if (userData.level < 5) draw.fillStyle="#000000";
-    draw.fillRect(228, 94+44*2, 44, 44);
-    if (userData.level < 6) draw.fillStyle="#000000";
-    draw.fillRect(317, 94+44*2, 44, 44);
-    if (userData.level < 7) draw.fillStyle="#000000";
-    draw.fillRect(139, 94+44*4, 44, 44);
-    if (userData.level < 8) draw.fillStyle="#000000";
-    draw.fillRect(228, 94+44*4, 44, 44);
-    if (userData.level < 9) draw.fillStyle="#000000";
-    draw.fillRect(317, 94+44*4, 44, 44);
-    if (userData.level < 10) draw.fillStyle="#000000"; 
-    draw.fillRect(139, 94+44*6, 44, 44);
-    if (userData.level < 11) draw.fillStyle="#000000";
-    draw.fillRect(228, 94+44*6, 44, 44);
-    if (userData.level < 12) draw.fillStyle="#000000";
-    draw.fillRect(317, 94+44*6, 44, 44);
-    draw.fillStyle = "#000000";
-    draw.font = "20px starfont";
-    draw.fillText("13", 139, 94);
-    if (userData.level < 2) draw.fillStyle="#A9A9A9";
-    draw.fillText("14", 228, 94);
-    if (userData.level < 3) draw.fillStyle="#A9A9A9";
-    draw.fillText("15", 317, 94);
-    if (userData.level < 4) draw.fillStyle="#A9A9A9";
-    draw.fillText("16", 139, 94+44*2);
-    if (userData.level < 5) draw.fillStyle="#A9A9A9";
-    draw.fillText("17", 228, 94+44*2);
-    if (userData.level < 6) draw.fillStyle="#A9A9A9";
-    draw.fillText("18", 317, 94+44*2);
-    if (userData.level < 7) draw.fillStyle="#A9A9A9";
-    draw.fillText("", 139, 94+44*4);
-    if (userData.level < 8) draw.fillStyle="#A9A9A9";
-    draw.fillText("8", 228, 94+44*4);
-    if (userData.level < 9) draw.fillStyle="#A9A9A9";
-    draw.fillText("9", 317, 94+44*4);
-    if (userData.level < 10) draw.fillStyle="#A9A9A9";
-    draw.fillText("10", 139, 94+44*6);
-    if (userData.level < 11) draw.fillStyle="#A9A9A9";
-    draw.fillText("11", 228, 94+44*6);
-    if (userData.level < 12) draw.fillStyle="#A9A9A9";
-    draw.fillText("12", 317, 94+44*6);
-    document.addEventListener("click", levelSelectSupport2);
   }
   function levelSelectSupport(e) {
      battleMusic.stop();
@@ -2342,10 +2288,10 @@
         }
       }
     }
-    if (x>300) {
-      if (x<350) {
-        if (y>300) {
-          if (y<350 && userData.level > 8) {
+    if (x>317) {
+      if (x<317+44) {
+        if (y>94+44*4) {
+          if (y<94+44*4+44 && userData.level > 8) {
             document.removeEventListener("click", levelSelectSupport);
             Game.level = 9;
             level(9, null, true);
@@ -2353,10 +2299,10 @@
         }
       }
     }
-    if (x>100) {
-      if (x<150) {
-        if (y>400) {
-          if (y<450 && userData.level > 9) {
+    if (x>139) {
+      if (x<139+44) {
+        if (y>94+44*6) {
+          if (y<94+44*6+44 && userData.level > 9) {
             document.removeEventListener("click", levelSelectSupport);
             Game.level = 10;
             level(10, null, true);
@@ -2364,10 +2310,10 @@
         }
       }
     }
-    if (x>200) {
-      if (x<250) {
-        if (y>400) {
-          if (y<450 && userData.level > 10) {
+    if (x>228) {
+      if (x<228+44) {
+        if (y>94+44*6) {
+          if (y<94+44*6+44 && userData.level > 10) {
             document.removeEventListener("click", levelSelectSupport);
             Game.level = 11;
             level(11, null, true);
@@ -2375,10 +2321,10 @@
         }
       }
     }
-    if (x>300) {
-      if (x<350) {
-        if (y>400) {
-          if (y<450 && userData.level > 11) {
+    if (x>317) {
+      if (x<317+44) {
+        if (y>94+44*6) {
+          if (y<94+44*6+44 && userData.level > 11) {
             document.removeEventListener("click", levelSelectSupport);
             Game.level = 12;
             level(12, null, true);
