@@ -1488,6 +1488,7 @@
     var floor = new Image();
     floor.src = "/floor.png";
     var pattern = draw.createPattern(floor, "repeat");
+    if (Game.borders == undefined) Game.borders = [0, 500, 0, 500];
     if (Game.borders[0] < 0) {
       draw.rect(-500, -500, 500, 500);
     } else {
