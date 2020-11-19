@@ -1444,21 +1444,6 @@
   }
   function levelReader(array, m, quad, borders) {
     Game.borders = borders;
-    if (quad) {
-      var floor = new Image();
-      floor.src = "/floor.png";
-      var pattern = draw.createPattern(floor, "repeat");
-      draw.rect(-500, -500, 500, 500);
-      draw.fillStyle=pattern;
-      draw.fill();
-    } else {
-      var floor = new Image();
-      floor.src = "/floor.png";
-      var pattern = draw.createPattern(floor, "repeat");
-      draw.rect(0, 0, 500, 500);
-      draw.fillStyle=pattern;
-      draw.fill();
-    }
     for (l = 0; l < array.length; l++) {
       for (q = 0;q < array[l].split("").length; q++) {
         var p = array[l].split(""); // Block key: # = invincible, 1 = weak, 2 = strong, @ = player, A = ai
@@ -1494,13 +1479,22 @@
     }
   }
   function level(num, mo, m) {
-    Game.borders = [0, 500, 0, 500]; // TEMPORARY LEVEL HOLDER
     draw.setTransform(1, 0, 0, 1, 0, 0);
     draw.fillStyle="#000000";
     draw.fillRect(-1000, -1000, 2000, 2000);
     draw.setTransform(1, 0, 0, 1, -user.tank.x+230, -user.tank.y+230);
     draw.clearRect(0, 0, 500, 500);
     draw.fillStyle = "#dcdcdc";
+    var floor = new Image();
+    floor.src = "/floor.png";
+    var pattern = draw.createPattern(floor, "repeat");
+    if (Game.borders[0] < 0) {
+      draw.rect(-500, -500, 500, 500);
+    } else {
+      draw.rect(0, 0, 500, 500);
+    }
+    draw.fillStyle=pattern;
+    draw.fill();
     if (mo != "n") {
       Game.coins = 0; 
       Game.foes = 0;
