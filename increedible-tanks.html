@@ -217,7 +217,7 @@
           }
         }
       }
-      if (s[l].x < 0 || s[l].x > 500 || s[l].y < 0 || s[l].y > 500) {
+      if (s[l].x < Game.borders[0] || s[l].x > Game.borders[1] || s[l].y < Game.borders[2] || s[l].y > Game.borders[3]) {
         delete s[l];
         s.splice(l, 1);
       }
