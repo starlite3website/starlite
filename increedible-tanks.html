@@ -1302,13 +1302,17 @@
   function jquery_tank_support(e) {
     user.tank.move(e);
   }
+  var wall_image = new Image();
+  wall_image.src = "/block-blue.png";
+  var weak_image = new Image();
+  weak_image.src = "/block-silver.png";
+  var weak_image = new Image();
+  weak_image.src = "/block-silver.png";
   function Block(health, x, y, isInvincible, isExplosive) {
     this.blockId = b.length-1;
     this.x = x;
     this.y = y;
-    this.wall = function(x,y) {
-      var wall_image = new Image();
-      wall_image.src = "/block-blue.png"
+    this.wall = function(x,y) {    
       draw.drawImage(wall_image, x * 50, y * 50);
       if (this.health == undefined) {
         this.health = Infinity;
@@ -1348,8 +1352,6 @@
       if (this.health == undefined) {
         this.health = 20;
       }
-      var weak_image = new Image();
-      weak_image.src = "/block-silver.png";
       draw.drawImage(weak_image, x * 50, y * 50);
     }
     /*i.push(window.setInterval(function(id) {
