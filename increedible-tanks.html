@@ -1478,6 +1478,8 @@
       }
     }
   }
+  var floor = new Image();
+  floor.src = "/floor.png";
   function level(num, mo, m) {
     draw.setTransform(1, 0, 0, 1, 0, 0);
     draw.fillStyle="#000000";
@@ -1485,8 +1487,6 @@
     draw.setTransform(1, 0, 0, 1, -user.tank.x+230, -user.tank.y+230);
     draw.clearRect(0, 0, 500, 500);
     draw.fillStyle = "#dcdcdc";
-    var floor = new Image();
-    floor.src = "/floor.png";
     var pattern = draw.createPattern(floor, "repeat");
     if (Game.borders == undefined) Game.borders = [0, 500, 0, 500];
     if (Game.borders[0] < 0) {
