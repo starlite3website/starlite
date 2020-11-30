@@ -1037,6 +1037,7 @@
       canvas.addEventListener("keydown", tank_listener1, false);
       canvas.addEventListener("keyup", tank_listener2, false);
       canvas.addEventListener("mousemove", tank_listener3, false);
+      canvas.addEventListener("click", tank_listener4, false);
     }
     
     move(e) {
@@ -1091,6 +1092,15 @@
                 this.u++;
               }
               // CHASE put in tank_track.play(); here
+            }
+          break;
+          case 32:
+            if (this.count == 30) {
+              this.fire();
+              // CHASE put in tank_fire.play(); here
+              this.count = 0;
+            } else {
+              this.count++;
             }
           break;
           case 39:
@@ -1173,8 +1183,16 @@
       }
     }
   }
+  function tank_listener4(event) {
+    if (user.tank.count == 30) {
+      user.tank.fire();
+      user.tank.count = 0;
+    } else {
+      user.tank.count++;
+    }
+  }
   function tank_listener3(event) {
-    user.tank.rotationCalc();
+    user.tank.rotationCalc(event);
   }
   function tank_listener1(event) {
     if (event.keyCode == 87 || event.keyCode == 83 || event.keyCode == 68 || event.keyCode == 65) {
