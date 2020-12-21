@@ -1092,6 +1092,18 @@
               // CHASE put in tank_track.play(); here
             }
           break;
+          case 16:
+            if (this.CanBoost == true) {
+              this.speed = 4;
+              this.CanBoost == false;
+              setTimeout(function() {
+                this.speed = 2;
+              }, 3000);
+              setTimeout(function() {
+                this.CanBoost = true;
+              }, 10000);
+            }
+          break;
           case 32:
             if (this.count == 30) {
               this.fire();
