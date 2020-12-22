@@ -465,7 +465,7 @@
       // draw the bullet
       draw.drawImage(red_bullet, this.x, this.y);
       draw.fillStyle="#FF4500";
-      draw.globalAlpha = .6;
+      draw.globalAlpha = .4;
       var random = Math.floor(Math.random()*3), random2 = Math.floor(Math.random()*2);
       draw.fillRect(this.x, this.y, 5, 5);
       draw.globalAlpha = 1;
@@ -473,8 +473,8 @@
     
     update() {
       if (this.counter == 1) {
-        this.x += this.xm;
-        this.y += this.ym;
+        this.x += this.xm/2;
+        this.y += this.ym/2;
         this.counter = 0;
       } else {
         this.counter++;
