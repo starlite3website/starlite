@@ -2186,7 +2186,7 @@
     if (userData.level < 12) draw.fillStyle="#A9A9A9";
     draw.fillText("12", 317+15, 94+44*6+30);
     document.addEventListener("click", levelSelectSupport);
-    document.addEventlistener("keydown", levelSelectSupport1KeyDown);
+    document.addEventListener("keydown", levelSelectSupport1KeyDown);
   }
   function levelSelectSupport1KeyDown(e) {
     if (e.keyCode == 39) {
