@@ -1315,6 +1315,15 @@
       i.push(window.setInterval(function() {
         clearShot();
       }, 30));
+      i.push(window.setInterval(function() {
+        //controls bullet speed must be at 10ms
+        var l = 0;
+        while (l<s.length) {
+          s[l].update();
+          s[l].draw();
+          l++;
+        }
+      }, 10);
     }
   } 
   function jquery_tank_support(e) {
@@ -1530,12 +1539,6 @@
     draw.font = "20px starfont";
     draw.fillStyle = "#FFDF00";
     draw.fillText(user.username, user.tank.x-user.username.length/4*15+5, user.tank.y - 25);
-    var l = 0;
-    while (l<s.length) {
-      s[l].update();
-      s[l].draw();
-      l++;
-    }
     var l = 0;
     while (l<b.length) {
       if (ai_check(b[l].x * 50, b[l].y * 50)) {
