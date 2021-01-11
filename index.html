@@ -46,11 +46,11 @@
       header {
         position:fixed;
         background-color:white;
-        width:100%;
+        width: 100%;
         z-index:100;
-        overflow: hidden;
         text-align: center;
         height: 70px;
+        overflow: scroll;
       }
       header:before {
         content: '';
@@ -67,7 +67,7 @@
       button {
         margin: auto;
         border:2px white;
-        font-size:15px;
+        font-size:10px;
         padding:12px;
         background-color:white;
         color:black;
@@ -84,12 +84,14 @@
     </style>
     <style>
       #main {
-        height:600px;
+        margin:0;
+        height:400px;
         width:100%;
+        image-rendering: -webkit-optimize-contrast;
+        background-image: url(data:image/jpeg;base64,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);
+        background-repeat: no-repeat;
         background-size: cover;
         background-attachment: fixed;
-        background-repeat: no-repeat;
-        background-image: url(https://thumbs.gfycat.com/CorruptSilkyAustraliancattledog-max-1mb.gif);
       }
       #d2 {
         position: absolute;
@@ -108,11 +110,13 @@
         margin-left:10px;
       }
       p {
-        font-size:15px;
+        font-size:10px;
       }
     </style>
     <style>
       footer {
+        color: white;
+        font-size: 10px;
         background-color:orangered;
         margin-bottom:0px;
         margin-left:0px;
@@ -120,37 +124,48 @@
         width:100%;
         padding-top:5%;
       }
-      #Footer{
+      #FooterLink {
+        text-align: center;
+        margin: auto;
+        margin-bottom: 30px;
         display: inline;
-        text-decoration:none;
-        font-size:15px;
-        margin-left:20%;
-        margin-bottom: 5%;
-        color:white;
+      }
+      #FooterLink a {
+        text-decoration: none;
+        color: white;
       }
     </style>
   </header>
   <body>
     <div id="main">
-      <div id="d2" style="top: 20%; left: 20%;">
+      <div id="d2" style="top: 90px; left: 20%;">
         <h1>Welcome!</h1>
         <p>We are a in progress game website. So far we only have 1 game, but we are in the process of adding two more. Currently the  site is under quality updates.</p>
-        <a href="/increedible-tanks"><button>Play Increedible Tanks</button></a>
+        <a href="/increedible-tanks"><button style="background-color: orangered; color: white;">Play Increedible Tanks</button></a>
       </div>
     </div>
-    <div style="background-color:white; color:black; margin: auto;text-align:center;">
+    <div style="background-color:white; color:black; margin: auto;text-align:center;margin-bottom: 50px;">
       <h2 style="margin-top: 50px;">Why Choose Starlite?</h2>
-      <p style="margin-left: 30%; margin-right: 30%;">Starlite's goal is to create a dedicated gaming website for everyone, free of cost. Although we are just starting we have already created a live chat and our first game, <a href="/increedible-tanks" style="text-decoration: none; color: orange;"><bold>Increedible Tanks!</bold></a> Starlite has features that beat other gaming websites, unlike website that host other people's games we create our own unique one of a kind games. Create an account now and start gaming!</p>
-      <button style="color: orangered;" id="create_account_button"><a href="/account">Create Account</a></button>
+      <hr style="width: 90%;">
+      <p style="margin-left: 20%; margin-right: 20%;">Starlite's goal is to create a dedicated gaming website for everyone, free of cost. Although we are just starting we have already created a live chat and our first game, <a href="/increedible-tanks" style="text-decoration: none; color: orange;"><bold>Increedible Tanks!</bold></a> Starlite has features that beat other gaming websites, unlike website that host other people's games we create our own unique one of a kind games. Create an account now and start gaming!</p>
+      <a href="/account"><button style="background-color: orangered; color: white;" id="create_account_button">Create Account</button></a>
     </div>
   </body>
   <footer id="d3">
-    <div id="FooterLink" id="d4">
-      <a href="/"id="Footer">Home</a>
-      <a href="/games" id="Footer">Games</a>
-      <a href="/problems" id="Footer">Game Bugs</a>                    
-    </div>
-    <div>
+    <div style="display:flex;">
+      <div id="FooterLink">
+        <h2>Blog</h2>
+        <b>Coming Soon</b>
+      </div>
+      <div id="FooterLink">
+        <h2>Games</h2>
+        <a href="/increedible-tanks">Increedible  Tanks</a>
+      </div>
+      <div id="FooterLink">
+        <h2>Other</h2>
+        <a href="/news">News</a>
+        <a href="/games">Games</a>
+      </div>
     </div>
   </footer>
 </html>
