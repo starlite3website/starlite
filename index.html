@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -19,13 +20,13 @@
       <a href="/games"><button>Games</button></a>
       <a href="/account"><button>Sign up/Login</button></a>
       <script>
-        window.addEventListener('scroll', function(event) {
-          if (document.body.scrollTop == 0) {
-            document.querySelector('header').style = "box-shadow: none; -moz-box-shadow: none; -webkit-box-shadow: none;";
+        window.addEventListener('scroll', function() {
+          if (document.documentElement.scrollTop == 0) {
+            document.getElementById('d1').style = "box-shadow: none; -moz-box-shadow: none; -webkit-box-shadow: none;";
           } else {
-            document.querySelector('header').style = "box-shadow: 0px 10px 10px #888; -moz-box-shadow: 0px 10px 10px #888; -webkit-box-shadow: 0px 10px 10px #888;";
+            document.getElementById('d1').style = "box-shadow: 0px 5px 5px #888; -moz-box-shadow: 0px 5px 5px #888; -webkit-box-shadow: 0px 5px 5px #888;";
           }
-        });
+        }, 200);
         if(sessionStorage.username != undefined) {
           window.location.href="/dashboard";
         }
