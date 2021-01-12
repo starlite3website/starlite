@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -1512,6 +1513,13 @@
   var floor = new Image();
   floor.src = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAA4UlEQVRoQ+2Z4Q2EIAxGy0qswUysyEqa4xLDKYRTJCnN85+iCcW2r1/rQgibVC7vvaSUakv5mbZ19zHkvKkV77MhGk/47Ao9DzgMWd2YH0NWNsZOjMQYt5WyUyt2Lq5VvtgLME3rTUM0bfIfztmJETiirKyBI2XK1lCbOTiirJSHI+piBI7AkTm9ADu1FhyBI98s8bbesRMjcASOwJHDB2r6Bz0yI4XebVyXfwY9gh5pzMBGSc98pDVcHD3Zp9/bqbXQIxNKcTgiInZiBD2CHkGPoEdeb9mMcKI3okaPaNMjO8Yz5c2pDFv2AAAAAElFTkSuQmCC";
   function level(num, mo, m) {
+    // remove event listener from all levelSelect screens
+    // levelSelect():
+    document.removeEventListener('keydown', levelSelectKeyDown);
+    document.removeEventListener('click', levelSelectSupport);
+    // levelSelect2();
+    document.removeEventListener('keydown', levelSelectSupport2KeyDown);
+    document.removeEventListener('click', levelSelect2Support);
     draw.setTransform(1, 0, 0, 1, 0, 0);
     draw.fillStyle="#000000";
     draw.fillRect(-1000, -1000, 2000, 2000);
@@ -2187,11 +2195,13 @@
     if (userData.level < 12) draw.fillStyle="#A9A9A9";
     draw.fillText("12", 317+15, 94+44*6+30);
     document.addEventListener("click", levelSelectSupport);
-    document.addEventListener("keydown", levelSelectSupport1KeyDown);
+    document.addEventListener("keydown", levelSelectKeyDown);
   }
-  function levelSelectSupport1KeyDown(e) {
+  function levelSelectKeyDown(e) {
     if (e.keyCode == 39) {
-        levelSelect2();
+      document.removeEventListener('keydown', levelSelectKeyDown);
+      document.removeEventListener('click', levelSelectSupport);
+      levelSelect2();
     }
   }
   function levelSelectSupport(e) {
@@ -2339,6 +2349,219 @@
       }
     }
   }
+  function levelSelect2() {
+    draw.fillStyle = "#556B2f";
+    draw.fillRect(50, 50, 400, 400);
+    draw.fillStyle = "#ffffff";
+    if (userData.level < 13) draw.fillStyle="#000000";
+    draw.fillRect(139, 94, 44, 44);
+    if (userData.level < 14) draw.fillStyle="#000000";
+    draw.fillRect(228, 94, 44, 44);
+    if (userData.level < 15) draw.fillStyle="#000000";
+    draw.fillRect(317, 94, 44, 44);
+    if (userData.level < 16) draw.fillStyle="#000000";
+    draw.fillRect(139, 94+44*2, 44, 44);
+    if (userData.level < 17) draw.fillStyle="#000000";
+    draw.fillRect(228, 94+44*2, 44, 44);
+    if (userData.level < 18) draw.fillStyle="#000000";
+    draw.fillRect(317, 94+44*2, 44, 44);
+    if (userData.level < 19) draw.fillStyle="#000000";
+    draw.fillRect(139, 94+44*4, 44, 44);
+    if (userData.level < 20) draw.fillStyle="#000000";
+    draw.fillRect(228, 94+44*4, 44, 44);
+    if (userData.level < 21) draw.fillStyle="#000000";
+    draw.fillRect(317, 94+44*4, 44, 44);
+    if (userData.level < 22) draw.fillStyle="#000000"; 
+    draw.fillRect(139, 94+44*6, 44, 44);
+    if (userData.level < 23) draw.fillStyle="#000000";
+    draw.fillRect(228, 94+44*6, 44, 44);
+    if (userData.level < 24) draw.fillStyle="#000000";
+    draw.fillRect(317, 94+44*6, 44, 44);
+    draw.fillStyle = "#000000";
+    draw.font = "20px starfont";
+    if (userData.level < 13) draw.fillStyle="#A9A9A9";
+    draw.fillText("13", 139+15, 94+30);
+    if (userData.level < 14) draw.fillStyle="#A9A9A9";
+    draw.fillText("14", 228+15, 94+30);
+    if (userData.level < 15) draw.fillStyle="#A9A9A9";
+    draw.fillText("15", 317+15, 94+30);
+    if (userData.level < 16) draw.fillStyle="#A9A9A9";
+    draw.fillText("16", 139+15, 94+44*2+30);
+    if (userData.level < 17) draw.fillStyle="#A9A9A9";
+    draw.fillText("17", 228+15, 94+44*2+30);
+    if (userData.level < 18) draw.fillStyle="#A9A9A9";
+    draw.fillText("18", 317+15, 94+44*2+30);
+    if (userData.level < 19) draw.fillStyle="#A9A9A9";
+    draw.fillText("19", 139+15, 94+44*4+30);
+    if (userData.level < 20) draw.fillStyle="#A9A9A9";
+    draw.fillText("20", 228+15, 94+44*4+30);
+    if (userData.level < 21) draw.fillStyle="#A9A9A9";
+    draw.fillText("21", 317+15, 94+44*4+30);
+    if (userData.level < 22) draw.fillStyle="#A9A9A9";
+    draw.fillText("22", 139+15, 94+44*6+30);
+    if (userData.level < 23) draw.fillStyle="#A9A9A9";
+    draw.fillText("23", 228+15, 94+44*6+30);
+    if (userData.level < 24) draw.fillStyle="#A9A9A9";
+    draw.fillText("24", 317+15, 94+44*6+30);
+    document.addEventListener("click", levelSelect2Support);
+    document.addEventListener("keydown", levelSelectSupport2KeyDown);
+  }
+  function levelSelect2Support(e) {
+     battleMusic.stop();
+     if (e.pageX || e.pageY) {
+        x = e.pageX;
+        y = e.pageY;
+      } else {
+        x = e.clientX + document.body.scrollLeft + document.documentElement.scrollLeft;
+        y = e.clientY + document.body.scrollTop + document.documentElement.scrollTop;
+      }
+      x -= canvas.offsetLeft;
+      y -= canvas.offsetTop;
+      if (x > 139) {
+        if (x < 139+44) {
+          if (y > 94) {
+            if (y < 94+44) {
+              document.removeEventListener("click", levelSelectSupport);
+              Game.level = 13;
+              level(13, null, true);
+            }
+          }
+        }
+      }
+      
+      if (x>228) {                  
+        if (x<228+44) {
+          if (y>94) {
+            if (y<94+44 && userData.level > 1) {
+              document.removeEventListener("click", levelSelectSupport);
+              Game.level = 14;
+              level(14, null, true);
+            }
+          }
+        }
+      }
+      if (x>317) {
+        if (x<317+44) {
+          if (y>94) {
+            if (y<94+44 && userData.level > 2) {
+              document.removeEventListener("click", levelSelectSupport);
+              Game.level = 15;
+              level(15, null, true);
+            }
+          }
+        }
+      }
+      if (x>139) {
+        if (x<139+44) {
+          if (y>94+44*2) {
+            if (y<94+44*2+44 && userData.level > 3) {
+              document.removeEventListener("click", levelSelectSupport);
+              Game.level = 16;
+              level(16, null, true);
+            }
+          }
+        }
+      }
+    if (x>228) {
+        if (x<228+44) {
+          if (y>94+44*2) {
+            if (y<94+44*2+44 && userData.level > 4) {
+              document.removeEventListener("click", levelSelectSupport);
+              Game.level = 17;
+              level(17, null, true);
+            }
+          }
+        }
+      }
+    if (x>317) {
+      if (x<317+44) {
+        if (y>94+44*2) {
+          if (y<94+44*2+44 && userData.level > 5) {
+            document.removeEventListener("click", levelSelectSupport);
+            Game.level = 18;
+            level(18, null, true);
+          }
+        }
+      }
+    }
+    if (x>139) {
+      if (x<139+44) {
+        if (y>94+44*4) {
+          if (y<94+44*4+44 && userData.level > 6) {
+            document.removeEventListener("click", levelSelectSupport);
+            Game.level = 19;
+            level(19, null, true);
+          }
+        }
+      }
+    }
+    if (x>228) {
+      if (x<228+44) {
+        if (y>94+44*4) {
+          if (y<94+44*4+44 && userData.level > 7) {
+            document.removeEventListener("click", levelSelectSupport);
+            Game.level = 20;
+            level(20, null, true);
+          }
+        }
+      }
+    }
+    if (x>317) {
+      if (x<317+44) {
+        if (y>94+44*4) {
+          if (y<94+44*4+44 && userData.level > 8) {
+            document.removeEventListener("click", levelSelectSupport);
+            Game.level = 21;
+            level(21, null, true);
+          }
+        }
+      }
+    }
+    if (x>139) {
+      if (x<139+44) {
+        if (y>94+44*6) {
+          if (y<94+44*6+44 && userData.level > 9) {
+            document.removeEventListener("click", levelSelectSupport);
+            Game.level = 22;
+            level(22, null, true);
+          }
+        }
+      }
+    }
+    if (x>228) {
+      if (x<228+44) {
+        if (y>94+44*6) {
+          if (y<94+44*6+44 && userData.level > 10) {
+            document.removeEventListener("click", levelSelectSupport);
+            Game.level = 23;
+            level(23, null, true);
+          }
+        }
+      }
+    }
+    if (x>317) {
+      if (x<317+44) {
+        if (y>94+44*6) {
+          if (y<94+44*6+44 && userData.level > 11) {
+            document.removeEventListener("click", levelSelectSupport);
+            Game.level = 24;
+            level(24, null, true);
+          }
+        }
+      }
+    }
+  }
+  function levelSelectSupport2KeyDown(e) {
+    if (e.keyCode == 39) {
+      //document.removeEventListener('keydown', levelSelectSupport2KeyDown);
+      //levelSelect3();
+    }
+    if (e.keyCode == 37) {
+      document.removeEventListener('keydown', levelSelectSupport2KeyDown);
+      levelSelect();
+    }
+  }
+  // Place Holder
   function multiplayer() {
     s=[];
     d=[];
