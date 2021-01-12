@@ -64,16 +64,25 @@
   </style>
   <div id="messages">
   </div>
-  <div>
-    <textarea placeholder="Message" id="message"></textarea>
-    <input type="text" placeholder="To" id="from"/>
-    <button id="submit">Send Message</button>
+  <hr>
+  <div id="form">
+    <div>
+      <textarea placeholder="Message" id="message"></textarea>
+      <input type="text" placeholder="To" id="from"/>
+      <button id="submit">Send Message</button>
+    </div>
     <h3> How To Use </h3>
     <p><b>Send Message:</b> Type message in MESSAGE box, and a username in TO box.</p>
     <p><b>Send to Everyone:</b> Type public in the TO box.</p>
     <p><b>Send to Muliple People:</b> Type : or colons in between usernames.</p>
   </div>
   <style>
+    textarea, input {
+      margin: auto;
+    }
+    #form {
+      text-align: center;
+    }
     * {
       font-family: Courier;
     }
@@ -102,10 +111,10 @@
       padding: 10px;
     }
     button {
-      font-family: Courier;
+      font-family: Comfortaa;
       color: white;
-      background-color: orange;
-      border: 1px solid orange;
+      background-color: orangered;
+      border: 1px solid orangered;
       padding: 5px;
       border-radius: 20px;
     }
@@ -114,6 +123,10 @@
   <iframe src="" id="database2" visibility="hidden" display="hidden" width="0" height="0"></iframe>
   <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
   <script>
+  sessionStorage.username = "admin";
+  if (sessionStorage.username == undefined) {
+    window.location.href = "/dashboard";
+  }
   var database = document.getElementById("database");
   var database2 = document.getElementById("database2");
   var messages = [], userMessages;
@@ -195,7 +208,7 @@
         if (sessionStorage.username == newMessages[l].send || sessionStorage.username == "admin") {
           var q = document.createElement("BUTTON");
           t.id = l;
-          q.setAttribute("onclick", 'get(messages[JSON.parse(this.parentElement.id)].send); setTimeout(function(){t=userMessages; for(var l=0;l<t.length;l++){if(t[l].message==messages[JSON.parse(this.parentElement.id)].message){t.splice(l, 1);}} update(messages[JSON.parse(this.parentElement.id)].send, "messages", JSON.stringify(t));}.bind(this), 2000); this.remove();');
+          q.setAttribute("onclick", 'var arr=[]; for(l=0;l<messages.length;l++) {if (messages[l].send == messages[this.parentElement.id].send){arr=arr.concat(messages[l]);}} for (l=0;l<arr.length;l++) {if (arr[l].timestamps == messages[this.parentElement.id].timestamps) {arr.splice(l,1);}}update(messages[this.parentElement.id].send,"messages",JSON.stringify(arr));messages=arr;this.parentElement.remove()');
           q.innerHTML = "Delete";
           t.innerHTML = q.outerHTML+" "+newMessages[l].send+": <div><b>"+newMessages[l].message+"</b></div>to:"+newMessages[l].user+" at: "+newMessages[l].timestamps;
         } else {
