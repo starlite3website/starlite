@@ -4,7 +4,7 @@
     <a href="/dashboard">Back</a>
   </header>
   <body>
-    <iframe id="database"></iframe>
+    <iframe id="database" style="visibility: hidden;'></iframe>
     <div id="container">
       Fetching Data...
     </div>
@@ -27,7 +27,7 @@
         database.src='https://starlitedatabase.cs641311.repl.co/?task=list&item='+item;
       }
       list('playerdata');
-      setTimeout(renderResults, 3000);
+      setTimeout(renderResults, 5000);
       function renderResults() {
         var l = 0;
         while (l<messages.length) {
