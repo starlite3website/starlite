@@ -72,7 +72,7 @@
     <h1 id="gameName"> Increedible Tanks </h1>
     <h3 id="views"></h3>
     <h3 id="users"></h3>
-    <h2>Under Updates. Please answer this form for free coins: <button id="buttonToForm">Click Here</button><a href="/scoreboard">Scoreboard! See your Score!</a></h2>
+    <h2>Under Updates. Please answer this form for free coins: <button id="buttonToForm">Click Here</button></h2>
     <script>
       var buttonToForm = document.getElementById("buttonToForm");
       buttonToForm.addEventListener("click", function() {
@@ -1614,48 +1614,49 @@
     draw.fillText("Play Levels", 195, 385);
     draw.fillText("Upgrades", 75, 385);
     draw.fillText("#####", 340, 385);
-    document.addEventListener("click", function(e) {
-      if (e.pageX || e.pageY) {
-        x = e.pageX;
-        y = e.pageY;
-      } else {
-        x = e.clientX + document.body.scrollLeft + document.documentElement.scrollLeft;
-        y = e.clientY + document.body.scrollTop + document.documentElement.scrollTop;
-      }
-      x -= canvas.offsetLeft;
-      y -= canvas.offsetTop;
-      if (x > 330) {
-        if (x < 430) {
-          if (y > 350) {
-            if (y < 400) {
-              multiplayer();
-            }
+    document.addEventListener("click", mainMenuSupport);
+  }
+  function mainMenuSupport(e) {
+    if (e.pageX || e.pageY) {
+      x = e.pageX;
+      y = e.pageY;
+    } else {
+      x = e.clientX + document.body.scrollLeft + document.documentElement.scrollLeft;
+      y = e.clientY + document.body.scrollTop + document.documentElement.scrollTop;
+    }
+    x -= canvas.offsetLeft;
+    y -= canvas.offsetTop;
+    if (x > 330) {
+      if (x < 430) {
+        if (y > 350) {
+          if (y < 400) {
+            multiplayer();
           }
         }
       }
-      if (x > 190) {
-        if (x < 310) {
-          if (y > 350) {
-            if (y < 400) {
-              document.removeEventListener('click', this);
-              levelSelect();
-            }
+    }
+    if (x > 190) {
+      if (x < 310) {
+        if (y > 350) {
+          if (y < 400) {
+            document.removeEventListener('click', this);
+            levelSelect();
           }
         }
       }
-      if (x>70) {
-        if (x<170) {
-          if (y>350) {
-            if (y<400) {
-              //shop();
-            } 
-          }
+    }
+    if (x>70) {
+      if (x<170) {
+        if (y>350) {
+          if (y<400) {
+            //shop();
+          } 
         }
       }
-    });
-    
-  } // main Menu
+    }
+  }
   function levelSelect() {
+    document.removeEventListener('click', mainMenuSupport);
     draw.fillStyle = "#556B2f";
     draw.fillRect(50, 50, 400, 400);
     draw.fillStyle = "#ffffff";
