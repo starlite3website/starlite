@@ -19,24 +19,24 @@
       function list(item) {
         var channel = pusher.subscribe('database-return2');
         channel.bind('list', function(response) {
-          console.log(response.data);
           messages = response.data;
-          console.log('list');
           pusher.unsubscribe('database-return2');
         });
         database.src='https://starlitedatabase.cs641311.repl.co/?task=list&item='+item;
       }
       setTimeout(function() {
         list('playerdata');
-      }, 500);
+      }, 1000);
       setTimeout(renderResults, 3000);
       function renderResults() {
+        document.getElementById('container').innerHTML = "";
         var l = 0;
         while (l<messages.length) {
-          var t = document.createElement("DIV");
-          t.innerHTML = messages[l]["increedible-tanks"].username + ": "+messages[l]["increedible-tanks"].coins;
-          document.getElementById('container').innerHTML = "";
-          document.getElementById('container').appendChild(t);
+          if (messages[l]['increedible-tanks'] != undefined) {
+            var t = document.createElement("DIV");
+            t.innerHTML = messages[l]["increedible-tanks"].username + ": "+messages[l]["increedible-tanks"].coins;
+            document.getElementById('container').appendChild(t);
+          }
           l++;
         }
       }
