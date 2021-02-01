@@ -1,6 +1,9 @@
+
 <html>
   <head>
     <link rel="shortcut icon"href="/starlite-logo.png"type="image/png">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@700&display=swap" rel="stylesheet">
     <title>Starlite | Chat</title>
   </head>
   <div id='wall'></div>
@@ -71,24 +74,26 @@
       <input type="text" placeholder="To" id="from"/>
       <button id="submit">Send Message</button>
     </div>
+    <hr>
     <h3> How To Use </h3>
+    <hr>
     <p><b>Send Message:</b> Type message in MESSAGE box, and a username in TO box.</p>
     <p><b>Send to Everyone:</b> Type public in the TO box.</p>
     <p><b>Send to Muliple People:</b> Type : or colons in between usernames.</p>
   </div>
+
   <style>
+    * {
+      font-family: Comfortaa;
+    }
     textarea, input {
       margin: auto;
     }
     #form {
       text-align: center;
     }
-    * {
-      font-family: Courier;
-    }
     div {
       display: block;
-      font-family: Courier;
     }
     textarea {
       margin-bottom: 10px;
@@ -97,7 +102,6 @@
       height: 100px;
       display: block;
       background-color: white;
-      font-family: Courier;
       border: 1px solid black;
       padding: 10px;
     }
@@ -105,18 +109,18 @@
       margin-bottom: 10px;
       width: 200px;
       display: block;
-      font-family: Courier;
       background-color: white;
       border: 1px solid back;
       padding: 10px;
     }
     button {
-      font-family: Comfortaa;
       color: white;
       background-color: orangered;
       border: 1px solid orangered;
       padding: 5px;
-      border-radius: 20px;
+    }
+    iframe {
+      display: none;
     }
   </style>
   <iframe src="" id="database" visibility="hidden" display="hidden" width="0" height="0"></iframe>
@@ -200,24 +204,25 @@
     d = [];
     var l = 0;
     while (l<newMessages.length) {
-      if (newMessages[l].send == sessionStorage.username || newMessages[l].user == sessionStorage.username || newMessages[l].user == "public" || sessionStorage.username == "admin") {
-        var t = document.createElement("DIV");
-        t.style = "margin-left:5%;margin-right:44%;margin-bottom:1%;margin-top:1%;padding:1%;border:1px solid black;word-wrap:break-word;width:50%;";
-        var data;
-        if (sessionStorage.username == newMessages[l].send || sessionStorage.username == "admin") {
-          var q = document.createElement("BUTTON");
-          t.id = l;
-          q.setAttribute("onclick", 'var arr=[]; for(l=0;l<messages.length;l++) {if (messages[l].send == messages[this.parentElement.id].send){arr=arr.concat(messages[l]);}} for (l=0;l<arr.length;l++) {if (arr[l].timestamps == messages[this.parentElement.id].timestamps) {arr.splice(l,1);}}update(messages[this.parentElement.id].send,"messages",JSON.stringify(arr));messages=arr;this.parentElement.remove()');
-          q.innerHTML = "Delete";
-          t.innerHTML = q.outerHTML+" "+newMessages[l].send+": <div><b>"+newMessages[l].message+"</b></div>to:"+newMessages[l].user+" at: "+newMessages[l].timestamps;
-        } else {
-          t.innerHTML = newMessages[l].send+": <b>"+newMessages[l].message+"</b> to: "+newMessages[l].user+" at: "+newMessages[l].timestamps;
+      if (newMessages[l].timestamps != undefined) {
+        if (newMessages[l].send == sessionStorage.username || newMessages[l].user == sessionStorage.username || newMessages[l].user == "public" || sessionStorage.username == "admin") {
+          var t = document.createElement("DIV");
+          t.style = "margin-left:5%;margin-right:44%;margin-bottom:1%;margin-top:1%;padding:1%;border:1px solid black;word-wrap:break-word;width:50%;";
+          var data;
+          if (sessionStorage.username == newMessages[l].send || sessionStorage.username == "admin") {
+            var q = document.createElement("BUTTON");
+            t.id = l;
+            q.setAttribute("onclick", 'var arr=[]; for(l=0;l<messages.length;l++) {if (messages[l].send == messages[this.parentElement.id].send){arr=arr.concat(messages[l]);}} for (l=0;l<arr.length;l++) {if (arr[l].timestamps == messages[this.parentElement.id].timestamps) {arr.splice(l,1);}}update(messages[this.parentElement.id].send,"messages",JSON.stringify(arr));messages=arr;this.parentElement.remove()');
+            q.innerHTML = "Delete";
+            t.innerHTML = q.outerHTML+" <b style='color:gray';>"+newMessages[l].send+" -> "+newMessages[l].user+"</b><div><b>"+newMessages[l].message+"</b></div>"+" <b style='color:gray;'>"+new Date(newMessages[l].timestamps).toDateString()+'</b>';
+          } else {
+           t.innerHTML = newMessages[l].send+" -> "+newMessages[l].to+"<div><b>"+newMessages[l].message+"</b></div>"+" <b style='color:gray;'>"+new Date(newMessages[l].timestamps).toDateString()+'</b>';
+          } 
+          e.push(t);
+          d.push(t);
+          document.getElementById("messages").appendChild(t);  
         } 
-        e.push(t);
-        d.push(t);
-        document.getElementById("messages").appendChild(t);
-        
-      } 
+      }
       l++;
     }
     oldMessages = messages;
