@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
   <head>
@@ -1154,6 +1153,21 @@
   function level(num, mo, m) {
     // remove event listener from all levelSelect screens
     // levelSelect();
+    if (num <= 10000) {
+      if (m) {
+        Game.borders = [-500, 500, -500, 500]
+        window.setInterval(function() {
+          if (Math.round(Math.random())>0) {
+            var x = Math.round(Math.random()*20)-10;
+            var y = Math.round(Math.random()*20)-10;
+            weak(x,y,true)
+            user.tank.scaffolding.push({x:x, y:y});
+          } else {
+            createAi((Math.round(Math.random()*20)-10)*50-50, (Math.round(Math.random()*20)-10)*50-50,true,3,3);
+          }
+        }, 1000);
+      }
+    }
     document.removeEventListener('keydown', levelSelectKeyDown);
     document.removeEventListener('click', levelSelectSupport);
     // levelSelect2();
@@ -1163,7 +1177,7 @@
     draw.setTransform(1, 0, 0, 1, -user.tank.x+230, -user.tank.y+230);
     draw.fillStyle="#000000";
     draw.fillRect(-1000, -1000, 2000, 2000);draw.clearRect(0, 0, 500, 500);
-    if (Game.level%10==0) {
+    if (Game.level%10==0 || Game.level > 10000) {
       draw.drawImage(floor, -500, -500, 500, 500);
       draw.drawImage(floor, -500, 0, 500, 500);
       draw.drawImage(floor, 0, -500, 500, 500);
@@ -1757,6 +1771,12 @@
     draw.fillText("Upgrades", 75, 385);
     draw.fillText("#####", 340, 385);
     document.addEventListener("click", mainMenuSupport);
+    document.addEventListener('keydown', function(e) {
+      if (e.keyCode == 69) {
+        Game.level = 10000;
+        level(10000, null, true);
+      }
+    })
   }
   function mainMenuSupport(e) {
     if (e.pageX || e.pageY) {
