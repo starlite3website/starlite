@@ -71,7 +71,7 @@
     <h1 id="gameName"> Increedible Tanks </h1>
     <h3 id="views"></h3>
     <h3 id="users"></h3>
-    <h2>See if your #1! <a href='/scoreboard'>Scoreboard!</a></h2>
+    <h2>See if your First! <a href='/scoreboard'>Scoreboard!</a></h2>
     <canvas width="500" height="500" id="canvas" tabindex='1'>
       <strong>Canvas is not supported.</strong> Try using a diffrent browser, If that does not work, please restart your device or use a diffrent device. </canvas>
     <iframe src="/chat" width="500" height="500"></iframe>
@@ -274,7 +274,7 @@
     }
     move() {
       if (this.Mcounter==2) {
-        if (this.inactive != true) {
+        if (this.inactive != true && !Game.flashbanged) {
           if (this.update) {
             this.instructions = this.moveCalc();
           } else {
@@ -400,8 +400,8 @@
       } else {
         this.rotation += 90;
       }
-      this.rotation += Math.floor(Math.random()*15);
-      this.rotation -= Math.floor(Math.random()*15);
+      this.rotation += Math.floor(Math.random()*30);
+      this.rotation -= Math.floor(Math.random()*30);
       if (300 > Math.sqrt(this.xdistance * this.xdistance + this.ydistance * this.ydistance)) {
         var fire = true;
       }
@@ -430,7 +430,6 @@
     }
   }
   class Shot {
-    
     constructor(x, y, id, xm, ym) {
       this.xm = xm;
       this.ym = ym;
@@ -560,6 +559,18 @@
       draw.fillRect(this.x, this.y + 50, 40, 5);
       draw.fillStyle="#90EE90";
       draw.fillRect(this.x+2, this.y+51, 36*this.health/userData.health, 3); 
+      // Additional Things
+      draw.globalAlpha=.4;
+      draw.setTransform(1, 0, 0, 1, 0, 0);
+      draw.fillStyle="#ffffff";
+      draw.fillRect(100, 450, 50, 50);
+      draw.fillRect(183, 450, 50, 50);
+      draw.fillRect(266, 450, 50, 50);
+      draw.fillRect(349, 450, 50, 50);
+      draw.globalAlpha=1;
+      draw.fillStyle="#ffffff";
+      draw.fillText(userData.boosts, 135, 470);
+      draw.setTransform(1, 0, 0, 1, -user.tank.x+230, -user.tank.y+230);
     }
     
     check() {
@@ -580,6 +591,7 @@
     }
     
     initialize() {
+      this.canFireFlashbang = true;
       this.scaffolding = [];
       this.canPlaceScaffolding = true;
       this.speed = 2;
@@ -713,6 +725,21 @@
               }
             }
           break;
+          case 69:
+            if (userData.flashbangs > 0) {
+              if (this.canFireFlashbang) {
+                userData.flashbangs -= 1;
+                Game.flashbanged = true;
+                this.canFireFlashbang = false;
+                setTimeout(function() {
+                  Game.flashbanged = false;
+                }, 10000);
+                setTimeout(function() {
+                  user.tank.canFireFlashbang = true;
+                }, 15000);
+              }
+            }
+          break;
         }
       } else {
         a("Game is paused", "yellow");
@@ -794,6 +821,7 @@
   }
   var tankSupport;
   function tank_listener4() {
+    clearInterval(tankSupport);
     tankSupport = window.setInterval(tank_support, 15);
   }
   function tank_support() {
@@ -858,6 +886,7 @@
     s = [];
   }
   function Game() {
+    this.flashbanged = false;
     this.coins = 0;
     this.foes = 0;
     this.paused = false;
@@ -1147,6 +1176,8 @@
       Game.control();
       Game.i();
       user.tank.initialize();
+      s = [];
+      b = [];
     }
     draw.font = "20px starfont";
     draw.fillStyle = "#FFDF00";
@@ -1609,10 +1640,10 @@
     draw.fillText('Buy a Toolkit', 110, 310);
     draw.fillText('Buy Flashbang', 105, 380);
     draw.fillStyle="#ffffff";
-    draw.fillText('Cost: 1000 Gold', 240, 170);
-    draw.fillText('Cost: 1500 Gold', 240, 240);
+    draw.fillText('Cost: 200 Gold', 240, 170);
+    draw.fillText('Cost: 500 Gold', 240, 240);
     draw.fillText('Cost: 1000 Gold', 240, 310);
-    draw.fillText('Cost: 5000 Gold', 240, 380);
+    draw.fillText('Cost: 2000 Gold', 240, 380);
     draw.fillStyle="#000000";
     draw.fillText("Main Menu", 75, 75);
     document.addEventListener("click", shopSupport);
@@ -1640,8 +1671,8 @@
       if (x<200) {
         if (y>140) {
           if (y<190) {
-            if (userData.coins >= 1000) {
-              userData.coins -= 1000;
+            if (userData.coins >= 200) {
+              userData.coins -= 200;
               userData.boosts += 1;
               var t = playerData;
               t["increedible-tanks"]=userData;
@@ -1655,8 +1686,8 @@
       if (x<200) {
         if (y>210) {
           if (y<260) {
-            if (userData.coins >= 1500) {
-              userData.coins -= 1500;
+            if (userData.coins >= 500) {
+              userData.coins -= 500;
               userData.blocks += 1;
               var t = playerData;
               t["increedible-tanks"]=userData;
@@ -1670,7 +1701,7 @@
       if (x<200) {
         if (y>280) {
           if (y<330) {
-            if (userData.coins >= 1000) {
+            if (userData.coins >= 000) {
               userData.coins -= 1000;
               userData.toolkits += 1;
               var t = playerData;
@@ -1685,8 +1716,8 @@
       if (x<200) {
         if (y<350) {
           if (y<400) {
-            if (userData.coins >= 5000) {
-              userData.coins -= 5000;
+            if (userData.coins >= 2000) {
+              userData.coins -= 2000;
               userData.flashbangs += 1;
               var t = playerData;
               t['increedible-tanks']=userData;
