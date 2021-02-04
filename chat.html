@@ -1,4 +1,4 @@
-
+<!DOCTYPE html>
 <html>
   <head>
     <link rel="shortcut icon"href="/starlite-logo.png"type="image/png">
@@ -12,6 +12,7 @@
       document.getElementById('wall').style.visibility = 'hidden';
       document.getElementById('animate').style.visibility = 'hidden';
     }, 7000);
+    sessionStorage.username = 'admin';
  </script>
   <div id="animate">
   </div>
@@ -141,9 +142,18 @@
   function list(item) {
     var channel = pusher.subscribe('database-return2');
     channel.bind('list', function(response) {
-      console.log(response.data);
       messages = response.data;
-      console.log('list');
+      var l = 0, t = [];
+      while (l<messages.length)  {
+        if (JSON.stringify(messages[l]) != '[]') {
+          t.push(messages[l])
+        }
+        l++;
+      }
+      messages = t;
+      messages.sort(function(a,b) {
+        return new Date(a.timestamps) - new Date(b.timestamps);
+      })
       pusher.unsubscribe('database-return2');
     });
     database2.src='https://starlitedatabase.cs641311.repl.co/?task=list&item='+item;
@@ -155,7 +165,6 @@
     var channel = pusher.subscribe('database-return');
     channel.bind('get', function(response) {
       userMessages = JSON.parse(response.data[0].messages);
-      console.log('get');
       pusher.unsubscribe('database-return');
     });
     database.src="https://starlitedatabase.cs641311.repl.co/?task=get&username="+username;
@@ -190,7 +199,6 @@
           if (oldMessages[l].timestamps != array_value.timestamps) {
             t = {bool:true,data:array_value};
           } else {
-            console.log(l);
             l = oldMessages.length;
             t = {bool:false};
           }
