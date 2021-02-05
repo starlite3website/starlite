@@ -380,8 +380,10 @@
             this.y = undefined;
             this.inactive = true;
             if (Game.foes == 0) {
-              setTimeout(victory, 20);
-              Game.endGame();
+              if (Game.level < 10000) {
+                setTimeout(victory, 20);
+                Game.endGame();
+              }
             }
           }
         }
@@ -739,6 +741,16 @@
               }
             }
           break;
+          case 76:
+            if (Game.level >= 10000) {
+              window.clearInterval(endlessRunner);
+              Game.endGame();
+              setTimeout(function() {
+                Game.endGame();
+                victory();
+              }, 5000);
+            }
+          break;
         }
       } else {
         a("Game is paused", "yellow");
@@ -1039,6 +1051,7 @@
   var canvas = document.getElementById("canvas"); // getting the canvas element
   var consoleText = document.getElementById("consoleText"); // text control for console
   var draw = canvas.getContext("2d"); // getting the canvas to be able to draw
+  var endlessRunner;
   draw.font = "15px starfont";
   draw.fillText("abcdefghijklmnopqrstuvwxyz", 0, 0); // init font
   draw.clearRect(0,0,500,500);
@@ -1153,11 +1166,12 @@
   function level(num, mo, m) {
     // remove event listener from all levelSelect screens
     // levelSelect();
-    if (num <= 10000) {
+    if (num >= 10000) {
       if (m) {
-        Game.borders = [-500, 500, -500, 500]
-        window.setInterval(function() {
-          if (Math.round(Math.random())>0) {
+        document.removeEventListener('keydown', endlessModeRunner);
+        Game.borders = [-500, 500, -500, 500];
+        endlessRunner = window.setInterval(function() {
+          if (Math.round(Math.random()*2)>=1) {
             var x = Math.round(Math.random()*20)-10;
             var y = Math.round(Math.random()*20)-10;
             weak(x,y,true)
@@ -1165,7 +1179,7 @@
           } else {
             createAi((Math.round(Math.random()*20)-10)*50-50, (Math.round(Math.random()*20)-10)*50-50,true,3,3);
           }
-        }, 1000);
+        }, 5000);
       }
     }
     document.removeEventListener('keydown', levelSelectKeyDown);
@@ -1177,7 +1191,7 @@
     draw.setTransform(1, 0, 0, 1, -user.tank.x+230, -user.tank.y+230);
     draw.fillStyle="#000000";
     draw.fillRect(-1000, -1000, 2000, 2000);draw.clearRect(0, 0, 500, 500);
-    if (Game.level%10==0 || Game.level > 10000) {
+    if (Game.level%10==0 || Game.level >= 10000) {
       draw.drawImage(floor, -500, -500, 500, 500);
       draw.drawImage(floor, -500, 0, 500, 500);
       draw.drawImage(floor, 0, -500, 500, 500);
@@ -1771,13 +1785,14 @@
     draw.fillText("Upgrades", 75, 385);
     draw.fillText("#####", 340, 385);
     document.addEventListener("click", mainMenuSupport);
-    document.addEventListener('keydown', function(e) {
+    document.addEventListener('keydown', endlessModeRunner);
+  }
+  function endlessModeRunner(e) {
       if (e.keyCode == 69) {
         Game.level = 10000;
         level(10000, null, true);
       }
-    })
-  }
+    }
   function mainMenuSupport(e) {
     if (e.pageX || e.pageY) {
       x = e.pageX;
