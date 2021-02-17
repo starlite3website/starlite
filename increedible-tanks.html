@@ -71,16 +71,11 @@
     <h3 id="views"></h3>
     <h3 id="users"></h3>
     <h2>See if your First! <a href='/scoreboard'>Scoreboard!</a></h2>
-    <h2><span style='color: red;'>IMPORTANT: If you do not see your accurate stats reload until you do. It is not deleted the website just has a bug.</span></h2>
     <canvas width="500" height="500" id="canvas" tabindex='1'>
       <strong>Canvas is not supported.</strong> Try using a diffrent browser, If that does not work, please restart your device or use a diffrent device. </canvas>
     <iframe src="/chat" width="500" height="500"></iframe>
-    <div id="play">
-      <h5 id="playText DEACTIVE"></h5>
-    </div> 
-    <div id="alertConsole">
-      <h5 id="consoleText">
-      </h5>
+    <div id='container' width='500px' style="margin-top: -250px">
+      <input id='server' type='number' style="display: none; margin-left:200px; width:100px; z-index: 1000000; position: absolute;"/>
     </div>
   </div>
   <style>
@@ -110,7 +105,6 @@
   }
   function after(err, data) {
     if (err !== null) {
-      console.log('Something went wrong: ' + err);
     } else {
     var l = 0;
       while (l<data.feed.entry.length) {
@@ -469,8 +463,8 @@
     
     update() {
       if (this.counter == 1) {
-        this.x += this.xm/2;
-        this.y += this.ym/2;
+        this.x += this.xm;
+        this.y += this.ym;
         this.counter = 0;
       } else {
         this.counter++;
@@ -483,48 +477,160 @@
       level(Game.level, "n", false);
     }
   }
-  class Joiner {
-    control(channelname) {
-      this.socket = pusher.subscribe('private-'+channelname);
-      this.socket.bind('client-hostupdate', this.render);
-      
+  var teamData = {}, pt = [];
+  class Host {
+    control(channelnum) {
+      this.blockData = ['', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''];
+      this.socket = new WebSocket('wss://us-nyc-1.websocket.me/v3/'+channelnum+'?api_key=Yaq8qJi37vGpAHja1BEVgnZkq79E6CT48YURNrJZ')
+      this.socket.onmessage = function(data) {
+        data = JSON.parse(data.data);
+        if (data.event == 'joinerjoin') {
+          user.host.joinerjoin(data.data);
+        } else {
+          user.host.joinerupdate(data.data);
+        }
+      }
+      teamData.red = {players:[]};
+      teamData.blue = {players:[]};
+      if (Math.round(Math.random()*2)) {
+        teamData.red.players.push(user.username);
+        user.tank.team = 'red';
+      } else {
+        teamData.blue.players.push(user.username);
+        user.tank.team = 'blue';
+      }
+      window.setInterval(function() {
+        user.host.send();
+      }, 75);
+      Game.level = 'multiplayer';
+      level('multiplayer', null, true);
     }
-    render(data) {
-      draw.clearRect(0, 0, 500, 500);
-      draw.fillStyle="#000000";
-      draw.fillRect(-1000, -1000, 2000, 2000);
-      this.hostupdate = JSON.parse(data.message);
+    joinerupdate(data) {
+      var tank = data;
+      //if (tank.fire) {
+        // use tank.rotation to shoot
+        // create new Shot(); include team tank.team
+      //}
       var l = 0;
-      while (l<this.hostupdate.tanks.length) {
-        if (sessionStorage.username == this.hostupdate.tank[l].username){
-          draw.setTransfrom(1, 0, 0, 1, -this.hostupdate.tank[l].x+230, -this.hostupdate.tank[l].y+230);
+      while (l<pt.length) {
+        if (pt[l].username == tank.username) {
+          if (checker(pt[l].x+tank.x, pt[l].y+tank.y)) {
+            pt[l].x += x;
+            pt[l].y += y;
+          }
+          pt[l].rotation += tank.rotation;
+          pt[l].leftright = tank.leftright;
         }
         l++;
       }
-      var l = 0;
-      while (l<this.hostupdate.tanks.length) {
-        Tank.draw().bind(this.hostname.tanks[l]);
-        l++;
-      }
-      var l = 0;
-      while (l<this.hostupdate.blocks.length) {
-        eval('Block.'+this.hostupdate.blocks[l].type+'().bind('+this.hostupdate.blocks[l]+');');
-        l++;
-      }
-      var l = 0;
-      while (l<this.hostupdate.ai.length) {
-        Ai.draw().bind(this.hostupdate.ai[l]);
-        l++;
-      }
-      var l = 0;
-      while (l<this.hostupdate.bullets.length) {
-        Shot.draw().bind(this.hostupdate.bullets[l]);
-        l++;
+    }
+    joinerjoin(data) {
+      // registers a new tank to the server
+      // pt = playertanks, teamData = team core hp and team playertanks
+      if (data.event == 'joinerjoin') {
+        var tank = data;
+        //var tank = JSON.parse(data);
+        if (Math.round(Math.random()*2)) {
+          tank.team = 'red';
+          teamData.red.players.push(tank.username)
+          tank.x = 7*50;
+          tank.y = -10*50;
+        } else {
+          tank.team = 'blue';
+          teamData.blue.players.push(tank.username);
+          tank.x = 12*50;
+          tank.y = 19*50;
+        }
+        pt.push(tank);
       }
     }
+    send() {
+      user.host.socket.send(JSON.stringify({
+        event: 'hostupdate',
+        tanks : pt.concat([{x:user.tank.x, y:user.tank.y, health:user.tank.health, rotation:user.tank.rotation, leftright:user.tank.leftright, username:user.username}]),
+        blocks : user.host.blockData,
+        ai : ai,
+        bullets : s,
+      }));
+    }
+  }
+  class Joiner {
+    control(channelnum) {
+      this.tank = {};
+      window.setInterval(function() {
+        draw.clearRect(0, 0, 500, 500);
+        draw.fillStyle = "#000000";
+        draw.fillRect(-1000, -1000, 1000, 1000);
+        draw.drawImage(floor, -500, -500, 500, 500);
+        draw.drawImage(floor, -500, 0, 500, 500);
+        draw.drawImage(floor, 0, -500, 500, 500);
+        draw.drawImage(floor, 0, 0, 500, 500);
+        levelReader(user.joiner.socket.hostupdate.blocks, false, true, [-500, 500, -500, 500]);
+        var l = 0;
+        while (l<pt.length) {
+          if (pt[l].leftright == true) {
+            draw.translate(pt[l].x + 20,  pt[l].y + 20)
+            draw.rotate(90 * Math.PI / 180);
+            if (pt[l].u > 40) {
+              draw.drawImage(tank_base_png, -20, -20);
+            } else {
+              draw.drawImage(tank_base2, -20, -20);
+            }
+            draw.rotate(-90 * Math.PI / 180);
+            draw.translate((-pt[l].x - 20), (-pt[l].y - 20));
+          } else {
+            if (pt[l].u > 40) {
+              draw.drawImage(tank_base_png, pt[l].x, pt[l].y);
+            } else {
+              draw.drawImage(tank_base2, pt[l].x, pt[l].y);
+            }
+          }
+          draw.translate(pt[l].x + 20, pt[l].y + 20);
+          draw.rotate(pt[l].rotation * Math.PI  / 180);
+          draw.drawImage(tank_top_png, -20, -20);
+          draw.rotate(-(pt[l].rotation * Math.PI / 180));
+          draw.translate(-pt[l].x - 20, -pt[l].y - 20);
+          // Health Bar!
+          draw.fillStyle="#000000";
+          draw.fillRect(pt[l].x, pt[l].y + 50, 40, 5);
+          draw.fillStyle="#90EE90";
+          draw.fillRect(pt[l].x+2, pt[l].y+51, 36*pt[l].health/userData.health, 3); 
+          // Additional Things
+          draw.globalAlpha=.4;
+          draw.setTransform(1, 0, 0, 1, 0, 0);
+          draw.fillStyle="#ffffff";
+          draw.fillRect(100, 450, 50, 50);
+          draw.fillRect(183, 450, 50, 50);
+          draw.fillRect(266, 450, 50, 50);
+          draw.fillRect(349, 450, 50, 50);
+          draw.globalAlpha=1;
+          draw.fillStyle="#ffffff";
+          draw.fillText(userData.boosts, 135, 470);
+          //draw.setTransform(1, 0, 0, 1, -pt[l].x+230, -pt[l].y+230);
+          l++;
+        }
+      }, 10);
+      Game.level = 'multiplayer-joiner';
+      this.socket = new WebSocket('wss://us-nyc-1.websocket.me/v3/'+channelnum+'?api_key=Yaq8qJi37vGpAHja1BEVgnZkq79E6CT48YURNrJZ')
+      this.socket.onmessage = function(data) {
+        data = JSON.parse(data.data);
+        if (data.event == 'hostupdate') {
+          this.hostupdate = data;
+          pt = this.hostupdate.tanks
+        }
+      }
+      this.socket.onopen = function() {
+        user.joiner.socket.send(JSON.stringify({
+          event: 'joinerjoin',
+          data: {
+            username: user.username,
+          },
+        }));
+      }
+      canvas.addEventListener('keydown', this.keyHandler);
+    }
     keyHandler(e) {
-      // replicate tank movement here
-      // first add mouse
+      
     }
   }
   class Hoster {
@@ -611,6 +717,7 @@
       this.inactive = false;
       this.rotation = 0;
       this.CanBoost = true;
+      this.leftright = true;
       canvas.focus();
       this.draw();
       /*i.push(window.setInterval(function() {
@@ -986,15 +1093,16 @@
     this.x = x;
     this.y = y;
     this.isScaffolding = isScaffolding;
-    this.wall = function(x,y) {    
+    this.wall = function(x,y) {   
       draw.drawImage(wall_image, x * 50, y * 50);
       if (this.health == undefined) {
-        this.health = Infinity;
+        this.health = Infinity;this.type = 'wall';
       }
     }
     this.strong = function(x,y) {
       if (this.health == undefined) {
         this.health = 60;
+        this.type = 'strong';
       }
       draw.strokeStyle = "#000000";
     draw.fillStyle = "#D3D3D3";
@@ -1025,6 +1133,7 @@
     this.weak = function(x,y) {
       if (this.health == undefined) {
         this.health = 20;
+        this.type = 'weak';
       }
       draw.drawImage(weak_image, x * 50, y * 50);
     }
@@ -1034,6 +1143,11 @@
         if (ai_check(b[l].x*50,b[l].y*50)) {
           b[l].health -= 10;
           if (b[l].health <= 0) {
+            if (Game.level == 'multiplayer') {
+              var strand = user.host.blockData[b[l].y+10].split('');
+              strand[b[l].x+10] = ' ';
+              user.host.blockData[b[l].y+10] = strand.join('');
+            }
             block_support(l);
           }
         }
@@ -1133,31 +1247,33 @@
         var p = array[l].split(""); // Block key: # = invincible, 1 = weak, 2 = strong, @ = player, A = ai
         if (p[q] == "#") {
           if (quad) {
+            if (Game.level == 'multiplayer' && m) user.host.blockData[l] += '#';
             wall(q-10, l-10, m);
           } else {
             wall(q, l, m);
           }
-        }
-        if (p[q] == "1") {
+        } else if (p[q] == "1") {
           if (quad) {
+            if (Game.level == 'multiplayer' && m) user.host.blockData[l] += '1';
             weak(q-10, l-10, m);
           } else {
             weak(q, l, m);
           }
-        }
-        if (p[q] == "2") {
+        } else if (p[q] == "2") {
           if (quad) {
-            strong(q-10, l-10, m);
+            if (Game.level == 'multiplayer' && m) user.host.blockData[l] += '2';
+             strong(q-10, l-10, m);
           } else {
             strong(q, l, m);
           }
-        }
-        if (p[q] == "A") {
+        } else if (p[q] == "A") {
           if (quad) {
             createAi((q-10)*50, (l-10)*50, m, 3, 3);
           } else {
             createAi(q*50, l*50,m, 3, 3);
           }
+        } else {
+          if (Game.level == 'multiplayer' && m) user.host.blockData[l]+=' ';
         }
       }
     }
@@ -1168,7 +1284,6 @@
     // remove event listener from all levelSelect screens
     if (num >= 10000) {
       if (m) {
-        document.removeEventListener('keydown', endlessModeRunner);
         Game.borders = [-500, 500, -500, 500];
         endlessRunner = window.setInterval(function() {
           if (Math.round(Math.random()*2)>=1) {
@@ -1179,7 +1294,7 @@
           } else {
             createAi((Math.round(Math.random()*20)-10)*50-50, (Math.round(Math.random()*20)-10)*50-50,true,3,3);
           }
-        }, 5000);
+        }, 1000);
       }
     }
     document.removeEventListener('keydown', levelSelectKeyDown);
@@ -1190,11 +1305,13 @@
     //levelSelect3();
     document.removeEventListener('keydown', levelSelect3KeyDown);
     document.removeEventListener('click', levelSelect3Support);
+    //multiplayer();
+    document.removeEventListener('click', multiplayer2);
     // make viewport follow tank
     draw.setTransform(1, 0, 0, 1, -user.tank.x+230, -user.tank.y+230);
     draw.fillStyle="#000000";
     draw.fillRect(-1000, -1000, 2000, 2000);draw.clearRect(0, 0, 500, 500);
-    if (Game.level%10==0 || Game.level >= 10000) {
+    if (Game.level%10==0 || Game.level >= 10000 || Game.level == 'multiplayer') {
       draw.drawImage(floor, -500, -500, 500, 500);
       draw.drawImage(floor, -500, 0, 500, 500);
       draw.drawImage(floor, 0, -500, 500, 500);
@@ -1218,6 +1335,11 @@
       if (ai_check(b[l].x * 50, b[l].y * 50)) {
         b[l].health -= 10;
         if (b[l].health <= 0) {
+          if (Game.level == 'multiplayer') {
+            var strand = user.host.blockData[b[l].y+10].split('');
+            strand[b[l].x+10] = ' ';
+            user.host.blockData[b[l].y+10] = strand.join('');
+          }
           block_support(l);
         }
       }
@@ -1608,6 +1730,19 @@
       }
       levelReader(['  # 2  A  ', '  #A#    A', '#######2##', ' A###A2   ', '2######22#', ' A#A# A   ', '  #2#A11  ', 'A 2 2 1 1#', '  # 2  11 ', '  ###  # @'], m, false, [0, 500, 0, 500]);
     }
+
+
+    if (num == 'multiplayer') {
+      if (mo != "n") {
+        if (user.tank.team == 'red') {
+          spawn(-2,-10);
+        } else {
+          spawn(2, 9)
+        }
+      }
+      //user.tank.host.send();
+      levelReader([' 2    2  2  2  222B#', '   2     2  2  #####', ' 2  22  2###########', '        2#2   2   2#', '  2  2 2 #  2   2  #', '2  2 2   #11111#1 1#', '        2#11111#1 1#', '  2 2    211 11#1 1#', '2    2  2#11111#1 1#', '22222#####11111#1 1#', '#1 1#11111#####22222', '#1 1#11111#2  2    2', '#1 1#11 112    2 2  ', '#1 1#11111#2        ', '#1 1#11111#   2 2  2', '#  2   2  # 2 2  2  ', '#2   2   2#2        ', '###########2  22  2 ', '#####  2  2     2   ', '#R222  2  2  2    2 '], m, true, [-500, 500, -500, 500]);
+    }
     draw.drawImage(coins, 5, 5);
     draw.fillStyle="#ffffff";
     draw.fillText(Game.coins, 20, 20);
@@ -1706,7 +1841,7 @@
     }
   }
   function shop() {    
-    document.removeEventListener('click', mainMenuSupport);
+    canvas.removeEventListener('click', mainMenuSupport);
     draw.fillStyle="#556B2F";
     draw.fillRect(50,50,400,400);
     draw.fillStyle="#ffffff";
@@ -1814,8 +1949,8 @@
     }
   }
   function mainMenu() {
+    document.getElementById('server').style.display = "none";
     document.removeEventListener('click', shopSupport);
-    document.removeEventListener("keydown", multiplayer1);
     document.removeEventListener("click", multiplayer2);
     user.tank = new Tank();
     window.clearInterval(interval2);
@@ -1840,16 +1975,9 @@
     draw.fillStyle = "#000000";
     draw.fillText("Play Levels", 195, 385);
     draw.fillText("Upgrades", 75, 385);
-    draw.fillText("#####", 340, 385);
-    document.addEventListener("click", mainMenuSupport);
-    document.addEventListener('keydown', endlessModeRunner);
+    draw.fillText("XIn ProgressX", 340, 385);
+    canvas.addEventListener("click", mainMenuSupport);
   }
-  function endlessModeRunner(e) {
-      if (e.keyCode == 69) {
-        Game.level = 10000;
-        level(10000, null, true);
-      }
-    }
   function mainMenuSupport(e) {
     if (e.pageX || e.pageY) {
       x = e.pageX;
@@ -1860,6 +1988,12 @@
     }
     x -= canvas.offsetLeft;
     y -= canvas.offsetTop;
+    if (x < 50 || x > 450) {
+      if (y < 50 || y > 450) {
+        Game.level = 10000;
+        level(10000, null, true);
+      }
+    }
     if (x > 330) {
       if (x < 430) {
         if (y > 350) {
@@ -1890,7 +2024,7 @@
     }
   }
   function levelSelect() {
-    document.removeEventListener('click', mainMenuSupport);
+    canvas.removeEventListener('click', mainMenuSupport);
     draw.fillStyle = "#556B2f";
     draw.fillRect(50, 50, 400, 400);
     draw.fillStyle = "#ffffff";
@@ -2312,7 +2446,7 @@
     }
   }
   function levelSelect3() {
-    document.removeEventListener('click', mainMenuSupport);
+    canvas.removeEventListener('click', mainMenuSupport);
     draw.fillStyle = "#556B2f";
     draw.fillRect(50, 50, 400, 400);
     draw.fillStyle = "#ffffff";
@@ -2521,10 +2655,8 @@
   }
   // Place Holder
   function multiplayer() {
-    s=[];
-    d=[];
-    get(5,1);
-    setTimeout(function(){sessionStorage.servers = JSON.parse(o[5][0][1]);},2000);
+    document.getElementById('server').style.display = "block";
+    document.getElementById('container').style.margin_top = "-500px;";
     draw.fillStyle="#556B2F";
     draw.fillRect(50,50,400,400);
     draw.fillStyle="#ffffff";
@@ -2542,7 +2674,6 @@
     draw.fillText("Join Game", 150, 330);
     draw.fillText("Host Game", 260, 330);
     draw.font="60px starfont";
-    document.addEventListener("keydown", multiplayer1);
     document.addEventListener("click", multiplayer2);
   }
   function multiplayer2(e) {
@@ -2559,11 +2690,10 @@
         if (x<360) {
           if (y>300) {
             if (y<350) {
-              if (sessionStorage.servers.includes(s[0]*100+s[1]*10+s[2])) {
-                a('Sorry, room is taken');
-              } else {
+              var server = document.getElementById('server');
+              if (server.value != "") {
                 user.host = new Host();
-                user.host.control(s[0]*100+s[1]*10+s[2]);
+                user.host.control(server.value);
               }
             }
           }
@@ -2573,12 +2703,11 @@
         if (x<250) {
           if (y>300) {
             if (y<350) {
-              //if (sessionStorage.servers.includes(s[0]*100+s[1]*10+s[2])) {
-                user.get = new Get();
-                user.get.control(s[0]*100+s[1]*10+s[2]);
-              //} else {
-              //  a("Room not found! Return to Main Menu and back to reload.");
-              //}
+              var server = document.getElementById('server');
+              if (server.value) {
+                user.joiner = new Joiner();
+                user.joiner.control(server.value);
+              }
             }
           }
         }
@@ -2593,26 +2722,6 @@
         }
       }
     } 
-  function multiplayer1(e) {
-      if (48 <= e.keyCode && e.keyCode <= 57) {
-        s.push(JSON.parse(e.key));
-      } else if (e.keyCode == 8) {
-        s = [];
-      }
-      var l = 0;
-      while (l < 3) {
-        if (s[l] == undefined) {
-          d[l] = 0;
-        } else {
-          d[l] = s[l];
-        }
-        l++;
-      }
-      draw.fillStyle="#556B2F";
-      draw.fillRect(200,200,200,60);
-      draw.fillStyle="#ffffff";
-      draw.fillText(d[0]*100+d[1]*10+d[2], 200, 250);
-    }
     
   function wall(x, y, m) {
     if (m) {
@@ -2627,6 +2736,9 @@
       }
       l++;
     }
+    if (Game.level == 'multiplayer-joiner') {
+      draw.drawImage(wall_image, x * 50, y * 50);
+    }
   } // creates a wall
   function strong(x, y, m) {
     if (m) {      
@@ -2640,6 +2752,33 @@
         }
       }
       l++;
+    }
+    if (Game.level == 'multiplayer-joiner') {
+      draw.strokeStyle = "#000000";
+      draw.fillStyle = "#D3D3D3";
+      draw.strokeRect(x * 50, y * 50, 50, 50);
+      draw.fillRect(x * 50, y * 50, 50, 50);
+      draw.beginPath();
+      draw.moveTo(x * 50, y * 50);
+      draw.lineTo(x * 50 + 10, y * 50 + 10);
+      draw.lineTo(x * 50 + 40, y * 50 + 10);
+      draw.lineTo(x * 50 + 50, y * 50 + 0);
+      draw.stroke();
+      draw.moveTo(x * 50, y * 50);
+      draw.lineTo(x * 50 + 10, y * 50 + 10);
+      draw.lineTo(x * 50 + 10, y * 50 + 40);
+      draw.lineTo(x * 50, y * 50 + 50);
+      draw.stroke();
+      draw.moveTo(x * 50, y * 50 + 50);
+      draw.lineTo(x * 50 + 10, y * 50 + 40);
+      draw.lineTo(x * 50 + 40, y * 50 + 40);
+      draw.lineTo(x * 50 + 50, y * 50 + 50);
+      draw.stroke();
+      draw.moveTo(x * 50 + 50, y * 50 + 50);
+      draw.lineTo(x * 50 + 40, y * 50 + 40);
+      draw.lineTo(x * 50 + 40, y * 50 + 10);
+      draw.lineTo(x * 50 + 50, y * 50 + 0);
+      draw.stroke();
     }
   } // creates a strong block
   function spawn(x, y) {
@@ -2659,6 +2798,9 @@
         }
       }
       l++;
+    }
+    if (Game.level == 'multiplayer-joiner') {
+      draw.drawImage(weak_image, x * 50, y * 50);
     }
   }
 
