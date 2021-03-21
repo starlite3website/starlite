@@ -44,9 +44,10 @@ img {
   display: none;
 }
 input {
-  width: 100%;
+  width: 75%;
   color: orangered;
+  margin-bottom: 5%;
 }
 #termsofservice {
   width: 5%;
-} 
+}
