@@ -7,7 +7,7 @@
 	<meta name='viewport' content='width=device-width, initial-scale=1.0'>
 	<meta name='robots' content='index, follow'>
 	<link rel='shortcut icon' href='/starlite-logo.png' type='image/png'>
-	<link rel='stylesheet' href='/style/account.css'>
+	<link rel='stylesheet' href='/style.css'>
 	<title>Starlite | Login/Signup</title>
 </head>
 
@@ -22,11 +22,13 @@
       authEndpoint: 'https://DimgreyZigzagProjector--five-nine.repl.co/pusher/auth',
     });
     var data;
-    function get(username) {
+    function get(username, callback) {
       var channel = pusher.subscribe('database-return');
+      channel.callback = callback;
       channel.bind('get', function(response) {
         data = response.data[0];
         pusher.unsubscribe('database-return');
+        channel.callback();
       });
       database.src='https://starlitedatabase.cs641311.repl.co/?task=get&username='+username;
     }
@@ -39,7 +41,7 @@
 	</script>
   <a href='/' class='content-return'>< <u>Back</u></a>
 	<div class="form">
-		<img src="/starlite-logo.png"/>
+		<img src="https://starliteprojects.tk/starlite-logo.png"/>
       <h1 class='content-title'>Sign up/Login</h1>
       <div class="input">
         <b>Username:</b>
@@ -59,22 +61,21 @@
     <script> 
       var submit=document.getElementById("submit");
       var newaccount=document.getElementById("newaccount");
-      submit.addEventListener("click", function() {
+      submit.addEventListener("click", async function() {
         var usernameInput=document.getElementById("usernameForm");
         var passwordInput=document.getElementById("passwordForm");
-        get(usernameInput.value);
-        setTimeout(function() {
+        get(usernameInput.value, function() {
+          console.log(data);
           if (data.password == passwordInput.value) {
             sessionStorage.setItem("username",usernameInput.value);
             window.location.href="/dashboard";
           }
-        }, 3000);  
+        });
       });
-      newaccount.addEventListener("click",function(){
+      newaccount.addEventListener("click", async function(){
         var usernameInput=document.getElementById("usernameForm");
         var passwordInput=document.getElementById("passwordForm");
-        get(usernameInput.value);
-        setTimeout(function() {
+        get(usernameInput.value, function() {
           if (data) {
             alert("Account Taken :(");
           } else {
@@ -82,7 +83,7 @@
             sessionStorage.username = usernameInput.value;
             window.location.href = "/dashboard";
           }
-        }, 3000);
+        });
       });
     </script>
   </div>
