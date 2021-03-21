@@ -1,136 +1,90 @@
+<!DOCTYPE html>
+<html>
+
 <head>
-  <title>Starlite | Accounts</title>
-  <link rel="shortcut icon"href="/starlite-logo.png"type="image/png">
+	<meta charset='UTF-8'>
+	<meta name='description' content='Login or Sign Up here'>
+	<meta name='viewport' content='width=device-width, initial-scale=1.0'>
+	<meta name='robots' content='index, follow'>
+	<link rel='shortcut icon' href='/starlite-logo.png' type='image/png'>
+	<link rel='stylesheet' href='/style.css'>
+	<title>Starlite | Login/Signup</title>
 </head>
-<iframe src="" id="database" visibility="hidden" display="hidden" width="0" height="0"></iframe>
-<script src="https://js.pusher.com/7.0/pusher.min.js"></script>
-<script>
-  var database = document.getElementById("database");
-  var pusher = new Pusher('127a8a2ca4a3676b2df9', {
-    cluster: 'us2',
-    authEndpoint: 'https://DimgreyZigzagProjector--five-nine.repl.co/pusher/auth',
-  });
-  var data;
-  function get(username) {
-    var channel = pusher.subscribe('database-return');
-    channel.bind('get', function(response) {
-      data = response.data[0];
-      pusher.unsubscribe('database-return');
+
+<body>
+	<iframe src="" id="database" visibility="hidden" display="hidden" width="0" height="0"></iframe>
+	<script src="https://js.pusher.com/7.0/pusher.min.js">
+	</script>
+	<script>
+		var database = document.getElementById("database");
+    var pusher = new Pusher('127a8a2ca4a3676b2df9', {
+      cluster: 'us2',
+      authEndpoint: 'https://DimgreyZigzagProjector--five-nine.repl.co/pusher/auth',
     });
-    database.src='https://starlitedatabase.cs641311.repl.co/?task=get&username='+username;
-  }
-  function update(username, key, value) {
-    database.src="https://starlitedatabase.cs641311.repl.co/?task=update&username="+username+"&key="+key+"&value="+value;
-  }
-  function newAccount(username, password) {
-    database.src="https://starlitedatabase.cs641311.repl.co/?task=new&username="+username+"&password="+password;
-  }
-</script>
-<div id="form">
-  <img src="/starlite-logo.png"/>
-  <h1>Sign up/Login</h1>
-  <div id="input">
-    <b>Username:</b>
-    <input type="text"id="usernameForm"/>
-  </div>
-  <div id="input">
-    <b>Password:</b>
-    <input type="password"id="passwordForm"/>
-  </div>
-  <div id="input">
-    <a href="/termsofservice"><b>Terms of Service:</b></a>
-    <input type="checkbox"id="termsofservice"/>
-  </div>
-  <button id="submit">Submit</button>
-  <button id="newaccount">New Account</button>
-  <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
-  <script> 
-    var submit=document.getElementById("submit");
-    var newaccount=document.getElementById("newaccount");
-    submit.addEventListener("click", function() {
-      var usernameInput=document.getElementById("usernameForm");
-      var passwordInput=document.getElementById("passwordForm");
-      get(usernameInput.value);
-      setTimeout(function() {
-        if (data.password == passwordInput.value) {
-          sessionStorage.setItem("username",usernameInput.value);
-          window.location.href="/dashboard";
-        }
-      }, 3000);  
-    });
-    newaccount.addEventListener("click",function(){
-      var usernameInput=document.getElementById("usernameForm");
-      var passwordInput=document.getElementById("passwordForm");
-      get(usernameInput.value);
-      setTimeout(function() {
-        if (data) {
-          alert("Account Taken :(");
-        } else {
-          newAccount(usernameInput.value, passwordInput.value);
-          sessionStorage.username = usernameInput.value;
-          window.location.href = "/dashboard";
-        }
-      }, 3000);
-    });
-  </script>
-  <style>
-      img{
-        width:100px;
-        height:100px;
-        margin-left:auto;
-      }
-    @font-face {
-      font-family: "starfont";
-      src: url(https://starlite.tk/FFFFORWA[1].TTF);
+    var data;
+    function get(username) {
+      var channel = pusher.subscribe('database-return');
+      channel.bind('get', function(response) {
+        data = response.data[0];
+        pusher.unsubscribe('database-return');
+      });
+      database.src='https://starlitedatabase.cs641311.repl.co/?task=get&username='+username;
     }
-      * {
-        font-family: starfont;
-      }
-      body {
-        background-color: orangered;
-      }
-      #form{
-        width: 30%;
-        text-align: center;
-        display:block;
-        padding:30px; 
-        margin-left:35%;
-        margin-right:35%;
-        margin-top:5%;
-        border:1px solid black;
-        background-color: white;
-      }
-      h1,input{
-        display:block;
-        margin-bottom:10px;
-      }
-      button{
-        display:block;
-        border:2px white;
-        font-size:20px;
-        padding:12px;
-        background-color:white;
-        color:black;
-      }
-      button:hover{
-        transition-duration:1.5s;
-        background-color:orangered;
-        color:white;
-        border-color:orangered;
-      }
-      img{
-        margin: auto;
-        margn-bottom: 5%;
-        display: block;
-      }
-      h1,a,button,b,input{
-        margin: auto;
-        margin-top: 5%;
-        display: inline;
-      }
-    #input {
-      display: block;
+    function update(username, key, value) {
+      database.src="https://starlitedatabase.cs641311.repl.co/?task=update&username="+username+"&key="+key+"&value="+value;
     }
-    </style>
+    function newAccount(username, password) {
+      database.src="https://starlitedatabase.cs641311.repl.co/?task=new&username="+username+"&password="+password;
+    }
+	</script>
+  <a href='/' class='content-return'>< <u>Back</u></a>
+	<div class="form">
+		<img src="https://starliteprojects.tk/starlite-logo.png"/>
+      <h1 class='content-title'>Sign up/Login</h1>
+      <div class="input">
+        <b>Username:</b>
+        <input type="text" id="usernameForm"/>
+      </div>
+      <div class="input">
+        <b>Password:</b>
+        <input type="password" id="passwordForm"/>
+      </div>
+      <div class="input">
+        <a href="/termsofservice"><b>Terms of Service:</b></a>
+        <input type="checkbox"id="termsofservice"/>
+      </div>
+      <button id="submit" class='submit'>Submit</button>
+      <button class="newaccount" id='newaccount'>New Account</button>
+      <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
+    <script> 
+      var submit=document.getElementById("submit");
+      var newaccount=document.getElementById("newaccount");
+      submit.addEventListener("click", function() {
+        var usernameInput=document.getElementById("usernameForm");
+        var passwordInput=document.getElementById("passwordForm");
+        get(usernameInput.value);
+        setTimeout(function() {
+          if (data.password == passwordInput.value) {
+            sessionStorage.setItem("username",usernameInput.value);
+            window.location.href="/dashboard";
+          }
+        }, 3000);  
+      });
+      newaccount.addEventListener("click",function(){
+        var usernameInput=document.getElementById("usernameForm");
+        var passwordInput=document.getElementById("passwordForm");
+        get(usernameInput.value);
+        setTimeout(function() {
+          if (data) {
+            alert("Account Taken :(");
+          } else {
+            newAccount(usernameInput.value, passwordInput.value);
+            sessionStorage.username = usernameInput.value;
+            window.location.href = "/dashboard";
+          }
+        }, 3000);
+      });
+    </script>
   </div>
+</body>
 </html>
