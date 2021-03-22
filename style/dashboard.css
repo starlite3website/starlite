@@ -49,7 +49,13 @@ button:hover {
 }
 body {
   margin: 0px;
-  background-color: orangered;
+}
+.body {
+  image-rendering: -webkit-optimize-contrast;
+  background-image: url(https://placeimg.com/1000/600/nature);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
 }
 .content-main-container {
   padding-top: 150px;
@@ -79,6 +85,7 @@ body {
 footer {
   color: white;
   font-size: 30px;
+  width: 100%;
   background-color:orangered;
   margin-bottom:0px;
   margin-left:0px;
@@ -104,6 +111,4 @@ footer {
 }
 iframe {
   display: none;
-  width: 0%;
-  height: 0%;
 }

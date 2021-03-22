@@ -7,7 +7,7 @@
 	<meta name='viewport' content='width=device-width, initial-scale=1.0'>
 	<meta name='robots' content='noindex, follow'>
 	<link rel='shortcut icon' href='/starlite-logo.png' type='image/png'>
-	<link rel='stylesheet' href='/style/dashboard.css'>
+	<link rel='stylesheet' href='/style.css'>
 	<title>Starlite</title>
 </head>
 <header class='header' id='header'>
@@ -34,7 +34,7 @@
       </script>
     </strong>
   </header>
-  <body>
+  <div class='body'>
     <iframe id='database'></iframe>
     <div class='content-main-container'>
       <h1 class='content-title-main'>Welcome To Dashboard!</h1>
@@ -59,7 +59,9 @@
                 pusher.unsubscribe('database-return');
                 channel.callback();
               });
-              database.src='https://starlitedatabase.cs641311.repl.co/?task=get&username='+username;
+              window.setTimeout(function() {
+                database.src='https://starlitedatabase.cs641311.repl.co/?task=get&username='+username;
+              }, 100);
             }
             function update(username, key, value) {
               database.src="https://starlitedatabase.cs641311.repl.co/?task=update&username="+username+"&key="+key+"&value="+value;
@@ -107,7 +109,7 @@
           </script>
       </div>
     </div>
-  </body>
+  </div>
   <footer class='footer'>
     <div class='footer-column'>
       <h2 class='footer-title'>Blog</h2>
