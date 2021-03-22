@@ -1,185 +1,99 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="UTF-8">
-    <meta name="description" content="in progress">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="robots" content="index, follow">
-    <link rel="shortcut icon" href="/starlite-logo.png" type="image/png">
-    <title>Starlite</title>
-  </head>
-  <header id="d1">
-    <img src="/starlite-logo.png" style="height:100px;width:100px;margin-bottom:-50px;margin-top:30px;margin-left:7.1428071428%;margin-right:3.0214030214%;"/>
+
+<head>
+	<meta charset='UTF-8'>
+	<meta name='description' content='Starlite is a game website that creates its own games.'>
+	<meta name='viewport' content='width=device-width, initial-scale=1.0'>
+	<meta name='robots' content='noindex, follow'>
+	<link rel='shortcut icon' href='/starlite-logo.png' type='image/png'>
+	<link rel='stylesheet' href='/style/dashboard.css'>
+	<title>Starlite</title>
+</head>
+<header class='header' id='header'>
+	<img width='50px' height='50px' src='data:image/png;base64,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' />
     <strong>
-      <a href="/home"style="font-family:Courier;text-decoration:none;color:black;margin-bottom:40px;">Starlite</a>
-      <a href="/news"><button>News</button></a>
-      <a href="/problems"><button>Bugs</button></a>
-      <a href="/chat"><button>Chat</button></a>
-      <a href="/entertainment"><button>Entertainment</button></a>
-      <a href="/settings"><button id="userAccount"></button></a>
+      <a href='/' class='site-name'>Starlite</a>
+      <a href='/news'><button>News</button></a>
+      <a href='/problems'><button>Bugs</button></a>
+      <a href='/chat'><button>Chat</button></a>
+      <a href='/projects'><button>Projects</button></a>
+      <a href='/settings'><button id='username'></button></a>
       <script>
-        if (sessionStorage.username!=undefined||sessionStorage.password!=undefined) {
-          loadAccountProgress();
-        } else {
-          window.location.href="https://starlite3.tk/account";
-        }
-        function loadAccountProgress () {
-          document.getElementById("userAccount").innerHTML=sessionStorage.username;
-        }
-        if(sessionStorage.username==undefined) {
-          window.location.href="/";
+        document.getElementById('username').innerHTML = sessionStorage.username;
+        window.addEventListener('scroll', function() {
+          if (document.documentElement.scrollTop == 0) {
+            document.getElementById('header').style = 'box-shadow: none; -moz-box-shadow: none; -webkit-box-shadow: none;';
+          } else {
+            document.getElementById('header').style = 'box-shadow: 0px 5px 5px #888; -moz-box-shadow: 0px 5px 5px #888; -webkit-box-shadow: 0px 5px 5px #888;';
+          }
+        }, false);
+        if(sessionStorage.username == undefined) {
+          window.location.href='/dashboard';
         }
       </script>
     </strong>
-    <style>
-      * {
-        font-family:Courier;
-      }
-      header {
-        position:fixed;
-        border-bottom:1px solid black;
-        margin-left:0px;
-        margin-right:0px;
-        background-color:white;
-        width:100%;
-        z-index:100;
-      }
-      button {
-        border:2px white;
-        font-size:20px;
-        padding:12px;
-        background-color:white;
-        color:black;
-        margin-left:7.1428071428%;
-        margin-bottom:50px;
-      }
-      button:hover {
-        transition-duration:1.5s;
-        background-color:orangered;
-        color:white;
-        border-color:orangered;
-      }
-      body {
-        margin:0;
-      }
-    </style>
-    <style>
-      #main {
-        background-color: orangered;
-        width: 100%;
-        height: 1000px;
-      }
-      #content {
-        position: absolute;
-        top: 30%;
-        left: 20%;
-        right: 20%;
-        text-align:center;
-        background-color:white;
-        padding:5%;
-        padding-left:5%;
-        padding-right:5%;
-        width:50%;
-        height:50%;
-      }
-    </style>
-    <style>
-      footer {
-        background-color:orangered;
-        margin-bottom:0px;
-        margin-left:0px;
-        margin-right:0px;
-        width:100%;
-        padding-top:5%;
-      }
-      #Footer{
-        display: inline;
-        text-decoration:none;
-        font-size:20px;
-        font-family:Courier;
-        margin-left:20%;
-        margin-bottom: 5%;
-        color:white;
-      }
-      #user-game-stats {
-        width: 100%;
-        height: 300px;
-        text-align: center;
-      }
-      #user-game-stats span {
-        color: orangered;
-      }
-      #user-game-stats p {
-        margin-left: 20%;
-        margin-right: 20%;
-      }
-      #user-game-stats h1 {
-        margin-top: 15%;
-      }
-    </style>
   </header>
-  <script>
-    if(sessionStorage.username!=undefined||sessionStorage.password!=undefined){
-      loadAccountProgress();
-    } else {
-      window.location.href="/account";
-    }
-    function loadAccountProgress(){
-      document.getElementById("userAccount").innerHTML=sessionStorage.username;
-    }
-  </script>
   <body>
-    <div id="main">
-      <div id="content">
-        <h1>Increedible Tanks Status</h1>
-        <p style="font-size: 30px;"><b>Verion:</b> 1.1.1. <b>Next Update:</b>Now<br><b>Increedible Tanks</b> is a 2d Tank shooter. The point of the game is to defeat enemy tanks to win gold for upgrades.<br> <b>Play</b> <a href="/increedible-tanks">here</a> <b>Bugs:</b> Bullets are broken...:(</h2>
+    <div class='content-main-container'>
+      <h1 class='content-title-main'>Welcome To Dashboard!</h1>
+      <div class='content-flex-container'>
+        <div class='content-column'>
+          <h1 class='content-title'>Increedible Tanks Stats</h1>
+          <div id='stat-holder'>
+          </div>
+          <script>
+          
+          </script>
+        </div>
+        <div class='content-column' id='right-column'>
+        <h1 class='content-title'>New Features</h1>
+          Here are a list of some features that will be added soon:
+          <div id='feature-holder'>
+          </div>
+          <script>
+            var features = [
+              {
+                name: 'Blog',
+                timeOfRelease: new Date("Nov 28 2021"),
+                description: 'We are adding a blog full of tips and tricks to help you up your game, warn about glitches, and teach you how to use the website.'
+              },
+              {
+                name: 'Full Site Design Update',
+                timeOfRelease: new Date("April 1 2021"),
+                description: 'We are currently updating the sites looks and features to improve it.'
+              }
+            ];
+            window.setInterval(function() {
+              document.getElementById('feature-holder').innerHTML = '';
+              var l = 0;
+              while (l<features.length) {
+                var distance = features[l].timeOfRelease - new Date();
+                var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                document.getElementById('feature-holder').innerHTML+='<h2>'+features[l].name+'</h2>'+'<i>'+days+'d '+hours+'h '+minutes+'m '+seconds+'s</i><br>'+features[l].description;
+                l++;
+              }
+            }, 200);
+          </script>
       </div>
     </div>
-    <div id="user-game-stats">
-      <h1>Your Game Stats</h1>
-      Currently In progress. This feature will come out in <b><span id="timer"></span></b>
-      <script>
-        var then = new Date("September 1, 2020"), now, hours, mins, secs, days, timer = document.getElementById("timer");
-        window.setInterval(countdown, 1000);
-        function countdown() {
-          now = new Date();
-          let distance = then - now;
-          days = Math.floor(distance / (1000 * 60 * 60 * 24));
-          hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-          mins = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-          secs = Math.floor((distance % (1000 * 60)) / 1000);
-          timer.innerHTML = days+"d "+hours+"h "+mins+"m "+secs+"s ";
-        }
-      </script>
-    </div>
   </body>
-  <footer id="d3">
-    <div id="FooterLink" id="d4">
-      <a href="/"id="Footer">Home</a>
-      <a href="/entertainment" id="Footer">Entertainment</a>
-      <a href="/problems" id="Footer">Game Bugs</a>                                                  
+  <footer class='footer'>
+    <div class='footer-column'>
+      <h2 class='footer-title'>Blog</h2>
+      <b class='footer-option'>Coming Soon</b>
     </div>
-    <div>
-      <a href="https://seal.beyondsecurity.com/vulnerability-scanner-verification/starlite3.tk"><img src="https://seal.beyondsecurity.com/verification-images/starlite3.tk/vulnerability-scanner-2.gif"alt="Website Security Test"border="0"></a>
-      Dark Theme:<input type="checkbox" id="dark"/>
-      <script>
-        var t = false;
-        document.getElementById("dark").addEventListener("click", function() {
-          if (!t) {
-            document.getElementById("d1").style.backgroundColor="black";
-            document.getElementById("d2").style.backgroundColor="black";
-            document.getElementById("d3").style.backgroundColor="black";
-            document.getElementById("d4").style.backgroundColor="black";
-            t=true;
-          } else {
-            document.getElementById("d1").style.backgroundColor="white";
-            document.getElementById("d2").style.backgroundColor="white";
-            document.getElementById("d3").style.backgroundColor="white";
-            document.getElementById("d4").style.backgroundColor="white";
-            t=false;
-          }
-        });
-      </script>
+    <div class='footer-column'>
+      <h2 class='footer-title'>Projects</h2>
+      <a href='/increedible-tanks' class='footer-option'>Increedible  Tanks</a>
+    </div>
+    <div class='footer-column'>
+      <h2 class='footer-title'>Other</h2>
+      <a href='/news' class='footer-option'>News</a>
+      <a href='/projects' class='footer-option'>Projects</a>
     </div>
   </footer>
 </html>
