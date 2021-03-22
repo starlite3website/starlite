@@ -7,7 +7,7 @@
 	<meta name='viewport' content='width=device-width, initial-scale=1.0'>
 	<meta name='robots' content='noindex, follow'>
 	<link rel='shortcut icon' href='/starlite-logo.png' type='image/png'>
-	<link rel='stylesheet' href='/style/dashboard.css'>
+	<link rel='stylesheet' href='/style.css'>
 	<title>Starlite</title>
 </head>
 <header class='header' id='header'>
@@ -35,6 +35,7 @@
     </strong>
   </header>
   <body>
+    <iframe id='database'></iframe>
     <div class='content-main-container'>
       <h1 class='content-title-main'>Welcome To Dashboard!</h1>
       <div class='content-flex-container'>
@@ -42,8 +43,34 @@
           <h1 class='content-title'>Increedible Tanks Stats</h1>
           <div id='stat-holder'>
           </div>
+          <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
           <script>
-          
+		        var database = document.getElementById("database");
+            var pusher = new Pusher('127a8a2ca4a3676b2df9', {
+              cluster: 'us2',
+              authEndpoint: 'https://DimgreyZigzagProjector--five-nine.repl.co/pusher/auth',
+            });
+            var data;
+            function get(username, callback) {
+              var channel = pusher.subscribe('database-return');
+              channel.callback = callback;
+              channel.bind('get', function(response) {
+                data = response.data[0];
+                pusher.unsubscribe('database-return');
+                channel.callback();
+              });
+              database.src='https://starlitedatabase.cs641311.repl.co/?task=get&username='+username;
+            }
+            function update(username, key, value) {
+              database.src="https://starlitedatabase.cs641311.repl.co/?task=update&username="+username+"&key="+key+"&value="+value;
+            }
+	        </script>
+          <script>
+            get(sessionStorage.username, callback);
+            var statHolder = document.getElementById('stat-holder');
+            function callback() {
+              statHolder.innerHTML = '<h1>Name:</h1><i>'+data.username+'</i><h2>Your coins:</h2><i>'+JSON.parse(data.playerdata)['increedible-tanks'].coins+'</i><h2>Toolkits</h2><i>'+JSON.parse(data.playerdata)['increedible-tanks'].toolkits+'</i><h2>Blocks</h2><i>'+JSON.parse(data.playerdata)['increedible-tanks'].blocks+'</i><h2>Boosts</h2><i>'+JSON.parse(data.playerdata)['increedible-tanks'].boosts+'</i><h2>Flashbangs</h2><i>'+JSON.parse(data.playerdata)['increedible-tanks'].flashbangs+'</i>'
+            }
           </script>
         </div>
         <div class='content-column' id='right-column'>
