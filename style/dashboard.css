@@ -111,6 +111,12 @@ footer {
 }
 iframe {
   display: none;
-  width: 0%;
-  height: 0%;
+}
+.form {
+  width: 100%;
+  background-color: white;
+}
+.displayed-iframe {
+  display: block;
+  margin: auto;
 }
