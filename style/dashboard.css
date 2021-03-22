@@ -102,3 +102,8 @@ footer {
   text-decoration: none;
   color: white;
 }
+iframe {
+  display: none;
+  width: 0%;
+  height: 0%;
+}
