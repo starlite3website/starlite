@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html>
   <head>
     <link rel="shortcut icon"href="/starlite-logo.png"type="image/png">
@@ -166,14 +165,16 @@
       userMessages = JSON.parse(response.data[0].messages);
       pusher.unsubscribe('database-return');
     });
-    database.src="https://starlitedatabase.cs641311.repl.co/?task=get&username="+username;
+    window.setTimeout(function() {
+      database.src="https://starlitedatabase.cs641311.repl.co/?task=get&username="+username;
+    }, 300);
   }
   window.setTimeout(function() {
     list('messages');
   }, 2000);
   var d = [], e = [], interval;
   window.setTimeout(function() {
-    get(sessionStorage.username);
+    //get(sessionStorage.username);
     interval = window.setInterval(updateChat, 1000);
     chat.bind('client-message', function(data) {
       updateChat(data.data);
@@ -219,7 +220,7 @@
           if (sessionStorage.username == newMessages[l].send || sessionStorage.username == "admin") {
             var q = document.createElement("BUTTON");
             t.id = l;
-            q.setAttribute("onclick", 'var arr=[]; for(l=0;l<messages.length;l++) {if (messages[l].send == messages[this.parentElement.id].send){arr=arr.concat(messages[l]);}} for (l=0;l<arr.length;l++) {if (arr[l].timestamps == messages[this.parentElement.id].timestamps) {arr.splice(l,1);}}update(messages[this.parentElement.id].send,"messages",JSON.stringify(arr));messages=arr;this.parentElement.remove()');
+            q.setAttribute("onclick", 'var arr=[]; for(l=0;l<messages.length;l++) {if (messages[l].send == messages[this.parentElement.id].send){arr=arr.concat(messages[l]);}} for (l=0;l<arr.length;l++) {if (arr[l].timestamps == messages[this.parentElement.id].timestamps) {arr.splice(l,1);messages[l] = {}}}update(messages[this.parentElement.id].send,"messages",JSON.stringify(arr));this.parentElement.remove()');
             q.innerHTML = "Delete";
             t.innerHTML = q.outerHTML+" <b style='color:gray';>"+newMessages[l].send+" -> "+newMessages[l].user+"</b><div><b>"+newMessages[l].message+"</b></div>"+" <b style='color:gray;'>"+new Date(newMessages[l].timestamps).toDateString()+'</b>';
           } else {
