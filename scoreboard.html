@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
   <header>
@@ -22,7 +23,9 @@
           messages = response.data;
           pusher.unsubscribe('database-return2');
         });
-        database.src='https://starlitedatabase.cs641311.repl.co/?task=list&item='+item;
+        window.setTimeout(function() {
+          database.src='https://starlitedatabase.cs641311.repl.co/?task=list&item='+item;
+        }, 300);
       }
       setTimeout(function() {
         list('playerdata');
@@ -30,6 +33,16 @@
       setTimeout(renderResults, 3000);
       function renderResults() {
         document.getElementById('container').innerHTML = "";
+        var l = 0;
+        while (l<messages.length) {
+          if (messages[l]['increedible-tanks'] == undefined) {
+            messages.splice(l, 1);
+          }
+          l++;
+        }
+        messages.sort(function(a, b) {
+          return b['increedible-tanks'].coins - a['increedible-tanks'].coins;
+        })
         var l = 0;
         while (l<messages.length) {
           if (messages[l]['increedible-tanks'] != undefined) {
