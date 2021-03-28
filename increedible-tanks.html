@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -384,7 +385,9 @@
     check() {
       if (ai_check(this.x, this.y)) {
         if (this.inactive != true) {
-          this.health -= 10;
+          draw.fillStyle="#FF0000";
+          draw.fillRect(this.x, this.y, 40, 40);
+          this.health -= 20;
           if (this.health <= 0) {
             Game.coins += 100;
             Game.foes--;
@@ -507,6 +510,8 @@
         data = JSON.parse(data.data);
         if (data.event == 'joinerjoin') {
           user.host.joinerjoin(data.data);
+        } else if (data.event == 'disconnect') {
+          user.host.disconnect(data.username);
         } else {
           user.host.joinerupdate(data.data);
         }
@@ -570,6 +575,15 @@
         tank.y = 19*50;
       }
       pt.push(tank);
+    }
+    disconnect(username) {
+      var l = 0;
+      while (l<pt.length) {
+        if (pt[l].username == username) {
+          pt.splice(l, 1);
+        }
+        l++;
+      }
     }
     send() {
       user.host.socket.send(JSON.stringify({
@@ -859,7 +873,7 @@
     tankSupport = window.setInterval(tank_M_support, 15);
   }
   function tank_M_support() {
-    if (user.joiner.tank.count == 15) {
+    if (user.joiner.tank.count == 30) {
       user.joiner.tank.fire = true;
       user.joiner.tank.xd = 1;
       user.joiner.tank.angle = user.joiner.tank.rotation % 90;
@@ -948,7 +962,9 @@
     
     check() {
       if (ai_check(this.x, this.y)) {
-        this.health -= 10;
+        draw.fillStyle="#FF0000";
+        draw.fillRect(this.x, this.y, 40, 40);
+        this.health -= 20;
         if (this.health <= 0) {
           this.inactive = true;
           window.clearInterval(this.checkloop);
@@ -1210,7 +1226,7 @@
     tankSupport = window.setInterval(tank_support, 15);
   }
   function tank_support() {
-    if (user.tank.count == 15) {
+    if (user.tank.count == 30) {
       user.tank.fire();
       // CHASE put in tank_fire.play(); here
       user.tank.count = 0;
@@ -1405,6 +1421,8 @@
       var l = 0;
       while (l<b.length) {
         if (ai_check(b[l].x*50,b[l].y*50,true)) {
+          draw.fillStyle="#FF0000";
+          draw.fillRect(b[l].x*50, b[l].y*50, 50, 50);
           b[l].health -= 10;
           if (b[l].health <= 0) {
             if (Game.level == 'multiplayer') {
@@ -1602,21 +1620,6 @@
     draw.font = "20px starfont";
     draw.fillStyle = "#FFDF00";
     draw.fillText(user.username, user.tank.x-user.username.length/4*15+5, user.tank.y - 25);
-    var l = 0;
-    while (l<b.length) {
-      if (ai_check(b[l].x * 50, b[l].y * 50, true)) {
-        b[l].health -= 10;
-        if (b[l].health <= 0) {
-          if (Game.level == 'multiplayer') {
-            var strand = user.host.blockData[b[l].y+10].split('');
-            strand[b[l].x+10] = ' ';
-            user.host.blockData[b[l].y+10] = strand.join('');
-          }
-          block_support(l);
-        }
-      }
-      l++;
-    }
     var l = 0;
     while (l<user.tank.scaffolding.length) {
       weak(user.tank.scaffolding[l].x, user.tank.scaffolding[l].y);
@@ -2014,43 +2017,47 @@
       }
       var l = 0;
       while (l<pt.length) {
-        if (ai_check(pt[l].x, pt[l].y)) {
-          pt[l].health -= 10;
-          if (pt[l].health <= 0) {
-            pt[l].ded = true;
-            window.setTimeout(function() {
-              pt[l].ded = false;
-              pt[l].health = pt[l].maxHealth;
-            }, 5000)
+        if (pt[l].ded != true) {
+          if (ai_check(pt[l].x, pt[l].y)) {
+            draw.fillStyle = "#FF0000";
+            draw.fillRect(pt[l].x, pt[l].y, 40, 40);
+            pt[l].health -= 20;
+            if (pt[l].health <= 0) {
+              pt[l].ded = true;
+              window.setTimeout(function() {
+                pt[l].ded = false;
+                pt[l].health = pt[l].maxHealth;
+              }, 5000);
+            }
           }
-        }
-        if (pt[l].leftright == true) {
-          draw.translate(pt[l].x + 20,  pt[l].y + 20)
-          draw.rotate(90 * Math.PI / 180);
-          if (pt[l].u > 40) {
-            draw.drawImage(tank_base_png, -20, -20);
+          if (pt[l].leftright == true) {
+            draw.translate(pt[l].x + 20,  pt[l].y + 20)
+            draw.rotate(90 * Math.PI / 180);
+            if (pt[l].u > 40) {
+              draw.drawImage(tank_base_png, -20, -20);
+            } else {
+              draw.drawImage(tank_base2, -20, -20);
+            }
+            draw.rotate(-90 * Math.PI / 180);
+            draw.translate((-pt[l].x - 20), (-pt[l].y - 20));
           } else {
-            draw.drawImage(tank_base2, -20, -20);
+            if (pt[l].u > 40) {
+              draw.drawImage(tank_base_png, pt[l].x,pt[l].y);
+            } else {
+              draw.drawImage(tank_base2, pt[l].x, pt[l].y);
+            }
           }
-          draw.rotate(-90 * Math.PI / 180);
-          draw.translate((-pt[l].x - 20), (-pt[l].y - 20));
-        } else {
-          if (pt[l].u > 40) {
-            draw.drawImage(tank_base_png, pt[l].x,pt[l].y);
-          } else {
-            draw.drawImage(tank_base2, pt[l].x, pt[l].y);
-          }
+          draw.translate(pt[l].x + 20, pt[l].y + 20);
+          draw.rotate(pt[l].rotation * Math.PI  / 180);
+          draw.drawImage(tank_top_png, -20, -20);
+          draw.rotate(-(pt[l].rotation * Math.PI / 180));
+          draw.translate(-pt[l].x - 20, -pt[l].y - 20);
+          // Health Bar!
+          draw.fillStyle="#000000";
+          draw.fillRect(pt[l].x, pt[l].y + 50, 40, 5);
+          draw.fillStyle="#90EE90";
+          draw.fillRect(pt[l].x+2, pt[l].y+51, 36*pt[l].health/userData.health, 3);
         }
-        draw.translate(pt[l].x + 20, pt[l].y + 20);
-        draw.rotate(pt[l].rotation * Math.PI  / 180);
-        draw.drawImage(tank_top_png, -20, -20);
-        draw.rotate(-(pt[l].rotation * Math.PI / 180));
-        draw.translate(-pt[l].x - 20, -pt[l].y - 20);
-        // Health Bar!
-        draw.fillStyle="#000000";
-        draw.fillRect(pt[l].x, pt[l].y + 50, 40, 5);
-        draw.fillStyle="#90EE90";
-        draw.fillRect(pt[l].x+2, pt[l].y+51, 36*pt[l].health/userData.health, 3);
         l++;
       }
       levelReader([' 2    2  2  2  222B#', '   2     2  2  #####', ' 2  22  2###########', '        2#2   2   2#', '  2  2 2 #  2   2  #', '2  2 2   #11111#1 1#', '        2#11111#1 1#', '  2 2    211 11#1 1#', '2    2  2#11111#1 1#', '22222#####11111#1 1#', '#1 1#11111#####22222', '#1 1#11111#2  2    2', '#1 1#11 112    2 2  ', '#1 1#11111#2        ', '#1 1#11111#   2 2  2', '#  2   2  # 2 2  2  ', '#2   2   2#2        ', '###########2  22  2 ', '#####  2  2     2   ', '#R222  2  2  2    2 '], m, true, [-500, 500, -500, 500]);
@@ -2070,9 +2077,26 @@
     }
     var l = 0;
     while (l < ai.length) {
-      ai[l].check();
       ai[l].draw();
+      ai[l].check();
       ai[l].move();
+      l++;
+    }
+    var l = 0;
+    while (l<b.length) {
+      if (ai_check(b[l].x * 50, b[l].y * 50, true)) {
+        draw.fillStyle="#FF0000";
+        draw.fillRect(b[l].x*50, b[l].y*50, 50, 50);
+        b[l].health -= 10;
+        if (b[l].health <= 0) {
+          if (Game.level == 'multiplayer') {
+            var strand = user.host.blockData[b[l].y+10].split('');
+            strand[b[l].x+10] = ' ';
+            user.host.blockData[b[l].y+10] = strand.join('');
+          }
+          block_support(l);
+        }
+      }
       l++;
     }
     var l = 0;
