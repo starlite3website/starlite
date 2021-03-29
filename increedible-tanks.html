@@ -446,8 +446,10 @@
       }
     }
   }
+  var tank_fire = new Audio('fire.mp3');
   class Shot {
     constructor(x, y, id, xm, ym) {
+      tank_fire.play();
       this.xm = xm;
       this.ym = ym;
       while (this.xm * this.xm + this.ym * this.ym > 1.2 || this.xm * this.xm + this.ym * this.ym < 1) {
