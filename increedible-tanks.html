@@ -446,11 +446,8 @@
       }
     }
   }
-  var tank_fire = new Audio('fire.wav');
-  tank_fire.playbackRate = 2;
   class Shot {
     constructor(x, y, id, xm, ym) {
-      tank_fire.play();
       this.xm = xm;
       this.ym = ym;
       while (this.xm * this.xm + this.ym * this.ym > 1.2 || this.xm * this.xm + this.ym * this.ym < 1) {
@@ -463,8 +460,8 @@
           this.ym *= 1.01;
         }
       }
-      this.xm = this.xm * 5;
-      this.ym = this.ym * 5;
+      this.xm = this.xm * 6;
+      this.ym = this.ym * 6;
       this.y = y;
       this.x = x;
       while ((this.x < x + 35 && this.x > x - 35) && (this.y < y + 35 && this.y > y - 35)) {	
@@ -691,7 +688,7 @@
           draw.globalAlpha = 1;
           l++;
         }
-      }, 70);
+      }, 30);
       Game.level = 'multiplayer-joiner';
       this.socket.onmessage = function(data) {
         data = JSON.parse(data.data);
@@ -918,7 +915,7 @@
   }
   function tank_M_listener5() {
     user.joiner.tank.fire = false;
-    clearInterval(tank_M_Support);
+    clearInterval(tankSupport);
   }
   class Tank {
     draw() {
