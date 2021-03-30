@@ -565,13 +565,13 @@
       if (Math.round(Math.random()*2)) {
         tank.team = 'red';
         teamData.red.players.push(tank.username)
-        tank.x = 7*50;
+        tank.x = 0*50;
         tank.y = -10*50;
       } else {
         tank.team = 'blue';
         teamData.blue.players.push(tank.username);
-        tank.x = 12*50;
-        tank.y = 19*50;
+        tank.x = 0*50;
+        tank.y = -10*50;
       }
       pt.push(tank);
     }
@@ -679,7 +679,7 @@
         }
         var l = 0;
         while (l<user.joiner.hostupdate.bullets.length) {
-	  draw.fillStyle="#000000";
+          draw.fillStyle="#000000";
           draw.fillRect(user.joiner.hostupdate.bullets[l].x, user.joiner.hostupdate.bullets[l].y, 5, 5);
           l++;
         }
