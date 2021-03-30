@@ -962,6 +962,13 @@
         draw.fillRect(this.x, this.y, 40, 40);
         this.health -= 20;
         if (this.health <= 0) {
+          if (Game.level == 'multiplayer') {
+            user.tank.inactive = true;
+            window.setTimeout(function() {
+              user.tank.inactive = false;
+              user.tank.health = userData.health;
+            }, 5000)
+          } else {
           this.inactive = true;
           window.clearInterval(this.checkloop);
           window.clearInterval(this.interval);
@@ -971,6 +978,7 @@
           this.interval2 = undefined;
           setTimeout(defeat, 20);
           Game.endGame();
+          }
         }
       }
     }
