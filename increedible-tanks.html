@@ -527,7 +527,7 @@
       }
       window.setInterval(function() {
         user.host.send();
-      }, 70);
+      }, 30);
       Game.level = 'multiplayer';
       level('multiplayer', null, true);
     }
@@ -2020,10 +2020,10 @@
             pt[l].health -= 20;
             if (pt[l].health <= 0) {
               pt[l].ded = true;
-              window.setTimeout(function() {
+              window.setTimeout(function(l) {
                 pt[l].ded = false;
                 pt[l].health = pt[l].maxHealth;
-              }, 5000);
+              }, 5000, l);
             }
           }
           if (pt[l].leftright == true) {
