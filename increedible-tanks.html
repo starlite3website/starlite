@@ -545,6 +545,9 @@
             }
             pt[l].rotation = tank.rotation;
             pt[l].leftright = tank.leftright;
+            if (tank.usingToolkit) {
+              pt[l].health = .75*pt[l].maxHealth;
+            }
             if (tank.fire) {
               if (tank.rotation > 180 && tank.rotation < 270) {
                 s.push(new Shot(pt[l].x+20,pt[l].y+20,s.length-1,-tank.yd,tank.xd));
@@ -607,6 +610,8 @@
         username: user.username,
         speed: 2,
         count: 0,
+        CanBoost: true,
+        usingToolkit: false,
       };
       this.tank.helper = [];
       this.tank.intervals = [];
@@ -738,10 +743,10 @@
         break;
         case 16:
           if (userData.boosts > 0) {
-            if (this.tank.CanBoost == true) {
+            if (user.joiner.tank.CanBoost == true) {
               userData.boosts -= 1;
-              this.tank.speed = 8;
-              this.tank.CanBoost = false;
+              user.joiner.tank.speed = 8;
+              user.joiner.tank.CanBoost = false;
               setTimeout(function() {
                 user.joiner.tank.speed = 2;
               }, 250);
@@ -755,16 +760,16 @@
          if (user.joiner.tank.health < userData.health*.75) {
             if (userData.toolkits > 0) {
               userData.toolkits -= 1;
-              user.joiner.tank.health =  userData.health*.75;
+              user.joiner.tank.usingToolkit = true;
             }
           }
         break;
         case 32:
           if (tank.canPlaceScaffolding) {
             if (userData.blocks > 0) {
-              this.tank.canPlaceScaffolding=false;
-                userData.blocks -= 1;
-                break;
+              user.joiner.tank.canPlaceScaffolding=false;
+              userData.blocks -= 1;
+              break;
               if (this.tank.rotation >= 0 &&   tank.rotation < 90) {
                 // in progress :)
               }
@@ -781,7 +786,7 @@
                 user.tank.scaffolding.push({x:(this.x+40)/50, y:(this.y+40)/50});
               }
               setTimeout(function() {
-                user.tank.canPlaceScaffolding=true;
+                user.tank.canPlactank = eScaffolding=true;
               }, 5000);
             }
           }
@@ -789,10 +794,10 @@
         case 69:
           break;
           if (userData.flashbangs > 0) {
-            if (this.tank.canFireFlashbang) {
+            if (user.joiner.tank.canFireFlashbang) {
               userData.flashbangs -= 1;
               Game.flashbanged = true;
-              this.canFireFlashbang = false;
+              user.joiner.canFireFlashbang = false;
               setTimeout(function() {
                 Game.flashbanged = false;
               }, 10000);
@@ -818,11 +823,13 @@
           fire: user.joiner.tank.fire,
           xd: user.joiner.tank.xd,
           yd: user.joiner.tank.yd,
+          usingToolkit: user.joiner.tank.usingToolkit,
         }
       }));
       user.joiner.tank.x = 0;
       user.joiner.tank.y = 0;
       user.joiner.tank.fire = false;
+      user.joiner.tank.usingToolkit = false;
     }
   }
   function tank_M_listener1(event) {
