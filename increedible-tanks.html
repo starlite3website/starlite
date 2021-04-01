@@ -569,12 +569,12 @@
       if (Math.round(Math.random()*2)) {
         tank.team = 'red';
         teamData.red.players.push(tank.username)
-        tank.x = 0*50;
+        tank.x = 1*50;
         tank.y = -10*50;
       } else {
         tank.team = 'blue';
         teamData.blue.players.push(tank.username);
-        tank.x = 0*50;
+        tank.x = -2*50;
         tank.y = -10*50;
       }
       pt.push(tank);
@@ -591,7 +591,7 @@
     send() {
       user.host.socket.send(JSON.stringify({
         event: 'hostupdate',
-        tanks : pt.concat([{x:user.tank.x, y:user.tank.y, health:user.tank.health, rotation:user.tank.rotation, leftright:user.tank.leftright, username:user.username}]),
+        tanks : pt.concat([{x:user.tank.x, y:user.tank.y, health:user.tank.health, rotation:user.tank.rotation, leftright:user.tank.leftright, username:user.username, team:user.tank.team, ded: user.tank.inactive, maxHealth: userData.health}]),
         blocks : user.host.blockData,
         scaffolding : user.tank.scaffolding,
         ai : ai,
@@ -612,6 +612,7 @@
         count: 0,
         CanBoost: true,
         usingToolkit: false,
+        CanToolkit: true,
       };
       this.tank.helper = [];
       this.tank.intervals = [];
@@ -637,57 +638,64 @@
         levelReader(user.joiner.hostupdate.blocks, false, true, [-500, 500, -500, 500]);
         var l = 0;
         while (l<pt.length) {
-          var m = 0;
-          while (m<user.joiner.hostupdate.tanks.length) {
-            if (user.joiner.hostupdate.tanks[m].username == user.username) {
-              draw.setTransform(resizer, 0, 0, resizer, resizer*(-pt[m].x+230), resizer*(-pt[m].y+230));
+          if (!pt[l].ded || pt[l].username == user.username) {
+            var m = 0;
+            while (m<user.joiner.hostupdate.tanks.length) {
+              if (user.joiner.hostupdate.tanks[m].username == user.username) {
+                draw.setTransform(resizer, 0, 0, resizer, resizer*(-pt[m].x+230), resizer*(-pt[m].y+230));
+              }
+              m++;
             }
-            m++;
-          }
-          if (pt[l].leftright == true) {
-            draw.translate(pt[l].x + 20,  pt[l].y + 20)
-            draw.rotate(90 * Math.PI / 180);
-            if (pt[l].u > 40) {
-              draw.drawImage(tank_base_png, -20, -20);
+            if (pt[l].leftright == true) {
+              draw.translate(pt[l].x + 20,  pt[l].y + 20)
+              draw.rotate(90 * Math.PI / 180);
+              if (pt[l].u > 40) {
+                draw.drawImage(tank_base_png, -20, -20);
+              } else {
+                draw.drawImage(tank_base2, -20, -20);
+              }
+              draw.rotate(-90 * Math.PI / 180);
+              draw.translate((-pt[l].x - 20), (-pt[l].y - 20));
             } else {
-              draw.drawImage(tank_base2, -20, -20);
+              if (pt[l].u > 40) {
+                draw.drawImage(tank_base_png, pt[l].x, pt[l].y);
+              } else {
+                draw.drawImage(tank_base2, pt[l].x, pt[l].y);
+              }
             }
-            draw.rotate(-90 * Math.PI / 180);
-            draw.translate((-pt[l].x - 20), (-pt[l].y - 20));
-          } else {
-            if (pt[l].u > 40) {
-              draw.drawImage(tank_base_png, pt[l].x, pt[l].y);
-            } else {
-              draw.drawImage(tank_base2, pt[l].x, pt[l].y);
-            }
+            draw.translate(pt[l].x + 20, pt[l].y + 20);
+            draw.rotate(pt[l].rotation * Math.PI  / 180);
+            draw.drawImage(tank_top_png, -20, -20);
+            draw.rotate(-(pt[l].rotation * Math.PI / 180));
+            draw.translate(-pt[l].x - 20, -pt[l].y - 20);
+            // Health Bar!
+            draw.fillStyle="#000000";
+            draw.fillRect(pt[l].x, pt[l].y + 50, 40, 5);
+            draw.fillStyle="#90EE90";
+            draw.fillRect(pt[l].x+2, pt[l].y+51, 36*pt[l].health/pt[l].maxHealth, 3); 
+            // Additional Things
+            draw.globalAlpha=.4;
+            //draw.setTransform(1, 0, 0, 1, 0, 0);
+            draw.fillStyle="#ffffff";
+            draw.fillRect(100, 450, 50, 50);
+            draw.fillRect(183, 450, 50, 50);
+            draw.fillRect(266, 450, 50, 50);
+            draw.fillRect(349, 450, 50, 50);
+            draw.globalAlpha=1;
+            draw.fillStyle="#ffffff";
+            draw.fillText(userData.boosts, 135, 470);
           }
-          draw.translate(pt[l].x + 20, pt[l].y + 20);
-          draw.rotate(pt[l].rotation * Math.PI  / 180);
-          draw.drawImage(tank_top_png, -20, -20);
-          draw.rotate(-(pt[l].rotation * Math.PI / 180));
-          draw.translate(-pt[l].x - 20, -pt[l].y - 20);
-          // Health Bar!
-          draw.fillStyle="#000000";
-          draw.fillRect(pt[l].x, pt[l].y + 50, 40, 5);
-          draw.fillStyle="#90EE90";
-          draw.fillRect(pt[l].x+2, pt[l].y+51, 36*pt[l].health/userData.health, 3); 
-          // Additional Things
-          draw.globalAlpha=.4;
-          //draw.setTransform(1, 0, 0, 1, 0, 0);
-          draw.fillStyle="#ffffff";
-          draw.fillRect(100, 450, 50, 50);
-          draw.fillRect(183, 450, 50, 50);
-          draw.fillRect(266, 450, 50, 50);
-          draw.fillRect(349, 450, 50, 50);
-          draw.globalAlpha=1;
-          draw.fillStyle="#ffffff";
-          draw.fillText(userData.boosts, 135, 470);
           l++;
         }
         var l = 0;
         while (l<user.joiner.hostupdate.bullets.length) {
           draw.fillStyle="#000000";
           draw.fillRect(user.joiner.hostupdate.bullets[l].x, user.joiner.hostupdate.bullets[l].y, 5, 5);
+          l++;
+        }
+        var l = 0;
+        while (l<user.joiner.hostupdate.scaffolding.length) {
+          weak(user.joiner.hostupdate.scaffolding[l].x*10, user.joiner.hostupdate.scaffolding[l].y*10, false)
           l++;
         }
       }, 30);
@@ -757,10 +765,23 @@
           }
         break;
         case 81:
-         if (user.joiner.tank.health < userData.health*.75) {
-            if (userData.toolkits > 0) {
-              userData.toolkits -= 1;
-              user.joiner.tank.usingToolkit = true;
+          var l = 0, health;
+          while (l<pt.length) {
+            if (pt[l].username == user.username) {
+              health = pt[l].health;
+            }
+            l++;
+          }
+          if (health < userData.health*.75) {
+            if (user.joiner.tank.CanToolkit) {
+              if (userData.toolkits > 0) {
+                userData.toolkits -= 1;
+                user.joiner.tank.usingToolkit = true;
+                user.joiner.tank.CanToolkit = false;
+                setTimeout(function() {
+                  user.joiner.tank.CanToolkit = true;
+                }, 30000)
+              }
             }
           }
         break;
@@ -971,6 +992,13 @@
         this.health -= 20;
         if (this.health <= 0) {
           if (Game.level == 'multiplayer') {
+            if (user.tank.team == 'red') {
+              user.tank.x = 50;
+              user.tank.y = -500;
+            } else {
+              user.tank.x = -100;
+              user.tank.y = -500;
+            }
             user.tank.inactive = true;
             window.setTimeout(function() {
               user.tank.inactive = false;
@@ -1257,11 +1285,13 @@
       return false;
     }
     // if touching user tank then return "i cant move"
-    if ((x + 40 >= user.tank.x && x + 40 <= user.tank.x + 40) || (x >= user.tank.x && x <= user.tank.x + 40)) {
-      if ((y + 40 >= user.tank.y && y + 40 <= user.tank.y + 40) || (y >= user.tank.y && y <= user.tank.y + 40)) {
-        if ((user.tank.x-user.tank.speed == x || user.tank.x+user.tank.speed == x || user.tank.x == x) && (user.tank.y+user.tank.speed == y || user.tank.y-user.tank.speed == y || user.tank.y == y)) {
-        } else {
-          return false;
+    if (Game.level != 'multiplayer') {
+      if ((x + 40 >= user.tank.x && x + 40 <= user.tank.x + 40) || (x >= user.tank.x && x <= user.tank.x + 40)) {
+        if ((y + 40 >= user.tank.y && y + 40 <= user.tank.y + 40) || (y >= user.tank.y && y <= user.tank.y + 40)) {
+          if ((user.tank.x-user.tank.speed == x || user.tank.x+user.tank.speed == x || user.tank.x == x) && (user.tank.y+user.tank.speed == y || user.tank.y-user.tank.speed == y || user.tank.y == y)) {
+          } else {
+            return false;
+          }
         }
       }
     }
@@ -2024,9 +2054,9 @@
     if (num == 'multiplayer') {
       if (mo != "n") {
         if (user.tank.team == 'red') {
-          spawn(-2,-10);
+          spawn(1, -10);
         } else {
-          spawn(2, 9)
+          spawn(-2, 10)
         }
       }
       var l = 0;
@@ -2038,6 +2068,13 @@
             pt[l].health -= 20;
             if (pt[l].health <= 0) {
               pt[l].ded = true;
+              if (pt[l].team == 'red') {
+                pt[l].x = 50;
+                pt[l].y = -500;
+              } else {
+                pt[l].x = -100;
+                pt[l].y = -500;
+              }
               window.setTimeout(function(l) {
                 pt[l].ded = false;
                 pt[l].health = pt[l].maxHealth;
