@@ -155,7 +155,7 @@
     var channel = pusher.subscribe('database-return');
     channel.callback = callback;
     channel.bind('get', function(response) {
-      userData = JSON.parse(response.data[0].playerdata)["increedible-tanks"];
+      userData = JSON.parse(response.data[0].playerdata)["increedible-tanks"] || undefined;
       pusher.unsubscribe('database-return');
       playerData = JSON.parse(response.data[0].playerdata);
       console.log(userData);
