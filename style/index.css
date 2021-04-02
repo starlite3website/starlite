@@ -87,7 +87,7 @@ body {
   min-height: 600px;
   width:100%;
   image-rendering: -webkit-optimize-contrast;
-  background-image: url(https://picsum.photos/200/300/?blur);
+  background-image: url(https://picsum.photos/1000/600/?blur=1);
   background-repeat: no-repeat;
   background-size: cover;
 }
