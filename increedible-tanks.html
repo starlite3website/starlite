@@ -155,11 +155,11 @@
     var channel = pusher.subscribe('database-return');
     channel.callback = callback;
     channel.bind('get', function(response) {
-      if (response.data.length == 1) {
-        userData = JSON.parse(response.data[0].playerdata)["increedible-tanks";
+      if (response.data.length != 0) {
+        userData = JSON.parse(response.data[0].playerdata)["increedible-tanks"];
+        playerData = JSON.parse(response.data[0].playerdata);
       }
       pusher.unsubscribe('database-return');
-      playerData = JSON.parse(response.data[0].playerdata);
       console.log(userData);
       channel.callback();
     });
@@ -462,8 +462,8 @@
           this.ym *= 1.01;
         }
       }
-      this.xm = this.xm * 6;
-      this.ym = this.ym * 6;
+      this.xm = this.xm * 7;
+      this.ym = this.ym * 7;
       this.y = y;
       this.x = x;
       while ((this.x < x + 35 && this.x > x - 35) && (this.y < y + 35 && this.y > y - 35)) {	
@@ -547,6 +547,24 @@
             }
             pt[l].rotation = tank.rotation;
             pt[l].leftright = tank.leftright;
+            if (tank.placeScaffolding) {
+              if (tank.rotation >= 0 &&   tank.rotation < 90) {
+                weak((pt[l].x-50)/50, (pt[l].y+40)/50, true);
+                user.tank.scaffolding.push({x:(pt[l].x-50)/50, y:(pt[l].y+40)/50});
+              }
+              if (tank.rotation >= 90 && tank.rotation < 180) {
+                weak((pt[l].x-50)/50, (pt[l].y-50)/50, true);
+                user.tank.scaffolding.push({x:(pt[l].x-50)/50, y:(pt[l].y-50)/50});
+              }                
+              if (tank.rotation >= 180 && tank.rotation < 270) {
+                weak((pt[l].x+40)/50, (pt[l].y-50)/50, true);
+                  user.tank.scaffolding.push({x:(pt[l].x+40)/50, y:(pt[l].y-50)/50});
+                }
+                if (tank.rotation >= 270 &&     tank.rotation < 360) {
+                  weak((pt[l].x+40)/50, (pt[l].y+40)/50, true);
+                  user.tank.scaffolding.push({x:(pt[l].x+40)/50, y:(pt[l].y+40)/50});
+                }
+            }
             if (tank.usingToolkit) {
               pt[l].health = .75*pt[l].maxHealth;
             }
@@ -615,6 +633,8 @@
         CanBoost: true,
         usingToolkit: false,
         CanToolkit: true,
+        canPlaceScaffolding: true,
+        placeScaffolding: false,
       };
       this.tank.helper = [];
       this.tank.intervals = [];
@@ -788,26 +808,11 @@
           }
         break;
         case 32:
-          if (tank.canPlaceScaffolding) {
+          if (user.joiner.tank.canPlaceScaffolding) {
             if (userData.blocks > 0) {
               user.joiner.tank.canPlaceScaffolding=false;
               userData.blocks -= 1;
-              break;
-              if (this.tank.rotation >= 0 &&   tank.rotation < 90) {
-                // in progress :)
-              }
-              if (this.rotation >= 90 && this.rotation < 180) {
-                weak((this.x-50)/50, (this.y-50)/50, true);
-                  user.tank.scaffolding.push({x:(this.x-50)/50, y:(this.y-50)/50});
-                }                
-              if (this.rotation >= 180 && this.rotation < 270) {
-                weak((this.x+40)/50, (this.y-50)/50, true);
-                user.tank.scaffolding.push({x:(this.x+40)/50, y:(this.y-50)/50});
-              }
-              if (this.rotation >= 270 &&     this.rotation < 360) {
-                weak((this.x+40)/50, (this.y+40)/50, true);
-                user.tank.scaffolding.push({x:(this.x+40)/50, y:(this.y+40)/50});
-              }
+              user.joiner.tank.placeScaffolding = true;
               setTimeout(function() {
                 user.tank.canPlactank = eScaffolding=true;
               }, 5000);
@@ -847,12 +852,14 @@
           xd: user.joiner.tank.xd,
           yd: user.joiner.tank.yd,
           usingToolkit: user.joiner.tank.usingToolkit,
+          placeScaffolding: user.joiner.tank.scaffolding,
         }
       }));
       user.joiner.tank.x = 0;
       user.joiner.tank.y = 0;
       user.joiner.tank.fire = false;
       user.joiner.tank.usingToolkit = false;
+      user.joiner.tank.placeScaffolding = false;
     }
   }
   function tank_M_listener1(event) {
@@ -988,7 +995,7 @@
     }
     
     check() {
-      if (ai_check(this.x, this.y)) {
+      if (ai_check(this.x, this.y) && !user.tank.inactive) {
         draw.fillStyle="#FF0000";
         draw.fillRect(this.x, this.y, 40, 40);
         this.health -= 20;
