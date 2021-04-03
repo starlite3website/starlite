@@ -30,6 +30,11 @@ h1 {
   font-size: 100px;
 }
 .content-description-container {
+  padding-left: 25%;
+  padding-top: 50px;
+  padding-right: 25%;
+}
+.content-description-container-body {
   text-align: center;
   padding-top: 50px;
   display:flex;
@@ -53,6 +58,11 @@ li {
 a {
   color: black;
 }
-.container-flex {
-  width: 33%;
+.container-flex-ad {
+  width: 20%;
+}
+.container-flex-content {
+  width: 50%;
+  margin-left: 5%;
+  margin-right: 5%;
 }
