@@ -32,8 +32,7 @@ h1 {
 .content-description-container {
   text-align: center;
   padding-top: 50px;
-  padding-left: 25%;
-  padding-right: 25%;
+  display:flex;
   font-size: 20px;
 }
 hr {
@@ -53,4 +52,7 @@ li {
 }
 a {
   color: black;
+}
+.container-flex {
+  width: 33%;
 }
