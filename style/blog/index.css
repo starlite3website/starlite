@@ -60,6 +60,7 @@ a {
 }
 .container-flex-ad {
   width: 20%;
+  position: sticky;
 }
 .container-flex-content {
   width: 50%;
