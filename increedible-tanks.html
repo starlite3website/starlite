@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -718,7 +717,7 @@
         }
         var l = 0;
         while (l<user.joiner.hostupdate.scaffolding.length) {
-          weak(user.joiner.hostupdate.scaffolding[l].x*10, user.joiner.hostupdate.scaffolding[l].y*10, false)
+          draw.drawImage(weak_image, user.joiner.hostupdate.scaffolding[l].x * 50, user.joiner.hostupdate.scaffolding[l].y * 50);
           l++;
         }
       }, 30);
@@ -815,7 +814,7 @@
               userData.blocks -= 1;
               user.joiner.tank.placeScaffolding = true;
               setTimeout(function() {
-                user.tank.canPlactank = eScaffolding=true;
+                user.joiner.tank.canPlaceScaffolding=true;
               }, 5000);
             }
           }
@@ -853,7 +852,7 @@
           xd: user.joiner.tank.xd,
           yd: user.joiner.tank.yd,
           usingToolkit: user.joiner.tank.usingToolkit,
-          placeScaffolding: user.joiner.tank.scaffolding,
+          placeScaffolding: user.joiner.tank.placeScaffolding,
         }
       }));
       user.joiner.tank.x = 0;
@@ -1483,6 +1482,15 @@
               var strand = user.host.blockData[b[l].y+10].split('');
               strand[b[l].x+10] = ' ';
               user.host.blockData[b[l].y+10] = strand.join('');
+            }
+            var q = 0;
+            while (q<user.tank.scaffolding.length) {
+              if (b[l].y == user.tank.scaffolding[q].y) {
+                if (b[l].x == user.tank.scaffolding[q].x) {
+                  user.tank.scaffolding.splice(q, 1);
+                }
+              }
+              q++;
             }
             block_support(l);
           }
@@ -2169,7 +2177,26 @@
               var strand = user.host.blockData[b[l].y+10].split('');
               strand[b[l].x+10] = ' ';
               user.host.blockData[b[l].y+10] = strand.join('');
+            } else {
+              var q = 0;
+              while (q<user.tank.scaffolding.length) {
+                if (b[l].y == user.tank.scaffolding[q].y) {
+                  if (b[l].x == user.tank.scaffolding[q].x) {
+                    user.tank.scaffolding.splice(q, 1);
+                  }
+                }
+                q++;
+              }
             }
+          }
+          var q = 0;
+          while (q<user.tank.scaffolding.length) {
+            if (b[l].y == user.tank.scaffolding[q].y) {
+              if (b[l].x == user.tank.scaffolding[q].x) {
+                user.tank.scaffolding.splice(q, 1);
+              }
+            }
+            q++;
           }
           block_support(l);
         }
