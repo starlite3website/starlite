@@ -61,9 +61,8 @@ a {
 }
 .container-flex-ad {
   width: 20%;
-  height: 100%;
 }
-.container-flex-ad div {
+.container-flex-ad-div {
   position: sticky;
   top: 10px;
 }
