@@ -1,8 +1,6 @@
-
 <!DOCTYPE html>
 <html>
   <header>
-    <script async src="https://arc.io/widget.min.js#N3KzQsou"></script>
     <a href="/dashboard">Back</a>
   </header>
   <body>
@@ -34,6 +32,13 @@
       setTimeout(renderResults, 3000);
       function renderResults() {
         document.getElementById('container').innerHTML = "";
+        var l = 0;
+        while (l<messages.length) {
+          if (messages[l]['increedible-tanks'] == undefined) {
+            messages.splice(l, 1);
+          }
+          l++;
+        }
         var l = 0;
         while (l<messages.length) {
           if (messages[l]['increedible-tanks'] == undefined) {
