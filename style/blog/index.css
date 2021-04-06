@@ -61,10 +61,11 @@ a {
 }
 .container-flex-ad {
   width: 20%;
-  position: sticky !important;
+  height: 100%;
 }
-.container-flex-ad p {
-  position: sticky !important;
+.container-flex-ad div {
+  position: sticky;
+  top: 10px;
 }
 .container-flex-content {
   width: 50%;
