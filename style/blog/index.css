@@ -63,6 +63,9 @@ a {
   width: 20%;
   position: sticky !important;
 }
+.container-flex-ad p {
+  position: sticky !important;
+}
 .container-flex-content {
   width: 50%;
   margin-left: 5%;
