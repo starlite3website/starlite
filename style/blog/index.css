@@ -71,3 +71,8 @@ a {
   margin-left: 5%;
   margin-right: 5%;
 }
+@media only screen and (max-width:800px) {
+  .container-flex-ad-div {
+    display: none;
+  }
+}
