@@ -12,9 +12,12 @@
   <a href='/blog'><button>Blog</button></a>
   <a href='/chat'><button>Chat</button></a>
   <a href='/projects'><button>Projects</button></a>
-  <a href='/settings'><button id='username'></button></a>
+  <a href='/account'><button id='username'>Signup/Login</button></a>
   <script>
-  document.getElementById('username').innerHTML = sessionStorage.username;
+  if (sessionStorage.username) {
+    document.getElementById('username').innerHTML = sessionStorage.username;
+    document.getElementById('username').parentElement.setAttribute('href', '/settings');
+  }
   window.addEventListener('scroll', function() {
     if (document.documentElement.scrollTop == 0) {
       document.getElementById('header').style = 'box-shadow: none; -moz-box-shadow: none; -webkit-box-shadow: none;';
