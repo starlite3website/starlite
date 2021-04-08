@@ -599,25 +599,32 @@ class Joiner {
           draw.fillRect(pt[l].x, pt[l].y + 50, 40, 5);
           draw.fillStyle = "#90EE90";
           draw.fillRect(pt[l].x + 2, pt[l].y + 51, 36 * pt[l].health / pt[l].maxHealth, 3);
-          // Additional Things
-          draw.font = '15px starfont';
-          draw.globalAlpha = .4;
-          draw.setTransform(1, 0, 0, 1, 0, 0);
-          draw.fillStyle = "#ffffff";
-          draw.fillRect(100, 450, 50, 50);
-          draw.fillRect(183, 450, 50, 50);
-          draw.fillRect(266, 450, 50, 50);
-          draw.fillRect(349, 450, 50, 50);
-          draw.globalAlpha = 1;
-          draw.drawImage(toolkit, 183, 450);
-          draw.drawImage(scaffolding, 266, 450);
-          draw.fillStyle = "#ffffff";
-          draw.fillText(userData.boosts, 135, 470);
-          draw.fillText(userData.toolkits, 183+35, 470);
-          draw.fillText(userData.blocks, 266+35, 470);
-          draw.fillText(userData.flashbangs, 349+35, 470);
         }
         l++;
+      }
+      draw.font = '15px starfont';
+      draw.globalAlpha = .4;
+      draw.setTransform(1, 0, 0, 1, 0, 0);
+      draw.fillStyle = "#ffffff";
+      draw.fillRect(100, 450, 50, 50);
+      draw.fillRect(183, 450, 50, 50);
+      draw.fillRect(266, 450, 50, 50);
+      draw.fillRect(349, 450, 50, 50);
+      draw.globalAlpha = 1;
+      draw.drawImage(toolkit, 183, 450);
+      draw.drawImage(scaffolding, 266, 450);
+      draw.fillStyle = "#ffffff";
+      draw.fillText(userData.boosts, 135, 470);
+      draw.fillText(userData.toolkits, 183+35, 470);
+      draw.fillText(userData.blocks, 266+35, 470);
+      draw.fillText(userData.flashbangs, 349+35, 470);
+      //settransform
+      var m = 0;
+      while (m < user.joiner.hostupdate.tanks.length) {
+        if (user.joiner.hostupdate.tanks[m].username == user.username) {
+          draw.setTransform(resizer, 0, 0, resizer, resizer * (-pt[m].x + 230), resizer * (-pt[m].y + 230));
+        }
+        m++;
       }
       var l = 0;
       while (l < user.joiner.hostupdate.bullets.length) {
