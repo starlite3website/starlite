@@ -2,7 +2,6 @@ window.setTimeout(function () {
   document.getElementById('wall').style.visibility = 'hidden';
   document.getElementById('animate').style.visibility = 'hidden';
 }, 3000);
-var embed = document.getElementById("database");
 var pusher = new Pusher('127a8a2ca4a3676b2df9', {
   cluster: 'us2',
   authEndpoint: 'https://DimgreyZigzagProjector--five-nine.repl.co/pusher/auth',
@@ -64,7 +63,6 @@ function get(username, callback) {
       playerData = JSON.parse(response.data[0].playerdata);
     }
     pusher.unsubscribe('database-return');
-    console.log(userData);
     channel.callback();
   });
   window.setTimeout(function () {
@@ -1383,9 +1381,35 @@ function Block(health, x, y, isInvincible, isExplosive, isScaffolding) {
         b[l].health -= 10;
         if (b[l].health <= 0) {
           if (Game.level == 'multiplayer') {
-            var strand = user.host.blockData[b[l].y + 10].split('');
-            strand[b[l].x + 10] = ' ';
-            user.host.blockData[b[l].y + 10] = strand.join('');
+            let isScaffolding = false;
+            var t = 0;
+            while (t < b.length) {
+              var q = 0;
+              while (q < user.tank.scaffolding.length) {
+                if (b[t].x == user.tank.scaffolding[q].x) {
+                  if (b[l].y == user.tank.scaffolding[q].y) {
+                    isScaffolding = true;
+                  }
+                }
+                q++;
+              }
+              t++;
+            }
+            if (!isScaffolding) {
+              var strand = user.host.blockData[b[l].y + 10].split('');
+              strand[b[l].x + 10] = ' ';
+              user.host.blockData[b[l].y + 10] = strand.join('');
+            } else {
+              var q = 0;
+              while (q < user.tank.scaffolding.length) {
+                if (b[l].y == user.tank.scaffolding[q].y) {
+                  if (b[l].x == user.tank.scaffolding[q].x) {
+                    user.tank.scaffolding.splice(q, 1);
+                  }
+                }
+                q++;
+              }
+            }
           }
           var q = 0;
           while (q < user.tank.scaffolding.length) {
