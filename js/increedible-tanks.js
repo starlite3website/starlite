@@ -1044,6 +1044,7 @@ class Tank {
                 }, 30000)
               }
             }
+          }
           break;
         case 32:
           if (this.canPlaceScaffolding) {
