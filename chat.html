@@ -129,7 +129,7 @@
       width: 200px;
       display: block;
       background-color: white;
-      border: 1px solid back;
+      border: 1px solid black;
       padding: 10px;
     }
     button {
@@ -137,6 +137,7 @@
       background-color: orangered;
       border: 1px solid orangered;
       padding: 5px;
+      border-radius: 5px;
     }
     iframe {
       display: none;
@@ -235,7 +236,7 @@
       if (newMessages[l].timestamps != undefined) {
         if (newMessages[l].send == sessionStorage.username || newMessages[l].user == sessionStorage.username || newMessages[l].user == "public" || sessionStorage.username == "admin") {
           var t = document.createElement("DIV");
-          t.style = "margin-left:5%;margin-right:44%;margin-bottom:1%;margin-top:1%;padding:1%;border:1px solid black;word-wrap:break-word;width:50%;";
+          t.style = "margin-left:5%;margin-right:44%;margin-bottom:1%;margin-top:1%;padding:1%;border:1px solid gray;border-radius:5px;word-wrap:break-word;width:50%;";
           var data;
           if (sessionStorage.username == newMessages[l].send || sessionStorage.username == "admin") {
             var q = document.createElement("BUTTON");
