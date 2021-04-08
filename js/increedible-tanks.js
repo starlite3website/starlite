@@ -949,6 +949,7 @@ class Tank {
     this.inactive = false;
     this.rotation = 0;
     this.CanBoost = true;
+    this.canToolkit = true;
     this.leftright = true;
     canvas.focus();
     this.draw();
@@ -1032,12 +1033,17 @@ class Tank {
           }
           break;
         case 81:
-          if (user.tank.health < userData.health * .75) {
-            if (userData.toolkits > 0) {
-              userData.toolkits -= 1;
-              user.tank.health = userData.health * .75;
+          if (user.tank.canToolkit) {
+            if (user.tank.health < userData.health * .75) {
+              if (userData.toolkits > 0) {
+                user.tank.canToolkit = false;
+                userData.toolkits -= 1;
+                user.tank.health = userData.health * .75;
+                window.setTimeout(function() {
+                  user.tank.canToolkit = true;
+                }, 30000)
+              }
             }
-          }
           break;
         case 32:
           if (this.canPlaceScaffolding) {
