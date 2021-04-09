@@ -1,5 +1,4 @@
 (function() {
-// IFFY for antihacks
 window.setTimeout(function () {
   document.getElementById('wall').style.visibility = 'hidden';
   document.getElementById('animate').style.visibility = 'hidden';
@@ -956,6 +955,7 @@ class Tank {
     this.inactive = false;
     this.rotation = 0;
     this.CanBoost = true;
+    this.CanToolkit = true;
     this.leftright = true;
     canvas.focus();
     this.draw();
@@ -1039,10 +1039,16 @@ class Tank {
           }
           break;
         case 81:
-          if (user.tank.health < userData.health * .75) {
-            if (userData.toolkits > 0) {
-              userData.toolkits -= 1;
-              user.tank.health = userData.health * .75;
+          if (user.tank.CanToolkit) {
+            if (user.tank.health < userData.health * .75) {
+              if (userData.toolkits > 0) {
+                user.tank.CanToolkit = false;
+                userData.toolkits -= 1;
+                user.tank.health = userData.health * .75;
+                window.setTimeout(function() {
+                  user.tank.CanToolkit = true;
+                }, 30000);
+              }
             }
           }
           break;
@@ -3242,5 +3248,4 @@ window.setTimeout(function () {
   document.getElementById('animate').style.visibility = 'hidden';
   startScreen();
 }, 3000);
-//end of IFFY
 })();
