@@ -899,25 +899,6 @@ class Tank {
     draw.fillRect(this.x, this.y + 50, 40, 5);
     draw.fillStyle = "#90EE90";
     draw.fillRect(this.x + 2, this.y + 51, 36 * this.health / userData.health, 3);
-    // Additional Things
-    draw.globalAlpha = .4;
-    draw.font = '15px starfont'
-    draw.setTransform(resizer, 0, 0, resizer, 0, 0);
-    draw.fillStyle = "#ffffff";
-    draw.fillRect(100, 450, 50, 50);
-    draw.fillRect(183, 450, 50, 50);
-    draw.fillRect(266, 450, 50, 50);
-    draw.fillRect(349, 450, 50, 50);
-    draw.globalAlpha = 1;
-    draw.drawImage(boost, 100, 450);
-    draw.drawImage(toolkit, 183, 450);
-    draw.drawImage(scaffolding, 266, 450);
-    draw.fillStyle = "#ffffff";
-    draw.fillText(userData.boosts, 135, 470);
-    draw.fillText(userData.toolkits, 183+35, 470);
-    draw.fillText(userData.blocks, 266+35, 470);
-    draw.fillText(userData.flashbangs, 349+35, 470);
-    draw.setTransform(resizer, 0, 0, resizer, resizer * (-user.tank.x + 230), resizer * (-user.tank.y + 230));
   }
 
   check() {
@@ -2160,6 +2141,25 @@ function level(num, mo, m) {
     s[l].draw();
     l++;
   }
+  // Additional Things
+  draw.globalAlpha = .4;
+  draw.font = '15px starfont'
+  draw.setTransform(resizer, 0, 0, resizer, 0, 0);
+  draw.fillStyle = "#ffffff";
+  draw.fillRect(100, 450, 50, 50);
+  draw.fillRect(183, 450, 50, 50);
+  draw.fillRect(266, 450, 50, 50);
+  draw.fillRect(349, 450, 50, 50);
+  draw.globalAlpha = 1;
+  draw.drawImage(boost, 100, 450);
+  draw.drawImage(toolkit, 183, 450);
+  draw.drawImage(scaffolding, 266, 450);
+  draw.fillStyle = "#ffffff";
+  draw.fillText(userData.boosts, 135, 470);
+  draw.fillText(userData.toolkits, 183+35, 470);
+  draw.fillText(userData.blocks, 266+35, 470);
+  draw.fillText(userData.flashbangs, 349+35, 470);
+  draw.setTransform(resizer, 0, 0, resizer, resizer * (-user.tank.x + 230), resizer * (-user.tank.y + 230));
 }
 var defeatSupport = false;
 function defeat() {
