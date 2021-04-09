@@ -1,3 +1,5 @@
+(function() {
+// IFFY for antihacks
 window.setTimeout(function () {
   document.getElementById('wall').style.visibility = 'hidden';
   document.getElementById('animate').style.visibility = 'hidden';
@@ -3240,3 +3242,5 @@ window.setTimeout(function () {
   document.getElementById('animate').style.visibility = 'hidden';
   startScreen();
 }, 3000);
+//end of IFFY
+})();
