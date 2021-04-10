@@ -1986,8 +1986,60 @@ function level(num, mo, m) {
     }
     levelReader(['  # 2  A  ', '  #A#    A', '#######2##', ' A###A2   ', '2######22#', ' A#A# A   ', '  #2#A11  ', 'A 2 2 1 1#', '  # 2  11 ', '  ###  # @'], m, false, [0, 500, 0, 500]);
   }
-
-
+  if (num == 34) {
+    if (mo != 'n') {
+      spawn(0, 0);
+    }
+    levelReader(['@#A#AA#A#A', ' 2##22##21 ', '1A# 22A#AA', '12#A2A #AA', '12#2 2 #11', ' 2#2 2 #  ', '  #2 2 #  ', '  #2 2 #  ', ' 2# A  #  ', 'A      2  '], m, false, [0, 500, 0, 500]);
+  }
+  if (num == 35) {
+    if (mo != 'n') {
+      spawn(5, 4);
+    }
+    levelReader(['A12222221A', '   2222   ', '2   22   2', '#21    12 ', '# 2  @ 2 #', '# #2222# #', '#  # ##  #', '#  # ##  #', '# #A##A# #', '   #  #   '], m, false, [0, 500, 0, 500]);
+  }
+  if (num == 36) {
+    if (mo != 'n') {
+      spawn(0, 9);
+    }
+    levelReader(['  2 A  22A', '2 #222 22 ', '        2 ', 'A22 2 2   ', '2 2  #  22', '   2 2  2', ' 22 2     ', '   2  222 ', '12     2 2', '@12 22   2'], m, false, [0, 500, 0, 500]);
+  }
+  if (num == 37) {
+    if (mo != 'n') {
+      spawn(9, 6);
+    }
+    levelReader(['          ', ' A A A A A', '          ', '          ', ' 2 2 2 2 2', '2#2#2#2#2#', ' 2 1   11@', 'A2  1   1 ', 'A2    1   ', ' 2  11    '], m, false, [0, 500, 0, 500]);
+  }
+  if (num == 38) {
+    if (mo != 'n') {
+      spawn(4, 4);
+    }
+    levelReader(['          ', ' A1    1A ', ' 1#    #1 ', '          ', '    @     ', '          ', '          ', ' 1#    #1 ', ' A1    1A '], m, false, [0, 500, 0, 500]);
+  }
+  if (num == 39) {
+    if (mo != 'n') {
+      spawn(9, 2);
+    }
+    levelReader([' 2    2  A', '     2  ##', '  2    ##@', '      ##  ', '2    ####2', '    ###   ', '   ##A#   ', '# ##   1  ', ' ##     ##', ' A2      A'], m, false, [0, 500, 0, 500]);
+  }
+  if (num == 40) {
+    if (mo != 'n') {
+      spawn(-8, 4);
+    }
+    levelReader(['AA1##AAAAAAAAAA##1AA', '#AA1##A#A#A#A#A#1AA2', '##A ##A#A#A#A#A#1A#2', ' ## # 1 1 1 1 1# ##A', '  # #      #   # #A ', ' #  ##       # # #22', '  # #   #      # #  ', ' #  #       #  # #  ', '  # #     #    # #  ', ' #  # #      # # #  ', '  # #    #     # #  ', ' #  #1111111111# #  ', '  #1#          # #  ', '##  ##########2# ## ', 'A#@    2222      #A ', 'A#################  ', 'AA#    #   #  ##    ', 'AA#  #              ', '           #  #  ## ', '      #   #   # #   '], m, true, [-500, 500, -500, 500]);
+  }
+  if (num == 41) {
+    if (mo != 'n') {
+      spawn(4, 9);
+    }
+    levelReader(['AA1    1AA', '#AA1  1AA#', '##A    A##',' ##    ## ', '          ', '          ', '          ', '          ', '  #####   ', '  2 @ 2   '], m, false, [0, 500, 0, 500]);
+  }
+  if (num == 42) {
+    if (mo != 'n') {
+      //spawn();
+    }
+    window.alerError();
+  }
   if (num == 'multiplayer') {
     if (mo != "n") {
       if (user.tank.team == 'red') {
@@ -3033,8 +3085,225 @@ function levelSelect3KeyDown(e) {
     document.removeEventListener('keydown', levelSelect3KeyDown);
     levelSelect2();
   }
+  if (e.keyCode == 39) {
+    document.removeEventListener('click', levelSelect3Support);
+    document.removeEventListener('keydown', levelSelect3KeyDown);
+    levelSelect4();
+  }
 }
-// Place Holder
+function levelSelect4() {
+  canvas.removeEventListener('click', mainMenuSupport);
+  draw.fillStyle = "#556B2f";
+  draw.fillRect(50, 50, 400, 400);
+  draw.fillStyle = "#ffffff";
+  if (userData.level < 37) draw.fillStyle = "#000000";
+  draw.fillRect(139, 94, 44, 44);
+  if (userData.level < 38) draw.fillStyle = "#000000";
+  draw.fillRect(228, 94, 44, 44);
+  if (userData.level < 39) draw.fillStyle = "#000000";
+  draw.fillRect(317, 94, 44, 44);
+  if (userData.level < 40) draw.fillStyle = "#000000";
+  draw.fillRect(139, 94 + 44 * 2, 44, 44);
+  if (userData.level < 41) draw.fillStyle = "#000000";
+  draw.fillRect(228, 94 + 44 * 2, 44, 44);
+  if (userData.level < 42) draw.fillStyle = "#000000";
+  draw.fillRect(317, 94 + 44 * 2, 44, 44);
+  if (userData.level < 43) draw.fillStyle = "#000000";
+  draw.fillRect(139, 94 + 44 * 4, 44, 44);
+  if (userData.level < 44) draw.fillStyle = "#000000";
+  draw.fillRect(228, 94 + 44 * 4, 44, 44);
+  if (userData.level < 45) draw.fillStyle = "#000000";
+  draw.fillRect(317, 94 + 44 * 4, 44, 44);
+  if (userData.level < 46) draw.fillStyle = "#000000";
+  draw.fillRect(139, 94 + 44 * 6, 44, 44);
+  if (userData.level < 47) draw.fillStyle = "#000000";
+  draw.fillRect(228, 94 + 44 * 6, 44, 44);
+  if (userData.level < 48) draw.fillStyle = "#000000";
+  draw.fillRect(317, 94 + 44 * 6, 44, 44);
+  draw.fillStyle = "#000000";
+  draw.font = "20px starfont";
+  if (userData.level < 37) draw.fillStyle = "#A9A9A9";
+  draw.fillText("37", 139 + 15, 94 + 30);
+  if (userData.level < 38) draw.fillStyle = "#A9A9A9";
+  draw.fillText("38", 228 + 15, 94 + 30);
+  if (userData.level < 39) draw.fillStyle = "#A9A9A9";
+  draw.fillText("39", 317 + 15, 94 + 30);
+  if (userData.level < 40) draw.fillStyle = "#A9A9A9";
+  draw.fillText("40", 139 + 15, 94 + 44 * 2 + 30);
+  if (userData.level < 41) draw.fillStyle = "#A9A9A9";
+  draw.fillText("41", 228 + 15, 94 + 44 * 2 + 30);
+  if (userData.level < 42) draw.fillStyle = "#A9A9A9";
+  draw.fillText("42", 317 + 15, 94 + 44 * 2 + 30);
+  if (userData.level < 43) draw.fillStyle = "#A9A9A9";
+  draw.fillText("43", 139 + 15, 94 + 44 * 4 + 30);
+  if (userData.level < 44) draw.fillStyle = "#A9A9A9";
+  draw.fillText("44", 228 + 15, 94 + 44 * 4 + 30);
+  if (userData.level < 45) draw.fillStyle = "#A9A9A9";
+  draw.fillText("45", 317 + 15, 94 + 44 * 4 + 30);
+  if (userData.level < 46) draw.fillStyle = "#A9A9A9";
+  draw.fillText("46", 139 + 15, 94 + 44 * 6 + 30);
+  if (userData.level < 47) draw.fillStyle = "#A9A9A9";
+  draw.fillText("47", 228 + 15, 94 + 44 * 6 + 30);
+  if (userData.level < 48) draw.fillStyle = "#A9A9A9";
+  draw.fillText("48", 317 + 15, 94 + 44 * 6 + 30);
+  document.addEventListener("click", levelSelect4Support);
+  document.addEventListener("keydown", levelSelect4KeyDown);
+}
+function levelSelect4Support(e) {
+  if (e.pageX || e.pageY) {
+    x = e.pageX;
+    y = e.pageY;
+  } else {
+    x = e.clientX + document.body.scrollLeft + document.documentElement.scrollLeft;
+    y = e.clientY + document.body.scrollTop + document.documentElement.scrollTop;
+  }
+  x -= canvas.offsetLeft;
+  y -= canvas.offsetTop;
+  if (x > 139) {
+    if (x < 139 + 44) {
+      if (y > 94) {
+        if (y < 94 + 44 && userData.level > 36) {
+          document.removeEventListener("click", levelSelectSupport);
+          Game.level = 37;
+          level(37, null, true);
+        }
+      }
+    }
+  }
+  if (x > 228) {
+    if (x < 228 + 44) {
+      if (y > 94) {
+        if (y < 94 + 44 && userData.level > 37) {
+          document.removeEventListener("click", levelSelectSupport);
+          Game.level = 38;
+          level(38, null, true);
+        }
+      }
+    }
+  }
+  if (x > 317) {
+    if (x < 317 + 44) {
+      if (y > 94) {
+        if (y < 94 + 44 && userData.level > 38) {
+          document.removeEventListener("click", levelSelectSupport);
+          Game.level = 39;
+          level(39, null, true);
+        }
+      }
+    }
+  }
+  if (x > 139) {
+    if (x < 139 + 44) {
+      if (y > 94 + 44 * 2) {
+        if (y < 94 + 44 * 2 + 44 && userData.level > 39) {
+          document.removeEventListener("click", levelSelectSupport);
+          Game.level = 40;
+          level(40, null, true);
+        }
+      }
+    }
+  }
+  if (x > 228) {
+    if (x < 228 + 44) {
+      if (y > 94 + 44 * 2) {
+        if (y < 94 + 44 * 2 + 44 && userData.level > 40) {
+          document.removeEventListener("click", levelSelectSupport);
+          Game.level = 41;
+          level(41, null, true);
+        }
+      }
+    }
+  }
+  if (x > 317) {
+    if (x < 317 + 44) {
+      if (y > 94 + 44 * 2) {
+        if (y < 94 + 44 * 2 + 44 && userData.level > 41) {
+          document.removeEventListener("click", levelSelectSupport);
+          Game.level = 42;
+          level(42, null, true);
+        }
+      }
+    }
+  }
+  if (x > 139) {
+    if (x < 139 + 44) {
+      if (y > 94 + 44 * 4) {
+        if (y < 94 + 44 * 4 + 44 && userData.level > 42) {
+          document.removeEventListener("click", levelSelectSupport);
+          Game.level = 43;
+          level(43, null, true);
+        }
+      }
+    }
+  }
+  if (x > 228) {
+    if (x < 228 + 44) {
+      if (y > 94 + 44 * 4) {
+        if (y < 94 + 44 * 4 + 44 && userData.level > 43) {
+          document.removeEventListener("click", levelSelectSupport);
+          Game.level = 44;
+          level(44, null, true);
+        }
+      }
+    }
+  }
+  if (x > 317) {
+    if (x < 317 + 44) {
+      if (y > 94 + 44 * 4) {
+        if (y < 94 + 44 * 4 + 44 && userData.level > 44) {
+          document.removeEventListener("click", levelSelectSupport);
+          Game.level = 45;
+          level(45, null, true);
+        }
+      }
+    }
+  }
+  if (x > 139) {
+    if (x < 139 + 44) {
+      if (y > 94 + 44 * 6) {
+        if (y < 94 + 44 * 6 + 44 && userData.level > 45) {
+          document.removeEventListener("click", levelSelectSupport);
+          Game.level = 46;
+          level(46, null, true);
+        }
+      }
+    }
+  }
+  if (x > 228) {
+    if (x < 228 + 44) {
+      if (y > 94 + 44 * 6) {
+        if (y < 94 + 44 * 6 + 44 && userData.level > 46) {
+          document.removeEventListener("click", levelSelectSupport);
+          Game.level = 47;
+          level(47, null, true);
+        }
+      }
+    }
+  }
+  if (x > 317) {
+    if (x < 317 + 44) {
+      if (y > 94 + 44 * 6) {
+        if (y < 94 + 44 * 6 + 44 && userData.level > 47) {
+          document.removeEventListener("click", levelSelectSupport);
+          Game.level = 48;
+          level(48, null, true);
+        }
+      }
+    }
+  }
+}
+function levelSelect4KeyDown(e) {
+  if (e.keyCode == 37) {
+    document.removeEventListener('click', levelSelect4Support);
+    document.removeEventListener('keydown', levelSelect4KeyDown);
+    levelSelect3();
+  }
+  if (e.keyCode == 39) {
+    //document.removeEventListener('click', levelSelect4Support);
+    //document.removeEventListener('keydown', levelSelect4KeyDown);
+    //levelSelect4();
+  }
+}
 function multiplayer() {
   canvas.removeEventListener('click', mainMenuSupport)
   document.getElementById('server').style.display = "block";
