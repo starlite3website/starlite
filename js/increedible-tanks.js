@@ -2535,6 +2535,7 @@ function levelSelectSupport(e) {
       if (y > 94) {
         if (y < 94 + 44) {
           document.removeEventListener("click", levelSelectSupport);
+          document.removeEventListener('keydown', levelSelectKeyDown);
           Game.level = 1;
           level(1, null, true);
         }
@@ -2547,6 +2548,7 @@ function levelSelectSupport(e) {
       if (y > 94) {
         if (y < 94 + 44 && userData.level > 1) {
           document.removeEventListener("click", levelSelectSupport);
+          document.removeEventListener('keydown', levelSelectKeyDown);
           Game.level = 2;
           level(2, null, true);
         }
@@ -2558,6 +2560,7 @@ function levelSelectSupport(e) {
       if (y > 94) {
         if (y < 94 + 44 && userData.level > 2) {
           document.removeEventListener("click", levelSelectSupport);
+          document.removeEventListener('keydown', levelSelectKeyDown);
           Game.level = 3;
           level(3, null, true);
         }
@@ -2569,6 +2572,7 @@ function levelSelectSupport(e) {
       if (y > 94 + 44 * 2) {
         if (y < 94 + 44 * 2 + 44 && userData.level > 3) {
           document.removeEventListener("click", levelSelectSupport);
+          document.removeEventListener('keydown', levelSelectKeyDown);
           Game.level = 4;
           level(4, null, true);
         }
@@ -2580,6 +2584,7 @@ function levelSelectSupport(e) {
       if (y > 94 + 44 * 2) {
         if (y < 94 + 44 * 2 + 44 && userData.level > 4) {
           document.removeEventListener("click", levelSelectSupport);
+          document.removeEventListener('keydown', levelSelectKeyDown);
           Game.level = 5;
           level(5, null, true);
         }
@@ -2591,6 +2596,7 @@ function levelSelectSupport(e) {
       if (y > 94 + 44 * 2) {
         if (y < 94 + 44 * 2 + 44 && userData.level > 5) {
           document.removeEventListener("click", levelSelectSupport);
+          document.removeEventListener('keydown', levelSelectKeyDown);
           Game.level = 6;
           level(6, null, true);
         }
@@ -2602,6 +2608,7 @@ function levelSelectSupport(e) {
       if (y > 94 + 44 * 4) {
         if (y < 94 + 44 * 4 + 44 && userData.level > 6) {
           document.removeEventListener("click", levelSelectSupport);
+          document.removeEventListener('keydown', levelSelectKeyDown);
           Game.level = 7;
           level(7, null, true);
         }
@@ -2613,6 +2620,7 @@ function levelSelectSupport(e) {
       if (y > 94 + 44 * 4) {
         if (y < 94 + 44 * 4 + 44 && userData.level > 7) {
           document.removeEventListener("click", levelSelectSupport);
+          document.removeEventListener('keydown', levelSelectKeyDown);
           Game.level = 8;
           level(8, null, true);
         }
@@ -2624,6 +2632,7 @@ function levelSelectSupport(e) {
       if (y > 94 + 44 * 4) {
         if (y < 94 + 44 * 4 + 44 && userData.level > 8) {
           document.removeEventListener("click", levelSelectSupport);
+          document.removeEventListener('keydown', levelSelectKeyDown);
           Game.level = 9;
           level(9, null, true);
         }
@@ -2635,6 +2644,7 @@ function levelSelectSupport(e) {
       if (y > 94 + 44 * 6) {
         if (y < 94 + 44 * 6 + 44 && userData.level > 9) {
           document.removeEventListener("click", levelSelectSupport);
+          document.removeEventListener('keydown', levelSelectKeyDown);
           Game.level = 10;
           level(10, null, true);
         }
@@ -2646,6 +2656,7 @@ function levelSelectSupport(e) {
       if (y > 94 + 44 * 6) {
         if (y < 94 + 44 * 6 + 44 && userData.level > 10) {
           document.removeEventListener("click", levelSelectSupport);
+          document.removeEventListener('keydown', levelSelectKeyDown);
           Game.level = 11;
           level(11, null, true);
         }
@@ -2657,6 +2668,7 @@ function levelSelectSupport(e) {
       if (y > 94 + 44 * 6) {
         if (y < 94 + 44 * 6 + 44 && userData.level > 11) {
           document.removeEventListener("click", levelSelectSupport);
+          document.removeEventListener('keydown', levelSelectKeyDown);
           Game.level = 12;
           level(12, null, true);
         }
@@ -2748,7 +2760,8 @@ function levelSelect2Support(e) {
     if (x < 228 + 44) {
       if (y > 94) {
         if (y < 94 + 44 && userData.level > 1) {
-          document.removeEventListener("click", levelSelectSupport);
+          document.removeEventListener("click", levelSelect2Support);
+          document.removeEventListener('keydown', levelSelect2KeyDown);
           Game.level = 14;
           level(14, null, true);
         }
@@ -2759,7 +2772,8 @@ function levelSelect2Support(e) {
     if (x < 317 + 44) {
       if (y > 94) {
         if (y < 94 + 44 && userData.level > 2) {
-          document.removeEventListener("click", levelSelectSupport);
+          document.removeEventListener("click", levelSelect2Support);
+          document.removeEventListener('keydown', levelSelect2KeyDown);
           Game.level = 15;
           level(15, null, true);
         }
@@ -2770,7 +2784,8 @@ function levelSelect2Support(e) {
     if (x < 139 + 44) {
       if (y > 94 + 44 * 2) {
         if (y < 94 + 44 * 2 + 44 && userData.level > 3) {
-          document.removeEventListener("click", levelSelectSupport);
+          document.removeEventListener("click", levelSelect2Support);
+          document.removeEventListener('keydown', levelSelect2KeyDown);
           Game.level = 16;
           level(16, null, true);
         }
@@ -2781,7 +2796,8 @@ function levelSelect2Support(e) {
     if (x < 228 + 44) {
       if (y > 94 + 44 * 2) {
         if (y < 94 + 44 * 2 + 44 && userData.level > 4) {
-          document.removeEventListener("click", levelSelectSupport);
+          document.removeEventListener("click", levelSelect2Support);
+          document.removeEventListener('keydown', levelSelect2KeyDown);
           Game.level = 17;
           level(17, null, true);
         }
@@ -2792,7 +2808,8 @@ function levelSelect2Support(e) {
     if (x < 317 + 44) {
       if (y > 94 + 44 * 2) {
         if (y < 94 + 44 * 2 + 44 && userData.level > 5) {
-          document.removeEventListener("click", levelSelectSupport);
+          document.removeEventListener("click", levelSelect2Support);
+          document.removeEventListener('keydown', levelSelect2KeyDown);
           Game.level = 18;
           level(18, null, true);
         }
@@ -2803,7 +2820,8 @@ function levelSelect2Support(e) {
     if (x < 139 + 44) {
       if (y > 94 + 44 * 4) {
         if (y < 94 + 44 * 4 + 44 && userData.level > 6) {
-          document.removeEventListener("click", levelSelectSupport);
+          document.removeEventListener("click", levelSelect2Support);
+          document.removeEventListener('keydown', levelSelect2KeyDown);
           Game.level = 19;
           level(19, null, true);
         }
@@ -2814,7 +2832,8 @@ function levelSelect2Support(e) {
     if (x < 228 + 44) {
       if (y > 94 + 44 * 4) {
         if (y < 94 + 44 * 4 + 44 && userData.level > 7) {
-          document.removeEventListener("click", levelSelectSupport);
+          document.removeEventListener("click", levelSelect2Support);
+          document.removeEventListener('keydown', levelSelect2KeyDown);
           Game.level = 20;
           level(20, null, true);
         }
@@ -2825,7 +2844,8 @@ function levelSelect2Support(e) {
     if (x < 317 + 44) {
       if (y > 94 + 44 * 4) {
         if (y < 94 + 44 * 4 + 44 && userData.level > 8) {
-          document.removeEventListener("click", levelSelectSupport);
+          document.removeEventListener("click", levelSelect2Support);
+          document.removeEventListener('keydown', levelSelect2KeyDown);
           Game.level = 21;
           level(21, null, true);
         }
@@ -2836,7 +2856,8 @@ function levelSelect2Support(e) {
     if (x < 139 + 44) {
       if (y > 94 + 44 * 6) {
         if (y < 94 + 44 * 6 + 44 && userData.level > 9) {
-          document.removeEventListener("click", levelSelectSupport);
+          document.removeEventListener("click", levelSelect2Support);
+          document.removeEventListener('keydown', levelSelect2KeyDown);
           Game.level = 22;
           level(22, null, true);
         }
@@ -2847,7 +2868,8 @@ function levelSelect2Support(e) {
     if (x < 228 + 44) {
       if (y > 94 + 44 * 6) {
         if (y < 94 + 44 * 6 + 44 && userData.level > 10) {
-          document.removeEventListener("click", levelSelectSupport);
+          document.removeEventListener("click", levelSelect2Support);
+          document.removeEventListener('keydown', levelSelect2KeyDown);
           Game.level = 23;
           level(23, null, true);
         }
@@ -2858,7 +2880,8 @@ function levelSelect2Support(e) {
     if (x < 317 + 44) {
       if (y > 94 + 44 * 6) {
         if (y < 94 + 44 * 6 + 44 && userData.level > 11) {
-          document.removeEventListener("click", levelSelectSupport);
+          document.removeEventListener("click", levelSelect2Support);
+          document.removeEventListener('keydown', levelSelect2KeyDown);
           Game.level = 24;
           level(24, null, true);
         }
@@ -2950,7 +2973,8 @@ function levelSelect3Support(e) {
     if (x < 139 + 44) {
       if (y > 94) {
         if (y < 94 + 44) {
-          document.removeEventListener("click", levelSelectSupport);
+          document.removeEventListener("click", levelSelect3Support);
+          document.removeEventListener('keydown', levelSelect3KeyDown);
           Game.level = 25;
           level(25, null, true);
         }
@@ -2961,7 +2985,8 @@ function levelSelect3Support(e) {
     if (x < 228 + 44) {
       if (y > 94) {
         if (y < 94 + 44 && userData.level > 1) {
-          document.removeEventListener("click", levelSelectSupport);
+          document.removeEventListener("click", levelSelect3Support);
+          document.removeEventListener('keydown', levelSelect3KeyDown);
           Game.level = 26;
           level(26, null, true);
         }
@@ -2972,7 +2997,8 @@ function levelSelect3Support(e) {
     if (x < 317 + 44) {
       if (y > 94) {
         if (y < 94 + 44 && userData.level > 26) {
-          document.removeEventListener("click", levelSelectSupport);
+          document.removeEventListener("click", levelSelect3Support);
+          document.removeEventListener('keydown', levelSelect3KeyDown);
           Game.level = 27;
           level(27, null, true);
         }
@@ -2983,7 +3009,8 @@ function levelSelect3Support(e) {
     if (x < 139 + 44) {
       if (y > 94 + 44 * 2) {
         if (y < 94 + 44 * 2 + 44 && userData.level > 27) {
-          document.removeEventListener("click", levelSelectSupport);
+          document.removeEventListener("click", levelSelect3Support);
+          document.removeEventListener('keydown', levelSelect3KeyDown);
           Game.level = 28;
           level(28, null, true);
         }
@@ -2994,7 +3021,8 @@ function levelSelect3Support(e) {
     if (x < 228 + 44) {
       if (y > 94 + 44 * 2) {
         if (y < 94 + 44 * 2 + 44 && userData.level > 28) {
-          document.removeEventListener("click", levelSelectSupport);
+          document.removeEventListener("click", levelSelect3Support);
+          document.removeEventListener('keydown', levelSelect3KeyDown);
           Game.level = 29;
           level(29, null, true);
         }
@@ -3005,7 +3033,8 @@ function levelSelect3Support(e) {
     if (x < 317 + 44) {
       if (y > 94 + 44 * 2) {
         if (y < 94 + 44 * 2 + 44 && userData.level > 29) {
-          document.removeEventListener("click", levelSelectSupport);
+          document.removeEventListener("click", levelSelect3Support);
+          document.removeEventListener('keydown', levelSelect3KeyDown);
           Game.level = 30;
           level(30, null, true);
         }
@@ -3016,7 +3045,8 @@ function levelSelect3Support(e) {
     if (x < 139 + 44) {
       if (y > 94 + 44 * 4) {
         if (y < 94 + 44 * 4 + 44 && userData.level > 30) {
-          document.removeEventListener("click", levelSelectSupport);
+          document.removeEventListener("click", levelSelect3Support);
+          document.removeEventListener('keydown', levelSelect3KeyDown);
           Game.level = 31;
           level(31, null, true);
         }
@@ -3027,7 +3057,8 @@ function levelSelect3Support(e) {
     if (x < 228 + 44) {
       if (y > 94 + 44 * 4) {
         if (y < 94 + 44 * 4 + 44 && userData.level > 31) {
-          document.removeEventListener("click", levelSelectSupport);
+          document.removeEventListener("click", levelSelect3Support);
+          document.removeEventListener('keydown', levelSelect3KeyDown);
           Game.level = 32;
           level(32, null, true);
         }
@@ -3038,7 +3069,8 @@ function levelSelect3Support(e) {
     if (x < 317 + 44) {
       if (y > 94 + 44 * 4) {
         if (y < 94 + 44 * 4 + 44 && userData.level > 32) {
-          document.removeEventListener("click", levelSelectSupport);
+          document.removeEventListener("click", levelSelect3Support);
+          document.removeEventListener('keydown', levelSelect3KeyDown);
           Game.level = 33;
           level(33, null, true);
         }
@@ -3049,7 +3081,8 @@ function levelSelect3Support(e) {
     if (x < 139 + 44) {
       if (y > 94 + 44 * 6) {
         if (y < 94 + 44 * 6 + 44 && userData.level > 33) {
-          document.removeEventListener("click", levelSelectSupport);
+          document.removeEventListener("click", levelSelect3Support);
+          document.removeEventListener('keydown', levelSelect3KeyDown);
           Game.level = 34;
           level(34, null, true);
         }
@@ -3060,7 +3093,8 @@ function levelSelect3Support(e) {
     if (x < 228 + 44) {
       if (y > 94 + 44 * 6) {
         if (y < 94 + 44 * 6 + 44 && userData.level > 34) {
-          document.removeEventListener("click", levelSelectSupport);
+          document.removeEventListener("click", levelSelect3Support);
+          document.removeEventListener('keydown', levelSelect3KeyDown);
           Game.level = 35;
           level(35, null, true);
         }
@@ -3071,7 +3105,8 @@ function levelSelect3Support(e) {
     if (x < 317 + 44) {
       if (y > 94 + 44 * 6) {
         if (y < 94 + 44 * 6 + 44 && userData.level > 35) {
-          document.removeEventListener("click", levelSelectSupport);
+          document.removeEventListener("click", levelSelect3Support);
+          document.removeEventListener('keydown', levelSelect3KeyDown);
           Game.level = 36;
           level(36, null, true);
         }
@@ -3163,7 +3198,7 @@ function levelSelect4Support(e) {
     if (x < 139 + 44) {
       if (y > 94) {
         if (y < 94 + 44 && userData.level > 36) {
-          document.removeEventListener("click", levelSelectSupport);
+          document.removeEventListener("click", levelSelect4Support);
           Game.level = 37;
           level(37, null, true);
         }
@@ -3174,7 +3209,7 @@ function levelSelect4Support(e) {
     if (x < 228 + 44) {
       if (y > 94) {
         if (y < 94 + 44 && userData.level > 37) {
-          document.removeEventListener("click", levelSelectSupport);
+          document.removeEventListener("click", levelSelect4Support);
           Game.level = 38;
           level(38, null, true);
         }
@@ -3185,7 +3220,7 @@ function levelSelect4Support(e) {
     if (x < 317 + 44) {
       if (y > 94) {
         if (y < 94 + 44 && userData.level > 38) {
-          document.removeEventListener("click", levelSelectSupport);
+          document.removeEventListener("click", levelSelect4Support);
           Game.level = 39;
           level(39, null, true);
         }
@@ -3196,7 +3231,7 @@ function levelSelect4Support(e) {
     if (x < 139 + 44) {
       if (y > 94 + 44 * 2) {
         if (y < 94 + 44 * 2 + 44 && userData.level > 39) {
-          document.removeEventListener("click", levelSelectSupport);
+          document.removeEventListener("click", levelSelect4Support);
           Game.level = 40;
           level(40, null, true);
         }
@@ -3207,7 +3242,7 @@ function levelSelect4Support(e) {
     if (x < 228 + 44) {
       if (y > 94 + 44 * 2) {
         if (y < 94 + 44 * 2 + 44 && userData.level > 40) {
-          document.removeEventListener("click", levelSelectSupport);
+          document.removeEventListener("click", levelSelect4Support);
           Game.level = 41;
           level(41, null, true);
         }
@@ -3218,7 +3253,8 @@ function levelSelect4Support(e) {
     if (x < 317 + 44) {
       if (y > 94 + 44 * 2) {
         if (y < 94 + 44 * 2 + 44 && userData.level > 41) {
-          document.removeEventListener("click", levelSelectSupport);
+          document.removeEventListener("click", levelSelect4Support);
+          document.removeEventListener('keydown', levelSelect4KeyDown);
           Game.level = 42;
           level(42, null, true);
         }
@@ -3229,7 +3265,8 @@ function levelSelect4Support(e) {
     if (x < 139 + 44) {
       if (y > 94 + 44 * 4) {
         if (y < 94 + 44 * 4 + 44 && userData.level > 42) {
-          document.removeEventListener("click", levelSelectSupport);
+          document.removeEventListener("click", levelSelect4Support);
+          document.removeEventListener('keydown', levelSelect4KeyDown);
           Game.level = 43;
           level(43, null, true);
         }
@@ -3240,7 +3277,8 @@ function levelSelect4Support(e) {
     if (x < 228 + 44) {
       if (y > 94 + 44 * 4) {
         if (y < 94 + 44 * 4 + 44 && userData.level > 43) {
-          document.removeEventListener("click", levelSelectSupport);
+          document.removeEventListener("click", levelSelect4Support);
+          document.removeEventListener('keydown', levelSelect4KeyDown);
           Game.level = 44;
           level(44, null, true);
         }
@@ -3251,7 +3289,8 @@ function levelSelect4Support(e) {
     if (x < 317 + 44) {
       if (y > 94 + 44 * 4) {
         if (y < 94 + 44 * 4 + 44 && userData.level > 44) {
-          document.removeEventListener("click", levelSelectSupport);
+          document.removeEventListener("click", levelSelect4Support);
+          document.removeEventListener('keydown', levelSelect4KeyDown);
           Game.level = 45;
           level(45, null, true);
         }
@@ -3262,7 +3301,8 @@ function levelSelect4Support(e) {
     if (x < 139 + 44) {
       if (y > 94 + 44 * 6) {
         if (y < 94 + 44 * 6 + 44 && userData.level > 45) {
-          document.removeEventListener("click", levelSelectSupport);
+          document.removeEventListener("click", levelSelect4Support);
+          document.removeEventListener('keydown', levelSelect4KeyDown);
           Game.level = 46;
           level(46, null, true);
         }
@@ -3273,7 +3313,8 @@ function levelSelect4Support(e) {
     if (x < 228 + 44) {
       if (y > 94 + 44 * 6) {
         if (y < 94 + 44 * 6 + 44 && userData.level > 46) {
-          document.removeEventListener("click", levelSelectSupport);
+          document.removeEventListener("click", levelSelect4Support);
+          document.removeEventListener('keydown', levelSelect4KeyDown);
           Game.level = 47;
           level(47, null, true);
         }
@@ -3284,7 +3325,8 @@ function levelSelect4Support(e) {
     if (x < 317 + 44) {
       if (y > 94 + 44 * 6) {
         if (y < 94 + 44 * 6 + 44 && userData.level > 47) {
-          document.removeEventListener("click", levelSelectSupport);
+          document.removeEventListener("click", levelSelect4Support);
+          document.removeEventListener('keydown', levelSelect4KeyDown);
           Game.level = 48;
           level(48, null, true);
         }
