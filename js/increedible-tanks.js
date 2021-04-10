@@ -1574,6 +1574,9 @@ function level(num, mo, m) {
   //levelSelect3();
   document.removeEventListener('keydown', levelSelect3KeyDown);
   document.removeEventListener('click', levelSelect3Support);
+  //levelSelect4();
+  document.removeEventListener('keydown', levelSelect4KeyDown);
+  document.removeEventListener('click', levelSelect4Support);
   //multiplayer();
   document.removeEventListener('click', multiplayer2);
   // make viewport follow tank
@@ -3199,6 +3202,7 @@ function levelSelect4Support(e) {
       if (y > 94) {
         if (y < 94 + 44 && userData.level > 36) {
           document.removeEventListener("click", levelSelect4Support);
+          document.removeEventListener('keydown', levelSelect4KeyDown);
           Game.level = 37;
           level(37, null, true);
         }
@@ -3210,6 +3214,7 @@ function levelSelect4Support(e) {
       if (y > 94) {
         if (y < 94 + 44 && userData.level > 37) {
           document.removeEventListener("click", levelSelect4Support);
+          document.removeEventListener('keydown', levelSelect4KeyDown);
           Game.level = 38;
           level(38, null, true);
         }
@@ -3221,6 +3226,7 @@ function levelSelect4Support(e) {
       if (y > 94) {
         if (y < 94 + 44 && userData.level > 38) {
           document.removeEventListener("click", levelSelect4Support);
+          document.removeEventListener('keydown', levelSelect4KeyDown);
           Game.level = 39;
           level(39, null, true);
         }
@@ -3232,6 +3238,7 @@ function levelSelect4Support(e) {
       if (y > 94 + 44 * 2) {
         if (y < 94 + 44 * 2 + 44 && userData.level > 39) {
           document.removeEventListener("click", levelSelect4Support);
+          document.removeEventListener('keydown', levelSelect4KeyDown);
           Game.level = 40;
           level(40, null, true);
         }
@@ -3243,6 +3250,7 @@ function levelSelect4Support(e) {
       if (y > 94 + 44 * 2) {
         if (y < 94 + 44 * 2 + 44 && userData.level > 40) {
           document.removeEventListener("click", levelSelect4Support);
+          document.removeEventListener('keydown', levelSelect4KeyDown);
           Game.level = 41;
           level(41, null, true);
         }
