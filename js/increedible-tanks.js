@@ -1333,9 +1333,11 @@ function jquery_tank_support(e) {
   user.tank.move(e);
 }
 var wall_image = new Image();
-wall_image.src = "data:iamge/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAABPElEQVRoQ+3XUQ6DIAwG4HpIjuOTx/GQLs3WjCHQamzhT8bLXrbpR0n7sxDRQetK6GuhlA7ad0LHvCG8wDFfCDjmFwKMOUNAMXUIIKYNAcP0IUAYHSKYkRPTMLDtkJTiKTzbeEFDZEBvGzAkTxmwkDIqQUJqeQ8O0gqtUJBe8oaBaNeHcIj0/KvTRpsRwyBXBqdWDd6UIRDeXX6wFTM1RHbRgpkeYsVAQEoMv3RZJRiIYPizdtT+kHOPf+4+ouWkWjeDqki+eSUGFlJrAFNOdu2lpDpSGeiK5BjLfXxIRLkaGKeDWI7IHWRoaPREhEG8ESGQCIQ7JArhColEuEGiES4QS8+/22J7v3t8IHq8pPU/DdHHFuOtD/T6nuFIY0B4gxQMDkTBYEE6GDxIA4MJqWBwIQUGG5Jh8CEfzAs2emfq3LQGFAAAAABJRU5ErkJggg==";
+wall_image.src = '/block-blue.png';
 var weak_image = new Image();
-weak_image.src = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAABPklEQVRoQ+3XwQ3DIAwFULIMu2UidssyqVzJFaUONlFs+FJz6aVteBjZny2ldO77ntCfLed8HseR0DFvCFUDHfOBoGO+IMiYHwgqRoQgYi4haJguBAmjQhgzc2BaZpwZknMOt9BsowcawgO6lIILqVMGLKSNSpAQKe/BQa5CKxSkl7xhINr1IRzCPX902GgzYhpkZHBq1aBNmQKh3aUXWzFLQ3gXLZjlIVYMBKTF0KLbKsFAGEOf0lH7Q4Qe/9h9RMtJUjeDqki9eS0GFiI1gCUnu7Yorg5XBroiNcZyH58SUUYD43IQyxG5gwwNjZ6IMIg3IgQSgXCHRCFcIZEIN0g0wgVi6fl3W2zvd48PRI9FWv/TEn1MMd76Qq/vWY40BIQ2SMPAQDQMFKSHgYNcYSAhEgYW0mKgITUGHsKYFwDs91vXxksnAAAAAElFTkSuQmCC";
+weak_image.src = '/block-grey.png';
+var strong_image = new Image();
+strong_image.src = '/block-white.png';
 function Block(health, x, y, isInvincible, isExplosive, isScaffolding) {
   this.blockId = b.length - 1;
   this.x = x;
@@ -1352,31 +1354,7 @@ function Block(health, x, y, isInvincible, isExplosive, isScaffolding) {
       this.health = 60;
       this.type = 'strong';
     }
-    draw.strokeStyle = "#000000";
-    draw.fillStyle = "#D3D3D3";
-    draw.strokeRect(x * 50, y * 50, 50, 50);
-    draw.fillRect(x * 50, y * 50, 50, 50);
-    draw.beginPath();
-    draw.moveTo(x * 50, y * 50);
-    draw.lineTo(x * 50 + 10, y * 50 + 10);
-    draw.lineTo(x * 50 + 40, y * 50 + 10);
-    draw.lineTo(x * 50 + 50, y * 50 + 0);
-    draw.stroke();
-    draw.moveTo(x * 50, y * 50);
-    draw.lineTo(x * 50 + 10, y * 50 + 10);
-    draw.lineTo(x * 50 + 10, y * 50 + 40);
-    draw.lineTo(x * 50, y * 50 + 50);
-    draw.stroke();
-    draw.moveTo(x * 50, y * 50 + 50);
-    draw.lineTo(x * 50 + 10, y * 50 + 40);
-    draw.lineTo(x * 50 + 40, y * 50 + 40);
-    draw.lineTo(x * 50 + 50, y * 50 + 50);
-    draw.stroke();
-    draw.moveTo(x * 50 + 50, y * 50 + 50);
-    draw.lineTo(x * 50 + 40, y * 50 + 40);
-    draw.lineTo(x * 50 + 40, y * 50 + 10);
-    draw.lineTo(x * 50 + 50, y * 50 + 0);
-    draw.stroke();
+    draw.drawImage(strong_image, x*50, y*50);
   }
   this.weak = function (x, y) {
     if (this.health == undefined) {
@@ -1600,7 +1578,7 @@ function level(num, mo, m) {
   document.removeEventListener('click', multiplayer2);
   // make viewport follow tank
   draw.setTransform(resizer, 0, 0, resizer, resizer * (-user.tank.x + 230), resizer * (-user.tank.y + 230));
-  draw.fillStyle = "#A9A9A9";
+  draw.fillStyle = "#000000";
   draw.fillRect(-1000, -1000, 2000, 2000);
   draw.clearRect(0, 0, 500, 500);
   if (Game.level % 10 == 0 || Game.level >= 10000 || Game.level == 'multiplayer') {
