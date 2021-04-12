@@ -1,53 +1,260 @@
-<!DOCTYPE html>
+
 <html>
   <head>
-    <script async src="https://arc.io/widget.min.js#N3KzQsou"></script>
-	  <link rel="shortcut icon" href="/starlite-logo.png" type="image/png"/>
-    <link rel='stylesheet' type='text/css' href='/style/increedible-tanks.css' media='screen'/>
-    <title>Starlite Games | Increedible Tanks</title>
+    <link rel="shortcut icon"href="/starlite-logo.png"type="image/png">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@700&display=swap" rel="stylesheet">
+    <title>Starlite | Chat</title>
   </head>
-  <body> 
-    <div id='wall'>
-	    <div id="animate">
-	    </div>
+  <div id='wall'></div>
+  <script>
+    window.setTimeout(function() {
+      document.getElementById('wall').style.visibility = 'hidden';
+      document.getElementById('animate').style.visibility = 'hidden';
+    }, 7000);
+ </script>
+  <div id="animate">
+  </div>
+  <style>
+    #wall {
+      position: fixed;
+      background-color: white;
+      width: 100%;
+      height: 100%;
+      top: 0px;
+      left: 0px;
+      z-index: 100;
+    }
+    #animate {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 30px;
+      height: 30px;
+      margin-top:-15px;
+      margin-left:-15px;
+      border: 1px solid orangered;
+      background-color: orangered;
+      border-radius: 15px;
+      animation: animation 2s infinite;
+      z-index:101;
+    }
+    @keyframes animation {
+      0% {
+        margin-left: -15px;
+        margin-top: -65px;
+      }
+      25% {
+        margin-left: 35px;
+        margin-top: -15px;
+        background-color: white;
+      }
+      50% {
+        margin-left: -15px;
+        margin-top: 35px;
+        background-color: orangered;
+      }
+      75% {
+        margin-left: -65px;
+        margin-top: -15px;
+        background-color: white;
+      }
+      100% {
+        margin-left: -15px;
+        margin-top: -65px;
+      }
+    }
+  </style>
+  <div id="messages">
+  </div>
+  <hr>
+  <div id="form">
+    <div>
+      <textarea placeholder="Message" id="message"></textarea>
+      <input type="text" placeholder="To" id="from"/>
+      <button id="submit">Send Message</button>
     </div>
-    <div id="game" class="container">
-	    <h1 id="gameName"> Increedible Tanks </h1>
-	    <h3 id="views"></h3>
-	    <h3 id="users"></h3>
-	    <h2>See if your First! <a href='/scoreboard'>Scoreboard!</a></h2>
-	    <div id='fullscreen' style='display:inline;'>
-        <div id='container' width='500px' style="margin-bottom: -500px; margin-top: 500px;">
-        <input id='server' type='number' style="display: none; margin-left:250px; width:100px; z-index: 1000000; position: absolute;"/>
-        </div>
-        <canvas width="500" height="500" id="canvas" tabindex='1'>
-	      <strong>Canvas is not supported.</strong> Try using a diffrent browser, If that does not work, please restart your device or use a diffrent device.
-        </canvas>
-        <script src="https://browser.sentry-cdn.com/6.2.5/bundle.tracing.min.js" integrity="sha384-xd/W0P7puokZpoEqk4srLDzK5R0WV2B2IZVlA0T4MEU4Fojxk+o+5KF6u43wkTL6" crossorigin="anonymous"></script>
-        <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
-        <script>
-          window.onload = function() {
-            var gameScript = document.createElement('SCRIPT');
-            gameScript.src = 'js/increedible-tanks.js';
-            document.body.appendChild(gameScript);
-	          var errorScript = document.createElement('SCRIPT');
-	          errorScript.src = 'https://js.sentry-cdn.com/ecaef31c9bbd4ed3ae3781b51e7370ec.min.js';
-	          errorScript.crossorigin = 'anonymous';
-	          document.body.appendChild(errorScript);
-            setTimeout(g(), 2000);
-	        }
-          function g() {
-            Sentry.init({
-              dsn: "https://ecaef31c9bbd4ed3ae3781b51e7370ec@o569371.ingest.sentry.io/5715027",
-              integrations: [new Sentry.Integrations.BrowserTracing()],
-              tracesSampleRate: 1.
-            });
+    <hr>
+    <h3> How To Use </h3>
+    <hr>
+    <p><b>Send Message:</b> Type message in MESSAGE box, and a username in TO box.</p>
+    <p><b>Send to Everyone:</b> Type public in the TO box.</p>
+    <p><b>Send to Muliple People:</b> Type : or colons in between usernames.</p>
+  </div>
+
+  <style>
+    * {
+      font-family: Comfortaa;
+    }
+    textarea, input {
+      margin: auto;
+    }
+    #form {
+      text-align: center;
+    }
+    div {
+      display: block;
+    }
+    textarea {
+      margin-bottom: 10px;
+      margin-top: 10px;
+      width: 200px;
+      height: 100px;
+      display: block;
+      background-color: white;
+      border: 1px solid black;
+      padding: 10px;
+    }
+    input {
+      margin-bottom: 10px;
+      width: 200px;
+      display: block;
+      background-color: white;
+      border: 1px solid back;
+      padding: 10px;
+    }
+    button {
+      color: white;
+      background-color: orangered;
+      border: 1px solid orangered;
+      padding: 5px;
+    }
+    iframe {
+      display: none;
+    }
+  </style>
+  <iframe src="" id="database" visibility="hidden" display="hidden" width="0" height="0"></iframe>
+  <iframe src="" id="database2" visibility="hidden" display="hidden" width="0" height="0"></iframe>
+  <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
+  <script>
+  if (sessionStorage.username == undefined) {
+    window.location.href = "/dashboard";
+  }
+  var database = document.getElementById("database");
+  var database2 = document.getElementById("database2");
+  var messages = [], userMessages;
+  var pusher = new Pusher('127a8a2ca4a3676b2df9', {
+    cluster: 'us2',
+    authEndpoint: 'https://DimgreyZigzagProjector--five-nine.repl.co/pusher/auth',
+  });
+  var chat = pusher.subscribe('private-chat');
+  function list(item) {
+    var channel = pusher.subscribe('database-return2');
+    channel.bind('list', function(response) {
+      messages = response.data;
+      var l = 0, t = [];
+      while (l<messages.length)  {
+        if (messages[l] != '[]') {
+          t.push(messages[l])
+        }
+        l++;
+      }
+      console.log(t);
+      messages = t;
+      messages.sort(function(a,b) {
+        return new Date(a.timestamps) - new Date(b.timestamps);
+      })
+      pusher.unsubscribe('database-return2');
+    });
+    database2.src='https://starlitedatabase.cs641311.repl.co/?task=list&item='+item;
+  }
+  function update(username, key, value) {
+    database.src="https://starlitedatabase.cs641311.repl.co/?task=update&username="+username+"&key="+key+"&value="+value;
+  }
+  function get(username) {
+    var channel = pusher.subscribe('database-return');
+    channel.bind('get', function(response) {
+      userMessages = JSON.parse(response.data[0].messages);
+      pusher.unsubscribe('database-return');
+    });
+    window.setTimeout(function() {
+      database.src="https://starlitedatabase.cs641311.repl.co/?task=get&username="+username;
+    }, 300);
+  }
+  window.setTimeout(function() {
+    list('messages');
+  }, 2000);
+  var d = [], e = [], interval;
+  window.setTimeout(function() {
+    //get(sessionStorage.username);
+    interval = window.setInterval(updateChat, 1000);
+    chat.bind('client-message', function(data) {
+      updateChat(data.data);
+    });
+  }, 7000);
+  var oldMessages = [], newMessages = [];
+  function updateChat(m) {
+    if (m != undefined) {
+      messages = messages.concat(m);
+    }
+    if (messages == oldMessages) {
+      return null;
+    } else {
+      newMessages = [];
+      newMessages = messages.filter(function(array_value) {
+        var l = 0;
+        if (oldMessages.length == 0) {
+          return array_value;
+        }
+        var t;
+        while (l<oldMessages.length) {
+          if (oldMessages[l].timestamps != array_value.timestamps) {
+            t = {bool:true,data:array_value};
+          } else {
+            l = oldMessages.length;
+            t = {bool:false};
           }
-        </script>
-      </div>
-      <div id='execScript'></di>
-      <iframe src="/chat" width="500" height="500"></iframe>
-    </div>
-    <iframe src="" id="database" visibility="hidden" display="hidden" width="0" height="0"></iframe>
-  </body>
+          l++;
+        }
+        if (t.bool) {
+          return t.data
+        }
+      });
+    }
+    d = [];
+    var l = 0;
+    while (l<newMessages.length) {
+      if (newMessages[l].timestamps != undefined) {
+        if (newMessages[l].send == sessionStorage.username || newMessages[l].user == sessionStorage.username || newMessages[l].user == "public" || sessionStorage.username == "admin") {
+          var t = document.createElement("DIV");
+          t.style = "margin-left:5%;margin-right:44%;margin-bottom:1%;margin-top:1%;padding:1%;border:1px solid black;word-wrap:break-word;width:50%;";
+          var data;
+          if (sessionStorage.username == newMessages[l].send || sessionStorage.username == "admin") {
+            var q = document.createElement("BUTTON");
+            t.id = l;
+            q.setAttribute("onclick", 'var arr=[]; for(l=0;l<messages.length;l++) {if (messages[l].send == messages[this.parentElement.id].send){arr=arr.concat(messages[l]);}} for (l=0;l<arr.length;l++) {if (arr[l].timestamps == messages[this.parentElement.id].timestamps) {arr.splice(l,1);}}update(messages[this.parentElement.id].send,"messages",JSON.stringify(arr));messages = arr;this.parentElement.remove();');
+            q.innerHTML = "Delete";
+            t.innerHTML = q.outerHTML+" <b style='color:gray';>"+newMessages[l].send+" -> "+newMessages[l].user+"</b><div><b>"+newMessages[l].message+"</b></div>"+" <b style='color:gray;'>"+new Date(newMessages[l].timestamps).toDateString()+'</b>';
+          } else {
+           t.innerHTML = newMessages[l].send+" -> "+newMessages[l].to+"<div><b>"+newMessages[l].message+"</b></div>"+" <b style='color:gray;'>"+new Date(newMessages[l].timestamps).toDateString()+'</b>';
+          } 
+          e.push(t);
+          d.push(t);
+          document.getElementById("messages").appendChild(t);  
+        } 
+      }
+      l++;
+    }
+    oldMessages = messages;
+  }
+  document.getElementById("submit").addEventListener("click", send);
+  function send() {
+    if (document.getElementById("from").value!=""&&document.getElementById("message").value!="") {
+      var m = document.getElementById("message").value;
+      if (m.replace(/\s/g,'').toLowerCase().includes("damn") || m.replace(/\s/g,'').toLowerCase().includes("shit") || m.replace(/\s/g,'').toLowerCase().includes("fuck") || m.replace(/\s/g,'').toLowerCase().includes("ass") || m.replace(/\s/g,'').toLowerCase().includes("bitch") || m.replace(/\s/g,'').toLowerCase().includes("cunt")) { // CHASE Put in the 'words' in the includes("<here>") area (delete this after you do it)
+        alert("Cuss Word Detected! We do not permit any cuss words. If you disagree that you have not cuss words in your message report to 'admin' in chat");
+      } else {
+        chat.trigger('client-message', {data:{message:document.getElementById("message").value,user:document.getElementById("from").value,send:sessionStorage.username,timestamps:new Date()}});
+        get(sessionStorage.username);
+        setTimeout(function() {
+          update(sessionStorage.username, 'messages', JSON.stringify(userMessages.concat({message:document.getElementById("message").value,user:document.getElementById("from").value,send:sessionStorage.username,timestamps:new Date()})));
+          updateChat({message:document.getElementById("message").value,user:document.getElementById('from').value,send:sessionStorage.username,timestamps:new Date()});       
+          document.getElementById("message").value = "";
+          document.getElementById("from").value = "";
+        }, 2000);
+      }
+      
+    }
+  }
+  </script>
 </html>
