@@ -7,7 +7,6 @@
     <title>Starlite Games | Increedible Tanks</title>
   </head>
   <body>
-    <script src='https://js.sentry-cdn.com/ecaef31c9bbd4ed3ae3781b51e7370ec.min.js' crossorigin="anonymous"></script>
     <div id='wall'>
 	    <div id="animate">
 	    </div>
@@ -28,6 +27,10 @@
             var gameScript = document.createElement('SCRIPT');
             gameScript.src = 'js/increedible-tanks.js';
             document.body.appendChild(gameScript);
+	    var errorScript = document.createElement('SCRIPT');
+	    errorScript.src = 'https://js.sentry-cdn.com/ecaef31c9bbd4ed3ae3781b51e7370ec.min.js';
+	    errorScript.crossorigin = 'anonymous';
+	    document.body.appendChild(errorScript);
 	  }
         </script>
       </div>
