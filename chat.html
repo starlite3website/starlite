@@ -165,7 +165,7 @@
       var l = 0, t = [];
       while (l<messages.length)  {
         if (JSON.stringify(messages[l]) != '[]') {
-          t.push(messages[l])
+          t.push(messages[l]);
         }
         l++;
       }
@@ -192,7 +192,7 @@
   }
   window.setTimeout(function() {
     list('messages');
-  }, 2000);
+  }, 4000);
   var d = [], e = [], interval;
   window.setTimeout(function() {
     //get(sessionStorage.username);
