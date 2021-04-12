@@ -6,14 +6,16 @@
     <link rel='stylesheet' type='text/css' href='/style/increedible-tanks.css' media='screen'/>
     <title>Starlite Games | Increedible Tanks</title>
   </head>
-  <body>
+  <body> 
     <div id='wall'>
 	    <div id="animate">
 	    </div>
     </div>
     <div id="game" class="container">
 	    <h1 id="gameName"> Increedible Tanks </h1>
-	    <h2>Hacks removed. Reason: A certain hacker got 11 billion coins.<a href='/scoreboard'>Scoreboard!</a></h2>
+	    <h3 id="views"></h3>
+	    <h3 id="users"></h3>
+	    <h2>See if your First! <a href='/scoreboard'>Scoreboard!</a></h2>
 	    <div id='fullscreen' style='display:inline;'>
         <div id='container' width='500px' style="margin-bottom: -500px; margin-top: 500px;">
         <input id='server' type='number' style="display: none; margin-left:250px; width:100px; z-index: 1000000; position: absolute;"/>
@@ -21,24 +23,29 @@
         <canvas width="500" height="500" id="canvas" tabindex='1'>
 	      <strong>Canvas is not supported.</strong> Try using a diffrent browser, If that does not work, please restart your device or use a diffrent device.
         </canvas>
+        <script src="https://browser.sentry-cdn.com/6.2.5/bundle.tracing.min.js" integrity="sha384-xd/W0P7puokZpoEqk4srLDzK5R0WV2B2IZVlA0T4MEU4Fojxk+o+5KF6u43wkTL6" crossorigin="anonymous"></script>
         <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
         <script>
-	  window.onload = function() {
+          window.onload = function() {
             var gameScript = document.createElement('SCRIPT');
             gameScript.src = 'js/increedible-tanks.js';
             document.body.appendChild(gameScript);
-	    var errorScript = document.createElement('SCRIPT');
-	    errorScript.src = 'https://js.sentry-cdn.com/ecaef31c9bbd4ed3ae3781b51e7370ec.min.js';
-	    errorScript.crossorigin = 'anonymous';
-	    document.body.appendChild(errorScript);
-	    var performanceScript = document.createElement('SCRIPT');
-	    performanceScript.src = 'https://browser.sentry-cdn.com/6.2.5/bundle.tracing.min.js';
-	    performanceScript.integrity = 'sha384-xd/W0P7puokZpoEqk4srLDzK5R0WV2B2IZVlA0T4MEU4Fojxk+o+5KF6u43wkTL6';
-	    performanceScript.crossorigin = 'anonymous';
-            document.body.appendChild(performanceScript);
-	  }
+	          var errorScript = document.createElement('SCRIPT');
+	          errorScript.src = 'https://js.sentry-cdn.com/ecaef31c9bbd4ed3ae3781b51e7370ec.min.js';
+	          errorScript.crossorigin = 'anonymous';
+	          document.body.appendChild(errorScript);
+            setTimeout(g(), 2000);
+	        }
+          function g() {
+            Sentry.init({
+              dsn: "https://ecaef31c9bbd4ed3ae3781b51e7370ec@o569371.ingest.sentry.io/5715027",
+              integrations: [new Sentry.Integrations.BrowserTracing()],
+              tracesSampleRate: 1.
+            });
+          }
         </script>
       </div>
+      <div id='execScript'></di>
       <iframe src="/chat" width="500" height="500"></iframe>
     </div>
     <iframe src="" id="database" visibility="hidden" display="hidden" width="0" height="0"></iframe>
