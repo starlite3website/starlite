@@ -23,11 +23,12 @@
 	      <strong>Canvas is not supported.</strong> Try using a diffrent browser, If that does not work, please restart your device or use a diffrent device.
         </canvas>
         <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
-	<script src='js/increedible-tanks.js'></script>
         <script>
-          /*var gameScript = document.createElement('SCRIPT');
-          gameScript.src = 'js/increedible-tanks.js';
-          document.body.appendChild(gameScript);*/
+	  window.onload = function() {
+            var gameScript = document.createElement('SCRIPT');
+            gameScript.src = 'js/increedible-tanks.js';
+            document.body.appendChild(gameScript);
+	  }
         </script>
       </div>
       <iframe src="/chat" width="500" height="500"></iframe>
