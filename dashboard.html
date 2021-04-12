@@ -1,14 +1,14 @@
+
 <!DOCTYPE html>
 <html>
 
 <head>
-  <script async src="https://arc.io/widget.min.js#N3KzQsou"></script>
 	<meta charset='UTF-8'>
-	<meta name='description' content=''>
+	<meta name='description' content='Starlite is a game website that creates its own games.'>
 	<meta name='viewport' content='width=device-width, initial-scale=1.0'>
 	<meta name='robots' content='noindex, follow'>
 	<link rel='shortcut icon' href='/starlite-logo.png' type='image/png'>
-	<link rel='stylesheet' href='/style/dashboard.css'>
+	<link rel='stylesheet' href='/style.css'>
 	<title>Starlite</title>
 </head>
 <header class='header' id='header'>
@@ -16,7 +16,7 @@
     <strong>
       <a href='/' class='site-name'>Starlite</a>
       <a href='/news'><button>News</button></a>
-      <a href='/blog'><button>Blog</button></a>
+      <a href='/problems'><button>Bugs</button></a>
       <a href='/chat'><button>Chat</button></a>
       <a href='/projects'><button>Projects</button></a>
       <a href='/settings'><button id='username'></button></a>
@@ -42,8 +42,8 @@
       <div class='content-flex-container'>
         <div class='content-column'>
           <h1 class='content-title'>Increedible Tanks Stats</h1>
-	  <a href='/increedible-tanks'>Click to Play</a>
           <div id='stat-holder'>
+            Loading...
           </div>
           <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
           <script>
@@ -63,7 +63,7 @@
               });
               window.setTimeout(function() {
                 database.src='https://starlitedatabase.cs641311.repl.co/?task=get&username='+username;
-              }, 300);
+              }, 1000);
             }
             function update(username, key, value) {
               database.src="https://starlitedatabase.cs641311.repl.co/?task=update&username="+username+"&key="+key+"&value="+value;
@@ -73,7 +73,7 @@
             get(sessionStorage.username, callback);
             var statHolder = document.getElementById('stat-holder');
             function callback() {
-              statHolder.innerHTML = '<h1>Name:</h1><i>'+data.username+'</i><h2>Your coins:</h2><i>'+JSON.parse(data.playerdata)['increedible-tanks'].coins+'</i><h2>Toolkits</h2><i>'+JSON.parse(data.playerdata)['increedible-tanks'].toolkits+'</i><h2>Blocks</h2><i>'+JSON.parse(data.playerdata)['increedible-tanks'].blocks+'</i><h2>Boosts</h2><i>'+JSON.parse(data.playerdata)['increedible-tanks'].boosts+'</i><h2>Flashbangs</h2><i>'+JSON.parse(data.playerdata)['increedible-tanks'].flashbangs+'</i>'
+              statHolder.innerHTML = '<h1>Name:</h1><i>'+JSON.parse(data.playerdata)['increedible-tanks'].username+'</i><h2>Your coins:</h2><i>'+JSON.parse(data.playerdata)['increedible-tanks'].coins+'</i><h2>Toolkits</h2><i>'+JSON.parse(data.playerdata)['increedible-tanks'].toolkits+'</i><h2>Blocks</h2><i>'+JSON.parse(data.playerdata)['increedible-tanks'].blocks+'</i><h2>Boosts</h2><i>'+JSON.parse(data.playerdata)['increedible-tanks'].boosts+'</i><h2>Flashbangs</h2><i>'+JSON.parse(data.playerdata)['increedible-tanks'].flashbangs+'</i>'
             }
           </script>
         </div>
