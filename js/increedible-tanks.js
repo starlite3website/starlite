@@ -3444,7 +3444,7 @@ function strong(x, y, m) {
     l++;
   }
   if (Game.level == 'multiplayer-joiner') {
-    draw.drawImage(floor, x*50, y*50)
+    draw.drawImage(strong_image, x*50, y*50);
   }
 } // creates a strong block
 function spawn(x, y) {
