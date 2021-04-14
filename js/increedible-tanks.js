@@ -1,7 +1,8 @@
 (function() {
 window.setTimeout(function () {
   document.getElementById('wall').style.visibility = 'hidden';
-  document.getElementById('animate').remove();
+  document.getElementById('animate').style.visibility = 'hidden';
+  document.getElementById('animate').style.animation = 'none';
 }, 3000);
 var pusher = new Pusher('127a8a2ca4a3676b2df9', {
   cluster: 'us2',
