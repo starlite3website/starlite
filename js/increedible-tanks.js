@@ -1,7 +1,7 @@
 (function() {
 window.setTimeout(function () {
   document.getElementById('wall').style.visibility = 'hidden';
-  document.getElementById('animate').style.visibility = 'hidden';
+  document.getElementById('animate').remove();
 }, 3000);
 var pusher = new Pusher('127a8a2ca4a3676b2df9', {
   cluster: 'us2',
@@ -1314,7 +1314,7 @@ function Game() {
         ai[l].shoot();
         l++;
       }
-    }, 1800))
+    }, 2700))
   }
 }
 function jquery_tank_support(e) {
