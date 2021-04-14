@@ -164,8 +164,6 @@ class Hitbox {
 class Ai {
   control() {
     this.health = 200;
-    this.Scounter = 0;
-    this.Mcounter = 0;
     this.inactive = false;
     this.update = true;
     this.leftright = false;
@@ -254,17 +252,15 @@ class Ai {
             this.update = false;
           }
         }
-        if (this.instructions.fire == true) {
-          if (this.Scounter == 10) {
-            this.fire();
-            this.Scounter = 0;
-          } else {
-            this.Scounter++;
-          }
-        }
       } else {
         window.clearInterval(this.aiDraw);
       }
+  }
+  shoot() {
+    this.instructions = this.moveCalc();
+    if (this.instructions.fire) {
+      this.fire();
+    }
   }
   fire() {
     var xd = (this.x + 20) - (user.tank.x + 20);
@@ -1312,6 +1308,13 @@ function Game() {
         l++;
       }
     }, 90));
+    i.push(window.setInterval(function() {
+      var l = 0;
+      while (l<ai.length) {
+        ai[l].shoot();
+        l++;
+      }
+    }, 900))
   }
 }
 function jquery_tank_support(e) {
