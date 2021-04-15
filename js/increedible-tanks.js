@@ -626,7 +626,7 @@ class Joiner {
         draw.drawImage(weak_image, user.joiner.hostupdate.scaffolding[l].x * 50, user.joiner.hostupdate.scaffolding[l].y * 50);
         l++;
       }
-    }, 10);
+    }, 30);
     Game.level = 'multiplayer-joiner';
     this.socket.onmessage = function (data) {
       data = JSON.parse(data.data);
