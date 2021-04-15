@@ -399,6 +399,8 @@ class Host {
       user.host.socket.send(JSON.stringify({
         room: user.host.channelname,
         username: user.username,
+        type: 'host',
+        mode: channelname,
       }));
     }
     this.socket.onmessage = function (data) {
@@ -628,7 +630,7 @@ class Joiner {
         draw.drawImage(weak_image, user.joiner.hostupdate.scaffolding[l].x * 50, user.joiner.hostupdate.scaffolding[l].y * 50);
         l++;
       }
-    }, 10);
+    }, 20);
     Game.level = 'multiplayer-joiner';
     this.socket.onmessage = function (data) {
       data = JSON.parse(data.data);
@@ -641,6 +643,8 @@ class Joiner {
       user.joiner.socket.send(JSON.stringify({
         room: user.joiner.channelname,
         username: user.username,
+        type: 'joiner',
+        mode: channelname,
       }));
       user.joiner.socket.send(JSON.stringify({
         event: 'joinerjoin',
@@ -3346,6 +3350,7 @@ function levelSelect4KeyDown(e) {
 function multiplayer() {
   canvas.removeEventListener('click', mainMenuSupport)
   document.getElementById('server').style.display = "block";
+  document.getElementById('gamemode').style.display = 'block';
   document.getElementById('container').style.margin_top = "-500px;";
   draw.fillStyle = "#556B2F";
   draw.fillRect(50, 50, 400, 400);
@@ -3385,6 +3390,12 @@ function multiplayer2(e) {
             document.removeEventListener('click', multiplayer2);
             user.host = new Host();
             user.host.control(server.value);
+          } else {
+            if (document.getElementById('gamemode').value == 'pvp') {
+              document.removeEventListener('click', multiplayer2);
+              user.host = new Host();
+              user.host.control('pvp');
+            }
           }
         }
       }
@@ -3395,10 +3406,14 @@ function multiplayer2(e) {
       if (y > 300) {
         if (y < 350) {
           var server = document.getElementById('server');
-          if (server.value) {
+          if (server.value != "") {
             document.removeEventListener('click', multiplayer2);
             user.joiner = new Joiner();
             user.joiner.control(server.value);
+          } else {
+            document.removeEventListener('click', multiplayer2);
+            user.joiner = new Joiner();
+            user.joiner.control('pvp');
           }
         }
       }
@@ -3446,7 +3461,7 @@ function strong(x, y, m) {
     l++;
   }
   if (Game.level == 'multiplayer-joiner') {
-    draw.drawImage(floor, x*50, y*50)
+    draw.drawImage(strong_image, x*50, y*50)
   }
 } // creates a strong block
 function spawn(x, y) {
