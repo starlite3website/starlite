@@ -73,7 +73,7 @@ function get(username, callback) {
 function update(username, key, value) {
   database.src = "https://starlitedatabase.cs641311.repl.co/?task=update&username=" + username + "&key=" + key + "&value=" + value;
 }
-var interval, user, listener, interval2, b = [], s = [], ai = [], l1 = 0, l2 = 0, i = [], Game = new Game(), button = new Image(), gameplay1 = new Image(), red_bullet = new Image(), ai_top = new Image(), ai_base = new Image(), tank_base_png = new Image(), tank_top_png = new Image(), start_screen = new Image(), main_menu = new Image(), tank_base2 = new Image(), coins = new Image(), toolkit = new Image(), scaffolding = new Image(), boost = new Image();
+var interval, user, listener, interval2, b = [], s = [], ai = [], l1 = 0, l2 = 0, i = [], Game = new Game(), button = new Image(), gameplay1 = new Image(), red_bullet = new Image(), ai_top = new Image(), ai_base = new Image(), tank_base_png = new Image(), tank_top_png = new Image(), start_screen = new Image(), main_menu = new Image(), tank_base2 = new Image(), coins = new Image(), toolkit = new Image(), scaffolding = new Image(), boost = new Image(), flashbang = new Image();
 ai_base.src = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAAAuElEQVRYR+2YQQ7DMAgE68eRR5fHtWpaS7UVwkYmt8nNkpVdxmCQ22P8XtO6Teu7lqHubsDM5g2DEXe/xaii+xE+NffntNqkpNuyKLrBp3vp8W5m0v9kglK4kuR3k3ocEIygQvBCuh1uhSAEfwS4B6NUoJOsFgkEIdivGebBIBfoxatFAkEIMs0kOUAvXi0SCEKQaSbJAXrxapGUE6x+p1Yn+R5I9oCqBnwVbKo7CM9RVVOL3J/pvgGoAo+TFbDWigAAAABJRU5ErkJggg==";
 tank_top_png.src = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAtCAYAAADcMyneAAAA90lEQVRYR+3YUQrCMBAE0OkhhOKJPLInEsFDVLY2QqtJZ5sNRBm/G32d7CYmAzr/DJ37IGDtDP1dglNtIst4Ohj6QQDTNUh3eX0P9dvUQwl3CgI+ALBIBjgnZ7gxCHgHwCL3gCvcOQh4A8AiS8AmuPSOLDIHbIrzIAUslS0zzUpQCdriHLX+bdNUDdZuLEpQCRb+NGovtvJQk6hJfrlJbPaadjLTIMzZtAmSxTHAjyRrG8PGsyc6FrhCRgDZM7EH+EZGANlbBS9wRkYA2XuZI8Dko5rH0wy5F9+7+siNEzAlowQ9a963elKCSjCzzvS/zBzcUdw1/wSJGLAu8rB/lgAAAABJRU5ErkJggg==";
 tank_base_png.src = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAAAuElEQVRYR+2YQQ7DMAgE68eRR5fHtWpaS7UVwkYmt8nNkpVdxmCQ22P8XtO6Teu7lqHubsDM5g2DEXe/xaii+xE+NffntNqkpNuyKLrBp3vp8W5m0v9kglK4kuR3k3ocEIygQvBCuh1uhSAEfwS4B6NUoJOsFgkEIdivGebBIBfoxatFAkEIMs0kOUAvXi0SCEKQaSbJAXrxapGUE6x+p1Yn+R5I9oCqBnwVbKo7CM9RVVOL3J/pvgGoAo+TFbDWigAAAABJRU5ErkJggg==";
@@ -88,6 +88,7 @@ gameplay1.src = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAfQAAAH0CAYAAADL1
 toolkit.src = '/toolkit.png';
 scaffolding.src = '/scaffolding.png';
 boost.src = '/boost.png';
+flashbang.src = '/flashbang.png'
 // initialize music and sounds  
 /*
 var villageMusic = new sound("");
@@ -602,6 +603,7 @@ class Joiner {
       draw.drawImage(boost, 100, 450);
       draw.drawImage(toolkit, 183, 450);
       draw.drawImage(scaffolding, 266, 450);
+      draw.drawImage(flashbang, 349, 450);
       draw.fillStyle = "#ffffff";
       draw.fillText(userData.boosts, 135, 470);
       draw.fillText(userData.toolkits, 183+35, 470);
@@ -626,7 +628,7 @@ class Joiner {
         draw.drawImage(weak_image, user.joiner.hostupdate.scaffolding[l].x * 50, user.joiner.hostupdate.scaffolding[l].y * 50);
         l++;
       }
-    }, 30);
+    }, 10);
     Game.level = 'multiplayer-joiner';
     this.socket.onmessage = function (data) {
       data = JSON.parse(data.data);
@@ -3444,7 +3446,7 @@ function strong(x, y, m) {
     l++;
   }
   if (Game.level == 'multiplayer-joiner') {
-    draw.drawImage(strong_image, x*50, y*50);
+    draw.drawImage(floor, x*50, y*50)
   }
 } // creates a strong block
 function spawn(x, y) {
