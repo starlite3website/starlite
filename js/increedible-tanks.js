@@ -424,7 +424,7 @@ class Host {
     }
     window.setInterval(function () {
       user.host.send();
-    }, 10);
+    }, 40);
     Game.level = 'multiplayer';
     level('multiplayer', null, true);
   }
