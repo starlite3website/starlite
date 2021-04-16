@@ -591,6 +591,10 @@ class Joiner {
           draw.fillRect(pt[l].x, pt[l].y + 50, 40, 5);
           draw.fillStyle = "#90EE90";
           draw.fillRect(pt[l].x + 2, pt[l].y + 51, 36 * pt[l].health / pt[l].maxHealth, 3);
+          //username
+          draw.font = "20px Courier";
+          draw.fillStyle = "#FFDF00";
+          draw.fillText(pt[l].username, pt[l].x + 20 - pt[l].username.length/2*13, pt[l].y - 25);
         }
         l++;
       }
@@ -1596,9 +1600,9 @@ function level(num, mo, m) {
     b = [];
     document.getElementById('fullscreen').requestFullscreen();
   }
-  draw.font = "20px starfont";
+  draw.font = "20px Courier";
   draw.fillStyle = "#FFDF00";
-  draw.fillText(user.username, user.tank.x - user.username.length / 4 * 15 + 5, user.tank.y - 25);
+  draw.fillText(user.username, user.tank.x + 20 - user.username.length/2*13, user.tank.y - 25);
   var l = 0;
   while (l < user.tank.scaffolding.length) {
     weak(user.tank.scaffolding[l].x, user.tank.scaffolding[l].y);
@@ -2095,6 +2099,9 @@ function level(num, mo, m) {
         draw.fillRect(pt[l].x, pt[l].y + 50, 40, 5);
         draw.fillStyle = "#90EE90";
         draw.fillRect(pt[l].x + 2, pt[l].y + 51, 36 * pt[l].health / userData.health, 3);
+        draw.font = "20px Courier";
+        draw.fillStyle = "#FFDF00";
+        draw.fillText(pt[l].username, pt[l].x + 20 - pt[l].username.length/2*13, pt[l].y - 25);
       }
       l++;
     }
