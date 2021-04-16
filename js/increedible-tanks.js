@@ -73,7 +73,7 @@ function get(username, callback) {
 function update(username, key, value) {
   database.src = "https://starlitedatabase.cs641311.repl.co/?task=update&username=" + username + "&key=" + key + "&value=" + value;
 }
-var interval, user, listener, interval2, b = [], s = [], ai = [], l1 = 0, l2 = 0, i = [], Game = new Game(), button = new Image(), gameplay1 = new Image(), red_bullet = new Image(), ai_top = new Image(), ai_base = new Image(), tank_base_png = new Image(), tank_top_png = new Image(), start_screen = new Image(), main_menu = new Image(), tank_base2 = new Image(), coins = new Image(), toolkit = new Image(), scaffolding = new Image(), boost = new Image(), flashbang = new Image();
+var interval, user, listener, interval2, b = [], s = [], ai = [], l1 = 0, l2 = 0, i = [], Game = new Game(), button = new Image(), gameplay1 = new Image(), red_bullet = new Image(), ai_top = new Image(), ai_base = new Image(), tank_base_png = new Image(), tank_top_png = new Image(), start_screen = new Image(), main_menu = new Image(), tank_base2 = new Image(), coins = new Image(), toolkit = new Image(), scaffolding = new Image(), boost = new Image(), flashbang = new Image(), victory_screen = new Image();
 ai_base.src = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAAAuElEQVRYR+2YQQ7DMAgE68eRR5fHtWpaS7UVwkYmt8nNkpVdxmCQ22P8XtO6Teu7lqHubsDM5g2DEXe/xaii+xE+NffntNqkpNuyKLrBp3vp8W5m0v9kglK4kuR3k3ocEIygQvBCuh1uhSAEfwS4B6NUoJOsFgkEIdivGebBIBfoxatFAkEIMs0kOUAvXi0SCEKQaSbJAXrxapGUE6x+p1Yn+R5I9oCqBnwVbKo7CM9RVVOL3J/pvgGoAo+TFbDWigAAAABJRU5ErkJggg==";
 tank_top_png.src = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAtCAYAAADcMyneAAAA90lEQVRYR+3YUQrCMBAE0OkhhOKJPLInEsFDVLY2QqtJZ5sNRBm/G32d7CYmAzr/DJ37IGDtDP1dglNtIst4Ohj6QQDTNUh3eX0P9dvUQwl3CgI+ALBIBjgnZ7gxCHgHwCL3gCvcOQh4A8AiS8AmuPSOLDIHbIrzIAUslS0zzUpQCdriHLX+bdNUDdZuLEpQCRb+NGovtvJQk6hJfrlJbPaadjLTIMzZtAmSxTHAjyRrG8PGsyc6FrhCRgDZM7EH+EZGANlbBS9wRkYA2XuZI8Dko5rH0wy5F9+7+siNEzAlowQ9a963elKCSjCzzvS/zBzcUdw1/wSJGLAu8rB/lgAAAABJRU5ErkJggg==";
 tank_base_png.src = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAAAuElEQVRYR+2YQQ7DMAgE68eRR5fHtWpaS7UVwkYmt8nNkpVdxmCQ22P8XtO6Teu7lqHubsDM5g2DEXe/xaii+xE+NffntNqkpNuyKLrBp3vp8W5m0v9kglK4kuR3k3ocEIygQvBCuh1uhSAEfwS4B6NUoJOsFgkEIdivGebBIBfoxatFAkEIMs0kOUAvXi0SCEKQaSbJAXrxapGUE6x+p1Yn+R5I9oCqBnwVbKo7CM9RVVOL3J/pvgGoAo+TFbDWigAAAABJRU5ErkJggg==";
@@ -89,6 +89,7 @@ toolkit.src = '/toolkit.png';
 scaffolding.src = '/scaffolding.png';
 boost.src = '/boost.png';
 flashbang.src = '/flashbang.png'
+victory_screen.src = '/victory-screen.png'
 // initialize music and sounds  
 /*
 var villageMusic = new sound("");
@@ -1299,7 +1300,7 @@ function Game() {
   this.i = function () {
     i.push(window.setInterval(function () {
       clearShot();
-    }, 30));
+    }, 40));
     i.push(window.setInterval(function () {
       var l = 0;
       while (l < s.length) {
@@ -2230,26 +2231,23 @@ function defeatHelper(event) {
 var victorySupport = false;
 function victory() {
   Game.endGame();
-  draw.fillStyle = "#556B2F";
-  draw.fillRect(50, 50, 400, 400);
-  draw.font = "60px starfont";
+  draw.drawImage(victory_screen, 0, 0);
   draw.fillStyle = "#ffffff";
-  draw.fillText("VICTORY!", 120, 120);
   draw.font = "20px starfont";
-  draw.fillText("Coins Gained: " + Game.coins, 140, 200);
+  draw.fillText("Coins Gained: " + Game.coins, 160, 250);
   if (user.tank.health == userData.health) {
-    draw.fillText("Full Health: x2", 140, 240);
+    draw.fillText("Full Health: x2", 160, 290);
     Game.coins *= 2;
   } else {
-    draw.fillText("Full Health: :/", 140, 240);
+    draw.fillText("Full Health: :/", 160, 290);
   }
-  draw.fillText("Game Coins: " + Game.coins, 140, 280);
+  draw.fillText("Game Coins: " + Game.coins, 160, 330);
   userData.coins += Game.coins;
   if (userData.level == Game.level) userData.level++;
   var t = new Object();
   t["increedible-tanks"] = userData;
   update(user.username, 'playerdata', JSON.stringify(t));
-  draw.fillText("Total Coins: " + userData.coins, 140, 320);
+  draw.fillText("Total Coins: " + userData.coins, 160, 370);
   document.addEventListener("keydown", victoryHelper);
   setTimeout(function () {
     document.removeEventListener("keydown", victoryHelper);
