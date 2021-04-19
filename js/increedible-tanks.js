@@ -491,7 +491,7 @@ class Host {
       tank.team = 'blue';
       teamData.blue.players.push(tank.username);
       tank.x = -2 * 50;
-      tank.y = -10 * 50;
+      tank.y = 9 * 50;
     }
     pt.push(tank);
   }
@@ -2047,7 +2047,7 @@ function level(num, mo, m) {
       if (user.tank.team == 'red') {
         spawn(1, -10);
       } else {
-        spawn(-2, 10)
+        spawn(-2, 9);
       }
     }
     var l = 0;
