@@ -165,6 +165,7 @@ class Hitbox {
 
 class Ai {
   control() {
+    this.pushback = 0;
     this.health = 200;
     this.inactive = false;
     this.update = true;
@@ -183,7 +184,10 @@ class Ai {
       }
       draw.translate(this.x + 20, this.y + 20);
       draw.rotate(this.rotation * Math.PI / 180);
-      draw.drawImage(ai_top, -20, -20);
+      draw.drawImage(ai_top, -20, -20+this.pushback);
+      if (this.pushback != 0) {
+        this.pushback += 1;
+      }
       draw.rotate(-(this.rotation * Math.PI / 180));
       draw.translate(-this.x - 20, -this.y - 20);
       draw.fillStyle = "#000000";
@@ -265,6 +269,7 @@ class Ai {
     }
   }
   fire() {
+    this.pushback = -3;
     var xd = (this.x + 20) - (user.tank.x + 20);
     var yd = (this.y + 20) - (user.tank.y + 20);
     if (xd < 0) {
@@ -318,8 +323,6 @@ class Ai {
     } else {
       this.rotation += 90;
     }
-    this.rotation += Math.floor(Math.random() * 30);
-    this.rotation -= Math.floor(Math.random() * 30);
     if (300 > Math.sqrt(this.xdistance * this.xdistance + this.ydistance * this.ydistance)) {
       var fire = true;
     }
@@ -465,6 +468,7 @@ class Host {
             pt[l].health = .75 * pt[l].maxHealth;
           }
           if (tank.fire) {
+            pt[l].pushback = -3;
             if (tank.rotation > 180 && tank.rotation < 270) {
               s.push(new Shot(pt[l].x + 20, pt[l].y + 20, s.length - 1, -tank.yd, tank.xd));
             } else if (tank.rotation > 270) {
@@ -531,6 +535,7 @@ class Joiner {
       CanToolkit: true,
       canPlaceScaffolding: true,
       placeScaffolding: false,
+      pushback: 0,
     };
     this.tank.helper = [];
     this.tank.intervals = [];
@@ -583,7 +588,7 @@ class Joiner {
           }
           draw.translate(pt[l].x + 20, pt[l].y + 20);
           draw.rotate(pt[l].rotation * Math.PI / 180);
-          draw.drawImage(tank_top_png, -20, -20);
+          draw.drawImage(tank_top_png, -20, -20+pt[l].pushback);
           draw.rotate(-(pt[l].rotation * Math.PI / 180));
           draw.translate(-pt[l].x - 20, -pt[l].y - 20);
           // Health Bar!
@@ -883,7 +888,10 @@ class Tank {
     }
     draw.translate(this.x + 20, this.y + 20);
     draw.rotate(this.rotation * Math.PI / 180);
-    draw.drawImage(tank_top_png, -20, -20);
+    draw.drawImage(tank_top_png, -20, -20+this.pushback);
+    if (this.pushback != 0) { 
+      this.pushback += 1;
+    }
     draw.rotate(-(this.rotation * Math.PI / 180));
     draw.translate(-this.x - 20, -this.y - 20);
     // Health Bar!
@@ -928,6 +936,7 @@ class Tank {
   }
 
   initialize() {
+    this.pushback = 0;
     this.canFireFlashbang = true;
     this.scaffolding = [];
     this.canPlaceScaffolding = true;
@@ -1104,6 +1113,7 @@ class Tank {
 
   fire() {
     if (!user.tank.inactive) {
+      this.pushback = -3;
       this.xd = 1;
       this.angle = this.rotation % 90;
       this.yd = Math.abs(((this.xd * this.angle) - (90 * this.xd)) / this.angle);
@@ -2091,7 +2101,10 @@ function level(num, mo, m) {
         }
         draw.translate(pt[l].x + 20, pt[l].y + 20);
         draw.rotate(pt[l].rotation * Math.PI / 180);
-        draw.drawImage(tank_top_png, -20, -20);
+        draw.drawImage(tank_top_png, -20, -20+pt[l].pushback);
+        if (pt[l].pushback != 0) {
+          pt[l].pushback += 1;
+        }
         draw.rotate(-(pt[l].rotation * Math.PI / 180));
         draw.translate(-pt[l].x - 20, -pt[l].y - 20);
         // Health Bar!
