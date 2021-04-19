@@ -511,7 +511,7 @@ class Host {
   send() {
     user.host.socket.send(JSON.stringify({
       event: 'hostupdate',
-      tanks: pt.concat([{ x: user.tank.x, y: user.tank.y, health: user.tank.health, rotation: user.tank.rotation, leftright: user.tank.leftright, username: user.username, team: user.tank.team, ded: user.tank.inactive, maxHealth: userData.health }]),
+      tanks: pt.concat([{ x: user.tank.x, y: user.tank.y, health: user.tank.health, rotation: user.tank.rotation, leftright: user.tank.leftright, username: user.username, team: user.tank.team, ded: user.tank.inactive, maxHealth: userData.health, pushback: user.tank.pushback, }]),
       blocks: user.host.blockData,
       scaffolding: user.tank.scaffolding,
       ai: ai,
@@ -663,6 +663,7 @@ class Joiner {
           health: userData.health,
           maxHealth: userData.health,
           ded: false,
+          pushback: 0,
         },
       }));
     }
