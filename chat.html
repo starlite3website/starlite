@@ -146,7 +146,7 @@
       var l = 0, t = [];
       while (l<messages.length)  {
         if (messages[l] != '[]') {
-          t.push(messages[l])
+          t.push(JSON.parse(messages[l])[0])
         }
         l++;
       }

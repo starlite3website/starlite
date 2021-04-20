@@ -33,16 +33,11 @@
       function renderResults() {
         document.getElementById('container').innerHTML = "";
         var l = 0;
-        while (l<messages.length) {
+        while(l<messages.length) {
+          messages[l] = JSON.parse(messages[l])
           if (messages[l]['increedible-tanks'] == undefined) {
             messages.splice(l, 1);
-          }
-          l++;
-        }
-        var l = 0;
-        while (l<messages.length) {
-          if (messages[l]['increedible-tanks'] == undefined) {
-            messages.splice(l, 1);
+            l--;
           }
           l++;
         }
