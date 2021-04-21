@@ -146,11 +146,10 @@
       var l = 0, t = [];
       while (l<messages.length)  {
         if (messages[l] != '[]') {
-          t.push(JSON.parse(messages[l])[0])
+          t = t.concat(JSON.parse(messages[l]));
         }
         l++;
       }
-      console.log(t);
       messages = t;
       messages.sort(function(a,b) {
         return new Date(a.timestamps) - new Date(b.timestamps);
