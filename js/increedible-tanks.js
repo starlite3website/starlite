@@ -1474,14 +1474,14 @@ function Block(health, x, y, isInvincible, isExplosive, isScaffolding) {
   }
   this.strong = function (x, y) {
     if (this.health == undefined) {
-      this.health = 80;
+      this.health = 60;
       this.type = 'strong';
     }
     draw.drawImage(strong_image, x*50, y*50);
   }
   this.weak = function (x, y) {
     if (this.health == undefined) {
-      this.health = 40;
+      this.health = 20;
       this.type = 'weak';
     }
     draw.drawImage(weak_image, x * 50, y * 50);
@@ -2437,10 +2437,10 @@ function shop() {
   draw.fillText('Buy a Toolkit', 110, 310);
   draw.fillText('Buy Flashbang', 105, 380);
   draw.fillStyle = "#ffffff";
-  draw.fillText('Cost: 200 Gold', 240, 170);
-  draw.fillText('Cost: 500 Gold', 240, 240);
-  draw.fillText('Cost: 1000 Gold', 240, 310);
-  draw.fillText('Cost: 2000 Gold', 240, 380);
+  draw.fillText('Cost: 50 Gold', 240, 170);
+  draw.fillText('Cost: 200 Gold', 240, 240);
+  draw.fillText('Cost: 500 Gold', 240, 310);
+  draw.fillText('Cost: 1000 Gold', 240, 380);
   draw.fillStyle = "#000000";
   draw.fillText("Main Menu", 75, 75);
   document.addEventListener("click", shopSupport);
