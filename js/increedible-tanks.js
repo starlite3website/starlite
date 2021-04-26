@@ -475,9 +475,9 @@ class Host {
           }
           if (tank.shielded) {
             pt[l].shields = 5;
-            setTimeout(function() {
+            setTimeout(function(l) {
               pt[l].shields = 0;
-            }, 10000)
+            }, 10000, l);
           }
           pt[l].base = tank.base;
           pt[l].rotation = tank.rotation;
@@ -2336,6 +2336,7 @@ function level(num, mo, m) {
   draw.drawImage(boost, 100, 450);
   draw.drawImage(toolkit, 183, 450);
   draw.drawImage(scaffolding, 266, 450);
+  draw.drawImage(flashbang, 349, 450);
   draw.fillStyle = "#ffffff";
   draw.fillText(userData.boosts, 135, 470);
   draw.fillText(userData.toolkits, 183+35, 470);
