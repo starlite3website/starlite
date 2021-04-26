@@ -110,7 +110,7 @@
       width: 200px;
       display: block;
       background-color: white;
-      border: 1px solid back;
+      border: 1px solid black;
       padding: 10px;
     }
     button {
@@ -127,6 +127,7 @@
   <iframe src="" id="database2" visibility="hidden" display="hidden" width="0" height="0"></iframe>
   <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
   <script>
+
   var counter = 0;
   if (sessionStorage.username == undefined) {
     window.location.href = "/dashboard";
@@ -145,7 +146,7 @@
       messages = response.data;
       var l = 0, t = [];
       while (l<messages.length)  {
-        if (messages[l] != '[]') {
+        if (JSON.parse(messages[l]).length != 0) {
           t = t.concat(JSON.parse(messages[l]));
         }
         l++;
@@ -217,16 +218,16 @@
       if (newMessages[l].timestamps != undefined) {
         if (newMessages[l].send == sessionStorage.username || newMessages[l].user == sessionStorage.username || newMessages[l].user == "public" || sessionStorage.username == "admin") {
           var t = document.createElement("DIV");
-          t.style = "margin-left:5%;margin-right:44%;margin-bottom:1%;margin-top:1%;padding:1%;border:1px solid black;word-wrap:break-word;width:50%;";
+          t.style = "margin-left:5%;margin-right:44%;margin-bottom:1%;margin-top:1%;padding:1%;border:1px solid gray;word-wrap:break-word;width:50%;border-radius: 10px;padding: 10px;";
           var data;
           if (sessionStorage.username == newMessages[l].send || sessionStorage.username == "admin") {
             var q = document.createElement("BUTTON");
             t.id = counter; counter++;
-            q.setAttribute("onclick", 'var arr=[], m = []; for(l=0;l<messages.length;l++) {if (messages[l].send == messages[this.parentElement.id].send){arr=arr.concat(messages[l]);}} m=messages;for (l=0;l<arr.length;l++) {if (arr[l].timestamps == messages[this.parentElement.id].timestamps) {arr.splice(l,1);}console.log(messages[this.parentElement.id].send);}update(messages[this.parentElement.id].send,"messages",JSON.stringify(arr));for(l=0;l<m.length;l++) {if (m[l].timestamps == messages[this.parentElement.id].timestamps) {m[l] = {};}}messages = m;this.parentElement.remove();');
+            q.setAttribute("onclick", 'var arr=[], m = []; for(l=0;l<messages.length;l++) {if (messages[l].send == messages[this.parentElement.id].send){arr=arr.concat(messages[l]);}} m=messages;for (l=0;l<arr.length;l++) {if (arr[l].timestamps == messages[this.parentElement.id].timestamps) {arr.splice(l,1);}}update(messages[this.parentElement.id].send,"messages",JSON.stringify(arr));for(l=0;l<m.length;l++) {if (m[l].timestamps == messages[this.parentElement.id].timestamps) {m[l] = {};}}messages = m;this.parentElement.remove();');
             q.innerHTML = "Delete";
-            t.innerHTML = q.outerHTML+" <b style='color:gray';>"+newMessages[l].send+" -> "+newMessages[l].user+"</b><div><b>"+newMessages[l].message+"</b></div>"+" <b style='color:gray;'>"+new Date(newMessages[l].timestamps).toDateString()+'</b>';
+            t.innerHTML = q.outerHTML+' <b style="color:orangered">'+newMessages[l].send+" -> "+newMessages[l].user+"</b><div><b>"+newMessages[l].message+"</b></div>"+" <b style='color:gray;'>"+new Date(newMessages[l].timestamps).toLocaleDateString()+' <i style="color:orangered">'+new Date(newMessages[l].timestamps).toLocaleTimeString()+'</i></b>';
           } else {
-           t.innerHTML = newMessages[l].send+" -> "+newMessages[l].user+"<div><b>"+newMessages[l].message+"</b></div>"+" <b style='color:gray;'>"+new Date(newMessages[l].timestamps).toDateString()+'</b>';
+           t.innerHTML = ' <b style="color:orangered">'+newMessages[l].send+" -> "+newMessages[l].user+"</b><div><b>"+newMessages[l].message+"</b></div>"+" <b style='color:gray;'>"+new Date(newMessages[l].timestamps).toLocaleDateString()+' <i style="color:orangered">'+new Date(newMessages[l].timestamps).toLocaleTimeString()+'</i></b>';
           } 
           e.push(t);
           d.push(t);
