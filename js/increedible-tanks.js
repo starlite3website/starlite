@@ -1474,14 +1474,14 @@ function Block(health, x, y, isInvincible, isExplosive, isScaffolding) {
   }
   this.strong = function (x, y) {
     if (this.health == undefined) {
-      this.health = 60;
+      this.health = 80;
       this.type = 'strong';
     }
     draw.drawImage(strong_image, x*50, y*50);
   }
   this.weak = function (x, y) {
     if (this.health == undefined) {
-      this.health = 20;
+      this.health = 40;
       this.type = 'weak';
     }
     draw.drawImage(weak_image, x * 50, y * 50);
