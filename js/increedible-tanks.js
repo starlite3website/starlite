@@ -1,4 +1,4 @@
-(function() {
+//(function() {
 window.setTimeout(function () {
   document.getElementById('wall').style.visibility = 'hidden';
   document.getElementById('animate').style.visibility = 'hidden';
@@ -7,7 +7,6 @@ var pusher = new Pusher('127a8a2ca4a3676b2df9', {
   cluster: 'us2',
   authEndpoint: 'https://DimgreyZigzagProjector--five-nine.repl.co/pusher/auth',
 });
-
 /*var o = [];
 function update(range, value) {
   embed.src="https://script.google.com/macros/s/AKfycbx2j30BqJJTK0igYO2QDtbVvBSwS7JK4BjZ5qeSUdNtONWVApBn/exec?type=2&range="+range+"&value="+value;
@@ -73,7 +72,7 @@ function get(username, callback) {
 function update(username, key, value) {
   database.src = "https://starlitedatabase.cs641311.repl.co/?task=update&username=" + username + "&key=" + key + "&value=" + value;
 }
-var interval, user, listener, interval2, b = [], s = [], ai = [], l1 = 0, l2 = 0, i = [], Game = new Game(), button = new Image(), gameplay1 = new Image(), red_bullet = new Image(), ai_top = new Image(), ai_base = new Image(), tank_base_png = new Image(), tank_top_png = new Image(), start_screen = new Image(), main_menu = new Image(), tank_base2 = new Image(), coins = new Image(), toolkit = new Image(), scaffolding = new Image(), boost = new Image(), flashbang = new Image(), victory_screen = new Image();
+var interval, user, listener, interval2, b = [], s = [], ai = [], l1 = 0, l2 = 0, i = [], Game = new Game(), button = new Image(), gameplay1 = new Image(), red_bullet = new Image(), ai_top = new Image(), ai_base = new Image(), tank_base_png = new Image(), tank_top_png = new Image(), start_screen = new Image(), main_menu = new Image(), tank_base2 = new Image(), coins = new Image(), toolkit = new Image(), scaffolding = new Image(), boost = new Image(), flashbang = new Image(), victory_screen = new Image(), iron_tank_top = new Image(), iron_tank_base = new Image(), iron_tank_base2 = new Image(), diamond_tank_top = new Image(), diamond_tank_base = new Image(), diamond_tank_base2 = new Image();
 ai_base.src = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAAAuElEQVRYR+2YQQ7DMAgE68eRR5fHtWpaS7UVwkYmt8nNkpVdxmCQ22P8XtO6Teu7lqHubsDM5g2DEXe/xaii+xE+NffntNqkpNuyKLrBp3vp8W5m0v9kglK4kuR3k3ocEIygQvBCuh1uhSAEfwS4B6NUoJOsFgkEIdivGebBIBfoxatFAkEIMs0kOUAvXi0SCEKQaSbJAXrxapGUE6x+p1Yn+R5I9oCqBnwVbKo7CM9RVVOL3J/pvgGoAo+TFbDWigAAAABJRU5ErkJggg==";
 tank_top_png.src = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAtCAYAAADcMyneAAAA90lEQVRYR+3YUQrCMBAE0OkhhOKJPLInEsFDVLY2QqtJZ5sNRBm/G32d7CYmAzr/DJ37IGDtDP1dglNtIst4Ohj6QQDTNUh3eX0P9dvUQwl3CgI+ALBIBjgnZ7gxCHgHwCL3gCvcOQh4A8AiS8AmuPSOLDIHbIrzIAUslS0zzUpQCdriHLX+bdNUDdZuLEpQCRb+NGovtvJQk6hJfrlJbPaadjLTIMzZtAmSxTHAjyRrG8PGsyc6FrhCRgDZM7EH+EZGANlbBS9wRkYA2XuZI8Dko5rH0wy5F9+7+siNEzAlowQ9a963elKCSjCzzvS/zBzcUdw1/wSJGLAu8rB/lgAAAABJRU5ErkJggg==";
 tank_base_png.src = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAABGElEQVRYR+1Yuw6DMAx0NiT+gMXdGNI5/f+xmZu9Gdo/QGKjCi0SpUpiRBAdjgWQLvhy8QsrImqI6ElExMxDuE+X917N3/d6TtkNBBpmfqSM70V0SWzJIdhVWusv1WJEnXNF1ZTaVcYYEcGrtUVP+GKM6Hv/TzDnB9M2796LdiwFnZhFUNW27dD3fRZ8BMGqqmg84q7rsgRvzmUxawBnrbPwuq7fBLNIIkKQRFRSCJKIMpIoRpCkgg+VRJKaUhiJD4b1qCQxFVFJtvqgOIpRSVBJPgqg3UK7tTLvSEod2i20W3MFjvgvRruV8kG0WyvT3g8c7dZWBYtXkiNGwON0KyiRm3BZa4vOpyf1JXa/DC8X7EVs6R4puy8xsfCO7UNcsAAAAABJRU5ErkJggg==";
@@ -90,6 +89,12 @@ scaffolding.src = '/scaffolding.png';
 boost.src = '/boost.png';
 flashbang.src = '/flashbang.png'
 victory_screen.src = '/victory-screen.png'
+iron_tank_base.src = '/iron-tank-base.png';
+iron_tank_base2.src = '/iron-tank-base2.png';
+iron_tank_top.src = '/iron-tank-top.png';
+diamond_tank_top.src = '/diamond-tank-top.png';
+diamond_tank_base.src = '/diamond-tank-base.png';
+diamond_tank_base2.src = '/diamond-tank-base2.png';
 // initialize music and sounds  
 /*
 var villageMusic = new sound("");
@@ -547,7 +552,7 @@ class Host {
   send() {
     user.host.socket.send(JSON.stringify({
       event: 'hostupdate',
-      tanks: pt.concat([{ x: user.tank.x, y: user.tank.y, health: user.tank.health, rotation: user.tank.rotation, leftright: user.tank.leftright, username: user.username, team: user.tank.team, ded: user.tank.inactive, maxHealth: userData.health, pushback: user.tank.pushback, base: user.tank.base, shields: user.tank.shields}]),
+      tanks: pt.concat([{ x: user.tank.x, y: user.tank.y, health: user.tank.health, rotation: user.tank.rotation, leftright: user.tank.leftright, username: user.username, team: user.tank.team, ded: user.tank.inactive, maxHealth: userData.health, pushback: user.tank.pushback, base: user.tank.base, shields: user.tank.shields, material: user.tank.material}]),
       blocks: user.host.blockData,
       scaffolding: user.tank.scaffolding,
       ai: ai,
@@ -577,6 +582,13 @@ class Joiner {
       shielded: false,
       canShield: true,
     };
+    if (userData.health == 200) {
+      user.joiner.tank.material = 'normal';
+    } else if (userData.health == 300) {
+      user.joiner.tank.material = 'iron';
+    } else if (userData.health == 400) {
+      user.joiner.tank.material = 'diamond';
+    }
     this.tank.helper = [];
     this.tank.intervals = [];
     this.socket = new WebSocket('wss://WebSocketServer.cs641311.repl.co');
@@ -613,22 +625,52 @@ class Joiner {
             draw.translate(pt[l].x + 20, pt[l].y + 20)
             draw.rotate(90 * Math.PI / 180);
             if (pt[l].base > 2) {
-              draw.drawImage(tank_base_png, -20, -20);
+              if (pt[l].material == 'normal') {
+                draw.drawImage(tank_base_png, -20, -20);
+              } else if (pt[l].material == 'iron') {
+                draw.drawImage(iron_tank_base, -20, -20);
+              } else if (pt[l].material == 'diamond') {
+                draw.drawImage(diamond_tank_base, -20, -20);
+              }
             } else {
-              draw.drawImage(tank_base2, -20, -20);
+              if (pt[l].material == 'normal') {
+                draw.drawImage(tank_base2, -20, -20);
+              } else if (pt[l].material == 'iron') {
+                draw.drawImage(iron_tank_base2, -20, -20);
+              } else if (pt[l].material == 'diamond') {
+                draw.drawImage(diamond_tank_base2, -20, -20);
+              }
             }
             draw.rotate(-90 * Math.PI / 180);
             draw.translate((-pt[l].x - 20), (-pt[l].y - 20));
           } else {
             if (pt[l].base>2) {
-              draw.drawImage(tank_base_png, pt[l].x, pt[l].y);
+              if (pt[l].material == 'normal') {
+                draw.drawImage(tank_base_png, pt[l].x, pt[l].y);
+              } else if (pt[l].material == 'iron') {
+                draw.drawImage(iron_tank_base, pt[l].x, pt[l].y);
+              } else if (pt[l].material == 'diamond') {
+                draw.drawImage(diamond_tank_base, pt[l].x, pt[l].y);
+              }
             } else {
-              draw.drawImage(tank_base2, pt[l].x, pt[l].y);
+              if (pt[l].material == 'normal') {
+                draw.drawImage(tank_base2, pt[l].x, pt[l].y);
+              } else if (pt[l].material == 'iron') {
+                draw.drawImage(iron_tank_base2, pt[l].x, pt[l].y);
+              } else if (pt[l].material == 'diamond') {
+                draw.drawImage(diamond_tank_base2, pt[l].x, pt[l].y);
+              }
             }
           }
           draw.translate(pt[l].x + 20, pt[l].y + 20);
           draw.rotate(pt[l].rotation * Math.PI / 180);
-          draw.drawImage(tank_top_png, -20, -20+pt[l].pushback);
+          if (pt[l].material == 'normal') {
+            draw.drawImage(tank_top_png, -20, -20+pt[l].pushback);
+          } else if (pt[l].material == 'iron') {
+            draw.drawImage(iron_tank_top, -20, -20+pt[l].pushback);
+          } else if (pt[l].material == 'diamond') {
+            draw.drawImage(diamond_tank_top, -20, -20+pt[l].pushback);
+          }
           draw.rotate(-(pt[l].rotation * Math.PI / 180));
           draw.translate(-pt[l].x - 20, -pt[l].y - 20);
           // Health Bar!
@@ -716,6 +758,7 @@ class Joiner {
           base: 0,
           shielded: false,
           shields: 0,
+          material: user.joiner.tank.material,
         },
       }));
     }
@@ -959,22 +1002,52 @@ class Tank {
       draw.translate(this.x + 20, this.y + 20)
       draw.rotate(90 * Math.PI / 180);
       if (this.base > 2) {
-        draw.drawImage(tank_base_png, -20, -20);
+        if (this.material == 'normal') {
+          draw.drawImage(tank_base_png, -20, -20);
+        } else if (this.material == 'iron') {
+          draw.drawImage(iron_tank_base, -20, -20);
+        } else if (this.material == 'diamond') {
+          draw.drawImage(diamond_tank_base, -20, -20);
+        }
       } else {
-        draw.drawImage(tank_base2, -20, -20);
+        if (this.material == 'normal') {
+          draw.drawImage(tank_base2, -20, -20);
+        } else if (this.material == 'iron') {
+          draw.drawImage(iron_tank_base2, -20, -20);
+        } else if (this.material == 'diamond') {
+          draw.drawImage(diamond_tank_base2, -20, -20)
+        }
       }
       draw.rotate(-90 * Math.PI / 180);
       draw.translate((-this.x - 20), (-this.y - 20));
     } else {
       if (this.base > 2) {
-        draw.drawImage(tank_base_png, this.x, this.y);
+        if (this.material == 'normal') {
+          draw.drawImage(tank_base_png, this.x, this.y);
+        } else if (this.material == 'iron') {
+          draw.drawImage(iron_tank_base, this.x, this.y);
+        } else if (this.material == 'diamond') {
+          draw.drawImage(diamond_tank_base, this.x, this.y)
+        }
       } else {
-        draw.drawImage(tank_base2, this.x, this.y);
+        if (this.material == 'normal') {
+          draw.drawImage(tank_base2, this.x, this.y);
+        } else if (this.material == 'iron') {
+          draw.drawImage(iron_tank_base2, this.x, this.y);
+        } else if (this.material == 'diamond') {
+          draw.drawImage(diamond_tank_base2, this.x, this.y)
+        }
       }
     }
     draw.translate(this.x + 20, this.y + 20);
     draw.rotate(this.rotation * Math.PI / 180);
-    draw.drawImage(tank_top_png, -20, -20+this.pushback);
+    if (this.material == 'normal') {
+      draw.drawImage(tank_top_png, -20, -20+this.pushback);
+    } else if (this.material == 'iron') {
+      draw.drawImage(iron_tank_top, -20, -20+this.pushback);
+    } else if (this.material == 'diamond') {
+      draw.drawImage(diamond_tank_top, -20, -20+this.pushback);
+    }
     if (this.pushback != 0) { 
       this.pushback += 1;
     }
@@ -1035,6 +1108,13 @@ class Tank {
   }
 
   initialize() {
+    if (userData.health == 200) {
+      this.material = 'normal';
+    } else if (userData.health == 300) {
+      this.material = 'iron';
+    } else if (userData.health == 400) {
+      this.material = 'diamond';
+    }
     this.base = 0;
     this.pushback = 0;
     this.shields = 0;
@@ -2204,22 +2284,52 @@ function level(num, mo, m) {
           draw.translate(pt[l].x + 20, pt[l].y + 20)
           draw.rotate(90 * Math.PI / 180);
           if (pt[l].base > 2) {
-            draw.drawImage(tank_base_png, -20, -20);
+            if (pt[l].material == 'normal') {
+              draw.drawImage(tank_base_png, -20, -20);
+            } else if (pt[l].material == 'iron') {
+              draw.drawImage(iron_tank_base, -20, -20);
+            } else if (pt[l].material == 'diamond') {
+              draw.drawImage(diamond_tank_base, -20, -20)
+            }
           } else {
-            draw.drawImage(tank_base2, -20, -20);
+            if (pt[l].material == 'normal') {
+              draw.drawImage(tank_base2, -20, -20);
+            } else if (pt[l].material == 'iron') {
+              draw.drawImae(iron_tank_base2, -20, -20);
+            } else if (pt[l].material == 'diamond')  {
+              draw.drawImage(diamond_tank_base2, -20, -20);
+            }
           }
           draw.rotate(-90 * Math.PI / 180);
           draw.translate((-pt[l].x - 20), (-pt[l].y - 20));
         } else {
           if (pt[l].base > 2) {
-            draw.drawImage(tank_base_png, pt[l].x, pt[l].y);
+            if (pt[l].material == 'normal') {
+              draw.drawImage(tank_base_png, pt[l].x, pt[l].y);
+            } else if (pt[l].material == 'iron') {
+              draw.drawImage(iron_tank_base, pt[l].x, pt[l].y);
+            } else if (pt[l].material == 'diamond') {
+              draw.drawImage(diamond_tank_base, pt[l].x, pt[l].y);
+            }
           } else {
-            draw.drawImage(tank_base2, pt[l].x, pt[l].y);
+            if (pt[l].material == 'normal') {
+              draw.drawImage(tank_base2, pt[l].x, pt[l].y);
+            } else if (pt[l].material == 'iron') {
+              draw.drawImage(iron_tank_base2, pt[l].x, pt[l].y);
+            } else if (pt[l].material == 'diamond') {
+              draw.drawImage(diamond_tank_base2, pt[l].x, pt[l].y);
+            }
           }
         }
         draw.translate(pt[l].x + 20, pt[l].y + 20);
         draw.rotate(pt[l].rotation * Math.PI / 180);
-        draw.drawImage(tank_top_png, -20, -20+pt[l].pushback);
+        if (pt[l].material == 'normal') {
+          draw.drawImage(tank_top_png, -20, -20+pt[l].pushback);
+        } else if (pt[l].material == 'iron') {
+          draw.drawImage(iron_tank_top, -20, -20+pt[l].pushback)
+        } else if (pt[l].material == 'diamond') {
+          draw.drawImage(diamond_tank_top, -20, -20+pt[l].pushback);
+        }
         if (pt[l].pushback != 0) {
           pt[l].pushback += 1;
         }
@@ -3671,4 +3781,4 @@ window.setTimeout(function () {
   document.getElementById('animate').style.visibility = 'hidden';
   startScreen();
 }, 3000);
-})();
+//})();
