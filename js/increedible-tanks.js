@@ -1,7 +1,6 @@
 //(function() {
 window.setTimeout(function () {
-  document.getElementById('wall').style.visibility = 'hidden';
-  document.getElementById('animate').style.visibility = 'hidden';
+  document.getElementById('wall').remove();
 }, 3000);
 var pusher = new Pusher('127a8a2ca4a3676b2df9', {
   cluster: 'us2',
@@ -182,7 +181,7 @@ class Ai {
       if (this.leftright) {
         draw.translate(this.x + 20, this.y + 20)
         draw.rotate(90 * Math.PI / 180);
-        if (this.base==1) {
+        if (this.base == 1) {
           draw.drawImage(tank_base_png, -20, -20);
         } else {
           draw.drawImage(tank_base2, -20, -20);
@@ -190,7 +189,7 @@ class Ai {
         draw.rotate(-90 * Math.PI / 180);
         draw.translate((-this.x - 20), (-this.y - 20));
       } else {
-        if (this.base==1) {
+        if (this.base == 1) {
           draw.drawImage(tank_base_png, this.x, this.y);
         } else {
           draw.drawImage(tank_base2, this.x, this.y);
@@ -198,7 +197,7 @@ class Ai {
       }
       draw.translate(this.x + 20, this.y + 20);
       draw.rotate(this.rotation * Math.PI / 180);
-      draw.drawImage(ai_top, -20, -20+this.pushback);
+      draw.drawImage(ai_top, -20, -20 + this.pushback);
       if (this.pushback != 0) {
         this.pushback += 1;
       }
@@ -211,90 +210,90 @@ class Ai {
     }
   }
   move() {
-      if (this.inactive != true && !Game.flashbanged) {
-        if (this.update) {
-          this.instructions = this.moveCalc();
-        } else {
-          this.update = true;
-        }
-        var xdistance = user.tank.x - this.x;
-        var ydistance = user.tank.y - this.y;
-        if (xdistance < 300 || ydistance < 300) {
-          if (!this.instructions) this.instructions = {};
-          this.instructions.fire = true;
-        }
-        if (this.instructions.up == true) {
-          if (checker(this.x - 5, this.y) != false) {
-            this.x -= 5;
-            if (this.base == 1) {
-              this.base = 0;
-            } else {
-              this.base += 1;
-            }
-            this.leftright = true;
-          } else {
-            if (this.y <= user.tank.y) {
-              this.instructions = { left: false, right: true, up: false, down: false };
-            } else {
-              this.instructions = { right: false, left: true, up: false, down: false };
-            }
-            this.update = false;
-          }
-        } else if (this.instructions.down == true) {
-          if (checker(this.x + 5, this.y) != false) {
-            this.x += 5;
-            if (this.base == 1) {
-              this.base = 0;
-            } else {
-              this.base += 1;
-            }
-            this.leftright = true;
-          } else {
-            if (this.y <= user.tank.y) {
-              this.instructions = { left: false, right: true, up: false, down: false };
-            } else {
-              this.instructions = { right: false, left: true, up: false, down: false };
-            }
-            this.update = false;
-          }
-        } else if (this.instructions.left == true) {
-          if (checker(this.x, this.y - 5) != false) {
-            this.y -= 5;
-            if (this.base == 1) {
-              this.base = 0;
-            } else {
-              this.base += 1;
-            }
-            this.leftright = false;
-          } else {
-            if (this.x <= user.tank.x) {
-              this.instructions = { down: true, up: false, left: false, right: false };
-            } else {
-              this.instructions = { up: true, down: false, left: false, right: false };
-            }
-            this.update = false;
-          }
-        } else if (this.instructions.right == true) {
-          if (checker(this.x, this.y + 5) != false) {
-            this.y += 5;
-            if (this.base == 1) {
-              this.base = 0;
-            } else {
-              this.base += 1;
-            }
-            this.leftright = false;
-          } else {
-            if (this.x <= user.tank.x) {
-              this.instructions = { down: true, up: false, right: false, left: false };
-            } else {
-              this.instructions = { up: true, down: false, right: false, left: false };
-            }
-            this.update = false;
-          }
-        }
+    if (this.inactive != true && !Game.flashbanged) {
+      if (this.update) {
+        this.instructions = this.moveCalc();
       } else {
-        window.clearInterval(this.aiDraw);
+        this.update = true;
       }
+      var xdistance = user.tank.x - this.x;
+      var ydistance = user.tank.y - this.y;
+      if (xdistance < 300 || ydistance < 300) {
+        if (!this.instructions) this.instructions = {};
+        this.instructions.fire = true;
+      }
+      if (this.instructions.up == true) {
+        if (checker(this.x - 5, this.y) != false) {
+          this.x -= 5;
+          if (this.base == 1) {
+            this.base = 0;
+          } else {
+            this.base += 1;
+          }
+          this.leftright = true;
+        } else {
+          if (this.y <= user.tank.y) {
+            this.instructions = { left: false, right: true, up: false, down: false };
+          } else {
+            this.instructions = { right: false, left: true, up: false, down: false };
+          }
+          this.update = false;
+        }
+      } else if (this.instructions.down == true) {
+        if (checker(this.x + 5, this.y) != false) {
+          this.x += 5;
+          if (this.base == 1) {
+            this.base = 0;
+          } else {
+            this.base += 1;
+          }
+          this.leftright = true;
+        } else {
+          if (this.y <= user.tank.y) {
+            this.instructions = { left: false, right: true, up: false, down: false };
+          } else {
+            this.instructions = { right: false, left: true, up: false, down: false };
+          }
+          this.update = false;
+        }
+      } else if (this.instructions.left == true) {
+        if (checker(this.x, this.y - 5) != false) {
+          this.y -= 5;
+          if (this.base == 1) {
+            this.base = 0;
+          } else {
+            this.base += 1;
+          }
+          this.leftright = false;
+        } else {
+          if (this.x <= user.tank.x) {
+            this.instructions = { down: true, up: false, left: false, right: false };
+          } else {
+            this.instructions = { up: true, down: false, left: false, right: false };
+          }
+          this.update = false;
+        }
+      } else if (this.instructions.right == true) {
+        if (checker(this.x, this.y + 5) != false) {
+          this.y += 5;
+          if (this.base == 1) {
+            this.base = 0;
+          } else {
+            this.base += 1;
+          }
+          this.leftright = false;
+        } else {
+          if (this.x <= user.tank.x) {
+            this.instructions = { down: true, up: false, right: false, left: false };
+          } else {
+            this.instructions = { up: true, down: false, right: false, left: false };
+          }
+          this.update = false;
+        }
+      }
+    } else {
+      window.clearInterval(this.aiDraw);
+    }
   }
   shoot() {
     this.instructions = this.moveCalc();
@@ -480,13 +479,64 @@ class Host {
           }
           if (tank.shielded) {
             pt[l].shields = 5;
-            setTimeout(function(l) {
+            setTimeout(function (l) {
               pt[l].shields = 0;
             }, 10000, l);
           }
           pt[l].base = tank.base;
           pt[l].rotation = tank.rotation;
           pt[l].leftright = tank.leftright;
+          if (tank.flashbangFired) {
+            var l = 0;
+            while (l < b.length) {
+              if (pt[l].x - pt[l].x % 50 == b[l].x * 50) {
+                if (pt[l].y - pt[l].y % 50 == b[l].y * 50) {
+                  if (Game.level == 'multiplayer') {
+                    let isScaffolding = false;
+                    var t = 0;
+                    while (t < b.length) {
+                      var q = 0;
+                      while (q < user.tank.scaffolding.length) {
+                        if (b[t].x == user.tank.scaffolding[q].x) {
+                          if (b[l].y == user.tank.scaffolding[q].y) {
+                            isScaffolding = true;
+                          }
+                        }
+                        q++;
+                      }
+                      t++;
+                    }
+                    if (!isScaffolding) {
+                      var strand = user.host.blockData[b[l].y + 10].split('');
+                      strand[b[l].x + 10] = ' ';
+                      user.host.blockData[b[l].y + 10] = strand.join('');
+                    } else {
+                      var q = 0;
+                      while (q < user.tank.scaffolding.length) {
+                        if (b[l].y == user.tank.scaffolding[q].y) {
+                          if (b[l].x == user.tank.scaffolding[q].x) {
+                            user.tank.scaffolding.splice(q, 1);
+                          }
+                        }
+                        q++;
+                      }
+                    }
+                  }
+                  var q = 0;
+                  while (q < user.tank.scaffolding.length) {
+                    if (b[l].y == user.tank.scaffolding[q].y) {
+                      if (b[l].x == user.tank.scaffolding[q].x) {
+                        user.tank.scaffolding.splice(q, 1);
+                      }
+                    }
+                    q++;
+                  }
+                  block_support(l);
+                }
+              }
+              l++;
+            }
+          }
           if (tank.placeScaffolding) {
             if (tank.rotation >= 0 && tank.rotation < 90) {
               weak((pt[l].x - 50) / 50, (pt[l].y + 40) / 50, true);
@@ -552,7 +602,7 @@ class Host {
   send() {
     user.host.socket.send(JSON.stringify({
       event: 'hostupdate',
-      tanks: pt.concat([{ x: user.tank.x, y: user.tank.y, health: user.tank.health, rotation: user.tank.rotation, leftright: user.tank.leftright, username: user.username, team: user.tank.team, ded: user.tank.inactive, maxHealth: userData.health, pushback: user.tank.pushback, base: user.tank.base, shields: user.tank.shields, material: user.tank.material}]),
+      tanks: pt.concat([{ x: user.tank.x, y: user.tank.y, health: user.tank.health, rotation: user.tank.rotation, leftright: user.tank.leftright, username: user.username, team: user.tank.team, ded: user.tank.inactive, maxHealth: userData.health, pushback: user.tank.pushback, base: user.tank.base, shields: user.tank.shields, material: user.tank.material }]),
       blocks: user.host.blockData,
       scaffolding: user.tank.scaffolding,
       ai: ai,
@@ -581,6 +631,8 @@ class Joiner {
       base: 0,
       shielded: false,
       canShield: true,
+      flashbangFired: false,
+      canFireFlashbang: true,
     };
     if (userData.health == 200) {
       user.joiner.tank.material = 'normal';
@@ -644,7 +696,7 @@ class Joiner {
             draw.rotate(-90 * Math.PI / 180);
             draw.translate((-pt[l].x - 20), (-pt[l].y - 20));
           } else {
-            if (pt[l].base>2) {
+            if (pt[l].base > 2) {
               if (pt[l].material == 'normal') {
                 draw.drawImage(tank_base_png, pt[l].x, pt[l].y);
               } else if (pt[l].material == 'iron') {
@@ -665,11 +717,11 @@ class Joiner {
           draw.translate(pt[l].x + 20, pt[l].y + 20);
           draw.rotate(pt[l].rotation * Math.PI / 180);
           if (pt[l].material == 'normal') {
-            draw.drawImage(tank_top_png, -20, -20+pt[l].pushback);
+            draw.drawImage(tank_top_png, -20, -20 + pt[l].pushback);
           } else if (pt[l].material == 'iron') {
-            draw.drawImage(iron_tank_top, -20, -20+pt[l].pushback);
+            draw.drawImage(iron_tank_top, -20, -20 + pt[l].pushback);
           } else if (pt[l].material == 'diamond') {
-            draw.drawImage(diamond_tank_top, -20, -20+pt[l].pushback);
+            draw.drawImage(diamond_tank_top, -20, -20 + pt[l].pushback);
           }
           draw.rotate(-(pt[l].rotation * Math.PI / 180));
           draw.translate(-pt[l].x - 20, -pt[l].y - 20);
@@ -681,13 +733,13 @@ class Joiner {
           //username
           draw.font = "20px starfont";
           draw.fillStyle = "#FFDF00";
-          draw.fillText(pt[l].username, pt[l].x + 20 - pt[l].username.length/2*13, pt[l].y - 25);
+          draw.fillText(pt[l].username, pt[l].x + 20 - pt[l].username.length / 2 * 13, pt[l].y - 25);
           if (pt[l].shields != 0) {
-            draw.strokeStyle="#7DF9FF";
+            draw.strokeStyle = "#7DF9FF";
             draw.globalAlpha = .2;
             draw.lineWidth = 5;
             draw.beginPath();
-            draw.arc(pt[l].x+20, pt[l].y+20, 33, 0, Math.PI*2);
+            draw.arc(pt[l].x + 20, pt[l].y + 20, 33, 0, Math.PI * 2);
             draw.fill();
             draw.globalAlpha = 1;
           }
@@ -709,9 +761,9 @@ class Joiner {
       draw.drawImage(flashbang, 349, 450);
       draw.fillStyle = "#ffffff";
       draw.fillText(userData.boosts, 135, 470);
-      draw.fillText(userData.toolkits, 183+35, 470);
-      draw.fillText(userData.blocks, 266+35, 470);
-      draw.fillText(userData.flashbangs, 349+35, 470);
+      draw.fillText(userData.toolkits, 183 + 35, 470);
+      draw.fillText(userData.blocks, 266 + 35, 470);
+      draw.fillText(userData.flashbangs, 349 + 35, 470);
       //settransform
       var m = 0;
       while (m < user.joiner.hostupdate.tanks.length) {
@@ -858,17 +910,13 @@ class Joiner {
         }
         break;
       case 69:
-        break;
         if (userData.flashbangs > 0) {
           if (user.joiner.tank.canFireFlashbang) {
             userData.flashbangs -= 1;
-            Game.flashbanged = true;
-            user.joiner.canFireFlashbang = false;
+            user.joiner.tank.canFireFlashbang = false;
+            user.joiner.tank.flashbangFired = true;
             setTimeout(function () {
-              Game.flashbanged = false;
-            }, 10000);
-            setTimeout(function () {
-              user.tank.canFireFlashbang = true;
+              user.joiner.tank.canFireFlashbang = true;
             }, 15000);
           }
         }
@@ -877,7 +925,7 @@ class Joiner {
         if (user.joiner.tank.canShield) {
           user.joiner.tank.shielded = true;
           user.joiner.tank.canShield = false;
-          setTimeout(function() {
+          setTimeout(function () {
             user.joiner.tank.canShield = true;
           }, 40000)
         }
@@ -886,7 +934,6 @@ class Joiner {
     user.joiner.send();
   }
   send() {
-    if (user.joiner.tank.shielded) console.log('fired shield attempt')
     user.joiner.socket.send(JSON.stringify({
       event: 'joinerupdate',
       data: {
@@ -903,6 +950,7 @@ class Joiner {
         placeScaffolding: user.joiner.tank.placeScaffolding,
         base: user.joiner.tank.base,
         shielded: user.joiner.tank.shielded,
+        flashbangFired: user.joiner.tank.flashbangFired,
       }
     }));
     user.joiner.tank.x = 0;
@@ -911,6 +959,7 @@ class Joiner {
     user.joiner.tank.usingToolkit = false;
     user.joiner.tank.placeScaffolding = false;
     user.joiner.tank.shielded = false;
+    user.joiner.tank.flashbangFired = false;
   }
 }
 function tank_M_listener1(event) {
@@ -958,39 +1007,39 @@ function tank_M_listener4() {
   tankSupport = window.setInterval(tank_M_support, 450);
 }
 function tank_M_support() {
-    user.joiner.tank.fire = true;
+  user.joiner.tank.fire = true;
+  user.joiner.tank.xd = 1;
+  user.joiner.tank.angle = user.joiner.tank.rotation % 90;
+  user.joiner.tank.yd = Math.abs(((user.joiner.tank.xd * user.joiner.tank.angle) - (90 * user.joiner.tank.xd)) / user.joiner.tank.angle);
+  if (user.joiner.tank.rotation < 90 || user.joiner.tank.rotation > 270) {
+    user.joiner.tank.yd = Math.abs(user.joiner.tank.yd);
+  } else {
+    user.joiner.tank.yd = 0 - Math.abs(user.joiner.tank.yd);
+  }
+  if (this.rotation > 180) {
+    user.joiner.tank.xd = Math.abs(user.joiner.tank.xd);
+  } else {
+    user.joiner.tank.xd = 0 - Math.abs(user.joiner.tank.xd);
+  }
+  if (user.joiner.tank.rotation == 0) {
+    user.joiner.tank.xd = 0;
+    user.joiner.tank.yd = 1;
+  } else if (user.joiner.tank.rotation == 90) {
+    user.joiner.tank.xd = -1;
+    user.joiner.tank.yd = 0;
+  } else if (user.joiner.tank.rotation == 180) {
+    user.joiner.tank.xd = 0;
+    user.joiner.tank.yd = -1;
+  } else if (user.joiner.tank.rotation == 270) {
     user.joiner.tank.xd = 1;
-    user.joiner.tank.angle = user.joiner.tank.rotation % 90;
-    user.joiner.tank.yd = Math.abs(((user.joiner.tank.xd * user.joiner.tank.angle) - (90 * user.joiner.tank.xd)) / user.joiner.tank.angle);
-    if (user.joiner.tank.rotation < 90 || user.joiner.tank.rotation > 270) {
-      user.joiner.tank.yd = Math.abs(user.joiner.tank.yd);
-    } else {
-      user.joiner.tank.yd = 0 - Math.abs(user.joiner.tank.yd);
-    }
-    if (this.rotation > 180) {
-      user.joiner.tank.xd = Math.abs(user.joiner.tank.xd);
-    } else {
-      user.joiner.tank.xd = 0 - Math.abs(user.joiner.tank.xd);
-    }
-    if (user.joiner.tank.rotation == 0) {
-      user.joiner.tank.xd = 0;
-      user.joiner.tank.yd = 1;
-    } else if (user.joiner.tank.rotation == 90) {
-      user.joiner.tank.xd = -1;
-      user.joiner.tank.yd = 0;
-    } else if (user.joiner.tank.rotation == 180) {
-      user.joiner.tank.xd = 0;
-      user.joiner.tank.yd = -1;
-    } else if (user.joiner.tank.rotation == 270) {
-      user.joiner.tank.xd = 1;
-      user.joiner.tank.yd = 0;
-    }
-    if ((user.joiner.tank.xd < 0 && user.joiner.tank.yd < 0) || (user.joiner.tank.xd > 0 && user.joiner.tank.yd > 0)) {
-      let place = user.joiner.tank.xd;
-      user.joiner.tank.xd = user.joiner.tank.yd;
-      user.joiner.tank.yd = place;
-    }
-    user.joiner.send();
+    user.joiner.tank.yd = 0;
+  }
+  if ((user.joiner.tank.xd < 0 && user.joiner.tank.yd < 0) || (user.joiner.tank.xd > 0 && user.joiner.tank.yd > 0)) {
+    let place = user.joiner.tank.xd;
+    user.joiner.tank.xd = user.joiner.tank.yd;
+    user.joiner.tank.yd = place;
+  }
+  user.joiner.send();
 }
 function tank_M_listener5() {
   user.joiner.tank.fire = false;
@@ -1042,13 +1091,13 @@ class Tank {
     draw.translate(this.x + 20, this.y + 20);
     draw.rotate(this.rotation * Math.PI / 180);
     if (this.material == 'normal') {
-      draw.drawImage(tank_top_png, -20, -20+this.pushback);
+      draw.drawImage(tank_top_png, -20, -20 + this.pushback);
     } else if (this.material == 'iron') {
-      draw.drawImage(iron_tank_top, -20, -20+this.pushback);
+      draw.drawImage(iron_tank_top, -20, -20 + this.pushback);
     } else if (this.material == 'diamond') {
-      draw.drawImage(diamond_tank_top, -20, -20+this.pushback);
+      draw.drawImage(diamond_tank_top, -20, -20 + this.pushback);
     }
-    if (this.pushback != 0) { 
+    if (this.pushback != 0) {
       this.pushback += 1;
     }
     draw.rotate(-(this.rotation * Math.PI / 180));
@@ -1059,11 +1108,11 @@ class Tank {
     draw.fillStyle = "#90EE90";
     draw.fillRect(this.x + 2, this.y + 51, 36 * this.health / userData.health, 3);
     if (user.tank.shields != 0) {
-      draw.strokeStyle="#7DF9FF";
+      draw.strokeStyle = "#7DF9FF";
       draw.globalAlpha = .2;
       draw.lineWidth = 5;
       draw.beginPath();
-      draw.arc(this.x+20, this.y+20, 33, 0, Math.PI*2);
+      draw.arc(this.x + 20, this.y + 20, 33, 0, Math.PI * 2);
       draw.fill();
       draw.globalAlpha = 1;
     }
@@ -1227,7 +1276,7 @@ class Tank {
                 user.tank.CanToolkit = false;
                 userData.toolkits -= 1;
                 user.tank.health = userData.health * .75;
-                window.setTimeout(function() {
+                window.setTimeout(function () {
                   user.tank.CanToolkit = true;
                 }, 30000);
               }
@@ -1267,6 +1316,55 @@ class Tank {
               userData.flashbangs -= 1;
               Game.flashbanged = true;
               this.canFireFlashbang = false;
+              var l = 0;
+              while (l < b.length) {
+                if (user.tank.x - user.tank.x % 50 == b[l].x * 50) {
+                  if (user.tank.y - user.tank.y % 50 == b[l].y * 50) {
+                    if (Game.level == 'multiplayer') {
+                      let isScaffolding = false;
+                      var t = 0;
+                      while (t < b.length) {
+                        var q = 0;
+                        while (q < user.tank.scaffolding.length) {
+                          if (b[t].x == user.tank.scaffolding[q].x) {
+                            if (b[l].y == user.tank.scaffolding[q].y) {
+                              isScaffolding = true;
+                            }
+                          }
+                          q++;
+                        }
+                        t++;
+                      }
+                      if (!isScaffolding) {
+                        var strand = user.host.blockData[b[l].y + 10].split('');
+                        strand[b[l].x + 10] = ' ';
+                        user.host.blockData[b[l].y + 10] = strand.join('');
+                      } else {
+                        var q = 0;
+                        while (q < user.tank.scaffolding.length) {
+                          if (b[l].y == user.tank.scaffolding[q].y) {
+                            if (b[l].x == user.tank.scaffolding[q].x) {
+                              user.tank.scaffolding.splice(q, 1);
+                            }
+                          }
+                          q++;
+                        }
+                      }
+                    }
+                    var q = 0;
+                    while (q < user.tank.scaffolding.length) {
+                      if (b[l].y == user.tank.scaffolding[q].y) {
+                        if (b[l].x == user.tank.scaffolding[q].x) {
+                          user.tank.scaffolding.splice(q, 1);
+                        }
+                      }
+                      q++;
+                    }
+                    block_support(l);
+                  }
+                }
+                l++;
+              }
               setTimeout(function () {
                 Game.flashbanged = false;
               }, 10000);
@@ -1280,11 +1378,11 @@ class Tank {
           if (this.canShield) {
             user.tank.shields = 5;
             this.canShield = false;
-            setTimeout(function() {
+            setTimeout(function () {
               user.tank.shields = 0;
             }, 10000);
-            setTimeout(function() {
-              user.tank.canShield = true; 
+            setTimeout(function () {
+              user.tank.canShield = true;
             }, 40000);
           }
           break;
@@ -1516,16 +1614,16 @@ function Game() {
         l++;
       }
     }, 16));
-    i.push(window.setInterval(function() {
+    i.push(window.setInterval(function () {
       var l = 0;
-      while (l<ai.length) {
+      while (l < ai.length) {
         ai[l].move();
         l++;
       }
     }, 90));
-    i.push(window.setInterval(function() {
+    i.push(window.setInterval(function () {
       var l = 0;
-      while (l<ai.length) {
+      while (l < ai.length) {
         ai[l].shoot();
         l++;
       }
@@ -1557,7 +1655,7 @@ function Block(health, x, y, isInvincible, isExplosive, isScaffolding) {
       this.health = 80;
       this.type = 'strong';
     }
-    draw.drawImage(strong_image, x*50, y*50);
+    draw.drawImage(strong_image, x * 50, y * 50);
   }
   this.weak = function (x, y) {
     if (this.health == undefined) {
@@ -1806,7 +1904,7 @@ function level(num, mo, m) {
   }
   draw.font = "20px starfont";
   draw.fillStyle = "#FFDF00";
-  draw.fillText(user.username, user.tank.x + 20 - user.username.length/2*13, user.tank.y - 25);
+  draw.fillText(user.username, user.tank.x + 20 - user.username.length / 2 * 13, user.tank.y - 25);
   var l = 0;
   while (l < user.tank.scaffolding.length) {
     weak(user.tank.scaffolding[l].x, user.tank.scaffolding[l].y);
@@ -2238,7 +2336,7 @@ function level(num, mo, m) {
     if (mo != 'n') {
       spawn(4, 9);
     }
-    levelReader(['AA1    1AA', '#AA1  1AA#', '##A    A##',' ##    ## ', '          ', '          ', '          ', '          ', '  #####   ', '  2 @ 2   '], m, false, [0, 500, 0, 500]);
+    levelReader(['AA1    1AA', '#AA1  1AA#', '##A    A##', ' ##    ## ', '          ', '          ', '          ', '          ', '  #####   ', '  2 @ 2   '], m, false, [0, 500, 0, 500]);
   }
   if (num == 42) {
     if (mo != 'n') {
@@ -2296,7 +2394,7 @@ function level(num, mo, m) {
               draw.drawImage(tank_base2, -20, -20);
             } else if (pt[l].material == 'iron') {
               draw.drawImae(iron_tank_base2, -20, -20);
-            } else if (pt[l].material == 'diamond')  {
+            } else if (pt[l].material == 'diamond') {
               draw.drawImage(diamond_tank_base2, -20, -20);
             }
           }
@@ -2324,11 +2422,11 @@ function level(num, mo, m) {
         draw.translate(pt[l].x + 20, pt[l].y + 20);
         draw.rotate(pt[l].rotation * Math.PI / 180);
         if (pt[l].material == 'normal') {
-          draw.drawImage(tank_top_png, -20, -20+pt[l].pushback);
+          draw.drawImage(tank_top_png, -20, -20 + pt[l].pushback);
         } else if (pt[l].material == 'iron') {
-          draw.drawImage(iron_tank_top, -20, -20+pt[l].pushback)
+          draw.drawImage(iron_tank_top, -20, -20 + pt[l].pushback)
         } else if (pt[l].material == 'diamond') {
-          draw.drawImage(diamond_tank_top, -20, -20+pt[l].pushback);
+          draw.drawImage(diamond_tank_top, -20, -20 + pt[l].pushback);
         }
         if (pt[l].pushback != 0) {
           pt[l].pushback += 1;
@@ -2342,13 +2440,13 @@ function level(num, mo, m) {
         draw.fillRect(pt[l].x + 2, pt[l].y + 51, 36 * pt[l].health / userData.health, 3);
         draw.font = "20px starfont";
         draw.fillStyle = "#FFDF00";
-        draw.fillText(pt[l].username, pt[l].x + 20 - pt[l].username.length/2*13, pt[l].y - 25);
+        draw.fillText(pt[l].username, pt[l].x + 20 - pt[l].username.length / 2 * 13, pt[l].y - 25);
         if (pt[l].shields != 0) {
-          draw.strokeStyle="#7DF9FF";
+          draw.strokeStyle = "#7DF9FF";
           draw.globalAlpha = .2;
           draw.lineWidth = 5;
           draw.beginPath();
-          draw.arc(pt[l].x+20, pt[l].y+20, 33, 0, Math.PI*2);
+          draw.arc(pt[l].x + 20, pt[l].y + 20, 33, 0, Math.PI * 2);
           draw.fill();
           draw.globalAlpha = 1;
         }
@@ -2449,9 +2547,9 @@ function level(num, mo, m) {
   draw.drawImage(flashbang, 349, 450);
   draw.fillStyle = "#ffffff";
   draw.fillText(userData.boosts, 135, 470);
-  draw.fillText(userData.toolkits, 183+35, 470);
-  draw.fillText(userData.blocks, 266+35, 470);
-  draw.fillText(userData.flashbangs, 349+35, 470);
+  draw.fillText(userData.toolkits, 183 + 35, 470);
+  draw.fillText(userData.blocks, 266 + 35, 470);
+  draw.fillText(userData.flashbangs, 349 + 35, 470);
   draw.setTransform(resizer, 0, 0, resizer, resizer * (-user.tank.x + 230), resizer * (-user.tank.y + 230));
 }
 var defeatSupport = false;
@@ -3717,7 +3815,7 @@ function strong(x, y, m) {
     l++;
   }
   if (Game.level == 'multiplayer-joiner') {
-    draw.drawImage(strong_image, x*50, y*50)
+    draw.drawImage(strong_image, x * 50, y * 50)
   }
 } // creates a strong block
 function spawn(x, y) {
@@ -3777,8 +3875,6 @@ function createAi(x, y, m, t, team) {
   }
 }
 window.setTimeout(function () {
-  document.getElementById('wall').style.visibility = 'hidden';
-  document.getElementById('animate').style.visibility = 'hidden';
   startScreen();
 }, 3000);
 //})();
