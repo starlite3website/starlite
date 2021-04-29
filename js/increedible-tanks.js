@@ -2599,7 +2599,7 @@ function victoryHelper(event) {
 }
 function shop() {
   canvas.removeEventListener('click', mainMenuSupport);
-  draw.fillStyle = "#556B2F";
+  draw.fillStyle = "#077007";
   draw.fillRect(50, 50, 400, 400);
   draw.fillStyle = "#ffffff";
   draw.font = "60px starfont";
@@ -2654,6 +2654,7 @@ function shopSupport(e) {
             var t = playerData;
             t["increedible-tanks"] = userData;
             update(sessionStorage.username, 'playerdata', JSON.stringify(t));
+            alert('You now have '+userData.boosts+' boost(s)');
           }
         }
       }
@@ -2669,6 +2670,7 @@ function shopSupport(e) {
             var t = playerData;
             t["increedible-tanks"] = userData;
             update(sessionStorage.username, 'playerdata', JSON.stringify(t));
+            alert('You now have '+userData.blocks+' block(s)');
           }
         }
       }
@@ -2684,6 +2686,7 @@ function shopSupport(e) {
             var t = playerData;
             t['increedible-tanks'] = userData;
             update(sessionStorage.username, 'playerdata', JSON.stringify(t));
+            alert('You now have '+userData.toolkits+' toolkit(s)');
           }
         }
       }
@@ -2699,6 +2702,7 @@ function shopSupport(e) {
             var t = playerData;
             t['increedible-tanks'] = userData;
             update(sessionStorage.username, 'playerdata', JSON.stringify(t));
+            alert('You now have '+userData.flashbangs+' flashbang(s)')
           }
         }
       }
