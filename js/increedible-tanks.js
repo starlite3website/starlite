@@ -487,55 +487,35 @@ class Host {
           pt[l].rotation = tank.rotation;
           pt[l].leftright = tank.leftright;
           if (tank.flashbangFired) {
-            var l = 0;
-            while (l < b.length) {
-              if (pt[l].x - pt[l].x % 50 == b[l].x * 50) {
-                if (pt[l].y - pt[l].y % 50 == b[l].y * 50) {
-                  if (Game.level == 'multiplayer') {
-                    let isScaffolding = false;
-                    var t = 0;
-                    while (t < b.length) {
-                      var q = 0;
-                      while (q < user.tank.scaffolding.length) {
-                        if (b[t].x == user.tank.scaffolding[q].x) {
-                          if (b[l].y == user.tank.scaffolding[q].y) {
-                            isScaffolding = true;
-                          }
-                        }
-                        q++;
-                      }
-                      t++;
-                    }
-                    if (!isScaffolding) {
-                      var strand = user.host.blockData[b[l].y + 10].split('');
-                      strand[b[l].x + 10] = ' ';
-                      user.host.blockData[b[l].y + 10] = strand.join('');
-                    } else {
-                      var q = 0;
-                      while (q < user.tank.scaffolding.length) {
-                        if (b[l].y == user.tank.scaffolding[q].y) {
-                          if (b[l].x == user.tank.scaffolding[q].x) {
-                            user.tank.scaffolding.splice(q, 1);
-                          }
-                        }
-                        q++;
-                      }
-                    }
-                  }
-                  var q = 0;
-                  while (q < user.tank.scaffolding.length) {
-                    if (b[l].y == user.tank.scaffolding[q].y) {
-                      if (b[l].x == user.tank.scaffolding[q].x) {
-                        user.tank.scaffolding.splice(q, 1);
-                      }
-                    }
-                    q++;
-                  }
-                  block_support(l);
+            var block = checker2(pt[l].x, pt[l].y);
+            let isScaffolding = false;
+            var q = 0;
+            while (q < user.tank.scaffolding.length) {
+              if (b[block].x == user.tank.scaffolding[q].x) {
+                if (b[block].y == user.tank.scaffolding[q].y) {
+                  isScaffolding = true;
                 }
               }
-              l++;
+              q++;
             }
+            if (!isScaffolding) {
+              if (Game.level == 'multiplayer') {
+                var strand = user.host.blockData[b[block].y + 10].split('');
+                strand[b[block].x + 10] = ' ';
+                user.host.blockData[b[block].y + 10] = strand.join('');
+              }
+            } else {
+              var q = 0;
+              while (q < user.tank.scaffolding.length) {
+                if (b[block].y == user.tank.scaffolding[q].y) {
+                  if (b[block].x == user.tank.scaffolding[q].x) {
+                    user.tank.scaffolding.splice(q, 1);
+                  }
+                }
+                q++;
+              }
+            }
+            block_support(block);
           }
           if (tank.placeScaffolding) {
             if (tank.rotation >= 0 && tank.rotation < 90) {
@@ -1316,55 +1296,35 @@ class Tank {
               userData.flashbangs -= 1;
               Game.flashbanged = true;
               this.canFireFlashbang = false;
-              var l = 0;
-              while (l < b.length) {
-                if (user.tank.x - user.tank.x % 50 == b[l].x * 50) {
-                  if (user.tank.y - user.tank.y % 50 == b[l].y * 50) {
-                    if (Game.level == 'multiplayer') {
-                      let isScaffolding = false;
-                      var t = 0;
-                      while (t < b.length) {
-                        var q = 0;
-                        while (q < user.tank.scaffolding.length) {
-                          if (b[t].x == user.tank.scaffolding[q].x) {
-                            if (b[l].y == user.tank.scaffolding[q].y) {
-                              isScaffolding = true;
-                            }
-                          }
-                          q++;
-                        }
-                        t++;
-                      }
-                      if (!isScaffolding) {
-                        var strand = user.host.blockData[b[l].y + 10].split('');
-                        strand[b[l].x + 10] = ' ';
-                        user.host.blockData[b[l].y + 10] = strand.join('');
-                      } else {
-                        var q = 0;
-                        while (q < user.tank.scaffolding.length) {
-                          if (b[l].y == user.tank.scaffolding[q].y) {
-                            if (b[l].x == user.tank.scaffolding[q].x) {
-                              user.tank.scaffolding.splice(q, 1);
-                            }
-                          }
-                          q++;
-                        }
-                      }
-                    }
-                    var q = 0;
-                    while (q < user.tank.scaffolding.length) {
-                      if (b[l].y == user.tank.scaffolding[q].y) {
-                        if (b[l].x == user.tank.scaffolding[q].x) {
-                          user.tank.scaffolding.splice(q, 1);
-                        }
-                      }
-                      q++;
-                    }
-                    block_support(l);
+              var block = checker2(user.tank.x, user.tank.y);
+              let isScaffolding = false;
+              var q = 0;
+              while (q < user.tank.scaffolding.length) {
+                if (b[block].x == user.tank.scaffolding[q].x) {
+                  if (b[block].y == user.tank.scaffolding[q].y) {
+                    isScaffolding = true;
                   }
                 }
-                l++;
+                q++;
               }
+              if (!isScaffolding) {
+                if (Game.level == 'multiplayer') {
+                  var strand = user.host.blockData[b[block].y + 10].split('');
+                  strand[b[block].x + 10] = ' ';
+                  user.host.blockData[b[block].y + 10] = strand.join('');
+                }
+              } else {
+                var q = 0;
+                while (q < user.tank.scaffolding.length) {
+                  if (b[block].y == user.tank.scaffolding[q].y) {
+                    if (b[block].x == user.tank.scaffolding[q].x) {
+                      user.tank.scaffolding.splice(q, 1);
+                    }
+                  }
+                  q++;
+                }
+              }
+              block_support(block);
               setTimeout(function () {
                 Game.flashbanged = false;
               }, 10000);
@@ -1530,6 +1490,17 @@ function checker(x, y) {
     l++;
   }
   return true;
+}
+function checker2(x, y) {
+  var l = 0;
+  while (l < b.length) {
+    if ((x + 40 > b[l].x * 50 && x + 40 < b[l].x * 50 + 50) || (x > b[l].x * 50 && x < b[l].x * 50 + 50)) {
+      if ((y > b[l].y * 50 && y < b[l].y * 50 + 50) || (y + 40 > b[l].y * 50 && y + 40 < b[l].y * 50 + 50)) {
+        return l;
+      }
+    }
+    l++;
+  }
 }
 function gameHelper() {
   var l = 0;
