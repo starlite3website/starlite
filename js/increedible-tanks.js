@@ -459,7 +459,7 @@ class Host {
       teamData.blue.players.push(user.username);
       user.tank.team = 'blue';
     }
-    window.setInterval(user.host.send, 30);
+    window.setInterval(user.host.send, 20);
     Game.level = 'multiplayer';
     level('multiplayer', null, true);
   }
@@ -761,7 +761,7 @@ class Joiner {
         draw.drawImage(weak_image, user.joiner.hostupdate.scaffolding[l].x * 50, user.joiner.hostupdate.scaffolding[l].y * 50);
         l++;
       }
-    }, 30);
+    }, 20);
     Game.level = 'multiplayer-joiner';
     this.socket.onmessage = function (data) {
       data = JSON.parse(data.data);
@@ -1438,7 +1438,7 @@ function tank_listener3(e) {
 var tankSupport;
 function tank_listener4() {
   clearInterval(tankSupport);
-  tankSupport = window.setInterval(tank_support, 450);
+  tankSupport = window.setInterval(tank_support, 500);
 }
 function tank_support() {
   user.tank.fire();
@@ -1580,7 +1580,7 @@ function Game() {
         s[l].update();
         l++;
       }
-    }, 16));
+    }, 14));
     i.push(window.setInterval(function () {
       var l = 0;
       while (l < ai.length) {
@@ -2290,9 +2290,48 @@ function level(num, mo, m) {
   }
   if (num == 42) {
     if (mo != 'n') {
-      //spawn();
+      spawn(0, 9);
     }
-    window.alerError();
+    levelReader(['A2        ', '######### ', '        # ', ' ###### # ', '      # # ', '##### # # ', '#   # # # ', '# # # # # ', '# # # # # ', '@ #   #   '], m, false, [0, 500, 0, 500]);
+  }
+  if (num == 43) {
+    if (mo != 'n') {
+      spawn(0, 0);
+    }
+    levelReader(['@#########', '  ########', ' #AAAA    ', ' #AAAA    ', ' #AAAA    ', ' #AAAA    ', ' #AAAA    ', ' #        ', ' #        ', '          '], m, false, [0, 500, 0, 500]);
+  }
+  if (num == 44) {
+    if (mo != 'n') {
+      spawn(1, 3);
+    }
+    levelReader(['          ', '# # #### #', '# # #A## #', '#@# #2# # ', '### # # # ', '# # # # # ', '# # # ## #', '# # # ## #', '          ', '          '], m, false, [0, 500, 0, 500]);
+  }
+  if (num == 45) {
+    if (mo != 'n') {
+      spawn(0, 0);
+    }
+    levelReader(['@         ', '######### ', '        # ', '  AAAA  # ', '  AAAA  # ', '  AAAA  # ', '  AAAA  # ', '        # ', ' ######## '], m, false, [0, 500, 0, 500]);
+  }
+  if (num == 46) {
+    if (mo != 'n') {
+      spawn(5, 4);
+    }
+    levelReader(['A#1111112 ', 'A#111111# ', 'A#111111# ', ' #111111# ', ' #111@11# ', ' #111111# ', ' #111111# ', ' #111111#A', ' #111111#A', ' #111111#A'], m, false, [0, 500, 0, 500]);
+  }
+  if (num == 47) {
+    if (mo != 'n') {
+      spawn(0, 0);
+    }
+    levelReader(['@# AAA 222', ' ########2', ' #    AA#2', ' #    AA#2', ' #    AA#2', ' #      # ', ' #      # ', ' #      # ', '1###2####1', '11      11'], m, false, [0, 500, 0, 500]);
+  }
+  if (num == 48) {
+    if (mo != 'n') {
+      spawn(2, 2);
+    }
+    levelReader(['##########', '#22211    ', '#2@###    ', '#2##      ', '#1#       ', '#        ', '#       AA', '#      AAA', '#      AAA'], m, false, [0, 500, 0, 500]);
+  }
+  if (num == 49) {
+
   }
   if (num == 'multiplayer') {
     if (mo != "n") {
@@ -3650,6 +3689,9 @@ function levelSelect4KeyDown(e) {
     //document.removeEventListener('keydown', levelSelect4KeyDown);
     //levelSelect4();
   }
+}
+function levelSelect5() {
+
 }
 function multiplayer() {
   canvas.removeEventListener('click', mainMenuSupport)
