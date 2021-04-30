@@ -1356,8 +1356,6 @@ class Tank {
           }
           break;
       }
-    } else {
-      a("Game is paused", "yellow");
     }
   }
 
@@ -1736,23 +1734,6 @@ function startScreenListener(e) {
     loading();
   }
 }
-function alert_startup() {
-  alertConsole.style.visibility = "hidden";
-} // alert Setup
-function a(m, c) {
-  alertConsole.classList.add("console");
-  alertConsole.style.backgroundColor = c;
-  alertConsole.style.opacity = .7;
-  alertConsole.style.border = "1px solid black";
-  consoleText.innerHTML = m;
-  alertConsole.style.visibility = "visible";
-  i.push(window.setInterval(alert_end, 8000));
-} // alert control
-function alert_end() {
-  window.clearInterval(interval);
-  alertConsole.classList.remove("console");
-  alertConsole.style.visibility = "hidden";
-} // alert end
 var userData;
 function loading() {
   canvas.removeEventListener("click", startScreenListener);
