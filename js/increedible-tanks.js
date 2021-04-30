@@ -459,9 +459,7 @@ class Host {
       teamData.blue.players.push(user.username);
       user.tank.team = 'blue';
     }
-    window.requestAnimationFrame(function() {
-      user.host.send();
-    });
+    window.setInterval(user.host.send, 20);
     Game.level = 'multiplayer';
     level('multiplayer', null, true);
   }
@@ -625,7 +623,7 @@ class Joiner {
     this.tank.intervals = [];
     this.socket = new WebSocket('wss://WebSocketServer.cs641311.repl.co');
     this.channelname = channelname;
-    window.requestAnimationFrame(function () {
+    window.setInterval(function () {
       user.joiner.tank.x = 0;
       user.joiner.tank.y = 0;
       var l = 0;
@@ -763,7 +761,7 @@ class Joiner {
         draw.drawImage(weak_image, user.joiner.hostupdate.scaffolding[l].x * 50, user.joiner.hostupdate.scaffolding[l].y * 50);
         l++;
       }
-    });
+    }, 20);
     Game.level = 'multiplayer-joiner';
     this.socket.onmessage = function (data) {
       data = JSON.parse(data.data);
@@ -2599,7 +2597,7 @@ function victoryHelper(event) {
 }
 function shop() {
   canvas.removeEventListener('click', mainMenuSupport);
-  draw.fillStyle = "#556B2F";
+  draw.fillStyle = "#07707";
   draw.fillRect(50, 50, 400, 400);
   draw.fillStyle = "#ffffff";
   draw.font = "60px starfont";
