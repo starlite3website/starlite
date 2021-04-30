@@ -2722,8 +2722,8 @@ function mainMenu() {
   draw.drawImage(coins, 310, 140);
   draw.fillText(userData.coins, 325, 150);
   draw.font = "bold 15px starfont";
-  draw.fillText("Controls: WASD movement, Hold click to fire", 75, 250);
-  draw.fillText("Use mouse to aim", 75, 280);
+  draw.fillText("Controls: WASD movement, Hold click", 75, 250);
+  draw.fillText("to fire. Use mouse to aim", 75, 280);
   draw.fillStyle = "#ffffff";
   draw.font = "15px starfont";
   draw.fillRect(190, 350, 120, 50);
