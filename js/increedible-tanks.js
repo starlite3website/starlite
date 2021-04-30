@@ -1,4 +1,4 @@
-//(function() {
+(function() {
 window.setTimeout(function () {
   document.getElementById('wall').remove();
 }, 3000);
