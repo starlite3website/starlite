@@ -459,9 +459,9 @@ class Host {
       teamData.blue.players.push(user.username);
       user.tank.team = 'blue';
     }
-    window.setInterval(function () {
+    window.requestAnimationFrame(function() {
       user.host.send();
-    }, 40);
+    });
     Game.level = 'multiplayer';
     level('multiplayer', null, true);
   }
@@ -625,7 +625,7 @@ class Joiner {
     this.tank.intervals = [];
     this.socket = new WebSocket('wss://WebSocketServer.cs641311.repl.co');
     this.channelname = channelname;
-    window.setInterval(function () {
+    window.requestAnimationFrame(function () {
       user.joiner.tank.x = 0;
       user.joiner.tank.y = 0;
       var l = 0;
@@ -763,7 +763,7 @@ class Joiner {
         draw.drawImage(weak_image, user.joiner.hostupdate.scaffolding[l].x * 50, user.joiner.hostupdate.scaffolding[l].y * 50);
         l++;
       }
-    }, 40);
+    });
     Game.level = 'multiplayer-joiner';
     this.socket.onmessage = function (data) {
       data = JSON.parse(data.data);
@@ -2599,7 +2599,7 @@ function victoryHelper(event) {
 }
 function shop() {
   canvas.removeEventListener('click', mainMenuSupport);
-  draw.fillStyle = "#077007";
+  draw.fillStyle = "#556B2F";
   draw.fillRect(50, 50, 400, 400);
   draw.fillStyle = "#ffffff";
   draw.font = "60px starfont";
@@ -2654,7 +2654,6 @@ function shopSupport(e) {
             var t = playerData;
             t["increedible-tanks"] = userData;
             update(sessionStorage.username, 'playerdata', JSON.stringify(t));
-            alert('You now have '+userData.boosts+' boost(s)');
           }
         }
       }
@@ -2670,7 +2669,6 @@ function shopSupport(e) {
             var t = playerData;
             t["increedible-tanks"] = userData;
             update(sessionStorage.username, 'playerdata', JSON.stringify(t));
-            alert('You now have '+userData.blocks+' block(s)');
           }
         }
       }
@@ -2686,7 +2684,6 @@ function shopSupport(e) {
             var t = playerData;
             t['increedible-tanks'] = userData;
             update(sessionStorage.username, 'playerdata', JSON.stringify(t));
-            alert('You now have '+userData.toolkits+' toolkit(s)');
           }
         }
       }
@@ -2702,7 +2699,6 @@ function shopSupport(e) {
             var t = playerData;
             t['increedible-tanks'] = userData;
             update(sessionStorage.username, 'playerdata', JSON.stringify(t));
-            alert('You now have '+userData.flashbangs+' flashbang(s)')
           }
         }
       }
@@ -2726,8 +2722,8 @@ function mainMenu() {
   draw.drawImage(coins, 310, 140);
   draw.fillText(userData.coins, 325, 150);
   draw.font = "bold 15px starfont";
-  draw.fillText("Controls: WASD movement, F fire, and", 75, 250);
-  draw.fillText("arrow keys barrel movement", 75, 280);
+  draw.fillText("Controls: WASD movement, Hold click to fire", 75, 250);
+  draw.fillText("Use mouse to aim", 75, 280);
   draw.fillStyle = "#ffffff";
   draw.font = "15px starfont";
   draw.fillRect(190, 350, 120, 50);
