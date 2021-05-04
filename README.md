@@ -1,2 +1,3 @@
 # starlite
-In progress website with one game so far.
+In Progress game website:
+https://starliteprojects.tk
