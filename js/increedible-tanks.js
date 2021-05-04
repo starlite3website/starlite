@@ -1573,7 +1573,7 @@ function Game() {
   this.i = function () {
     i.push(window.setInterval(function () {
       clearShot();
-    }, 40));
+    }, 30));
     i.push(window.setInterval(function () {
       var l = 0;
       while (l < s.length) {
