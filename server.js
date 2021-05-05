@@ -11,8 +11,10 @@ http.createServer(function(req, res) {
       pathname += '.html';
     }
   }
-  fs.readFile(pathname, function(err, data) {
+  console.log(pathname);
+  fs.readFile('starlite/'+pathname, function(err, data) {
     if (err) {
+      console.log(err);
       res.end();
       return;
     }
@@ -20,6 +22,7 @@ http.createServer(function(req, res) {
     if (pathname.includes('.png')) res.writeHead(200, {'Content-Type':'image/png'});
     if (pathname.includes('.css')) res.writeHead(200, {'Content-Type':'text/css'});
     res.write(data);
+    console.log(pathname);
     res.end();
   });
-}).listen(1000);
+}).listen(9087);
