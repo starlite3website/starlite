@@ -1,0 +1,26 @@
+{
+  "name": "starlite",
+  "version": "0.0.1",
+  "description": "3",
+  "main": "server.js",
+  "dependencies": {
+  },
+  "engine": {
+    "node": "*",
+    "npm": "*"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "test": "IP=0.0.0.0 PORT=3030 mocha --timeout 5000 tests/*_test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/starlite3website/starlite.git"
+  },
+  "author": "Aaron Godfrey <3foes@mail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "http://github.com/starlite3website/starlite"
+  },
+  "homepage": "http://github.com/starlite3website/starlite"
+}
