@@ -2,74 +2,31 @@
 window.setTimeout(function () {
   document.getElementById('wall').remove();
 }, 3000);
-var pusher = new Pusher('127a8a2ca4a3676b2df9', {
-  cluster: 'us2',
-  authEndpoint: 'https://DimgreyZigzagProjector--five-nine.repl.co/pusher/auth',
-});
-/*var o = [];
-function update(range, value) {
-  embed.src="https://script.google.com/macros/s/AKfycbx2j30BqJJTK0igYO2QDtbVvBSwS7JK4BjZ5qeSUdNtONWVApBn/exec?type=2&range="+range+"&value="+value;
-}
-function get(one, two) {
-  getUrlJSON("https://spreadsheets.google.com/feeds/list/14CpLkPBcEv44RQwlRohjwgQ7GyVbYciaC7mgKNguuSY/1/public/basic?alt=json");
-}
-function getUrlJSON(url) {
-  getJSON(url, after); 
-}
-function after(err, data) {
-  if (err !== null) {
-  } else {
-  var l = 0;
-    while (l<data.feed.entry.length) {
-      if (data.feed.entry[l].content.$t != "") {
-        o.push(data.feed.entry[l].content.$t.split(", ")); 
-      }
-        l++;
-      }
-      l = 0;
-      while (l<o.length) {
-        var q = 0;
-          while (q<o[l].length) {
-            o[l][q] = o[l][q].split(": ");
-            q++;
-          }
-        l++;
-      }
-    }
-  }
-  var getJSON = function(url, callback) {
-    var xhr = new XMLHttpRequest();
-    xhr.open('GET', url, true);
-    xhr.responseType = 'json';
-    xhr.onload = function() {
-      var status = xhr.status;
-      if (status === 200) {
-        callback(null, xhr.response);
-      } else {
-        callback(status, xhr.response);
-      }
-    };
-  xhr.send();
-};*/
 var database = document.getElementById("database");
 var playerData;
+var socket = new WebSocket('wss://starlitehttp.cs641311.repl.co/server');
 function get(username, callback) {
-  var channel = pusher.subscribe('database-return');
-  channel.callback = callback;
-  channel.bind('get', function (response) {
-    if (response.data.length != 0) {
-      userData = JSON.parse(response.data[0].playerdata)["increedible-tanks"];
-      playerData = JSON.parse(response.data[0].playerdata);
-    }
-    pusher.unsubscribe('database-return');
-    channel.callback();
-  });
-  window.setTimeout(function () {
-    database.src = 'https://starlitedatabase.cs641311.repl.co/?task=get&username=' + username;
-  }, 300);
+  socket.send(JSON.stringify({
+    operation: 'database',
+    task: 'get',
+    username: sessionStorage.username,
+    token: sessionStorage.token,
+  }));
+  socket.onmessage = function(data) {
+    userData = JSON.parse(JSON.parse(data.data).data[0].playerdata)['increedible-tanks'];
+    playerData = JSON.parse(JSON.parse(data.data).data[0].playerdata);
+    callback();
+  }
 }
 function update(username, key, value) {
-  database.src = "https://starlitedatabase.cs641311.repl.co/?task=update&username=" + username + "&key=" + key + "&value=" + value;
+  socket.send(JSON.stringify({
+    operation: 'database',
+    token: sessionStorage.token,
+    task: 'update',
+    username: sessionStorage.username,
+    key: key,
+    value: value,
+  }));
 }
 var interval, user, listener, interval2, b = [], s = [], ai = [], l1 = 0, l2 = 0, i = [], Game = new Game(), button = new Image(), gameplay1 = new Image(), red_bullet = new Image(), ai_top = new Image(), ai_base = new Image(), tank_base_png = new Image(), tank_top_png = new Image(), start_screen = new Image(), main_menu = new Image(), tank_base2 = new Image(), coins = new Image(), toolkit = new Image(), scaffolding = new Image(), boost = new Image(), flashbang = new Image(), victory_screen = new Image(), iron_tank_top = new Image(), iron_tank_base = new Image(), iron_tank_base2 = new Image(), diamond_tank_top = new Image(), diamond_tank_base = new Image(), diamond_tank_base2 = new Image();
 ai_base.src = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAAAuElEQVRYR+2YQQ7DMAgE68eRR5fHtWpaS7UVwkYmt8nNkpVdxmCQ22P8XtO6Teu7lqHubsDM5g2DEXe/xaii+xE+NffntNqkpNuyKLrBp3vp8W5m0v9kglK4kuR3k3ocEIygQvBCuh1uhSAEfwS4B6NUoJOsFgkEIdivGebBIBfoxatFAkEIMs0kOUAvXi0SCEKQaSbJAXrxapGUE6x+p1Yn+R5I9oCqBnwVbKo7CM9RVVOL3J/pvgGoAo+TFbDWigAAAABJRU5ErkJggg==";
@@ -1750,9 +1707,9 @@ function loading() {
   } else {
     user = {};
     user.username = sessionStorage.username;
-    get(sessionStorage.username, function () {
+    get(sessionStorage.username, function() {
       if (userData == undefined) {
-        userData = { username: sessionStorage.username, health: 200, coins: 0, level: 1, blocks: 0, flashbangs: 0, boosts: 0, toolkits: 0 }
+        userData = {username: sessionStorage.username, health: 200, coins: 0, level: 1, blocks: 0, flashbangs: 0, boosts: 0, toolkits: 0}
       }
       user.level = userData.level;
       user.coins = userData.coins;

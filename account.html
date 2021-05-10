@@ -9,44 +9,15 @@
 	<meta name='viewport' content='width=device-width, initial-scale=1.0'>
 	<meta name='robots' content='index, follow'>
 	<link rel='shortcut icon' href='/starlite-logo.png' type='image/png'>
-  <link rel='stylesheet' type='text/css' href='/style/account.css' />
+	<link rel='stylesheet' type='text/css' href='/style/account.css' />
 	<title>Starlite | Login / Signup</title>
 </head>
 
 <body>
-	<iframe src="" id="database" visibility="hidden" display="hidden" width="0" height="0"></iframe>
-	<script src="https://js.pusher.com/7.0/pusher.min.js">
-
-	</script>
-	<script>
-		var database = document.getElementById("database");
-    var pusher = new Pusher('127a8a2ca4a3676b2df9', {
-      cluster: 'us2',
-      authEndpoint: 'https://DimgreyZigzagProjector--five-nine.repl.co/pusher/auth',
-    });
-    var data;
-    function get(username, callback) {
-      var channel = pusher.subscribe('database-return');
-      channel.callback = callback;
-      channel.bind('get', function(response) {
-        data = response.data[0];
-        pusher.unsubscribe('database-return');
-        channel.callback();
-      });
-      database.src='https://starlitedatabase.cs641311.repl.co/?task=get&username='+username;
-    }
-    function update(username, key, value) {
-      database.src="https://starlitedatabase.cs641311.repl.co/?task=update&username="+username+"&key="+key+"&value="+value;
-    }
-    function newAccount(username, password) {
-      database.src="https://starlitedatabase.cs641311.repl.co/?task=new&username="+username+"&password="+password;
-    }
-	</script>
-	<a href='/' class='content-return'>
 		< <u>Back</u>
 	</a>
 	<div class="form">
-		<img src="https://starliteprojects.tk/starlite-logo.png"/>
+		<img src='/starlite-logo.png'/>
       <h1 class='content-title'>Sign up/Login</h1>
       <div class="input">
         <b>Username:</b>
@@ -58,29 +29,65 @@
       </div>
       <button id="submit" class='submit'>Log in</button>
       <button class="newaccount" id='newaccount'>Create Account</button>
-      <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
-    <script> 
+    <script>
+      var socket = new WebSocket('wss://'+window.location.hostname+'/server');
+      function auth(username, password, callback) {
+        socket.send(JSON.stringify({
+          task: 'auth',
+          operation: 'database',
+          username: username,
+          password: password,
+        }));
+        socket.onmessage = function(data) {
+          callback(JSON.parse(data.data));
+        }
+      }
+      function create(username, password, callback) {
+        socket.send(JSON.stringify({
+          task: 'new',
+          operation: 'database',
+          username: username,
+          password: password,
+        }))
+      }
+      socket.onclose = function() {
+        console.log('Disconnected');
+        reconnect();
+      }
+      function reconnect() {
+        socket = new WebSocket('wss://starlitehttp.cs641311.repl.co/server');
+        socket.onopen = function() {
+          console.log('Reconnected')
+        }
+        socket.onclose = function() {
+          console.log('Disconnected');
+          reconnect();
+        }
+      }
       var submit=document.getElementById("submit");
       var newaccount=document.getElementById("newaccount");
-      submit.addEventListener("click", async function() {
+      submit.addEventListener("click", function() {
         var usernameInput=document.getElementById("usernameForm");
         var passwordInput=document.getElementById("passwordForm");
-        get(usernameInput.value, function() {
-          console.log(data);
-          if (data.password == passwordInput.value) {
-            sessionStorage.setItem("username",usernameInput.value);
-            window.location.href="/dashboard";
+        auth(usernameInput.value, passwordInput.value, function(auth) {
+          if (auth.authencated) {
+            sessionStorage.username = usernameInput.value;
+            sessionStorage.token = auth.token;
+            window.location.href = '/dashboard';
+          } else {
+            alert('Incorrect Password');
           }
         });
       });
-      newaccount.addEventListener("click", async function(){
+      newaccount.addEventListener("click", function(){
         var usernameInput=document.getElementById("usernameForm");
         var passwordInput=document.getElementById("passwordForm");
-        get(usernameInput.value, function() {
-          if (data) {
-            alert("Account Taken :(");
+        auth(usernameInput.value, passwordInput.value, function(data) {
+          console.log(data);
+          if (data.isAccount) {
+            alert("Account Taken");
           } else {
-            newAccount(usernameInput.value, passwordInput.value);
+            create(usernameInput.value, passwordInput.value);
             sessionStorage.username = usernameInput.value;
             window.location.href = "/dashboard";
           }
