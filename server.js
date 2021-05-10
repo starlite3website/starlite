@@ -12,7 +12,7 @@ http.createServer(function(req, res) {
     }
   }
   console.log(pathname);
-  fs.readFile(pathname, function(err, data) {
+  fs.readFile('starlite/'+pathname, function(err, data) {
     if (err) {
       console.log(err);
       res.end();
