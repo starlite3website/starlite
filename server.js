@@ -11,6 +11,7 @@ http.createServer(function(req, res) {
       pathname += '.html';
     }
   }
+  console.log(pathname.substr(0));
   fs.readFile(pathname.substr(0), function(err, data) {
     if (err) {
       res.end('Unable to get '+pathname);
