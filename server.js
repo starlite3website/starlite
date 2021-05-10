@@ -11,8 +11,7 @@ http.createServer(function(req, res) {
       pathname += '.html';
     }
   }
-  console.log(pathname.substr(0));
-  fs.readFile(pathname.substr(0), function(err, data) {
+  fs.readFile(pathname.substr(1), function(err, data) {
     if (err) {
       res.end('Unable to get '+pathname);
       return;
@@ -24,3 +23,11 @@ http.createServer(function(req, res) {
     res.end();
   });
 }).listen(process.env.PORT);
+const testFolder = './starlite/';
+const fs = require('fs');
+
+fs.readdir(testFolder, (err, files) => {
+  files.forEach(file => {
+    console.log(file);
+  });
+});
