@@ -11,7 +11,7 @@ http.createServer(function(req, res) {
       pathname += '.html';
     }
   }
-  fs.readFile('starlite'+pathname, function(err, data) {
+  fs.readFile(pathname.substr(0), function(err, data) {
     if (err) {
       res.end('Unable to get '+pathname);
       return;
