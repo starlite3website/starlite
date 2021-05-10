@@ -23,11 +23,3 @@ http.createServer(function(req, res) {
     res.end();
   });
 }).listen(process.env.PORT);
-const testFolder = './starlite/';
-const fs = require('fs');
-
-fs.readdir(testFolder, (err, files) => {
-  files.forEach(file => {
-    console.log(file);
-  });
-});
