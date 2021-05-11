@@ -2751,7 +2751,9 @@ function mainMenuSupport(e) {
     if (x < 170) {
       if (y > 350) {
         if (y < 400) {
-          shop();
+          setTimeout(function() {
+            shop();
+          }, 20);
         }
       }
     }
