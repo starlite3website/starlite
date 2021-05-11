@@ -160,7 +160,7 @@ wss.on('connection', function(socket) {
                   pvpRooms[l] += 1;
                   if (pvpRooms[l] == 2) {
                     sockets.forEach(function(s) {
-                      if (s.room === 'pvp' + l) {
+                      if (s.room === 'pvp bfv' + l) {
                         socket.send('{"event":"start"}');
                       }
                     })
