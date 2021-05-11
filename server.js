@@ -28,7 +28,6 @@ const server = http.createServer(function(req, res) {
       pathname += '.html';
     }
   }
-<<<<<<< HEAD
   fs.readFile('starlite/' + pathname, function(err, data) {
     if (err) {
       var data = fs.readFileSync('starlite/404.html');
@@ -36,11 +35,9 @@ const server = http.createServer(function(req, res) {
       console.log('FAIL'+pathname)
       res.write(data);
       res.end();
-=======
   fs.readFile(pathname.substr(1), function(err, data) {
     if (err) {
       res.end('Unable to get '+pathname);
->>>>>>> 8957df07ea95576cc7e227e7b06a76e3119a5db2
       return;
     }
     if (pathname.includes('.html')) res.writeHead(200, { 'Content-Type': 'text/html' });
@@ -49,7 +46,6 @@ const server = http.createServer(function(req, res) {
     res.write(data);
     res.end();
   });
-<<<<<<< HEAD
 });
 server.listen(8080);
 
@@ -240,6 +236,4 @@ wss.on('connection', function(socket) {
     sockets = sockets.filter(s => s !== socket);
   });
 });
-=======
 }).listen(process.env.PORT);
->>>>>>> 8957df07ea95576cc7e227e7b06a76e3119a5db2
