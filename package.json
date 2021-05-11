@@ -12,7 +12,8 @@
   },
   "scripts": {
     "start": "node server.js",
-    "test": "node server.js"
+    "test": "node server.js",
+    "build": "node server.js"
   },
   "repository": {
     "type": "git",
