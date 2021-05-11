@@ -35,9 +35,6 @@ const server = http.createServer(function(req, res) {
       console.log('FAIL'+pathname)
       res.write(data);
       res.end();
-  fs.readFile(pathname.substr(1), function(err, data) {
-    if (err) {
-      res.end('Unable to get '+pathname);
       return;
     }
     if (pathname.includes('.html')) res.writeHead(200, { 'Content-Type': 'text/html' });
@@ -160,7 +157,7 @@ wss.on('connection', function(socket) {
                   pvpRooms[l] += 1;
                   if (pvpRooms[l] == 2) {
                     sockets.forEach(function(s) {
-                      if (s.room === 'pvp bfv' + l) {
+                      if (s.room === 'pvp' + l) {
                         socket.send('{"event":"start"}');
                       }
                     })
@@ -236,4 +233,3 @@ wss.on('connection', function(socket) {
     sockets = sockets.filter(s => s !== socket);
   });
 });
-}).listen(process.env.PORT);
