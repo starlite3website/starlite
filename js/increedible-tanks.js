@@ -4,7 +4,7 @@ window.setTimeout(function () {
 }, 3000);
 var database = document.getElementById("database");
 var playerData;
-var socket = new WebSocket('wss://starlitehttp.cs641311.repl.co/server');
+var socket = new WebSocket('wss:/'+window.location.host+'/server');
 function get(username, callback) {
   socket.send(JSON.stringify({
     operation: 'database',
@@ -388,9 +388,10 @@ class Host {
   control(channelname) {
     this.blockData = ['', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''];
     user.host.channelname = channelname;
-    this.socket = new WebSocket('wss://WebSocketServer.cs641311.repl.co');
+    this.socket = new WebSocket('wss://'+window.location.host+'/server');
     this.socket.onopen = function () {
       user.host.socket.send(JSON.stringify({
+        operation: 'multiplayer',
         room: user.host.channelname,
         username: user.username,
         type: 'host',
@@ -536,6 +537,7 @@ class Host {
   }
   send() {
     user.host.socket.send(JSON.stringify({
+      operation: 'multiplayer',
       event: 'hostupdate',
       tanks: pt.concat([{ x: user.tank.x, y: user.tank.y, health: user.tank.health, rotation: user.tank.rotation, leftright: user.tank.leftright, username: user.username, team: user.tank.team, ded: user.tank.inactive, maxHealth: userData.health, pushback: user.tank.pushback, base: user.tank.base, shields: user.tank.shields, material: user.tank.material }]),
       blocks: user.host.blockData,
@@ -578,7 +580,7 @@ class Joiner {
     }
     this.tank.helper = [];
     this.tank.intervals = [];
-    this.socket = new WebSocket('wss://WebSocketServer.cs641311.repl.co');
+    this.socket = new WebSocket('wss://'+window.location.host+'/server');
     this.channelname = channelname;
     window.setInterval(function () {
       user.joiner.tank.x = 0;
@@ -729,12 +731,14 @@ class Joiner {
     }
     this.socket.onopen = function () {
       user.joiner.socket.send(JSON.stringify({
+        operation: 'multiplayer',
         room: user.joiner.channelname,
         username: user.username,
         type: 'joiner',
         mode: channelname,
       }));
       user.joiner.socket.send(JSON.stringify({
+        operation: 'multiplayer',
         event: 'joinerjoin',
         data: {
           username: user.username,
@@ -870,6 +874,7 @@ class Joiner {
   }
   send() {
     user.joiner.socket.send(JSON.stringify({
+      operation: 'multiplayer',
       event: 'joinerupdate',
       data: {
         username: user.username,
