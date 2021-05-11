@@ -4,7 +4,13 @@
   "description": "3",
   "main": "server.js",
   "dependencies": {
-    "express": "^4.13.3"
+    "@replit/database": "^2.0.1",
+    "express": "^4.17.1",
+    "level": "^7.0.0",
+    "mysql": "^2.18.1",
+    "node-schedule": "^2.0.0",
+    "pusher": "^5.0.0",
+    "ws": "^7.4.5"
   },
   "engine": {
     "node": "*",
