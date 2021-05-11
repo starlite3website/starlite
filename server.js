@@ -3,8 +3,6 @@ const fs = require('fs');
 const url = require('url');
 const level = require('level');
 const db = level('./starliteDB', {valueEncoding: 'json'});
-const express = require('express');
-const app = express();
 const WebSocket = require('ws');
 const schedule = require('node-schedule');
 
