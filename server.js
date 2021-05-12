@@ -1,10 +1,10 @@
 const http = require('http');
 const fs = require('fs');
 const url = require('url');
-const level = require('level');
-const db = level('./starliteDB', {valueEncoding: 'json'});
+const KVdb = require('kvdb.io');
 const WebSocket = require('ws');
 const schedule = require('node-schedule');
+const db = KVdb.bucket('HdJi23Vpua43AxiyUFnJej', '12481485');
 
 schedule.scheduleJob('0 0 * * *', () => {
   sessionTokens = [1];
@@ -26,9 +26,9 @@ const server = http.createServer(function(req, res) {
       pathname += '.html';
     }
   }
-  fs.readFile(pathname.substr(1), function(err, data) {
+  fs.readFile('starlite/'+pathname.substr(1), function(err, data) {
     if (err) {
-      var data = fs.readFileSync('404.html');
+      var data = fs.readFileSync('starlite/404.html');
       res.writeHead(404, { 'Content-Type': 'text/html' });
       console.log('FAIL'+pathname);
       res.write(data);
@@ -51,7 +51,7 @@ const wss = new WebSocket.Server({
 
 wss.on('connection', function(socket) {
   sockets.push(socket);
-  socket.on('message', function(msg) {
+  socket.on('message', async function(msg) {
     if (socket.username == undefined) {
       socket.username = JSON.parse(msg).username;
     }
@@ -62,35 +62,38 @@ wss.on('connection', function(socket) {
         return;
       }
       if (data.task == 'list') {
-        var readStream = db.createReadStream({});
-        var a = [];
-        readStream.on('data', function(value) {
-          a.push(JSON.parse(value.value)[data.item]);
+        var values = [];
+        db.list({prefix: ''}).then((value) => {
+          values = value;
         });
-        readStream.once('end', function() {
-          console.log('LIST: '+data.item);
-          socket.send(JSON.stringify({
-            type: 'list-return',
-            data: a,
-          }))
-        })
+        var l = 0, a = [];
+        while (l<values.length) {
+          a.push(JSON.parse(values[l])[data.item]);
+          l++;
+        }
+        console.log('LIST: '+data.item);
+        socket.send(JSON.stringify({
+          type: 'list-return',
+          data: a,
+        }))
       }
       if (data.task == 'new') {
-        db.put(data.username, JSON.stringify({
+        db.set(data.username, JSON.stringify({
           password: data.password,
           messages: '[]',
           playerdata: '{}',
           preferences: '{}',
           servers: '[]',
           fame: '0',
-        }));
-        console.log('NEW: '+data.username);
-        socket.send(JSON.stringify({
-          success: true,
-        }))
+        })).then(() => {
+          console.log('NEW: '+data.username);
+          socket.send(JSON.stringify({
+            success: true,
+          }))
+        });
       }
       if (data.task == 'get') {
-        db.get(data.username, function(err, value) {
+        db.get(data.username).then((value) => {
           console.log('GET: '+data.username);
           socket.send(JSON.stringify({
             type: 'get-return',
@@ -99,7 +102,7 @@ wss.on('connection', function(socket) {
         })
       }
       if (data.task == 'auth') {
-        db.get(data.username, function(err, value) {
+        db.get(data.username).then((value) => {
           if (value == undefined) {
             console.log('CREATE: '+data.username);
             var token = Math.random();
@@ -129,10 +132,10 @@ wss.on('connection', function(socket) {
         });
       }
       if (data.task == 'update') {
-        db.get(data.username, function(err, value) {
+        db.get(data.username).then((value) => {
           value = JSON.parse(value);
           value[data.key] = data.value;
-          db.put(data.username, JSON.stringify({
+          db.set(data.username, JSON.stringify({
             password: value.password,
             messages: value.messages,
             playerdata: value.playerdata,
