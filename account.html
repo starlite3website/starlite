@@ -87,8 +87,9 @@
           if (data.isAccount) {
             alert("Account Taken");
           } else {
+            socket.onmessage = function(){};
             create(usernameInput.value, passwordInput.value);
-            sessionStorage.username = data.username;
+            sessionStorage.username = usernameInput.value;
             sessionStorage.token = data.token;
             window.location.href = "/dashboard";
           }
