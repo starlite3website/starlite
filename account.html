@@ -55,7 +55,7 @@
         reconnect();
       }
       function reconnect() {
-        socket = new WebSocket('wss://starlitehttp.cs641311.repl.co/server');
+        socket = new WebSocket('wss://'+window.location.hostname+'/server');
         socket.onopen = function() {
           console.log('Reconnected')
         }
