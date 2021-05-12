@@ -26,9 +26,9 @@ const server = http.createServer(function(req, res) {
       pathname += '.html';
     }
   }
-  fs.readFile(pathname.substr(1), function(err, data) {
+  fs.readFile('starlite/'+pathname.substr(1), function(err, data) {
     if (err) {
-      var data = fs.readFileSync('404.html');
+      var data = fs.readFileSync('starlite/404.html');
       res.writeHead(404, { 'Content-Type': 'text/html' });
       console.log('FAIL'+pathname);
       res.write(data);
@@ -68,17 +68,22 @@ wss.on('connection', function(socket) {
         var values = [];
         db.list({prefix: ''}).then((value) => {
           values = value;
+          console.log(values);
+          var l = 0, a = [];
+          while (l<values.length) {
+            db.get(values[l]).then((value) => {
+              a.push(JSON.parse(value)[data.item]);
+              if (a.length == values.length) {
+                console.log(a);
+                socket.send(JSON.stringify({
+                  type: 'list-return',
+                  data: a,
+                }))
+              }
+            });
+            l++;
+          }
         });
-        var l = 0, a = [];
-        while (l<values.length) {
-          a.push(JSON.parse(values[l])[data.item]);
-          l++;
-        }
-        console.log('LIST: '+data.item);
-        socket.send(JSON.stringify({
-          type: 'list-return',
-          data: a,
-        }))
       }
       if (data.task == 'new') {
         db.set(data.username, JSON.stringify({
