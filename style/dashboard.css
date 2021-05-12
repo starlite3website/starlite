@@ -132,11 +132,7 @@ body {
   margin: 0px;
 }
 .body {
-  image-rendering: -webkit-optimize-contrast;
-  background-image: url(https://picsum.photos/1000/600/?blur=1);
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-attachment: fixed;
+  background-color: orangered;
 }
 .content-main-container {
   padding-top: 150px;
