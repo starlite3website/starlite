@@ -51,6 +51,9 @@ const wss = new WebSocket.Server({
 
 wss.on('connection', function(socket) {
   sockets.push(socket);
+  socket.interval = setInterval(function() {
+    socket.ping(function() {});
+  }, 10000);
   socket.on('message', async function(msg) {
     if (socket.username == undefined) {
       socket.username = JSON.parse(msg).username;
@@ -230,7 +233,9 @@ wss.on('connection', function(socket) {
           username: socket.username,
         }));
       }
-      
+      if (s === socket) {
+        clearInterval(socket.interval)
+      }
     });
     if (socket.pvpRoom != undefined) {
       pvpRooms[socket.pvpRoom] -= 1;
