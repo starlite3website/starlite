@@ -88,7 +88,8 @@
             alert("Account Taken");
           } else {
             create(usernameInput.value, passwordInput.value);
-            sessionStorage.username = usernameInput.value;
+            sessionStorage.username = data.username;
+            sessionStorage.token = data.token;
             window.location.href = "/dashboard";
           }
         });
