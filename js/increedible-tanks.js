@@ -442,6 +442,7 @@ class Host {
           pt[l].base = tank.base;
           pt[l].rotation = tank.rotation;
           pt[l].leftright = tank.leftright;
+          pt[l].immune = tank.imm
           if (tank.flashbangFired) {
             var block = checker2(pt[l].x, pt[l].y);
             let isScaffolding = false;
