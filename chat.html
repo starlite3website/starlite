@@ -227,7 +227,8 @@
     var l = 0;
     while (l<newMessages.length) {
       if (newMessages[l].timestamps != undefined) {
-        if (newMessages[l].send == sessionStorage.username || newMessages[l].user == sessionStorage.username || newMessages[l].user == "public" || sessionStorage.username == "admin") {
+        var users = newMessages[l].user.split(':');
+        if (newMessages[l].send == sessionStorage.username || newMessages[l].user == sessionStorage.username || newMessages[l].user == "public" || sessionStorage.username == "admin" || users.includes(sessionStorage.username)) {
           var t = document.createElement("DIV");
           t.style = "margin-left:5%;margin-right:44%;margin-bottom:1%;margin-top:1%;padding:1%;border:1px solid gray;word-wrap:break-word;width:50%;border-radius: 10px;padding: 10px;";
           var data;
