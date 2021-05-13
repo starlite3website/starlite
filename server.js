@@ -28,7 +28,7 @@ const server = http.createServer(function(req, res) {
   }
   fs.readFile(pathname.substr(1), function(err, data) {
     if (err) {
-      var data = fs.readFileSync('starlite/404.html');
+      var data = fs.readFileSync('404.html');
       res.writeHead(404, { 'Content-Type': 'text/html' });
       console.log('FAIL'+pathname);
       res.write(data);
