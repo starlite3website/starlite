@@ -4,7 +4,7 @@ window.setTimeout(function () {
 }, 3000);
 var database = document.getElementById("database");
 var playerData;
-var socket = new WebSocket('wss:/'+window.location.host+'/server');
+var socket = new WebSocket('wss://'+window.location.host+'/server');
 function get(username, callback) {
   socket.send(JSON.stringify({
     operation: 'database',
@@ -417,7 +417,7 @@ class Host {
       teamData.blue.players.push(user.username);
       user.tank.team = 'blue';
     }
-    window.setInterval(user.host.send, 30);
+    window.setInterval(user.host.send, 10);
     Game.level = 'multiplayer';
     level('multiplayer', null, true);
   }
@@ -570,6 +570,7 @@ class Joiner {
       canShield: true,
       flashbangFired: false,
       canFireFlashbang: true,
+      immune: false,
     };
     if (userData.health == 200) {
       user.joiner.tank.material = 'normal';
@@ -720,7 +721,7 @@ class Joiner {
         draw.drawImage(weak_image, user.joiner.hostupdate.scaffolding[l].x * 50, user.joiner.hostupdate.scaffolding[l].y * 50);
         l++;
       }
-    }, 30);
+    }, 10);
     Game.level = 'multiplayer-joiner';
     this.socket.onmessage = function (data) {
       data = JSON.parse(data.data);
@@ -806,9 +807,11 @@ class Joiner {
             userData.boosts -= 1;
             user.joiner.tank.speed = 8;
             user.joiner.tank.CanBoost = false;
+            user.joiner.tank.immune = true;
             setTimeout(function () {
               user.joiner.tank.speed = 2;
-            }, 250);
+              user.joiner.tank.immune = false;
+            }, 500);
             setTimeout(function () {
               user.joiner.tank.CanBoost = true;
             }, 5000);
@@ -1064,6 +1067,9 @@ class Tank {
         user.tank.shields -= 1;
         return;
       }
+      if (user.tank.immune) {
+        return;
+      }
       draw.fillStyle = "#FF0000";
       draw.fillRect(this.x, this.y, 40, 40);
       this.health -= 20;
@@ -1128,6 +1134,7 @@ class Tank {
     this.CanBoost = true;
     this.CanToolkit = true;
     this.leftright = true;
+    this.immune = false;
     canvas.focus();
     this.draw();
     /*i.push(window.setInterval(function() {
@@ -1200,9 +1207,11 @@ class Tank {
               userData.boosts -= 1;
               this.speed = 8;
               this.CanBoost = false;
+              user.tank.immune = true;
               setTimeout(function () {
                 user.tank.speed = 2;
-              }, 250);
+                user.tank.immune = false;
+              }, 500);
               setTimeout(function () {
                 user.tank.CanBoost = true;
               }, 5000);
@@ -2309,7 +2318,7 @@ function level(num, mo, m) {
         if (ai_check(pt[l].x, pt[l].y)) {
           if (pt[l].shields > 0) {
             pt[l].shields -= 1;
-          } else {
+          } else if (pt[l].immune) {} else {
             draw.fillStyle = "#FF0000";
             draw.fillRect(pt[l].x, pt[l].y, 40, 40);
             pt[l].health -= 20;
