@@ -894,6 +894,7 @@ class Joiner {
         base: user.joiner.tank.base,
         shielded: user.joiner.tank.shielded,
         flashbangFired: user.joiner.tank.flashbangFired,
+        immune: user.joiner.tank.immune,
       }
     }));
     user.joiner.tank.x = 0;
