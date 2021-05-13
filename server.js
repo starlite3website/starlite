@@ -26,7 +26,7 @@ const server = http.createServer(function(req, res) {
       pathname += '.html';
     }
   }
-  fs.readFile('starlite/'+pathname.substr(1), function(err, data) {
+  fs.readFile(pathname.substr(1), function(err, data) {
     if (err) {
       var data = fs.readFileSync('starlite/404.html');
       res.writeHead(404, { 'Content-Type': 'text/html' });
