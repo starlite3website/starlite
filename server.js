@@ -93,12 +93,11 @@ wss.on('connection', function(socket) {
           preferences: '{}',
           servers: '[]',
           fame: '0',
-        })).then(() => {
-          console.log('NEW: '+data.username);
-          socket.send(JSON.stringify({
-            success: true,
-          }))
-        });
+        }));
+        console.log('NEW: '+data.username);
+        socket.send(JSON.stringify({
+          success: true,
+        }));
       }
       if (data.task == 'get') {
         db.get(data.username).then((value) => {

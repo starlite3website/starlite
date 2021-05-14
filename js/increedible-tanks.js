@@ -417,7 +417,7 @@ class Host {
       teamData.blue.players.push(user.username);
       user.tank.team = 'blue';
     }
-    window.setInterval(user.host.send, 5);
+    window.setInterval(user.host.send, 1);
     Game.level = 'multiplayer';
     level('multiplayer', null, true);
   }
