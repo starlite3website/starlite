@@ -4,7 +4,7 @@ window.setTimeout(function () {
 }, 3000);
 var database = document.getElementById("database");
 var playerData;
-var socket = new WebSocket('wss://'+window.location.host+'/server');
+var socket = new WebSocket('wss://'+window.location.hostname+'/server');
 function get(username, callback) {
   socket.send(JSON.stringify({
     operation: 'database',
@@ -388,7 +388,7 @@ class Host {
   control(channelname) {
     this.blockData = ['', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''];
     user.host.channelname = channelname;
-    this.socket = new WebSocket('wss://'+window.location.host+'/server');
+    this.socket = new WebSocket('wss://'+window.location.hostname'/server');
     this.socket.onopen = function () {
       user.host.socket.send(JSON.stringify({
         operation: 'multiplayer',
@@ -417,7 +417,7 @@ class Host {
       teamData.blue.players.push(user.username);
       user.tank.team = 'blue';
     }
-    window.setInterval(user.host.send, 1);
+    window.setInterval(user.host.send, 10);
     Game.level = 'multiplayer';
     level('multiplayer', null, true);
   }
@@ -442,7 +442,9 @@ class Host {
           pt[l].base = tank.base;
           pt[l].rotation = tank.rotation;
           pt[l].leftright = tank.leftright;
-          pt[l].immune = tank.immune;
+          pt[l].invis = tank.invis,
+          pt[l].canChangeInvisStatus = tank.canChangeInvisStatus;
+          pt[l].canInvis = tank.canInvis;
           if (tank.flashbangFired) {
             var block = checker2(pt[l].x, pt[l].y);
             let isScaffolding = false;
@@ -540,7 +542,7 @@ class Host {
     user.host.socket.send(JSON.stringify({
       operation: 'multiplayer',
       event: 'hostupdate',
-      tanks: pt.concat([{ x: user.tank.x, y: user.tank.y, health: user.tank.health, rotation: user.tank.rotation, leftright: user.tank.leftright, username: user.username, team: user.tank.team, ded: user.tank.inactive, maxHealth: userData.health, pushback: user.tank.pushback, base: user.tank.base, shields: user.tank.shields, material: user.tank.material }]),
+      tanks: pt.concat([{ x: user.tank.x, y: user.tank.y, health: user.tank.health, rotation: user.tank.rotation, leftright: user.tank.leftright, username: user.username, team: user.tank.team, ded: user.tank.inactive, maxHealth: userData.health, pushback: user.tank.pushback, base: user.tank.base, shields: user.tank.shields, material: user.tank.material, invis: user.tank.invis, }]),
       blocks: user.host.blockData,
       scaffolding: user.tank.scaffolding,
       ai: ai,
@@ -572,6 +574,10 @@ class Joiner {
       flashbangFired: false,
       canFireFlashbang: true,
       immune: false,
+      canInvis: true,
+      invis: false,
+      canChangeInvisStatus: true,
+      class: userData.class,
     };
     if (userData.health == 200) {
       user.joiner.tank.material = 'normal';
@@ -582,7 +588,7 @@ class Joiner {
     }
     this.tank.helper = [];
     this.tank.intervals = [];
-    this.socket = new WebSocket('wss://'+window.location.host+'/server');
+    this.socket = new WebSocket('wss://'+window.location.hostname+'/server');
     this.channelname = channelname;
     window.setInterval(function () {
       user.joiner.tank.x = 0;
@@ -611,6 +617,13 @@ class Joiner {
               draw.setTransform(resizer, 0, 0, resizer, resizer * (-pt[m].x + 230), resizer * (-pt[m].y + 230));
             }
             m++;
+          }
+          if (pt[l].invis) {
+            if (pt[l].username != user.username) {
+              draw.globalAlpha = 0;
+            } else {
+              draw.globalAlpha = .5;
+            }
           }
           if (pt[l].leftright == true) {
             draw.translate(pt[l].x + 20, pt[l].y + 20)
@@ -682,6 +695,9 @@ class Joiner {
             draw.fill();
             draw.globalAlpha = 1;
           }
+          if (pt[l].invis) {
+            draw.globalAlpha = 1;
+          }
         }
         l++;
       }
@@ -722,7 +738,7 @@ class Joiner {
         draw.drawImage(weak_image, user.joiner.hostupdate.scaffolding[l].x * 50, user.joiner.hostupdate.scaffolding[l].y * 50);
         l++;
       }
-    }, 30);
+    }, 10);
     Game.level = 'multiplayer-joiner';
     this.socket.onmessage = function (data) {
       data = JSON.parse(data.data);
@@ -865,12 +881,36 @@ class Joiner {
         }
         break;
       case 70:
-        if (user.joiner.tank.canShield) {
-          user.joiner.tank.shielded = true;
-          user.joiner.tank.canShield = false;
-          setTimeout(function () {
-            user.joiner.tank.canShield = true;
-          }, 40000)
+        if (user.joiner.tank.class === 'stealth') {
+          if (user.joiner.tank.canChangeInvisStatus) {  
+            if (user.joiner.tank.invis) {
+              user.joiner.tank.canChangeInvisStatus = false;
+              window.setTimeout(function() {
+                user.joiner.tank.canChangeInvisStatus = true;
+              }, 500);
+              user.joiner.tank.invis = false;
+              window.setTimeout(function() {
+                user.joiner.tank.canInvis = true;
+              }, 40000);
+            } else {
+              if (user.joiner.tank.canInvis) {
+                user.joiner.tank.canChangeInvisStatus = false;
+                window.setTimeout(function() {
+                  user.joiner.tank.canChangeInvisStatus = true;
+                }, 500);
+                user.joiner.tank.invis = true;
+                user.joiner.tank.canInvis = false;
+              }
+            }
+          }
+        } else if (user.joiner.tank.class === 'normal') {
+          if (user.joiner.tank.canShield) {
+            user.joiner.tank.shielded = true;
+            user.joiner.tank.canShield = false;
+            setTimeout(function() {
+              user.joiner.tank.canShield = true;
+            }, 40000);
+          }
         }
         break;
     }
@@ -895,7 +935,9 @@ class Joiner {
         base: user.joiner.tank.base,
         shielded: user.joiner.tank.shielded,
         flashbangFired: user.joiner.tank.flashbangFired,
-        immune: user.joiner.tank.immune,
+        invis: user.joiner.tank.invis,
+        canInvis: user.joiner.tank.canInvis,
+        canChangeInvisStatus: user.joiner.tank.canChangeInvisStatus,
       }
     }));
     user.joiner.tank.x = 0;
@@ -992,6 +1034,9 @@ function tank_M_listener5() {
 }
 class Tank {
   draw() {
+    if (this.invis) {
+      draw.globalAlpha = .5;
+    }
     if (this.leftright == true) {
       draw.translate(this.x + 20, this.y + 20)
       draw.rotate(90 * Math.PI / 180);
@@ -1059,6 +1104,9 @@ class Tank {
       draw.beginPath();
       draw.arc(this.x + 20, this.y + 20, 33, 0, Math.PI * 2);
       draw.fill();
+      draw.globalAlpha = 1;
+    }
+    if (this.invis) {
       draw.globalAlpha = 1;
     }
   }
@@ -1139,9 +1187,10 @@ class Tank {
     this.immune = false;
     canvas.focus();
     this.draw();
-    /*i.push(window.setInterval(function() {
-      user.tank.check();
-    }, 50);*/ // type::interval reason::"paused for testing"
+    this.invis = false;
+    this.canInvis = true;
+    this.canChangeInvisStatus = true;
+    this.class = userData.class;
     canvas.addEventListener("keydown", tank_listener1, false);
     canvas.addEventListener("keyup", tank_listener2, false);
     canvas.addEventListener('mousemove', tank_listener3, false);
@@ -1306,17 +1355,41 @@ class Tank {
           }
           break;
         case 70:
-          if (this.canShield) {
-            user.tank.shields = 5;
-            this.canShield = false;
-            setTimeout(function () {
-              user.tank.shields = 0;
-            }, 10000);
-            setTimeout(function () {
-              user.tank.canShield = true;
-            }, 40000);
+          if (this.class === 'stealth') {
+            if (this.canChangeInvisStatus) {  
+              if (this.invis) {
+                this.canChangeInvisStatus = false;
+                window.setTimeout(function() {
+                  user.tank.canChangeInvisStatus = true;
+                }, 500);
+                this.invis = false;
+                window.setTimeout(function() {
+                  user.tank.canInvis = true;
+                }, 40000);
+              } else {
+                if (this.canInvis) {
+                  this.canChangeInvisStatus = false;
+                  window.setTimeout(function() {
+                    user.tank.canChangeInvisStatus = true;
+                  }, 500);
+                  this.invis = true;
+                  this.canInvis = false;
+                }
+              }
+            }
+          } else if (this.class === 'normal') {
+            if (this.canShield) {
+              user.tank.shields = 5;
+              this.canShield = false;
+              setTimeout(function () {
+                user.tank.shields = 0;
+              }, 10000);
+              setTimeout(function () {
+                user.tank.canShield = true;
+              }, 40000);
+            }
           }
-          break;
+            break;
         case 76:
           if (Game.level >= 10000) {
             window.clearInterval(endlessRunner);
@@ -1713,7 +1786,7 @@ function loading() {
   if (sessionStorage.username == undefined) {
     var t = confirm("Do you want to play as Guest?");
     if (t) {
-      userData = { username: "Guest" + JSON.stringify(Math.random()), health: 200, coins: 0, level: 1, boosts: 0, blocks: 0, flashbangs: 0, toolkits: 0 };
+      userData = { username: "Guest" + JSON.stringify(Math.random()), health: 200, coins: 0, level: 1, boosts: 0, blocks: 0, flashbangs: 0, toolkits: 0, class: 'normal' };
       user = {};
       user.username = userData.username;
       mainMenu();
@@ -1725,10 +1798,13 @@ function loading() {
     user.username = sessionStorage.username;
     get(sessionStorage.username, function() {
       if (userData == undefined) {
-        userData = {username: sessionStorage.username, health: 200, coins: 0, level: 1, blocks: 0, flashbangs: 0, boosts: 0, toolkits: 0}
+        userData = {username: sessionStorage.username, health: 200, coins: 0, level: 1, blocks: 0, flashbangs: 0, boosts: 0, toolkits: 0, class: 'normal'}
       }
       user.level = userData.level;
       user.coins = userData.coins;
+      if (userData.class == undefined) {
+        userData.class = 'normal';
+      }
       mainMenu();
     });
   }
@@ -2340,6 +2416,13 @@ function level(num, mo, m) {
             }
           }
         }
+        if (pt[l].invis) {
+          if (pt[l].username != user.username) {
+            draw.globalAlpha = 0;
+          } else {
+            draw.globalAlpha = .5; 
+          }
+        }
         if (pt[l].leftright == true) {
           draw.translate(pt[l].x + 20, pt[l].y + 20)
           draw.rotate(90 * Math.PI / 180);
@@ -2410,6 +2493,9 @@ function level(num, mo, m) {
           draw.beginPath();
           draw.arc(pt[l].x + 20, pt[l].y + 20, 33, 0, Math.PI * 2);
           draw.fill();
+          draw.globalAlpha = 1;
+        }
+        if (pt[l].invis) {
           draw.globalAlpha = 1;
         }
       }
