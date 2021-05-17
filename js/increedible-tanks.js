@@ -1,4 +1,4 @@
-(function() {
+//(function() {
 window.setTimeout(function () {
   document.getElementById('wall').remove();
 }, 3000);
@@ -3930,4 +3930,4 @@ function createAi(x, y, m, t, team) {
 window.setTimeout(function () {
   startScreen();
 }, 3000);
-})();
+//})();
