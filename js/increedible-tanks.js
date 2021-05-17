@@ -388,7 +388,7 @@ class Host {
   control(channelname) {
     this.blockData = ['', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''];
     user.host.channelname = channelname;
-    this.socket = new WebSocket('wss://'+window.location.hostname'/server');
+    this.socket = new WebSocket('wss://'+window.location.hostname+'/server');
     this.socket.onopen = function () {
       user.host.socket.send(JSON.stringify({
         operation: 'multiplayer',
