@@ -592,7 +592,7 @@ class Joiner {
     this.channelname = channelname;
     window.setInterval(function() {
       user.joiner.send();
-    }, 5);
+    }, 1);
     window.setInterval(function () {
       user.joiner.tank.x = 0;
       user.joiner.tank.y = 0;
