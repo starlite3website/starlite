@@ -417,7 +417,7 @@ class Host {
       teamData.blue.players.push(user.username);
       user.tank.team = 'blue';
     }
-    window.setInterval(user.host.send, 10);
+    window.setInterval(user.host.send, 60);
     Game.level = 'multiplayer';
     level('multiplayer', null, true);
   }
@@ -739,7 +739,7 @@ class Joiner {
         draw.drawImage(weak_image, user.joiner.hostupdate.scaffolding[l].x * 50, user.joiner.hostupdate.scaffolding[l].y * 50);
         l++;
       }
-    }, 10);
+    }, 60);
     Game.level = 'multiplayer-joiner';
     this.socket.onmessage = function (data) {
       data = JSON.parse(data.data);
@@ -1620,7 +1620,7 @@ function Game() {
   this.i = function () {
     i.push(window.setInterval(function () {
       clearShot();
-    }, 30));
+    }, 60));
     i.push(window.setInterval(function () {
       var l = 0;
       while (l < s.length) {
