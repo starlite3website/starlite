@@ -207,7 +207,7 @@ wss.on('connection', function(socket) {
         });
       }
     } else if (data.operation == 'status') {
-      if (!sessionTokens.includes(data.token)) return;
+      if (!sessionTokens.includes(parseFloat(data.token))) return;
       if (data.task == 'get') {
         socket.send(JSON.stringify({
           status: status[data.username],
