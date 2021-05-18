@@ -511,6 +511,7 @@ class Host {
       }
       l++;
     }
+    user.host.send();
   }
   joinerjoin(data) {
     // registers a new tank to the server
@@ -590,9 +591,6 @@ class Joiner {
     this.tank.intervals = [];
     this.socket = new WebSocket('wss://'+window.location.hostname+'/server');
     this.channelname = channelname;
-    window.setInterval(function() {
-      user.joiner.send();
-    }, 1);
     window.setInterval(function () {
       user.joiner.tank.x = 0;
       user.joiner.tank.y = 0;
