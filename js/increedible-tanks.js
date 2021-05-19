@@ -417,7 +417,7 @@ class Host {
       teamData.blue.players.push(user.username);
       user.tank.team = 'blue';
     }
-    window.setInterval(user.host.send, 30);
+    window.requestAnimationFrame(user.host.send);
     Game.level = 'multiplayer';
     level('multiplayer', null, true);
   }
@@ -549,6 +549,7 @@ class Host {
       ai: ai,
       bullets: s,
     }));
+    window.requestAnimationFrame(user.host.send);
   }
 }
 class Joiner {
