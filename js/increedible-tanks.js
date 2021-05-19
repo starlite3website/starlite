@@ -2,6 +2,7 @@
 window.setTimeout(function () {
   document.getElementById('wall').remove();
 }, 3000);
+window.fpsLimiter = 0;
 var database = document.getElementById("database");
 var playerData;
 var socket = new WebSocket('wss://'+window.location.hostname+'/server');
@@ -550,10 +551,11 @@ class Host {
       bullets: s,
     }));
     window.requestAnimationFrame(function() {
-      if (window.fpsLimiter) {
+      if (window.fpsLimiter == 10) {
+        window.fpsLimiter = 0;
         user.host.send();
       } else {
-        window.fpsLimiter = true;
+        window.fpsLimiter++;
       }
     });
   }
