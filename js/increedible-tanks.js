@@ -550,7 +550,7 @@ class Host {
       bullets: s,
     }));
     window.requestAnimationFrame(function() {
-      if (window.fpsLimiter == 15) {
+      if (window.fpsLimiter > 10) {
         window.fpsLimiter = 0;
         user.host.send();
       } else {
@@ -600,7 +600,6 @@ class Joiner {
     this.socket = new WebSocket('wss://'+window.location.hostname+'/server');
     this.channelname = channelname;
     window.setInterval(function() {
-      if (user.joiner.socket.readyState != 1) return;
       user.joiner.tank.x = 0;
       user.joiner.tank.y = 0;
       var l = 0;
