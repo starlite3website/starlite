@@ -512,7 +512,6 @@ class Host {
       }
       l++;
     }
-    user.host.send();
   }
   joinerjoin(data) {
     // registers a new tank to the server
