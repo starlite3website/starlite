@@ -549,14 +549,12 @@ class Host {
       ai: ai,
       bullets: s,
     }));
-    window.requestAnimationFrame(function() {
-      if (window.fpsLimiter > 10) {
-        window.fpsLimiter = 0;
-        user.host.send();
-      } else {
-        window.fpsLimiter++;
-      }
-    });
+    if (window.fpsLimiter == 15) {
+      window.requestAnimationFrame(user.host.send);
+      window.fpsLimiter = 0;
+    } else {
+      window.fpsLimiter++;
+    }
   }
 }
 class Joiner {
