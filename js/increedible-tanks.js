@@ -417,8 +417,7 @@ class Host {
       teamData.blue.players.push(user.username);
       user.tank.team = 'blue';
     }
-    window.setInterval(user.host.send, 10);
-    window.setInterval(user.host.send, 5);
+    window.setInterval(user.host.send, 30);
     Game.level = 'multiplayer';
     level('multiplayer', null, true);
   }
@@ -1621,7 +1620,7 @@ function Game() {
   this.i = function () {
     i.push(window.setInterval(function () {
       clearShot();
-    }, 60));
+    }, 30));
     i.push(window.setInterval(function () {
       var l = 0;
       while (l < s.length) {
