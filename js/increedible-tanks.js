@@ -385,6 +385,15 @@ function clearShot() {
   }
 }
 var teamData = {}, pt = [];
+function hostupdate() {
+  if (window.fpsLimiter == 15) {
+    window.fpsLimiter = 0;
+    user.host.send();
+  } else {
+    window.fpsLimiter++;
+  }
+  window.requestAnimationFrame()
+}
 class Host {
   control(channelname) {
     this.blockData = ['', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''];
@@ -418,7 +427,7 @@ class Host {
       teamData.blue.players.push(user.username);
       user.tank.team = 'blue';
     }
-    window.requestAnimationFrame(user.host.send);
+    window.requestAnimationFrame(hostupdate);
     Game.level = 'multiplayer';
     level('multiplayer', null, true);
   }
@@ -549,12 +558,6 @@ class Host {
       ai: ai,
       bullets: s,
     }));
-    if (window.fpsLimiter == 15) {
-      window.requestAnimationFrame(user.host.send);
-      window.fpsLimiter = 0;
-    } else {
-      window.fpsLimiter++;
-    }
   }
 }
 class Joiner {
