@@ -599,7 +599,8 @@ class Joiner {
     this.tank.intervals = [];
     this.socket = new WebSocket('wss://'+window.location.hostname+'/server');
     this.channelname = channelname;
-    window.setInterval(function () {
+    window.setInterval(function() {
+      if (user.joiner.socket.readyState != 4) return;
       user.joiner.tank.x = 0;
       user.joiner.tank.y = 0;
       var l = 0;
