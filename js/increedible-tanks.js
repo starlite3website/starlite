@@ -550,7 +550,7 @@ class Host {
       bullets: s,
     }));
     window.requestAnimationFrame(function() {
-      if (window.fpsLimiter == 5) {
+      if (window.fpsLimiter == 15) {
         window.fpsLimiter = 0;
         user.host.send();
       } else {
