@@ -392,7 +392,7 @@ function hostupdate() {
   } else {
     window.fpsLimiter++;
   }
-  window.requestAnimationFrame()
+  window.requestAnimationFrame(hostupdate);
 }
 class Host {
   control(channelname) {
