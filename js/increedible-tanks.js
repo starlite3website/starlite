@@ -2,7 +2,7 @@
 window.setTimeout(function () {
   document.getElementById('wall').remove();
 }, 3000);
-window.fpsLimiter = 0;
+var fpsLimiter = 0; 
 var database = document.getElementById("database");
 var playerData;
 var socket = new WebSocket('wss://'+window.location.hostname+'/server');
@@ -386,11 +386,12 @@ function clearShot() {
 }
 var teamData = {}, pt = [];
 function hostupdate() {
-  if (window.fpsLimiter == 15) {
-    window.fpsLimiter = 0;
+  console.log(fpsLimiter);
+  if (fpsLimiter == 15) {
+    fpsLimiter = 0;
     user.host.send();
   } else {
-    window.fpsLimiter++;
+    fpsLimiter++;
   }
   window.requestAnimationFrame(hostupdate);
 }
