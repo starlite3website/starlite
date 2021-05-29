@@ -386,7 +386,7 @@ function clearShot() {
 }
 var teamData = {}, pt = [];
 function hostupdate() {
-  if (fpsLimiter == 15) {
+  if (fpsLimiter == 30) {
     fpsLimiter = 0;
     window.requestAnimationFrame(hostupdate);
     user.host.send();
