@@ -2,7 +2,6 @@
 window.setTimeout(function () {
   document.getElementById('wall').remove();
 }, 3000);
-var fpsLimiter = 0; 
 var database = document.getElementById("database");
 var playerData;
 var socket = new WebSocket('wss://'+window.location.hostname+'/server');
@@ -386,14 +385,8 @@ function clearShot() {
 }
 var teamData = {}, pt = [];
 function hostupdate() {
-  if (fpsLimiter == 5) {
-    fpsLimiter = 0;
-    window.requestAnimationFrame(hostupdate);
-    user.host.send();
-  } else {
-    fpsLimiter++;
-    window.requestAnimationFrame(hostupdate);
-  }
+   user.host.send();
+   window.requestAnimationFrame(hostupdate);
 }
 class Host {
   control(channelname) {
