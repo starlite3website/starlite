@@ -392,8 +392,8 @@ function hostupdate() {
     user.host.send();
   } else {
     fpsLimiter++;
+    window.requestAnimationFrame(hostupdate);
   }
-  window.requestAnimationFrame(hostupdate);
 }
 class Host {
   control(channelname) {
