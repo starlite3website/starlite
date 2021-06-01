@@ -385,8 +385,8 @@ function clearShot() {
 }
 var teamData = {}, pt = [];
 function hostupdate() {
-   user.host.send();
    window.requestAnimationFrame(hostupdate);
+   user.host.send();
 }
 class Host {
   control(channelname) {
