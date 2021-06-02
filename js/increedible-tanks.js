@@ -422,6 +422,7 @@ class Host {
       user.tank.team = 'blue';
     }
     window.requestAnimationFrame(hostupdate);
+    window.setInterval(user.host.send, 30);
     Game.level = 'multiplayer';
     level('multiplayer', null, true);
   }
