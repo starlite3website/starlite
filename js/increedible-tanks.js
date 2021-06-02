@@ -384,10 +384,6 @@ function clearShot() {
   }
 }
 var teamData = {}, pt = [];
-function hostupdate() {
-   window.requestAnimationFrame(hostupdate);
-   user.host.send();
-}
 class Host {
   control(channelname) {
     this.blockData = ['', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''];
@@ -421,7 +417,6 @@ class Host {
       teamData.blue.players.push(user.username);
       user.tank.team = 'blue';
     }
-    window.requestAnimationFrame(hostupdate);
     window.setInterval(user.host.send, 30);
     Game.level = 'multiplayer';
     level('multiplayer', null, true);
@@ -2396,6 +2391,7 @@ function level(num, mo, m) {
         spawn(-2, 9);
       }
     }
+    user.host.send();
     var l = 0;
     while (l < pt.length) {
       if (pt[l].ded != true) {
@@ -3854,7 +3850,7 @@ function wall(x, y, m) {
         b[l].wall(x, y);
       }
     }
-    l++;
+     l++;
   }
   if (Game.level == 'multiplayer-joiner') {
     draw.drawImage(wall_image, x * 50, y * 50);
