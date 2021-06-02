@@ -422,7 +422,7 @@ class Host {
       user.tank.team = 'blue';
     }
     window.requestAnimationFrame(hostupdate);
-    window.setInterval(user.host.send, 15);
+    window.setInterval(user.host.send, 30);
     Game.level = 'multiplayer';
     level('multiplayer', null, true);
   }
@@ -516,6 +516,7 @@ class Host {
       }
       l++;
     }
+    user.host.send();
   }
   joinerjoin(data) {
     // registers a new tank to the server
