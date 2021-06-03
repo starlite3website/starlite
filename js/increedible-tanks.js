@@ -417,7 +417,6 @@ class Host {
       teamData.blue.players.push(user.username);
       user.tank.team = 'blue';
     }
-    window.setInterval(user.host.send, 30);
     Game.level = 'multiplayer';
     level('multiplayer', null, true);
   }
@@ -511,7 +510,6 @@ class Host {
       }
       l++;
     }
-    user.host.send();
   }
   joinerjoin(data) {
     // registers a new tank to the server
