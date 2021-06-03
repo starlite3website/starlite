@@ -418,6 +418,7 @@ class Host {
       user.tank.team = 'blue';
     }
     Game.level = 'multiplayer';
+    window.setInterval(user.host.send, 30);
     level('multiplayer', null, true);
   }
   joinerupdate(data) {
@@ -510,6 +511,7 @@ class Host {
       }
       l++;
     }
+    user.host.send();
   }
   joinerjoin(data) {
     // registers a new tank to the server
@@ -2389,7 +2391,6 @@ function level(num, mo, m) {
         spawn(-2, 9);
       }
     }
-    user.host.send();
     var l = 0;
     while (l < pt.length) {
       if (pt[l].ded != true) {
@@ -2502,6 +2503,7 @@ function level(num, mo, m) {
       l++;
     }
     levelReader([' 2    2  2  2  222B#', '   2     2  2  #####', ' 2  22  2###########', '        2#2   2   2#', '  2  2 2 #  2   2  #', '2  2 2   #11111#1 1#', '        2#11111#1 1#', '  2 2    211 11#1 1#', '2    2  2#11111#1 1#', '22222#####11111#1 1#', '#1 1#11111#####22222', '#1 1#11111#2  2    2', '#1 1#11 112    2 2  ', '#1 1#11111#2        ', '#1 1#11111#   2 2  2', '#  2   2  # 2 2  2  ', '#2   2   2#2        ', '###########2  22  2 ', '#####  2  2     2   ', '#R222  2  2  2    2 '], m, true, [-500, 500, -500, 500]);
+    user.host.send();
   }
   draw.drawImage(coins, 5, 5);
   draw.fillStyle = "#ffffff";
