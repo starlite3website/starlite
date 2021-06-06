@@ -26,6 +26,14 @@ const server = http.createServer(function(req, res) {
       pathname += '.html';
     }
   }
+  if (pathname == '/server.js') {
+    var data = fs.readFileSync('404.html');
+    res.writeHead(404, { 'Content-Type': 'text/html' });
+    console.log('FAIL'+pathname);
+    res.write(data);
+    res.end();
+    return;
+  }
   fs.readFile(pathname.substr(1), function(err, data) {
     if (err) {
       var data = fs.readFileSync('404.html');
