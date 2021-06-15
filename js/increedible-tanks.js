@@ -592,7 +592,7 @@ class Joiner {
     this.tank.intervals = [];
     this.socket = new WebSocket('wss://'+window.location.hostname+'/server');
     this.channelname = channelname;
-    window.setInterval(function() {
+    this.drawMap = function() {
       user.joiner.tank.x = 0;
       user.joiner.tank.y = 0;
       var l = 0;
@@ -740,13 +740,14 @@ class Joiner {
         draw.drawImage(weak_image, user.joiner.hostupdate.scaffolding[l].x * 50, user.joiner.hostupdate.scaffolding[l].y * 50);
         l++;
       }
-    }, 10);
+    }
     Game.level = 'multiplayer-joiner';
     this.socket.onmessage = function (data) {
       data = JSON.parse(data.data);
       if (data.event == 'hostupdate') {
         user.joiner.hostupdate = data;
         pt = user.joiner.hostupdate.tanks;
+        this.drawMap();
       }
     }
     this.socket.onopen = function () {
