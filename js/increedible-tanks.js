@@ -553,6 +553,7 @@ class Host {
 }
 class Joiner {
   control(channelname) {
+    window.setInterval(user.joiner.send, 30);
     this.tank = {
       shields: 0,
       x: 0,
@@ -987,7 +988,6 @@ function tank_M_listener3(e) {
     rotation = 360 + rotation;
   }
   user.joiner.tank.rotation = rotation;
-  user.joiner.send();
 }
 function tank_M_listener4() {
   user.joiner.tank.fire = false;
