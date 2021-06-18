@@ -747,7 +747,7 @@ class Joiner {
       if (data.event == 'hostupdate') {
         user.joiner.hostupdate = data;
         pt = user.joiner.hostupdate.tanks;
-        this.drawMap();
+        user.joiner.drawMap();
       }
     }
     this.socket.onopen = function () {
