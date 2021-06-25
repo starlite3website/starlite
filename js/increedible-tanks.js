@@ -2392,7 +2392,7 @@ function level(num, mo, m) {
         spawn(-2, 9);
       }
     }
-    /*var l = 0;
+    var l = 0;
     while (l < pt.length) {
       if (pt[l].ded != true) {
         if (ai_check(pt[l].x, pt[l].y)) {
@@ -2503,7 +2503,7 @@ function level(num, mo, m) {
       }
       l++;
     }
-    */
+    
     var l = 0;
     while (l<0) {
       draw.fillStyle="#000000";
