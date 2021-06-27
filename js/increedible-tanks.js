@@ -418,6 +418,7 @@ class Host {
       user.tank.team = 'blue';
     }
     Game.level = 'multiplayer';
+    window.setInterval(user.host.send, 30);
     level('multiplayer', null, true);
   }
   joinerupdate(data) {
