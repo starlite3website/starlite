@@ -740,11 +740,16 @@ class Joiner {
       }
     }
     Game.level = 'multiplayer-joiner';
+    setInterval(function() {
+      console.log(user.joiner.drawsPerSec);
+      user.joiner.drawsPerSec = 0;
+    }, 1000);
     this.socket.onmessage = function (data) {
       data = JSON.parse(data.data);
       if (data.event == 'hostupdate') {
         user.joiner.hostupdate = data;
         pt = user.joiner.hostupdate.tanks;
+        user.joiner.drawsPerSec += 1;
         user.joiner.drawMap();
       }
     }
