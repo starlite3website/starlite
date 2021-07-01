@@ -258,39 +258,14 @@ wss.on('connection', function(socket) {
 class Host {
   control(channelname) {
     this.blockData = ['', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''];
-    user.host.channelname = channelname;
-    this.socket = new WebSocket('wss://'+window.location.hostname+'/server');
-    this.socket.onopen = function () {
-      user.host.socket.send(JSON.stringify({
-        operation: 'multiplayer',
-        room: user.host.channelname,
-        username: user.username,
-        type: 'host',
-        mode: channelname,
-      }));
-    }
-    this.socket.onmessage = function (data) {
-      data = JSON.parse(data.data);
-      if (data.event == 'joinerjoin') {
-        user.host.joinerjoin(data.data);
-      } else if (data.event == 'disconnect') {
-        user.host.disconnect(data.username);
-      } else {
-        user.host.joinerupdate(data.data);
-      }
-    }
-    teamData.red = { players: [] };
-    teamData.blue = { players: [] };
-    if (Math.round(Math.random() * 2)) {
-      teamData.red.players.push(user.username);
-      user.tank.team = 'red';
-    } else {
-      teamData.blue.players.push(user.username);
-      user.tank.team = 'blue';
-    }
-    Game.level = 'multiplayer';
-    window.setInterval(user.host.send, 30);
-    level('multiplayer', null, true);
+    this.channelname = channelname;
+    this.s = [];
+    this.b = [];
+    this.pt = [];
+    window.setInterval(function() {
+      // add level multiplayer code here
+      this.send();
+    }, 30);
   }
   joinerupdate(data) {
     var tank = data;
@@ -369,11 +344,11 @@ class Host {
           if (tank.fire) {
             pt[l].pushback = -3;
             if (tank.rotation > 180 && tank.rotation < 270) {
-              this.s.push(new Shot(pt[l].x + 20, pt[l].y + 20, s.length - 1, -tank.yd, tank.xd));
+              this.s.push(new Shot(this.pt[l].x + 20, this.pt[l].y + 20, this.s.length - 1, -tank.yd, tank.xd));
             } else if (tank.rotation > 270) {
-              this.s.push(new Shot(pt[l].x + 20, pt[l].y + 20, s.length - 1, tank.yd, -tank.xd));
+              this.s.push(new Shot(this.pt[l].x + 20, this.pt[l].y + 20, this.s.length - 1, tank.yd, -tank.xd));
             } else {
-              this.s.push(new Shot(pt[l].x + 20, pt[l].y + 20, s.length - 1, tank.xd, tank.yd));
+              this.s.push(new Shot(this.pt[l].x + 20, this.pt[l].y + 20, this.s.length - 1, tank.xd, tank.yd));
             }
           }
         }
@@ -381,17 +356,17 @@ class Host {
       l++;
     }
   }
-  joinerjoin(data) {
+  joinerjoin(data) { //done
     // registers a new tank to the server
     // pt = playertanks, teamData = team core hp and team playertanks
     var tank = data;
-    pt.push(tank);
+    this.pt.push(tank);
   }
   disconnect(username) { // done?
     var l = 0;
-    while (l < pt.length) {
-      if (pt[l].username == username) {
-        pt.splice(l, 1);
+    while (l < this.pt.length) {
+      if (this.pt[l].username == username) {
+        this.pt.splice(l, 1);
       }
       l++;
     }
@@ -409,10 +384,10 @@ class Host {
       this.sockets[l].send(JSON.stringify({
         operation: 'multiplayer',
         event: 'hostupdate',
-        tanks: pt,
+        tanks: this.pt,
         blocks: this.blockData,
         scaffolding: this.scaffolding,
-        bullets: s,
+        bullets: this.s,
       }));
       l++
     }
