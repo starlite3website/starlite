@@ -270,10 +270,10 @@ class Host {
   joinerupdate(data) {
     var tank = data;
     var l = 0;
-    while (l < pt.length) {
-      if (!pt[l].ded) {
-        if (pt[l].username == tank.username) {
-          if (checker(pt[l].x + tank.x, pt[l].y)) {
+    while (l < this.pt.length) {
+      if (!this.pt[l].ded) {
+        if (this.pt[l].username == tank.username) {
+          if (this.checker(this.pt[l].x + tank.x, pt[l].y)) { // require checker
             pt[l].x += tank.x;
           }
           if (checker(pt[l].x, pt[l].y + tank.y)) {
