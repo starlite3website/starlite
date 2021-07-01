@@ -255,3 +255,166 @@ wss.on('connection', function(socket) {
     sockets = sockets.filter(s => s !== socket);
   });
 });
+class Host {
+  control(channelname) {
+    this.blockData = ['', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', ''];
+    user.host.channelname = channelname;
+    this.socket = new WebSocket('wss://'+window.location.hostname+'/server');
+    this.socket.onopen = function () {
+      user.host.socket.send(JSON.stringify({
+        operation: 'multiplayer',
+        room: user.host.channelname,
+        username: user.username,
+        type: 'host',
+        mode: channelname,
+      }));
+    }
+    this.socket.onmessage = function (data) {
+      data = JSON.parse(data.data);
+      if (data.event == 'joinerjoin') {
+        user.host.joinerjoin(data.data);
+      } else if (data.event == 'disconnect') {
+        user.host.disconnect(data.username);
+      } else {
+        user.host.joinerupdate(data.data);
+      }
+    }
+    teamData.red = { players: [] };
+    teamData.blue = { players: [] };
+    if (Math.round(Math.random() * 2)) {
+      teamData.red.players.push(user.username);
+      user.tank.team = 'red';
+    } else {
+      teamData.blue.players.push(user.username);
+      user.tank.team = 'blue';
+    }
+    Game.level = 'multiplayer';
+    window.setInterval(user.host.send, 30);
+    level('multiplayer', null, true);
+  }
+  joinerupdate(data) {
+    var tank = data;
+    var l = 0;
+    while (l < pt.length) {
+      if (!pt[l].ded) {
+        if (pt[l].username == tank.username) {
+          if (checker(pt[l].x + tank.x, pt[l].y)) {
+            pt[l].x += tank.x;
+          }
+          if (checker(pt[l].x, pt[l].y + tank.y)) {
+            pt[l].y += tank.y;
+          }
+          if (tank.shielded) {
+            pt[l].shields = 5;
+            setTimeout(function (l) {
+              pt[l].shields = 0;
+            }, 10000, l);
+          }
+          pt[l].base = tank.base;
+          pt[l].rotation = tank.rotation;
+          pt[l].leftright = tank.leftright;
+          pt[l].invis = tank.invis,
+          pt[l].canChangeInvisStatus = tank.canChangeInvisStatus;
+          pt[l].canInvis = tank.canInvis;
+          if (tank.flashbangFired) {
+            var block = checker2(this.pt[l].x, this.pt[l].y); // require checker2
+            let isScaffolding = false;
+            var q = 0;
+            while (q < this.scaffolding.length) {
+              if (this.b[block].x == this.scaffolding[q].x) {
+                if (this.b[block].y == this.scaffolding[q].y) {
+                  isScaffolding = true;
+                }
+              }
+              q++;
+            }
+            if (!isScaffolding) {
+              var strand = this.blockData[this.b[block].y + 10].split('');
+              strand[this.b[block].x + 10] = ' ';
+              this.blockData[this.b[block].y + 10] = strand.join('');
+            } else {
+              var q = 0;
+              while (q < this.scaffolding.length) {
+                if (this.b[block].y == this.scaffolding[q].y) {
+                  if (this.b[block].x == this.scaffolding[q].x) {
+                    this.scaffolding.splice(q, 1);
+                  }
+                }
+                q++;
+              }
+            }
+            block_support(block); // require block_support may need to be Host function
+          }
+          if (tank.placeScaffolding) {
+            if (tank.rotation >= 0 && tank.rotation < 90) {
+              weak((this.pt[l].x - 50) / 50, (pt[l].y + 40) / 50, true);
+              this.scaffolding.push({ x: (pt[l].x - 50) / 50, y: (pt[l].y + 40) / 50 });
+            }
+            if (tank.rotation >= 90 && tank.rotation < 180) {
+              weak((pt[l].x - 50) / 50, (pt[l].y - 50) / 50, true);
+              user.tank.scaffolding.push({ x: (pt[l].x - 50) / 50, y: (pt[l].y - 50) / 50 });
+            }
+            if (tank.rotation >= 180 && tank.rotation < 270) {
+              weak((pt[l].x + 40) / 50, (pt[l].y - 50) / 50, true);
+              user.tank.scaffolding.push({ x: (pt[l].x + 40) / 50, y: (pt[l].y - 50) / 50 });
+            }
+            if (tank.rotation >= 270 && tank.rotation < 360) {
+              weak((this.pt[l].x + 40) / 50, (pt[l].y + 40) / 50, true);
+              this.scaffolding.push({ x: (pt[l].x + 40) / 50, y: (pt[l].y + 40) / 50 });
+            }
+          }
+          if (tank.usingToolkit) {
+            pt[l].health = .75 * pt[l].maxHealth;
+          }
+          if (tank.fire) {
+            pt[l].pushback = -3;
+            if (tank.rotation > 180 && tank.rotation < 270) {
+              this.s.push(new Shot(pt[l].x + 20, pt[l].y + 20, s.length - 1, -tank.yd, tank.xd));
+            } else if (tank.rotation > 270) {
+              this.s.push(new Shot(pt[l].x + 20, pt[l].y + 20, s.length - 1, tank.yd, -tank.xd));
+            } else {
+              this.s.push(new Shot(pt[l].x + 20, pt[l].y + 20, s.length - 1, tank.xd, tank.yd));
+            }
+          }
+        }
+      }
+      l++;
+    }
+  }
+  joinerjoin(data) {
+    // registers a new tank to the server
+    // pt = playertanks, teamData = team core hp and team playertanks
+    var tank = data;
+    pt.push(tank);
+  }
+  disconnect(username) { // done?
+    var l = 0;
+    while (l < pt.length) {
+      if (pt[l].username == username) {
+        pt.splice(l, 1);
+      }
+      l++;
+    }
+    var l = 0;
+    while (l < this.sockets.length) {
+      if (this.sockets[l].username == username) {
+        this.sockets.splice(l, 1);
+      }
+      l++;
+    }
+  }
+  send() { //done
+    var l = 0;
+    while (l<this.sockets.length) {
+      this.sockets[l].send(JSON.stringify({
+        operation: 'multiplayer',
+        event: 'hostupdate',
+        tanks: pt,
+        blocks: this.blockData,
+        scaffolding: this.scaffolding,
+        bullets: s,
+      }));
+      l++
+    }
+  }
+}
