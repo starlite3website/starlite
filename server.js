@@ -16,6 +16,7 @@ var sessionTokens = [1];
 var pvpRooms = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 var message = {};
 var status = {};
+var servers = {};
 
 const server = http.createServer(function(req, res) {
   var pathname = url.parse(req.url).pathname;
@@ -196,16 +197,11 @@ wss.on('connection', function(socket) {
             return;
           }
         } else {
-          if (JSON.parse(msg).type == 'host') {
-            sockets.forEach(function(s) {
-              if (s.type == 'host' && s.room == JSON.parse(msg).room) {
-                socket.close();
-                sockets = sockets.filter(s => s !== socket);
-              }
-            });
+          if (servers[JSON.parse(msg).room] !== undefined) {
+            servers[JSON.parse(msg).room] = new Host();
+            servers[JSON.parse(msg).room].control(JSON.parse(msg).room);
+            servers[JSON.parse(msg).room].sockets.push(socket);
           }
-          socket.room = JSON.parse(msg).room;
-          socket.type = JSON.parse(msg).type;
         }
       } else {
         sockets.forEach(function(s) {
