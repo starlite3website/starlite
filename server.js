@@ -193,6 +193,7 @@ wss.on('connection', function(socket) {
             servers[JSON.parse(msg).room].control(JSON.parse(msg).room);
           }
           servers[JSON.parse(msg).room].sockets.push(socket);
+          socket.room = JSON.parse(msg).room;
         }
       } else {
         servers[socket.room].joinerupdate(JSON.parse(msg));
