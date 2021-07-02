@@ -188,7 +188,7 @@ wss.on('connection', function(socket) {
             return;
           }
         } else {
-          if (servers[JSON.parse(msg).room] !== undefined) {
+          if (servers[JSON.parse(msg).room] == undefined) {
             servers[JSON.parse(msg).room] = new Host();
             servers[JSON.parse(msg).room].control(JSON.parse(msg).room);
           }
