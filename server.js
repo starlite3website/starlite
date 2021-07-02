@@ -266,6 +266,14 @@ class Host {
       // add level multiplayer code here
       this.send();
     }, 30);
+    window.setInterval(function() {
+      var l = 0;
+      while (l<this.s.length) {
+        s.update();
+        l++;
+      }
+      
+    }, 30);
   }
   joinerupdate(data) {
     var tank = data;
@@ -273,24 +281,24 @@ class Host {
     while (l < this.pt.length) {
       if (!this.pt[l].ded) {
         if (this.pt[l].username == tank.username) {
-          if (this.checker(this.pt[l].x + tank.x, pt[l].y)) { // require checker
-            pt[l].x += tank.x;
+          if (this.checker(this.pt[l].x + tank.x, this.pt[l].y)) { // require checker
+            this.pt[l].x += tank.x;
           }
           if (checker(pt[l].x, pt[l].y + tank.y)) {
-            pt[l].y += tank.y;
+            this.pt[l].y += tank.y;
           }
           if (tank.shielded) {
-            pt[l].shields = 5;
+            this.pt[l].shields = 5;
             setTimeout(function (l) {
-              pt[l].shields = 0;
+              this.pt[l].shields = 0;
             }, 10000, l);
           }
-          pt[l].base = tank.base;
-          pt[l].rotation = tank.rotation;
-          pt[l].leftright = tank.leftright;
-          pt[l].invis = tank.invis,
-          pt[l].canChangeInvisStatus = tank.canChangeInvisStatus;
-          pt[l].canInvis = tank.canInvis;
+          this.pt[l].base = tank.base;
+          this.pt[l].rotation = tank.rotation;
+          this.pt[l].leftright = tank.leftright;
+          this.pt[l].invis = tank.invis,
+          this.pt[l].canChangeInvisStatus = tank.canChangeInvisStatus;
+          this.pt[l].canInvis = tank.canInvis;
           if (tank.flashbangFired) {
             var block = checker2(this.pt[l].x, this.pt[l].y); // require checker2
             let isScaffolding = false;
@@ -391,5 +399,117 @@ class Host {
       }));
       l++
     }
+  }
+}
+function Block(health, x, y, isInvincible, isExplosive, isScaffolding, host) {
+  this.host = host;
+  this.blockId = b.length - 1;
+  this.x = x;
+  this.y = y;
+  this.isScaffolding = isScaffolding;
+  this.wall = function (x, y) {
+    if (this.health == undefined) {
+      this.health = Infinity; this.type = 'wall';
+    }
+  }
+  this.strong = function (x, y) {
+    if (this.health == undefined) {
+      this.health = 80;
+      this.type = 'strong';
+    }
+  }
+  this.weak = function (x, y) {
+    if (this.health == undefined) {
+      this.health = 40;
+      this.type = 'weak';
+    }
+  }
+  /*i.push(window.setInterval(function () {
+    var l = 0;
+    while (l < b.length) {
+      if (ai_check(b[l].x * 50, b[l].y * 50, true)) {
+        draw.fillStyle = "#FF0000";
+        draw.fillRect(b[l].x * 50, b[l].y * 50, 50, 50);
+        b[l].health -= 10;
+        if (b[l].health <= 0) {
+          if (Game.level == 'multiplayer') {
+            let isScaffolding = false;
+            var t = 0;
+            while (t < b.length) {
+              var q = 0;
+              while (q < user.tank.scaffolding.length) {
+                if (b[t].x == user.tank.scaffolding[q].x) {
+                  if (b[l].y == user.tank.scaffolding[q].y) {
+                    isScaffolding = true;
+                  }
+                }
+                q++;
+              }
+              t++;
+            }
+            if (!isScaffolding) {
+              var strand = user.host.blockData[b[l].y + 10].split('');
+              strand[b[l].x + 10] = ' ';
+              user.host.blockData[b[l].y + 10] = strand.join('');
+            } else {
+              var q = 0;
+              while (q < user.tank.scaffolding.length) {
+                if (b[l].y == user.tank.scaffolding[q].y) {
+                  if (b[l].x == user.tank.scaffolding[q].x) {
+                    user.tank.scaffolding.splice(q, 1);
+                  }
+                }
+                q++;
+              }
+            }
+          }
+          var q = 0;
+          while (q < this.host.scaffolding.length) {
+            if (this.host.b[l].y == this.host.scaffolding[q].y) {
+              if (this.host.b[l].x == this.host.scaffolding[q].x) {
+                this.host.scaffolding.splice(q, 1);
+              }
+            }
+            q++;
+          }
+          this.block_support();
+        }
+      }
+      l++;
+    }
+  }, 50));*/
+  this.block_support = function() {
+    this.x = -1000;
+    this.y = -1000;
+  }
+}
+class Shot { // done
+  constructor(x, y, id, xm, ym) {
+    this.xm = xm;
+    this.ym = ym;
+    while (this.xm * this.xm + this.ym * this.ym > 1.2 || this.xm * this.xm + this.ym * this.ym < 1) {
+      if (this.xm * this.xm + this.ym * this.ym > 1.1) {
+        this.xm /= 1.01;
+        this.ym /= 1.01;
+      }
+      if (this.xm * this.xm + this.ym * this.ym < 1.1) {
+        this.xm *= 1.01;
+        this.ym *= 1.01;
+      }
+    }
+    this.xm = this.xm * 7;
+    this.ym = this.ym * 7;
+    this.y = y;
+    this.x = x;
+    while ((this.x < x + 35 && this.x > x - 35) && (this.y < y + 35 && this.y > y - 35)) {
+      this.x = this.x + xm / 5;
+      this.y = this.y + ym / 5;
+    }
+    this.counter = 0;
+    this.id = id;
+  }
+  update() {
+    this.x += this.xm / 2;
+    this.y += this.ym / 2;
   }
 }
