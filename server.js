@@ -170,23 +170,14 @@ wss.on('connection', function(socket) {
           var l = 0, ip;
           while (l < pvpRooms.length) {
             if (pvpRooms[l] < 3) {
-              if (pvpRooms[l] != 0 && JSON.parse(msg).type == 'host') {
-              } else {
-                if (pvpRooms[l] == 0 && JSON.parse(msg).type == 'joiner') {
-                } else {
-                  ip = 'pvp' + l;
-                  pvpRooms[l] += 1;
-                  if (pvpRooms[l] == 2) {
-                    sockets.forEach(function(s) {
-                      if (s.room === 'pvp' + l) {
-                        socket.send('{"event":"start"}');
-                      }
-                    })
-                  }
-                  socket.pvpRoom = l;
-                  socket.room = 'pvp' + l;
-                  l = pvpRooms.length;
-                }
+              ip = 'pvp' + l;
+              pvpRooms[l] += 1;
+              socket.pvpRoom = l;
+              socket.room = 'pvp' + l;
+              l = pvpRooms.length;
+              if (pvpRooms[l] == 1) {
+                servers[ip] = new Host();
+                servers[ip].control(ip);
               }
             }
             l++;
@@ -200,15 +191,11 @@ wss.on('connection', function(socket) {
           if (servers[JSON.parse(msg).room] !== undefined) {
             servers[JSON.parse(msg).room] = new Host();
             servers[JSON.parse(msg).room].control(JSON.parse(msg).room);
-            servers[JSON.parse(msg).room].sockets.push(socket);
           }
+          servers[JSON.parse(msg).room].sockets.push(socket);
         }
       } else {
-        sockets.forEach(function(s) {
-          if (s.room === socket.room && s !== socket) {
-            s.send(msg);
-          }
-        });
+        servers[socket.room].joinerupdate(JSON.parse(msg));
       }
     } else if (data.operation == 'status') {
       if (!sessionTokens.includes(parseFloat(data.token))) return;
@@ -265,10 +252,9 @@ class Host {
     window.setInterval(function() {
       var l = 0;
       while (l<this.s.length) {
-        s.update();
+        this.s.update();
         l++;
       }
-      
     }, 30);
   }
   joinerupdate(data) {
