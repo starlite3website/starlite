@@ -245,10 +245,10 @@ class Host {
     this.s = [];
     this.b = [];
     this.pt = [];
-    window.setInterval(function() {
+    window.setInterval(function(host) {
       // add level multiplayer code here
-      this.send();
-    }, 30);
+      host.send();
+    }, 30, this);
     window.setInterval(function() {
       var l = 0;
       while (l<this.s.length) {
