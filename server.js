@@ -246,6 +246,7 @@ class Host {
     this.s = [];
     this.b = [];
     this.pt = [];
+    this.sockets = [];
     window.setInterval(function(host) {
       // add level multiplayer code here
       host.send();
