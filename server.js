@@ -188,12 +188,12 @@ wss.on('connection', function(socket) {
             return;
           }
         } else {
+          servers[JSON.parse(msg).room].sockets.push(socket);
+          socket.room = JSON.parse(msg).room;
           if (servers[JSON.parse(msg).room] == undefined) {
             servers[JSON.parse(msg).room] = new Host();
             servers[JSON.parse(msg).room].control(JSON.parse(msg).room);
           }
-          servers[JSON.parse(msg).room].sockets.push(socket);
-          socket.room = JSON.parse(msg).room;
         }
       } else {
         servers[socket.room].joinerupdate(JSON.parse(msg));
