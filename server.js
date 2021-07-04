@@ -259,13 +259,13 @@ class Host {
       // add level multiplayer code here
       host.send();
     }, 30, this);
-    setInterval(function() {
+    setInterval(function(host) {
       var l = 0;
-      while (l<this.s.length) {
+      while (l<host.s.length) {
         this.s.update();
         l++;
       }
-    }, 30);
+    }, 30, this);
   }
   joinerupdate(data) {
     var tank = data;
@@ -273,12 +273,12 @@ class Host {
     while (l < this.pt.length) {
       if (!this.pt[l].ded) {
         if (this.pt[l].username == tank.username) {
-          if (this.checker(this.pt[l].x + tank.x, this.pt[l].y)) { // require checker
+          //if (this.checker(this.pt[l].x + tank.x, this.pt[l].y)) { // require checker
             this.pt[l].x += tank.x;
-          }
-          if (checker(pt[l].x, pt[l].y + tank.y)) {
+          //}
+          //if (checker(pt[l].x, pt[l].y + tank.y)) {
             this.pt[l].y += tank.y;
-          }
+          //}
           if (tank.shielded) {
             this.pt[l].shields = 5;
             setTimeout(function (l) {
