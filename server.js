@@ -198,9 +198,11 @@ wss.on('connection', function(socket) {
         }
       } else {
         if (JSON.parse(msg).event == 'joinerupdate') {
+          console.log('UPDATE');
           servers[socket.room].joinerupdate(JSON.parse(msg));
         }
         if (JSON.parse(msg).event == 'joinerjoin') {
+          console.log('JOIN');
           servers[socket.room].joinerjoin(JSON.parse(msg));
         }
       }
@@ -358,6 +360,8 @@ class Host {
     // registers a new tank to the server
     // pt = playertanks, teamData = team core hp and team playertanks
     var tank = data;
+    tank.x = 0;
+    tank.y = 0;
     this.pt.push(tank);
   }
   disconnect(username) { // done?
