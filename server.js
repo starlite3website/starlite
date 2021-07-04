@@ -337,10 +337,10 @@ class Host {
             }
           }
           if (tank.usingToolkit) {
-            pt[l].health = .75 * pt[l].maxHealth;
+            this.pt[l].health = .75 * this.pt[l].maxHealth;
           }
           if (tank.fire) {
-            pt[l].pushback = -3;
+            this.pt[l].pushback = -3;
             if (tank.rotation > 180 && tank.rotation < 270) {
               this.s.push(new Shot(this.pt[l].x + 20, this.pt[l].y + 20, this.s.length - 1, -tank.yd, tank.xd));
             } else if (tank.rotation > 270) {
