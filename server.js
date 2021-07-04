@@ -198,12 +198,10 @@ wss.on('connection', function(socket) {
         }
       } else {
         if (JSON.parse(msg).event == 'joinerupdate') {
-          console.log('UPDATE: '+msg);
-          servers[socket.room].joinerupdate(JSON.parse(msg));
+          servers[socket.room].joinerupdate(JSON.parse(msg).data);
         }
         if (JSON.parse(msg).event == 'joinerjoin') {
-          console.log('JOIN'+msg);
-          servers[socket.room].joinerjoin(JSON.parse(msg));
+          servers[socket.room].joinerjoin(JSON.parse(msg).data);
         }
       }
     } else if (data.operation == 'status') {
