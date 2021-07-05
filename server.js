@@ -270,7 +270,7 @@ class Host {
       var l = 0;
       while (l < host.pt.length) {
         if (host.pt[l].ded != true) {
-          if (ai_check(host.pt[l].x, host.pt[l].y, false, this)) {
+          if (ai_check(host.pt[l].x, host.pt[l].y, false, host)) {
             if (host.pt[l].shields > 0) {
               host.pt[l].shields -= 1;
             } else if (host.pt[l].immune) {} else {
