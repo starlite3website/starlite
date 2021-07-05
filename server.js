@@ -272,23 +272,21 @@ class Host {
           if (ai_check(host.pt[l].x, host.pt[l].y, false, this)) {
             if (host.pt[l].shields > 0) {
               host.pt[l].shields -= 1;
-            } else if (pt[l].immune) {} else {
-              draw.fillStyle = "#FF0000";
-              draw.fillRect(pt[l].x, pt[l].y, 40, 40);
-              pt[l].health -= 20;
-              if (pt[l].health <= 0) {
-                pt[l].ded = true;
-                if (pt[l].team == 'red') {
-                  pt[l].x = 50;
-                  pt[l].y = -500;
+            } else if (host.pt[l].immune) {} else {
+              host.pt[l].health -= 20;
+              if (host.pt[l].health <= 0) {
+                host.pt[l].ded = true;
+                if (host.pt[l].team == 'red') {
+                  host.pt[l].x = 50;
+                  host.pt[l].y = -500;
                 } else {
-                  pt[l].x = -100;
-                  pt[l].y = -500;
+                  host.pt[l].x = -100;
+                  host.pt[l].y = -500;
                 }
-                window.setTimeout(function (l) {
-                  pt[l].ded = false;
-                  pt[l].health = pt[l].maxHealth;
-                }, 10000, l);
+                window.setTimeout(function(l, host) {
+                  host.pt[l].ded = false;
+                  host.pt[l].health = host.pt[l].maxHealth;
+                }, 10000, [l, host]);
               }
             }
           }
