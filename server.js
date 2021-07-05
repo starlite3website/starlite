@@ -266,7 +266,6 @@ class Host {
       }
     }, 14, this);
     setInterval(function(host) {
-      try {
       var l = 0;
       while (l < host.pt.length) {
         if (host.pt[l].ded != true) {
@@ -296,9 +295,6 @@ class Host {
           }
         }
         l++;
-      }
-      } catch(e) {
-        console.log(e);
       }
     }, 30, this);
   }
