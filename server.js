@@ -256,11 +256,11 @@ class Host {
     setInterval(function(host) {
       // add level multiplayer code here
       host.send();
-    }, 10, this);
+    }, 20, this);
     setInterval(function(host) {
       var l = 0;
       while (l<host.s.length) {
-        this.s.update();
+        this.s[l].update();
         l++;
       }
     }, 30, this);
