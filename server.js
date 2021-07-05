@@ -252,6 +252,7 @@ class Host {
     this.s = [];
     this.b = [];
     this.pt = [];
+    this.scaffolding = [];
     this.sockets = [];
     setInterval(function(host) {
       // add level multiplayer code here
