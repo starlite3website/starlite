@@ -261,7 +261,7 @@ class Host {
     setInterval(function(host) {
       var l = 0;
       while (l<host.s.length) {
-        this.s[l].update();
+        host.s[l].update();
         l++;
       }
     }, 30, this);
