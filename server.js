@@ -264,6 +264,40 @@ class Host {
         host.s[l].update();
         l++;
       }
+    }, 14, this);
+    setInterval(function(host) {
+      var l = 0;
+      while (l < host.pt.length) {
+        if (host.pt[l].ded != true) {
+          if (ai_check(host.pt[l].x, host.pt[l].y, false, this)) {
+            if (host.pt[l].shields > 0) {
+              host.pt[l].shields -= 1;
+            } else if (pt[l].immune) {} else {
+              draw.fillStyle = "#FF0000";
+              draw.fillRect(pt[l].x, pt[l].y, 40, 40);
+              pt[l].health -= 20;
+              if (pt[l].health <= 0) {
+                pt[l].ded = true;
+                if (pt[l].team == 'red') {
+                  pt[l].x = 50;
+                  pt[l].y = -500;
+                } else {
+                  pt[l].x = -100;
+                  pt[l].y = -500;
+                }
+                window.setTimeout(function (l) {
+                  pt[l].ded = false;
+                  pt[l].health = pt[l].maxHealth;
+                }, 10000, l);
+              }
+            }
+          }
+          if (host.pt[l].pushback != 0) {
+            host.pt[l].pushback += 1;
+          }
+        }
+        l++;
+      }
     }, 30, this);
   }
   joinerupdate(data) {
@@ -505,4 +539,28 @@ class Shot { // done
     this.x += this.xm / 2;
     this.y += this.ym / 2;
   }
+}
+function ai_check(x, y, isBlock, host) {
+  var t = 40;
+  if (isBlock) t = 50;
+  var l = 0;
+  while (l < host.s.length) {
+    if (host.s[l].x > x || host.s[l].x + 5 > x) {
+      if (host.s[l].x < x + t || host.s[l].x + 5 < x + t) {
+        if (host.s[l].y > y || host.s[l].y + 5 > y) {
+          if (host.s[l].y < y + t || host.s[l].y + 5 < y + t) {
+            delete host.s[l]; // remove object from javascript memory for #lesslag
+            host.s.splice(l, 1); // remove extra undefined from array(leftover from *delete s[l];*)
+            return true;
+          }
+        }
+      }
+    }
+    if (host.s[l].x < -500 || host.s[l].x > 500 || s[l].y < -500 || s[l].y > 500) {
+      delete host.s[l];
+      host.s.splice(l, 1);
+    }
+    l++;
+  }
+  return false;
 }
