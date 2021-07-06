@@ -554,7 +554,7 @@ function ai_check(x, y, isBlock, host) {
         }
       }
     }
-    if (host.s[l].x < -500 || host.s[l].x > 500 || host.s[l].y < -500 || s[l].y > 500) {
+    if (host.s[l].x < -500 || host.s[l].x > 500 || host.s[l].y < -500 || host.s[l].y > 500) {
       delete host.s[l];
       host.s.splice(l, 1);
     }
