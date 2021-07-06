@@ -228,6 +228,7 @@ wss.on('connection', function(socket) {
     }
   });
   socket.on('close', function() {
+    console.log('DISCONNECT');
     if (socket.room != undefined) console.log('servers: '+servers); console.log('room: '+socket.room);//servers[socket.room].disconnect(socket.username);
     sockets.forEach(function(s) {
       if (s !== socket) {
