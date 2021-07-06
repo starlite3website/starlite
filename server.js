@@ -228,7 +228,7 @@ wss.on('connection', function(socket) {
     }
   });
   socket.on('close', function() {
-    if (socket.room != undefined) console.log(servers); console.log(servers[socket.room]);servers[socket.room].disconnect(socket.username);
+    if (socket.room != undefined) console.log(servers); console.log(socket.room);//servers[socket.room].disconnect(socket.username);
     sockets.forEach(function(s) {
       if (s !== socket) {
         s.send(JSON.stringify({
