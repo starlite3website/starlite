@@ -411,6 +411,10 @@ class Host {
       }
       l++;
     }
+    if (this.sockets.length == 0) {
+      servers[this.channelname] = undefined;
+      delete this;
+    }
   }
   send() { //done
     var l = 0;
