@@ -300,6 +300,7 @@ class Host {
         l++;
       }
     }, 30, this);
+    levelReader([' 2    2  2  2  222B#', '   2     2  2  #####', ' 2  22  2###########', '        2#2   2   2#', '  2  2 2 #  2   2  #', '2  2 2   #11111#1 1#', '        2#11111#1 1#', '  2 2    211 11#1 1#', '2    2  2#11111#1 1#', '22222#####11111#1 1#', '#1 1#11111#####22222', '#1 1#11111#2  2    2', '#1 1#11 112    2 2  ', '#1 1#11111#2        ', '#1 1#11111#   2 2  2', '#  2   2  # 2 2  2  ', '#2   2   2#2        ', '###########2  22  2 ', '#####  2  2     2   ', '#R222  2  2  2    2 '], m, true, [-500, 500, -500, 500], this);
   }
   joinerupdate(data) {
     var tank = data;
@@ -568,4 +569,59 @@ function ai_check(x, y, isBlock, host) {
     l++;
   }
   return false;
+}
+function levelReader(array, m, quad, borders, host) {
+  // quad and borders dont really matter
+  for (l = 0; l < array.length; l++) {
+    for (q = 0; q < array[l].split("").length; q++) {
+      var p = array[l].split(""); // Block key: # = invincible, 1 = weak, 2 = strong, @ = player, A = ai
+      if (p[q] == "#") {
+        if (quad) {
+          host.blockData[l] += '#';
+          wall(q - 10, l - 10, m, host);
+        } else {
+          wall(q, l, m, host);
+        }
+      } else if (p[q] == "1") {
+        if (quad) {
+          host.blockData[l] += '1';
+          weak(q - 10, l - 10, m, host);
+        } else {
+          weak(q, l, m, host);
+        }
+      } else if (p[q] == "2") {
+        if (quad) {
+          host.blockData[l] += '2';
+          strong(q - 10, l - 10, m, host);
+        } else {
+          strong(q, l, m, host);
+        }
+      } else if (p[q] == "A") {
+        if (quad) {
+          //createAi((q - 10) * 50, (l - 10) * 50, m, 3, 3);
+        } else {
+          //createAi(q * 50, l * 50, m, 3, 3);
+        }
+      } else {
+        host.blockData[l] += ' ';
+      }
+    }
+  }
+}
+function weak(x, y, m, host) {
+  if (m) {
+    host.b.push(new Block(10, x, y, false, false));
+  }
+  // check if block hit maybe? this loops
+}
+function strong(x, y, m, host) {
+  if (m) {
+    host.b.push(new Block(20, x, y, false, false));
+  }
+  // loops
+}
+function wall(x, y, m) {
+  if (m) {
+    host.b.push(new Block(0, x, y, true));
+  }
 }
