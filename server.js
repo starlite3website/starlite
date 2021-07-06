@@ -436,7 +436,7 @@ class Host {
 }
 function Block(health, x, y, isInvincible, isExplosive, isScaffolding, host) {
   this.host = host;
-  this.blockId = b.length - 1;
+  this.blockId = host.b.length - 1;
   this.x = x;
   this.y = y;
   this.isScaffolding = isScaffolding;
@@ -610,18 +610,24 @@ function levelReader(array, m, quad, borders, host) {
 }
 function weak(x, y, m, host) {
   if (m) {
-    host.b.push(new Block(10, x, y, false, false));
+    var block = new Block(10, x, y, false, false);
+    block.weak();
+    host.b.push(block);
   }
   // check if block hit maybe? this loops
 }
 function strong(x, y, m, host) {
   if (m) {
-    host.b.push(new Block(20, x, y, false, false));
+    var block = new Block(20, x, y, false, false);
+    block.strong();
+    host.b.push(block);
   }
   // loops
 }
-function wall(x, y, m) {
+function wall(x, y, m, host) {
   if (m) {
-    host.b.push(new Block(0, x, y, true));
+    var block = new Block(0, x, y, true);
+    block.wall();
+    host.b.push(block);
   }
 }
