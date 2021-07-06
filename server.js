@@ -287,7 +287,7 @@ class Host {
                 setTimeout(function(l, host) {
                   host.pt[l].ded = false;
                   host.pt[l].health = host.pt[l].maxHealth;
-                }, 10000, [l, host]);
+                }, 10000, l, host);
               }
             }
           }
