@@ -610,7 +610,7 @@ function levelReader(array, m, quad, borders, host) {
 }
 function weak(x, y, m, host) {
   if (m) {
-    var block = new Block(10, x, y, false, false);
+    var block = new Block(10, x, y, false, false, false, host);
     block.weak();
     host.b.push(block);
   }
@@ -618,7 +618,7 @@ function weak(x, y, m, host) {
 }
 function strong(x, y, m, host) {
   if (m) {
-    var block = new Block(20, x, y, false, false);
+    var block = new Block(20, x, y, false, false, false, host);
     block.strong();
     host.b.push(block);
   }
@@ -626,7 +626,7 @@ function strong(x, y, m, host) {
 }
 function wall(x, y, m, host) {
   if (m) {
-    var block = new Block(0, x, y, true);
+    var block = new Block(0, x, y, true, false, false, host);
     block.wall();
     host.b.push(block);
   }
