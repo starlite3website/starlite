@@ -561,7 +561,7 @@ class Joiner {
       health: userData.health,
       leftright: true,
       username: user.username,
-      speed: 5,
+      speed: 2,
       count: 0,
       CanBoost: true,
       usingToolkit: false,
@@ -962,7 +962,7 @@ function tank_M_listener1(event) {
   if (user.joiner.tank.helper[event.keyCode] != true) {
     user.joiner.tank.intervals[event.keyCode] = window.setInterval(function () {
       user.joiner.keyHandler(event, user.joiner.tank.speed);
-    }, 40);
+    }, 15);
   }
   user.joiner.tank.helper[event.keyCode] = true;
 }
@@ -1173,7 +1173,7 @@ class Tank {
     this.canFireFlashbang = true;
     this.scaffolding = [];
     this.canPlaceScaffolding = true;
-    this.speed = 5;
+    this.speed = 2;
     this.intervals = [];
     this.helper = [];
     this.count = 0;
@@ -1455,7 +1455,7 @@ function tank_listener1(event) {
   if (user.tank.helper[event.keyCode] != true) {
     user.tank.intervals[event.keyCode] = window.setInterval(function () {
       user.tank.move(event, this.speed);
-    }, 40);
+    }, 15);
   }
   user.tank.helper[event.keyCode] = true;
 }
