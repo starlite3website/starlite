@@ -283,7 +283,7 @@ class Host {
                   host.pt[l].x = -100;
                   host.pt[l].y = -500;
                 }
-                window.setTimeout(function(l, host) {
+                setTimeout(function(l, host) {
                   host.pt[l].ded = false;
                   host.pt[l].health = host.pt[l].maxHealth;
                 }, 10000, [l, host]);
