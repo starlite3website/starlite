@@ -356,20 +356,20 @@ class Host {
           }
           if (tank.placeScaffolding) {
             if (tank.rotation >= 0 && tank.rotation < 90) {
-              weak((this.pt[l].x - 50) / 50, (pt[l].y + 40) / 50, true);
-              this.scaffolding.push({ x: (pt[l].x - 50) / 50, y: (pt[l].y + 40) / 50 });
+              weak((this.pt[l].x - 50) / 50, (this.pt[l].y + 40) / 50, true);
+              this.scaffolding.push({ x: (this.pt[l].x - 50) / 50, y: (this.pt[l].y + 40) / 50 });
             }
             if (tank.rotation >= 90 && tank.rotation < 180) {
-              weak((pt[l].x - 50) / 50, (pt[l].y - 50) / 50, true);
-              user.tank.scaffolding.push({ x: (pt[l].x - 50) / 50, y: (pt[l].y - 50) / 50 });
+              this.weak((this.pt[l].x - 50) / 50, (this.pt[l].y - 50) / 50, true);
+              this.scaffolding.push({ x: (this.pt[l].x - 50) / 50, y: (this.pt[l].y - 50) / 50 });
             }
             if (tank.rotation >= 180 && tank.rotation < 270) {
-              weak((pt[l].x + 40) / 50, (pt[l].y - 50) / 50, true);
-              user.tank.scaffolding.push({ x: (pt[l].x + 40) / 50, y: (pt[l].y - 50) / 50 });
+              weak((this.pt[l].x + 40) / 50, (this.pt[l].y - 50) / 50, true);
+              this.scaffolding.push({ x: (this.pt[l].x + 40) / 50, y: (this.pt[l].y - 50) / 50 });
             }
             if (tank.rotation >= 270 && tank.rotation < 360) {
-              weak((this.pt[l].x + 40) / 50, (pt[l].y + 40) / 50, true);
-              this.scaffolding.push({ x: (pt[l].x + 40) / 50, y: (pt[l].y + 40) / 50 });
+              weak((this.pt[l].x + 40) / 50, (this.pt[l].y + 40) / 50, true);
+              this.scaffolding.push({ x: (this.pt[l].x + 40) / 50, y: (this.pt[l].y + 40) / 50 });
             }
           }
           if (tank.usingToolkit) {
