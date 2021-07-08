@@ -299,6 +299,56 @@ class Host {
         }
         l++;
       }
+      var l = 0;
+      while (l < host.b.length) {
+        if (ai_check(host.b[l].x * 50, host.b[l].y * 50, true)) {
+          draw.fillStyle = "#FF0000";
+          draw.fillRect(host.b[l].x * 50, host.b[l].y * 50, 50, 50);
+          host.b[l].health -= 10;
+          if (host.b[l].health <= 0) {
+            let isScaffolding = false;
+            var t = 0;
+            while (t < host.b.length) {
+              var q = 0;
+              while (q < host.scaffolding.length) {
+                if (host.b[t].x == host.scaffolding[q].x) {
+                  if (host.b[l].y == host.scaffolding[q].y) {
+                    isScaffolding = true;
+                  }
+                }
+                q++;
+              }
+              t++;
+            }
+            if (!isScaffolding) {
+              var strand = host.blockData[host.b[l].y + 10].split('');
+              strand[host.b[l].x + 10] = ' ';
+              host.blockData[host.b[l].y + 10] = strand.join('');
+            } else {
+              var q = 0;
+              while (q < host.scaffolding.length) {
+                if (host.b[l].y == host.scaffolding[q].y) {
+                  if (host.b[l].x == host.scaffolding[q].x) {
+                    host.scaffolding.splice(q, 1);
+                  }
+                }
+                q++;
+              }
+            }
+            var q = 0;
+            while (q < host.scaffolding.length) {
+              if (host.b[l].y == host.scaffolding[q].y) {
+                if (host.b[l].x == host.scaffolding[q].x) {
+                  host.scaffolding.splice(q, 1);
+                }
+              }
+              q++;
+            }
+            block_support(l);
+          }
+        }
+        l++;
+      }
     }, 30, this);
     levelReader([' 2    2  2  2  222B#', '   2     2  2  #####', ' 2  22  2###########', '        2#2   2   2#', '  2  2 2 #  2   2  #', '2  2 2   #11111#1 1#', '        2#11111#1 1#', '  2 2    211 11#1 1#', '2    2  2#11111#1 1#', '22222#####11111#1 1#', '#1 1#11111#####22222', '#1 1#11111#2  2    2', '#1 1#11 112    2 2  ', '#1 1#11111#2        ', '#1 1#11111#   2 2  2', '#  2   2  # 2 2  2  ', '#2   2   2#2        ', '###########2  22  2 ', '#####  2  2     2   ', '#R222  2  2  2    2 '], true, true, [-500, 500, -500, 500], this);
   }
@@ -646,4 +696,15 @@ function checker(x, y, host) {
     l++;
   }
   return true;
+}
+function checker2(x, y, host) {
+  var l = 0;
+  while (l < host.b.length) {
+    if ((x + 40 > host.b[l].x * 50 && x + 40 < host.b[l].x * 50 + 50) || (x > host.b[l].x * 50 && x < host.b[l].x * 50 + 50)) {
+      if ((y > host.b[l].y * 50 && y < host.b[l].y * 50 + 50) || (y + 40 > host.b[l].y * 50 && y + 40 < host.b[l].y * 50 + 50)) {
+        return l;
+      }
+    }
+    l++;
+  }
 }
