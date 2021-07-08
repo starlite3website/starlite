@@ -632,7 +632,6 @@ function wall(x, y, m, host) {
   }
 }
 function checker(x, y, host) {
-  if (Game.borders == undefined) Game.borders = [0, 500, 0, 500];
   if (x < 0|| y < 0 || x + 40 > 500 || y + 40 > 500) {
     return false;
   }
