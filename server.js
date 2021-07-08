@@ -308,10 +308,10 @@ class Host {
     while (l < this.pt.length) {
       if (!this.pt[l].ded) {
         if (this.pt[l].username == tank.username) {
-          if (this.checker(this.pt[l].x + tank.x, this.pt[l].y)) { // require checker
+          if (tchecker(this.pt[l].x + tank.x, this.pt[l].y, this)) { // require checker
             this.pt[l].x += tank.x;
           }
-          if (checker(pt[l].x, pt[l].y + tank.y)) {
+          if (checker(this.pt[l].x, this.pt[l].y + tank.y, this)) {
             this.pt[l].y += tank.y;
           }
           if (tank.shielded) {
