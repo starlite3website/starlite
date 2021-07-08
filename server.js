@@ -308,12 +308,12 @@ class Host {
     while (l < this.pt.length) {
       if (!this.pt[l].ded) {
         if (this.pt[l].username == tank.username) {
-          //if (this.checker(this.pt[l].x + tank.x, this.pt[l].y)) { // require checker
+          if (this.checker(this.pt[l].x + tank.x, this.pt[l].y)) { // require checker
             this.pt[l].x += tank.x;
-          //}
-          //if (checker(pt[l].x, pt[l].y + tank.y)) {
+          }
+          if (checker(pt[l].x, pt[l].y + tank.y)) {
             this.pt[l].y += tank.y;
-          //}
+          }
           if (tank.shielded) {
             this.pt[l].shields = 5;
             setTimeout(function (l) {
