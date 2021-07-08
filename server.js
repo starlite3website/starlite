@@ -631,3 +631,20 @@ function wall(x, y, m, host) {
     host.b.push(block);
   }
 }
+function checker(x, y, host) {
+  if (Game.borders == undefined) Game.borders = [0, 500, 0, 500];
+  if (x < 0|| y < 0 || x + 40 > 500 || y + 40 > 500) {
+    return false;
+  }
+  // if touching walls then return "i cant move"
+  var l = 0;
+  while (l < host.b.length) {
+    if ((x + 40 > host.b[l].x * 50 && x + 40 < host.b[l].x * 50 + 50) || (x > host.b[l].x * 50 && x < host.b[l].x * 50 + 50)) {
+      if ((y > host.b[l].y * 50 && y < host.b[l].y * 50 + 50) || (y + 40 > host.b[l].y * 50 && y + 40 < host.b[l].y * 50 + 50)) {
+        return false;
+      }
+    }
+    l++;
+  }
+  return true;
+}
