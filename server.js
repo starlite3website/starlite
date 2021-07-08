@@ -632,7 +632,7 @@ function wall(x, y, m, host) {
   }
 }
 function checker(x, y, host) {
-  if (x < 0|| y < 0 || x + 40 > 500 || y + 40 > 500) {
+  if (x < -500|| y < -500 || x + 40 > 500 || y + 40 > 500) {
     return false;
   }
   // if touching walls then return "i cant move"
