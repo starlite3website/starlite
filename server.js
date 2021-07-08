@@ -395,8 +395,8 @@ class Host {
     // registers a new tank to the server
     // pt = playertanks, teamData = team core hp and team playertanks
     var tank = data;
-    tank.x = 0;
-    tank.y = 0;
+    tank.x = -500;
+    tank.y = -450;
     this.pt.push(tank);
   }
   disconnect(username) { // done?
