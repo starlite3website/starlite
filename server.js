@@ -308,7 +308,7 @@ class Host {
     while (l < this.pt.length) {
       if (!this.pt[l].ded) {
         if (this.pt[l].username == tank.username) {
-          if (tchecker(this.pt[l].x + tank.x, this.pt[l].y, this)) { // require checker
+          if (checker(this.pt[l].x + tank.x, this.pt[l].y, this)) { // require checker
             this.pt[l].x += tank.x;
           }
           if (checker(this.pt[l].x, this.pt[l].y + tank.y, this)) {
