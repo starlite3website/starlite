@@ -260,7 +260,7 @@ class Host {
     setInterval(function(host) {
       // add level multiplayer code here
       host.send();
-    }, 5, this);
+    }, 1, this);
     setInterval(function(host) {
       var l = 0;
       while (l<host.s.length) {
