@@ -302,8 +302,6 @@ class Host {
       var l = 0;
       while (l < host.b.length) {
         if (ai_check(host.b[l].x * 50, host.b[l].y * 50, true, host)) {
-          draw.fillStyle = "#FF0000";
-          draw.fillRect(host.b[l].x * 50, host.b[l].y * 50, 50, 50);
           host.b[l].health -= 10;
           if (host.b[l].health <= 0) {
             let isScaffolding = false;
@@ -344,7 +342,7 @@ class Host {
               }
               q++;
             }
-            block_support(l);
+            host.b[l].block_support();
           }
         }
         l++;
