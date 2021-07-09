@@ -260,7 +260,7 @@ class Host {
     setInterval(function(host) {
       // add level multiplayer code here
       host.send();
-    }, 20, this);
+    }, 10, this);
     setInterval(function(host) {
       var l = 0;
       while (l<host.s.length) {
@@ -438,6 +438,7 @@ class Host {
       }
       l++;
     }
+    this.send();
   }
   joinerjoin(data) { //done
     // registers a new tank to the server
