@@ -277,6 +277,7 @@ class Host {
               host.pt[l].shields -= 1;
             } else if (host.pt[l].immune) {} else {
               host.pt[l].health -= 20;
+              host.pt[l].invis = false;
               host.pt[l].damagedRecent = true;
               setTimeout(function() {
                 host.pt[l].damagedRecent = false;
