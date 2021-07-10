@@ -279,9 +279,9 @@ class Host {
               host.pt[l].health -= 20;
               host.pt[l].invis = false;
               host.pt[l].damagedRecent = true;
-              setTimeout(function() {
+              setTimeout(function(l, host) {
                 host.pt[l].damagedRecent = false;
-              }, 10000);
+              }, 10000, l, this);
               if (host.pt[l].health <= 0) {
                 host.pt[l].ded = true;
                 if (host.pt[l].team == 'red') {
