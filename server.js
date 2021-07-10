@@ -260,7 +260,7 @@ class Host {
     setInterval(function(host) {
       // add level multiplayer code here
       host.send();
-    }, 10, this);
+    }, 5, this);
     setInterval(function(host) {
       var l = 0;
       while (l<host.s.length) {
@@ -277,6 +277,10 @@ class Host {
               host.pt[l].shields -= 1;
             } else if (host.pt[l].immune) {} else {
               host.pt[l].health -= 20;
+              host.pt[l].damagedRecent = true;
+              setTimeout(function() {
+                host.pt[l].damagedRecent = false;
+              }, 10000);
               if (host.pt[l].health <= 0) {
                 host.pt[l].ded = true;
                 if (host.pt[l].team == 'red') {
@@ -371,7 +375,7 @@ class Host {
           this.pt[l].base = tank.base;
           this.pt[l].rotation = tank.rotation;
           this.pt[l].leftright = tank.leftright;
-          this.pt[l].invis = tank.invis,
+          if (!this.pt[l].damagedRecent) this.pt[l].invis = tank.invis;
           this.pt[l].canChangeInvisStatus = tank.canChangeInvisStatus;
           this.pt[l].canInvis = tank.canInvis;
           if (tank.flashbangFired) {
@@ -445,6 +449,7 @@ class Host {
     var tank = data;
     tank.x = -500;
     tank.y = -450;
+    tank.damagedRecent = false;
     this.pt.push(tank);
   }
   disconnect(username) { // done?
