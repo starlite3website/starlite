@@ -380,7 +380,7 @@ class Host {
           this.pt[l].canChangeInvisStatus = tank.canChangeInvisStatus;
           this.pt[l].canInvis = tank.canInvis;
           if (tank.flashbangFired) {
-            var block = checker2(this.pt[l].x, this.pt[l].y); // require checker2
+            var block = checker2(this.pt[l].x, this.pt[l].y, this); // require checker2
             let isScaffolding = false;
             var q = 0;
             while (q < this.scaffolding.length) {
