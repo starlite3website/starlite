@@ -406,7 +406,7 @@ class Host {
                 q++;
               }
             }
-            block_support(block); // require block_support may need to be Host function
+            this.b[block].block_support(); // require block_support may need to be Host function
           }
           if (tank.placeScaffolding) {
             if (tank.rotation >= 0 && tank.rotation < 90) {
