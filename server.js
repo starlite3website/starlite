@@ -216,6 +216,25 @@ wss.on('connection', function(socket) {
         status[data.username] = data.status;
         message[data.username] = data.message;
       }
+      if (data.task == 'admin-servers') {
+        var l = 0, serversOnline = 0, serverData = [];
+        while (l<servers.length) {
+          if (servers[l] != undefined) {
+            serversOnline++;
+            var q = 0, players = [];
+            while (q<server[l].sockets.length) {
+              players.push(server[l].sockets.username);
+            }
+            serverData.push({
+              serversOnline: serversOnline,
+              serverRoom: servers[l].channelname,
+              playerNum: servers[l].sockets.length,
+              players: players,
+            });
+          }
+          l++;
+        }
+      }
     } else if (data.operation == 'chat') {
       sockets.forEach(function(s) {
         if (s != socket) {
