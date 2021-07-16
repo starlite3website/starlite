@@ -234,6 +234,7 @@ wss.on('connection', function(socket) {
           }
           l++;
         }
+        socket.send(JSON.stringify(serverData));
       }
     } else if (data.operation == 'chat') {
       sockets.forEach(function(s) {
