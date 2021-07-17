@@ -237,6 +237,16 @@ wss.on('connection', function(socket) {
         }
         socket.send(JSON.stringify(serverData));
       }
+      if (data.task == 'admin-crash') {
+        var l = 0, g = Object.values(servers);
+        while (l<g.length) {
+          if (g[l].channelname == data.channel) {
+            delete servers[g[l].channelname];
+            servers[g[l].channelname] = undefined;
+          }
+          l++;
+        }
+      }
     } else if (data.operation == 'chat') {
       sockets.forEach(function(s) {
         if (s != socket) {
