@@ -224,6 +224,7 @@ wss.on('connection', function(socket) {
             var q = 0, players = [];
             while (q<g[l].sockets.length) {
               players.push(g[l].sockets.username);
+              q++;
             }
             serverData.push({
               serversOnline: serversOnline,
