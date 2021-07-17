@@ -241,6 +241,11 @@ wss.on('connection', function(socket) {
         var l = 0, g = Object.values(servers);
         while (l<g.length) {
           if (g[l].channelname == data.channel) {
+            var q = 0;
+            while (q<servers[g[l].channelname].sockets.length) {
+              servers[g[l].channelname].sockets[q].close();
+              q++;
+            }
             delete servers[g[l].channelname];
             servers[g[l].channelname] = undefined;
           }
