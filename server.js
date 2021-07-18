@@ -252,6 +252,19 @@ wss.on('connection', function(socket) {
           l++;
         }
       }
+      if (data.task == 'admin-kick') {
+        var l = 0, g = Object.values(servers);
+        while (l<g.length) {
+          var q = 0;
+          while (q<g[l].sockets.length) {
+            if (g[l].sockets[q].username == data.victim) {
+              servers[g[l].channelname].disconnect(data.victim);
+            }
+            q++;
+          }
+          l++;
+        }
+      }
     } else if (data.operation == 'chat') {
       sockets.forEach(function(s) {
         if (s != socket) {
@@ -506,6 +519,11 @@ class Host {
       l++;
     }
     if (this.sockets.length == 0) {
+      var l = 0;
+      while (l<this.i) {
+        clearInterval(this.i[l]);
+        l++;
+      }
       servers[this.channelname] = undefined;
       delete this;
     }
