@@ -293,18 +293,19 @@ class Host {
     this.pt = [];
     this.scaffolding = [];
     this.sockets = [];
-    setInterval(function(host) {
+    this.i = [];
+    this.i.push(setInterval(function(host) {
       // add level multiplayer code here
       host.send();
-    }, 10, this);
-    setInterval(function(host) {
+    }, 10, this));
+    this.i.push(setInterval(function(host) {
       var l = 0;
       while (l<host.s.length) {
         host.s[l].update();
         l++;
       }
-    }, 14, this);
-    setInterval(function(host) {
+    }, 14, this));
+    this.i.push(setInterval(function(host) {
       var l = 0;
       while (l < host.pt.length) {
         if (host.pt[l].ded != true) {
@@ -388,7 +389,7 @@ class Host {
         }
         l++;
       }
-    }, 30, this);
+    }, 30, this));
     levelReader([' 2    2  2  2  222B#', '   2     2  2  #####', ' 2  22  2###########', '        2#2   2   2#', '  2  2 2 #  2   2  #', '2  2 2   #11111#1 1#', '        2#11111#1 1#', '  2 2    211 11#1 1#', '2    2  2#11111#1 1#', '22222#####11111#1 1#', '#1 1#11111#####22222', '#1 1#11111#2  2    2', '#1 1#11 112    2 2  ', '#1 1#11111#2        ', '#1 1#11111#   2 2  2', '#  2   2  # 2 2  2  ', '#2   2   2#2        ', '###########2  22  2 ', '#####  2  2     2   ', '#R222  2  2  2    2 '], true, true, [-500, 500, -500, 500], this);
   }
   joinerupdate(data) {
