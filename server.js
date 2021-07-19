@@ -246,6 +246,11 @@ wss.on('connection', function(socket) {
               servers[g[l].channelname].sockets[q].close();
               q++;
             }
+            var q = 0;
+            while (q<servers[g[l].channelname].i.length) {
+              clearInterval(servers[g[l].channelname].i[q]);
+              q++;
+            }
             delete servers[g[l].channelname];
             servers[g[l].channelname] = undefined;
           }
