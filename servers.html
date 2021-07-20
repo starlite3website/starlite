@@ -1,0 +1,13 @@
+<div id='data'>
+</div>
+<script>
+  var socket = new WebSocket('wss://'+window.location.host+'/server');
+  var output = document.getElementById('data');
+  socket.onopen = function() {
+    socket.send('{"operation":"status", "task":"admin-servers", "username":"admin", "token":"1"}');
+    socket.onmessage = function(e) {
+      var l = 0;
+      while (l<JSON.parse(e).length
+    }
+  }
+</script>
