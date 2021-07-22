@@ -35,8 +35,10 @@ const server = http.createServer(function(req, res) {
     res.end();
     return;
   }
+  console.log(pathname);
   fs.readFile(pathname.substr(1), function(err, data) {
     if (err) {
+      console.log('2:'+pathname)
       pathname = pathname.substr(1);
       pathname = pathname.replace('.html', '/index.html');
       fs.readFile(pathname, function(err, data) {
