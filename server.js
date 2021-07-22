@@ -39,7 +39,7 @@ const server = http.createServer(function(req, res) {
     if (err) {
       console.log(pathname)
       pathname = pathname.replace('.html', '/index.html');
-      console.log(pathname)
+      console.log(pathname.substr(1))
       fs.readFile(pathname.substr(1), function(err, data) {
         if (err) {
           var data = fs.readFileSync('404.html');
