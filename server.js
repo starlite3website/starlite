@@ -37,24 +37,17 @@ const server = http.createServer(function(req, res) {
   }
   fs.readFile(pathname.substr(1), function(err, data) {
     if (err) {
-      console.log(pathname)
-      pathname = pathname.replace('.html', '/index.html');
-      console.log(pathname.substr(1))
-      fs.readFile(pathname.substr(1), function(err, data) {
-        if (err) {
-          var data = fs.readFileSync('404.html');
-          res.writeHead(404, { 'Content-Type': 'text/html' });
-          console.log('FAIL'+pathname);
-          res.write(data);
-          res.end();
-          return;
-        }
-        if (pathname.includes('.html')) res.writeHead(200, { 'Content-Type': 'text/html' });
-        if (pathname.includes('.png')) res.writeHead(200, { 'Content-Type': 'image/png' });
-        if (pathname.includes('.css')) res.writeHead(200, { 'Content-Type': 'text/css' });
-        res.write(data);
-        res.end();
-      });
+      var data = fs.readFileSync('404.html');
+      res.writeHead(404, { 'Content-Type': 'text/html' });
+      console.log('FAIL'+pathname);
+      res.write(data);
+      res.end();
+      return;
+      if (pathname.includes('.html')) res.writeHead(200, { 'Content-Type': 'text/html' });
+      if (pathname.includes('.png')) res.writeHead(200, { 'Content-Type': 'image/png' });
+      if (pathname.includes('.css')) res.writeHead(200, { 'Content-Type': 'text/css' });
+      res.write(data);
+      res.end();
     }
     if (pathname.includes('.html')) res.writeHead(200, { 'Content-Type': 'text/html' });
     if (pathname.includes('.png')) res.writeHead(200, { 'Content-Type': 'image/png' });
