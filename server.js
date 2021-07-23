@@ -429,9 +429,9 @@ class Host {
           }
           if (tank.shielded) {
             this.pt[l].shields = 5;
-            setTimeout(function (l) {
-              this.pt[l].shields = 0;
-            }, 10000, l);
+            setTimeout(function(l, host) {
+              host.pt[l].shields = 0;
+            }, 10000, l, this);
           }
           this.pt[l].base = tank.base;
           this.pt[l].rotation = tank.rotation;
