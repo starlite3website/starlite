@@ -706,9 +706,16 @@ class Joiner {
       draw.globalAlpha = .4;
       draw.setTransform(1, 0, 0, 1, 0, 0);
       draw.fillStyle = "#ffffff";
+      if (user.joiner.tank.CanBoost) draw.globalAlpha = 1';
       draw.fillRect(100, 450, 50, 50);
+      draw.globalAlpha = .4;
+      if (user.joiner.tank.CanToolkit) draw.globalAlpha = 1;
       draw.fillRect(183, 450, 50, 50);
+      draw.globalAlpha = .4;
+      if (user.joiner.tank.canPlaceScaffolding) draw.globalAlpha = 1;
       draw.fillRect(266, 450, 50, 50);
+      draw.globalAlpha = .4;
+      if (user.joiner.tank.canFireFlashbang) draw.globalAlpha = 1;
       draw.fillRect(349, 450, 50, 50);
       draw.globalAlpha = 1;
       draw.drawImage(boost, 100, 450);
