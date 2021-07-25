@@ -179,13 +179,26 @@ wss.on('connection', function(socket) {
         }
       }
       if (data.task == 'update') {
+        var values = [], item = null;
+        var cursor = await db.find({});
+        await cursor.forEach(function(value) {
+          values.push(value);
+        });
+        var l = 0;
+        while (l<values.length) {
+          if (values[l].username == data.username) {
+            item = values[l]
+          }
+          l++;
+        }
+        item[data.key] = data.value;
         const query = {
           username: data.username,
         }
         const options = {
           upsert: false,
         }
-        db.replaceOne(query, replacement, options);
+        db.replaceOne(query, item, options);
         socket.send(JSON.stringify({
           success: true,
         }));
