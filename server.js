@@ -191,6 +191,7 @@ wss.on('connection', function(socket) {
           }
           l++;
         }
+        console.log('UPDATE')
         item[data.key] = data.value;
         const query = {
           username: data.username,
