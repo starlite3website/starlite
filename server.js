@@ -5,6 +5,7 @@ const KVdb = require('kvdb.io');
 const WebSocket = require('ws');
 const schedule = require('node-schedule');
 const db = KVdb.bucket('HdJi23Vpua43AxiyUFnJej', '12481485');
+const {MongoClient} = require('mongodb');
 
 schedule.scheduleJob('0 0 * * *', () => {
   sessionTokens = [1];
@@ -17,6 +18,16 @@ var pvpRooms = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 var message = {};
 var status = {};
 var servers = {};
+
+const uri = "mongodb+srv://cs641311:355608-G38@cluster0.z6wsn.mongodb.net/?retryWrites=true";
+const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true});
+
+var db;
+client.connect(function(err) {
+  console.log('SUCCESSFULLY CONNECTED TO DB');
+  db = client.db('data').collection('data');
+  console.log('DB INIT');
+})
 
 const server = http.createServer(function(req, res) {
   var pathname = url.parse(req.url).pathname;
@@ -79,95 +90,107 @@ wss.on('connection', function(socket) {
         return;
       }
       if (data.task == 'list') {
-        var values = [];
-        db.list({prefix: ''}).then((value) => {
-          values = value;
-          console.log(values);
-          var l = 0, a = [];
-          while (l<values.length) {
-            db.get(values[l]).then((value) => {
-              a.push(JSON.parse(value)[data.item]);
-              if (a.length == values.length) {
-                console.log(a);
-                socket.send(JSON.stringify({
-                  type: 'list-return',
-                  data: a,
-                }))
-              }
-            });
-            l++;
-          }
+        var values = [], items = [];
+        var cursor = await db.find({});
+        await cursor.forEach(function(value) {
+          values.push(value);
         });
+        console.log(values);
+        var l = 0;
+        while (l<values.length) {
+          items.push(values[l][data.item]);
+          l++;
+        }
+        socket.send(JSON.stringify({
+          type: 'list-return',
+          data: items,
+        }));
       }
       if (data.task == 'new') {
-        db.set(data.username, JSON.stringify({
+        var success = await db.insertOne({
           password: data.password,
           messages: '[]',
           playerdata: '{}',
           preferences: '{}',
           servers: '[]',
           fame: '0',
-        }));
+        });
         console.log('NEW: '+data.username);
+        if (!success.acknowledged) console.log('DB ERROR SETTING NEW VALUE');
         socket.send(JSON.stringify({
-          success: true,
+          success: success.acknowledged,
         }));
       }
       if (data.task == 'get') {
-        db.get(data.username).then((value) => {
-          console.log('GET: '+data.username);
-          socket.send(JSON.stringify({
-            type: 'get-return',
-            data:[JSON.parse(value)],
-          }));
-        })
+        var values = [], item;
+        var cursor = await db.find({});
+        await cursor.forEach(function(value) {
+          values.push(value);
+        });
+        console.log(values);
+        var l = 0;
+        while (l<values.length) {
+          if (values[l].username == data.username) {
+            item = values[l];
+          }
+          l++;
+        }
+        console.log('GET: '+data.username);
+        socket.send(JSON.stringify({
+          type: 'get-return',
+          data: [item],
+        }))
       }
       if (data.task == 'auth') {
-        db.get(data.username).then((value) => {
-          if (value == undefined) {
-            console.log('CREATE: '+data.username);
-            var token = Math.random();
-            sessionTokens.push(token);
-            socket.send(JSON.stringify({
-              authencated: false,
-              isAccount: false,
-              token: token,
-            }));
-            return;
-          }
-          value = JSON.parse(value);
-          if (value.password == data.password) {
-            var token = Math.random();
-            sessionTokens.push(token);
-            console.log('NEW SESSION: '+data.username);
-            socket.send(JSON.stringify({
-              authencated: true,
-              token: token,
-            }));
-          } else {
-            socket.send(JSON.stringify({
-              authencated: false,
-              isAccount: true,
-            }));
-          }
+        var values = [], item = null;
+        var cursor = await db.find({});
+        await cursor.forEach(function(value) {
+          values.push(value);
         });
+        var l = 0;
+        while (l<values.length) {
+          if (values[l].username == data.username) {
+            item = values[l]
+          }
+          l++;
+        }
+        if (item == null) {
+          console.log('CREATE: '+data.username);
+          var token = Math.random();
+          sessionTokens.push(token);
+          socket.send(JSON.stringify({
+            authencated: false,
+            isAccount: false,
+            token: token,
+          }));
+          return;
+        }
+        if (item.password == data.password) {
+          var token = Math.random();
+          sessionTokens.push(token);
+          console.log('NEW SESSION: '+data.username);
+          socket.send(JSON.stringify({
+            authencated: true,
+            token: token,
+          }));
+        } else {
+          socket.send(JSON.stringify({
+            authencated: false,
+            isAccount: true,
+          }));
+        }
       }
       if (data.task == 'update') {
-        db.get(data.username).then((value) => {
-          value = JSON.parse(value);
-          value[data.key] = data.value;
-          db.set(data.username, JSON.stringify({
-            password: value.password,
-            messages: value.messages,
-            playerdata: value.playerdata,
-            preferences: value.preferences,
-            fame: value.fame,
-          }));
-          console.log('UPDATE: '+data.username);
-          socket.send(JSON.stringify({
-            success: true,
-          }));
-        });
+        const query = {
+          username: data.username,
+        }
+        const options = {
+          upsert: false,
+        }
+        db.replaceOne(query, replacement, options);
+        socket.send(JSON.stringify({
+          success: true,
+        }));
       }
     } else if (data.operation === 'multiplayer') {
       if (socket.room === undefined) {
