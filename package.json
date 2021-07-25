@@ -4,7 +4,7 @@
   "description": "3",
   "main": "server.js",
   "dependencies": {
-    "kvdb.io": "^1.0.5",
+    "mongodb": "^4.0.1",
     "node-schedule": "^2.0.0",
     "ws": "^7.4.5"
   },
