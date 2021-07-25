@@ -1,10 +1,8 @@
 const http = require('http');
 const fs = require('fs');
 const url = require('url');
-const KVdb = require('kvdb.io');
 const WebSocket = require('ws');
 const schedule = require('node-schedule');
-const db = KVdb.bucket('HdJi23Vpua43AxiyUFnJej', '12481485');
 const {MongoClient} = require('mongodb');
 
 schedule.scheduleJob('0 0 * * *', () => {
