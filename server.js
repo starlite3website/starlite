@@ -267,7 +267,6 @@ wss.on('connection', function(socket) {
               q++;
             }
             serverData.push({
-              serversOnline: serversOnline,
               serverRoom: g[l].channelname,
               playerNum: g[l].sockets.length,
               players: players,
@@ -275,7 +274,10 @@ wss.on('connection', function(socket) {
           }
           l++;
         }
-        socket.send(JSON.stringify(serverData));
+        socket.send(JSON.stringify({
+          servers: serverData,
+          serversOnline: serversOnline,
+        }));
       }
       if (data.task == 'admin-crash') {
         var l = 0, g = Object.values(servers);

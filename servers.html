@@ -6,11 +6,7 @@
   socket.onopen = function() {
     socket.send('{"operation":"status", "task":"admin-servers", "username":"admin", "token":"1"}');
     socket.onmessage = function(data) {
-      var l = 0;
-      while (l<JSON.parse(data).length) {
-        alert(JSON.parse(data)[l]);
-        l++;
-      }
+      alert(data);
     }
   }
 </script>
