@@ -311,6 +311,7 @@ wss.on('connection', function(socket) {
                 if (sockets[i].username == data.victim) {
                   sockets[i].close();
                 }
+                i++;
               }
             }
             q++;
