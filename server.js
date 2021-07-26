@@ -307,7 +307,9 @@ wss.on('connection', function(socket) {
             if (servers[g[l].channelname].sockets[q].username == data.victim) {
               servers[g[l].channelname].disconnect(data.victim);
             }
+            q++;
           }
+        }
       }
     } else if (data.operation == 'chat') {
       sockets.forEach(function(s) {
