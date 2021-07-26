@@ -294,6 +294,7 @@ wss.on('connection', function(socket) {
       }
       if (data.task == 'admin-kick') {
         var l = 0, g = Object.values(servers);
+        console.log(g);
         while (l<g.length) {
           var q = 0;
           while (q<servers[g[l].channelname].sockets.length) {
