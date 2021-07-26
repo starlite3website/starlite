@@ -306,6 +306,12 @@ wss.on('connection', function(socket) {
           while (q<servers[g[l].channelname].sockets.length) {
             if (servers[g[l].channelname].sockets[q].username == data.victim) {
               servers[g[l].channelname].disconnect(data.victim);
+              var i = 0;
+              while (i<sockets.length) {
+                if (sockets[i].username == data.victim) {
+                  sockets[i].close();
+                }
+              }
             }
             q++;
           }
