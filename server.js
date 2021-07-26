@@ -106,6 +106,7 @@ wss.on('connection', function(socket) {
       }
       if (data.task == 'new') {
         var success = await db.insertOne({
+          username: data.username,
           password: data.password,
           messages: '[]',
           playerdata: '{}',
@@ -153,7 +154,6 @@ wss.on('connection', function(socket) {
           l++;
         }
         if (item == null) {
-          console.log('CREATE: '+data.username);
           var token = Math.random();
           sessionTokens.push(token);
           socket.send(JSON.stringify({
