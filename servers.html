@@ -1,12 +1,60 @@
 <div id='data'>
 </div>
+<hr>
+<div>
+  <input id='kick' />
+  <button id='kick-button'>Kick Player</button>
+  <hr>
+  <input id='crash' />
+  <button id='crash-button'>Reset Server</button>
+  <script>
+    var socket2 = new WebSocket('wss://star1.ml/server');
+    var kick = document.getElementById('kick');
+    var crash = document.getElementById('crash');
+    document.getElementById('kick-button').addEventListener('click', function() {
+      socket2.send(JSON.stringify({
+        operation: 'status',
+        task: 'admin-kick',
+        username: sessionStorage.username,
+        token: sessionStorage.token,
+        victim: kick.value,
+      }))
+    });
+    document.getElementById('crash-button').addEventListener('click', function() {
+      socket2.send(JSON.stringify({
+        operation: 'status',
+        task: 'admin-crash',
+        username: sessionStorage.username,
+        token: sessionStorage.token,
+        channel: crash.value,
+      }))
+    })
+  </script>
+</div>
+<hr>
 <script>
-  var socket = new WebSocket('wss://'+window.location.host+'/server');
+  var socket = new WebSocket('wss://star1.ml/server');
   var output = document.getElementById('data');
   socket.onopen = function() {
-    socket.send('{"operation":"status", "task":"admin-servers", "username":"admin", "token":"1"}');
+    socket.send('{"operation":"status", "task":"admin-servers", "username":"'+sessionStorage.username+'", "token":"'+sessionStorage.token+'"}');
     socket.onmessage = function(data) {
-      alert(data);
+      data = JSON.parse(data.data);
+      servers = data.servers;
+      output.innerHTML += 'Total Servers: '+data.serversOnline;
+      var l = 0;
+      while (l<servers.length) {
+        var div = document.createElement('DIV');
+        div.setAttribute('class', 'server');
+        div.innerHTML += '<br>Server IP: ' + servers[l].serverRoom + '<br>' + 'Player Count: ' + servers[l].playerNum + '<br>' + 'Players:';
+        var q = 0;
+        while (q<servers[l].players.length) {
+          div.innerHTML += '<br>' + servers[l].players[q];
+          q++;
+        }
+        output.appendChild(div);
+        l++;
+      }
+      socket.onmessage = function() {}
     }
   }
 </script>
