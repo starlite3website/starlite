@@ -316,6 +316,7 @@ wss.on('connection', function(socket) {
             }
             q++;
           }
+          g++;
         }
       }
     } else if (data.operation == 'chat') {
