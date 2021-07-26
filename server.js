@@ -303,9 +303,7 @@ wss.on('connection', function(socket) {
         var l = 0;
         while (l<sockets.length) {
           if (sockets[l].username == data.victim) {
-            console.log(sockets[l].room);
-            console.log(sockets[l].username);
-            console.log(servers[sockets[l].room])
+            console.log(sockets[l]);
             servers[sockets[l].room].disconnect(data.victim);
           }
           l++;
