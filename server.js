@@ -300,14 +300,14 @@ wss.on('connection', function(socket) {
         }
       }
       if (data.task == 'admin-kick') {
-        var l = 0;
-        while (l<sockets.length) {
-          if (sockets[l].username == data.victim) {
-            console.log(sockets[l]);
-            servers[sockets[l].room].disconnect(data.victim);
+        var l = 0, g = Object.values(servers);
+        while (l<g.length) {
+          var q = 0;
+          while (q<servers[g[l].channelname].sockets.length) {
+            if (servers[g[l].channelname].sockets[q].username == data.victim) {
+              servers[g[l].channelname].disconnect(data.victim);
+            }
           }
-          l++;
-        }
       }
     } else if (data.operation == 'chat') {
       sockets.forEach(function(s) {
