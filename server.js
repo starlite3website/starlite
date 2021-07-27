@@ -358,7 +358,7 @@ class Host {
     this.i.push(setInterval(function(host) {
       // add level multiplayer code here
       host.send();
-    }, 10, this));
+    }, 15, this));
     this.i.push(setInterval(function(host) {
       var l = 0;
       while (l<host.s.length) {
