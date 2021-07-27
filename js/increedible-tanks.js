@@ -552,7 +552,7 @@ class Host {
 }
 class Joiner {
   control(channelname) {
-    window.setInterval(user.joiner.send, 30);
+    //window.setInterval(user.joiner.send, 30);
     this.tank = {
       shields: 0,
       x: 0,
