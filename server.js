@@ -282,10 +282,11 @@ wss.on('connection', function(socket) {
       if (data.task == 'admin-crash') {
         var l = 0, g = Object.values(servers);
         while (l<g.length) {
+          console.log(g[l].channelname);
           if (g[l].channelname == data.channel) {
             var q = 0;
-            while (q<servers[g[l].channelname].sockets.length) {
-              servers[g[l].channelname].sockets[q].close();
+            while (q<g[l].sockets.length) {
+              g[l].sockets[q].close();
               q++;
             }
           }
@@ -297,16 +298,9 @@ wss.on('connection', function(socket) {
         console.log(g);
         while (l<g.length) {
           var q = 0;
-          while (q<servers[g[l].channelname].sockets.length) {
-            if (servers[g[l].channelname].sockets[q].username == data.victim) {
-              servers[g[l].channelname].disconnect(data.victim);
-              var i = 0;
-              while (i<sockets.length) {
-                if (sockets[i].username == data.victim) {
-                  sockets[i].close();
-                }
-                i++;
-              }
+          while (q<g[l].sockets.length) {
+            if (g[l].sockets[q].username == data.victim) {
+              g[l].sockets[q].close();
             }
             q++;
           }
