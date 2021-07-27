@@ -541,6 +541,20 @@ class Host {
       }
       l++;
     }
+    var l = 0;
+    while (l<this.sockets.length) {
+      if (this.sockets[l].username == data.username) {
+        this.sockets[l].send(JSON.stringify({
+          operation: 'multiplayer',
+          event: 'hostupdate',
+          tanks: this.pt,
+          blocks: this.blockData,
+          scaffolding: this.scaffolding,
+          bullets: this.s,
+        }));
+      }
+      l++;
+    }
   }
   joinerjoin(data) { //done
     // registers a new tank to the server
