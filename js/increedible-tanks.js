@@ -749,7 +749,7 @@ class Joiner {
     }
     Game.level = 'multiplayer-joiner';
     setInterval(function() {
-      console.log(user.joiner.drawsPerSec);
+      document.getElementById('fps').innerHTML = user.joiner.drawsPerSec;
       user.joiner.drawsPerSec = 0;
     }, 1000);
     this.socket.onmessage = function (data) {
