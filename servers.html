@@ -8,7 +8,7 @@
   <input id='crash' />
   <button id='crash-button'>Reset Server</button>
   <script>
-    var socket2 = new WebSocket('wss://star1.ml/server');
+    var socket2 = new WebSocket('wss://'+window.location.hostname+'/server');
     var kick = document.getElementById('kick');
     var crash = document.getElementById('crash');
     document.getElementById('kick-button').addEventListener('click', function() {
@@ -33,7 +33,7 @@
 </div>
 <hr>
 <script>
-  var socket = new WebSocket('wss://star1.ml/server');
+  var socket = new WebSocket('wss://'+window.location.hostname+'/server');
   var output = document.getElementById('data');
   socket.onopen = function() {
     socket.send('{"operation":"status", "task":"admin-servers", "username":"'+sessionStorage.username+'", "token":"'+sessionStorage.token+'"}');
