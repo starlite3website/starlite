@@ -536,17 +536,23 @@ class Host {
       }
       l++;
     }
-    var l = 0;
+   m var l = 0;
     while (l<this.sockets.length) {
       if (this.sockets[l].username == data.username) {
-        this.sockets[l].send(JSON.stringify({
-          operation: 'multiplayer',
-          event: 'hostupdate',
-          tanks: this.pt,
-          blocks: this.blockData,
-          scaffolding: this.scaffolding,
-          bullets: this.s,
-        }));
+        if (this.sockets[l].fpsLimiter == undefined) this.sockets[l].fpsLimiter = 0;
+        if (this.sockets[l].fpsLimiter = 0) {
+          this.sockets[l].send(JSON.stringify({
+            operation: 'multiplayer',
+            event: 'hostupdate',
+            tanks: this.pt,
+            blocks: this.blockData,
+            scaffolding: this.scaffolding,
+            bullets: this.s,
+          }));
+          this.fpsLimiter++;
+        } else {
+          this.fpsLimiter = 0;
+        }
       }
       l++;
     }
