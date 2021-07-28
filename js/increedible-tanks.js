@@ -1000,6 +1000,7 @@ function tank_M_listener3(e) {
     rotation = 360 + rotation;
   }
   user.joiner.tank.rotation = rotation;
+  user.joiner.send();
 }
 function tank_M_listener4() {
   user.joiner.tank.fire = false;
