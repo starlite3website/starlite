@@ -2783,7 +2783,7 @@ function shopSupport(e) {
   }
   if (x > 100) {
     if (x < 200) {
-      if (y < 350) {
+      if (y > 350) {
         if (y < 400) {
           if (userData.coins >= 1000) {
             userData.coins -= 1000;
