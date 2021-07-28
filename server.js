@@ -536,7 +536,7 @@ class Host {
       }
       l++;
     }
-   m var l = 0;
+    var l = 0;
     while (l<this.sockets.length) {
       if (this.sockets[l].username == data.username) {
         if (this.sockets[l].fpsLimiter == undefined) this.sockets[l].fpsLimiter = 0;
