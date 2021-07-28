@@ -591,6 +591,7 @@ class Joiner {
     this.tank.intervals = [];
     this.socket = new WebSocket('wss://'+window.location.hostname+'/server');
     this.channelname = channelname;
+    this.fpsLimiter = 0;
     this.drawMap = function() {
       user.joiner.tank.x = 0;
       user.joiner.tank.y = 0;
@@ -928,7 +929,12 @@ class Joiner {
         }
         break;
     }
-    user.joiner.send();
+    if (user.joiner.fpsLimiter == 0) {
+      user.joiner.send();
+      user.joiner.fpsLimiter = 1;
+    } else {
+      user.joiner.fpsLimiter = 0;
+    }
   }
   send() {
     user.joiner.socket.send(JSON.stringify({
@@ -1000,7 +1006,12 @@ function tank_M_listener3(e) {
     rotation = 360 + rotation;
   }
   user.joiner.tank.rotation = rotation;
-  user.joiner.send();
+  if (user.joiner.fpsLimiter == 0) {
+    user.joiner.send();
+    user.joiner.fpsLimiter = 1;
+  } else {
+    user.joiner.fpsLimiter = 0;
+  }
 }
 function tank_M_listener4() {
   user.joiner.tank.fire = false;
@@ -1040,7 +1051,12 @@ function tank_M_support() {
     user.joiner.tank.xd = user.joiner.tank.yd;
     user.joiner.tank.yd = place;
   }
-  user.joiner.send();
+  if (user.joiner.fpsLimiter == 0) {
+    user.joiner.send();
+    user.joiner.fpsLimiter = 1;
+  } else {
+    user.joiner.fpsLimiter = 0;
+  }
 }
 function tank_M_listener5() {
   user.joiner.tank.fire = false;
