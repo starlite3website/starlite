@@ -2689,7 +2689,7 @@ function victoryHelper(event) {
     level(Game.level, null, true);
   }
 }
-function shop() {
+function shopItems() {
   canvas.removeEventListener('click', mainMenuSupport);
   draw.fillStyle = "#07707";
   draw.fillRect(50, 50, 400, 400);
@@ -2715,9 +2715,17 @@ function shop() {
   draw.fillText('Cost: 1000 Gold', 240, 380);
   draw.fillStyle = "#000000";
   draw.fillText("Main Menu", 75, 75);
-  document.addEventListener("click", shopSupport);
+  document.addEventListener("click", shopItemsSupport);
+  document.addEventListener('keydown', shopItemsKeyDown);
 }
-function shopSupport(e) {
+function shopItemsKeyDown(e) {
+  if (e.keyCode == '39') {
+    document.removeEventListener('click', shopItemsSupport);
+    document.removeEventListener('keydown', shopItemKeyDown);
+    shopClasses
+  }
+}
+function shopItemsSupport(e) {
   if (e.pageX || e.pageY) {
     x = e.pageX;
     y = e.pageY;
@@ -2797,6 +2805,242 @@ function shopSupport(e) {
     }
   }
 }
+function shopItems() {
+  canvas.removeEventListener('click', mainMenuSupport);
+  draw.fillStyle = "#07707";
+  draw.fillRect(50, 50, 400, 400);
+  draw.fillStyle = "#ffffff";
+  draw.font = "60px starfont";
+  draw.fillText("Shop", 170, 120);
+  draw.fillStyle = "#ffffff";
+  draw.fillRect(60, 60, 90, 30);
+  draw.fillRect(100, 140, 100, 50);
+  draw.fillRect(100, 210, 100, 50);
+  draw.fillRect(100, 280, 100, 50);
+  draw.fillRect(100, 350, 100, 50);
+  draw.fillStyle = "#000000";
+  draw.font = "10px starfont";
+  draw.fillText('Buy Boost', 120, 170);
+  draw.fillText('Buy a Block', 115, 240);
+  draw.fillText('Buy a Toolkit', 110, 310);
+  draw.fillText('Buy Flashbang', 105, 380);
+  draw.fillStyle = "#ffffff";
+  draw.fillText('Cost: 50 Gold', 240, 170);
+  draw.fillText('Cost: 200 Gold', 240, 240);
+  draw.fillText('Cost: 500 Gold', 240, 310);
+  draw.fillText('Cost: 1000 Gold', 240, 380);
+  draw.fillStyle = "#000000";
+  draw.fillText("Main Menu", 75, 75);
+  document.addEventListener("click", shopClassesSupport);
+  document.addEventListener('keydown', shopClassesKeyDown);
+}
+function shopClassesKeyDown(e) {
+  if (e.keyCode == '37') {
+    document.removeEventListener('click', shopClassesSupport);
+    document.removeEventListener('keydown', shopClassesKeyDown);
+    shopItems();
+  } else if (e.keyCode == '39') {
+    document.removeEventListener('click', shopClassesSupport);
+    document.removeEventListener('keydown', shopClassesKeyDown);
+    shopTanks();
+  }
+}
+function shopClassesSupport(e) {
+  if (e.pageX || e.pageY) {
+    x = e.pageX;
+    y = e.pageY;
+  } else {
+    x = e.clientX + document.body.scrollLeft + document.documentElement.scrollLeft;
+    y = e.clientY + document.body.scrollTop + document.documentElement.scrollTop;
+  }
+  x -= canvas.offsetLeft;
+  y -= canvas.offsetTop;
+  if (x > 60) {
+    if (x < 140) {
+      if (y > 60) {
+        if (y < 90) {
+          mainMenu();
+        }
+      }
+    }
+  }
+  if (x > 100) {
+    if (x < 200) {
+      if (y > 140) {
+        if (y < 190) {
+          if (userData.coins >= 60) {
+            userData.coins -= 50;
+            userData.boosts += 1;
+            var t = playerData;
+            t["increedible-tanks"] = userData;
+            update(sessionStorage.username, 'playerdata', JSON.stringify(t));
+          }
+        }
+      }
+    }
+  }
+  if (x > 100) {
+    if (x < 200) {
+      if (y > 210) {
+        if (y < 260) {
+          if (userData.coins >= 200) {
+            userData.coins -= 200;
+            userData.blocks += 1;
+            var t = playerData;
+            t["increedible-tanks"] = userData;
+            update(sessionStorage.username, 'playerdata', JSON.stringify(t));
+          }
+        }
+      }
+    }
+  }
+  if (x > 100) {
+    if (x < 200) {
+      if (y > 280) {
+        if (y < 330) {
+          if (userData.coins >= 500) {
+            userData.coins -= 500;
+            userData.toolkits += 1;
+            var t = playerData;
+            t['increedible-tanks'] = userData;
+            update(sessionStorage.username, 'playerdata', JSON.stringify(t));
+          }
+        }
+      }
+    }
+  }
+  if (x > 100) {
+    if (x < 200) {
+      if (y > 350) {
+        if (y < 400) {
+          if (userData.coins >= 1000) {
+            userData.coins -= 1000;
+            userData.flashbangs += 1;
+            var t = playerData;
+            t['increedible-tanks'] = userData;
+            update(sessionStorage.username, 'playerdata', JSON.stringify(t));
+          }
+        }
+      }
+    }
+  }
+}
+function shopTanks() {
+  canvas.removeEventListener('click', mainMenuSupport);
+  draw.fillStyle = "#07707";
+  draw.fillRect(50, 50, 400, 400);
+  draw.fillStyle = "#ffffff";
+  draw.font = "60px starfont";
+  draw.fillText("Shop", 170, 120);
+  draw.fillStyle = "#ffffff";
+  draw.fillRect(60, 60, 90, 30);
+  draw.fillRect(100, 140, 100, 50);
+  draw.fillRect(100, 210, 100, 50);
+  draw.fillRect(100, 280, 100, 50);
+  draw.fillRect(100, 350, 100, 50);
+  draw.fillStyle = "#000000";
+  draw.font = "10px starfont";
+  draw.fillText('Buy Iron', 120, 170);
+  draw.fillText('Buy Diamond', 115, 240);
+  draw.fillText('Buy Nothing', 110, 310);
+  draw.fillText('Buy Nothing', 105, 380);
+  draw.fillStyle = "#ffffff";
+  draw.fillText('Cost: 50 Gold', 240, 170);
+  draw.fillText('Cost: 200 Gold', 240, 240);
+  draw.fillText('Cost: 500 Gold', 240, 310);
+  draw.fillText('Cost: 1000 Gold', 240, 380);
+  draw.fillStyle = "#000000";
+  draw.fillText("Main Menu", 75, 75);
+  document.addEventListener("click", shopTanksSupport);
+  document.addEventListener('keydown', shopTanksKeyDown);
+}
+function shopTanksKeyDown(e) {
+  if (e.keyCode == '37') {
+    document.removeEventListener('click', shopTanksSupport);
+    document.removeEventListener('keydown', shopTanksKeyDown);
+    shopClasses();
+  }
+}
+function shopTanksSupport(e) {
+  if (e.pageX || e.pageY) {
+    x = e.pageX;
+    y = e.pageY;
+  } else {
+    x = e.clientX + document.body.scrollLeft + document.documentElement.scrollLeft;
+    y = e.clientY + document.body.scrollTop + document.documentElement.scrollTop;
+  }
+  x -= canvas.offsetLeft;
+  y -= canvas.offsetTop;
+  if (x > 60) {
+    if (x < 140) {
+      if (y > 60) {
+        if (y < 90) {
+          mainMenu();
+        }
+      }
+    }
+  }
+  if (x > 100) {
+    if (x < 200) {
+      if (y > 140) {
+        if (y < 190) {
+          if (userData.coins >= 60) {
+            userData.coins -= 50;
+            userData.boosts += 1;
+            var t = playerData;
+            t["increedible-tanks"] = userData;
+            update(sessionStorage.username, 'playerdata', JSON.stringify(t));
+          }
+        }
+      }
+    }
+  }
+  if (x > 100) {
+    if (x < 200) {
+      if (y > 210) {
+        if (y < 260) {
+          if (userData.coins >= 200) {
+            userData.coins -= 200;
+            userData.blocks += 1;
+            var t = playerData;
+            t["increedible-tanks"] = userData;
+            update(sessionStorage.username, 'playerdata', JSON.stringify(t));
+          }
+        }
+      }
+    }
+  }
+  if (x > 100) {
+    if (x < 200) {
+      if (y > 280) {
+        if (y < 330) {
+          if (userData.coins >= 500) {
+            userData.coins -= 500;
+            userData.toolkits += 1;
+            var t = playerData;
+            t['increedible-tanks'] = userData;
+            update(sessionStorage.username, 'playerdata', JSON.stringify(t));
+          }
+        }
+      }
+    }
+  }
+  if (x > 100) {
+    if (x < 200) {
+      if (y > 350) {
+        if (y < 400) {
+          if (userData.coins >= 1000) {
+            userData.coins -= 1000;
+            // give item
+            var t = playerData;
+            t['increedible-tanks'] = userData;
+            update(sessionStorage.username, 'playerdata', JSON.stringify(t));
+          }
+        }
+      }
+    }
+  }
+}
 function mainMenu() {
   document.getElementById('server').style.display = "none";
   document.removeEventListener('click', shopSupport);
@@ -2864,7 +3108,7 @@ function mainMenuSupport(e) {
       if (y > 350) {
         if (y < 400) {
           setTimeout(function() {
-            shop();
+            shopItems();
           }, 20);
         }
       }
