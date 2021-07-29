@@ -3043,7 +3043,7 @@ function shopTanksSupport(e) {
 }
 function mainMenu() {
   document.getElementById('server').style.display = "none";
-  document.removeEventListener('click', shopSupport);
+  document.removeEventListener('click', shopItemsSupport);
   document.removeEventListener("click", multiplayer2);
   user.tank = new Tank();
   window.clearInterval(interval2);
