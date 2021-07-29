@@ -2722,7 +2722,7 @@ function shopItemsKeyDown(e) {
   if (e.keyCode == '39') {
     document.removeEventListener('click', shopItemsSupport);
     document.removeEventListener('keydown', shopItemKeyDown);
-    shopClasses
+    shopClasses();
   }
 }
 function shopItemsSupport(e) {
@@ -2805,7 +2805,7 @@ function shopItemsSupport(e) {
     }
   }
 }
-function shopItems() {
+function shopClasses() { 
   canvas.removeEventListener('click', mainMenuSupport);
   draw.fillStyle = "#07707";
   draw.fillRect(50, 50, 400, 400);
