@@ -2721,7 +2721,7 @@ function shopItems() {
 function shopItemsKeyDown(e) {
   if (e.keyCode == '39') {
     document.removeEventListener('click', shopItemsSupport);
-    document.removeEventListener('keydown', shopItemKeyDown);
+    document.removeEventListener('keydown', shopItemsKeyDown);
     shopClasses();
   }
 }
