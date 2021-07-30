@@ -2996,6 +2996,7 @@ function shopTanksSupport(e) {
               alert('You already bought a better upgrade!');
               return;
             }
+            userData.coins -= 20000;
             try {
               var t = playerData;
               t["increedible-tanks"] = userData;
