@@ -15,6 +15,9 @@ function get(username, callback) {
   socket.onmessage = function(data) {
     userData = JSON.parse(JSON.parse(data.data).data[0].playerdata)['increedible-tanks'];
     playerData = JSON.parse(JSON.parse(data.data).data[0].playerdata);
+    setTimeout(function() {
+      socket.onmessage = function() {}
+    }, 20)
     callback();
   }
 }
