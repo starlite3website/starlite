@@ -2740,8 +2740,10 @@ function shopItemsSupport(e) {
           if (userData.coins >= 60) {
             userData.coins -= 50;
             userData.boosts += 1;
-            var t = playerData;
-            t["increedible-tanks"] = userData;
+            try {
+              var t = playerData;
+              t["increedible-tanks"] = userData;
+            } catch(e) {} 
             setTimeout(function() {
               document.removeEventListener('keydown', shopItemsKeyDown);
               document.removeEventListener('click', shopItemsSupport);
@@ -2760,8 +2762,10 @@ function shopItemsSupport(e) {
           if (userData.coins >= 200) {
             userData.coins -= 200;
             userData.blocks += 1;
-            var t = playerData;
-            t["increedible-tanks"] = userData;
+            try {
+              var t = playerData;
+              t["increedible-tanks"] = userData;
+            } catch(e) {}
             setTimeout(function() {
               document.removeEventListener('keydown', shopItemsKeyDown);
               document.removeEventListener('click', shopItemsSupport);
@@ -2780,8 +2784,10 @@ function shopItemsSupport(e) {
           if (userData.coins >= 500) {
             userData.coins -= 500;
             userData.toolkits += 1;
-            var t = playerData;
-            t['increedible-tanks'] = userData;
+            try {
+              var t = playerData;
+              t['increedible-tanks'] = userData;
+            } catch(e) {}
             setTimeout(function() {
               document.removeEventListener('keydown', shopItemsKeyDown);
               document.removeEventListener('click', shopItemsSupport);
@@ -2800,8 +2806,10 @@ function shopItemsSupport(e) {
           if (userData.coins >= 1000) {
             userData.coins -= 1000;
             userData.flashbangs += 1;
-            var t = playerData;
-            t['increedible-tanks'] = userData;
+            try {
+              var t = playerData;
+              t['increedible-tanks'] = userData;
+            } catch(e) {}
             setTimeout(function() {
               document.removeEventListener('keydown', shopItemsKeyDown);
               document.removeEventListener('click', shopItemsSupport);
