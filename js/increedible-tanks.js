@@ -22,6 +22,7 @@ function get(username, callback) {
   }
 }
 function update(username, key, value) {
+  document.getElementById('users').innerHTML = 'Saving...'
   socket.send(JSON.stringify({
     operation: 'database',
     token: sessionStorage.token,
@@ -30,6 +31,14 @@ function update(username, key, value) {
     key: key,
     value: value,
   }));
+  socket.onmessage = function(data) {
+    if (JSON.parse(data.data).success) {
+      document.getElementById('users').innerHTML = 'Saved!';
+      setTimeout(function() {
+        document.getElementById('users').innerHTML = '';
+      }, 3000);
+    }
+  }
 }
 var interval, user, listener, interval2, b = [], s = [], ai = [], l1 = 0, l2 = 0, i = [], Game = new Game(), button = new Image(), gameplay1 = new Image(), red_bullet = new Image(), ai_top = new Image(), ai_base = new Image(), tank_base_png = new Image(), tank_top_png = new Image(), start_screen = new Image(), main_menu = new Image(), tank_base2 = new Image(), coins = new Image(), toolkit = new Image(), scaffolding = new Image(), boost = new Image(), flashbang = new Image(), victory_screen = new Image(), iron_tank_top = new Image(), iron_tank_base = new Image(), iron_tank_base2 = new Image(), diamond_tank_top = new Image(), diamond_tank_base = new Image(), diamond_tank_base2 = new Image();
 ai_base.src = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAAAuElEQVRYR+2YQQ7DMAgE68eRR5fHtWpaS7UVwkYmt8nNkpVdxmCQ22P8XtO6Teu7lqHubsDM5g2DEXe/xaii+xE+NffntNqkpNuyKLrBp3vp8W5m0v9kglK4kuR3k3ocEIygQvBCuh1uhSAEfwS4B6NUoJOsFgkEIdivGebBIBfoxatFAkEIMs0kOUAvXi0SCEKQaSbJAXrxapGUE6x+p1Yn+R5I9oCqBnwVbKo7CM9RVVOL3J/pvgGoAo+TFbDWigAAAABJRU5ErkJggg==";
