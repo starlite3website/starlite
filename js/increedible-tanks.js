@@ -2695,9 +2695,10 @@ function shopItems() {
   canvas.removeEventListener('click', mainMenuSupport);
   draw.drawImage(shopItemsMenu, 0, 0);
   draw.fillStyle = '#ffffff';
-  draw.fillText('Coins: '+userData.coins, 320, 170);
-  draw.fillText('Boosts: '+userData.boosts, 320, 240);
-  draw.fillText('Blocks: '+userData.blocks, 320, 310);
+  draw.font = '10px starfont';
+  draw.fillText('Coins: '+userData.coins, 380, 170);
+  draw.fillText('Boosts: '+userData.boosts, 380, 240);
+  draw.fillText('Blocks: '+userData.blocks, 380, 310);
   draw.fillText('Flashbangs: '+userData.flashbangs, 320, 380)
   document.addEventListener("click", shopItemsSupport);
   document.addEventListener('keydown', shopItemsKeyDown);
