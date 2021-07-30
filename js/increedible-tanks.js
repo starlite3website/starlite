@@ -2696,10 +2696,11 @@ function shopItems() {
   draw.drawImage(shopItemsMenu, 0, 0);
   draw.fillStyle = '#ffffff';
   draw.font = '10px starfont';
-  draw.fillText('Coins: '+userData.coins, 345, 170);
-  draw.fillText('Boosts: '+userData.boosts, 345, 240);
-  draw.fillText('Blocks: '+userData.blocks, 345, 310);
-  draw.fillText('Flashbangs: '+userData.flashbangs, 345, 380)
+  draw.fillText('Coins: '+userData.coins, 345, 100);
+  draw.fillText('Boosts: '+userData.boosts, 345, 170);
+  draw.fillText('Blocks: '+userData.blocks, 345, 240);
+  draw.fillText('Toolkits: '+userData.toolkits, 345, 310);
+  draw.fillText('Flashbangs: '+userData.flashbangs, 345, 380);
   document.addEventListener("click", shopItemsSupport);
   document.addEventListener('keydown', shopItemsKeyDown);
 }
@@ -2738,10 +2739,12 @@ function shopItemsSupport(e) {
             userData.boosts += 1;
             var t = playerData;
             t["increedible-tanks"] = userData;
+            setTimeout(function() {
+              document.removeEventListener('keydown', shopItemsKeyDown);
+              document.removeEventListener('click', shopItemsSupport);
+              shopItems();
+            }, 20);
             update(sessionStorage.username, 'playerdata', JSON.stringify(t));
-            document.removeEventListener('keydown', shopItemsKeyDown);
-            document.removeEventListener('click', shopItemsSupport);
-            shopItems();
           }
         }
       }
@@ -2756,10 +2759,12 @@ function shopItemsSupport(e) {
             userData.blocks += 1;
             var t = playerData;
             t["increedible-tanks"] = userData;
+            setTimeout(function() {
+              document.removeEventListener('keydown', shopItemsKeyDown);
+              document.removeEventListener('click', shopItemsSupport);
+              shopItems();
+            }, 20);
             update(sessionStorage.username, 'playerdata', JSON.stringify(t));
-            document.removeEventListener('keydown', shopItemsKeyDown);
-            document.removeEventListener('click', shopItemsSupport);
-            shopItems();
           }
         }
       }
@@ -2774,10 +2779,12 @@ function shopItemsSupport(e) {
             userData.toolkits += 1;
             var t = playerData;
             t['increedible-tanks'] = userData;
+            setTimeout(function() {
+              document.removeEventListener('keydown', shopItemsKeyDown);
+              document.removeEventListener('click', shopItemsSupport);
+              shopItems();
+            }, 20);
             update(sessionStorage.username, 'playerdata', JSON.stringify(t));
-            document.removeEventListener('keydown', shopItemsKeyDown);
-            document.removeEventListener('click', shopItemsSupport);
-            shopItems();
           }
         }
       }
@@ -2792,10 +2799,12 @@ function shopItemsSupport(e) {
             userData.flashbangs += 1;
             var t = playerData;
             t['increedible-tanks'] = userData;
+            setTimeout(function() {
+              document.removeEventListener('keydown', shopItemsKeyDown);
+              document.removeEventListener('click', shopItemsSupport);
+              shopItems();
+            }, 20);
             update(sessionStorage.username, 'playerdata', JSON.stringify(t));
-            document.removeEventListener('keydown', shopItemsKeyDown);
-            document.removeEventListener('click', shopItemsSupport);
-            shopItems();
           }
         }
       }
