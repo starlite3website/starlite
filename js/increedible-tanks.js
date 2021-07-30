@@ -2696,7 +2696,7 @@ function shopItems() {
   draw.drawImage(shopItemsMenu, 0, 0);
   draw.fillStyle = '#ffffff';
   draw.font = '10px starfont';
-  draw.fillText('Coins: '+userData.coins, 345, 100);
+  draw.fillText('Coins: '+userData.coins, 360, 100);
   draw.fillText('Boosts: '+userData.boosts, 345, 170);
   draw.fillText('Blocks: '+userData.blocks, 345, 240);
   draw.fillText('Toolkits: '+userData.toolkits, 345, 310);
