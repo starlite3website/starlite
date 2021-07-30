@@ -2722,7 +2722,7 @@ function shopItemsKeyDown(e) {
   if (e.keyCode == '39') {
     document.removeEventListener('click', shopItemsSupport);
     document.removeEventListener('keydown', shopItemsKeyDown);
-    shopClasses();
+    shopTanks();
   }
 }
 function shopItemsSupport(e) {
@@ -2822,8 +2822,8 @@ function shopClasses() {
   draw.font = "10px starfont";
   draw.fillText('Buy Boost', 120, 170);
   draw.fillText('Buy a Block', 115, 240);
-  draw.fillText('Buy a Toolkit', 110, 310);
-  draw.fillText('Buy Flashbang', 105, 380);
+  draw.fillText('Buy asdfsdafasdit', 110, 310);
+  draw.fillText('Buy Fasdfasdfasdfasdfshbang', 105, 380);
   draw.fillStyle = "#ffffff";
   draw.fillText('Cost: 50 Gold', 240, 170);
   draw.fillText('Cost: 200 Gold', 240, 240);
@@ -2836,10 +2836,6 @@ function shopClasses() {
 }
 function shopClassesKeyDown(e) {
   if (e.keyCode == '37') {
-    document.removeEventListener('click', shopClassesSupport);
-    document.removeEventListener('keydown', shopClassesKeyDown);
-    shopItems();
-  } else if (e.keyCode == '39') {
     document.removeEventListener('click', shopClassesSupport);
     document.removeEventListener('keydown', shopClassesKeyDown);
     shopTanks();
@@ -2956,6 +2952,11 @@ function shopTanks() {
 }
 function shopTanksKeyDown(e) {
   if (e.keyCode == '37') {
+    document.removeEventListener('click', shopTanksSupport);
+    document.removeEventListener('keydown', shopTanksKeyDown);
+    shopItems();
+  }
+  if (e.keyCode == '39') {
     document.removeEventListener('click', shopTanksSupport);
     document.removeEventListener('keydown', shopTanksKeyDown);
     shopClasses();
