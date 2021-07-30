@@ -2989,7 +2989,6 @@ function shopTanksSupport(e) {
       if (y > 140) {
         if (y < 190) {
           if (userData.coins >= 20000) {
-            userData.coins -= 20000;
             if (userData.health == 200) {
               userData.health = 300;
             } else {
