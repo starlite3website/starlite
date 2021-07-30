@@ -3055,6 +3055,11 @@ function shopTanksSupport(e) {
 function mainMenu() {
   document.getElementById('server').style.display = "none";
   document.removeEventListener('click', shopItemsSupport);
+  document.removeEventListener('keydown', shopItemsKeyDown);
+  document.removeEventListener('click', shopTanksSupport);
+  document.removeEventListener('keydown', shopTanksKeyDown);
+  document.removeEventListener('click', shopClassesSupport);
+  document.removeEventListener('keydown', shopClassesKeyDown);
   document.removeEventListener("click", multiplayer2);
   user.tank = new Tank();
   window.clearInterval(interval2);
