@@ -2696,10 +2696,10 @@ function shopItems() {
   draw.drawImage(shopItemsMenu, 0, 0);
   draw.fillStyle = '#ffffff';
   draw.font = '10px starfont';
-  draw.fillText('Coins: '+userData.coins, 380, 170);
-  draw.fillText('Boosts: '+userData.boosts, 380, 240);
-  draw.fillText('Blocks: '+userData.blocks, 380, 310);
-  draw.fillText('Flashbangs: '+userData.flashbangs, 320, 380)
+  draw.fillText('Coins: '+userData.coins, 360, 170);
+  draw.fillText('Boosts: '+userData.boosts, 360, 240);
+  draw.fillText('Blocks: '+userData.blocks, 360, 310);
+  draw.fillText('Flashbangs: '+userData.flashbangs, 360, 380)
   document.addEventListener("click", shopItemsSupport);
   document.addEventListener('keydown', shopItemsKeyDown);
 }
