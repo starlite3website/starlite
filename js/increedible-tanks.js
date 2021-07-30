@@ -22,7 +22,7 @@ function get(username, callback) {
   }
 }
 function update(username, key, value) {
-  document.getElementById('users').innerHTML = 'Saving...'
+  document.getElementById('saveStatus').innerHTML = 'Saving...'
   socket.send(JSON.stringify({
     operation: 'database',
     token: sessionStorage.token,
@@ -33,9 +33,9 @@ function update(username, key, value) {
   }));
   socket.onmessage = function(data) {
     if (JSON.parse(data.data).success) {
-      document.getElementById('users').innerHTML = 'Saved!';
+      document.getElementById('saveStatus').innerHTML = 'Saved!';
       setTimeout(function() {
-        document.getElementById('users').innerHTML = '';
+        document.getElementById('saveStatus').innerHTML = '';
       }, 3000);
     }
   }
