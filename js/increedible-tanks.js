@@ -2885,6 +2885,10 @@ function shopClassesSupport(e) {
       if (y > 140) {
         if (y < 190) {
           if (userData.coins >= 50000) {
+            if (userData.class == 'stealth') {
+              alert('You already bought this!');
+              return;
+            }
             userData.coins -= 50000;
             userData.class = 'stealth';
             try {
