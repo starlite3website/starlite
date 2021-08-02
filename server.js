@@ -215,12 +215,12 @@ wss.on('connection', function(socket) {
               pvpRooms[l] += 1;
               socket.pvpRoom = l;
               socket.room = 'pvp' + l;
-              l = pvpRooms.length;
               if (pvpRooms[l] == 1) {
                 servers[ip] = new Host();
                 servers[ip].control(ip);
               }
               servers[ip].sockets.push(socket);
+              l = pvpRooms.length;
             }
             l++;
           }
