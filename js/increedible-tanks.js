@@ -1166,6 +1166,7 @@ class Tank {
           }, 10000)
         } else {
           this.inactive = true;
+          window.clearInterval(endlessRunner);
           window.clearInterval(this.checkloop);
           window.clearInterval(this.interval);
           window.clearInterval(this.interval2)
