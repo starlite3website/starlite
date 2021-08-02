@@ -2847,7 +2847,7 @@ function shopClasses() {
   draw.drawImage(shopClassesMenu, 0, 0);
   draw.font = '10px starfont';
   draw.fillText('Coins: '+userData.coins, 360, 100);
-  if (userData.class = 'stealth') draw.fillText('Equiped', 345, 170);
+  if (userData.class == 'stealth') draw.fillText('Equiped', 345, 170);
   //if (userData.health == 400) draw.fillText('Equiped', 345, 240);
   //draw.fillText('Equiped', 345, 310);
   //draw.fillText('Equiped', 345, 380);
