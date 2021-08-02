@@ -2916,13 +2916,13 @@ function shopClassesSupport(e) {
     if (x < 200) {
       if (y > 280) {
         if (y < 330) {
-          if (userData.coins >= 500) {
+          /*if (userData.coins >= 500) {
             userData.coins -= 500;
             userData.toolkits += 1;
             var t = playerData;
             t['increedible-tanks'] = userData;
             update(sessionStorage.username, 'playerdata', JSON.stringify(t));
-          }
+          }*/
         }
       }
     }
@@ -2931,13 +2931,13 @@ function shopClassesSupport(e) {
     if (x < 200) {
       if (y > 350) {
         if (y < 400) {
-          if (userData.coins >= 1000) {
+          /*if (userData.coins >= 1000) {
             userData.coins -= 1000;
             userData.flashbangs += 1;
             var t = playerData;
             t['increedible-tanks'] = userData;
             update(sessionStorage.username, 'playerdata', JSON.stringify(t));
-          }
+          }*/
         }
       }
     }
