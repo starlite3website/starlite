@@ -964,6 +964,7 @@ class Joiner {
         invis: user.joiner.tank.invis,
         canInvis: user.joiner.tank.canInvis,
         canChangeInvisStatus: user.joiner.tank.canChangeInvisStatus,
+        immune: user.joiner.tank.immune,
       }
     }));
     user.joiner.tank.x = 0;

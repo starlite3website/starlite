@@ -469,6 +469,7 @@ class Host {
           this.pt[l].base = tank.base;
           this.pt[l].rotation = tank.rotation;
           this.pt[l].leftright = tank.leftright;
+          this.pt[l].immune = tank.immune;
           if (!this.pt[l].damagedRecent) this.pt[l].invis = tank.invis;
           this.pt[l].canChangeInvisStatus = tank.canChangeInvisStatus;
           this.pt[l].canInvis = tank.canInvis;
