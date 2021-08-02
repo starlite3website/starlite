@@ -1,0 +1,278 @@
+
+<!DOCTYPE html>
+<html>
+
+<head>
+	<link rel="shortcut icon" href="/starlite-logo.png" type="image/png">
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@700&display=swap" rel="stylesheet">
+	<title>Starlite | Chat</title>
+</head>
+<div id='wall'></div>
+<script>
+	window.setTimeout(function() {
+      document.getElementById('wall').style.visibility = 'hidden';
+      document.getElementById('animate').style.visibility = 'hidden';
+    }, 7000);
+</script>
+<div id="animate">
+</div>
+<style>
+	#wall {
+		position: fixed;
+		background-color: white;
+		width: 100%;
+		height: 100%;
+		top: 0px;
+		left: 0px;
+		z-index: 100;
+	}
+
+	#animate {
+		position: absolute;
+		left: 50%;
+		top: 50%;
+		width: 30px;
+		height: 30px;
+		margin-top: -15px;
+		margin-left: -15px;
+		border: 1px solid orangered;
+		background-color: orangered;
+		border-radius: 15px;
+		animation: animation 2s infinite;
+		z-index: 101;
+	}
+
+	@keyframes animation {
+		0% {
+			margin-left: -15px;
+			margin-top: -65px;
+		}
+		25% {
+			margin-left: 35px;
+			margin-top: -15px;
+			background-color: white;
+		}
+		50% {
+			margin-left: -15px;
+			margin-top: 35px;
+			background-color: orangered;
+		}
+		75% {
+			margin-left: -65px;
+			margin-top: -15px;
+			background-color: white;
+		}
+		100% {
+			margin-left: -15px;
+			margin-top: -65px;
+		}
+	}
+</style>
+<div id="messages">
+</div>
+<hr>
+<div id="form">
+	<div>
+		<textarea placeholder="Message" id="message"></textarea>
+      <input type="text" placeholder="To" id="from"/>
+      <button id="submit">Send Message</button>
+    </div>
+    <hr>
+    <h3> How To Use </h3>
+    <hr>
+    <p><b>Send Message:</b> Type message in MESSAGE box, and a username in TO box.</p>
+    <p><b>Send to Everyone:</b> Type public in the TO box.</p>
+    <p><b>Send to Muliple People:</b> Type : or colons in between usernames.</p>
+  </div>
+
+  <style>
+    * {
+      font-family: Comfortaa;
+    }
+    textarea, input {
+      margin: auto;
+    }
+    #form {
+      text-align: center;
+    }
+    div {
+      display: block;
+    }
+    textarea {
+      margin-bottom: 10px;
+      margin-top: 10px;
+      width: 200px;
+      height: 100px;
+      display: block;
+      background-color: white;
+      border: 1px solid black;
+      padding: 10px;
+    }
+    input {
+      margin-bottom: 10px;
+      width: 200px;
+      display: block;
+      background-color: white;
+      border: 1px solid black;
+      padding: 10px;
+    }
+    button {
+      color: white;
+      background-color: orangered;
+      border: 1px solid orangered;
+      padding: 5px;
+    }
+    iframe {
+      display: none;
+    }
+  </style>
+  <iframe src="" id="database" visibility="hidden" display="hidden" width="0" height="0"></iframe>
+  <iframe src="" id="database2" visibility="hidden" display="hidden" width="0" height="0"></iframe>
+  <script>
+  var counter = 0;
+  if (sessionStorage.username == undefined) {
+    window.location.href = "/dashboard";
+  }
+  var messages = [], userMessages;
+  var socket = new WebSocket('wss://'+window.location.hostname+'/server');
+  function list(item) {
+    socket.send(JSON.stringify({
+      operation: 'database',
+      token: sessionStorage.token,
+      task: 'list',
+      item: 'messages',
+    }));
+    socket.onmessage = function(data) {
+      if (JSON.parse(data.data).type == 'list-return') {
+        messages = JSON.parse(data.data).data;
+        var l = 0, t = [];
+        while (l<messages.length) {
+          t = t.concat(JSON.parse(messages[l]));
+          l++;
+        }
+        messages = t;
+        messages.sort(function(a,b) {
+          return new Date(a.timestamps) - new Date(b.timestamps);
+        });
+      }
+    }
+  }
+  function update(username, key, value) {
+    socket.send(JSON.stringify({
+      operation: 'database',
+      token: sessionStorage.token,
+      task: 'update',
+      username: username,
+      key: key,
+      value: value,
+    }));
+  }
+  function get(username, callback) {
+    socket.send(JSON.stringify({
+      operation: 'database',
+      task: 'get',
+      token: sessionStorage.token,
+      username: sessionStorage.username,
+    }));
+    socket.onmessage = function(data) {
+      if (JSON.parse(data.data).type == 'get-return') {
+        userMessages = JSON.parse(JSON.parse(data.data).data[0].messages);
+        callback();
+      }
+    }
+  }
+  window.setTimeout(function() {
+    list('messages');
+  }, 1000);
+  var d = [], e = [], interval;
+  var socket2 = new WebSocket('wss://'+window.location.hostname+'/server');
+  window.setTimeout(function() {
+    interval = window.setInterval(updateChat, 1000);
+    socket2.onmessage = function(data) {
+      if (JSON.parse(data.data).type == 'chat') {
+        updateChat(JSON.parse(data.data).message);
+      }
+    }
+  }, 7000);
+  var oldMessages = [], newMessages = [];
+  function updateChat(m) {
+    if (m != undefined) {
+      messages = messages.concat(m);
+    }
+    if (messages == oldMessages) {
+      return null;
+    } else {
+      newMessages = [];
+      newMessages = messages.filter(function(array_value) {
+        var l = 0;
+        if (oldMessages.length == 0) {
+          return array_value;
+        }
+        var t;
+        while (l<oldMessages.length) {
+          if (oldMessages[l].timestamps != array_value.timestamps) {
+            t = {bool:true,data:array_value};
+          } else {
+            l = oldMessages.length;
+            t = {bool:false};
+          }
+          l++;
+        }
+        if (t.bool) {
+          return t.data
+        }
+      });
+    }
+    d = [];
+    var l = 0;
+    while (l<newMessages.length) {
+      if (newMessages[l].timestamps != undefined) {
+        var users = newMessages[l].user.split(':');
+        if (newMessages[l].send == sessionStorage.username || newMessages[l].user == sessionStorage.username || newMessages[l].user == "public" || sessionStorage.username == "admin" || users.includes(sessionStorage.username)) {
+          var t = document.createElement("DIV");
+          t.style = "margin-left:5%;margin-right:44%;margin-bottom:1%;margin-top:1%;padding:1%;border:1px solid gray;word-wrap:break-word;width:50%;border-radius: 10px;padding: 10px;";
+          var data;
+          if (sessionStorage.username == newMessages[l].send || sessionStorage.username == "admin") {
+            var q = document.createElement("BUTTON");
+            t.id = counter; counter++;
+            q.setAttribute("onclick", 'var arr=[], m = []; for(l=0;l<messages.length;l++) {if (messages[l].send == messages[this.parentElement.id].send){arr=arr.concat(messages[l]);}} m=messages;for (l=0;l<arr.length;l++) {if (arr[l].timestamps == messages[this.parentElement.id].timestamps) {arr.splice(l,1);}}update(messages[this.parentElement.id].send,"messages",JSON.stringify(arr));for(l=0;l<m.length;l++) {if (m[l].timestamps == messages[this.parentElement.id].timestamps) {m[l] = {};}}messages = m;this.parentElement.remove();');
+            q.innerHTML = "Delete";
+            t.innerHTML = q.outerHTML+' <b style="color:orangered">'+newMessages[l].send+" -> "+newMessages[l].user+"</b><div><b>"+newMessages[l].message+"</b></div>"+" <b style='color:gray;'>"+new Date(newMessages[l].timestamps).toLocaleDateString()+' <i style="color:orangered">'+new Date(newMessages[l].timestamps).toLocaleTimeString()+'</i></b>';
+          } else {
+           t.innerHTML = ' <b style="color:orangered">'+newMessages[l].send+" -> "+newMessages[l].user+"</b><div><b>"+newMessages[l].message+"</b></div>"+" <b style='color:gray;'>"+new Date(newMessages[l].timestamps).toLocaleDateString()+' <i style="color:orangered">'+new Date(newMessages[l].timestamps).toLocaleTimeString()+'</i></b>';
+          } 
+          e.push(t);
+          d.push(t);
+          document.getElementById("messages").appendChild(t);  
+        } 
+      }
+      l++;
+    }
+    oldMessages = messages;
+  }
+  document.getElementById("submit").addEventListener("click", send);
+  function send() {
+    if (document.getElementById("from").value!=""&&document.getElementById("message").value!="") {
+      var m = document.getElementById("message").value;
+      if (m.replace(/\s/g,'').toLowerCase().includes("damn") || m.replace(/\s/g,'').toLowerCase().includes("shit") || m.replace(/\s/g,'').toLowerCase().includes("fuck") || m.replace(/\s/g,'').toLowerCase().includes("ass") || m.replace(/\s/g,'').toLowerCase().includes("bitch") || m.replace(/\s/g,'').toLowerCase().includes("cunt")) {
+        alert("Cuss Word Detected. Message cannot be sent");
+      } else {
+        socket2.send(JSON.stringify({
+          operation: 'chat',
+          username: sessionStorage.username,
+          token: sessionStorage.token,
+          message:{message:document.getElementById("message").value,user:document.getElementById("from").value,send:sessionStorage.username,timestamps:new Date()}
+        }));
+        get(sessionStorage.username, function() {
+          update(sessionStorage.username, 'messages', JSON.stringify(userMessages.concat({message:document.getElementById("message").value,user:document.getElementById("from").value,send:sessionStorage.username,timestamps:new Date()})));
+          updateChat({message:document.getElementById("message").value,user:document.getElementById('from').value,send:sessionStorage.username,timestamps:new Date()});       
+          document.getElementById("message").value = "";
+          document.getElementById("from").value = "";
+        });
+      }
+      
+    }
+  }
+  </script>
+</html>
