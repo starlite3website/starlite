@@ -17,7 +17,7 @@ var message = {};
 var status = {};
 var servers = {};
 
-const uri = "mongodb+srv://cs641311:355608-G38@cluster0.z6wsn.mongodb.net/?retryWrites=true";
+const uri = process.env.db;
 const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true});
 
 var db;
@@ -220,6 +220,7 @@ wss.on('connection', function(socket) {
                 servers[ip] = new Host();
                 servers[ip].control(ip);
               }
+              servers[ip].sockets.push(socket);
             }
             l++;
           }
