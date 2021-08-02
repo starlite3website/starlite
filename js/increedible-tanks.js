@@ -2892,6 +2892,9 @@ function shopClassesSupport(e) {
               t["increedible-tanks"] = userData;
             } catch(e) {}
             update(sessionStorage.username, 'playerdata', JSON.stringify(t));
+            document.removeEventListener('keydown', shopClassesKeyDown);
+            document.removeEventListener('click', shopClassesSupport);
+            shopClasses();
           }
         }
       }
