@@ -353,7 +353,7 @@ class Host {
     this.i.push(setInterval(function(host) {
       // add level multiplayer code here
       host.send();
-    }, 20, this));
+    }, 15, this));
     this.i.push(setInterval(function(host) {
       var l = 0;
       while (l<host.s.length) {
@@ -540,7 +540,7 @@ class Host {
     while (l<this.sockets.length) {
       if (this.sockets[l].username == data.username) {
         if (this.sockets[l].fpsLimiter == undefined) this.sockets[l].fpsLimiter = 0;
-        if (this.sockets[l].fpsLimiter == 2) {
+        if (this.sockets[l].fpsLimiter == 1) {
           this.sockets[l].send(JSON.stringify({
             operation: 'multiplayer',
             event: 'hostupdate',
