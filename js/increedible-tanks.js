@@ -40,7 +40,13 @@ function update(username, key, value) {
     }
   }
 }
-var interval, user, listener, interval2, b = [], s = [], ai = [], l1 = 0, l2 = 0, i = [], Game = new Game(), button = new Image(), gameplay1 = new Image(), red_bullet = new Image(), ai_top = new Image(), ai_base = new Image(), tank_base_png = new Image(), tank_top_png = new Image(), start_screen = new Image(), main_menu = new Image(), tank_base2 = new Image(), coins = new Image(), toolkit = new Image(), scaffolding = new Image(), boost = new Image(), flashbang = new Image(), victory_screen = new Image(), iron_tank_top = new Image(), iron_tank_base = new Image(), iron_tank_base2 = new Image(), diamond_tank_top = new Image(), diamond_tank_base = new Image(), diamond_tank_base2 = new Image();
+var interval, user, listener, interval2, b = [], s = [], ai = [], l1 = 0, l2 = 0, i = [], Game = new Game(), button = new Image(), gameplay1 = new Image(), red_bullet = new Image(), ai_top = new Image(), ai_base = new Image(), tank_base_png = new Image(), tank_top_png = new Image(), start_screen = new Image(), main_menu = new Image(), tank_base2 = new Image(), coins = new Image(), toolkit = new Image(), scaffolding = new Image(), boost = new Image(), flashbang = new Image(), victory_screen = new Image(), iron_tank_top = new Image(), iron_tank_base = new Image(), iron_tank_base2 = new Image(), diamond_tank_top = new Image(), diamond_tank_base = new Image(), diamond_tank_base2 = new Image(), dark_tank_base = new Image(), dark_tank_base2 = new Image(), dark_tank_top = new Image(), light_tank_base = new Image(), light_tank_base2 = new Image(), light_tank_top = new Image();
+dark_tank_base.src = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAAA1klEQVRYR+2YUQrEIAxE16sJOYgn8yCBXK0LBcEKtVNGYVmmXy3EZPp8X0mf7sk5H/13RKT+e9f7bO4ZwMwuwcYg7r4lKDI3lVKm4VrYWuvSkOjcNwGX3nApBeqXxvu/OxURUEO0KOcMlaYnD1oXd4caokVmBpX+/hWjstZaoT9Gi+QgSuquTg6yBOUgS1AOsgTlIEtQDrIE5SBLUA6yBOUgS1AOsgTlIEtQDrIE5SBLUA6yBP/HwRcLzKUrYHTuOfRpBbd6P930QOZeqIwHdgUb/Z3N/QI4D9Svu5ywMgAAAABJRU5ErkJggg==';
+dark_tank_base2.src = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAAA2ElEQVRYR+2YUQrEIAxE16sJOUhOloMIudouFAoqaGeJgpTpVwvRTJ/Pn6RP9ajqt/42s1R/73qf9b0C9AV9kF1Bkb4p59xQG1Fy96U00b7/BFx6wjlnaL/0hPnexcygDdEiVYVKzw8oIpCDpRToj9EiEYFK6eAIEx2EBJoU0cEoQToYJUgHowTpYJQgHYwSpINRgnQwSpAORgnSwSjB9ziIzkjcPQqtWQ+PPo4PyNnMQAz4khx/xMcHfJODS0fAKJir6dMxr55P3/cG6dtQ6RfsCtZf7FnfH3mg1J0r/kpqAAAAAElFTkSuQmCC';
+dark_tank_top.src = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAtCAYAAADcMyneAAABAElEQVRYR+3YwQ7CIBAE0O25B1PS///ChsYD55ptxKQqdChLgmY8F30ddkEYpPPP0LlPCKydob9LcKtN5DkeDgZ+UES22c0mvsUv+j3Qb0MPRdw4jibAEIKgSAS4J6e46TaZANf7KijyDHjAOedMgN57QZE5YBNcfEMUmQI2xZUgCcwVLTLNTJAJ6uJstf69p8karN1WmCATzPxp5F6s5cEmYZP8cpPo7DXtZKRBkLNpEySKQ4AfSdY2ho5HT3Qo8IC0AKJn4hLgC2kBRG8VSoE70gKI3stcAUYf1DwlzZB68bOrj9Q4AmMyTLBkzftWT0yQCSbWmf6XmYs7SnHNPwBtJsA9viK98gAAAABJRU5ErkJggg==';
+light_tank_base.src = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAAA7UlEQVRYR+2Y0QkCMRBETWVCJNYgCEJswhpswoAgWIPBgJUpHATuAskNTAJ+zH0lsNkdZt/tx5rN7LPWfuf3lJKZ30edW3UnAc65hbBSSIxxiFCkrvHeN8VlsSGEriLRurDA2/XetcPnywnKZ8r+1169nx8oIRq0O2yhULPGQc7yeiQoIRq0P1oo9P9bjMIqBisNF4O1PwEeM2KwYqHmIDRlG0FikHVQDLIOikHWQTHIOigGWQfFIOugGGQdFIOsg2KQdVAMsg6KQdZBmEF0gdl7oY7WnfbOa+uP3vvp7D5Sd7EYLx+MElbi0ar7A2OA1K9QZe48AAAAAElFTkSuQmCC';
+light_tank_base2.src = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAAA6UlEQVRYR+2YUQrDIBBE68kKBnuGQiBgL9Ez9BIVCoWcoVAhJ0shEDCCZmCVSph8Rdi4k+fzZ9UpeKy1c7h2zqlwXes913cJEBfEQWoFRfoqrfWGWoqS974oTbQvHPA7TkVPuLueof3UHuZ1l+fjBW2IFt3uA1TafkBjDOTg5+2hP0aLLr2GSulgChMdhATKFNFBKUE6KCVIB6UE6aCUIB2UEqSDUoJ0UEqQDkoJ0kEpweM4iM5I/jb6aD4gZzOJ2wRfkuaPuPmAh3Gw9JwaBbPMnfeOufR8er03SN/NYDz+oFaw+GLn+v4ApRHUnY0j2+8AAAAASUVORK5CYII=';
+light_tank_top.src = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAtCAYAAADcMyneAAABuUlEQVRYR+3YP07DMBgF8BcViblIzBk6ZWDIFRiYuEQHJDhAOAQ5AEgMvQQTA1fIwJCpQ+ZKdEYCBSU0LY1j+9lOolK5Y/PHv7w4/vIlwIH/ggP3wQNd79DRJVi6JrI5ng6G3hFAWT6JvPtlojQ/zFJhe3Bb/0WNTe20xUWnwmCL5aMSOJ/didvzT7BIBvibXIWLvoTB3t5flcDLi6sO4AlAInXAfdz5tzDYev2hBE6nZ+L21QTIOaQKqMVVI1sBqwNJpAzYC66JrjNFEnm8QN2tbU8827lolaApTnqriXloBLSFSdN0ASZJgiiKEIYh4jjuqcLtnybLMhRFgTzPkaZ1xRECkybogQB8gq4Tc/QEm7WOfdpHBbYXYgY5GlBWa3XIUYDSF4HNBFUhBwfqcM1DJEMOCmRxKuRgQFOcDDkI0BbXhXQBVucr2/XYFfcXyeCY3nSLnF/fAB1Nk1U1WU2weHlWvsU059V1dXWSqrbTCkh2dEyCzfg7pJWodRDZE5sAd0n2AGS/KpgCa2QPPqNxmTnYZaL6ZrY5V120B7LfYGQp+gR9gpK54Z9ik1r8P9dBy4pivGr8AM7yrD1RUkDvAAAAAElFTkSuQmCC';
 ai_base.src = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAAAuElEQVRYR+2YQQ7DMAgE68eRR5fHtWpaS7UVwkYmt8nNkpVdxmCQ22P8XtO6Teu7lqHubsDM5g2DEXe/xaii+xE+NffntNqkpNuyKLrBp3vp8W5m0v9kglK4kuR3k3ocEIygQvBCuh1uhSAEfwS4B6NUoJOsFgkEIdivGebBIBfoxatFAkEIMs0kOUAvXi0SCEKQaSbJAXrxapGUE6x+p1Yn+R5I9oCqBnwVbKo7CM9RVVOL3J/pvgGoAo+TFbDWigAAAABJRU5ErkJggg==";
 tank_top_png.src = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAtCAYAAADcMyneAAAA90lEQVRYR+3YUQrCMBAE0OkhhOKJPLInEsFDVLY2QqtJZ5sNRBm/G32d7CYmAzr/DJ37IGDtDP1dglNtIst4Ohj6QQDTNUh3eX0P9dvUQwl3CgI+ALBIBjgnZ7gxCHgHwCL3gCvcOQh4A8AiS8AmuPSOLDIHbIrzIAUslS0zzUpQCdriHLX+bdNUDdZuLEpQCRb+NGovtvJQk6hJfrlJbPaadjLTIMzZtAmSxTHAjyRrG8PGsyc6FrhCRgDZM7EH+EZGANlbBS9wRkYA2XuZI8Dko5rH0wy5F9+7+siNEzAlowQ9a963elKCSjCzzvS/zBzcUdw1/wSJGLAu8rB/lgAAAABJRU5ErkJggg==";
 tank_base_png.src = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAABGElEQVRYR+1Yuw6DMAx0NiT+gMXdGNI5/f+xmZu9Gdo/QGKjCi0SpUpiRBAdjgWQLvhy8QsrImqI6ElExMxDuE+X917N3/d6TtkNBBpmfqSM70V0SWzJIdhVWusv1WJEnXNF1ZTaVcYYEcGrtUVP+GKM6Hv/TzDnB9M2796LdiwFnZhFUNW27dD3fRZ8BMGqqmg84q7rsgRvzmUxawBnrbPwuq7fBLNIIkKQRFRSCJKIMpIoRpCkgg+VRJKaUhiJD4b1qCQxFVFJtvqgOIpRSVBJPgqg3UK7tTLvSEod2i20W3MFjvgvRruV8kG0WyvT3g8c7dZWBYtXkiNGwON0KyiRm3BZa4vOpyf1JXa/DC8X7EVs6R4puy8xsfCO7UNcsAAAAABJRU5ErkJggg==";
@@ -3009,8 +3015,8 @@ function shopTanks() {
   draw.fillText('Coins: '+userData.coins, 360, 100);
   if (userData.health == 300) draw.fillText('Equiped', 345, 170);
   if (userData.health == 400) draw.fillText('Equiped', 345, 240);
-  //draw.fillText('Equiped', 345, 310);
-  //draw.fillText('Equiped', 345, 380);
+  if (userData.health == 500) draw.fillText('Equiped', 345, 310);
+  if (userData.health == 600) draw.fillText('Equiped', 345, 380);
   document.addEventListener("click", shopTanksSupport);
   document.addEventListener('keydown', shopTanksKeyDown);
 }
@@ -3112,13 +3118,32 @@ function shopTanksSupport(e) {
     if (x < 200) {
       if (y > 280) {
         if (y < 330) {
-          /*if (userData.coins >= 500) {
-            userData.coins -= 500;
-            userData.toolkits += 1;
-            var t = playerData;
-            t['increedible-tanks'] = userData;
+          if (userData.coins >= 50000) {
+            if (userData.health < 400) {
+              alert('You need to buy Crystal Tank first!');
+              return;
+            }
+            if (userData.health > 400) {
+              alert('You already bought a better upgrade!');
+              return;
+            }
+            if (userData.health == 400) {
+              userData.health = 500;
+            }
+            userData.coins -= 50000;
+            try {
+              var t = playerData;
+              t["increedible-tanks"] = userData;
+            } catch(e) {}
+            setTimeout(function() {
+              document.removeEventListener('keydown', shopTanksKeyDown);
+              document.removeEventListener('click', shopTanksSupport);
+              shopTanks();
+            }, 20);
             update(sessionStorage.username, 'playerdata', JSON.stringify(t));
-          }*/
+          } else {
+            alert('Not Enough Money! You are '+50000-userData.coins+' coins short!');
+          }
         }
       }
     }
@@ -3127,13 +3152,32 @@ function shopTanksSupport(e) {
     if (x < 200) {
       if (y > 350) {
         if (y < 400) {
-          /*if (userData.coins >= 1000) {
-            userData.coins -= 1000;
-            // give item
-            var t = playerData;
-            t['increedible-tanks'] = userData;
+          if (userData.coins >= 75000) {
+            if (userData.health < 500) {
+              alert('You need to buy Dark Tank first!');
+              return;
+            }
+            if (userData.health > 500) {
+              alert('You already bought a better upgrade!');
+              return;
+            }
+            if (userData.health == 500) {
+              userData.health = 600;
+            }
+            userData.coins -= 75000;
+            try {
+              var t = playerData;
+              t["increedible-tanks"] = userData;
+            } catch(e) {}
+            setTimeout(function() {
+              document.removeEventListener('keydown', shopTanksKeyDown);
+              document.removeEventListener('click', shopTanksSupport);
+              shopTanks();
+            }, 20);
             update(sessionStorage.username, 'playerdata', JSON.stringify(t));
-          }*/
+          } else {
+            alert('Not Enough Money! You are '+75000-userData.coins+' coins short!');
+          }
         }
       }
     }
