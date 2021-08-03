@@ -687,9 +687,9 @@ class Joiner {
               } else if (pt[l].material == 'diamond') {
                 draw.drawImage(diamond_tank_base, pt[l].x, pt[l].y);
               } else if (pt[l].material == 'dark') {
-                draw.drawImage(dark_tank_base, -20, -20);
+                draw.drawImage(dark_tank_base, pt[l].x, pt[l].y);
               } else if (pt[l].material == 'light') {
-                draw.drawImage(dark_tank_base, -20, -20);
+                draw.drawImage(dark_tank_base, pt[l].x, pt[l].y);
               }
             } else {
               if (pt[l].material == 'normal') {
@@ -699,9 +699,9 @@ class Joiner {
               } else if (pt[l].material == 'diamond') {
                 draw.drawImage(diamond_tank_base2, pt[l].x, pt[l].y);
               } else if (pt[l].material == 'dark') {
-                draw.drawImage(dark_tank_base2, -20, -20);
+                draw.drawImage(dark_tank_base2, pt[l].x, pt[l].y);
               } else if (pt[l].material == 'light') {
-                draw.drawImage(light_tank_base2, -20, -20);
+                draw.drawImage(light_tank_base2, pt[l].x, pt[l].y);
               }
             }
           }
