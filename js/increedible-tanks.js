@@ -598,6 +598,10 @@ class Joiner {
       user.joiner.tank.material = 'iron';
     } else if (userData.health == 400) {
       user.joiner.tank.material = 'diamond';
+    } else if (userData.health == 500) {
+      user.joiner.tank.material = 'dark';
+    } else if (userData.health == 600) {
+      user.joiner.tank.material = 'light';
     }
     this.tank.helper = [];
     this.tank.intervals = [];
@@ -648,6 +652,10 @@ class Joiner {
                 draw.drawImage(iron_tank_base, -20, -20);
               } else if (pt[l].material == 'diamond') {
                 draw.drawImage(diamond_tank_base, -20, -20);
+              } else if (pt[l].material == 'dark') {
+                draw.drawImage(dark_tank_base, -20, -20);
+              } else if (pt[l].material == 'light') {
+                draw.drawImage(light_tank_base, -20, -20);
               }
             } else {
               if (pt[l].material == 'normal') {
@@ -656,6 +664,10 @@ class Joiner {
                 draw.drawImage(iron_tank_base2, -20, -20);
               } else if (pt[l].material == 'diamond') {
                 draw.drawImage(diamond_tank_base2, -20, -20);
+              } else if (pt[l].material == 'dark') {
+                draw.drawImage(dark_tank_base2, -20, -20);
+              } else if (pt[l].material == 'light') {
+                draw.drawImage(light_tank_base2, -20, -20);
               }
             }
             draw.rotate(-90 * Math.PI / 180);
@@ -668,6 +680,10 @@ class Joiner {
                 draw.drawImage(iron_tank_base, pt[l].x, pt[l].y);
               } else if (pt[l].material == 'diamond') {
                 draw.drawImage(diamond_tank_base, pt[l].x, pt[l].y);
+              } else if (pt[l].material == 'dark') {
+                draw.drawImage(dark_tank_base, -20, -20);
+              } else if (pt[l].material == 'light') {
+                draw.drawImage(dark_tank_base, -20, -20);
               }
             } else {
               if (pt[l].material == 'normal') {
@@ -676,6 +692,10 @@ class Joiner {
                 draw.drawImage(iron_tank_base2, pt[l].x, pt[l].y);
               } else if (pt[l].material == 'diamond') {
                 draw.drawImage(diamond_tank_base2, pt[l].x, pt[l].y);
+              } else if (pt[l].material == 'dark') {
+                draw.drawImage(dark_tank_base2, -20, -20);
+              } else if (pt[l].material == 'light') {
+                draw.drawImage(light_tank_base2, -20, -20);
               }
             }
           }
@@ -687,6 +707,10 @@ class Joiner {
             draw.drawImage(iron_tank_top, -20, -20 + pt[l].pushback);
           } else if (pt[l].material == 'diamond') {
             draw.drawImage(diamond_tank_top, -20, -20 + pt[l].pushback);
+          } else if (pt[l].material == 'dark') {
+            draw.drawImage(dark_tank_top, -20, -20 + pt[l].pushback);
+          } else if (pt[l].material == 'light') {
+            draw.drawImage(light_tank_top, -20, -20 + pt[l].pushback);
           }
           draw.rotate(-(pt[l].rotation * Math.PI / 180));
           draw.translate(-pt[l].x - 20, -pt[l].y - 20);
@@ -1074,6 +1098,10 @@ class Tank {
           draw.drawImage(iron_tank_base, -20, -20);
         } else if (this.material == 'diamond') {
           draw.drawImage(diamond_tank_base, -20, -20);
+        } else if (this.material == 'dark') {
+          draw.drawImage(dark_tank_base, -20, -20);
+        } else if (this.material == 'light') {
+          draw.drawImage(light_tank_base, -20, -20);
         }
       } else {
         if (this.material == 'normal') {
@@ -1082,6 +1110,10 @@ class Tank {
           draw.drawImage(iron_tank_base2, -20, -20);
         } else if (this.material == 'diamond') {
           draw.drawImage(diamond_tank_base2, -20, -20)
+        } else if (this.material == 'dark') {
+          draw.drawImage(dark_tank_base2, -20, -20);
+        } else if (this.material == 'light') {
+          draw.drawImage(light_tank_base2, -20, -20);
         }
       }
       draw.rotate(-90 * Math.PI / 180);
@@ -1094,6 +1126,10 @@ class Tank {
           draw.drawImage(iron_tank_base, this.x, this.y);
         } else if (this.material == 'diamond') {
           draw.drawImage(diamond_tank_base, this.x, this.y)
+        } else if (this.material == 'dark') {
+          draw.drawImage(dark_tank_base, this.x, this.y);
+        } else if (this.material == 'light') {
+          draw.drawImage(light_tank_base, this.x, this.y);
         }
       } else {
         if (this.material == 'normal') {
@@ -1102,6 +1138,10 @@ class Tank {
           draw.drawImage(iron_tank_base2, this.x, this.y);
         } else if (this.material == 'diamond') {
           draw.drawImage(diamond_tank_base2, this.x, this.y)
+        } else if (this.material == 'dark') {
+          draw.drawImage(dark_tank_base2, this.x, this.y);
+        } else if (this.material == 'light') {
+          draw.drawImage(light_tank_base2, this.x, this.y)
         }
       }
     }
@@ -1113,6 +1153,10 @@ class Tank {
       draw.drawImage(iron_tank_top, -20, -20 + this.pushback);
     } else if (this.material == 'diamond') {
       draw.drawImage(diamond_tank_top, -20, -20 + this.pushback);
+    } else if (this.material == 'dark') {
+      draw.drawImage(dark_tank_top, -20, -20 + this.pushback);
+    } else if (this.material == 'light') {
+      draw.drawImage(light_tank_top, -20, -20 + this.pushback);
     }
     if (this.pushback != 0) {
       this.pushback += 1;
@@ -1187,6 +1231,10 @@ class Tank {
       this.material = 'iron';
     } else if (userData.health == 400) {
       this.material = 'diamond';
+    } else if (userData.health == 500) {
+      this.material = 'dark';
+    } else if (userData.health == 600) {
+      this.material = 'light';
     }
     this.base = 0;
     this.pushback = 0;
@@ -2461,7 +2509,7 @@ function level(num, mo, m) {
               draw.drawImage(iron_tank_base, -20, -20);
             } else if (pt[l].material == 'diamond') {
               draw.drawImage(diamond_tank_base, -20, -20)
-            }
+            } 
           } else {
             if (pt[l].material == 'normal') {
               draw.drawImage(tank_base2, -20, -20);
