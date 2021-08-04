@@ -295,7 +295,7 @@ class Ai {
       xd = 0 - 1;
       yd = 0 - yd;
     }
-    s.push(new Shot(this.x + 20, this.y + 20, s.length - 1, xd, yd));
+    s.push(new Shot(this.x + 20, this.y + 20, s.length - 1, xd, yd, 'bullet'));
   }
   check() {
     var results = ai_check(this.x, this.y, false);
@@ -528,11 +528,11 @@ class Host {
           if (tank.fire) {
             pt[l].pushback = -3;
             if (tank.rotation > 180 && tank.rotation < 270) {
-              s.push(new Shot(pt[l].x + 20, pt[l].y + 20, s.length - 1, -tank.yd, tank.xd));
+              s.push(new Shot(pt[l].x + 20, pt[l].y + 20, s.length - 1, -tank.yd, tank.xd, 'bullet'));
             } else if (tank.rotation > 270) {
-              s.push(new Shot(pt[l].x + 20, pt[l].y + 20, s.length - 1, tank.yd, -tank.xd));
+              s.push(new Shot(pt[l].x + 20, pt[l].y + 20, s.length - 1, tank.yd, -tank.xd, 'bullet'));
             } else {
-              s.push(new Shot(pt[l].x + 20, pt[l].y + 20, s.length - 1, tank.xd, tank.yd));
+              s.push(new Shot(pt[l].x + 20, pt[l].y + 20, s.length - 1, tank.xd, tank.yd, 'bullet'));
             }
           }
         }
