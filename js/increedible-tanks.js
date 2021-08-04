@@ -107,9 +107,11 @@ function ai_check(x, y, isBlock) {
       if (s[l].x < x + t || s[l].x + 5 < x + t) {
         if (s[l].y > y || s[l].y + 5 > y) {
           if (s[l].y < y + t || s[l].y + 5 < y + t) {
-            delete s[l]; // remove object from javascript memory for #lesslag
-            s.splice(l, 1); // remove extra undefined from array(leftover from *delete s[l];*)
-            return [true, l];
+            setTimeout(function() {
+              delete s[l]; // remove object from javascript memory for #lesslag
+              s.splice(l, 1);
+            }, 20);
+            return [true, s[l].type];
           }
         }
       }
@@ -299,14 +301,13 @@ class Ai {
   }
   check() {
     var results = ai_check(this.x, this.y, false);
-    if (results[0]) alert(results)
     if (results[0]) {
       if (this.inactive != true) {
         draw.fillStyle = "#FF0000";
         draw.fillRect(this.x, this.y, 40, 40);
-        if (s[results[1]].type == 'bullet') {
+        if (results[1] == 'bullet') {
           this.health -= 20;
-        } else if (s[results[1]].type == 'power_bullet') {
+        } else if (results[1] == 'power_bullet') {
           this.health -= 50;
         }
         if (this.health <= 0) {
@@ -1201,7 +1202,6 @@ class Tank {
 
   check() {
     var results = ai_check(this.x, this.y, false);
-    if (results[0]) alert(results);
     if (results[0] && !user.tank.inactive) {
       if (user.tank.shields > 0) {
         user.tank.shields -= 1;
@@ -1776,13 +1776,12 @@ function Block(health, x, y, isInvincible, isExplosive, isScaffolding) {
     var l = 0;
     while (l < b.length) {
       var results = ai_check(b[l].x * 50, b[l].y * 50, true);
-      if (results[0]) alert(results);
       if (results[0]) {
         draw.fillStyle = "#FF0000";
         draw.fillRect(b[l].x * 50, b[l].y * 50, 50, 50);
-        if (s[results[1]].type == 'bullet') {
+        if (results[1] == 'bullet') {
           b[l].health -= 10;
-        } else if (s[results[1]].type == 'power_bullet') {
+        } else if (results[1] == 'power_bullet') {
           b[l].health -= 50;
         }
         if (b[l].health <= 0) {
