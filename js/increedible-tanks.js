@@ -98,7 +98,7 @@ function sound(src) {
   }
 }
 
-function ai_check(x, y, isBlock, giveID) {
+function ai_check(x, y, isBlock) {
   var t = 40;
   if (isBlock) t = 50;
   var l = 0;
@@ -109,10 +109,7 @@ function ai_check(x, y, isBlock, giveID) {
           if (s[l].y < y + t || s[l].y + 5 < y + t) {
             delete s[l]; // remove object from javascript memory for #lesslag
             s.splice(l, 1); // remove extra undefined from array(leftover from *delete s[l];*)
-            if (!giveID) {
-              return true;
-            }
-            return l;
+            return [true, l];
           }
         }
       }
@@ -301,14 +298,14 @@ class Ai {
     s.push(new Shot(this.x + 20, this.y + 20, s.length - 1, xd, yd));
   }
   check() {
-    if (ai_check(this.x, this.y)) {
+    var results = ai_check(this.x, this.y, false);
+    if (results[0]) {
       if (this.inactive != true) {
         draw.fillStyle = "#FF0000";
         draw.fillRect(this.x, this.y, 40, 40);
-        alert(ai_check(this.x, this.y, false, true))
-        if (s[ai_check(this.x, this.y, false, true)].type == 'bullet') {
+        if (s[results[1]].type == 'bullet') {
           this.health -= 20;
-        } else if (s[ai_check(this.x, this.y, false, true)].type == 'power_bullet') {
+        } else if (s[results[1]].type == 'power_bullet') {
           this.health -= 50;
         }
         if (this.health <= 0) {
@@ -1202,7 +1199,8 @@ class Tank {
   }
 
   check() {
-    if (ai_check(this.x, this.y) && !user.tank.inactive) {
+    var results = ai_check(this.x, this.y, false);
+    if (results[0] && !user.tank.inactive) {
       if (user.tank.shields > 0) {
         user.tank.shields -= 1;
         return;
@@ -1775,12 +1773,13 @@ function Block(health, x, y, isInvincible, isExplosive, isScaffolding) {
   i.push(window.setInterval(function () {
     var l = 0;
     while (l < b.length) {
-      if (ai_check(b[l].x * 50, b[l].y * 50, true)) {
+      var results = ai_check(b[l].x * 50, b[l].y * 50, true);
+      if (results[0]) {
         draw.fillStyle = "#FF0000";
         draw.fillRect(b[l].x * 50, b[l].y * 50, 50, 50);
-        if (s[ai_check(b[l].x * 50, b[l].y * 50, true, true)].type == 'bullet') {
+        if (s[results[1]].type == 'bullet') {
           b[l].health -= 10;
-        } else if (s[ai_check(b[l].x*50, b[l].x*50, true, true)].type == 'power_bullet') {
+        } else if (s[results[1]].type == 'power_bullet') {
           b[l].health -= 50;
         }
         if (b[l].health <= 0) {
