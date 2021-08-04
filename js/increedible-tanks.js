@@ -1530,9 +1530,9 @@ class Tank {
         this.yd = 0;
       }
       if ((this.xd < 0 && this.yd < 0) || (this.xd > 0 && this.yd > 0)) {
-        s.push(new Shot(this.x + 20, this.y + 20, s.length - 1, this.yd, this.xd, 'power_bullet'));
+        s.push(new Shot(this.x + 20, this.y + 20, s.length - 1, this.yd, this.xd, 'bullet'));
       } else {
-        s.push(new Shot(this.x + 20, this.y + 20, s.length - 1, this.xd, this.yd, 'power_bullet'));
+        s.push(new Shot(this.x + 20, this.y + 20, s.length - 1, this.xd, this.yd, 'bullet'));
       }
     }
   }
