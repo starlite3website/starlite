@@ -40,7 +40,8 @@ function update(username, key, value) {
     }
   }
 }
-var interval, user, listener, interval2, b = [], s = [], ai = [], l1 = 0, l2 = 0, i = [], Game = new Game(), button = new Image(), gameplay1 = new Image(), red_bullet = new Image(), ai_top = new Image(), ai_base = new Image(), tank_base_png = new Image(), tank_top_png = new Image(), start_screen = new Image(), main_menu = new Image(), tank_base2 = new Image(), coins = new Image(), toolkit = new Image(), scaffolding = new Image(), boost = new Image(), flashbang = new Image(), victory_screen = new Image(), iron_tank_top = new Image(), iron_tank_base = new Image(), iron_tank_base2 = new Image(), diamond_tank_top = new Image(), diamond_tank_base = new Image(), diamond_tank_base2 = new Image(), dark_tank_base = new Image(), dark_tank_base2 = new Image(), dark_tank_top = new Image(), light_tank_base = new Image(), light_tank_base2 = new Image(), light_tank_top = new Image();
+var interval, user, listener, interval2, b = [], s = [], ai = [], l1 = 0, l2 = 0, i = [], Game = new Game(), button = new Image(), gameplay1 = new Image(), red_bullet = new Image(), ai_top = new Image(), ai_base = new Image(), tank_base_png = new Image(), tank_top_png = new Image(), start_screen = new Image(), main_menu = new Image(), tank_base2 = new Image(), coins = new Image(), toolkit = new Image(), scaffolding = new Image(), boost = new Image(), flashbang = new Image(), victory_screen = new Image(), iron_tank_top = new Image(), iron_tank_base = new Image(), iron_tank_base2 = new Image(), diamond_tank_top = new Image(), diamond_tank_base = new Image(), diamond_tank_base2 = new Image(), dark_tank_base = new Image(), dark_tank_base2 = new Image(), dark_tank_top = new Image(), light_tank_base = new Image(), light_tank_base2 = new Image(), light_tank_top = new Image(), power_bullet = new Image();
+power_bullet.src = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAAXNSR0IArs4c6QAAAGdJREFUGFdjVJz2+f8jphcMDIKSDH+FHzAo3pJnYGTYc+U/w9tXDIpvTRnuC59mYH4vy8DIvPLLf7m3/xlAquX+STA8EmZkYGSecfv/X8HHcJUMwmIMjCAz76s9ZGB+q8DA8P45WDUAnYQo+68luFQAAAAASUVORK5CYII=';
 dark_tank_base.src = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAAA1klEQVRYR+2YUQrEIAxE16sJOYgn8yCBXK0LBcEKtVNGYVmmXy3EZPp8X0mf7sk5H/13RKT+e9f7bO4ZwMwuwcYg7r4lKDI3lVKm4VrYWuvSkOjcNwGX3nApBeqXxvu/OxURUEO0KOcMlaYnD1oXd4caokVmBpX+/hWjstZaoT9Gi+QgSuquTg6yBOUgS1AOsgTlIEtQDrIE5SBLUA6yBOUgS1AOsgTlIEtQDrIE5SBLUA6yBP/HwRcLzKUrYHTuOfRpBbd6P930QOZeqIwHdgUb/Z3N/QI4D9Svu5ywMgAAAABJRU5ErkJggg==';
 dark_tank_base2.src = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAAA2ElEQVRYR+2YUQrEIAxE16sJOUhOloMIudouFAoqaGeJgpTpVwvRTJ/Pn6RP9ajqt/42s1R/73qf9b0C9AV9kF1Bkb4p59xQG1Fy96U00b7/BFx6wjlnaL/0hPnexcygDdEiVYVKzw8oIpCDpRToj9EiEYFK6eAIEx2EBJoU0cEoQToYJUgHowTpYJQgHYwSpINRgnQwSpAORgnSwSjB9ziIzkjcPQqtWQ+PPo4PyNnMQAz4khx/xMcHfJODS0fAKJir6dMxr55P3/cG6dtQ6RfsCtZf7FnfH3mg1J0r/kpqAAAAAElFTkSuQmCC';
 dark_tank_top.src = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAtCAYAAADcMyneAAABAElEQVRYR+3YwQ7CIBAE0O25B1PS///ChsYD55ptxKQqdChLgmY8F30ddkEYpPPP0LlPCKydob9LcKtN5DkeDgZ+UES22c0mvsUv+j3Qb0MPRdw4jibAEIKgSAS4J6e46TaZANf7KijyDHjAOedMgN57QZE5YBNcfEMUmQI2xZUgCcwVLTLNTJAJ6uJstf69p8karN1WmCATzPxp5F6s5cEmYZP8cpPo7DXtZKRBkLNpEySKQ4AfSdY2ho5HT3Qo8IC0AKJn4hLgC2kBRG8VSoE70gKI3stcAUYf1DwlzZB68bOrj9Q4AmMyTLBkzftWT0yQCSbWmf6XmYs7SnHNPwBtJsA9viK98gAAAABJRU5ErkJggg==';
@@ -97,7 +98,7 @@ function sound(src) {
   }
 }
 
-function ai_check(x, y, isBlock) {
+function ai_check(x, y, isBlock, giveID) {
   var t = 40;
   if (isBlock) t = 50;
   var l = 0;
@@ -108,7 +109,8 @@ function ai_check(x, y, isBlock) {
           if (s[l].y < y + t || s[l].y + 5 < y + t) {
             delete s[l]; // remove object from javascript memory for #lesslag
             s.splice(l, 1); // remove extra undefined from array(leftover from *delete s[l];*)
-            return true;
+            if (giveID == undefined) return true;
+            return l;
           }
         }
       }
@@ -301,7 +303,11 @@ class Ai {
       if (this.inactive != true) {
         draw.fillStyle = "#FF0000";
         draw.fillRect(this.x, this.y, 40, 40);
-        this.health -= 20;
+        if (s[ai_check(this.x, this.y, false, true)].type == 'bullet') {
+          this.health -= 20;
+        } else if (s[ai_check(this.x, this.y, false, true)].type == 'power_bullet') {
+          this.health -= 50;
+        }
         if (this.health <= 0) {
           Game.coins += 100;
           Game.foes--;
@@ -359,7 +365,8 @@ class Ai {
   }
 }
 class Shot {
-  constructor(x, y, id, xm, ym) {
+  constructor(x, y, id, xm, ym, type) {
+    this.type = type;
     this.xm = xm;
     this.ym = ym;
     while (this.xm * this.xm + this.ym * this.ym > 1.2 || this.xm * this.xm + this.ym * this.ym < 1) {
@@ -385,9 +392,12 @@ class Shot {
   }
 
   draw() {
-    // draw the bullet
-    draw.fillStyle = "#000000";
-    draw.fillRect(this.x, this.y, 5, 5);
+    if (this.type == 'bullet') {
+      draw.fillStyle = "#000000";
+      draw.fillRect(this.x, this.y, 5, 5);
+    } else if (this.type == 'power_bullet') {
+      draw.drawImage(power_bullet, this.x, this.y);
+    }
   }
 
   update() {
@@ -1517,9 +1527,9 @@ class Tank {
         this.yd = 0;
       }
       if ((this.xd < 0 && this.yd < 0) || (this.xd > 0 && this.yd > 0)) {
-        s.push(new Shot(this.x + 20, this.y + 20, s.length - 1, this.yd, this.xd));
+        s.push(new Shot(this.x + 20, this.y + 20, s.length - 1, this.yd, this.xd, 'power_bullet'));
       } else {
-        s.push(new Shot(this.x + 20, this.y + 20, s.length - 1, this.xd, this.yd));
+        s.push(new Shot(this.x + 20, this.y + 20, s.length - 1, this.xd, this.yd, 'power_bullet'));
       }
     }
   }
@@ -1765,7 +1775,11 @@ function Block(health, x, y, isInvincible, isExplosive, isScaffolding) {
       if (ai_check(b[l].x * 50, b[l].y * 50, true)) {
         draw.fillStyle = "#FF0000";
         draw.fillRect(b[l].x * 50, b[l].y * 50, 50, 50);
-        b[l].health -= 10;
+        if (s[ai_check(b[l].x * 50, b[l].y * 50, true, true)].type == 'bullet') {
+          b[l].health -= 10;
+        } else if (s[ai_check(b[l].x*50, b[l].x*50, true, true)].type == 'power_bullet') {
+          b[l].health -= 50;
+        }
         if (b[l].health <= 0) {
           if (Game.level == 'multiplayer') {
             let isScaffolding = false;
