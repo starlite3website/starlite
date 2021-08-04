@@ -299,7 +299,7 @@ class Ai {
   }
   check() {
     var results = ai_check(this.x, this.y, false);
-    alert(results)
+    if (results[0]) alert(results)
     if (results[0]) {
       if (this.inactive != true) {
         draw.fillStyle = "#FF0000";
@@ -1201,7 +1201,7 @@ class Tank {
 
   check() {
     var results = ai_check(this.x, this.y, false);
-    alert(results);
+    if (results[0]) alert(results);
     if (results[0] && !user.tank.inactive) {
       if (user.tank.shields > 0) {
         user.tank.shields -= 1;
@@ -1776,7 +1776,7 @@ function Block(health, x, y, isInvincible, isExplosive, isScaffolding) {
     var l = 0;
     while (l < b.length) {
       var results = ai_check(b[l].x * 50, b[l].y * 50, true);
-      alert(results);
+      if (results[0]) alert(results);
       if (results[0]) {
         draw.fillStyle = "#FF0000";
         draw.fillRect(b[l].x * 50, b[l].y * 50, 50, 50);
