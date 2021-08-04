@@ -109,7 +109,9 @@ function ai_check(x, y, isBlock, giveID) {
           if (s[l].y < y + t || s[l].y + 5 < y + t) {
             delete s[l]; // remove object from javascript memory for #lesslag
             s.splice(l, 1); // remove extra undefined from array(leftover from *delete s[l];*)
-            if (giveID == undefined) return true;
+            if (!giveID) {
+              return true;
+            }
             return l;
           }
         }
