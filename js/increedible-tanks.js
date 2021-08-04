@@ -107,10 +107,10 @@ function ai_check(x, y, isBlock) {
       if (s[l].x < x + t || s[l].x + 5 < x + t) {
         if (s[l].y > y || s[l].y + 5 > y) {
           if (s[l].y < y + t || s[l].y + 5 < y + t) {
-            setTimeout(function() {
+            setTimeout(function(l) {
               delete s[l]; // remove object from javascript memory for #lesslag
               s.splice(l, 1);
-            }, 20);
+            }, 20, l);
             return [true, s[l].type];
           }
         }
