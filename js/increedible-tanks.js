@@ -305,6 +305,7 @@ class Ai {
       if (this.inactive != true) {
         draw.fillStyle = "#FF0000";
         draw.fillRect(this.x, this.y, 40, 40);
+        alert(ai_check(this.x, this.y, false, true))
         if (s[ai_check(this.x, this.y, false, true)].type == 'bullet') {
           this.health -= 20;
         } else if (s[ai_check(this.x, this.y, false, true)].type == 'power_bullet') {
