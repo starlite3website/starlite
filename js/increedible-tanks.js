@@ -14,7 +14,7 @@ function socket_support() {
   socket = new WebSocket('wss://star1.ml/server');
   socket.onclose = function() {
     document.getElementById('saveStatus').innerHTML = 'Disconnected... Reconnecting';
-    respawn = setInterval(socket_support, 1000);
+    socket_support();
   }
   socket.onopen = function() {
     clearInterval(respawn);

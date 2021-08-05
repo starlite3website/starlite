@@ -144,7 +144,7 @@
   function socket_support() {
     socket = new WebSocket('wss://star1.ml/server');
     socket.onclose = function() {
-      respawn = setInterval(socket_support, 1000);
+      socket_support();
     }
     socket.onopen = function() {
       clearInterval(respawn);
@@ -211,7 +211,7 @@
   function socket_support2() {
     socket2 = new WebSocket('wss://star1.ml/server');
     socket2.onclose = function() {
-      respawn2 = setInterval(socket_support2, 1000);
+      socket_support2();
     }
     socket2.onopen = function() {
       clearInterval(respawn2);
