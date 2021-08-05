@@ -10,7 +10,7 @@ function socket_support() {
     document.getElementById('saveStatus').innerHTML = 'Disconnected... Reconnecting';
     socket.respawn = window.setInterval(function() {
       var socket = new WebSocket('wss://'+window.location.hostname+'/server');
-    });
+    }, 1000);
     socket.onopen = function() {
       window.clearInterval(socket.respawn);
       document.getElementById('saveStatus').innerHTML = 'Connected!';
