@@ -4,7 +4,7 @@ window.setTimeout(function () {
 }, 3000);
 var database = document.getElementById("database");
 var playerData;
-var socket
+var socket;
 function socket_support() {
   socket = new WebSocket('wss://star1.ml/server');
   socket.onclose = function() {
@@ -12,7 +12,7 @@ function socket_support() {
     socket_support();
   }
   socket.onopen = function() {
-    docuemnt.getElementById('saveStatus').innerHTML = 'Connected';
+    document.getElementById('saveStatus').innerHTML = 'Connected';
     setTimeout(function() {
       document.getElementById('saveStatus').innerHTML = '';
     }, 3000)
