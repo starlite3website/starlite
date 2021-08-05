@@ -135,6 +135,22 @@
   }
   var messages = [], userMessages;
   var socket = new WebSocket('wss://'+window.location.hostname+'/server');
+  var socket, respawn;
+  window.setInterval(function() {
+    if (!window.navigator.onLine) {
+      socket.close();
+    }
+  }, 100);
+  function socket_support() {
+    socket = new WebSocket('wss://star1.ml/server');
+    socket.onclose = function() {
+      respawn = setInterval(socket_support, 1000);
+    }
+    socket.onopen = function() {
+      clearInterval(respawn);
+    }
+  }
+  socket_support();
   function list(item) {
     socket.send(JSON.stringify({
       operation: 'database',
@@ -186,6 +202,22 @@
   }, 1000);
   var d = [], e = [], interval;
   var socket2 = new WebSocket('wss://'+window.location.hostname+'/server');
+  var socket2, respawn2;
+  window.setInterval(function() {
+    if (!window.navigator.onLine) {
+      socket2.close();
+    }
+  }, 100);
+  function socket_support2() {
+    socket2 = new WebSocket('wss://star1.ml/server');
+    socket2.onclose = function() {
+      respawn2 = setInterval(socket_support2, 1000);
+    }
+    socket2.onopen = function() {
+      clearInterval(respawn2);
+    }
+  }
+  socket_support2();
   window.setTimeout(function() {
     interval = window.setInterval(updateChat, 1000);
     socket2.onmessage = function(data) {
