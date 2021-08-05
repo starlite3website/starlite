@@ -5,6 +5,23 @@ window.setTimeout(function () {
 var database = document.getElementById("database");
 var playerData;
 var socket = new WebSocket('wss://'+window.location.hostname+'/server');
+function socket_support() {
+  socket.onclose = function() {
+    document.getElementById('saveStatus').innerHTML = 'Disconnected... Reconnecting';
+    socket.respawn = window.setInterval(function() {
+      var socket = new WebSocket('wss://'+window.location.hostname+'/server');
+    });
+    socket.onopen = function() {
+      window.clearInterval(socket.respawn);
+      document.getElementById('saveStatus').innerHTML = 'Connected!';
+      setTimeout(function() {
+        document.getElementById('saveStatus').innerHTML = '';
+      }, 3000);
+      socket_support();
+    }
+  }
+}
+socket_support();
 function get(username, callback) {
   socket.send(JSON.stringify({
     operation: 'database',
