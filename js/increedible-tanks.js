@@ -24,6 +24,7 @@ function socket_support() {
     }, 3000)
   }
 }
+socket_support();
 function get(username, callback) {
   socket.send(JSON.stringify({
     operation: 'database',
