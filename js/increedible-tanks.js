@@ -4,21 +4,26 @@ window.setTimeout(function () {
 }, 3000);
 var database = document.getElementById("database");
 var playerData;
-var socket;
+var socket, respawn;
+window.setInterval(function() {
+  if (!window.navigator.onLine) {
+    socket.close();
+  }
+}, 100);
 function socket_support() {
   socket = new WebSocket('wss://star1.ml/server');
   socket.onclose = function() {
     document.getElementById('saveStatus').innerHTML = 'Disconnected... Reconnecting';
-    socket_support();
+    respawn = setInterval(socket_support, 1000);
   }
   socket.onopen = function() {
+    clearInterval(respawn);
     document.getElementById('saveStatus').innerHTML = 'Connected';
     setTimeout(function() {
       document.getElementById('saveStatus').innerHTML = '';
     }, 3000)
   }
 }
-socket_support();
 function get(username, callback) {
   socket.send(JSON.stringify({
     operation: 'database',
