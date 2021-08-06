@@ -11,7 +11,7 @@ window.setInterval(function() {
   }
 }, 100);
 function socket_support() {
-  socket = new WebSocket('wss://star1.ml/server');
+  socket = new WebSocket('wss://'+window.location.hostname+'/server');
   socket.onclose = function() {
     document.getElementById('saveStatus').innerHTML = 'Disconnected... Reconnecting';
     socket_support();
