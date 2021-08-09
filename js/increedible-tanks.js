@@ -2,6 +2,9 @@
 window.setTimeout(function () {
   document.getElementById('wall').remove();
 }, 3000);
+window.oncontextmenu = function() {
+  return false;
+}
 var database = document.getElementById("database");
 var playerData;
 var socket, respawn;
@@ -1519,7 +1522,7 @@ class Tank {
     }
   }
 
-  fire() {
+  fire(button) {
     if (!user.tank.inactive) {
       this.pushback = -3;
       this.xd = 1;
@@ -1548,10 +1551,16 @@ class Tank {
         this.xd = 1;
         this.yd = 0;
       }
-      if ((this.xd < 0 && this.yd < 0) || (this.xd > 0 && this.yd > 0)) {
-        s.push(new Shot(this.x + 20, this.y + 20, s.length - 1, this.yd, this.xd, 'bullet'));
+      var type;
+      if (button == 0) {
+        type = 'bullet';
       } else {
-        s.push(new Shot(this.x + 20, this.y + 20, s.length - 1, this.xd, this.yd, 'bullet'));
+        type = 'power_bullet'
+      }
+      if ((this.xd < 0 && this.yd < 0) || (this.xd > 0 && this.yd > 0)) {
+        s.push(new Shot(this.x + 20, this.y + 20, s.length - 1, this.yd, this.xd, type));
+      } else {
+        s.push(new Shot(this.x + 20, this.y + 20, s.length - 1, this.xd, this.yd, type));
       }
     }
   }
@@ -1596,12 +1605,13 @@ function tank_listener3(e) {
   user.tank.rotation = rotation;
 }
 var tankSupport;
-function tank_listener4() {
+function tank_listener4(e) {
+  var mouseValue = e.button;
   clearInterval(tankSupport);
-  tankSupport = window.setInterval(tank_support, 500);
+  tankSupport = window.setInterval(tank_support, 500, mouseValue);
 }
-function tank_support() {
-  user.tank.fire();
+function tank_support(button) {
+  user.tank.fire(button);
 }
 function tank_listener5() {
   clearInterval(tankSupport);
