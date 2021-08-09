@@ -147,7 +147,6 @@
       socket_support();
     }
     socket.onopen = function() {
-      clearInterval(respawn);
     }
   }
   socket_support();
@@ -209,7 +208,7 @@
     }
   }, 100);
   function socket_support2() {
-    socket2 = new WebSocket('wss://star1.ml/server');
+    socket2 = new WebSocket('wss://'+window.location.hostname+'/server');
     socket2.onclose = function() {
       socket_support2();
     }
