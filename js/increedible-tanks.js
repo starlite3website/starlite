@@ -2654,10 +2654,15 @@ function level(num, mo, m) {
   }
   var l = 0;
   while (l < b.length) {
-    if (ai_check(b[l].x * 50, b[l].y * 50, true)) {
+    var results = ai_check(b[l].x * 50, b[l].y * 50, true);
+    if (results[0]) {
       draw.fillStyle = "#FF0000";
       draw.fillRect(b[l].x * 50, b[l].y * 50, 50, 50);
-      b[l].health -= 10;
+      if (results[1] == 'bullet') {
+        b[l].health -= 10;
+      } else if (results[1] == 'power_bullet') {
+        b[l].health -= 50;
+      }
       if (b[l].health <= 0) {
         if (Game.level == 'multiplayer') {
           let isScaffolding = false;
