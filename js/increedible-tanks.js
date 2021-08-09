@@ -1308,6 +1308,7 @@ class Tank {
     this.canInvis = true;
     this.canChangeInvisStatus = true;
     this.class = userData.class;
+    this.altAttack = true;
     canvas.addEventListener("keydown", tank_listener1, false);
     canvas.addEventListener("keyup", tank_listener2, false);
     canvas.addEventListener('mousemove', tank_listener3, false);
@@ -1555,7 +1556,15 @@ class Tank {
       if (button == 0) {
         type = 'bullet';
       } else {
-        type = 'power_bullet'
+        if (this.altAttack) {
+          type = 'power_bullet';
+          this.altAttack = false;
+          setTimeout(function() {
+            user.tank.altAttack = true;
+          }, 10000);
+        } else {
+          type = 'bullet';
+        }
       }
       if ((this.xd < 0 && this.yd < 0) || (this.xd > 0 && this.yd > 0)) {
         s.push(new Shot(this.x + 20, this.y + 20, s.length - 1, this.yd, this.xd, type));
