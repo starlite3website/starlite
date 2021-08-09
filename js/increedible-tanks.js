@@ -63,7 +63,8 @@ function update(username, key, value) {
     }
   }
 }
-var interval, user, listener, interval2, b = [], s = [], ai = [], l1 = 0, l2 = 0, i = [], Game = new Game(), button = new Image(), gameplay1 = new Image(), red_bullet = new Image(), ai_top = new Image(), ai_base = new Image(), tank_base_png = new Image(), tank_top_png = new Image(), start_screen = new Image(), main_menu = new Image(), tank_base2 = new Image(), coins = new Image(), toolkit = new Image(), scaffolding = new Image(), boost = new Image(), flashbang = new Image(), victory_screen = new Image(), iron_tank_top = new Image(), iron_tank_base = new Image(), iron_tank_base2 = new Image(), diamond_tank_top = new Image(), diamond_tank_base = new Image(), diamond_tank_base2 = new Image(), dark_tank_base = new Image(), dark_tank_base2 = new Image(), dark_tank_top = new Image(), light_tank_base = new Image(), light_tank_base2 = new Image(), light_tank_top = new Image(), power_bullet = new Image();
+var interval, user, listener, interval2, b = [], s = [], ai = [], l1 = 0, l2 = 0, i = [], Game = new Game(), button = new Image(), gameplay1 = new Image(), red_bullet = new Image(), ai_top = new Image(), ai_base = new Image(), tank_base_png = new Image(), tank_top_png = new Image(), start_screen = new Image(), main_menu = new Image(), tank_base2 = new Image(), coins = new Image(), toolkit = new Image(), scaffolding = new Image(), boost = new Image(), flashbang = new Image(), victory_screen = new Image(), iron_tank_top = new Image(), iron_tank_base = new Image(), iron_tank_base2 = new Image(), diamond_tank_top = new Image(), diamond_tank_base = new Image(), diamond_tank_base2 = new Image(), dark_tank_base = new Image(), dark_tank_base2 = new Image(), dark_tank_top = new Image(), light_tank_base = new Image(), light_tank_base2 = new Image(), light_tank_top = new Image(), power_bullet = new Image(), mega_bullet = new Image();
+mega_bullet.src = '';
 power_bullet.src = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAAXNSR0IArs4c6QAAAGdJREFUGFdjVJz2+f8jphcMDIKSDH+FHzAo3pJnYGTYc+U/w9tXDIpvTRnuC59mYH4vy8DIvPLLf7m3/xlAquX+STA8EmZkYGSecfv/X8HHcJUMwmIMjCAz76s9ZGB+q8DA8P45WDUAnYQo+68luFQAAAAASUVORK5CYII=';
 dark_tank_base.src = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAAA1klEQVRYR+2YUQrEIAxE16sJOYgn8yCBXK0LBcEKtVNGYVmmXy3EZPp8X0mf7sk5H/13RKT+e9f7bO4ZwMwuwcYg7r4lKDI3lVKm4VrYWuvSkOjcNwGX3nApBeqXxvu/OxURUEO0KOcMlaYnD1oXd4caokVmBpX+/hWjstZaoT9Gi+QgSuquTg6yBOUgS1AOsgTlIEtQDrIE5SBLUA6yBOUgS1AOsgTlIEtQDrIE5SBLUA6yBP/HwRcLzKUrYHTuOfRpBbd6P930QOZeqIwHdgUb/Z3N/QI4D9Svu5ywMgAAAABJRU5ErkJggg==';
 dark_tank_base2.src = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAAA2ElEQVRYR+2YUQrEIAxE16sJOUhOloMIudouFAoqaGeJgpTpVwvRTJ/Pn6RP9ajqt/42s1R/73qf9b0C9AV9kF1Bkb4p59xQG1Fy96U00b7/BFx6wjlnaL/0hPnexcygDdEiVYVKzw8oIpCDpRToj9EiEYFK6eAIEx2EBJoU0cEoQToYJUgHowTpYJQgHYwSpINRgnQwSpAORgnSwSjB9ziIzkjcPQqtWQ+PPo4PyNnMQAz4khx/xMcHfJODS0fAKJir6dMxr55P3/cG6dtQ6RfsCtZf7FnfH3mg1J0r/kpqAAAAAElFTkSuQmCC';
@@ -331,6 +332,8 @@ class Ai {
           this.health -= 20;
         } else if (results[1] == 'power_bullet') {
           this.health -= 50;
+        } else if (resutls[1] == 'mega_bullet') {
+          this.health -= 100;
         }
         if (this.health <= 0) {
           Game.coins += 100;
@@ -421,6 +424,8 @@ class Shot {
       draw.fillRect(this.x, this.y, 5, 5);
     } else if (this.type == 'power_bullet') {
       draw.drawImage(power_bullet, this.x, this.y);
+    } else if (this.type == 'mega_bullet') {
+      draw.drawImage(mega_bullet, this.x, this.y);
     }
   }
 
@@ -632,6 +637,7 @@ class Joiner {
       canChangeInvisStatus: true,
       class: userData.class,
       altAttack: true,
+      megaAttack: true,
     };
     if (userData.health == 200) {
       user.joiner.tank.material = 'normal';
@@ -819,6 +825,8 @@ class Joiner {
         draw.fillRect(user.joiner.hostupdate.bullets[l].x, user.joiner.hostupdate.bullets[l].y, 5, 5);
         } else if (user.joiner.hostupdate.bullets[l].type == 'power_bullet') {
           draw.drawImage(power_bullet, user.joiner.hostupdate.bullets[l].x, user.joiner.hostupdate.bullets[l].y);
+        } else if (user.joiner.hostupdate.bullets[l].type == 'mega_bullet') {
+          draw.drawImage(mega_bullet, user.joiner.hostupdate.bullets[l].x, user.joiner.hostupdate.bullets[l].y);
         }
         l++;
       }
@@ -1006,6 +1014,14 @@ class Joiner {
               user.joiner.tank.canShield = true;
             }, 40000);
           }
+        } else if (user.joiner.tank.class == 'tactical') {
+          if (user.joiner.tank.megaAttack) {
+            tank_M_support('megaAttack');
+            user.joiner.tank.megaAttack = false;
+            setTimeout(function() {
+              user.joiner.tank.megaAttack = true;
+            }, 30000);
+          }
         }
         break;
     }
@@ -1093,18 +1109,22 @@ function tank_M_listener4(e) {
 }
 function tank_M_support(button) {
   user.joiner.tank.fire = true;
-  if (button == 0) {
-    user.joiner.tank.type = 'bullet';
-  } else {
-    if (user.joiner.tank.altAttack) {
-      user.joiner.tank.type = 'power_bullet';
-      user.joiner.tank.altAttack = false;
-      setTimeout(function() {
-        user.joiner.tank.altAttack = true;
-      }, 10000);
-    } else {
+  if (button != 'megaAttack') {
+    if (button == 0) {
       user.joiner.tank.type = 'bullet';
+    } else {
+      if (user.joiner.tank.altAttack) {
+        user.joiner.tank.type = 'power_bullet';
+        user.joiner.tank.altAttack = false;
+        setTimeout(function() {
+          user.joiner.tank.altAttack = true;
+        }, 10000);
+      } else {
+        user.joiner.tank.type = 'bullet';
+      }
     }
+  } else {
+    user.joiner.tank.type = 'mega_bullet';
   }
   user.joiner.tank.xd = 1;
   user.joiner.tank.angle = user.joiner.tank.rotation % 90;
@@ -1329,6 +1349,7 @@ class Tank {
     this.canChangeInvisStatus = true;
     this.class = userData.class;
     this.altAttack = true;
+    this.megaAttack = true;
     canvas.addEventListener("keydown", tank_listener1, false);
     canvas.addEventListener("keyup", tank_listener2, false);
     canvas.addEventListener('mousemove', tank_listener3, false);
@@ -1526,6 +1547,14 @@ class Tank {
                 user.tank.canShield = true;
               }, 40000);
             }
+          } else if (this.class == 'tactical') {
+            if (this.megaAttack) {
+              user.tank.fire('megaAttack');
+              this.megaAttack = false;
+              setTimeout(function() {
+                user.tank.megaAttack = true;
+              }, 30000)
+            }
           }
             break;
         case 76:
@@ -1573,18 +1602,22 @@ class Tank {
         this.yd = 0;
       }
       var type;
-      if (button == 0) {
-        type = 'bullet';
-      } else {
-        if (this.altAttack) {
-          type = 'power_bullet';
-          this.altAttack = false;
-          setTimeout(function() {
-            user.tank.altAttack = true;
-          }, 10000);
-        } else {
+      if (button != 'megaAttack') {
+        if (button == 0) {
           type = 'bullet';
+        } else {
+          if (this.altAttack) {
+            type = 'power_bullet';
+            this.altAttack = false;
+            setTimeout(function() {
+              user.tank.altAttack = true;
+            }, 10000);
+          } else {
+            type = 'bullet';
+          }
         }
+      } else {
+        type = 'mega_bullet';
       }
       if ((this.xd < 0 && this.yd < 0) || (this.xd > 0 && this.yd > 0)) {
         s.push(new Shot(this.x + 20, this.y + 20, s.length - 1, this.yd, this.xd, type));
@@ -1841,6 +1874,8 @@ function Block(health, x, y, isInvincible, isExplosive, isScaffolding) {
           b[l].health -= 10;
         } else if (results[1] == 'power_bullet') {
           b[l].health -= 50;
+        } else if (results[1] == 'mega_bullet') {
+          b[l].health -= 100;
         }
         if (b[l].health <= 0) {
           if (Game.level == 'multiplayer') {
@@ -2691,6 +2726,8 @@ function level(num, mo, m) {
         b[l].health -= 10;
       } else if (results[1] == 'power_bullet') {
         b[l].health -= 50;
+      } else if (results[1] == 'mega_bullet') {
+        b[l].health -= 100;
       }
       if (b[l].health <= 0) {
         if (Game.level == 'multiplayer') {
