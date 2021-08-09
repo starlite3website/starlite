@@ -331,7 +331,7 @@ class Ai {
         if (results[1] == 'bullet') {
           this.health -= 20;
         } else if (results[1] == 'power_bullet') {
-          this.health -= 50;
+          this.health -= 80;
         } else if (resutls[1] == 'mega_bullet') {
           this.health -= 100;
         }
@@ -1873,7 +1873,7 @@ function Block(health, x, y, isInvincible, isExplosive, isScaffolding) {
         if (results[1] == 'bullet') {
           b[l].health -= 10;
         } else if (results[1] == 'power_bullet') {
-          b[l].health -= 50;
+          b[l].health -= 80;
         } else if (results[1] == 'mega_bullet') {
           b[l].health -= 100;
         }
@@ -2048,7 +2048,7 @@ function level(num, mo, m) {
     if (m) {
       Game.borders = [-500, 500, -500, 500];
       endlessRunner = window.setInterval(function () {
-        if (Math.round(Math.random() * 2) >= 1) {
+        if (Math.round(Math.random() * 5) >= 1) {
           var x = Math.round(Math.random() * 20) - 10;
           var y = Math.round(Math.random() * 20) - 10;
           weak(x, y, true)
@@ -2725,7 +2725,7 @@ function level(num, mo, m) {
       if (results[1] == 'bullet') {
         b[l].health -= 10;
       } else if (results[1] == 'power_bullet') {
-        b[l].health -= 50;
+        b[l].health -= 80;
       } else if (results[1] == 'mega_bullet') {
         b[l].health -= 100;
       }
