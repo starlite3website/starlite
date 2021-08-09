@@ -818,7 +818,7 @@ class Joiner {
         draw.fillStyle = "#000000";
         draw.fillRect(user.joiner.hostupdate.bullets[l].x, user.joiner.hostupdate.bullets[l].y, 5, 5);
         } else if (user.joiner.hostupdate.bullets[l].type == 'power_bullet') {
-          draw.drawImage(power_bullet, user.joiner.bullets.hostupdate[l].x, user.joiner.hostupdate.bullets[l].y);
+          draw.drawImage(power_bullet, user.joiner.hostupdate.bullets[l].x, user.joiner.hostupdate.bullets[l].y);
         }
         l++;
       }
