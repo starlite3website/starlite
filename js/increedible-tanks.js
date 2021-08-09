@@ -45,23 +45,25 @@ function get(username, callback) {
   }
 }
 function update(username, key, value) {
-  document.getElementById('saveStatus').innerHTML = 'Saving...'
-  socket.send(JSON.stringify({
-    operation: 'database',
-    token: sessionStorage.token,
-    task: 'update',
-    username: sessionStorage.username,
-    key: key,
-    value: value,
-  }));
-  socket.onmessage = function(data) {
-    if (JSON.parse(data.data).success) {
-      document.getElementById('saveStatus').innerHTML = 'Saved!';
-      setTimeout(function() {
-        document.getElementById('saveStatus').innerHTML = '';
-      }, 3000);
+  try {
+    document.getElementById('saveStatus').innerHTML = 'Saving...'
+    socket.send(JSON.stringify({
+      operation: 'database',
+      token: sessionStorage.token,
+      task: 'update',
+      username: sessionStorage.username,
+      key: key,
+      value: value,
+    }));
+    socket.onmessage = function(data) {
+      if (JSON.parse(data.data).success) {
+        document.getElementById('saveStatus').innerHTML = 'Saved!';
+        setTimeout(function() {
+          document.getElementById('saveStatus').innerHTML = '';
+        }, 3000);
+      }
     }
-  }
+  } catch(e) {}
 }
 var interval, user, listener, interval2, b = [], s = [], ai = [], l1 = 0, l2 = 0, i = [], Game = new Game(), button = new Image(), gameplay1 = new Image(), red_bullet = new Image(), ai_top = new Image(), ai_base = new Image(), tank_base_png = new Image(), tank_top_png = new Image(), start_screen = new Image(), main_menu = new Image(), tank_base2 = new Image(), coins = new Image(), toolkit = new Image(), scaffolding = new Image(), boost = new Image(), flashbang = new Image(), victory_screen = new Image(), iron_tank_top = new Image(), iron_tank_base = new Image(), iron_tank_base2 = new Image(), diamond_tank_top = new Image(), diamond_tank_base = new Image(), diamond_tank_base2 = new Image(), dark_tank_base = new Image(), dark_tank_base2 = new Image(), dark_tank_top = new Image(), light_tank_base = new Image(), light_tank_base2 = new Image(), light_tank_top = new Image(), power_bullet = new Image(), mega_bullet = new Image();
 mega_bullet.src = '';
