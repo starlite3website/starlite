@@ -366,11 +366,16 @@ class Host {
       var l = 0;
       while (l < host.pt.length) {
         if (host.pt[l].ded != true) {
-          if (ai_check(host.pt[l].x, host.pt[l].y, false, host)) {
+          var results = ai_check(host.pt[l].x, host.pt[l].y, false, host);
+          if (results[0]) {
             if (host.pt[l].shields > 0) {
               host.pt[l].shields -= 1;
             } else if (host.pt[l].immune) {} else {
-              host.pt[l].health -= 20;
+              if (results[1] == 'bullet') {
+                host.pt[l].health -= 20;
+              } else if (results[1] == 'power_bullet') {
+                host.pt[l].health -= 50;
+              }
               host.pt[l].invis = false;
               host.pt[l].damagedRecent = true;
               setTimeout(function(l, host) {
@@ -400,8 +405,13 @@ class Host {
       }
       var l = 0;
       while (l < host.b.length) {
-        if (ai_check(host.b[l].x * 50, host.b[l].y * 50, true, host)) {
-          host.b[l].health -= 10;
+        var results = ai_check(host.b[l].x * 50, host.b[l].y * 50, true, host);
+        if (results[0]) {
+          if (results[1] == 'bullet') {
+            host.b[l].health -= 10;
+          } else if (results[1] == 'power_bullet') {
+            host.b[l].health -= 50;
+          }
           if (host.b[l].health <= 0) {
             let isScaffolding = false;
             var t = 0;
@@ -527,11 +537,11 @@ class Host {
           if (tank.fire) {
             this.pt[l].pushback = -3;
             if (tank.rotation > 180 && tank.rotation < 270) {
-              this.s.push(new Shot(this.pt[l].x + 20, this.pt[l].y + 20, this.s.length - 1, -tank.yd, tank.xd));
+              this.s.push(new Shot(this.pt[l].x + 20, this.pt[l].y + 20, this.s.length - 1, -tank.yd, tank.xd, tank.type));
             } else if (tank.rotation > 270) {
-              this.s.push(new Shot(this.pt[l].x + 20, this.pt[l].y + 20, this.s.length - 1, tank.yd, -tank.xd));
+              this.s.push(new Shot(this.pt[l].x + 20, this.pt[l].y + 20, this.s.length - 1, tank.yd, -tank.xd, tank.type));
             } else {
-              this.s.push(new Shot(this.pt[l].x + 20, this.pt[l].y + 20, this.s.length - 1, tank.xd, tank.yd));
+              this.s.push(new Shot(this.pt[l].x + 20, this.pt[l].y + 20, this.s.length - 1, tank.xd, tank.yd, tank.type));
             }
           }
         }
@@ -691,7 +701,8 @@ function Block(health, x, y, isInvincible, isExplosive, isScaffolding, host) {
   }
 }
 class Shot { // done
-  constructor(x, y, id, xm, ym) {
+  constructor(x, y, id, xm, ym, type) {
+    this.type = type;
     this.xm = xm;
     this.ym = ym;
     while (this.xm * this.xm + this.ym * this.ym > 1.2 || this.xm * this.xm + this.ym * this.ym < 1) {
@@ -729,9 +740,10 @@ function ai_check(x, y, isBlock, host) {
       if (host.s[l].x < x + t || host.s[l].x + 5 < x + t) {
         if (host.s[l].y > y || host.s[l].y + 5 > y) {
           if (host.s[l].y < y + t || host.s[l].y + 5 < y + t) {
-            delete host.s[l]; // remove object from javascript memory for #lesslag
-            host.s.splice(l, 1); // remove extra undefined from array(leftover from *delete s[l];*)
-            return true;
+            var type = host.s[l].type;
+            delete host.s[l];
+            host.s.splice(l, 1);
+            return [true, type];
           }
         }
       }

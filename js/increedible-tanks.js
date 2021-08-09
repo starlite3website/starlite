@@ -631,6 +631,7 @@ class Joiner {
       invis: false,
       canChangeInvisStatus: true,
       class: userData.class,
+      altAttack: true,
     };
     if (userData.health == 200) {
       user.joiner.tank.material = 'normal';
@@ -813,8 +814,12 @@ class Joiner {
       }
       var l = 0;
       while (l < user.joiner.hostupdate.bullets.length) {
+        if (user.joiner.hostupdate.bullets[l].type == 'bullet') {
         draw.fillStyle = "#000000";
         draw.fillRect(user.joiner.hostupdate.bullets[l].x, user.joiner.hostupdate.bullets[l].y, 5, 5);
+        } else if (user.joiner.hostupdate.bullets[l].type == 'power_bullet') {
+          draw.drawImage(power_bullet, user.joiner.bullets[l].x, user.joiner.hostupdate.bullets[l].y);
+        }
         l++;
       }
       var l = 0;
@@ -1029,8 +1034,10 @@ class Joiner {
         canInvis: user.joiner.tank.canInvis,
         canChangeInvisStatus: user.joiner.tank.canChangeInvisStatus,
         immune: user.joiner.tank.immune,
+        type: user.joiner.tank.type,
       }
     }));
+    user.joiner.tank.type = null;
     user.joiner.tank.x = 0;
     user.joiner.tank.y = 0;
     user.joiner.tank.fire = false;
@@ -1079,13 +1086,26 @@ function tank_M_listener3(e) {
   user.joiner.tank.rotation = rotation;
   user.joiner.send();
 }
-function tank_M_listener4() {
+function tank_M_listener4(e) {
   user.joiner.tank.fire = false;
   clearInterval(tankSupport);
-  tankSupport = window.setInterval(tank_M_support, 450);
+  tankSupport = window.setInterval(tank_M_support, 450, e.button);
 }
-function tank_M_support() {
+function tank_M_support(button) {
   user.joiner.tank.fire = true;
+  if (button == 0) {
+    user.joiner.tank.type = 'bullet';
+  } else {
+    if (user.joiner.tank.altAttack) {
+      user.joiner.tank.type = 'power_bullet';
+      user.joiner.tank.altAttack = false;
+      setTimeout(function() {
+        user.joiner.tank.altAttack = true;
+      }, 10000);
+    } else {
+      user.joiner.tank.type = 'bullet';
+    }
+  }
   user.joiner.tank.xd = 1;
   user.joiner.tank.angle = user.joiner.tank.rotation % 90;
   user.joiner.tank.yd = Math.abs(((user.joiner.tank.xd * user.joiner.tank.angle) - (90 * user.joiner.tank.xd)) / user.joiner.tank.angle);
