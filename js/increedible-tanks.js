@@ -2048,7 +2048,7 @@ function level(num, mo, m) {
     if (m) {
       Game.borders = [-500, 500, -500, 500];
       endlessRunner = window.setInterval(function () {
-        if (Math.round(Math.random() * 4) >= 1) {
+        if (Math.round(Math.random() * 3) >= 1) {
           var x = Math.round(Math.random() * 20) - 10;
           var y = Math.round(Math.random() * 20) - 10;
           weak(x, y, true)
