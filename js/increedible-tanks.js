@@ -1122,6 +1122,7 @@ function tank_M_support(button) {
           user.joiner.tank.altAttack = true;
         }, 10000);
       } else {
+        user.joiner.tank.fire = false;
         return;
       }
     }
@@ -1576,6 +1577,24 @@ class Tank {
 
   fire(button) {
     if (!user.tank.inactive) {
+      var type;
+      if (button != 'megaAttack') {
+        if (button == 0) {
+          type = 'bullet';
+        } else {
+          if (this.altAttack) {
+            type = 'power_bullet';
+            this.altAttack = false;
+            setTimeout(function() {
+              user.tank.altAttack = true;
+            }, 10000);
+          } else {
+            return;
+          }
+        }
+      } else {
+        type = 'mega_bullet';
+      }
       this.pushback = -3;
       this.xd = 1;
       this.angle = this.rotation % 90;
@@ -1602,24 +1621,6 @@ class Tank {
       } else if (this.rotation == 270) {
         this.xd = 1;
         this.yd = 0;
-      }
-      var type;
-      if (button != 'megaAttack') {
-        if (button == 0) {
-          type = 'bullet';
-        } else {
-          if (this.altAttack) {
-            type = 'power_bullet';
-            this.altAttack = false;
-            setTimeout(function() {
-              user.tank.altAttack = true;
-            }, 10000);
-          } else {
-            return;
-          }
-        }
-      } else {
-        type = 'mega_bullet';
       }
       if ((this.xd < 0 && this.yd < 0) || (this.xd > 0 && this.yd > 0)) {
         s.push(new Shot(this.x + 20, this.y + 20, s.length - 1, this.yd, this.xd, type));
