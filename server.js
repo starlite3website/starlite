@@ -378,7 +378,8 @@ class Host {
               }
               host.pt[l].invis = false;
               host.pt[l].damagedRecent = true;
-              setTimeout(function(l, host) {
+              clearInterval(host.pt[l].damagedRecentInterval);
+              host.pt[l].damagedRecentInterval = setTimeout(function(l, host) {
                 if (host.pt[l] != undefined) host.pt[l].damagedRecent = false;
               }, 10000, l, host);
               if (host.pt[l].health <= 0) {

@@ -1122,7 +1122,7 @@ function tank_M_support(button) {
           user.joiner.tank.altAttack = true;
         }, 10000);
       } else {
-        user.joiner.tank.type = 'bullet';
+        return;
       }
     }
   } else {
@@ -1615,7 +1615,7 @@ class Tank {
               user.tank.altAttack = true;
             }, 10000);
           } else {
-            type = 'bullet';
+            return;
           }
         }
       } else {
