@@ -17,7 +17,15 @@ var message = {};
 var status = {};
 var servers = {};
 
+const uri = process.env.db;
+const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true});
 
+var db;
+client.connect(function(err) {
+  console.log('SUCCESSFULLY CONNECTED TO DB');
+  db = client.db('data').collection('data');
+  console.log('DB INIT');
+})
 
 const server = http.createServer(function(req, res) {
   var pathname = url.parse(req.url).pathname;
@@ -376,8 +384,8 @@ class Host {
               }
               host.pt[l].invis = false;
               host.pt[l].damagedRecent = true;
-              clearTimeout(host[pt[l].username+'_damageTimer']);
-              host[pt[l].username+'_damageTimer'] = setTimeout(function(l, host) {
+              clearTimeout(host[pt[l].username+'_damageTimer'].damagedRecentInterval);
+              host[pt[l].username+'_damageTimer'].damagedRecentInterval = setTimeout(function(l, host) {
                 if (host.pt[l] != undefined) host.pt[l].damagedRecent = false;
               }, 10000, l, host);
               if (host.pt[l].health <= 0) {
