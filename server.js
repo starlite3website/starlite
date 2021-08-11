@@ -386,7 +386,9 @@ class Host {
               host.pt[l].damagedRecent = true;
               clearTimeout(host[host.pt[l].username+'_damageTimer']);
               host[host.pt[l].username+'_damageTimer'] = setTimeout(function(l, host) {
-                if (host.pt[l] != undefined) host.pt[l].damagedRecent = false;
+                try {
+                  if (host.pt[l] != undefined) host.pt[l].damagedRecent = false;
+                } catch(e) {}
               }, 10000, l, host);
               if (host.pt[l].health <= 0) {
                 host.pt[l].ded = true;
@@ -398,8 +400,10 @@ class Host {
                   host.pt[l].y = -500;
                 }
                 setTimeout(function(l, host) {
-                  host.pt[l].ded = false;
-                  host.pt[l].health = host.pt[l].maxHealth;
+                  try {
+                    host.pt[l].ded = false;
+                    host.pt[l].health = host.pt[l].maxHealth;
+                  } catch(e) {}
                 }, 10000, l, host);
               }
             }
@@ -481,7 +485,9 @@ class Host {
           if (tank.shielded) {
             this.pt[l].shields = 5;
             setTimeout(function(l, host) {
-              host.pt[l].shields = 0;
+              try {
+                host.pt[l].shields = 0;
+              } catch(e) {}
             }, 10000, l, this);
           }
           this.pt[l].base = tank.base;
