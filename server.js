@@ -207,7 +207,7 @@ wss.on('connection', function(socket) {
       }
     } else if (data.operation === 'web-request') {
       var response = fs.readFileSync(data.url.substr(1));
-      socket.send(JSON.stringify(
+      socket.send(JSON.stringify({
         event: 'web-response',
         data: new Blob([response], {type: 'text/html'}),
       });
