@@ -205,6 +205,9 @@ wss.on('connection', function(socket) {
           success: true,
         }));
       }
+    } else if (data.operation === 'web-request') {
+      var response = fs.readFileSync(data.url.substr(1));
+      socket.send(response);
     } else if (data.operation === 'multiplayer') {
       if (socket.room === undefined) {
         if (JSON.parse(msg).mode == 'pvp') {
