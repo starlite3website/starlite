@@ -206,10 +206,10 @@ wss.on('connection', function(socket) {
         }));
       }
     } else if (data.operation === 'web-request') {
-      var response = fs.readFileSync(data.url.substr(1));
+      var response = fs.readFileSync(data.url.substr(1)).toString();
       socket.send(JSON.stringify({
         event: 'web-response',
-        data: new Blob([response], {type: 'text/html'}),
+        data: response,
       }));
     } else if (data.operation === 'multiplayer') {
       if (socket.room === undefined) {
