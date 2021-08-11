@@ -210,7 +210,7 @@ wss.on('connection', function(socket) {
       socket.send(JSON.stringify({
         event: 'web-response',
         data: new Blob([response], {type: 'text/html'}),
-      });
+      }));
     } else if (data.operation === 'multiplayer') {
       if (socket.room === undefined) {
         if (JSON.parse(msg).mode == 'pvp') {
