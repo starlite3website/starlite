@@ -384,8 +384,8 @@ class Host {
               }
               host.pt[l].invis = false;
               host.pt[l].damagedRecent = true;
-              clearTimeout(host[pt[l].username+'_damageTimer'].damagedRecentInterval);
-              host[pt[l].username+'_damageTimer'].damagedRecentInterval = setTimeout(function(l, host) {
+              clearTimeout(host[host.pt[l].username+'_damageTimer'].damagedRecentInterval);
+              host[host.pt[l].username+'_damageTimer'].damagedRecentInterval = setTimeout(function(l, host) {
                 if (host.pt[l] != undefined) host.pt[l].damagedRecent = false;
               }, 10000, l, host);
               if (host.pt[l].health <= 0) {
