@@ -2020,7 +2020,7 @@
     if (sessionStorage.username == undefined) {
       var t = confirm("Do you want to play as Guest?");
       if (t) {
-        userData = { username: "Guest" + JSON.stringify(Math.random()), health: 200, coins: 0, level: 1, boosts: 0, blocks: 0, flashbangs: 0, toolkits: 0, class: 'normal' };
+        userData = { username: "Guest" + JSON.stringify(Math.random()), health: 200, coins: 0, level: 1, boosts: 0, blocks: 0, flashbangs: 0, toolkits: 0, class: 'normal', stealth: false, builder: false, tactical: false, summoner: false, steel: false, crystal: false, dark: false, light: false};
         user = {};
         user.username = userData.username;
         mainMenu();
@@ -2032,7 +2032,7 @@
       user.username = sessionStorage.username;
       get(sessionStorage.username, function () {
         if (userData == undefined) {
-          userData = { username: sessionStorage.username, health: 200, coins: 0, level: 1, blocks: 0, flashbangs: 0, boosts: 0, toolkits: 0, class: 'normal' }
+          userData = { username: sessionStorage.username, health: 200, coins: 0, level: 1, blocks: 0, flashbangs: 0, boosts: 0, toolkits: 0, class: 'normal', stealth: false, builder: false, tactical: false, summoner: false, steel: false, crystal: false, dark: false, light: false}
         }
         user.level = userData.level;
         user.coins = userData.coins;
@@ -3214,7 +3214,9 @@
       if (x < 200) {
         if (y > 140) {
           if (y < 190) {
-            if (userData.coins >= 20000) {
+            if (userData.steel) {
+              userData.health = 300;
+            } else if (userData.coins >= 20000) {
               if (userData.health == 200) {
                 userData.health = 300;
               } else {
@@ -3243,7 +3245,9 @@
       if (x < 200) {
         if (y > 210) {
           if (y < 260) {
-            if (userData.coins >= 40000) {
+            if (userData.crystal) {
+              userData.health = 400;
+            } else if (userData.coins >= 40000) {
               if (userData.health < 300) {
                 alert('You need to buy Steel Tank first!');
                 return;
@@ -3277,7 +3281,9 @@
       if (x < 200) {
         if (y > 280) {
           if (y < 330) {
-            if (userData.coins >= 50000) {
+            if (userData.dark) {
+              userData.health = 500;
+            } else if (userData.coins >= 50000) {
               if (userData.health < 400) {
                 alert('You need to buy Crystal Tank first!');
                 return;
@@ -3311,7 +3317,9 @@
       if (x < 200) {
         if (y > 350) {
           if (y < 400) {
-            if (userData.coins >= 75000) {
+            if (userData.light) {
+              userData.health = 600;
+            } else if (userData.coins >= 75000) {
               if (userData.health < 500) {
                 alert('You need to buy Dark Tank first!');
                 return;
