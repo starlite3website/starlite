@@ -61,7 +61,7 @@ const server = http.createServer(function(req, res) {
     if (pathname.includes('.html')) res.writeHead(200, { 'Content-Type': 'text/html' });
     if (pathname.includes('.png')) res.writeHead(200, { 'Content-Type': 'image/png' });
     if (pathname.includes('.css')) res.writeHead(200, { 'Content-Type': 'text/css' });
-    if (pathname.includes('.js')) res.writeHead(200, {'Content-Type': 'application/js'});
+    if (pathname.includes('.js')) res.writeHead(200, {'Content-Type': 'application/javascript'});
     res.write(data);
     res.end();
   });
