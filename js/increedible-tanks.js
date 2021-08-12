@@ -3216,6 +3216,11 @@
           if (y < 190) {
             if (userData.steel) {
               userData.health = 300;
+              setTimeout(function () {
+                document.removeEventListener('keydown', shopTanksKeyDown);
+                document.removeEventListener('click', shopTanksSupport);
+                shopTanks();
+              }, 20);
             } else if (userData.coins >= 20000) {
               if (userData.health == 200) {
                 userData.health = 300;
@@ -3248,6 +3253,11 @@
           if (y < 260) {
             if (userData.crystal) {
               userData.health = 400;
+              setTimeout(function () {
+                document.removeEventListener('keydown', shopTanksKeyDown);
+                document.removeEventListener('click', shopTanksSupport);
+                shopTanks();
+              }, 20);
             } else if (userData.coins >= 40000) {
               if (userData.health < 300) {
                 alert('You need to buy Steel Tank first!');
@@ -3285,6 +3295,11 @@
           if (y < 330) {
             if (userData.dark) {
               userData.health = 500;
+              setTimeout(function () {
+                document.removeEventListener('keydown', shopTanksKeyDown);
+                document.removeEventListener('click', shopTanksSupport);
+                shopTanks();
+              }, 20);
             } else if (userData.coins >= 50000) {
               if (userData.health < 400) {
                 alert('You need to buy Crystal Tank first!');
@@ -3322,6 +3337,11 @@
           if (y < 400) {
             if (userData.light) {
               userData.health = 600;
+              setTimeout(function () {
+                document.removeEventListener('keydown', shopTanksKeyDown);
+                document.removeEventListener('click', shopTanksSupport);
+                shopTanks();
+              }, 20);
             } else if (userData.coins >= 75000) {
               if (userData.health < 500) {
                 alert('You need to buy Dark Tank first!');
