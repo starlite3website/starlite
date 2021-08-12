@@ -3219,6 +3219,7 @@
             } else if (userData.coins >= 20000) {
               if (userData.health == 200) {
                 userData.health = 300;
+                userData.steel = true;
               } else {
                 alert('You already bought a better upgrade!');
                 return;
@@ -3258,6 +3259,7 @@
               }
               if (userData.health == 300) {
                 userData.health = 400;
+                userData.crystal = true;
               }
               userData.coins -= 40000;
               try {
@@ -3294,6 +3296,7 @@
               }
               if (userData.health == 400) {
                 userData.health = 500;
+                userData.dark = true;
               }
               userData.coins -= 50000;
               try {
@@ -3330,6 +3333,7 @@
               }
               if (userData.health == 500) {
                 userData.health = 600;
+                userData.light = true;
               }
               userData.coins -= 75000;
               try {
