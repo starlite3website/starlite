@@ -24,6 +24,7 @@ var db;
 client.connect(function(err) {
   console.log('SUCCESSFULLY CONNECTED TO DB');
   db = client.db('data').collection('data');
+  chat_db = client.db('data').collection('chatServers');
   console.log('DB INIT');
 })
 
@@ -324,6 +325,39 @@ wss.on('connection', function(socket) {
           }))
         }
       })
+    } else if (data.operation == 'chat-servers') {
+      var values = [], item;
+      var cursor = await db.find({});
+      await cursor.forEach(function(value) {
+        values.push(value);
+      });
+      var l = 0;
+      while (l<values.length) {
+        if (values[l].name == data.name) {
+          item = values[l];
+        }
+        l++;
+      }
+      if (!item.members.includes(data.username)) return;
+      if (data.task == 'get') {
+        socket.send(JSON.stringify({
+          type: 'chat-servers-return',
+          data: item.messages,
+        }))
+      } else if (data.task == 'update') {
+        item[data.key] = data.value;
+        const query = {
+          username: data.username,
+        }
+        const options = {
+          upsert: false,
+        }
+        chat_db.replaceOne(query, item, options);
+      } else if (data.task == 'delete') {
+         chat_db.deleteOne({
+            name: data.name,
+         })
+      }
     }
   });
   socket.on('close', function() {
