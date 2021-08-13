@@ -327,7 +327,7 @@ wss.on('connection', function(socket) {
       })
     } else if (data.operation == 'chat-servers') {
       var values = [], item;
-      var cursor = await db.find({});
+      var cursor = await chat_db.find({});
       await cursor.forEach(function(value) {
         values.push(value);
       });
