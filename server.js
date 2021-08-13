@@ -353,6 +353,9 @@ wss.on('connection', function(socket) {
           upsert: false,
         }
         chat_db.replaceOne(query, item, options);
+        socket.send(JSON.stringify({
+          success: true,
+        }));
       } else if (data.task == 'add-message') {
         item['messages'] = JSON.stringify(JSON.parse(item['messages']).concat(data.addition));
         const query = {
