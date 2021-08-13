@@ -24,7 +24,7 @@ var db;
 client.connect(function(err) {
   console.log('SUCCESSFULLY CONNECTED TO DB');
   db = client.db('data').collection('data');
-  chat_db = client.db('data').collection('chatServers');
+  chat_db = client.db('data').collection('ChatServers');
   console.log('DB INIT');
 })
 
