@@ -353,6 +353,15 @@ wss.on('connection', function(socket) {
           upsert: false,
         }
         chat_db.replaceOne(query, item, options);
+      } else if (data.task == 'add-message') {
+        item['messages'] = item['messages'].concat(data.addition);
+        const query = {
+          name: data.name,
+        }
+        const options = {
+          upsert: false,
+        }
+        chat_db.replaceOne(query, item, options);
       } else if (data.task == 'delete') {
          chat_db.deleteOne({
             name: data.name,
