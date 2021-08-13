@@ -347,7 +347,7 @@ wss.on('connection', function(socket) {
       } else if (data.task == 'update') {
         item[data.key] = data.value;
         const query = {
-          username: data.username,
+          name: data.name,
         }
         const options = {
           upsert: false,
