@@ -354,7 +354,7 @@ wss.on('connection', function(socket) {
         }
         chat_db.replaceOne(query, item, options);
       } else if (data.task == 'add-message') {
-        item['messages'] = item['messages'].concat(data.addition);
+        item['messages'] = JSON.stringify(JSON.parse(item['messages']).concat(data.addition));
         const query = {
           name: data.name,
         }
