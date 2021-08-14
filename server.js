@@ -365,6 +365,9 @@ wss.on('connection', function(socket) {
           upsert: false,
         }
         chat_db.replaceOne(query, item, options);
+        socket.send(JSON.stringify({
+          success: true,
+        }));
       } else if (data.task == 'delete') {
          chat_db.deleteOne({
             name: data.name,
