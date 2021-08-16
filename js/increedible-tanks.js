@@ -613,6 +613,7 @@
     control(channelname) {
       //window.setInterval(user.joiner.send, 30);
       this.tank = {
+        canFire: true,
         shields: 0,
         x: 0,
         y: 0,
@@ -1108,7 +1109,13 @@
   function tank_M_listener4(e) {
     user.joiner.tank.fire = false;
     clearInterval(tankSupport);
-    tank_M_support(e.button);
+    if (user.joiner.tank.canFire) {
+      tank_M_support(e.button);
+      user.joiner.tank.canFire = false;
+      setTimeout(function() {
+        user.joiner.tank.canFire = true;
+      }, 450);
+    }
     tankSupport = window.setInterval(tank_M_support, 450, e.button);
   }
   function tank_M_support(button) {
@@ -1372,6 +1379,7 @@
       } else if (userData.health == 600) {
         this.material = 'light';
       }
+      this.canFire = true;
       this.base = 0;
       this.pushback = 0;
       this.shields = 0;
@@ -1725,7 +1733,13 @@
   function tank_listener4(e) {
     var mouseValue = e.button;
     clearInterval(tankSupport);
-    tank_support(mouseValue);
+    if (user.tank.canFire) {
+      tank_support(mouseValue);
+      user.tank.canFire = false;
+      setTimeout(function() {
+        user.tank.canFire = true;
+      }, 450);
+    }
     tankSupport = window.setInterval(tank_support, 500, mouseValue);
   }
   function tank_support(button) {
