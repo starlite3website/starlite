@@ -1108,7 +1108,7 @@
   function tank_M_listener4(e) {
     user.joiner.tank.fire = false;
     clearInterval(tankSupport);
-    tank_M_support();
+    tank_M_support(e.button);
     tankSupport = window.setInterval(tank_M_support, 450, e.button);
   }
   function tank_M_support(button) {
@@ -1725,7 +1725,7 @@
   function tank_listener4(e) {
     var mouseValue = e.button;
     clearInterval(tankSupport);
-    tank_support();
+    tank_support(mouseValue);
     tankSupport = window.setInterval(tank_support, 500, mouseValue);
   }
   function tank_support(button) {
