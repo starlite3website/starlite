@@ -1034,7 +1034,7 @@
       user.joiner.send();
     }
     send() {
-      user.joiner.frameOuput++;
+      user.joiner.frameOutput++;
       user.joiner.socket.send(JSON.stringify({
         operation: 'multiplayer',
         event: 'joinerupdate',
