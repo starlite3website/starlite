@@ -611,7 +611,7 @@
   }
   class Joiner {
     control(channelname) {
-      //window.setInterval(user.joiner.send, 30);
+      window.setInterval(user.joiner.send, 15);
       this.tank = {
         canFire: true,
         shields: 0,
@@ -1031,7 +1031,7 @@
           }
           break;
       }
-      user.joiner.send();
+      //user.joiner.send();
     }
     send() {
       user.joiner.frameOutput++;
@@ -1107,7 +1107,7 @@
       rotation = 360 + rotation;
     }
     user.joiner.tank.rotation = rotation;
-    user.joiner.send();
+    //user.joiner.send();
   }
   function tank_M_listener4(e) {
     user.joiner.tank.fire = false;
@@ -1172,7 +1172,7 @@
       user.joiner.tank.xd = user.joiner.tank.yd;
       user.joiner.tank.yd = place;
     }
-    user.joiner.send();
+    //user.joiner.send();
   }
   function tank_M_listener5() {
     user.joiner.tank.fire = false;
