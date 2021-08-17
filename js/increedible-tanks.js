@@ -611,7 +611,7 @@
   }
   class Joiner {
     control(channelname) {
-      window.setInterval(user.joiner.send, 15);
+      window.setInterval(user.joiner.send, 30);
       this.tank = {
         canFire: true,
         shields: 0,
@@ -1031,7 +1031,7 @@
           }
           break;
       }
-      //user.joiner.send();
+      user.joiner.send();
     }
     send() {
       user.joiner.frameOutput++;
