@@ -655,6 +655,7 @@
       }
       this.tank.helper = [];
       this.tank.intervals = [];
+      this.frameOuput = 0;
       this.socket = new WebSocket('wss://' + window.location.hostname + '/server');
       this.channelname = channelname;
       this.drawMap = function () {
@@ -841,8 +842,9 @@
       }
       Game.level = 'multiplayer-joiner';
       setInterval(function () {
-        document.getElementById('fps').innerHTML = user.joiner.drawsPerSec;
+        document.getElementById('fps').innerHTML = user.joiner.drawsPerSec + ':'+ user.joiner.frameOutput;
         user.joiner.drawsPerSec = 0;
+        user.joiner.frameOutput = 0;
       }, 1000);
       this.socket.onmessage = function (data) {
         data = JSON.parse(data.data);
@@ -1032,6 +1034,7 @@
       user.joiner.send();
     }
     send() {
+      user.joiner.frameOuput++;
       user.joiner.socket.send(JSON.stringify({
         operation: 'multiplayer',
         event: 'joinerupdate',
