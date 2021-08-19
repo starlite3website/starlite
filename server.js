@@ -321,7 +321,8 @@ wss.on('connection', function(socket) {
         if (s != socket) {
           s.send(JSON.stringify({
             type: 'chat',
-            message: data.message,
+            message: data.message.message,
+            send: data.message.send,
             server: data.server,
           }))
         }
