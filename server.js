@@ -322,6 +322,7 @@ wss.on('connection', function(socket) {
           s.send(JSON.stringify({
             type: 'chat',
             message: data.message,
+            server: data.server,
           }))
         }
       })
