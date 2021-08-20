@@ -1031,7 +1031,9 @@
           }
           break;
       }
-      //user.joiner.send();
+      if (Math.random() < .5) {
+        user.joiner.send();
+      }
     }
     send() {
       user.joiner.frameOutput++;
@@ -1117,9 +1119,9 @@
       user.joiner.tank.canFire = false;
       setTimeout(function() {
         user.joiner.tank.canFire = true;
-      }, 250);
+      }, 350);
     }
-    tankSupport = window.setInterval(tank_M_support, 250, e.button);
+    tankSupport = window.setInterval(tank_M_support, 350, e.button);
   }
   function tank_M_support(button) {
     user.joiner.tank.fire = true;
@@ -1172,7 +1174,7 @@
       user.joiner.tank.xd = user.joiner.tank.yd;
       user.joiner.tank.yd = place;
     }
-    //user.joiner.send();
+    user.joiner.send();
   }
   function tank_M_listener5() {
     user.joiner.tank.fire = false;
@@ -1742,9 +1744,9 @@
       user.tank.canFire = false;
       setTimeout(function() {
         user.tank.canFire = true;
-      }, 250);
+      }, 350);
     }
-    tankSupport = window.setInterval(tank_support, 250, mouseValue);
+    tankSupport = window.setInterval(tank_support, 350, mouseValue);
   }
   function tank_support(button) {
     user.tank.fire(button);
@@ -1897,7 +1899,9 @@
       i.push(window.setInterval(function () {
         var l = 0;
         while (l < ai.length) {
-          ai[l].shoot();
+          setTimeout(function(l) {
+            ai[l].shoot();
+          }, Math.floor(Math.random() * 5000)+1, l);
           l++;
         }
       }, 2700))
