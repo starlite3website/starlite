@@ -178,6 +178,7 @@
       this.inactive = false;
       this.update = true;
       this.leftright = false;
+      this.canShoot = true;
     }
     draw() {
       if (this.inactive != true) {
@@ -1031,9 +1032,7 @@
           }
           break;
       }
-      if (Math.random() < .5) {
-        user.joiner.send();
-      }
+      user.joiner.send();
     }
     send() {
       user.joiner.frameOutput++;
@@ -1899,12 +1898,16 @@
       i.push(window.setInterval(function () {
         var l = 0;
         while (l < ai.length) {
-          setTimeout(function(l) {
-            ai[l].shoot();
-          }, Math.floor(Math.random() * 5000)+1, l);
+          if (ai[l].canShoot) {
+            ai[l].canShoot = false;
+            setTimeout(function(l) {
+              ai[l].shoot();
+              ai[l].canShoot = true;
+            }, Math.floor(Math.random() * 5000)+1, l);
+          }
           l++;
         }
-      }, 2700))
+      }, 1000))
     }
   }
   function jquery_tank_support(e) {
