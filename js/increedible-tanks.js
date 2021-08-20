@@ -1031,7 +1031,7 @@
           }
           break;
       }
-      user.joiner.send();
+      //user.joiner.send();
     }
     send() {
       user.joiner.frameOutput++;
@@ -1117,9 +1117,9 @@
       user.joiner.tank.canFire = false;
       setTimeout(function() {
         user.joiner.tank.canFire = true;
-      }, 450);
+      }, 250);
     }
-    tankSupport = window.setInterval(tank_M_support, 450, e.button);
+    tankSupport = window.setInterval(tank_M_support, 250, e.button);
   }
   function tank_M_support(button) {
     user.joiner.tank.fire = true;
@@ -1742,9 +1742,9 @@
       user.tank.canFire = false;
       setTimeout(function() {
         user.tank.canFire = true;
-      }, 450);
+      }, 250);
     }
-    tankSupport = window.setInterval(tank_support, 500, mouseValue);
+    tankSupport = window.setInterval(tank_support, 250, mouseValue);
   }
   function tank_support(button) {
     user.tank.fire(button);
