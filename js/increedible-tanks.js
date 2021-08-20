@@ -1118,9 +1118,9 @@
       user.joiner.tank.canFire = false;
       setTimeout(function() {
         user.joiner.tank.canFire = true;
-      }, 350);
+      }, 400);
     }
-    tankSupport = window.setInterval(tank_M_support, 350, e.button);
+    tankSupport = window.setInterval(tank_M_support, 400, e.button);
   }
   function tank_M_support(button) {
     user.joiner.tank.fire = true;
@@ -1743,9 +1743,9 @@
       user.tank.canFire = false;
       setTimeout(function() {
         user.tank.canFire = true;
-      }, 350);
+      }, 400);
     }
-    tankSupport = window.setInterval(tank_support, 350, mouseValue);
+    tankSupport = window.setInterval(tank_support, 400, mouseValue);
   }
   function tank_support(button) {
     user.tank.fire(button);
@@ -1903,11 +1903,11 @@
             setTimeout(function(l) {
               ai[l].shoot();
               ai[l].canShoot = true;
-            }, Math.floor(Math.random() * 5000)+1, l);
+            }, Math.floor(Math.random() * 2000)+1, l);
           }
           l++;
         }
-      }, 1000))
+      }, 500))
     }
   }
   function jquery_tank_support(e) {
