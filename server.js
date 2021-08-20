@@ -370,6 +370,15 @@ wss.on('connection', function(socket) {
         socket.send(JSON.stringify({
           success: true,
         }));
+      } else if (data.task == 'share') {
+        item['members'].concat(data.new_member);
+        const query = {
+          name: data.name,
+        }
+        const options = {
+          upsert: false,
+        }
+        chat_db.replaceOne(query, item, options);
       } else if (data.task == 'delete') {
          chat_db.deleteOne({
             name: data.name,
