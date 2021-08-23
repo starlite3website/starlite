@@ -339,7 +339,7 @@
             this.health -= 100;
           }
           if (this.health <= 0) {
-            Game.coins += 100;
+            Game.coins += Math.floor(Math.random()*400)+100;
             Game.foes--;
             this.x = undefined;
             this.y = undefined;
