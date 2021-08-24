@@ -340,7 +340,9 @@ wss.on('connection', function(socket) {
         }
         l++;
       }
-      if (!item.members.includes(data.username) && !item.members[0] == '*') return;
+      if (!item.members.includes(data.username) && !item.members[0] == '*') {
+        return;
+      }
       if (data.task == 'get') {
         socket.send(JSON.stringify({
           type: 'chat-servers-return',
@@ -371,8 +373,8 @@ wss.on('connection', function(socket) {
           success: true,
         }));
       } else if (data.task == 'share') {
-        JSON.parse(item['members']).push(data.new_member);
-        console.log(item['members'])
+        items.members = JSON.parse(items.members);
+        items.members.push(data.new_member);
         const query = {
           name: data.name,
         }
