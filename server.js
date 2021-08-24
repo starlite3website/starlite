@@ -373,6 +373,7 @@ wss.on('connection', function(socket) {
       } else if (data.task == 'share') {
         item.members = JSON.parse(item.members);
         item.members.push(data.new_member);
+        item.members = JSON.stringify(item.members);
         const query = {
           name: data.name,
         }
