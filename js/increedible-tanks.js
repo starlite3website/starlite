@@ -4450,16 +4450,15 @@
       if (x < 250) {
         if (y > 300) {
           if (y < 350) {
+            document.removeEventListener('click', multiplayer2);
             load = new Animation(loadOpt);
             load.start();
             setTimeout(function() {
               var server = document.getElementById('server');
               if (server.value != "") {
-                document.removeEventListener('click', multiplayer2);
                 user.joiner = new Joiner();
                 user.joiner.control(server.value);
               } else {
-                document.removeEventListener('click', multiplayer2);
                 user.joiner = new Joiner();
                 user.joiner.control('pvp');
               }
