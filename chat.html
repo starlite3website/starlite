@@ -83,9 +83,8 @@
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300&display=swap');
     body {
-      font-family: 'Comfortaa';
       margin: 0px;
-      font-family: sanserif;
+      font-family: 'Comfortaa';
       background-color: white;
     }
     #servers {
@@ -142,7 +141,6 @@
       word-wrap: break-word;
       background-color: white;
       margin-bottom: 10px;
-      font-family: 'Comfortaa';
       width: 80%;
     }
     .message-send {
@@ -163,12 +161,19 @@
     }
     socket2.onmessage = function(data) {
       if (selectedServer == JSON.parse(data.data).server) {
+        messages.push({
+          send: JSON.parse(data.data).send,
+          message: JSON.parse(data.data).message,
+          timestamp: JSON.parse(data.data).timestamp,
+        })
         var scrollAfterMessage = false;
         if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
           scrollAfterMessage = true;
         }
         var t = document.createElement('DIV');
-        t.innerHTML = '<div class="message"><div class="message-send"><b>'+JSON.parse(data.data).send+'</b></div><div class="message-content">'+JSON.parse(data.data).message+'</div></div>';
+        var options = { weekday: 'long', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric'};
+        var time = new Date().toLocaleDateString(undefined, options);
+        t.innerHTML = '<div class="message"><button id="'+JSON.parse(data.data).timestamp+'"class="message-delete" onclick="deleteMessage(this.id)">Delete</button><div class="message-send"><b>'+JSON.parse(data.data).send+'</b></div><div class="message-content">'+JSON.parse(data.data).message+'</div><div class="message-timestamp">'+time+'</div></div>';
         document.getElementById('messages').appendChild(t);
         if (scrollAfterMessage) {
           window.scrollTo(0,document.body.scrollHeight);
@@ -200,6 +205,21 @@
         name: server_name,
         task: 'add-message',
         addition: value,
+      }));
+      socket.onmessage = function(data) {
+        socket.onmessage = function() {};
+        callback(JSON.parse(data.data).success);
+      }
+    }
+    function updateServer2(server_name, value, callback) {
+      console.log(value);
+      socket.send(JSON.stringify({
+        operation: 'chat-servers',
+        token: sessionStorage.token,
+        username: sessionStorage.username,
+        name: server_name,
+        task: 'delete-message',
+        removal: value,
       }));
       socket.onmessage = function(data) {
         socket.onmessage = function() {};
@@ -241,7 +261,7 @@
       document.getElementById('messages').innerHTML = '';
       messages = JSON.parse(data.data);
       messages.sort(function(a,b) {
-        return new Date(a.timestamps) - new Date(b.timestamps);
+        return new Date(a.timestamp) - new Date(b.timestamp);
       });
       var elements = document.getElementsByClassName('server');
       var l = 0;
@@ -255,7 +275,9 @@
       var l = 0;
       while (l<messages.length) {
         var t = document.createElement('DIV');
-        t.innerHTML = '<div class="message"><div class="message-send"><b>'+messages[l].send+'</b></div><div class="message-content">'+messages[l].message+'</div></div>';
+        var options = { weekday: 'long', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric'};
+        var time = new Date(messages[l].timestamp).toLocaleDateString(undefined, options);
+        t.innerHTML = '<div class="message"><button id='+messages[l].timestamp+' class="message-delete" onclick="deleteMessage(this.id)" >Delete</button><div class="message-send"><b>'+messages[l].send+'</b></div><div class="message-content">'+messages[l].message+'</div><div class="message-timestamp">'+time+'</div></div>';
         document.getElementById('messages').appendChild(t);
         l++;
       }
@@ -264,11 +286,19 @@
     document.getElementById('message').addEventListener('keydown', function(e) {
       if (e.keyCode == 13) {
         if (document.getElementById('message').value == '') return;
+        var now = new Date();
+        messages.push({
+          send: sessionStorage.username,
+          message: document.getElementById('message').value,
+          timestamp: JSON.parse(JSON.stringify(now)),
+        });
         socket2.message = document.getElementById('message').value
-        updateServer(selectedServer, {send:sessionStorage.username,message:document.getElementById('message').value}, function(success) {
-          if (success) {     
+        updateServer(selectedServer, {send:sessionStorage.username,message:document.getElementById('message').value,timestamp: now}, function(success) {
+          if (success) {
             var t = document.createElement('DIV');
-            t.innerHTML = '<div class="message"><div class="message-send"><b>'+sessionStorage.username+'</b></div><div class="message-content">'+document.getElementById('message').value+'</div></div>';
+            var options = { weekday: 'long', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric'};
+            var time = now.toLocaleDateString(undefined, options);
+            t.innerHTML = '<div class="message"><button class="message-delete" id='+JSON.stringify(now)+' onclick="deleteMessage(this.id)" >Delete</button><div class="message-send"><b>'+sessionStorage.username+'</b></div><div class="message-content">'+document.getElementById('message').value+'</div><div class="message-timestamp">'+time+'</div></div>';
             document.getElementById('messages').appendChild(t);
             document.getElementById('message').value = '';
             window.scrollTo(0,document.body.scrollHeight);socket2.send(JSON.stringify({
@@ -276,7 +306,7 @@
               username: sessionStorage.username,
               token: sessionStorage.token,
               server: selectedServer,
-              message: {message: socket2.message, send: sessionStorage.username}
+              message: {message: socket2.message, send: sessionStorage.username, timestamp: new Date()}
             }));
           } else {
             alert('ERR! DISCONNECTED!')
@@ -298,6 +328,23 @@
         task: 'share',
         addition: document.getElementById('edit-server-input'+server),
       }))
+    }
+    function deleteMessage(timestamp) {
+      var l = 0, item;
+      while (l<messages.length) {
+        if (messages[l].timestamp == timestamp) {
+          item = l;
+        }
+        l++;
+      }
+      document.getElementById(timestamp).parentElement.remove();
+      updateServer2(selectedServer, messages[item], function(success) {
+        if (success) {
+          messages.splice(item, 1);
+        } else {
+          alert('ERR! You are offline. Reload to delete messages')
+        }
+      })
     }
   </script>
 </html>
