@@ -340,6 +340,8 @@ wss.on('connection', function(socket) {
         }
         l++;
       }
+      console.log(JSON.parse(item.members));
+      console.log(JSON.parse(item.members).includes(data.username));
       if (!JSON.parse(item.members).includes(data.username) && !JSON.parse(item.members)[0] == '*') {
         return;
       }
