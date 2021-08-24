@@ -80,7 +80,6 @@
     <input id='message' />
     <hr>
   </div>
-  Click <a href='/old-chat'>here</a> for old chat.
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Comfortaa:wght@300&display=swap');
     body {
@@ -164,9 +163,18 @@
     }
     socket2.onmessage = function(data) {
       if (selectedServer == JSON.parse(data.data).server) {
+        var scrollAfterMessage = false;
+        if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+          scrollAfterMessage = true;
+        }
         var t = document.createElement('DIV');
         t.innerHTML = '<div class="message"><div class="message-send"><b>'+JSON.parse(data.data).send+'</b></div><div class="message-content">'+JSON.parse(data.data).message+'</div></div>';
         document.getElementById('messages').appendChild(t);
+        if (scrollAfterMessage) {
+          window.scrollTo(0,document.body.scrollHeight);
+        } else {
+          // notiy user of new message
+        }
       } 
     }
     function getServerMessages(server_name, callback) {
