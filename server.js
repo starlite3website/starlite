@@ -371,8 +371,7 @@ wss.on('connection', function(socket) {
           success: true,
         }));
       } else if (data.task == 'share') {
-        console.log(item['members'])
-        item['members'].push(data.new_member);
+        item.members = JSON.parse(item['members']).push(data.new_member);
         const query = {
           name: data.name,
         }
@@ -380,6 +379,9 @@ wss.on('connection', function(socket) {
           upsert: false,
         }
         chat_db.replaceOne(query, item, options);
+        socket.send({
+          success: true,
+        })
       } else if (data.task == 'delete') {
          chat_db.deleteOne({
             name: data.name,
