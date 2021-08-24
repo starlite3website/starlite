@@ -340,7 +340,7 @@ wss.on('connection', function(socket) {
         }
         l++;
       }
-      if (!item.members.includes(data.username) && !item.members[0] == '*') {
+      if (!JSON.parse(item.members).includes(data.username) && !JSON.parse(item.members)[0] == '*') {
         return;
       }
       if (data.task == 'get') {
