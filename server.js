@@ -371,7 +371,7 @@ wss.on('connection', function(socket) {
           success: true,
         }));
       } else if (data.task == 'share') {
-        item['members'].concat(data.new_member);
+        item['members'].push(data.new_member);
         const query = {
           name: data.name,
         }
