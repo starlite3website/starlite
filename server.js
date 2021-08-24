@@ -374,10 +374,10 @@ wss.on('connection', function(socket) {
         item.messages = JSON.parse(item.messages);
         var l = 0;
         while (l<item.messages.length) {
-          if (item.messages[l].timestamp == JSON.parse(data.removal).timestamp) {
+          if (item.messages[l].timestamp == data.removal.timestamp) {
             console.log('Timestamp Match');
-            if (item.messages[l].message == JSON.parse(data.removal).message) {
-              if (item.messages[l].send == JSON.parse(data.removal).send) {
+            if (item.messages[l].message == data.removal.message) {
+              if (item.messages[l].send == data.removal.send) {
                 item.messages.splice(l, 1);
               }
             }
