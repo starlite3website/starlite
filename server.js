@@ -340,11 +340,7 @@ wss.on('connection', function(socket) {
         }
         l++;
       }
-      console.log(JSON.parse(item.members));
-      console.log(JSON.parse(item.members).includes(data.username));
-      if (!JSON.parse(item.members).includes(data.username) && !JSON.parse(item.members)[0] == '*') {
-        return;
-      }
+      if (!JSON.parse(item.members).includes(data.username) && JSON.parse(item.members)[0] != '*') return;
       if (data.task == 'get') {
         socket.send(JSON.stringify({
           type: 'chat-servers-return',
