@@ -370,6 +370,31 @@ wss.on('connection', function(socket) {
         socket.send(JSON.stringify({
           success: true,
         }));
+      } else if (data.task == 'delete-message') {
+        item.messages = JSON.parse(item.messages);
+        var l = 0;
+        while (l<item.messages.length) {
+          if (item.messages[l].timestamp == JSON.parse(data.removal).timestamp) {
+            console.log('Timestamp Match');
+            if (item.messages[l].message == JSON.parse(data.removal).message) {
+              if (item.messages[l].send == JSON.parse(data.removal).send) {
+                item.messages.splice(l, 1);
+              }
+            }
+          }
+          l++;
+        }
+        item.messages = JSON.stringify(item.messages);
+        const query = {
+          name: data.name,
+        }
+        const options = {
+          upsert: false,
+        }
+        chat_db.replaceOne(query, item, options);
+        socket.send(JSON.stringify({
+          success: true,
+        }))
       } else if (data.task == 'share') {
         item.members = JSON.parse(item.members);
         item.members.push(data.new_member);
