@@ -371,7 +371,8 @@ wss.on('connection', function(socket) {
           success: true,
         }));
       } else if (data.task == 'share') {
-        item.members = JSON.parse(item['members']).push(data.new_member);
+        JSON.parse(item['members']).push(data.new_member);
+        console.log(item['members'])
         const query = {
           name: data.name,
         }
