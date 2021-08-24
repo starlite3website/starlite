@@ -323,7 +323,7 @@ wss.on('connection', function(socket) {
             type: 'chat',
             message: data.message.message,
             send: data.message.send,
-            timestamp: data.message.timestamp
+            timestamp: data.message.timestamp,
             server: data.server,
           }))
         }
