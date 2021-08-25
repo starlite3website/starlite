@@ -1189,7 +1189,7 @@
   }
   const toolkitOpt = {
     totalFrames: 5,
-    frameSpeed: 500,
+    frameSpeed: 200,
     x: 230,
     y: 230,
     frameImages: [
@@ -2909,12 +2909,14 @@
     draw.fillText(userData.toolkits, 183 + 35, 470);
     draw.fillText(userData.blocks, 266 + 35, 470);
     draw.fillText(userData.flashbangs, 349 + 35, 470);
+    draw.globalAlpha = .5;
     if (user.tank.toolkitAnimation) {
       toolkitAnimation.drawFrame();
       if (toolkitAnimation.currentFrame == 5) {
-        toolkitAnimatoin.endRun();
+        toolkitAnimation.endRun();
       }
     }
+    draw.globalAlpha = 1;
     draw.setTransform(resizer, 0, 0, resizer, resizer * (-user.tank.x + 230), resizer * (-user.tank.y + 230));
   }
   var defeatSupport = false;
