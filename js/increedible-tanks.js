@@ -816,9 +816,9 @@
         draw.fillText(userData.blocks, 266 + 35, 470);
         draw.fillText(userData.flashbangs, 349 + 35, 470);
         if (user.joiner.tank.toolkitAnimation) {
-          loadAnimation.drawFrame();
-          if (loadAnimation.currentFrame == 5) {
-            loadAnimation.endRun();
+          toolkitAnimation.drawFrame();
+          if (toolkitAnimation.currentFrame == 5) {
+            toolkitAnimation.endRun();
           }
         }
         //settransform
@@ -964,6 +964,7 @@
               if (userData.toolkits > 0) {
                 toolkitAnimation = new Animation(toolkitOpt);
                 user.joiner.tank.toolkitAnimation = true;
+                toolkitAnimation.loopRun();
                 userData.toolkits -= 1;
                 user.joiner.tank.usingToolkit = true;
                 user.joiner.tank.CanToolkit = false;
@@ -1189,7 +1190,7 @@
   }
   const toolkitOpt = {
     totalFrames: 5,
-    frameSpeed: 200,
+    frameSpeed: 50,
     x: 230,
     y: 230,
     frameImages: [
