@@ -1192,7 +1192,7 @@
   }
   const toolkitOpt = {
     totalFrames: 5,
-    frameSpeed: 50,
+    frameSpeed: 100,
     x: 230,
     y: 230,
     frameImages: [
