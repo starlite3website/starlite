@@ -1240,7 +1240,7 @@
       }, this.frameSpeed, this);
     }
     loopRun() {
-      this.interval = window.setInterval(function() {
+      this.interval = window.setInterval(function(gif) {
         gif.currentFrame++;
       }, this.frameSpeed, this);
     }
