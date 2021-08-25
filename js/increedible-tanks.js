@@ -815,6 +815,9 @@
         draw.fillText(userData.toolkits, 183 + 35, 470);
         draw.fillText(userData.blocks, 266 + 35, 470);
         draw.fillText(userData.flashbangs, 349 + 35, 470);
+        if (user.joiner.tank.toolkitAnimation) {
+          loadAnimation.singleFrame();
+        }
         //settransform
         var m = 0;
         while (m < user.joiner.hostupdate.tanks.length) {
@@ -956,6 +959,8 @@
           if (health < userData.health * .75) {
             if (user.joiner.tank.CanToolkit) {
               if (userData.toolkits > 0) {
+                var toolkitAnimation = new Animation(toolkitOpt);
+                user.joiner.tank.toolkitAnimation = true;
                 userData.toolkits -= 1;
                 user.joiner.tank.usingToolkit = true;
                 user.joiner.tank.CanToolkit = false;
@@ -1179,6 +1184,19 @@
     user.joiner.tank.fire = false;
     clearInterval(tankSupport);
   }
+  const toolkitOpt = {
+    totalFrames: 5,
+    frameSpeed: 200,
+    x: 230,
+    y: 230,
+    frameImages: [
+      'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAABBUlEQVRoQ+2Z3QqDMAyF9UbY+z/swJsNx4QitTkJa9eWz+skzflJqrgukzzrJDgWgPSmZJeKbM/tdSVqf+zFXgFS01ooUpPdSG0UUVjLsXTmWRvlrn6pptLTEXOeLW8tgBSoRZGEHKyVc0p02D1LwDrjr8MOkAwDcynyizVoXWCWx9P88CsKQCwZMvvekeIK/cxIb4q4EHyDAeJlzTPs3tpHPIp4WWuiiNJUje8R5Vw1psubXW0+jQNIykZt/ysKoQiKKD4JxGCtYa0VUFtOuV62kS0oW0vuKhAIkIQ0FAk46DZlSGtFP6utBdDcWgDp7ff0NIrkJn7IYQeIse+bby0UMRR5A5Bt5DPRqdnDAAAAAElFTkSuQmCC',
+      'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAABBklEQVRoQ+1ZXQuDMAzUF2H//8cOfNnYmBCkNpfDdG05n5O095FEcV0medZJcCwCkqnk9txe5/r7Y6+S3qUiApJpE6a2FGFYy8xJVaRU/ADjTZQr0LWaKFHH2fDUEpAKtVLEkCNrlZzCNntkCHhn/LXZBaTAwFyK3DEGvQXmedzm05tdQDwZCvM+kBIK/fZIb4qEEPyCBSTKWqTZo7U/8VIkyloTRZBLZXyPIOeiMV1udvTyNk5ALBvZ/kcUkiJSBPEJESNrDWstQm045bxsmSkIWwu+FREoIIY0KUI46DJlSGuxn9XeAGhuLQHp7ff0NIqUOn7IZhcQZ943n1pSZARF7nhLeAOe6uQzdBwSTgAAAABJRU5ErkJggg==',
+      'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAABCElEQVRoQ+1ZywrEIAxsL4X9/49d6GVLly2EkppJUDfK9Jxo5pGodF0m+dZJcCwpgWzv7XMneH/txVoJpKUlqUhLdiNrUxGENY2lK8+aKE/rl9ZEajpjrr3hqUUgBWqpiCCH1tKcEm12zxCw9vhrsxOIwsBcitQYg9YBZnlc5oevKARiyaDMe0eKK/TbI9kUcSH4BROIlzVPs3vXPuOpiJe1LoogRbV4jyD7ojEpT3a0eBlHIJKN1v5HFKIiVATxSSCG1hrWWgG14ZT7YRuZgrC14KoCgQQiSKMiAQc9pgxpreiz2hoA3a1FINl+T0+jiNbxQzY7gRjzvvvUoiIjKFLjlpDCWjWAHK1n5DOivZc3AAAAAElFTkSuQmCC',
+      'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAABBklEQVRoQ+1ZywqEMAzUi+D/f+yCF8VlhSCxmQTbTct4TtrMI2mL8zTIN2fEsXyW/V7Xtm7FWgmkppJUpCa7kbWpCMKaxtKVZ02Up/VLayI1nTHX3vDUIpACtVREkENraU6JNrtnCFh7/LXZCURhYCxF3hiD1gFmeVzmh68oBGLJoMx7R4or9Nsj2RRxIfgFE4iXNU+ze9c+46mIl7UmiiBF1XiPIPuiMSlPdrR4GUcgko3a/kcUoiJUBPFJIIbW6tZaAbXhlPthG5mCsLXgqgKBBCJIoyIBBz2mdGmt6LPaGgDNrUUg2X5PD6OI1vFdNjuBGPO++dSiIj0o8sYtIYW1CEQwcAC75OQzivgfuQAAAABJRU5ErkJggg==',
+      'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAA80lEQVRoQ+2Z2wqDMBBE64vQ///Ygi8tFJRU0uzuEM2ix9dczMyZXRWnR8Jrfs3v/bGW5zK1jtocHKURIaOc/3dfiNyKSA33aoDVUSIRipq63tvdtRDSsLhljpcMRGpO3b5GIk3AMmtosSOk4sC1iPRog1a7tDJerpfftRBiYSjGI0QC225TvzWSjQhCIBLIADXiNCvlA9F59p9pCCntODr/HkIQgYgnJ8IcokW0hNh4lrij5dlMnbN/11PaOUJU92vrIFK4QrTUaKkfcVYDOJ0IQrL9nr4MEdqv0V1OL3aIQER94g1al6JGemhHSA8Xe+7xAcph5DN9w3kfAAAAAElFTkSuQmCC',
+    ]
+  }
   const loadOpt = {
     totalFrames: 5,
     frameSpeed: 500,
@@ -1384,6 +1402,7 @@
       } else if (userData.health == 600) {
         this.material = 'light';
       }
+      this.toolkitAnimation = false;
       this.canFire = true;
       this.base = 0;
       this.pushback = 0;
@@ -1500,6 +1519,8 @@
             if (user.tank.CanToolkit) {
               if (user.tank.health < userData.health * .75) {
                 if (userData.toolkits > 0) {
+                  var toolkitAnimation = new Animation(toolkitOpt);
+                  user.tank.toolkitAnimation = true;
                   user.tank.CanToolkit = false;
                   userData.toolkits -= 1;
                   user.tank.health = userData.health * .75;
@@ -2880,6 +2901,9 @@
     draw.fillText(userData.toolkits, 183 + 35, 470);
     draw.fillText(userData.blocks, 266 + 35, 470);
     draw.fillText(userData.flashbangs, 349 + 35, 470);
+    if (user.tank.toolkitAnimation) {
+      toolkitAnimation.singleFrame();
+    }
     draw.setTransform(resizer, 0, 0, resizer, resizer * (-user.tank.x + 230), resizer * (-user.tank.y + 230));
   }
   var defeatSupport = false;
