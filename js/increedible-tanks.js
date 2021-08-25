@@ -816,7 +816,10 @@
         draw.fillText(userData.blocks, 266 + 35, 470);
         draw.fillText(userData.flashbangs, 349 + 35, 470);
         if (user.joiner.tank.toolkitAnimation) {
-          loadAnimation.singleFrame();
+          loadAnimation.drawFrame();
+          if (loadAnimation.currentFrame == 5) {
+            loadAnimation.endRun();
+          }
         }
         //settransform
         var m = 0;
@@ -1186,7 +1189,7 @@
   }
   const toolkitOpt = {
     totalFrames: 5,
-    frameSpeed: 200,
+    frameSpeed: 500,
     x: 230,
     y: 230,
     frameImages: [
@@ -1236,13 +1239,16 @@
         }
       }, this.frameSpeed, this);
     }
-    singleFrame() {
+    loopRun() {
+      this.interval = window.setInterval(function() {
+        gif.currentFrame++;
+      }, this.frameSpeed, this);
+    }
+    endRun() {
+      window.clearInterval(this.interval);
+    }
+    drawFrame() {
       draw.drawImage(this.frames[this.currentFrame], this.x, this.y);
-      if (this.currentFrame == this.totalFrames) {
-        this.currentFrame = 0;
-      } else {
-        this.currentFrame++;
-      }
     }
     stop() {
       clearInterval(this.interval);
@@ -1521,6 +1527,7 @@
                 if (userData.toolkits > 0) {
                   toolkitAnimation = new Animation(toolkitOpt);
                   user.tank.toolkitAnimation = true;
+                  toolkitAnimation.loopRun();
                   user.tank.CanToolkit = false;
                   userData.toolkits -= 1;
                   user.tank.health = userData.health * .75;
@@ -2903,7 +2910,10 @@
     draw.fillText(userData.blocks, 266 + 35, 470);
     draw.fillText(userData.flashbangs, 349 + 35, 470);
     if (user.tank.toolkitAnimation) {
-      toolkitAnimation.singleFrame();
+      toolkitAnimation.drawFrame();
+      if (toolkitAnimation.currentFrame == 5) {
+        toolkitAnimatoin.endRun();
+      }
     }
     draw.setTransform(resizer, 0, 0, resizer, resizer * (-user.tank.x + 230), resizer * (-user.tank.y + 230));
   }
