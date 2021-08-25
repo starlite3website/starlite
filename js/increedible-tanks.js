@@ -959,7 +959,7 @@
           if (health < userData.health * .75) {
             if (user.joiner.tank.CanToolkit) {
               if (userData.toolkits > 0) {
-                var toolkitAnimation = new Animation(toolkitOpt);
+                toolkitAnimation = new Animation(toolkitOpt);
                 user.joiner.tank.toolkitAnimation = true;
                 userData.toolkits -= 1;
                 user.joiner.tank.usingToolkit = true;
@@ -1519,7 +1519,7 @@
             if (user.tank.CanToolkit) {
               if (user.tank.health < userData.health * .75) {
                 if (userData.toolkits > 0) {
-                  var toolkitAnimation = new Animation(toolkitOpt);
+                  toolkitAnimation = new Animation(toolkitOpt);
                   user.tank.toolkitAnimation = true;
                   user.tank.CanToolkit = false;
                   userData.toolkits -= 1;
@@ -1934,6 +1934,7 @@
   function jquery_tank_support(e) {
     user.tank.move(e);
   }
+  var toolkitAnimation;
   var wall_image = new Image();
   wall_image.src = '/block-blue.png';
   var weak_image = new Image();
