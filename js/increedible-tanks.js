@@ -816,10 +816,12 @@
         draw.fillText(userData.blocks, 266 + 35, 470);
         draw.fillText(userData.flashbangs, 349 + 35, 470);
         if (user.joiner.tank.toolkitAnimation) {
+          draw.globalAlpha = .5;
           toolkitAnimation.drawFrame();
           if (toolkitAnimation.currentFrame == 5) {
             toolkitAnimation.endRun();
           }
+          draw.globalAlpha = 1;
         }
         //settransform
         var m = 0;
@@ -2910,14 +2912,14 @@
     draw.fillText(userData.toolkits, 183 + 35, 470);
     draw.fillText(userData.blocks, 266 + 35, 470);
     draw.fillText(userData.flashbangs, 349 + 35, 470);
-    draw.globalAlpha = .5;
     if (user.tank.toolkitAnimation) {
+      draw.globalAlpha = .5;
       toolkitAnimation.drawFrame();
       if (toolkitAnimation.currentFrame == 5) {
         toolkitAnimation.endRun();
       }
+      draw.globalAlpha = 1;
     }
-    draw.globalAlpha = 1;
     draw.setTransform(resizer, 0, 0, resizer, resizer * (-user.tank.x + 230), resizer * (-user.tank.y + 230));
   }
   var defeatSupport = false;
