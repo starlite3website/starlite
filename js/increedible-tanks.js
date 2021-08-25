@@ -819,6 +819,7 @@
           draw.globalAlpha = .5;
           toolkitAnimation.drawFrame();
           if (toolkitAnimation.currentFrame == 5) {
+            user.joiner.tank.toolkitAnimation = false;
             toolkitAnimation.endRun();
           }
           draw.globalAlpha = 1;
@@ -2916,6 +2917,7 @@
       draw.globalAlpha = .5;
       toolkitAnimation.drawFrame();
       if (toolkitAnimation.currentFrame == 5) {
+        user.tank.toolkitAnimation = false;
         toolkitAnimation.endRun();
       }
       draw.globalAlpha = 1;
