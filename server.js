@@ -410,6 +410,17 @@ wss.on('connection', function(socket) {
         socket.send(JSON.stringify({
           success: true,
         }));
+      } else if (data.task == 'unshare') {
+        item.members = JSON.parse(item.members);
+        var l = 0;
+        while (l<item.members.length) {
+          if (items.members[l] == data.remove_member) {
+            item.members.splice(l, 1);
+          }
+          l++;
+        }
+        item.members = JSON.stringify(item.members);
+        console.log(item.members);
       } else if (data.task == 'delete') {
          chat_db.deleteOne({
             name: data.name,
