@@ -336,7 +336,7 @@
           } else if (results[1] == 'power_bullet') {
             this.health -= 80;
           } else if (resutls[1] == 'mega_bullet') {
-            this.health -= 100;
+            this.health -= 160;
           }
           if (this.health <= 0) {
             Game.coins += Math.floor(Math.random()*400)+100;
@@ -1993,7 +1993,7 @@
           } else if (results[1] == 'power_bullet') {
             b[l].health -= 80;
           } else if (results[1] == 'mega_bullet') {
-            b[l].health -= 100;
+            b[l].health -= 160;
           }
           if (b[l].health <= 0) {
             if (Game.level == 'multiplayer') {
@@ -2845,7 +2845,7 @@
         } else if (results[1] == 'power_bullet') {
           b[l].health -= 80;
         } else if (results[1] == 'mega_bullet') {
-          b[l].health -= 100;
+          b[l].health -= 160;
         }
         if (b[l].health <= 0) {
           if (Game.level == 'multiplayer') {
