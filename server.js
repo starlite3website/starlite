@@ -483,6 +483,8 @@ class Host {
                 host.pt[l].health -= 20;
               } else if (results[1] == 'power_bullet') {
                 host.pt[l].health -= 80;
+              } else if (results[1] == 'mega_bullet') {
+                host.pt[l].health -= 160;
               }
               host.pt[l].invis = false;
               host.pt[l].damagedRecent = true;
@@ -524,6 +526,8 @@ class Host {
             host.b[l].health -= 10;
           } else if (results[1] == 'power_bullet') {
             host.b[l].health -= 80;
+          } else if (results[1] == 'mega_bullet') {
+            host.b[l].health -= 160;
           }
           if (host.b[l].health <= 0) {
             let isScaffolding = false;
