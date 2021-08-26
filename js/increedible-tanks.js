@@ -335,7 +335,7 @@
             this.health -= 20;
           } else if (results[1] == 'power_bullet') {
             this.health -= 80;
-          } else if (resutls[1] == 'mega_bullet') {
+          } else if (results[1] == 'mega_bullet') {
             this.health -= 160;
           }
           if (this.health <= 0) {
