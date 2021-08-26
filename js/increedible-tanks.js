@@ -3144,7 +3144,7 @@
     draw.font = '10px starfont';
     draw.fillText('Coins: ' + userData.coins, 360, 100);
     if (userData.class == 'stealth') draw.fillText('Equiped', 345, 170);
-    //if (userData.health == 400) draw.fillText('Equiped', 345, 240);
+    if (userData.class == 'tactical') draw.fillText('Equiped', 345, 240);
     //draw.fillText('Equiped', 345, 310);
     //draw.fillText('Equiped', 345, 380);
     document.addEventListener("click", shopClassesSupport);
