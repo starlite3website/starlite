@@ -3057,7 +3057,7 @@
               }, 20);
               update(sessionStorage.username, 'playerdata', JSON.stringify(t));
             } else {
-              alert('Not Enough Money! You are ' + 50 - userData.coins + ' coins short!');
+              alert('Not Enough Money! You are ' + JSON.stringify(50 - userData.coins) + ' coins short!');
             }
           }
         }
@@ -3081,7 +3081,7 @@
               }, 20);
               update(sessionStorage.username, 'playerdata', JSON.stringify(t));
             } else {
-              alert('Not Enought Money! You are ' + 200 - userData.coins + ' coins short!');
+              alert('Not Enough Money! You are ' + JSON.stringify(200 - userData.coins) + ' coins short!');
             }
           }
         }
@@ -3105,7 +3105,7 @@
               }, 20);
               update(sessionStorage.username, 'playerdata', JSON.stringify(t));
             } else {
-              alert('Not Enough Money! You are ' + 500 - userData.coins + ' coins short!');
+              alert('Not Enough Money! You are ' + JSON.stringify(500 - userData.coins) + ' coins short!');
             }
           }
         }
@@ -3129,7 +3129,7 @@
               }, 20);
               update(sessionStorage.username, 'playerdata', JSON.stringify(t));
             } else {
-              alert('Not Enought Money! You are ' + 1000 - userData.coins + ' coins short!');
+              alert('Not Enough Money! You are ' + JSON.stringify(1000 - userData.coins) + ' coins short!');
             }
           }
         }
@@ -3180,21 +3180,33 @@
       if (x < 200) {
         if (y > 140) {
           if (y < 190) {
-            if (userData.coins >= 50000) {
+            if (userData.stealth) {
+              userData.class = 'stealth';
+              setTimeout(function() {
+                document.removeEventListener('keydown', shopClassesKeyDown);
+                document.removeEventListener('click', shopClassesSupport);
+                shopClasses();
+              }, 20);
+            } else if (userData.coins >= 50000) {
               if (userData.class == 'stealth') {
                 alert('You already bought this!');
                 return;
               }
               userData.coins -= 50000;
               userData.class = 'stealth';
+              userData.stealth = true;
               try {
                 var t = playerData;
                 t["increedible-tanks"] = userData;
               } catch (e) { }
+              setTimeout(function() {
+                document.removeEventListener('keydown', shopClassesKeyDown);
+                document.removeEventListener('click', shopClassesSupport);
+                shopClasses();
+              }, 20);
               update(sessionStorage.username, 'playerdata', JSON.stringify(t));
-              document.removeEventListener('keydown', shopClassesKeyDown);
-              document.removeEventListener('click', shopClassesSupport);
-              shopClasses();
+            } else {
+              alert('Not Enough Money! You are '+JSON.stringfy(50000 - userData.coins)+'coins short!');
             }
           }
         }
@@ -3204,13 +3216,34 @@
       if (x < 200) {
         if (y > 210) {
           if (y < 260) {
-            /*if (userData.coins >= 200) {
-              userData.coins -= 200;
-              userData.blocks += 1;
-              var t = playerData;
-              t["increedible-tanks"] = userData;
+            if (userData.tactical) {
+              userData.class = 'tactical';
+              setTimeout(function() {
+                document.removeEventListener('keydown', shopClassesKeyDown);
+                document.removeEventListener('click', shopClassesSupport);
+                shopClasses();
+              }, 20);
+            } else if (userData.coins >= 50000) {
+              if (userData.class == 'tactical') {
+                alert('You already bought this!');
+                return;
+              }
+              userData.coins -= 50000;
+              userData.class = 'tactical';
+              userData.tactical = true;
+              try {
+                var t = playerData;
+                t["increedible-tanks"] = userData;
+              } catch (e) { }
+              setTimeout(function() {
+                document.removeEventListener('keydown', shopClassesKeyDown);
+                document.removeEventListener('click', shopClassesSupport);
+                shopClasses();
+              }, 20);
               update(sessionStorage.username, 'playerdata', JSON.stringify(t));
-            }*/
+            } else {
+              alert('Not Enough Money! You are' + JSON.stringify(50000 - userData.coins) + 'coins short!')
+            }
           }
         }
       }
@@ -3323,7 +3356,7 @@
               }, 20);
               update(sessionStorage.username, 'playerdata', JSON.stringify(t));
             } else {
-              alert('Not Enough Money! You are ' + 20000 - userData.coins + ' coins short!');
+              alert('Not Enough Money! You are ' + JSON.stringify(20000 - userData.coins) + ' coins short!');
             }
           }
         }
@@ -3365,7 +3398,7 @@
               }, 20);
               update(sessionStorage.username, 'playerdata', JSON.stringify(t));
             } else {
-              alert('Not Enough Money! You are ' + 40000 - userData.coins + ' coins short!');
+              alert('Not Enough Money! You are ' + JSON.stringify(40000 - userData.coins) + ' coins short!');
             }
           }
         }
@@ -3407,7 +3440,7 @@
               }, 20);
               update(sessionStorage.username, 'playerdata', JSON.stringify(t));
             } else {
-              alert('Not Enough Money! You are ' + 50000 - userData.coins + ' coins short!');
+              alert('Not Enough Money! You are ' + JSON.stringify(50000 - userData.coins) + ' coins short!');
             }
           }
         }
@@ -3449,7 +3482,7 @@
               }, 20);
               update(sessionStorage.username, 'playerdata', JSON.stringify(t));
             } else {
-              alert('Not Enough Money! You are ' + 75000 - userData.coins + ' coins short!');
+              alert('Not Enough Money! You are ' + JSON.stringify(75000 - userData.coins) + ' coins short!');
             }
           }
         }
