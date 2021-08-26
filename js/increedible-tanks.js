@@ -1036,7 +1036,7 @@
               user.joiner.tank.megaAttack = false;
               setTimeout(function () {
                 user.joiner.tank.megaAttack = true;
-              }, 30000);
+              }, 20000);
             }
           }
           break;
@@ -1657,7 +1657,7 @@
                 this.megaAttack = false;
                 setTimeout(function () {
                   user.tank.megaAttack = true;
-                }, 30000)
+                }, 20000)
               }
             }
             break;
