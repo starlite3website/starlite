@@ -179,6 +179,7 @@
       this.update = true;
       this.leftright = false;
       this.canShoot = true;
+      this.canTakeThermalDamage = true;
     }
     draw() {
       if (this.inactive != true) {
@@ -326,6 +327,15 @@
       s.push(new Shot(this.x + 20, this.y + 20, s.length - 1, xd, yd, 'bullet'));
     }
     check() {
+      if (userData.kit == 'thermal') {
+        if (thermal_check(this.x, this.y) && this.canTakeThermalDamage) {
+          this.health -= 20;
+          this.canTakeThermalDamage = false;
+          setTimeout(funciton(tank) {
+            tank.canTakeThermalDamage = true;
+          }, 1000, this);
+        }
+      }
       var results = ai_check(this.x, this.y, false);
       if (results[0]) {
         if (this.inactive != true) {
@@ -618,6 +628,7 @@
     control(channelname) {
       window.setInterval(user.joiner.send, 30);
       this.tank = {
+        isThermal: false,
         canFire: true,
         shields: 0,
         x: 0,
@@ -893,10 +904,15 @@
           type: 'joiner',
           mode: channelname,
         }));
+        var thermalStatus = false;
+        if (userData.kit == 'thermal') {
+          thermalStatus = true;
+        }
         user.joiner.socket.send(JSON.stringify({
           operation: 'multiplayer',
           event: 'joinerjoin',
           data: {
+            isThermal: thermalStatus,
             username: user.username,
             health: userData.health,
             maxHealth: userData.health,
@@ -1895,6 +1911,14 @@
   }
   function tank_listener5() {
     clearInterval(tankSupport);
+  }
+  function thermal_check(x, y) {
+    if ((x + 45 >= user.tank.x-5 && x + 40 <= user.tank.x+5 + 40) || (x >= user.tank.x-5 && x <= user.tank.x+5 + 40)) {
+      if (( y + 40 >= user.tank.y-5 && y + 40 <= user.tank.y+5 + 40) || ( y >= user.tank.y-5 && y <= user.tank.y+5 + 40)) {
+        return true;
+      }
+    }
+    return false;
   }
   function checker(x, y) {
     if (Game.borders == undefined) Game.borders = [0, 500, 0, 500];
