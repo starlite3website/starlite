@@ -665,6 +665,25 @@
         var l = 0;
         while (l < user.joiner.hostupdate.tanks.length) {
           if (pt[l].username == user.username) {
+            if (pt[l].health < 60 && userData.kit == 'autoheal') {
+              if (user.joiner.tank.CanToolkit) {
+                if (userData.toolkits > 0) {
+                  toolkitAnimation = new Animation(toolkitOpt);
+                  user.joiner.tank.toolkitAnimation = true;
+                  toolkitAnimation.loopRun('toolkit-reset2');
+                  userData.toolkits -= 1;
+                  user.joiner.tank.usingToolkit = true;
+                  user.joiner.tank.CanToolkit = false;
+                  var cooldown = 30000;
+                  if (userData.kit == 'cooldown') {
+                    cooldown *= .9;
+                  }
+                  setTimeout(function () {
+                    user.joiner.tank.CanToolkit = true;
+                  }, cooldown)
+                }
+              }
+            }
             draw.setTransform(resizer, 0, 0, resizer, resizer * (-pt[l].x + 230), resizer * (-pt[l].y + 230));
           }
           l++;
@@ -1404,6 +1423,27 @@
         draw.fillStyle = "#FF0000";
         draw.fillRect(this.x, this.y, 40, 40);
         this.health -= 20;
+        if (user.tank.health < 60 && userData.kit == 'autoheal') {
+          if (user.tank.CanToolkit) {
+            if (user.tank.health < userData.health * .75) {
+              if (userData.toolkits > 0) {
+                toolkitAnimation = new Animation(toolkitOpt);
+                user.tank.toolkitAnimation = true;
+                toolkitAnimation.loopRun('toolkit-reset');
+                user.tank.CanToolkit = false;
+                userData.toolkits -= 1;
+                user.tank.health = userData.health * .75;
+                var cooldown = 30000;
+                if (userData.kit == 'cooldown') {
+                  cooldown *= .9;
+                }
+                window.setTimeout(function () {
+                  user.tank.CanToolkit = true;
+                }, cooldown);
+              }
+            }
+          }
+        } 
         if (this.health <= 0) {
           if (Game.level == 'multiplayer') {
             if (user.tank.team == 'red') {
