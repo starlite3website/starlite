@@ -3044,7 +3044,7 @@
         if (y > 140) {
           if (y < 190) {
             if (userData.cooldownKit) {
-              userData.kit == 'cooldown';
+              userData.kit = 'cooldown';
               setTimeout(function () {
                 document.removeEventListener('keydown', shopKitsKeyDown);
                 document.removeEventListener('click', shopKitsSupport);
