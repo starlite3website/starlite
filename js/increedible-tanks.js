@@ -331,7 +331,7 @@
         if (thermal_check(this.x, this.y) && this.canTakeThermalDamage) {
           this.health -= 20;
           this.canTakeThermalDamage = false;
-          setTimeout(funciton(tank) {
+          setTimeout(function(tank) {
             tank.canTakeThermalDamage = true;
           }, 1000, this);
         }
