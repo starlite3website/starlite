@@ -339,7 +339,11 @@
             this.health -= 160;
           }
           if (this.health <= 0) {
-            Game.coins += Math.floor(Math.random()*400)+100;
+            if (userData.kit == 'scavenger') {
+              Game.coins += Math.floor(Math.random()*400) +101;
+            } else {
+              Game.coins += 2*(Math.floor(Math.random()*400)+101);
+            }
             Game.foes--;
             this.x = undefined;
             this.y = undefined;
