@@ -622,7 +622,7 @@
         health: userData.health,
         leftright: true,
         username: user.username,
-        speed: 2,
+        speed: 2.5,
         count: 0,
         CanBoost: true,
         usingToolkit: false,
@@ -942,7 +942,7 @@
               user.joiner.tank.CanBoost = false;
               user.joiner.tank.immune = true;
               setTimeout(function () {
-                user.joiner.tank.speed = 2;
+                user.joiner.tank.speed = 2.5;
                 user.joiner.tank.immune = false;
               }, 500);
               setTimeout(function () {
@@ -1087,7 +1087,7 @@
     if (user.joiner.tank.helper[event.keyCode] != true) {
       user.joiner.tank.intervals[event.keyCode] = window.setInterval(function () {
         user.joiner.keyHandler(event, user.joiner.tank.speed);
-      }, 15);
+      }, 18);
     }
     user.joiner.tank.helper[event.keyCode] = true;
   }
@@ -1425,7 +1425,7 @@
       this.canFireFlashbang = true;
       this.scaffolding = [];
       this.canPlaceScaffolding = true;
-      this.speed = 2;
+      this.speed = 2.5;
       this.intervals = [];
       this.helper = [];
       this.count = 0;
@@ -1520,7 +1520,7 @@
                 this.CanBoost = false;
                 user.tank.immune = true;
                 setTimeout(function () {
-                  user.tank.speed = 2;
+                  user.tank.speed = 2.5;
                   user.tank.immune = false;
                 }, 500);
                 setTimeout(function () {
@@ -1738,7 +1738,7 @@
     if (user.tank.helper[event.keyCode] != true) {
       user.tank.intervals[event.keyCode] = window.setInterval(function () {
         user.tank.move(event, this.speed);
-      }, 15);
+      }, 18);
     }
     user.tank.helper[event.keyCode] = true;
   }
