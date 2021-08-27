@@ -3006,10 +3006,10 @@
     draw.fillStyle = '#ffffff';
     draw.font = '10px starfont';
     draw.fillText('Coins: ' + userData.coins, 360, 100);
-    if (userData.cooldownKit) draw.fillText('Equiped', 345, 170);
-    if (userData.autohealKit) draw.fillText('Equiped', 345, 240);
-    if (userData.thermalKit) draw.fillText('Equiped', 345, 310);
-    if (userData.scavengerKit) draw.fillText('Equiped', 345, 380);
+    if (userData.kit == 'cooldown') draw.fillText('Equiped', 345, 170);
+    if (userData.kit == 'autoheal') draw.fillText('Equiped', 345, 240);
+    if (userData.kit == 'thermal') draw.fillText('Equiped', 345, 310);
+    if (userData.kit == 'scavenger') draw.fillText('Equiped', 345, 380);
     document.addEventListener("click", shopKitsSupport);
     document.addEventListener('keydown', shopKitsKeyDown);
   }
@@ -3147,8 +3147,8 @@
                 shopKits();
               }, 20);
             } else if (userData.coins >= 40000) {
-              userData.kit = 'thermal';
-              userData.thermalKit = true;
+              userData.kit = 'scavenger';
+              userData.scavengerKit = true;
               userData.coins -= 40000;
               try {
                 var t = playerData;
