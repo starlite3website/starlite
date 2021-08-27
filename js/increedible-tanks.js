@@ -660,7 +660,6 @@
       this.socket = new WebSocket('wss://'+window.location.hostname+'/server');
       this.channelname = channelname;
       this.drawMap = function () {
-        document.getElementById('speed').innerHTML = new Date().getMilliseconds() - user.joiner.speed.getMilliseconds();
         user.joiner.tank.x = 0;
         user.joiner.tank.y = 0;
         var l = 0;
@@ -1045,7 +1044,6 @@
     }
     send() {
       user.joiner.frameOutput++;
-      user.joiner.speed = new Date();
       user.joiner.socket.send(JSON.stringify({
         operation: 'multiplayer',
         event: 'joinerupdate',
