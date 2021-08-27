@@ -944,9 +944,13 @@
                 user.joiner.tank.speed = 2.5;
                 user.joiner.tank.immune = false;
               }, 500);
+              var cooldown = 5000;
+              if (userData.kit == 'cooldown') {
+                cooldown *= .9;
+              }
               setTimeout(function () {
                 user.joiner.tank.CanBoost = true;
-              }, 5000);
+              }, cooldown);
             }
           }
           break;
@@ -967,9 +971,13 @@
                 userData.toolkits -= 1;
                 user.joiner.tank.usingToolkit = true;
                 user.joiner.tank.CanToolkit = false;
+                var cooldown = 30000;
+                if (userData.kit == 'cooldown') {
+                  cooldown *= .9;
+                }
                 setTimeout(function () {
                   user.joiner.tank.CanToolkit = true;
-                }, 30000)
+                }, cooldown)
               }
             }
           }
@@ -980,9 +988,13 @@
               user.joiner.tank.canPlaceScaffolding = false;
               userData.blocks -= 1;
               user.joiner.tank.placeScaffolding = true;
+              var cooldown = 5000;
+              if (userData.kit == 'cooldown') {
+                cooldown *= .9;
+              }
               setTimeout(function () {
                 user.joiner.tank.canPlaceScaffolding = true;
-              }, 5000);
+              }, cooldown);
             }
           }
           break;
@@ -992,9 +1004,13 @@
               userData.flashbangs -= 1;
               user.joiner.tank.canFireFlashbang = false;
               user.joiner.tank.flashbangFired = true;
+              var cooldown = 15000;
+              if (userData.kit == 'cooldown') {
+                cooldown *= .9;
+              }
               setTimeout(function () {
                 user.joiner.tank.canFireFlashbang = true;
-              }, 15000);
+              }, cooldown);
             }
           }
           break;
@@ -1007,9 +1023,13 @@
                   user.joiner.tank.canChangeInvisStatus = true;
                 }, 500);
                 user.joiner.tank.invis = false;
+                var cooldown = 40000;
+                if (userData.kit == 'cooldown') {
+                  cooldown *= .9;
+                }
                 window.setTimeout(function () {
                   user.joiner.tank.canInvis = true;
-                }, 40000);
+                }, cooldown);
               } else {
                 if (user.joiner.tank.canInvis) {
                   user.joiner.tank.canChangeInvisStatus = false;
@@ -1025,17 +1045,25 @@
             if (user.joiner.tank.canShield) {
               user.joiner.tank.shielded = true;
               user.joiner.tank.canShield = false;
+              var cooldown = 40000;
+              if (userData.kit == 'cooldown') {
+                cooldown *= .9;
+              }
               setTimeout(function () {
                 user.joiner.tank.canShield = true;
-              }, 40000);
+              }, cooldown);
             }
           } else if (user.joiner.tank.class == 'tactical') {
             if (user.joiner.tank.megaAttack) {
               tank_M_support('megaAttack');
               user.joiner.tank.megaAttack = false;
+              var cooldown = 20000;
+              if (userData.kit == 'cooldown') {
+                cooldown *= .9
+              }
               setTimeout(function () {
                 user.joiner.tank.megaAttack = true;
-              }, 20000);
+              }, cooldown);
             }
           }
           break;
@@ -1139,9 +1167,13 @@
         if (user.joiner.tank.altAttack) {
           user.joiner.tank.type = 'power_bullet';
           user.joiner.tank.altAttack = false;
+          var cooldown = 10000;
+          if (userData.kit == 'cooldown') {
+            cooldown *= .9;
+          }
           setTimeout(function () {
             user.joiner.tank.altAttack = true;
-          }, 10000);
+          }, cooldown);
         } else {
           user.joiner.tank.fire = false;
           return;
@@ -1521,9 +1553,13 @@
                   user.tank.speed = 2.5;
                   user.tank.immune = false;
                 }, 500);
+                var cooldown = 5000;
+                if (userData.kit == 'cooldown') {
+                  cooldown *= .9;
+                }
                 setTimeout(function () {
                   user.tank.CanBoost = true;
-                }, 5000);
+                }, cooldown);
               }
             }
             break;
@@ -1537,9 +1573,13 @@
                   user.tank.CanToolkit = false;
                   userData.toolkits -= 1;
                   user.tank.health = userData.health * .75;
+                  var cooldown = 30000;
+                  if (userData.kit == 'cooldown') {
+                    cooldown *= .9;
+                  }
                   window.setTimeout(function () {
                     user.tank.CanToolkit = true;
-                  }, 30000);
+                  }, cooldown);
                 }
               }
             }
@@ -1565,9 +1605,13 @@
                   weak((this.x + 40) / 50, (this.y + 40) / 50, true);
                   user.tank.scaffolding.push({ x: (this.x + 40) / 50, y: (this.y + 40) / 50 });
                 }
+                var cooldown = 5000;
+                if (userData.kit == 'cooldown') {
+                  cooldown *= .9;
+                }
                 setTimeout(function () {
                   user.tank.canPlaceScaffolding = true;
-                }, 5000);
+                }, cooldown);
               }
             }
             break;
@@ -1609,9 +1653,13 @@
                 setTimeout(function () {
                   Game.flashbanged = false;
                 }, 10000);
+                var cooldown = 15000;
+                if (userData.kit == 'cooldown') {
+                  cooldown *= .9;
+                }
                 setTimeout(function () {
                   user.tank.canFireFlashbang = true;
-                }, 15000);
+                }, cooldown);
               }
             }
             break;
@@ -1624,9 +1672,13 @@
                     user.tank.canChangeInvisStatus = true;
                   }, 500);
                   this.invis = false;
+                  var cooldown = 40000;
+                  if (userData.kit == 'cooldown') {
+                    cooldown *= .9;
+                  }
                   window.setTimeout(function () {
                     user.tank.canInvis = true;
-                  }, 40000);
+                  }, cooldown);
                 } else {
                   if (this.canInvis) {
                     this.canChangeInvisStatus = false;
@@ -1645,17 +1697,25 @@
                 setTimeout(function () {
                   user.tank.shields = 0;
                 }, 10000);
+                var cooldown = 40000;
+                if (userData.kit == 'cooldown') {
+                  cooldown *= .9;
+                }
                 setTimeout(function () {
                   user.tank.canShield = true;
-                }, 40000);
+                }, cooldown);
               }
             } else if (this.class == 'tactical') {
               if (this.megaAttack) {
                 user.tank.fire('megaAttack');
                 this.megaAttack = false;
+                var cooldown = 20000;
+                if (userData.kit == 'cooldown') {
+                  cooldown *= .9;
+                }
                 setTimeout(function () {
                   user.tank.megaAttack = true;
-                }, 20000)
+                }, cooldown);
               }
             }
             break;
@@ -1684,9 +1744,13 @@
             if (this.altAttack) {
               type = 'power_bullet';
               this.altAttack = false;
+              var cooldown = 10000;
+              if (userData.kit == 'cooldown') {
+                cooldown *= .9;
+              }
               setTimeout(function () {
                 user.tank.altAttack = true;
-              }, 10000);
+              }, cooldown);
             } else {
               return;
             }
@@ -1775,9 +1839,10 @@
     if (user.tank.canFire) {
       tank_support(mouseValue);
       user.tank.canFire = false;
+      var cooldown = 400;
       setTimeout(function() {
         user.tank.canFire = true;
-      }, 400);
+      }, cooldown);
     }
     tankSupport = window.setInterval(tank_support, 400, mouseValue);
   }
