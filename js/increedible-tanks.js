@@ -3664,6 +3664,8 @@
   function mainMenu() {
     Game.flashbanged = false;
     document.getElementById('server').style.display = "none";
+    document.removeEventListener('click', shopKitsSupport);
+    document.removeEventListener('keydown', shopKitsKeyDown);
     document.removeEventListener('click', shopItemsSupport);
     document.removeEventListener('keydown', shopItemsKeyDown);
     document.removeEventListener('click', shopTanksSupport);
